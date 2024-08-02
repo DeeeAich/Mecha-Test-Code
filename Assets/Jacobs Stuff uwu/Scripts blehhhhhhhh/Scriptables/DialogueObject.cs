@@ -19,6 +19,11 @@ public class DialogueObject : ScriptableObject
     public bool isBold = false;
     public bool isItalic = false;
 
+    [Header("Audio")]
+    public AudioClip typingAudio;
+    public AudioClip entranceAudio;
+
+
 
 
 }

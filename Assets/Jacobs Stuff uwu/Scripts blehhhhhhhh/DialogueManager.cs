@@ -11,7 +11,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
     public Animator dialogueBoxAnimator;
     public Texture defaultProfileImage;
-
+    public GameObject audioPrefab;
+    public AudioClip transitionSound;
+    public GameObject skipButton;
     public GameObject interactButton;
 
     private float smallFontSize = 25;
@@ -44,12 +46,6 @@ public class DialogueManager : MonoBehaviour
     public List<DialogueObject> Interaction_2;
     public List<DialogueObject> Interaction_3;
 
-
-
-    void Start()
-    {
-       // DisplayNewDialogue(Interaction_1[0]);
-    }
 
     public void DisplayNext(bool isFirstLine = false)
     {
@@ -88,19 +84,24 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBoxAnimator.SetTrigger("transition");
         isTransitioning = true;
+        PlaySFX(transitionSound);
+        skipButton.SetActive(false);
     }
     public void TriggerNextDialogueFromTransitionAnimation()
     {
-         DisplayNewDialogue(currentInteractionList[currentLine]);
+        DisplayNewDialogue(currentInteractionList[currentLine]);
         isTransitioning = false;
+        skipButton.SetActive(true);
     }
 
     void DisplayNewDialogue(DialogueObject dialogueObject)
     {
         currnetDialogueObject = dialogueObject;
 
-        profileImage.texture = dialogueObject.character;
-
+        if (dialogueObject.entranceAudio != null)
+        {
+            PlaySFX(dialogueObject.entranceAudio);
+        }
         switch (dialogueObject.fontSize)
         {
             case FontSize.Small:
@@ -141,6 +142,8 @@ public class DialogueManager : MonoBehaviour
         if (dialogueObject.isItalic) textBox.fontStyle = FontStyles.Italic;
 
         finalText = dialogueObject.dialogueText + " ";
+        profileImage.texture = dialogueObject.character;
+
 
 
         StartCoroutine(DisplayText(finalText));
@@ -153,8 +156,39 @@ public class DialogueManager : MonoBehaviour
         {
             currentText = text.Substring(0, i);
             textBox.text = currentText;
+            if (i > 1)
+            {
+                string lastChar = currentText.Substring(currentText.Length - 1);
+                if (lastChar != " ")
+                {
+                    PlayTypingSFX(currnetDialogueObject.typingAudio);
+                }
+            }
+            else
+            {
+                PlayTypingSFX(currnetDialogueObject.typingAudio);
+            }
             yield return new WaitForSeconds(textDelay);
         }       
+    }
+    void PlayTypingSFX(AudioClip clip)
+    {
+        if (!isTyping) return;
+
+        GameObject newSFX = Instantiate(audioPrefab);
+        newSFX.GetComponent<AudioSource>().clip = clip;
+        newSFX.GetComponent<AudioSource>().Play();
+        Destroy(newSFX, clip.length);
+
+    }
+    void PlaySFX(AudioClip clip)
+    {
+        if (!dialogueBox.activeInHierarchy) return;
+
+        GameObject newSFX = Instantiate(audioPrefab);
+        newSFX.GetComponent<AudioSource>().clip = clip;
+        newSFX.GetComponent<AudioSource>().Play();
+        Destroy(newSFX, clip.length);
     }
     IEnumerator WaitForTextToEnd(float length, float automaticSkipDelay)
     {
@@ -200,6 +234,7 @@ public class DialogueManager : MonoBehaviour
     void CloseDialogue()
     {
         dialogueBoxAnimator.SetTrigger("exit");
+        skipButton.SetActive(false);
     }
     public void DialougeBoxCloseAnimationComplete()
     {
