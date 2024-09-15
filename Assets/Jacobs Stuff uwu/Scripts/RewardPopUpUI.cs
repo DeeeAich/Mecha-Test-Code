@@ -1,0 +1,82 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class RewardPopUpUI : MonoBehaviour
+{
+    public bool isOpen;
+    public string _name;
+    public TextMeshProUGUI nameText;
+
+    [TextArea]
+    public string finalDescriptionText = "";
+    private string currentDescriptionText = "";
+    public TextMeshProUGUI descriptionText;
+
+    public rewardRarity rarity;
+    public Color commonColor;
+    public Color rareColor;
+    public Color legendaryColor;
+
+    public Animator anim;
+
+    public void PassInRewardInfo(string rewardName, string rewardDescription, rewardRarity rewardRarity)
+    {
+        _name = rewardName;
+        finalDescriptionText = rewardDescription;
+        rarity = rewardRarity;
+    }
+
+    private void LateUpdate()
+    {
+        if (isOpen)
+        {
+            isOpen = false;
+            OpenRewardPopUpUI();
+        }
+    }
+
+    public void OpenRewardPopUpUI()
+    {
+        anim.SetBool("Open", true);
+        nameText.text = _name;
+        descriptionText.text = "";
+        switch (rarity)
+        {
+            case rewardRarity.common:
+                nameText.color = commonColor;
+                break;
+            case rewardRarity.rare:
+                nameText.color = rareColor;
+                break;
+            case rewardRarity.legendary:
+                nameText.color = legendaryColor;
+                break;
+        }
+        StopAllCoroutines();
+        StartCoroutine(DisplayText(finalDescriptionText));
+    }
+
+
+    IEnumerator DisplayText(string text)
+    {
+        yield return new WaitForSeconds(.25f);
+        for (int i = 0; i < text.Length; i++)
+        {
+            currentDescriptionText = text.Substring(0, i);
+            descriptionText.text = currentDescriptionText;
+            yield return new WaitForSeconds(0.0075f);
+        }
+    }
+
+
+}
+
+public enum rewardRarity
+{
+    common,
+    rare,
+    legendary
+}
