@@ -5,13 +5,13 @@ using UnityEngine;
 public class TriggerParticleEmission : MonoBehaviour
 {
     public ParticleSystem ps;
-
+    public int numberOfParticles = 1;
 
     public void TriggerParticle()
     {
         if (ps != null && ps.gameObject.activeInHierarchy) 
         { 
-            ps.Emit(1); 
+            ps.Emit(numberOfParticles); 
         }
     }
 }
