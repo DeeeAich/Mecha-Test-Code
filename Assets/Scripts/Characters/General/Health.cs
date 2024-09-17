@@ -1,18 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float health;
+
+    [SerializeField] private float maxHealth;
+    [SerializeField] private bool destroyOnDeath = true;
+
+    public UnityEvent onTakeDamage;
+    public UnityEvent onDeath;
+
+
+    private void Awake()
     {
-        
+        health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int amount)
     {
+        health -= amount;
         
+        onTakeDamage.Invoke();
+
+        if (health <= 0)
+        {
+            TriggerDeath();
+        }
+    }
+
+    public void TriggerDeath()
+    {
+        onDeath.Invoke();
+        if(destroyOnDeath) Destroy(gameObject);
     }
 }
