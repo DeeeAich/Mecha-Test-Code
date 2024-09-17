@@ -14,6 +14,7 @@ public class MultipleLegIkMover : MonoBehaviour
     
     [SerializeField] private float noMovementZoneRadius = 1;
     [SerializeField] private float guaranteedMovementZoneRadius = 2;
+    [SerializeField] private float distanceAheadOfCenterScalar = 1;
     [SerializeField] private float distanceAheadOfCenterCap = 0.3f;
 
     [Header("Internal, dont touch")]
@@ -98,7 +99,7 @@ public class MultipleLegIkMover : MonoBehaviour
                     legMoving[i] = true;
                     moveSpeeds[i] = dist * legMoveSpeed;
                     moveTargets[i] = zoneCenters[i].transform.position + Vector3.ClampMagnitude(
-                        (zoneCenters[i].transform.position - moveTargets[i]) * moveSpeeds[i], noMovementZoneRadius * distanceAheadOfCenterCap);
+                        (zoneCenters[i].transform.position - moveTargets[i]).normalized * moveSpeeds[i] * distanceAheadOfCenterScalar, noMovementZoneRadius * distanceAheadOfCenterCap);
                     
                 }
             }
