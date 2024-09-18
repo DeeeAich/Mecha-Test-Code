@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 348527989906764730}
   - component: {fileID: 5579548903281045828}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: Barrel Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4924,11 +4924,11 @@ Transform:
   m_GameObject: {fileID: 1349190506677836526}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0021454392, y: 0.70710355, z: -0.70710355, w: -0.0021451414}
-  m_LocalPosition: {x: -0.011529745, y: -0.01700306, z: 3.3319554}
+  m_LocalPosition: {x: 0.13057244, y: -0.017002583, z: 2.6829169}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7504593659146776128}
+  m_Father: {fileID: 5006504612390972048}
   m_LocalEulerAnglesHint: {x: -270, y: 0, z: 179.652}
 --- !u!33 &3351164075080823539
 MeshFilter:
@@ -5042,7 +5042,7 @@ GameObject:
   - component: {fileID: 253587509707356110}
   - component: {fileID: 773795391115422508}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Gun Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5057,7 +5057,7 @@ Transform:
   m_GameObject: {fileID: 2480436945405805190}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0021454392, y: 0.70710355, z: -0.70710355, w: -0.0021451414}
-  m_LocalPosition: {x: -0.20110199, y: -0.017000198, z: 0.6190385}
+  m_LocalPosition: {x: -0.059, y: -0.017, z: -0.03}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5191,7 +5191,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7595164198634578224}
-  - {fileID: 2618316397941360366}
   m_Father: {fileID: 3049629100045191425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6959036936672576193
@@ -5225,6 +5224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2618316397941360366}
   - {fileID: 1962758583265892097}
   m_Father: {fileID: 3049629100045191425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5291,6 +5291,7 @@ GameObject:
   - component: {fileID: 1647028651168547803}
   - component: {fileID: 7769815603208164371}
   - component: {fileID: 4140543151565493386}
+  - component: {fileID: 3066733537734096174}
   m_Layer: 0
   m_Name: Placeholder Gun
   m_TagString: Untagged
@@ -5400,6 +5401,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 8529712678156298273}
+  numberOfParticles: 1
+--- !u!114 &3066733537734096174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663696461702594437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b107de7bb2b2e4ab0059f200c5c9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testTrigger: 0
+  explosionVFX: {fileID: 0}
+  objectsToPush:
+  - {fileID: 1349190506677836526}
+  - {fileID: 2480436945405805190}
+  objectsToDelete:
+  - {fileID: 7180870063841083235}
+  - {fileID: 1004465532071868503}
+  meshRenderersToDisable:
+  - {fileID: 1647028651168547803}
+  - {fileID: 3052665280376634883}
+  explosionForce: 1000
+  explosionRadius: 100
+  timeToDelete: 8
+  timeBeforeScaleDebris: 6
+  scaleSpeed: 1
 --- !u!1001 &7854414819349778654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5481,6 +5511,12 @@ PrefabInstance:
 --- !u!4 &1962758583265892097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8520073966856030175, guid: d4a4aa63cd6ce4545894afd3dceeaac1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7854414819349778654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7180870063841083235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1056076447897333693, guid: d4a4aa63cd6ce4545894afd3dceeaac1,
     type: 3}
   m_PrefabInstance: {fileID: 7854414819349778654}
   m_PrefabAsset: {fileID: 0}

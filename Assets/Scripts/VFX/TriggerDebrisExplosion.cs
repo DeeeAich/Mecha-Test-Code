@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerDebrisExplosion : MonoBehaviour
 {
-    public bool testTrigger = false;
+    public bool explosionTrigger = false;
 
     public GameObject explosionVFX;
     public List<GameObject> objectsToPush;
@@ -23,9 +23,9 @@ public class TriggerDebrisExplosion : MonoBehaviour
 
     void LateUpdate()
     {
-        if (testTrigger)
+        if (explosionTrigger)
         {
-            testTrigger = false;
+            explosionTrigger = false;
             TriggerExplosion();
         }
         if (scaleDown && scale>0)
@@ -49,7 +49,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
     public void TriggerExplosion()
     {
         Destroy(gameObject, timeToDelete);
-        explosionVFX.SetActive(true);
+        if (explosionVFX != null && !explosionVFX.activeInHierarchy) { explosionVFX.SetActive(true); }
         for (int i = 0; i < meshRenderersToDisable.Count; i++)
         {
             meshRenderersToDisable[i].enabled = false;
@@ -62,7 +62,11 @@ public class TriggerDebrisExplosion : MonoBehaviour
         {
             objectsToPush[i].SetActive(true);
             objectsToPush[i].GetComponent<Rigidbody>().isKinematic = false;
-            objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius);
+            if (explosionVFX != null) { objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius); } 
+            else
+            {
+                objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            }
         }
         StartCoroutine(WaitToScale());
     }
