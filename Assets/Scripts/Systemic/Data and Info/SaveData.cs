@@ -7,7 +7,10 @@ public struct PersonalData
     
 }
 
-public struct 
+public struct SaveFile
+{
+
+}
 
 public class SaveData : MonoBehaviour
 {
