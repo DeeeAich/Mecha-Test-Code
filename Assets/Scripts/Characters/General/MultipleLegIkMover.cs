@@ -8,14 +8,18 @@ public class MultipleLegIkMover : MonoBehaviour
 {
     [SerializeField] private GameObject[] legIks;
 
+    [Header("Speeds")]
     [SerializeField] private int maxLegsMovingAtOnce = 1;
     [SerializeField] private float legMoveSpeed = 0.2f;
-    [SerializeField] private float ikMoveStopDistance = 0.1f;
-    
-    [SerializeField] private float noMovementZoneRadius = 1;
-    [SerializeField] private float guaranteedMovementZoneRadius = 2;
+    [SerializeField] private float legMoveSpeedBonusPerSpeedMultiplier = 1.5f;
+
+    [Header("Zone sizes")]
+    [SerializeField] private float triggerMovementZoneRadius = 0.75f;
+    [SerializeField] private float forceMovementZoneRadius = 2;
     [SerializeField] private float distanceAheadOfCenterScalar = 1;
     [SerializeField] private float distanceAheadOfCenterCap = 0.3f;
+    
+    [SerializeField] private float ikMoveStopDistance = 0.1f;
 
     [Header("Internal, dont touch")]
     [SerializeField] private Vector3[] legIkTargets;
@@ -93,13 +97,13 @@ public class MultipleLegIkMover : MonoBehaviour
             {
                 float dist = (legIkTargets[i] - zoneCenters[i].transform.position).magnitude;
                 
-                if ((dist > noMovementZoneRadius && legMovingCount < maxLegsMovingAtOnce) || dist > guaranteedMovementZoneRadius)
+                if ((dist > triggerMovementZoneRadius && legMovingCount < maxLegsMovingAtOnce) || dist > forceMovementZoneRadius)
                 {
                     // starts moving leg
                     legMoving[i] = true;
-                    moveSpeeds[i] = dist * legMoveSpeed;
+                    moveSpeeds[i] = dist * legMoveSpeed + speed * legMoveSpeedBonusPerSpeedMultiplier;
                     moveTargets[i] = zoneCenters[i].transform.position + Vector3.ClampMagnitude(
-                        (zoneCenters[i].transform.position - moveTargets[i]).normalized * moveSpeeds[i] * distanceAheadOfCenterScalar, noMovementZoneRadius * distanceAheadOfCenterCap);
+                        (zoneCenters[i].transform.position - moveTargets[i]).normalized * moveSpeeds[i] * distanceAheadOfCenterScalar, triggerMovementZoneRadius * distanceAheadOfCenterCap);
                     
                 }
             }
@@ -117,9 +121,9 @@ public class MultipleLegIkMover : MonoBehaviour
             for (int i = 0; i < legIks.Length; i++)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(zoneCenters[i].transform.position, noMovementZoneRadius);
+                Gizmos.DrawWireSphere(zoneCenters[i].transform.position, triggerMovementZoneRadius);
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(zoneCenters[i].transform.position, guaranteedMovementZoneRadius);
+                Gizmos.DrawWireSphere(zoneCenters[i].transform.position, forceMovementZoneRadius);
                 
                 Gizmos.color = Color.magenta;
                 Gizmos.DrawLine(moveTargets[i], legIkTargets[i] + Vector3.up * 0.2f);
