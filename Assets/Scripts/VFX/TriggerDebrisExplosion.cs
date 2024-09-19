@@ -7,6 +7,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
     public bool explosionTrigger = false;
 
     public GameObject explosionVFX;
+    public Animator animatorToPause;
     public List<GameObject> objectsToPush;
     public List<GameObject> objectsToDelete;
     public List<Renderer> meshRenderersToDisable;
@@ -50,6 +51,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
     {
         Destroy(gameObject, timeToDelete);
         if (explosionVFX != null && !explosionVFX.activeInHierarchy) { explosionVFX.SetActive(true); }
+        if (animatorToPause!= null && animatorToPause.enabled) { animatorToPause.speed = 0; }
         for (int i = 0; i < meshRenderersToDisable.Count; i++)
         {
             meshRenderersToDisable[i].enabled = false;
