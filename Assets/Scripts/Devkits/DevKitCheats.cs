@@ -32,6 +32,18 @@ public class DevKitCheats : MonoBehaviour
                     }
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Room[] rooms = FindObjectsOfType<Room>();
+                for (int i = 0; i < rooms.Length; i++)
+                {
+                    if (rooms[i].isActive)
+                    {
+                        rooms[i].completeRoom();
+                    }
+                }
+            }
         }
     }
 }
