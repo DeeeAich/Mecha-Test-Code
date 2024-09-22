@@ -56,11 +56,12 @@ MonoBehaviour:
   - {fileID: 5177398418585816098}
   maxLegsMovingAtOnce: 1
   legMoveSpeed: 0.2
-  ikMoveStopDistance: 0.1
-  noMovementZoneRadius: 1
-  guaranteedMovementZoneRadius: 2
+  legMoveSpeedBonusPerSpeedMultiplier: 1.5
+  triggerMovementZoneRadius: 0.75
+  forceMovementZoneRadius: 2
   distanceAheadOfCenterScalar: 1
   distanceAheadOfCenterCap: 0.3
+  ikMoveStopDistance: 0.1
   legIkTargets: []
   moveTargets: []
   moveSpeeds: []
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionTrigger: 0
   explosionVFX: {fileID: 0}
+  animatorToPause: {fileID: 0}
   objectsToPush:
   - {fileID: 2725689101308848270}
   - {fileID: 6328488398942468300}
