@@ -1,0 +1,95 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerBody : MonoBehaviour
+{
+
+    private PlayerLegs myMovement;
+    private PlayerWeapons weaponHolder;
+    public Legs legStats;
+    public List<ChipBasic> chipsInserted;
+    public LegInfo curLegs;
+    private PlayerInput playerInputs;
+
+    //input actions
+    private InputAction move, look, dash,
+        ultimate, leftFire, rightFire,
+        leftRe, rightRe, interact;
+
+    private bool isGamepad = true;
+
+    private void Awake()
+    {
+        playerInputs = GetComponent<PlayerInput>();
+        myMovement = GetComponent<PlayerLegs>();
+        weaponHolder = GetComponent<PlayerWeapons>();
+    }
+
+    private void Start()
+    {
+        SetControls();
+        LoadStats();
+        print(curLegs.accelleration);
+    }
+
+    private void FixedUpdate()
+    {
+
+        myMovement.Movement(move.ReadValue<Vector2>());
+
+        weaponHolder.LookDirection(isGamepad ?
+            look.ReadValue<Vector2>():
+            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position + transform.up * 1.5f));
+
+    }
+
+    private void Dash(InputAction.CallbackContext context)
+    {
+
+        print("Dashing");
+        StartCoroutine(myMovement.Dash(move.ReadValue<Vector2>()));
+
+    }
+
+    private void SetControls()
+    {
+        move = playerInputs.actions["Move"];
+        look = playerInputs.actions["Look"];
+        dash = playerInputs.actions["Dash"];
+        dash.performed += Dash;
+
+        ultimate = playerInputs.actions["Ultimate"];
+        leftFire = playerInputs.actions["Left Fire"];
+        leftRe = playerInputs.actions["Left Reload"];
+        rightFire = playerInputs.actions["Right Fire"];
+        rightRe = playerInputs.actions["Right Reload"];
+        interact = playerInputs.actions["Interact"];
+
+        playerInputs.onControlsChanged += SetControlScheme;
+    }
+
+    private void SetControlScheme(PlayerInput input)
+    {
+        isGamepad = input.currentControlScheme.Equals("Controller");
+
+        Debug.Log("Control scheme is now " + input.currentControlScheme);
+    }
+
+    private void LoadStats()
+    {
+        curLegs = legStats.LoadLegs();
+    }
+
+    public struct LegInfo
+    {
+        public float speed;
+        public float accelleration;
+        public float turnSpeed;
+        public float dashTime;
+        public float dashDistance;
+        public float dashRecharge;
+        public int dashCharges;
+    }
+}
