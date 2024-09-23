@@ -28,6 +28,8 @@ public class MultipleLegIkMover : MonoBehaviour
     [SerializeField] private GameObject[] zoneCenters;
 
     [SerializeField] private bool[] legMoving;
+    [SerializeField] private bool EditorCheckZones;
+    
     private int legMovingCount;
 
     private Vector3 pastPosition;
@@ -116,6 +118,12 @@ public class MultipleLegIkMover : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (EditorCheckZones)
+        {
+            EditorCheckZones = false;
+            CreatePositionsLists();
+        }
+        
         if (zoneCenters != null && zoneCenters.Length > 0)
         {
             for (int i = 0; i < legIks.Length; i++)
