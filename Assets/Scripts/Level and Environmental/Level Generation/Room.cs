@@ -10,6 +10,8 @@ public class Room : MonoBehaviour
     public Door entryDoor;
     public Door[] exitDoors;
 
+    public Objective objective;
+
     private void Start()
     {
         for (int i = 0; i < exitDoors.Length; i++)
