@@ -8,8 +8,8 @@ using UnityEngine.AI;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] public List<MovementBehaviour> behaviours;
-    public NavMeshAgent agent;
-    public GameObject player;
+    private NavMeshAgent agent;
+    private GameObject player;
     // Start is called before the first frame update
 
     public int currentBehaviour;
@@ -161,6 +161,39 @@ public class PauseForFixedTime : MovementBehaviour
     public override bool CheckTransitionState(GameObject self, GameObject target)
     {
         timer += Time.deltaTime;
-        return timer > pauseLength;
+        return timer >= pauseLength;
+    }
+}
+
+public class PauseForRandTime:MovementBehaviour
+{
+    private float minLength, maxLength;
+    private float timer = 0f, pauseLength = 0;
+    public PauseForRandTime(float minLength, float maxLength)
+    {
+        this.minLength = minLength;
+        this.maxLength = maxLength;
+    }
+
+    public override bool CheckTransitionState(GameObject self, GameObject target)
+    {
+        timer += Time.deltaTime;
+        return timer >= pauseLength;
+    }
+
+    public override void Enter(GameObject self, GameObject target)
+    {
+        timer = 0;
+        pauseLength = UnityEngine.Random.Range(minLength, maxLength);
+    }
+
+    public override void Exit(GameObject self, GameObject target)
+    {
+        base.Exit(self, target);
+    }
+
+    public override Vector3 GetTargetLocation(GameObject self, GameObject target)
+    {
+        return self.transform.position;
     }
 }

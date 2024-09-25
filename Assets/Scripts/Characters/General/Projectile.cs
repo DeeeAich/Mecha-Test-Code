@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     public bool piercing;
     public int pierceCount;
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health health))
         {
