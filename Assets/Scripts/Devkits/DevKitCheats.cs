@@ -14,7 +14,7 @@ public class DevKitCheats : MonoBehaviour
                 Health[] healths = FindObjectsOfType<Health>();
                 for (int i = 0; i < healths.Length; i++)
                 {
-                    if (healths[i].entityType == "Enemy")
+                    if (healths[i].entityType == EntityType.ENEMY)
                     {
                         healths[i].TriggerDeath();
                     }
@@ -26,7 +26,7 @@ public class DevKitCheats : MonoBehaviour
                 Health[] healths = FindObjectsOfType<Health>();
                 for (int i = 0; i < healths.Length; i++)
                 {
-                    if (healths[i].entityType == "Player")
+                    if (healths[i].entityType == EntityType.PLAYER)
                     {
                         healths[i].TriggerDeath();
                     }

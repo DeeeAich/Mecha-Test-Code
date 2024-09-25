@@ -2,27 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Room : MonoBehaviour
 {
     public bool isActive;
-    
-    public Door entryDoor;
-    public Door[] exitDoors;
-
     public Objective objective;
+    public GameObject[] nextRooms;
+    
+    [Header("References")]
+    [SerializeField] private Door entryDoor;
+    [SerializeField] private Door[] exitDoors;
+    [SerializeField] private GameObject[] nextRoomSpawnPoints;
+
+    [Header("Events")] 
+    public UnityEvent onStartRoom;
+    public UnityEvent onCompleteRoom;
 
     private void Start()
     {
-        for (int i = 0; i < exitDoors.Length; i++)
+        if (exitDoors.Length > 0)
         {
-            for (int j = 0; j < exitDoors.Length; j++)
+            nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
+
+            for (int i = 0; i < exitDoors.Length; i++)
             {
-                if (j != i)
+                for (int j = 0; j < exitDoors.Length; j++)
                 {
-                    int index = j;
-                    exitDoors[i].onOpen.AddListener(delegate { exitDoors[index].LockDoor(); });
+                    if (j != i)
+                    {
+                        int index = j;
+                        exitDoors[i].onOpen.AddListener(delegate { exitDoors[index].LockDoor();
+                        });
+                    }
                 }
+
+                int exitIndex = i;
+                exitDoors[i].onOpen.AddListener(delegate { LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], nextRoomSpawnPoints[exitIndex]); });
             }
         }
     }
@@ -39,13 +55,23 @@ public class Room : MonoBehaviour
             exitDoors[i].CloseDoor();
             exitDoors[i].LockDoor();
         }
+
+        isActive = true;
+        onStartRoom.Invoke();
     }
 
     public void completeRoom()
     {
-        for (int i = 0; i < exitDoors.Length; i++)
+        if (isActive)
         {
-            exitDoors[i].UnlockDoor();
+            onCompleteRoom.Invoke();
+            
+            for (int i = 0; i < exitDoors.Length; i++)
+            {
+                exitDoors[i].UnlockDoor();
+            }
+            
+            Debug.Log("Finished Room: " + gameObject.name);
         }
     }
 }

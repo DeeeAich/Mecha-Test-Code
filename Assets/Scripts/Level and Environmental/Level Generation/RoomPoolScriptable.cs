@@ -9,4 +9,5 @@ public class RoomPoolScriptable : ScriptableObject
     public GameObject[] rareRooms;
     public GameObject[] miniBossRooms;
     public GameObject[] bossRooms;
+    public GameObject[] finalRooms;
 }
