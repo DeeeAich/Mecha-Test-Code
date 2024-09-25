@@ -7,7 +7,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float health;
-    public string entityType;
+    //public string entityType;
+    public EntityType entityType;
 
     [SerializeField] private float maxHealth;
     [SerializeField] private bool destroyOnDeath = true;
