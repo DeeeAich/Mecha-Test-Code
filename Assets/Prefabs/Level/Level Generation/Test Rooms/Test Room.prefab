@@ -631,6 +631,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1291039430640293155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6301972153183914626}
+  m_Layer: 0
+  m_Name: SpawnPoint (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6301972153183914626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291039430640293155}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 293129155411512733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056482750077989831
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +872,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3278620094103838044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5492778967788075838}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5492778967788075838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278620094103838044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 293129155411512733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3910835401062757556
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +937,7 @@ Transform:
   - {fileID: 956728700369759379}
   - {fileID: 7247612330891476731}
   - {fileID: 7824505647630014624}
+  - {fileID: 293129155411512733}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8224456625716351731
@@ -1013,6 +1076,84 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &4388484921802452761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293129155411512733}
+  - component: {fileID: 3247441620543199024}
+  m_Layer: 0
+  m_Name: Wave Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &293129155411512733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388484921802452761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5492778967788075838}
+  - {fileID: 5990851136950657453}
+  - {fileID: 6301972153183914626}
+  - {fileID: 2398142225322675541}
+  m_Father: {fileID: 7487414394155762495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3247441620543199024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388484921802452761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9c2ff29cfaaa94f9dc7d4a62e3ec4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawning: 0
+  isComplete: 0
+  currentWave: 0
+  spawnOnStart: 0
+  remainingEnemiesToTriggerNextWave: 2
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8224456625716351731}
+        m_TargetAssemblyTypeName: Room, Assembly-CSharp
+        m_MethodName: completeRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  enemySpawnPrefab: {fileID: 2025918306934670692, guid: 9021f149eb192824093a81baddb9e885,
+    type: 3}
+  waves: 03000000050000000200000004000000
+  enemyTypes: 00000000
+  spawnPoints:
+  - {fileID: 3278620094103838044}
+  - {fileID: 7698165046119435384}
+  - {fileID: 1291039430640293155}
+  - {fileID: 8236137328299417444}
+  spawnedEnemies: []
 --- !u!1 &4422172606698649990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1469,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7698165046119435384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5990851136950657453}
+  m_Layer: 0
+  m_Name: SpawnPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5990851136950657453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698165046119435384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 293129155411512733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8236137328299417444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2398142225322675541}
+  m_Layer: 0
+  m_Name: SpawnPoint (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2398142225322675541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236137328299417444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 293129155411512733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8687908385056745393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1927,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clear Trigger
       objectReference: {fileID: 0}
+    - target: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7849588645440953391, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1908,11 +2116,16 @@ PrefabInstance:
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
@@ -1922,7 +2135,17 @@ PrefabInstance:
       objectReference: {fileID: 8224456625716351731}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3247441620543199024}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
@@ -1932,12 +2155,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartSpawning
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Room, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: WaveSpawner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,

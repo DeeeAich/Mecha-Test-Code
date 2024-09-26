@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-[CreateAssetMenu(fileName = "Room Pool Scriptable", menuName = "Room Pool")]
+[CreateAssetMenu(fileName = "Room Pool", menuName = "ScriptableObjects/Level Scriptables/Room Pool")]
 public class RoomPoolScriptable : ScriptableObject
 {
     public GameObject[] standardRooms;

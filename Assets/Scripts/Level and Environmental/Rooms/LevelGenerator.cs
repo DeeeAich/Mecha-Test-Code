@@ -17,9 +17,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject StartPosition;
     [SerializeField] private int randomSeed;
     [SerializeField] private bool randomizeSeedOnAwake;
-    public RoomPoolScriptable roomPool;
-    
-    private Random seededRandom;
+    public LevelScriptable levelInfo;
+
+    public Random seededRandom;
     public static LevelGenerator instance;
 
     private void Awake()
@@ -42,7 +42,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        SpawnRoom(roomPool.standardRooms[seededRandom.Next(0, roomPool.standardRooms.Length)], StartPosition);
+        SpawnRoom(levelInfo.roomPool.standardRooms[seededRandom.Next(0, levelInfo.roomPool.standardRooms.Length)], StartPosition);
         roomIndex = 0;
     }
 
@@ -53,15 +53,15 @@ public class LevelGenerator : MonoBehaviour
 
         if (roomIndex == roomsInThisFloor - 1)
         {
-            possibleRooms = roomPool.bossRooms.ToList();
+            possibleRooms = levelInfo.roomPool.bossRooms.ToList();
         }
         else if (minibossRoomIndexes.Contains(roomIndex))
         {
-            possibleRooms = roomPool.miniBossRooms.ToList();
+            possibleRooms = levelInfo.roomPool.miniBossRooms.ToList();
         }
         else
         {
-            possibleRooms = roomPool.standardRooms.ToList();
+            possibleRooms = levelInfo.roomPool.standardRooms.ToList();
         }
 
         int totalPossibleRooms = possibleRooms.Count;
