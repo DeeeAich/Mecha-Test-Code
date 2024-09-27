@@ -15,7 +15,7 @@ public class PlayerLegs : MonoBehaviour
 
         if (dashing)
             return;
-
+        
         if (stickAmount.magnitude != 0)
         {
             curSpeed += stickAmount * myBody.curLegs.accelleration * Time.deltaTime;

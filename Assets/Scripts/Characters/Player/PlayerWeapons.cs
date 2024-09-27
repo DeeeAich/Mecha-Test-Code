@@ -9,6 +9,11 @@ public class PlayerWeapons : MonoBehaviour
 
     [SerializeField] Transform turnerObject;
 
+    private PlayerBody myBody;
+
+    private PlayerBody.WeaponInfo leftWeapon;
+    private PlayerBody.WeaponInfo rightWeapon;
+
     public void LookDirection(Vector2 direction)
     {
 
@@ -25,6 +30,16 @@ public class PlayerWeapons : MonoBehaviour
             turnerObject.rotation = lookDirection;
 
         }
+
+    }
+
+    public virtual void Start()
+    {
+
+        myBody = GetComponent<PlayerBody>();
+
+        myBody.weaponLeft.LoadWeapon(leftWeapon);
+        myBody.weaponRight.LoadWeapon(rightWeapon);
 
     }
 

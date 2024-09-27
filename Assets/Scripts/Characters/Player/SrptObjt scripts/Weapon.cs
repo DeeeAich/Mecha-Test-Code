@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public int maxAmmo;
+    public int shotCost;
+    public bool fullAuto;
+    public float fireRate;
+    public float reloadTime;
+    public GameObject projectile;
+    public float turnLimit;
+
+    public void LoadWeapon(PlayerBody.WeaponInfo weaponSlot)
     {
-        
+        weaponSlot.maxAmmo = maxAmmo;
+        weaponSlot.curAmmo = maxAmmo;
+        weaponSlot.fullAuto = fullAuto;
+        weaponSlot.fireRate = fireRate;
+        weaponSlot.reloadTime = reloadTime;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
