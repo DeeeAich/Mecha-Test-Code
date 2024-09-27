@@ -40,6 +40,16 @@ public abstract class EnemyBehaviour : MonoBehaviour
         }
         agent.SetDestination(behaviours[currentBehaviour].GetTargetLocation(gameObject, player));
     }
+
+    public virtual void Stop()
+    {
+        agent.isStopped = true;
+    }
+
+    public virtual void Resume()
+    {
+        agent.isStopped = false;
+    }
 }
 
 public abstract class MovementBehaviour

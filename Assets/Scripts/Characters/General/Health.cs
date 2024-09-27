@@ -10,12 +10,24 @@ public class Health : MonoBehaviour
     //public string entityType;
     public EntityType entityType;
 
+    public bool editorTakeDamage = false;
+    public float editorDamageAmount = 100f;
+
     [SerializeField] private float maxHealth;
     [SerializeField] private bool destroyOnDeath = true;
 
     public UnityEvent onTakeDamage;
     public UnityEvent onDeath;
 
+
+    private void Update()
+    {
+        if(editorTakeDamage)
+        {
+            TakeDamage(editorDamageAmount);
+            editorTakeDamage = false;
+        }
+    }
 
     private void Awake()
     {
