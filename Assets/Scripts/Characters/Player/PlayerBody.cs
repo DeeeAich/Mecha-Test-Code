@@ -9,13 +9,16 @@ public class PlayerBody : MonoBehaviour
     private PlayerLegs myMovement;
     private PlayerWeapons weaponHolder;
     public Legs legStats;
+    public Weapon weaponLeft;
+    public Weapon weaponRight;
+    public Ultimate ultimate;
     public List<ChipBasic> chipsInserted;
     public LegInfo curLegs;
     private PlayerInput playerInputs;
 
     //input actions
     private InputAction move, look, dash,
-        ultimate, leftFire, rightFire,
+        ultUse, leftFire, rightFire,
         leftRe, rightRe, interact;
 
     private bool isGamepad = true;
@@ -60,7 +63,7 @@ public class PlayerBody : MonoBehaviour
         dash = playerInputs.actions["Dash"];
         dash.performed += Dash;
 
-        ultimate = playerInputs.actions["Ultimate"];
+        ultUse = playerInputs.actions["Ultimate"];
         leftFire = playerInputs.actions["Left Fire"];
         leftRe = playerInputs.actions["Left Reload"];
         rightFire = playerInputs.actions["Right Fire"];
@@ -91,5 +94,15 @@ public class PlayerBody : MonoBehaviour
         public float dashDistance;
         public float dashRecharge;
         public int dashCharges;
+    }
+    public struct WeaponInfo
+    {
+        public int maxAmmo;
+        public int curAmmo;
+        public int shotCost;
+        public bool fullAuto;
+        public float fireRate;
+        public float reloadTime;
+        public GameObject projectile;
     }
 }
