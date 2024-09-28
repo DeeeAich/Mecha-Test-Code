@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class RewardPopUpUI : MonoBehaviour
+public class DescriptionTextPopUpUI : MonoBehaviour
 {
-    public bool isOpen;
+    public bool open;
+    public bool close;
     public string _name;
     public TextMeshProUGUI nameText;
 
@@ -16,6 +17,7 @@ public class RewardPopUpUI : MonoBehaviour
     public TextMeshProUGUI descriptionText;
 
     public rewardRarity rarity;
+    public Color noneColor;
     public Color commonColor;
     public Color rareColor;
     public Color legendaryColor;
@@ -31,20 +33,28 @@ public class RewardPopUpUI : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (isOpen)
+        if (open)
         {
-            isOpen = false;
-            OpenRewardPopUpUI();
+            open = false;
+            OpenDescriptionPopUpUI();
+        }
+        if (close)
+        {
+            close = false;
+            CloseDescriptionPopUpUI();
         }
     }
 
-    public void OpenRewardPopUpUI()
+    public void OpenDescriptionPopUpUI()
     {
         anim.SetBool("Open", true);
         nameText.text = _name;
         descriptionText.text = "";
         switch (rarity)
         {
+            case rewardRarity.none:
+                nameText.color = noneColor;
+                break;
             case rewardRarity.common:
                 nameText.color = commonColor;
                 break;
@@ -67,15 +77,19 @@ public class RewardPopUpUI : MonoBehaviour
         {
             currentDescriptionText = text.Substring(0, i);
             descriptionText.text = currentDescriptionText;
-            yield return new WaitForSeconds(0.0075f);
+            yield return new WaitForSeconds(0.005f);
         }
     }
-
+    public void CloseDescriptionPopUpUI()
+    {
+        anim.SetBool("Open", false);
+    }
 
 }
 
 public enum rewardRarity
 {
+    none,
     common,
     rare,
     legendary
