@@ -14,13 +14,27 @@ public class Projectile : MonoBehaviour
     public List<string> damageableHealthEntityTypes;
     public List<EntityType> damageableEntities;
 
-    [Header("For passing through targets, set pierce count to 0 to infinitely pierce")]
-    public bool piercing;
+    [Tooltip("0 means infinite")]
     public int pierceCount;
 
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health health))
+        {
+
+            health.TakeDamage(damage);
+
+            pierceCount--;
+
+            if (pierceCount == 0)
+                Destroy(gameObject);
+
+
+        }
+        else
+            Destroy(gameObject);
+
+        /*if (other.TryGetComponent(out Health health))
         {
             if (damageableEntities.Contains(health.entityType))
             {
@@ -41,6 +55,6 @@ public class Projectile : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }

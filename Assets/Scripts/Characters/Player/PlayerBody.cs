@@ -7,10 +7,8 @@ public class PlayerBody : MonoBehaviour
 {
 
     private PlayerLegs myMovement;
-    private PlayerWeapons weaponHolder;
+    private PlayerWeaponControl weaponHolder;
     public Legs legStats;
-    public Weapon weaponLeft;
-    public Weapon weaponRight;
     public Ultimate ultimate;
     public List<ChipBasic> chipsInserted;
     public LegInfo curLegs;
@@ -27,7 +25,7 @@ public class PlayerBody : MonoBehaviour
     {
         playerInputs = GetComponent<PlayerInput>();
         myMovement = GetComponent<PlayerLegs>();
-        weaponHolder = GetComponent<PlayerWeapons>();
+        weaponHolder = GetComponent<PlayerWeaponControl>();
     }
 
     private void Start()
@@ -50,10 +48,7 @@ public class PlayerBody : MonoBehaviour
 
     private void Dash(InputAction.CallbackContext context)
     {
-
-        print("Dashing");
         StartCoroutine(myMovement.Dash(move.ReadValue<Vector2>()));
-
     }
 
     private void SetControls()
@@ -66,8 +61,18 @@ public class PlayerBody : MonoBehaviour
         ultUse = playerInputs.actions["Ultimate"];
         leftFire = playerInputs.actions["Left Fire"];
         leftRe = playerInputs.actions["Left Reload"];
+
+        leftFire.performed += weaponHolder.PressLeft;
+        leftFire.canceled += weaponHolder.LiftLeft;
+        leftRe.performed += weaponHolder.ReloadLeft;
+
         rightFire = playerInputs.actions["Right Fire"];
         rightRe = playerInputs.actions["Right Reload"];
+
+        rightFire.performed += weaponHolder.FireRight;
+        rightFire.canceled += weaponHolder.LiftRight;
+        rightRe.performed += weaponHolder.ReloadRight;
+
         interact = playerInputs.actions["Interact"];
 
         playerInputs.onControlsChanged += SetControlScheme;
@@ -95,14 +100,5 @@ public class PlayerBody : MonoBehaviour
         public float dashRecharge;
         public int dashCharges;
     }
-    public struct WeaponInfo
-    {
-        public int maxAmmo;
-        public int curAmmo;
-        public int shotCost;
-        public bool fullAuto;
-        public float fireRate;
-        public float reloadTime;
-        public GameObject projectile;
-    }
+
 }
