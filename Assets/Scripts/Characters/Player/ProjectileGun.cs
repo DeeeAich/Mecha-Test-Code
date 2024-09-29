@@ -7,6 +7,11 @@ public class ProjectileGun : Weapon
 
     public GameObject projectile;
 
+    public float maxDiviation;
+    public float curDivation;
+
+    public float divPerShot;
+
     private bool waitOnShot;
 
     public override void FirePress()
@@ -18,7 +23,6 @@ public class ProjectileGun : Weapon
     {
         fireHeld = false;
     }
-
 
     private IEnumerator RepeatFire()
     {
@@ -42,10 +46,12 @@ public class ProjectileGun : Weapon
         {
             StartCoroutine(Reload());
             yield break;
-        }    
+        }
 
         if (fireHeld && fullAuto)
             StartCoroutine(RepeatFire());
+        else if (!fireHeld && fullAuto)
+            curDivation = 0;
 
         yield return null;
     }
