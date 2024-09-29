@@ -27,12 +27,15 @@ public class MoveProjectile : Projectile
             if (damageableEntities.Contains(health.entityType))
             {
                 health.TakeDamage(damage);
-                if (!piercing)
+
+                pierceCount--;
+
+                if (pierceCount == 0)
                 {
                     Destroy(gameObject, 1f);
                     globalVelocity = Vector3.zero;
                     transform.GetComponentInChildren<Animator>().SetTrigger("impact");
-                }
+                }/*
                 else
                 {
                     if (pierceCount > 0)
@@ -45,8 +48,15 @@ public class MoveProjectile : Projectile
                             transform.GetComponentInChildren<Animator>().SetTrigger("impact");
                         }
                     }
-                }
+                }*/
             }
+        }
+        else
+        {
+            Destroy(gameObject, 1f);
+            globalVelocity = Vector3.zero;
+            transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+
         }
     }
 }
