@@ -16,10 +16,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual void Start()
     {
         //Find the player
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         currentBehaviour = 0;
         behaviours[currentBehaviour].Enter(gameObject, player);
+
+        foreach(MovementBehaviour m in behaviours)
+        {
+            m.Setup(gameObject, player);
+        }
     }
 
     // Update is called once per frame
@@ -67,6 +72,9 @@ public abstract class MovementBehaviour
     {
     }
     public virtual void Exit(GameObject self, GameObject target)
+    {
+    }
+    public virtual void Setup(GameObject self, GameObject target)
     {
     }
 }

@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] private float maxHealth;
     [SerializeField] private bool destroyOnDeath = true;
+    [SerializeField] private float destroyTimer = 3f;
 
     public UnityEvent onTakeDamage;
     public UnityEvent onDeath;
@@ -49,6 +50,6 @@ public class Health : MonoBehaviour
     public void TriggerDeath()
     {
         onDeath.Invoke();
-        if(destroyOnDeath) Destroy(gameObject);
+        if(destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
 }

@@ -38,4 +38,9 @@ public class EnemyGun : MonoBehaviour
             timer = 0f;
         }
     }
+
+    public void BeGone()
+    {
+        StopAllCoroutines();
+    }
 }
