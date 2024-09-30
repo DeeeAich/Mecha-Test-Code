@@ -30,6 +30,7 @@ public class ProjectileGun : Weapon
 
         GameObject newBullet = GameObject.Instantiate(projectile, firePoint);
         newBullet.transform.parent = null;
+        newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
 
         myAnim.SetTrigger("fire");
 
@@ -44,6 +45,10 @@ public class ProjectileGun : Weapon
             StartCoroutine(Reload());
             yield break;
         }
+
+        curDivation += divPerShot;
+        if (curDivation > maxDiviation)
+            curDivation = maxDiviation;
 
         if (fireHeld && fullAuto)
             StartCoroutine(RepeatFire());

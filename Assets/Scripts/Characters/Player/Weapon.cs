@@ -24,6 +24,9 @@ public class Weapon : MonoBehaviour
     public virtual void Start()
     {
         myAnim = weapon.GetComponent<Animator>();
+
+        myAnim.SetFloat("FireRate", 1 / fireRate);
+        myAnim.SetFloat("ReloadSpeed", 1 / reloadTime);
     }
 
     public virtual void FirePress()
