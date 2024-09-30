@@ -31,6 +31,8 @@ public class PlayerBody : MonoBehaviour
 
     private void Start()
     {
+        
+        isGamepad = playerInputs.currentControlScheme.Equals("Controller");
         SetControls();
         LoadStats();
         print(curLegs.accelleration);
