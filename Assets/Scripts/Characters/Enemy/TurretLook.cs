@@ -15,8 +15,12 @@ public class TurretLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 lookDir = transform.position - player.transform.position;
+        if(player == null)
+        {
+            return;
+        }
+        Vector3 lookDir = player.transform.position - transform.position;
         lookDir.y = 0;
-        transform.rotation = Quaternion.LookRotation(Vector3.up, lookDir);
+        transform.rotation = Quaternion.LookRotation(lookDir);
     }
 }

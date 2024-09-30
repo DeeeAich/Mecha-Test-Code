@@ -30,6 +30,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        if(player == null)
+        {
+            return;
+        }
         int changeCount = 0;
         while (behaviours[currentBehaviour].CheckTransitionState(gameObject, player))
         {
