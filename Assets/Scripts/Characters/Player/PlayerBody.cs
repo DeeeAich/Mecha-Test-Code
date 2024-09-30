@@ -13,6 +13,7 @@ public class PlayerBody : MonoBehaviour
     public List<ChipBasic> chipsInserted;
     public LegInfo curLegs;
     private PlayerInput playerInputs;
+    public Camera myCamera;
 
     //input actions
     private InputAction move, look, dash,
@@ -42,7 +43,7 @@ public class PlayerBody : MonoBehaviour
 
         weaponHolder.LookDirection(isGamepad ?
             look.ReadValue<Vector2>():
-            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position + transform.up * 1.5f));
+            Input.mousePosition - myCamera.WorldToScreenPoint(transform.position + transform.up * 1.5f));
 
     }
 
