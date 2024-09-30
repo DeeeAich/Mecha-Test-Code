@@ -18,6 +18,9 @@ public class Weapon : MonoBehaviour
 
     public float turnLimit;
 
+    public bool waitOnShot;
+
+
     public virtual void Start()
     {
         myAnim = weapon.GetComponent<Animator>();
@@ -40,7 +43,7 @@ public class Weapon : MonoBehaviour
     public virtual IEnumerator Reload()
     {
 
-        if (reloading)
+        if (reloading || waitOnShot)
             yield break;
 
         reloading = true;

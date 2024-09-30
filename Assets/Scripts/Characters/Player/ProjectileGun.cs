@@ -11,9 +11,6 @@ public class ProjectileGun : Weapon
     public float curDivation;
 
     public float divPerShot;
-
-    private bool waitOnShot;
-
     public override void FirePress()
     {
         fireHeld = true;
