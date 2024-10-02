@@ -15,16 +15,18 @@ public class TrainingBot : EnemyBehaviour
         behaviours.Add(new PauseForRandTime(PauseMin, PauseMax));
     }
     */
-    public override void Start()
+    internal override void Start()
     {
-        behaviours = new List<MovementBehaviour>();
-        behaviours.Add(new ApproachUntilDistance(ApproachDist));
-        behaviours.Add(new StrafeWithinRange(StrafeRangeMin, StrafeRangeMax));
-        behaviours.Add(new PauseForRandTime(PauseMin, PauseMax));
+        behaviours = new List<MovementBehaviour>
+        {
+            new ApproachUntilDistance(ApproachDist),
+            new StrafeWithinRange(StrafeRangeMin, StrafeRangeMax),
+            new PauseForRandTime(PauseMin, PauseMax)
+        };
         base.Start();
     }
 
-    public override void Update()
+    internal override void Update()
     {
         base.Update();
     }

@@ -7,13 +7,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField] public List<MovementBehaviour> behaviours;
+    public List<MovementBehaviour> behaviours;
     private NavMeshAgent agent;
     private GameObject player;
     // Start is called before the first frame update
 
     public int currentBehaviour;
-    public virtual void Start()
+    internal virtual void Start()
     {
         //Find the player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -21,16 +21,16 @@ public abstract class EnemyBehaviour : MonoBehaviour
         currentBehaviour = 0;
         behaviours[currentBehaviour].Enter(gameObject, player);
 
-        foreach(MovementBehaviour m in behaviours)
+        foreach (MovementBehaviour m in behaviours)
         {
             m.Setup(gameObject, player);
         }
     }
 
     // Update is called once per frame
-    public virtual void Update()
+    internal virtual void Update()
     {
-        if(player == null)
+        if (player == null)
         {
             return;
         }
@@ -42,7 +42,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             currentBehaviour %= behaviours.Count;
             behaviours[currentBehaviour].Enter(gameObject, player);
             changeCount++;
-            if(changeCount > behaviours.Count+2)
+            if (changeCount > behaviours.Count + 2)
             {
                 break;
             }
@@ -63,14 +63,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
 public abstract class MovementBehaviour
 {
+    internal NavMeshAgent agent;
+
+
     public virtual Vector3 GetTargetLocation(GameObject self, GameObject target)
     {
-        return self.transform.position;
+        return self.GetComponent<NavMeshAgent>().destination;
     }
 
     public virtual bool CheckTransitionState(GameObject self, GameObject target)
     {
-        return true;
+        return false;
     }
     public virtual void Enter(GameObject self, GameObject target)
     {
@@ -80,6 +83,7 @@ public abstract class MovementBehaviour
     }
     public virtual void Setup(GameObject self, GameObject target)
     {
+        agent = self.GetComponent<NavMeshAgent>();
     }
 }
 
@@ -178,6 +182,13 @@ public class PauseForFixedTime : MovementBehaviour
     public override void Enter(GameObject self, GameObject target)
     {
         timer = 0;
+        agent.isStopped = true;
+    }
+
+    public override void Exit(GameObject self, GameObject target)
+    {
+        agent.isStopped = false;
+        base.Exit(self, target);
     }
 
     public override bool CheckTransitionState(GameObject self, GameObject target)
@@ -187,9 +198,10 @@ public class PauseForFixedTime : MovementBehaviour
     }
 }
 
-public class PauseForRandTime:MovementBehaviour
+public class PauseForRandTime : MovementBehaviour
 {
-    private float minLength, maxLength;
+    private readonly float minLength;
+    private readonly float maxLength;
     private float timer = 0f, pauseLength = 0;
     public PauseForRandTime(float minLength, float maxLength)
     {
@@ -207,15 +219,68 @@ public class PauseForRandTime:MovementBehaviour
     {
         timer = 0;
         pauseLength = UnityEngine.Random.Range(minLength, maxLength);
+        agent.isStopped = true;
     }
 
     public override void Exit(GameObject self, GameObject target)
     {
-        base.Exit(self, target);
+        agent.isStopped = false;
     }
 
     public override Vector3 GetTargetLocation(GameObject self, GameObject target)
     {
-        return self.transform.position;
+        return agent.destination;
+    }
+}
+
+public class ModifySpeed : MovementBehaviour
+{
+    private readonly float newSpeed;
+
+    public ModifySpeed(float newSpeed)
+    {
+        this.newSpeed = newSpeed;
+    }
+
+    public override void Enter(GameObject self, GameObject target)
+    {
+        agent.speed = newSpeed;
+    }
+
+    public override bool CheckTransitionState(GameObject self, GameObject target)
+    {
+        return true;
+    }
+}
+public class ModifyAcceleration : MovementBehaviour
+{
+    private readonly float newAcc;
+
+    public ModifyAcceleration(float newAcc)
+    {
+        this.newAcc = newAcc;
+    }
+
+    public override void Enter(GameObject self, GameObject target)
+    {
+        agent.acceleration = newAcc;
+    }
+
+    public override bool CheckTransitionState(GameObject self, GameObject target)
+    {
+        return true;
+    }
+}
+
+public class Detonate : MovementBehaviour
+{
+
+}
+
+public class MoveToDestination : MovementBehaviour
+{
+    public override bool CheckTransitionState(GameObject self, GameObject target)
+    {
+        return agent.remainingDistance <= 0.01f;
     }
 }
