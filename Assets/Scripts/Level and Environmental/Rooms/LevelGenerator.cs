@@ -11,8 +11,9 @@ public class LevelGenerator : MonoBehaviour
     public int roomIndex;
     public int roomsInThisFloor;
     public int[] minibossRoomIndexes;
-
-    [SerializeField] private GameObject pastRoom;
+    
+    public GameObject currentRoom;
+    public GameObject oldRoom;
     
     [SerializeField] private GameObject StartPosition;
     [SerializeField] private int randomSeed;
@@ -79,14 +80,14 @@ public class LevelGenerator : MonoBehaviour
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
         GameObject newRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
+        if(currentRoom != null) oldRoom = currentRoom;
+        currentRoom = newRoom;
         newRoom.GetComponent<Room>().onStartRoom.AddListener(delegate
         {
-            if (pastRoom != null)
+            if (currentRoom != null)
             {
-                Destroy(pastRoom);
+                Destroy(oldRoom);
             }
-
-            pastRoom = newRoom;
         });
         roomIndex++;
     }
