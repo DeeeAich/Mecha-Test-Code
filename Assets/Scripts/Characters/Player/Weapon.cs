@@ -32,14 +32,16 @@ public class Weapon : MonoBehaviour
     public virtual void FirePress()
     {
 
-
+        if(reloading)
+            fireHeld = true;
 
     }
 
     public virtual void FireRelease()
     {
 
-
+        if(reloading)
+            fireHeld = false;
 
     }
 
