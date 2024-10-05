@@ -7,14 +7,16 @@ using UnityEngine.Events;
 public class Room : MonoBehaviour
 {
     public bool isActive;
-    public Objective objective;
     public GameObject[] nextRooms;
-    
+
+    public Objective primaryObjective;
+    public Objective secondaryObjective;
+
     [Header("References")]
     [SerializeField] private Door entryDoor;
     [SerializeField] private Door[] exitDoors;
     [SerializeField] private GameObject[] nextRoomSpawnPoints;
-
+    
     [Header("Events")] 
     public UnityEvent onStartRoom;
     public UnityEvent onCompleteRoom;
@@ -41,7 +43,11 @@ public class Room : MonoBehaviour
                 exitDoors[i].onOpen.AddListener(delegate { LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], nextRoomSpawnPoints[exitIndex]); });
             }
         }
+        
+        primaryObjective.onComplete.AddListener(completeRoom);
+        
     }
+    
 
     public void startRoom()
     {

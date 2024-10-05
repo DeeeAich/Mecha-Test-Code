@@ -15,7 +15,8 @@ public class WaveSpawner : MonoBehaviour
     public bool spawning;
     public bool isComplete;
     public int currentWave;
-    
+
+    [SerializeField] private bool looping;
     [SerializeField] private bool spawnOnStart = true;
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
@@ -67,6 +68,11 @@ public class WaveSpawner : MonoBehaviour
         {
             if (currentWave == waves.Length - 1 && spawnedEnemies.Count == 0)
             {
+                if (looping)
+                {
+                    currentWave = 0;
+                    return;
+                }
                 onComplete.Invoke();
                 isComplete = true;
                 spawning = false;
@@ -89,8 +95,6 @@ public class WaveSpawner : MonoBehaviour
             {
                 waveSpawnCooldownTimer -= Time.fixedDeltaTime;
             }
-
-          
         }
     }
 
@@ -116,7 +120,8 @@ public class WaveSpawner : MonoBehaviour
     {
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            Gizmos.color = Color.cyan;
+            if(spawnPoints[i] == null) break;
+            Gizmos.color = Color.red;
             Gizmos.DrawSphere(spawnPoints[i].transform.position, 2.5f);
         }
     }

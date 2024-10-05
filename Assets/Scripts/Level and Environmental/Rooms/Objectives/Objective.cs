@@ -8,4 +8,10 @@ public class Objective : MonoBehaviour
 {
     public bool isComplete;
     public UnityEvent onComplete;
+    public Room room;
+
+    private void Awake()
+    {
+        room = GetComponentInParent<Room>();
+    }
 }
