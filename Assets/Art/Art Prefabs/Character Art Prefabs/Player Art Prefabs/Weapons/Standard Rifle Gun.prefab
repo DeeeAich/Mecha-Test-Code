@@ -310,8 +310,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9190727336456235136}
-  - component: {fileID: 5166103479934879504}
-  - component: {fileID: 6994968024537500513}
   m_Layer: 0
   m_Name: Standard Rifle Gun
   m_TagString: Untagged
@@ -327,84 +325,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511979946215825224}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0.000000030908623, z: -0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: -4.041277, y: -0.40999997, z: 0.3137761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.413, y: 1.259, z: 5.789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8964402945880573119}
-  - {fileID: 398162444118538909}
-  - {fileID: 6535702161257099653}
+  - {fileID: 5476053680626998105}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5166103479934879504
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511979946215825224}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 367af10fa1febb243a747a2b577e2ee5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6994968024537500513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511979946215825224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b107de7bb2b2e4ab0059f200c5c9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionTrigger: 0
-  explosionVFX: {fileID: 0}
-  animatorToPause: {fileID: 5166103479934879504}
-  objectsToPush:
-  - {fileID: 5802236547311966693}
-  - {fileID: 4360992608634802473}
-  - {fileID: 21781072977641049}
-  - {fileID: 8510459242675118990}
-  - {fileID: 5078425723547119113}
-  - {fileID: 7840755572522883339}
-  - {fileID: 7582351125598361403}
-  - {fileID: 5700442121535773686}
-  - {fileID: 5526206080166727381}
-  - {fileID: 3552655746347010188}
-  - {fileID: 3514517259144797482}
-  objectsToDelete:
-  - {fileID: 9015084319005496063}
-  - {fileID: 9015084319005496063}
-  meshRenderersToDisable:
-  - {fileID: 7794842718977572816}
-  - {fileID: 5092673966068238946}
-  - {fileID: 7569509919051300007}
-  - {fileID: 6979359316589952905}
-  - {fileID: 2967077584677934937}
-  - {fileID: 1346412242737655501}
-  - {fileID: 2961502072899429460}
-  - {fileID: 9211545524244680459}
-  - {fileID: 7231868575649223889}
-  - {fileID: 8366721363294835011}
-  - {fileID: 1986571826121042864}
-  explosionForce: 1000
-  explosionRadius: 100
-  timeToDelete: 8
-  timeBeforeScaleDebris: 6
-  scaleSpeed: 1
 --- !u!1 &1764660053436177771
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +852,110 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4064461769817515081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5476053680626998105}
+  - component: {fileID: 2462587092766586697}
+  - component: {fileID: 7052071580619068940}
+  m_Layer: 0
+  m_Name: Standard Rifle Main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5476053680626998105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461769817515081}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000035370996, y: -0.7071069, z: -0.7071067, w: 0.00000035762787}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8964402945880573119}
+  - {fileID: 398162444118538909}
+  - {fileID: 6535702161257099653}
+  m_Father: {fileID: 9190727336456235136}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
+--- !u!95 &2462587092766586697
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461769817515081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 367af10fa1febb243a747a2b577e2ee5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7052071580619068940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461769817515081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b107de7bb2b2e4ab0059f200c5c9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionTrigger: 0
+  explosionVFX: {fileID: 0}
+  animatorToPause: {fileID: 2462587092766586697}
+  objectsToPush:
+  - {fileID: 5802236547311966693}
+  - {fileID: 4360992608634802473}
+  - {fileID: 21781072977641049}
+  - {fileID: 8510459242675118990}
+  - {fileID: 5078425723547119113}
+  - {fileID: 7840755572522883339}
+  - {fileID: 7582351125598361403}
+  - {fileID: 5700442121535773686}
+  - {fileID: 5526206080166727381}
+  - {fileID: 3552655746347010188}
+  - {fileID: 3514517259144797482}
+  objectsToDelete:
+  - {fileID: 9015084319005496063}
+  - {fileID: 9015084319005496063}
+  meshRenderersToDisable:
+  - {fileID: 7794842718977572816}
+  - {fileID: 5092673966068238946}
+  - {fileID: 7569509919051300007}
+  - {fileID: 6979359316589952905}
+  - {fileID: 2967077584677934937}
+  - {fileID: 1346412242737655501}
+  - {fileID: 2961502072899429460}
+  - {fileID: 9211545524244680459}
+  - {fileID: 7231868575649223889}
+  - {fileID: 8366721363294835011}
+  - {fileID: 1986571826121042864}
+  explosionForce: 1000
+  explosionRadius: 100
+  timeToDelete: 8
+  timeBeforeScaleDebris: 6
+  scaleSpeed: 1
 --- !u!1 &4360992608634802473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,7 +2174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9190727336456235136}
+  m_Father: {fileID: 5476053680626998105}
   m_LocalEulerAnglesHint: {x: 0, y: -144.98, z: 0}
 --- !u!198 &3621423278067519124
 ParticleSystem:
@@ -7175,7 +7207,7 @@ Transform:
   - {fileID: 4290903316326824043}
   - {fileID: 2670224499356316329}
   - {fileID: 6587804117172987686}
-  m_Father: {fileID: 9190727336456235136}
+  m_Father: {fileID: 5476053680626998105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5460666700273961754
 MeshFilter:
@@ -7402,7 +7434,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9190727336456235136}
+    m_TransformParent: {fileID: 5476053680626998105}
     m_Modifications:
     - target: {fileID: 1056076447897333693, guid: d4a4aa63cd6ce4545894afd3dceeaac1,
         type: 3}

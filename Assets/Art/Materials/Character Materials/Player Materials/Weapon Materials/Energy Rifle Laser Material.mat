@@ -20,25 +20,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Energy Rifle Beam Material
+  m_Name: Energy Rifle Laser Material
   m_Shader: {fileID: 4800000, guid: 933f24cde1e3f6a41818f56d729421ab, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   - _HALFTONESHAPE_DOT
-  - _OUTLINE
   - _SPECULARHIGHLIGHTS_OFF
-  - _TOON_SHADING_ON
   m_InvalidKeywords:
   - _STEPVIARAMPTEXTURE_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
+  m_CustomRenderQueue: 3050
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_LockedProperties: _Metallic _MetallicGlossMap
   m_SavedProperties:
     serializedVersion: 3
@@ -149,7 +148,7 @@ Material:
     - _DiffuseStep: -1
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _DstBlendAlpha: 0
     - _EnabledHairSpec: 0
     - _EnvironmentReflections: 1
@@ -182,7 +181,7 @@ Material:
     - _NoiseScale: 1
     - _NoiseStrength: 0.1
     - _OcclusionStrength: 1
-    - _OutlineEnabled: 1
+    - _OutlineEnabled: 0
     - _OutlineMode: 0
     - _OutlineWidth: 12
     - _Parallax: 0.005
@@ -202,21 +201,21 @@ Material:
     - _SpecularHighlights: 0
     - _SpecularSize: 1
     - _SpherizeNormalEnabled: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _StencilComp: 0
     - _StencilRef: 0
     - _StepViaRampTexture: 1
-    - _Surface: 0
+    - _Surface: 1
     - _ToonBlending: 1
-    - _ToonEnabled: 1
+    - _ToonEnabled: 0
     - _UseRampColor: 0
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.54509807}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 2.9960787, b: 2.996078, a: 1}
+    - _EmissionColor: {r: 0, g: 1.4980391, b: 1.4980388, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
