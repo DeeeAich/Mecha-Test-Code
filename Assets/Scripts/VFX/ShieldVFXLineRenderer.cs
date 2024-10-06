@@ -16,11 +16,10 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     public Transform line02;
     public Transform line03;
 
-    public bool setPos;
     public float timeBetweenSet;
     public float jitterDistance;
 
-    void Update()
+    public void ManualUpdate()
     {
         SetLinePositionsBetweenStartEnd();
 
@@ -29,13 +28,14 @@ public class ShieldVFXLineRenderer : MonoBehaviour
         lineRenderer.SetPosition(2, point02.position);
         lineRenderer.SetPosition(3, point03.position);
         lineRenderer.SetPosition(4, lineEnd.position);
-
-
-        if (setPos)
-        {
-            setPos = false;
-            StartCoroutine(TimeBetweenSetPos());
-        }
+    }
+    private void OnEnable()
+    {
+         StartCoroutine(TimeBetweenSetPos());
+    }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     void SetLinePositionsBetweenStartEnd()
