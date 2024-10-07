@@ -7,6 +7,7 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
     public List<ShieldVFXLineRenderer> shieldVFXLineRenderers;
 
     public GameObject shieldedTarget;
+    public bool shieldToggle;
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,7 +15,7 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void LateUpdate()
     {
-        if (shieldedTarget != null)
+        if (shieldedTarget != null && shieldToggle)
         {
             for (int i = 0; i < shieldVFXLineRenderers.Count; i++)
             {
@@ -24,7 +25,8 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
             }
 
         }
-        else
+        
+        if (!shieldToggle)
         {
             for (int i = 0; i < shieldVFXLineRenderers.Count; i++)
             {
