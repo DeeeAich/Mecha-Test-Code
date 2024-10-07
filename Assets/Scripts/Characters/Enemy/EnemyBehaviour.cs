@@ -178,6 +178,7 @@ public class StrafeWithinRange : MovementBehaviour
         Vector3 offset = brain.gameObject.transform.position - brain.target.transform.position;
         Vector3 randVect = UnityEngine.Random.insideUnitSphere;
         randVect.y = 0;
+        randVect.Normalize();
         if (Vector3.Dot(randVect, offset) < 0)
         {
             randVect = -randVect;
@@ -407,8 +408,8 @@ public class TakeCoverBehindTarget : MovementBehaviour
         }
         Vector3 offset = brain.gameObject.transform.position - brain.player.transform.position;
         Vector3 randVect = UnityEngine.Random.insideUnitSphere;
-        offset.y = 0;
         randVect.y = 0;
+        randVect.Normalize();
         Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.green, 5f);
         if (Vector3.Dot(randVect, offset) < 0)
         {
@@ -426,8 +427,8 @@ public class TakeCoverBehindTarget : MovementBehaviour
             else
                 randVect = right;
 
-            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
-            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
+            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + left, Color.red, 5f);
+            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + right, Color.white, 5f);
         }
 
         randVect = (randVect.normalized * minDist + randVect * (maxDist - minDist));
