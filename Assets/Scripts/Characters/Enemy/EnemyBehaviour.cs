@@ -8,22 +8,23 @@ using UnityEngine.AI;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
     public List<MovementBehaviour> behaviours;
-    private NavMeshAgent agent;
-    private GameObject player;
-    // Start is called before the first frame update
-
-    public int currentBehaviour;
+    internal NavMeshAgent agent;
+    internal GameObject player;
+    internal GameObject target;
+    internal bool isShieldable = true;
+    internal int currentBehaviour;
     internal virtual void Start()
     {
         //Find the player
         player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         currentBehaviour = 0;
-        behaviours[currentBehaviour].Enter(gameObject, player);
+        behaviours[currentBehaviour].Enter();
 
         foreach (MovementBehaviour m in behaviours)
         {
-            m.Setup(gameObject, player);
+            m.Setup();
+            m.brain = this;
         }
     }
 
@@ -35,19 +36,20 @@ public abstract class EnemyBehaviour : MonoBehaviour
             return;
         }
         int changeCount = 0;
-        while (behaviours[currentBehaviour].CheckTransitionState(gameObject, player))
+        while (behaviours[currentBehaviour].CheckTransitionState() > 0)
         {
-            behaviours[currentBehaviour].Exit(gameObject, player);
-            currentBehaviour += 1;
+            currentBehaviour += behaviours[currentBehaviour].CheckTransitionState();
+            currentBehaviour += behaviours.Count;
             currentBehaviour %= behaviours.Count;
-            behaviours[currentBehaviour].Enter(gameObject, player);
+
+            behaviours[currentBehaviour].Enter();
             changeCount++;
             if (changeCount > behaviours.Count + 2)
             {
                 break;
             }
         }
-        agent.SetDestination(behaviours[currentBehaviour].GetTargetLocation(gameObject, player));
+        behaviours[currentBehaviour].GetTargetLocation();
     }
 
     public virtual void Stop()
@@ -63,27 +65,80 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
 public abstract class MovementBehaviour
 {
-    internal NavMeshAgent agent;
+    internal EnemyBehaviour brain;
+
+    public virtual void GetTargetLocation()
+    {
+        brain.agent.SetDestination(brain.gameObject.GetComponent<NavMeshAgent>().destination); //Hey, this is redundant, but the principle counts
+    }
+
+    public virtual int CheckTransitionState()
+    {
+        return 0;
+    }
+    public virtual void Enter()
+    {
+    }
+    public virtual void Exit()
+    {
+    }
+    public virtual void Setup()
+    {
+    }
+}
+
+public class GetEnemyShieldTarget : MovementBehaviour
+{
+    int failJump;
+    Shielder shielder;
+    public GetEnemyShieldTarget(int failJump, Shielder shielder)
+    {
+        this.failJump = failJump;
+        this.shielder = shielder;
+    }
+
+    public override int CheckTransitionState()
+    {
+        List<EnemyBehaviour> potentialTargets = new List<EnemyBehaviour>();
+        potentialTargets.AddRange(GameObject.FindObjectsOfType<EnemyBehaviour>());
+        if (potentialTargets.Count == 0)
+            return failJump;
+        for (int i = 0; i < potentialTargets.Count; i++)
+        {
+            if (!potentialTargets[i].isShieldable)
+            {
+                potentialTargets.RemoveAt(i);
+                i--;
+            }
+        }
+        if (potentialTargets.Count == 0)
+            return failJump;
+        int primeTarget = 0;
+        for (int i = 1; i < potentialTargets.Count; i++)
+        {
+            if (!potentialTargets[i].isShieldable)
+            {
+                potentialTargets.RemoveAt(i);
+                i--;
+            }
+        }
 
 
-    public virtual Vector3 GetTargetLocation(GameObject self, GameObject target)
+        return failJump;
+    }
+}
+
+public class IndexJump : MovementBehaviour
+{
+    int jump;
+    public IndexJump(int jump)
     {
-        return self.GetComponent<NavMeshAgent>().destination;
+        this.jump = jump;
     }
 
-    public virtual bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return false;
-    }
-    public virtual void Enter(GameObject self, GameObject target)
-    {
-    }
-    public virtual void Exit(GameObject self, GameObject target)
-    {
-    }
-    public virtual void Setup(GameObject self, GameObject target)
-    {
-        agent = self.GetComponent<NavMeshAgent>();
+        return jump;
     }
 }
 
@@ -99,18 +154,23 @@ public class StrafeWithinRange : MovementBehaviour
         this.maxDist = maxDist;
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return (self.transform.position - target.transform.position).magnitude > maxDist || (self.transform.position - activeTarget).magnitude < approachRange;
+        if ((brain.gameObject.transform.position - brain.target.transform.position).magnitude > maxDist || (brain.gameObject.transform.position - activeTarget).magnitude < approachRange)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 
-    public override Vector3 GetTargetLocation(GameObject self, GameObject target)
+    public override void GetTargetLocation()
     {
-        if ((self.transform.position - activeTarget).magnitude > approachRange)
+        if ((brain.gameObject.transform.position - activeTarget).magnitude > approachRange)
         {
-            return activeTarget;
+            brain.agent.SetDestination(activeTarget);
         }
-        Vector3 offset = self.transform.position - target.transform.position;
+        Vector3 offset = brain.gameObject.transform.position - brain.target.transform.position;
         Vector3 randVect = UnityEngine.Random.insideUnitSphere;
         randVect.y = 0;
         if (Vector3.Dot(randVect, offset) < 0)
@@ -118,15 +178,15 @@ public class StrafeWithinRange : MovementBehaviour
             randVect = -randVect;
         }
         randVect = (randVect.normalized * minDist + randVect * (maxDist - minDist));
-        activeTarget = target.transform.position + randVect;
-        return activeTarget;
+        activeTarget = brain.target.transform.position + randVect;
+        brain.agent.SetDestination(activeTarget);
     }
 
-    public override void Enter(GameObject self, GameObject target)
+    public override void Enter()
     {
-        base.Enter(self, target);
-        activeTarget = self.transform.position;
-        GetTargetLocation(self, target);
+        base.Enter();
+        activeTarget = brain.gameObject.transform.position;
+        GetTargetLocation();
     }
 }
 
@@ -139,14 +199,19 @@ public class ApproachUntilDistance : MovementBehaviour
         this.distance = distance;
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return (self.transform.position - target.transform.position).magnitude <= distance;
+        if ((brain.gameObject.transform.position - brain.target.transform.position).magnitude <= distance)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 
-    public override Vector3 GetTargetLocation(GameObject self, GameObject target)
+    public override void GetTargetLocation()
     {
-        return target.transform.position;
+        brain.agent.SetDestination(brain.target.transform.position);
     }
 }
 
@@ -159,13 +224,18 @@ public class RemainStationaryInRange : MovementBehaviour
         this.range = range;
     }
 
-    public override Vector3 GetTargetLocation(GameObject self, GameObject target)
+    public override void GetTargetLocation()
     {
-        return self.transform.position;
+        brain.agent.SetDestination(brain.gameObject.transform.position);
     }
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return (self.transform.position - target.transform.position).magnitude >= range;
+        if ((brain.gameObject.transform.position - brain.target.transform.position).magnitude >= range)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 }
 
@@ -179,22 +249,27 @@ public class PauseForFixedTime : MovementBehaviour
     }
 
     float timer;
-    public override void Enter(GameObject self, GameObject target)
+    public override void Enter()
     {
         timer = 0;
-        agent.isStopped = true;
+        brain.agent.isStopped = true;
     }
 
-    public override void Exit(GameObject self, GameObject target)
+    public override void Exit()
     {
-        agent.isStopped = false;
-        base.Exit(self, target);
+        brain.agent.isStopped = false;
+        base.Exit();
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
         timer += Time.deltaTime;
-        return timer >= pauseLength;
+        if (timer >= pauseLength)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 }
 
@@ -209,27 +284,32 @@ public class PauseForRandTime : MovementBehaviour
         this.maxLength = maxLength;
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
         timer += Time.deltaTime;
-        return timer >= pauseLength;
+        if (timer >= pauseLength)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 
-    public override void Enter(GameObject self, GameObject target)
+    public override void Enter()
     {
         timer = 0;
         pauseLength = UnityEngine.Random.Range(minLength, maxLength);
-        agent.isStopped = true;
+        brain.agent.isStopped = true;
     }
 
-    public override void Exit(GameObject self, GameObject target)
+    public override void Exit()
     {
-        agent.isStopped = false;
+        brain.agent.isStopped = false;
     }
 
-    public override Vector3 GetTargetLocation(GameObject self, GameObject target)
+    public override void GetTargetLocation()
     {
-        return agent.destination;
+        brain.agent.SetDestination(brain.agent.destination);
     }
 }
 
@@ -242,16 +322,17 @@ public class ModifySpeed : MovementBehaviour
         this.newSpeed = newSpeed;
     }
 
-    public override void Enter(GameObject self, GameObject target)
+    public override void Enter()
     {
-        agent.speed = newSpeed;
+        brain.agent.speed = newSpeed;
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return true;
+        return 1;
     }
 }
+
 public class ModifyAcceleration : MovementBehaviour
 {
     private readonly float newAcc;
@@ -261,14 +342,14 @@ public class ModifyAcceleration : MovementBehaviour
         this.newAcc = newAcc;
     }
 
-    public override void Enter(GameObject self, GameObject target)
+    public override void Enter()
     {
-        agent.acceleration = newAcc;
+        brain.agent.acceleration = newAcc;
     }
 
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return true;
+        return 1;
     }
 }
 
@@ -279,8 +360,13 @@ public class Detonate : MovementBehaviour
 
 public class MoveToDestination : MovementBehaviour
 {
-    public override bool CheckTransitionState(GameObject self, GameObject target)
+    public override int CheckTransitionState()
     {
-        return agent.remainingDistance <= 0.01f;
+        if (brain.agent.remainingDistance <= 0.01f)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
     }
 }

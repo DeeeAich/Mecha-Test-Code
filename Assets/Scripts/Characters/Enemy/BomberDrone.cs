@@ -17,6 +17,7 @@ public class BomberDrone : EnemyBehaviour
             new PauseForFixedTime(pauseTime),
             new ModifySpeed(dashSpeed),
             new ModifyAcceleration(dashAcceleration),
+            //move to target for time or distance
             new MoveToDestination(),
             new Detonate()
         };
