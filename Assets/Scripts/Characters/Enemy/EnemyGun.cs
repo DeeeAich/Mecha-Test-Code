@@ -14,13 +14,6 @@ public class EnemyGun : MonoBehaviour
         StartCoroutine(FireOnRepeat());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     IEnumerator FireOnRepeat()
     {
         float timer = 0f;
