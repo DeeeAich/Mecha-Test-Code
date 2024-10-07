@@ -12,11 +12,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
     internal GameObject player;
     internal GameObject target;
     internal bool isShieldable = true;
-    internal int currentBehaviour;
+    [SerializeField]internal int currentBehaviour;
     internal virtual void Start()
     {
         //Find the player
         player = GameObject.FindGameObjectWithTag("Player");
+        target = player;
         agent = GetComponent<NavMeshAgent>();
         currentBehaviour = 0;
         behaviours[currentBehaviour].Enter();
@@ -114,17 +115,20 @@ public class GetEnemyShieldTarget : MovementBehaviour
         if (potentialTargets.Count == 0)
             return failJump;
         int primeTarget = 0;
+        float distToPrime = (brain.gameObject.transform.position - potentialTargets[primeTarget].gameObject.transform.position).sqrMagnitude;
         for (int i = 1; i < potentialTargets.Count; i++)
         {
-            if (!potentialTargets[i].isShieldable)
+            float potentialDist = (brain.gameObject.transform.position - potentialTargets[i].gameObject.transform.position).sqrMagnitude;
+            if(potentialDist < distToPrime)
             {
-                potentialTargets.RemoveAt(i);
-                i--;
+                primeTarget = i;
+                distToPrime = potentialDist;
             }
         }
+        brain.target = potentialTargets[primeTarget].gameObject;
+        shielder.SetTarget(brain.target);
 
-
-        return failJump;
+        return 1;
     }
 }
 
@@ -169,6 +173,7 @@ public class StrafeWithinRange : MovementBehaviour
         if ((brain.gameObject.transform.position - activeTarget).magnitude > approachRange)
         {
             brain.agent.SetDestination(activeTarget);
+            return;
         }
         Vector3 offset = brain.gameObject.transform.position - brain.target.transform.position;
         Vector3 randVect = UnityEngine.Random.insideUnitSphere;
@@ -368,5 +373,73 @@ public class MoveToDestination : MovementBehaviour
             return 1;
         }
         return 0;
+    }
+}
+
+public class TakeCoverBehindTarget : MovementBehaviour
+{
+    public float minDist, maxDist;
+    public float approachRange = 0.001f;
+    public Vector3 activeTarget;
+
+    public TakeCoverBehindTarget(float minDist, float maxDist)
+    {
+        this.minDist = minDist;
+        this.maxDist = maxDist;
+    }
+
+    public override int CheckTransitionState()
+    {
+        if (brain.target == null)
+        {
+            Exit();
+            return 1;
+        }
+        return 0;
+    }
+
+    public override void GetTargetLocation()
+    {
+        if ((brain.gameObject.transform.position - activeTarget).magnitude > approachRange)
+        {
+            brain.agent.SetDestination(activeTarget);
+            return;
+        }
+        Vector3 offset = brain.gameObject.transform.position - brain.player.transform.position;
+        Vector3 randVect = UnityEngine.Random.insideUnitSphere;
+        offset.y = 0;
+        randVect.y = 0;
+        Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.green, 5f);
+        if (Vector3.Dot(randVect, offset) < 0)
+        {
+            randVect = -randVect;
+            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
+        }
+        if(Vector3.Dot(randVect, offset) < Mathf.Cos(45f*Mathf.Deg2Rad))
+        {
+            Vector3 left = Vector3.Cross(randVect, Vector3.up);
+            Vector3 right = Vector3.Cross(Vector3.up, randVect);
+            float leftDot = Vector3.Dot(left, offset);
+            float rightDot = Vector3.Dot(right, offset);
+            if (leftDot > rightDot)
+                randVect = left;
+            else
+                randVect = right;
+
+            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
+            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
+        }
+
+        randVect = (randVect.normalized * minDist + randVect * (maxDist - minDist));
+        activeTarget = brain.target.transform.position + randVect;
+        Debug.DrawLine(brain.gameObject.transform.position, activeTarget, Color.red, 5f);
+        brain.agent.SetDestination(activeTarget);
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        activeTarget = brain.gameObject.transform.position;
+        GetTargetLocation();
     }
 }
