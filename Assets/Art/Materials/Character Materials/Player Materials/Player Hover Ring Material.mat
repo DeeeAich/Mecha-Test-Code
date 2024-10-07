@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7425227723667194168
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,29 +7,29 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unalive Drone Battery Material
-  m_Shader: {fileID: 4800000, guid: e88aeddd2ef1f934d805981244872e27, type: 3}
+  m_Name: Player Hover Ring Material
+  m_Shader: {fileID: 4800000, guid: 933f24cde1e3f6a41818f56d729421ab, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSION
   - _HALFTONESHAPE_DOT
-  - _OUTLINE
-  m_InvalidKeywords:
-  - _STEPVIARAMPTEXTURE_ON
+  - _TOON_SHADING_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 3050
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4811e2f385ca0cb4fbe6531182b9bfa1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -90,7 +77,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4811e2f385ca0cb4fbe6531182b9bfa1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -106,7 +93,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampTex:
-        m_Texture: {fileID: 2800000, guid: dde28dc20e6d0e44ea2e260b0a28e5a0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -140,24 +127,22 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DiffuseStep: 0
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _DstBlendAlpha: 0
     - _EnabledHairSpec: 0
     - _EnvironmentReflections: 1
     - _FaceShadowMapEnabled: 0
     - _FaceShadowMapPow: 0.2
-    - _FaceShadowSmoothness: 0
-    - _FlattenGI: 0
+    - _FaceShadowSmoothness: 0.1
     - _GlossMapScale: 0
     - _Glossiness: 0
-    - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _HairSpecExponent: 128
     - _HairSpecNoiseStrength: 1
@@ -182,52 +167,63 @@ Material:
     - _NoiseScale: 1
     - _NoiseStrength: 0.1
     - _OcclusionStrength: 1
-    - _OutlineEnabled: 1
+    - _OutlineEnabled: 0
     - _OutlineMode: 0
-    - _OutlineWidth: 15
-    - _OverrideShadowColor: 0
+    - _OutlineWidth: 12
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 0
     - _RimLightAlign: 0
     - _RimLightSmoothness: 0
-    - _RimPower: 0.55
-    - _Shininess: 0
+    - _RimPower: 0.438
     - _SizeFalloff: 0
-    - _Smoothness: 0.5
-    - _SmoothnessSource: 0
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecClipMaskScale: 1
     - _SpecShadowStrength: 1
-    - _SpecSource: 0
     - _SpecularClipStrength: 0
-    - _SpecularFalloff: 0.5
+    - _SpecularFalloff: 1
     - _SpecularHighlights: 1
-    - _SpecularSize: 0.25
+    - _SpecularSize: 1
     - _SpherizeNormalEnabled: 0
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _StencilComp: 0
     - _StencilRef: 0
-    - _StepViaRampTexture: 1
-    - _Surface: 0
+    - _StepViaRampTexture: 0
+    - _Surface: 1
+    - _ToonBlending: 1
+    - _ToonEnabled: 1
     - _UseRampColor: 0
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.37699795, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0.61894363, b: 0, a: 0.007843138}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 12.708291, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 91.57773, g: 38.428364, b: 0, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineDistancFade: {r: 11.514523, g: 86.51453, b: 0, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineDistancFade: {r: -25, g: 50, b: 0, a: 0}
+    - _RimColor: {r: 0.0603773, g: 0.82495856, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 0.5}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &5406817996903218906
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
