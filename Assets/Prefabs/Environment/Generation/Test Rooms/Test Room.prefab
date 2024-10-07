@@ -954,8 +954,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  objective: {fileID: 0}
   nextRooms: []
+  possibleObjectives: []
+  primaryObjective: {fileID: 0}
+  secondaryObjective: {fileID: 0}
   entryDoor: {fileID: 2144131794776385701}
   exitDoors:
   - {fileID: 3519229712817773680}
@@ -965,6 +967,7 @@ MonoBehaviour:
   - {fileID: 2904261179801349283}
   - {fileID: 1758002256116464444}
   - {fileID: 2759965022896786371}
+  enemySpawnPoints: []
   onStartRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -1128,6 +1131,7 @@ MonoBehaviour:
   spawning: 0
   isComplete: 0
   currentWave: 0
+  looping: 0
   spawnOnStart: 0
   remainingEnemiesToTriggerNextWave: 2
   onComplete:
@@ -1636,7 +1640,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 86bfd4dde1cec9d4fb585fe1e752d502, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 03e38a109bfc0aa4ab07be95c8a844ba, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &9121281687681965749
 GameObject:

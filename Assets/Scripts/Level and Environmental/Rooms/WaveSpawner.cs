@@ -52,6 +52,10 @@ public class WaveSpawner : MonoBehaviour
 
     private void Start()
     {
+        if (spawnPoints.Length == 0)
+        {
+            spawnPoints = LevelGenerator.instance.currentRoom.GetComponent<Room>().enemySpawnPoints;
+        }
         if(spawnOnStart) StartSpawning();
     }
 

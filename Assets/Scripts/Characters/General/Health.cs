@@ -52,4 +52,13 @@ public class Health : MonoBehaviour
         onDeath.Invoke();
         if(destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
+    
+    ///SHIELD MECHANICS
+    ///
+    ///Shields can stack
+    ///Smallest health sheild takes damage first
+    ///Shield provider gets stunned
+    ///Healths have shieldable stat and shielded stat
+    ///
+    /// 
 }

@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
     public bool isActive;
     public GameObject[] nextRooms;
 
+    [SerializeField] private Objective[] possibleObjectives;
     public Objective primaryObjective;
     public Objective secondaryObjective;
 
@@ -16,6 +17,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Door entryDoor;
     [SerializeField] private Door[] exitDoors;
     [SerializeField] private GameObject[] nextRoomSpawnPoints;
+    public GameObject[] enemySpawnPoints;
     
     [Header("Events")] 
     public UnityEvent onStartRoom;
