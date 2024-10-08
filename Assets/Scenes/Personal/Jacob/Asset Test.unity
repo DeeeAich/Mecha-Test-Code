@@ -7899,6 +7899,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2968721e81b7df343a5662b0f0eb9a81, type: 3}
+--- !u!1 &1007006887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4064461769817515081, guid: 458637334f9083a438b9711164a49fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438880988691112046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1007006891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007006887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af280ec1bf26684a81d45b151ecf224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps: {fileID: 1620312812}
+  numberOfParticles: 1
 --- !u!1 &1018126054
 GameObject:
   m_ObjectHideFlags: 0
@@ -12170,6 +12190,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!198 &1620312812 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3621423278067519124, guid: 458637334f9083a438b9711164a49fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438880988691112046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637736834
 GameObject:
   m_ObjectHideFlags: 0
@@ -14730,6 +14756,21 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3304664833122811808, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304664833122811808, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304664833122811808, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3406314776709754815, guid: 3ac20ad01162cd04099704af4b1e94ad,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -14739,6 +14780,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942133691331632955, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102731677106218648, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102731677106218648, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8118804989909180222, guid: 3ac20ad01162cd04099704af4b1e94ad,
         type: 3}
@@ -14761,7 +14817,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3942133691331632955, guid: 3ac20ad01162cd04099704af4b1e94ad, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac20ad01162cd04099704af4b1e94ad, type: 3}
@@ -15448,7 +15505,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4064461769817515081, guid: 458637334f9083a438b9711164a49fb6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1007006891}
   m_SourcePrefab: {fileID: 100100000, guid: 458637334f9083a438b9711164a49fb6, type: 3}
 --- !u!1 &1551498174225176524
 GameObject:
@@ -17242,7 +17303,7 @@ PrefabInstance:
     - target: {fileID: 69069197975776509, guid: 539fe2990326d134991d18fb50ded3a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86437356
+      value: 2.19
       objectReference: {fileID: 0}
     - target: {fileID: 69069197975776509, guid: 539fe2990326d134991d18fb50ded3a9,
         type: 3}
