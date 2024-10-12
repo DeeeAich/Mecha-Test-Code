@@ -119,14 +119,4 @@ public class WaveSpawner : MonoBehaviour
         waveSpawnCooldownTimer = waveSpawnCooldown;
         currentWave++;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            if(spawnPoints[i] == null) break;
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(spawnPoints[i].transform.position, 2.5f);
-        }
-    }
 }
