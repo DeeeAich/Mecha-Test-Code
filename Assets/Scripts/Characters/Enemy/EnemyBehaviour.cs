@@ -37,8 +37,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
             return;
         }
         int changeCount = 0;
-        while (behaviours[currentBehaviour].CheckTransitionState() > 0)
+        while (behaviours[currentBehaviour].CheckTransitionState() != 0)
         {
+            behaviours[currentBehaviour].Exit();
             currentBehaviour += behaviours[currentBehaviour].CheckTransitionState();
             currentBehaviour += behaviours.Count;
             currentBehaviour %= behaviours.Count;
@@ -209,7 +210,6 @@ public class ApproachUntilDistance : MovementBehaviour
     {
         if ((brain.gameObject.transform.position - brain.target.transform.position).magnitude <= distance)
         {
-            Exit();
             return 1;
         }
         return 0;
@@ -295,7 +295,6 @@ public class PauseForRandTime : MovementBehaviour
         timer += Time.deltaTime;
         if (timer >= pauseLength)
         {
-            Exit();
             return 1;
         }
         return 0;
@@ -393,7 +392,6 @@ public class TakeCoverBehindTarget : MovementBehaviour
     {
         if (brain.target == null)
         {
-            Exit();
             return 1;
         }
         return 0;
@@ -442,5 +440,32 @@ public class TakeCoverBehindTarget : MovementBehaviour
         base.Enter();
         activeTarget = brain.gameObject.transform.position;
         GetTargetLocation();
+    }
+}
+public class DiscardTarget : MovementBehaviour
+{
+    public override int CheckTransitionState()
+    {
+        return 1;
+    }
+
+    public override void Enter()
+    {
+        brain.target = brain.player;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void GetTargetLocation()
+    {
+        base.GetTargetLocation();
+    }
+
+    public override void Setup()
+    {
+        base.Setup();
     }
 }

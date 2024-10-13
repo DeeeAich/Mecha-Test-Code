@@ -31,7 +31,7 @@ public class ShieldDrone : EnemyBehaviour
                 //Enter Bomber Mode
                 //Copy Bomber Behaviour
 
-            //new DiscardTarget(),
+            new DiscardTarget(),
             new ApproachUntilDistance(stopDistance),
             new PauseForFixedTime(pauseTime),
             new ModifySpeed(dashSpeed),
