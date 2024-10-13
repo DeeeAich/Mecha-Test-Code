@@ -16,7 +16,7 @@ public class WaveSpawner : MonoBehaviour
     public bool isComplete;
     public int currentWave;
 
-    [SerializeField] private bool looping;
+    public bool looping;
     [SerializeField] private bool spawnOnStart = true;
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
@@ -48,6 +48,8 @@ public class WaveSpawner : MonoBehaviour
         if(enemyTypes.Contains(SpawnType.Rare)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.rareEnemies);
         if(enemyTypes.Contains(SpawnType.MiniBoss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.miniBosses);
         if(enemyTypes.Contains(SpawnType.Boss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.bosses);
+        
+        
     }
 
     private void Start()
@@ -56,7 +58,7 @@ public class WaveSpawner : MonoBehaviour
         {
             spawnPoints = LevelGenerator.instance.currentRoom.GetComponent<Room>().enemySpawnPoints;
         }
-        if(spawnOnStart) StartSpawning();
+        if(spawnOnStart) LevelGenerator.instance.currentRoom.GetComponent<Room>().onStartRoom.AddListener(delegate { StartSpawning(); });
     }
 
     public void StartSpawning()

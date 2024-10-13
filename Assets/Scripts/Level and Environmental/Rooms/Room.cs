@@ -9,9 +9,12 @@ public class Room : MonoBehaviour
     public bool isActive;
     public GameObject[] nextRooms;
 
-    [SerializeField] private Objective[] possibleObjectives;
+    public GameObject[] possiblePrimaryObjectives;
+    public GameObject[] possibleSecondaryObjectives;
     public Objective primaryObjective;
     public Objective secondaryObjective;
+
+    public WaveSpawner[] waveSpawners;
 
     [Header("References")]
     [SerializeField] private Door entryDoor;
@@ -46,8 +49,6 @@ public class Room : MonoBehaviour
             }
         }
         
-        primaryObjective.onComplete.AddListener(completeRoom);
-        
     }
     
 
@@ -63,6 +64,9 @@ public class Room : MonoBehaviour
             exitDoors[i].CloseDoor();
             exitDoors[i].LockDoor();
         }
+        
+        if(primaryObjective == null) primaryObjective = Instantiate(possiblePrimaryObjectives[LevelGenerator.instance.seededRandom.Next(0, possiblePrimaryObjectives.Length)], transform).GetComponent<Objective>();
+        primaryObjective.onComplete.AddListener(completeRoom);
 
         isActive = true;
         onStartRoom.Invoke();

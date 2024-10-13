@@ -55,18 +55,35 @@ MonoBehaviour:
   - {fileID: 4660670980408573659}
   - {fileID: 5177398418585816098}
   maxLegsMovingAtOnce: 1
-  legMoveSpeed: 0.2
+  legMoveSpeed: 0.3
   legMoveSpeedBonusPerSpeedMultiplier: 1.5
-  triggerMovementZoneRadius: 0.75
+  triggerMovementZoneRadius: 1
   forceMovementZoneRadius: 2
   distanceAheadOfCenterScalar: 1
-  distanceAheadOfCenterCap: 0.3
+  distanceAheadOfCenterCap: 1
   ikMoveStopDistance: 0.1
-  legIkTargets: []
-  moveTargets: []
-  moveSpeeds: []
-  zoneCenters: []
-  legMoving: 
+  legIkTargets:
+  - {x: -1.21, y: -0.009000063, z: 1.23}
+  - {x: 1.2300009, y: -0.009000063, z: 1.2099992}
+  - {x: 1.2099998, y: -0.009000063, z: -1.2300003}
+  - {x: -1.2299986, y: -0.009000063, z: -1.2100015}
+  moveTargets:
+  - {x: -1.21, y: -0.009000063, z: 1.23}
+  - {x: 1.2300009, y: -0.009000063, z: 1.2099992}
+  - {x: 1.2099998, y: -0.009000063, z: -1.2300003}
+  - {x: -1.2299986, y: -0.009000063, z: -1.2100015}
+  moveSpeeds:
+  - 0
+  - 0
+  - 0
+  - 0
+  zoneCenters:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  legMoving: 00000000
+  EditorCheckZones: 0
 --- !u!114 &2070941949360449678
 MonoBehaviour:
   m_ObjectHideFlags: 0

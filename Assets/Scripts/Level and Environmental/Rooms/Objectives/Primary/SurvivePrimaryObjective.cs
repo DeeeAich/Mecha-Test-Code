@@ -1,22 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Survive : Objective
+public class SurvivePrimaryObjective : Objective
 {
-    public float timer;
-    
+    public float timer = 30f;
+    private TMP_Text uiText;
+
+    private void Start()
+    {
+        uiText = GetComponentInChildren<TMP_Text>();
+        for (int i = 0; i < room.waveSpawners.Length; i++)
+        {
+            room.waveSpawners[i].looping = true;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!isComplete)
         {
+
             timer -= Time.fixedDeltaTime;
             if (timer <= 0)
             {
-                isComplete = true;
-                onComplete.Invoke();
-                WaveSpawner[] spawners = room.GetComponentsInChildren<WaveSpawner>();
+                WaveSpawner[] spawners = room.waveSpawners;
 
                 for (int i = 0; i < spawners.Length; i++)
                 {
@@ -25,8 +35,12 @@ public class Survive : Objective
                         spawners[i].spawnedEnemies[j].GetComponent<Health>().TriggerDeath();
                     }
                 }
+                
+                isComplete = true;
+                onComplete.Invoke();
             }
             
+            uiText.text = "Survive: " + Mathf.CeilToInt(timer);
         }
     }
 }

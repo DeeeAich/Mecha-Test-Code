@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 
@@ -79,16 +80,18 @@ public class LevelGenerator : MonoBehaviour
 
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
-        GameObject newRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
         if(currentRoom != null) oldRoom = currentRoom;
-        currentRoom = newRoom;
-        newRoom.GetComponent<Room>().onStartRoom.AddListener(delegate
+        currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
+        roomIndex++;
+        
+        Room thisRoom = currentRoom.GetComponent<Room>();
+
+        thisRoom.onStartRoom.AddListener(delegate
         {
             if (currentRoom != null)
             {
                 Destroy(oldRoom);
             }
         });
-        roomIndex++;
     }
 }
