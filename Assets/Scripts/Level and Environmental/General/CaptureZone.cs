@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class CaptureZone : MonoBehaviour
 {
     public UnityEvent onCapture;
+    public bool isCaptured;
     public float captureProgress;
     public float captureProgressPerSecond = 1;
 
@@ -17,8 +18,7 @@ public class CaptureZone : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position, transform.localScale * 2, transform.forward,
-            transform.rotation, 0, characterLayers, QueryTriggerInteraction.Collide);
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, transform.localScale * 2, transform.forward, transform.rotation, 0, characterLayers, QueryTriggerInteraction.Collide);
 
         enemiesPresent = 0;
         for (int i = 0; i < hits.Length; i++)
@@ -37,8 +37,9 @@ public class CaptureZone : MonoBehaviour
             captureProgress += captureProgressPerSecond *= Time.fixedDeltaTime;
         }
 
-        if (captureProgress == 100)
+        if (captureProgress >= 100)
         {
+            isCaptured = true;
             onCapture.Invoke();
         }
     }

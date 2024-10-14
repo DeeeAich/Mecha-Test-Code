@@ -2597,9 +2597,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  nextRooms: []
-  primaryObjective: {fileID: 6253120161426777702}
+  possiblePrimaryObjectives: []
+  possibleSecondaryObjectives: []
+  primaryObjective: {fileID: 0}
   secondaryObjective: {fileID: 0}
+  enemySpawnPoints: []
+  waveSpawners: []
+  captureZones: []
+  nextRooms: []
   entryDoor: {fileID: 7862983576464581681}
   exitDoors:
   - {fileID: 3183519694656553110}
@@ -3235,18 +3240,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b373c7dd26f64d84b8b3ed3267f5ac91, type: 3}
---- !u!114 &6253120161426777702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1565723512957191947, guid: b373c7dd26f64d84b8b3ed3267f5ac91,
-    type: 3}
-  m_PrefabInstance: {fileID: 4863072401122353517}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78af41a38adf6644a04d84eae14014c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6746857982637858306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2223860140703235951, guid: b373c7dd26f64d84b8b3ed3267f5ac91,

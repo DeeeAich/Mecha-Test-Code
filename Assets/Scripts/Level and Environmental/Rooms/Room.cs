@@ -7,21 +7,24 @@ using UnityEngine.Events;
 public class Room : MonoBehaviour
 {
     public bool isActive;
-    public GameObject[] nextRooms;
 
+    [Header("Objectives")]
     public GameObject[] possiblePrimaryObjectives;
     public GameObject[] possibleSecondaryObjectives;
     public Objective primaryObjective;
     public Objective secondaryObjective;
 
+    [Header("Public References")]
+    public GameObject[] enemySpawnPoints;
     public WaveSpawner[] waveSpawners;
+    public CaptureZone[] captureZones;
 
-    [Header("References")]
+    [Header("Internal References")]
+    public GameObject[] nextRooms;
     [SerializeField] private Door entryDoor;
     [SerializeField] private Door[] exitDoors;
     [SerializeField] private GameObject[] nextRoomSpawnPoints;
-    public GameObject[] enemySpawnPoints;
-    
+
     [Header("Events")] 
     public UnityEvent onStartRoom;
     public UnityEvent onCompleteRoom;
