@@ -34,6 +34,8 @@ public class SurvivePrimaryObjective : Objective
                     {
                         spawners[i].spawnedEnemies[j].GetComponent<Health>().TriggerDeath();
                     }
+
+                    spawners[i].spawning = false;
                 }
                 
                 isComplete = true;

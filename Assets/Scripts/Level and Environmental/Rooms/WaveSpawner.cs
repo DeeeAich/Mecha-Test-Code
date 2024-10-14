@@ -27,8 +27,9 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private SpawnType[] enemyTypes = new [] {SpawnType.Standard};
     [SerializeField] private GameObject[] spawnPoints;
 
-    public List<GameObject> spawnedEnemies;
-
+    public List<GameObject> spawnedEnemies = new List<GameObject>();
+    public List<GameObject> incomingEnemySpawners = new List<GameObject>();
+    
     private List<GameObject> spawnableEnemies;
     private Random seededRandom;
     private float waveSpawnCooldown = 3;
@@ -72,7 +73,35 @@ public class WaveSpawner : MonoBehaviour
     {
         if (spawning)
         {
-            if (currentWave == waves.Length - 1 && spawnedEnemies.Count == 0)
+            if (spawnedEnemies != null && spawnedEnemies.Count > 0)
+            {
+                for (int i = 0; i < spawnedEnemies.Count; i++)
+                {
+                    if(spawnedEnemies[i] == null) spawnedEnemies.RemoveAt(i);
+                }
+            }
+
+            if (incomingEnemySpawners != null && incomingEnemySpawners.Count > 0)
+            {
+                for (int i = 0; i < incomingEnemySpawners.Count; i++)
+                {
+                    if(incomingEnemySpawners[i] == null) incomingEnemySpawners.RemoveAt(i);
+                }
+            }
+            
+            if (waveSpawnCooldownTimer <= 0)
+            {
+                if ((spawnableEnemies == null || spawnedEnemies.Count <= remainingEnemiesToTriggerNextWave) && currentWave < waves.Length)
+                {
+                    SpawnWave(waves[currentWave]);
+                }
+            }
+            else
+            {
+                waveSpawnCooldownTimer -= Time.fixedDeltaTime;
+            }
+            
+            if (currentWave == waves.Length - 1 && (spawnedEnemies == null || spawnedEnemies.Count == 0) && (incomingEnemySpawners == null || incomingEnemySpawners.Count == 0))
             {
                 if (looping)
                 {
@@ -83,23 +112,6 @@ public class WaveSpawner : MonoBehaviour
                 isComplete = true;
                 spawning = false;
                 return;
-            }
-            
-            for (int i = 0; i < spawnedEnemies.Count; i++)
-            {
-                if(spawnedEnemies[i] == null) spawnedEnemies.RemoveAt(i);
-            }
-            
-            if (waveSpawnCooldownTimer <= 0)
-            {
-                if (spawnedEnemies.Count <= remainingEnemiesToTriggerNextWave && currentWave < waves.Length)
-                {
-                    SpawnWave(waves[currentWave]);
-                }
-            }
-            else
-            {
-                waveSpawnCooldownTimer -= Time.fixedDeltaTime;
             }
         }
     }
@@ -116,6 +128,7 @@ public class WaveSpawner : MonoBehaviour
             GameObject newSpawn = Instantiate(enemySpawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = spawnableEnemies[seededRandom.Next(0, spawnableEnemies.Count)];
             newSpawn.GetComponent<EnemySpawn>().waveSpawner = this;
+            incomingEnemySpawners.Add(newSpawn);
         }
         
         waveSpawnCooldownTimer = waveSpawnCooldown;
