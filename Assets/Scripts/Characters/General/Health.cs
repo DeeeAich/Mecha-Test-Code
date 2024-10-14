@@ -7,13 +7,13 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float health;
+    [SerializeField] private float maxHealth;
     //public string entityType;
     public EntityType entityType;
 
     public bool editorTakeDamage = false;
     public float editorDamageAmount = 100f;
 
-    [SerializeField] private float maxHealth;
     [SerializeField] private bool destroyOnDeath = true;
     [SerializeField] private float destroyTimer = 3f;
 
