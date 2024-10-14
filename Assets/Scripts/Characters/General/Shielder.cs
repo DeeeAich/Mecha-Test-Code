@@ -26,7 +26,7 @@ public class Shielder : MonoBehaviour
         {
             ShieldOn();
         }
-        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax)
+        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null)
         {
             Break();
         }

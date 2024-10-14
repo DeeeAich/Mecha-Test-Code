@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 27409755}
   - component: {fileID: 27409754}
+  - component: {fileID: 27409756}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -152,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f95cb92de8c944facd4a4d37831e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionTime: 0
+  linearScale: 0
 --- !u!4 &27409755
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +170,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &27409756
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27409753}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &152067317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247349491236946628, guid: 97394da52111d76448d4c96ce174435e,
+        type: 3}
+      propertyPath: shieldHealth
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
