@@ -17,9 +17,9 @@ public class ShieldDrone : EnemyBehaviour
         isShieldable = false;
         behaviours = new List<MovementBehaviour>
         {
-            new GetEnemyShieldTarget(3, shielder),
-            new TakeCoverBehindTarget(coverRangeMin, coverRangeMax),
-            new IndexJump(9),
+            new GetEnemyShieldTarget(3, shielder), // index 0
+            new TakeCoverBehindTarget(coverRangeMin, coverRangeMax), // 1
+            new IndexJump(8),// 2
 
             //Get Shieldable Ally * how store it?
             //new GetShieldableTarget(this, failIndex)
@@ -31,15 +31,15 @@ public class ShieldDrone : EnemyBehaviour
                 //Enter Bomber Mode
                 //Copy Bomber Behaviour
 
-            new DiscardTarget(),
-            new ApproachUntilDistance(stopDistance),
-            new PauseForFixedTime(pauseTime),
-            new ModifySpeed(dashSpeed),
-            new ModifyAcceleration(dashAcceleration),
+            new DiscardTarget(),// 3
+            new ApproachUntilDistance(stopDistance),// 4
+            new PauseForFixedTime(pauseTime),// 5
+            new ModifySpeed(dashSpeed),// 6
+            new ModifyAcceleration(dashAcceleration),// 7
             //move to target for time or distance
-            new MoveToDestination(),
-            new Detonate(),
-            new PauseForRandTime(stunTimeMin, stunTimeMax)
+            new MoveToDestination(),// 8
+            new Detonate(),// 9
+            new PauseForRandTime(stunTimeMin, stunTimeMax)// 10
         };
         base.Start();
     }
@@ -57,6 +57,6 @@ public class ShieldDrone : EnemyBehaviour
 
     internal void Stun()
     {
-        currentBehaviour = 9;
+        currentBehaviour = behaviours.Count - 1; ;
     }
 }
