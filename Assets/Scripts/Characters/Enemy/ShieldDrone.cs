@@ -19,7 +19,7 @@ public class ShieldDrone : EnemyBehaviour
         {
             new GetEnemyShieldTarget(3, shielder),
             new TakeCoverBehindTarget(coverRangeMin, coverRangeMax),
-            new IndexJump(8),
+            new IndexJump(9),
 
             //Get Shieldable Ally * how store it?
             //new GetShieldableTarget(this, failIndex)

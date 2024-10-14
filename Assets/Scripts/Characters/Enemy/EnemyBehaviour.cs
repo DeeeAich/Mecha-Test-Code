@@ -36,21 +36,29 @@ public abstract class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
+        bool changed = false;
         int changeCount = 0;
-        while (behaviours[currentBehaviour].CheckTransitionState() != 0)
+        do
         {
-            behaviours[currentBehaviour].Exit();
-            currentBehaviour += behaviours[currentBehaviour].CheckTransitionState();
-            currentBehaviour += behaviours.Count;
-            currentBehaviour %= behaviours.Count;
+            changed = false;
+            int change = behaviours[currentBehaviour].CheckTransitionState();
+            if (change != 0)
+            {
+                changed = true;
+                behaviours[currentBehaviour].Exit();
+                currentBehaviour += change;
+                currentBehaviour += behaviours.Count;
+                currentBehaviour %= behaviours.Count;
+                behaviours[currentBehaviour].Enter();
+                changeCount++;
+            }
 
-            behaviours[currentBehaviour].Enter();
-            changeCount++;
             if (changeCount > behaviours.Count + 2)
             {
                 break;
             }
         }
+        while (changed);
         behaviours[currentBehaviour].GetTargetLocation();
     }
 
@@ -305,11 +313,13 @@ public class PauseForRandTime : MovementBehaviour
         timer = 0;
         pauseLength = UnityEngine.Random.Range(minLength, maxLength);
         brain.agent.isStopped = true;
+        Debug.Log(brain.gameObject.name + " entered Stun");
     }
 
     public override void Exit()
     {
         brain.agent.isStopped = false;
+        Debug.Log("Escaped Stun " + timer + " over " + pauseLength);
     }
 
     public override void GetTargetLocation()
