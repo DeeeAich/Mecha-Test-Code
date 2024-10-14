@@ -28,7 +28,6 @@ public class Shielder : MonoBehaviour
         }
         else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax)
         {
-            Debug.Log((VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude);
             Break();
         }
     }

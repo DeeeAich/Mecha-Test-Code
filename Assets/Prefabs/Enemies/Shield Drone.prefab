@@ -1,0 +1,304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2168237188150525127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5309172495042634644}
+  - component: {fileID: 7889106024169608077}
+  - component: {fileID: 5786988066262490530}
+  - component: {fileID: 8730854701290407108}
+  - component: {fileID: 1405942927936854907}
+  - component: {fileID: 8247349491236946628}
+  m_Layer: 0
+  m_Name: Shield Drone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5309172495042634644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.07, y: 1, z: 14.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6485930605598147837}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7889106024169608077
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!195 &5786988066262490530
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &8730854701290407108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbca16dfe31d284db2c1882484c8c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  entityType: 1
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  maxHealth: 0
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7632370957433720296}
+        m_TargetAssemblyTypeName: TriggerDebrisExplosion, Assembly-CSharp
+        m_MethodName: TriggerExplosion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1405942927936854907}
+        m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7889106024169608077}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2168237188150525127}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: set_tag
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Untagged
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8247349491236946628}
+        m_TargetAssemblyTypeName: Shielder, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  meshesRef: {fileID: 5630047974682929555}
+--- !u!114 &1405942927936854907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8689ca13b2288f748b11c7767e0ca6e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBehaviour: 0
+  shielder: {fileID: 8247349491236946628}
+  stopDistance: 2
+  coverRangeMin: 5
+  coverRangeMax: 5
+  stunTimeMin: 2
+  stunTimeMax: 5
+  pauseTime: 1
+  dashSpeed: 5
+  dashAcceleration: 20
+--- !u!114 &8247349491236946628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d851f797e7b1744a8e9d3da7055273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VFX: {fileID: 0}
+  targetHealth: {fileID: 0}
+  rangeMax: 7.5
+  rangeInit: 5
+  shieldHealth: 100
+  breakEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &5863150719433242317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5309172495042634644}
+    m_Modifications:
+    - target: {fileID: 458112603376352351, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield Drone Assets
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ac20ad01162cd04099704af4b1e94ad, type: 3}
+--- !u!1 &5630047974682929555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2269790359674871646, guid: 3ac20ad01162cd04099704af4b1e94ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5863150719433242317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6485930605598147837 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 818739265854239280, guid: 3ac20ad01162cd04099704af4b1e94ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5863150719433242317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7632370957433720296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4086375033582959397, guid: 3ac20ad01162cd04099704af4b1e94ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5863150719433242317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b107de7bb2b2e4ab0059f200c5c9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

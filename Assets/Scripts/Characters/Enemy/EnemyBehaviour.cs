@@ -91,8 +91,8 @@ public abstract class MovementBehaviour
 
 public class GetEnemyShieldTarget : MovementBehaviour
 {
-    int failJump;
-    Shielder shielder;
+    readonly int failJump;
+    readonly Shielder shielder;
     public GetEnemyShieldTarget(int failJump, Shielder shielder)
     {
         this.failJump = failJump;
@@ -135,7 +135,7 @@ public class GetEnemyShieldTarget : MovementBehaviour
 
 public class IndexJump : MovementBehaviour
 {
-    int jump;
+    readonly int jump;
     public IndexJump(int jump)
     {
         this.jump = jump;

@@ -91,7 +91,7 @@ public abstract class DamageMod
 public class ShieldModifier:DamageMod
 {
     float shieldHealth;
-    Shielder source;
+    readonly Shielder source;
     public ShieldModifier(float shieldHealth, Shielder source)
     {
         this.shieldHealth = shieldHealth;
@@ -100,7 +100,7 @@ public class ShieldModifier:DamageMod
 
     public override float Modification(float damage)
     {
-        float returnDamage = 0;
+        float returnDamage;
         if (damage >= shieldHealth)
         {
             returnDamage = damage - shieldHealth;
