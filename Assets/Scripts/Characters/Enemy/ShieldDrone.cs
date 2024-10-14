@@ -59,5 +59,6 @@ public class ShieldDrone : EnemyBehaviour
     internal void Stun()
     {
         currentBehaviour = behaviours.Count - 1;
+        behaviours[currentBehaviour].Enter();
     }
 }
