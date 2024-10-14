@@ -8,7 +8,8 @@ public class PlayerLegs : MonoBehaviour
     private static Vector2 curSpeed;
     private GameObject myLegs;
     private bool dashing = false;
-    private Vector3 dashPoint;
+    private Vector3 dashDirection;
+    Rigidbody ridBy;
 
     public virtual void Movement(Vector2 stickAmount)
     {
@@ -30,7 +31,7 @@ public class PlayerLegs : MonoBehaviour
                 curSpeed = new Vector2();
         }
 
-        transform.position += new Vector3(curSpeed.x, 0, curSpeed.y) * Time.deltaTime;
+        ridBy.velocity = new Vector3(curSpeed.x, 0, curSpeed.y);
     }
 
     public virtual IEnumerator Dash(Vector2 stickAmount)
@@ -38,15 +39,15 @@ public class PlayerLegs : MonoBehaviour
         if (dashing || myBody.curLegs.dashCharges == 0)
             yield break;
 
-        Vector2 direction = new Vector2();
+        dashDirection = new Vector2();
 
         if(stickAmount.magnitude != 0)
         {
-            direction = (stickAmount * 10).normalized;
+            dashDirection = (stickAmount * 10).normalized;
         }
         else if(curSpeed.magnitude != 0)
         {
-            direction = curSpeed.normalized;
+            dashDirection = curSpeed.normalized;
         }
         else
         {
@@ -56,11 +57,7 @@ public class PlayerLegs : MonoBehaviour
         myBody.curLegs.dashCharges--;
         dashing = true;
 
-        dashPoint = transform.position + new Vector3(direction.x, 0, direction.y) * myBody.curLegs.dashDistance;
-
-        yield return new WaitUntil(DashHappening);
-
-        transform.position = dashPoint;
+        yield return new WaitUntil(Dashing);
 
         dashing = false;
 
@@ -72,21 +69,29 @@ public class PlayerLegs : MonoBehaviour
 
     }
 
-    public virtual bool DashHappening()
+    private bool Dashing()
     {
 
-        Vector3 movement = (dashPoint - transform.position) * myBody.curLegs.dashDistance / myBody.curLegs.dashTime;
+        
 
-        transform.position += movement * Time.deltaTime;
-
-        curSpeed = new Vector2(movement.x, movement.z);
-
-        return 0.3f > Vector3.Distance(dashPoint, transform.position);
-
+        return dashing;
     }
 
     private void Start()
     {
         myBody = GetComponent<PlayerBody>();
+        ridBy = GetComponent<Rigidbody>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if(dashing && collision.gameObject.layer == 0)
+        {
+
+
+
+        }
+
     }
 }
