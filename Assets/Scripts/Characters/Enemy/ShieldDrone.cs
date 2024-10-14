@@ -11,6 +11,7 @@ public class ShieldDrone : EnemyBehaviour
     [SerializeField] float stunTimeMin = 2f, stunTimeMax = 5f;
     [SerializeField] float pauseTime = 1f;
     [SerializeField] float dashSpeed = 5f, dashAcceleration = 20f;
+    [SerializeField] [Range(0, 1)] float coverStep = 0.2f;
     // Start is called before the first frame update
     internal override void Start()
     {
@@ -18,7 +19,7 @@ public class ShieldDrone : EnemyBehaviour
         behaviours = new List<MovementBehaviour>
         {
             new GetEnemyShieldTarget(3, shielder), // index 0
-            new TakeCoverBehindTarget(coverRangeMin, coverRangeMax), // 1
+            new TakeCoverBehindTarget(coverRangeMin, coverRangeMax, coverStep), // 1
             new IndexJump(8),// 2
 
             //Get Shieldable Ally * how store it?

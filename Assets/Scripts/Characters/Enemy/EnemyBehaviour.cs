@@ -391,11 +391,19 @@ public class TakeCoverBehindTarget : MovementBehaviour
     public float minDist, maxDist;
     public float approachRange = 0.001f;
     public Vector3 activeTarget;
+    public float stepDist;
+    public TakeCoverBehindTarget(float minDist, float maxDist, float stepDist)
+    {
+        this.minDist = minDist;
+        this.maxDist = maxDist;
+        this.stepDist = stepDist;
+    }
 
     public TakeCoverBehindTarget(float minDist, float maxDist)
     {
         this.minDist = minDist;
         this.maxDist = maxDist;
+        this.stepDist = 1f;
     }
 
     public override int CheckTransitionState()
@@ -418,11 +426,9 @@ public class TakeCoverBehindTarget : MovementBehaviour
         Vector3 randVect = UnityEngine.Random.insideUnitSphere;
         randVect.y = 0;
         randVect.Normalize();
-        Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.green, 5f);
         if (Vector3.Dot(randVect, offset) < 0)
         {
             randVect = -randVect;
-            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + randVect, Color.blue, 5f);
         }
         if(Vector3.Dot(randVect, offset) < Mathf.Cos(45f*Mathf.Deg2Rad))
         {
@@ -435,14 +441,13 @@ public class TakeCoverBehindTarget : MovementBehaviour
             else
                 randVect = right;
 
-            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + left, Color.red, 5f);
-            Debug.DrawLine(brain.target.transform.position, brain.target.transform.position + right, Color.white, 5f);
         }
 
         randVect = (randVect.normalized * minDist + randVect * (maxDist - minDist));
         activeTarget = brain.target.transform.position + randVect;
         Debug.DrawLine(brain.gameObject.transform.position, activeTarget, Color.red, 5f);
         brain.agent.SetDestination(activeTarget);
+        approachRange = Mathf.Max((brain.gameObject.transform.position - activeTarget).magnitude * (1 - stepDist), 0.01f);
     }
 
     public override void Enter()
