@@ -7,9 +7,15 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float health;
-    [SerializeField] private float maxHealth;
+    public float maxHealth;
+
+    public bool isAlive = true;
+    public bool canTakeDamage = true;
+    
     //public string entityType;
     public EntityType entityType;
+    [Tooltip("This marks the outer bounds of the entity, for the purposes of positioning and scaling anything attatched to them (ie: healthbars, shield circles etc)")]
+    public Vector3 entityBounds = new Vector3(1,1,1);
 
     public bool editorTakeDamage = false;
     public float editorDamageAmount = 100f;
@@ -41,6 +47,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if(!canTakeDamage || !isAlive) return;
+        
         float remainingDamage = amount;
         foreach(DamageMod mod in damageMods)
         {
@@ -60,6 +68,11 @@ public class Health : MonoBehaviour
             }
         }
 
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
         if (health <= 0)
         {
             TriggerDeath();
@@ -68,18 +81,20 @@ public class Health : MonoBehaviour
 
     public void TriggerDeath()
     {
+        isAlive = false;
+        canTakeDamage = false;
         onDeath.Invoke();
         if(destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
     
-    ///SHIELD MECHANICS
-    ///
-    ///Shields can stack
-    ///Smallest health sheild takes damage first //not yet implemented, just take damage in order applied (should be smallest to largest unless shields of varying sizes happen
-    ///Shield provider gets stunned
-    ///Healths have shieldable stat and shielded stat
-    ///
-    /// 
+    /*SHIELD MECHANICS
+    
+    Shields can stack
+    Smallest health sheild takes damage first //not yet implemented, just take damage in order applied (should be smallest to largest unless shields of varying sizes happen
+    Shield provider gets stunned
+    Healths have shieldable stat and shielded stat
+    
+    */
 }
 
 public abstract class DamageMod
@@ -90,7 +105,7 @@ public abstract class DamageMod
 
 public class ShieldModifier:DamageMod
 {
-    float shieldHealth;
+    public float shieldHealth;
     readonly Shielder source;
     public ShieldModifier(float shieldHealth, Shielder source)
     {

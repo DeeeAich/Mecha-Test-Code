@@ -89,6 +89,19 @@ public class WaveSpawner : MonoBehaviour
                 }
             }
             
+            if (currentWave == waves.Length && (spawnedEnemies == null || spawnedEnemies.Count == 0) && (incomingEnemySpawners == null || incomingEnemySpawners.Count == 0))
+            {
+                if (looping)
+                {
+                    currentWave = 0;
+                    return;
+                }
+                onComplete.Invoke();
+                isComplete = true;
+                spawning = false;
+                return;
+            }
+            
             if (waveSpawnCooldownTimer <= 0)
             {
                 if ((spawnableEnemies == null || spawnedEnemies.Count <= remainingEnemiesToTriggerNextWave) && currentWave < waves.Length)
@@ -101,18 +114,7 @@ public class WaveSpawner : MonoBehaviour
                 waveSpawnCooldownTimer -= Time.fixedDeltaTime;
             }
             
-            if (currentWave == waves.Length - 1 && (spawnedEnemies == null || spawnedEnemies.Count == 0) && (incomingEnemySpawners == null || incomingEnemySpawners.Count == 0))
-            {
-                if (looping)
-                {
-                    currentWave = 0;
-                    return;
-                }
-                onComplete.Invoke();
-                isComplete = true;
-                spawning = false;
-                return;
-            }
+            
         }
     }
 
