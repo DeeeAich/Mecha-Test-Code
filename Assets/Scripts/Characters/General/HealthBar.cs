@@ -25,10 +25,13 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         health = GetComponentInParent<Health>();
+
         transform.localPosition = new Vector3(0, health.entityBounds.y + 0.5f, 0);
         canvasOrigionalScale = canvas.transform.localScale.x;
         canvas.transform.localScale = new Vector3(canvasOrigionalScale + ((health.maxHealth - 100) / 100) * canvasOrigionalScale * healthbarSizeDifferenceScalar, canvasOrigionalScale, canvasOrigionalScale);
+        
         pastHealth = health.maxHealth;
+        shieldModifiers = new List<ShieldModifier>();
         healthBarHideTimer = 0;
     }
 
