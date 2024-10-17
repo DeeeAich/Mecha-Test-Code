@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour
         healthBarHideTimer = 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         transform.rotation = Quaternion.Euler(Vector3.zero);
         
