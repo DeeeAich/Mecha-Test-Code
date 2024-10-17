@@ -15,6 +15,8 @@ public class PlayerBody : MonoBehaviour
     private PlayerInput playerInputs;
     public Camera myCamera;
 
+    [SerializeField] List<Transform> weaponPoints = new();
+
     //input actions
     private InputAction move, look, dash,
         ultUse, leftFire, rightFire,
@@ -102,6 +104,26 @@ public class PlayerBody : MonoBehaviour
         public float dashDistance;
         public float dashRecharge;
         public int dashCharges;
+    }
+
+    [Tooltip("Add Prefab, if using left")]
+    public void SetWeapon(GameObject setWeapon, bool left)
+    {
+
+        if (left)
+            Destroy(weaponHolder.leftWeapon.gameObject);
+        else
+            Destroy(weaponHolder.rightWeapon.gameObject);
+
+        GameObject genWeapon = GameObject.Instantiate(setWeapon, weaponPoints[left ? 0 : 1]);
+
+        genWeapon.transform.localScale = new Vector3(left ? -1 : 1, 1, 1);
+
+        if (left)
+            weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
+        else
+            weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
+
     }
 
 }
