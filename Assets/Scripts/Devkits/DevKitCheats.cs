@@ -7,15 +7,30 @@ using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown[] loadoutDropdowns;
+    [SerializeField] private ComponentMasterListScriptable componentMasterListScriptable;
+    
+    [SerializeField] private TMP_Dropdown leftGunDropdown;
+    [SerializeField] private TMP_Dropdown RightGunDropdown;
+    [SerializeField] private TMP_Dropdown chassisDropdown;
+    
     public GameObject devkitCheatMenu;
     private int[] loadout;
 
     private void Start()
     {
-        loadout = new int[loadoutDropdowns.Length]; 
+        loadout = new int[3]; 
         devkitCheatMenu = GetComponentInChildren<Canvas>(true).gameObject;
         DontDestroyOnLoad(gameObject);
+
+        leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
+        RightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
+        chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
+
+        for (int i = 0; i < componentMasterListScriptable.weapons.Length; i++)
+        {
+            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
+            RightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
+        }
     }
 
     private void Update()
@@ -75,19 +90,20 @@ public class DevKitCheats : MonoBehaviour
 
     public void SetLoadout()
     {
-        int[] newLoadout = new int[loadoutDropdowns.Length];
-        for (int i = 0; i < newLoadout.Length; i++)
-        {
-            newLoadout[i] = loadoutDropdowns[i].value;
-        }
+        int[] newLoadout = new int[3];
 
-        if (newLoadout == loadout)
+        newLoadout[0] = chassisDropdown.value;
+        newLoadout[1] = leftGunDropdown.value;
+        newLoadout[2] = RightGunDropdown.value;
+
+        if (newLoadout != loadout)
         {
+            PlayerBody body = FindObjectOfType<PlayerBody>();
+            
+            if(newLoadout[1] != loadout[1]) body.SetWeapon(componentMasterListScriptable.weapons[newLoadout[1]], true);
+            if(newLoadout[2] != loadout[2]) body.SetWeapon(componentMasterListScriptable.weapons[newLoadout[2]], false);
+            
             loadout = newLoadout;
         }
-        
-        
     }
-
-
 }

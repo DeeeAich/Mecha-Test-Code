@@ -194,6 +194,9 @@ MonoBehaviour:
   ultimate: {fileID: 0}
   chipsInserted: []
   myCamera: {fileID: 3150745629504288718}
+  weaponPoints:
+  - {fileID: 7730225897642374141}
+  - {fileID: 4054117787783875094}
 --- !u!114 &2525358211267844037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 120
   maxHealth: 120
+  isAlive: 1
+  canTakeDamage: 1
   entityType: 0
   entityBounds: {x: 2, y: 3, z: 2}
   editorTakeDamage: 0
@@ -1208,6 +1213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a661a996c1af24dc9a7dace3c1926bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &4054117787783875094 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5442798636713282853, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8343949789707487027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5710632104132506964 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4362747258823225959, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
@@ -1226,3 +1237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a661a996c1af24dc9a7dace3c1926bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &7730225897642374141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1769049747828143310, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8343949789707487027}
+  m_PrefabAsset: {fileID: 0}

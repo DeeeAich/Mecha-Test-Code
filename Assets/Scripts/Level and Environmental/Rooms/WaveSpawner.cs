@@ -16,19 +16,23 @@ public class WaveSpawner : MonoBehaviour
     public bool isComplete;
     public int currentWave;
 
+    [Header("Settings")]
     public bool looping;
     [SerializeField] private bool spawnOnStart = true;
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
-    public UnityEvent onComplete;
-    [SerializeField] private GameObject enemySpawnPrefab;
-    
-    [SerializeField] private int[] waves;
     [SerializeField] private SpawnType[] enemyTypes = new [] {SpawnType.Standard};
-    [SerializeField] private GameObject[] spawnPoints;
+    [SerializeField] private int[] waves;
 
+    [Header("References")]
+    [SerializeField] private GameObject[] spawnPoints;
+    [SerializeField] private GameObject enemySpawnPrefab;
+
+    [Header("Internal References")]
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     public List<GameObject> incomingEnemySpawners = new List<GameObject>();
+    
+    public UnityEvent onComplete;
     
     private List<GameObject> spawnableEnemies;
     private Random seededRandom;

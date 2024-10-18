@@ -3006,66 +3006,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &5103374912498059611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1607513370059820149}
-  - component: {fileID: 7774537188591267351}
-  m_Layer: 0
-  m_Name: Waves
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1607513370059820149
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5103374912498059611}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4559611829059661878}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7774537188591267351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5103374912498059611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9c2ff29cfaaa94f9dc7d4a62e3ec4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawning: 0
-  isComplete: 0
-  currentWave: 0
-  looping: 0
-  spawnOnStart: 1
-  remainingEnemiesToTriggerNextWave: 2
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  enemySpawnPrefab: {fileID: 2025918306934670692, guid: 9021f149eb192824093a81baddb9e885,
-    type: 3}
-  waves: 030000000200000004000000
-  enemyTypes: 00000000
-  spawnPoints: []
-  spawnedEnemies: []
-  incomingEnemySpawners: []
 --- !u!1 &5177686184014092540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,7 +4696,6 @@ Transform:
   - {fileID: 5807325999809541847}
   - {fileID: 126976165967851801}
   - {fileID: 5628535290161337009}
-  - {fileID: 1607513370059820149}
   - {fileID: 432192571699779085}
   m_Father: {fileID: 6108016630826878524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5058,8 +4997,7 @@ MonoBehaviour:
   - {fileID: 8555098820737593586}
   - {fileID: 1712680264871812675}
   - {fileID: 1939223783805548771}
-  waveSpawners:
-  - {fileID: 7774537188591267351}
+  waveSpawners: []
   captureZones: []
   nextRooms: []
   entryDoor: {fileID: 7862983576464581681}
