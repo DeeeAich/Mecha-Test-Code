@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class PlayerLegs : MonoBehaviour
 {
-    private PlayerBody myBody;
-    private static Vector2 curSpeed;
-    private GameObject myLegs;
-    private bool dashing = false;
-    private Vector3 dashDirection;
-    Rigidbody ridBy;
+    public PlayerBody myBody;
+    public static Vector2 curSpeed;
+    public GameObject myLegs;
+    public bool dashing = false;
+    public Vector3 dashDirection;
+    public Rigidbody ridBy;
 
     public virtual void Movement(Vector2 stickAmount)
     {
-
-        if (dashing)
-            return;
         
-        if (stickAmount.magnitude != 0)
+        if (stickAmount.magnitude != 0 && !dashing)
         {
             curSpeed += stickAmount * myBody.curLegs.accelleration * Time.deltaTime;
 
             if (curSpeed.magnitude > (stickAmount * myBody.curLegs.speed).magnitude)
                 curSpeed = stickAmount * myBody.curLegs.speed;
         }
-        else
+        else if(!dashing)
         {
             curSpeed -= curSpeed.normalized * Time.deltaTime * myBody.curLegs.accelleration;
             if (curSpeed.magnitude <= 0.5f)
@@ -54,27 +51,8 @@ public class PlayerLegs : MonoBehaviour
             yield break;
         }
 
-        myBody.curLegs.dashCharges--;
-        dashing = true;
-
-        yield return new WaitUntil(Dashing);
-
-        dashing = false;
-
-        yield return new WaitForSeconds(myBody.curLegs.dashRecharge);
-
-        myBody.curLegs.dashCharges++;
-
         yield return null;
 
-    }
-
-    private bool Dashing()
-    {
-
-        
-
-        return dashing;
     }
 
     private void Start()
@@ -83,7 +61,7 @@ public class PlayerLegs : MonoBehaviour
         ridBy = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
 
         if(dashing && collision.gameObject.layer == 0)

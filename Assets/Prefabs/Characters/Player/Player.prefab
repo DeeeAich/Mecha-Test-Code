@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5338708035899863324}
   - component: {fileID: 5072524261996192025}
-  - component: {fileID: 2525358211267844037}
+  - component: {fileID: 8033736023942219050}
   - component: {fileID: 2772350036050259412}
   - component: {fileID: 3339494783938837665}
   - component: {fileID: 7604659684895359705}
@@ -197,7 +197,7 @@ MonoBehaviour:
   weaponPoints:
   - {fileID: 7730225897642374141}
   - {fileID: 4054117787783875094}
---- !u!114 &2525358211267844037
+--- !u!114 &8033736023942219050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,9 +206,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5041930653980852429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee32336f4fbc4817a9d6dc4ede06cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: b7d6e9501baad46f3b2e0de0a65446af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myBody: {fileID: 0}
+  myLegs: {fileID: 0}
+  dashing: 0
+  dashDirection: {x: 0, y: 0, z: 0}
+  ridBy: {fileID: 0}
 --- !u!114 &2772350036050259412
 MonoBehaviour:
   m_ObjectHideFlags: 0
