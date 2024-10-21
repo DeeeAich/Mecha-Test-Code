@@ -48,6 +48,7 @@ public class ShieldDrone : EnemyBehaviour
     private void OnEnable()
     {
         shielder.breakEvent.AddListener(Stun);
+        isShieldable = false;
     }
 
 

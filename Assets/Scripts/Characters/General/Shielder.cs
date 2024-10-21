@@ -26,7 +26,7 @@ public class Shielder : MonoBehaviour
         {
             ShieldOn();
         }
-        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null)
+        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive)
         {
             Break();
         }
@@ -55,7 +55,13 @@ public class Shielder : MonoBehaviour
     internal void ShieldOn()
     {
         VFX.shieldToggle = true;
-        targetHealth.damageMods.Add(new ShieldModifier(shieldHealth, this));
+        ShieldModifier sm = new ShieldModifier(shieldHealth, this);
+        targetHealth.damageMods.Add(sm);
+        HealthBar hb;
+        if(targetHealth.TryGetComponent(out hb))
+        {
+            hb.shieldModifiers.Add(sm);
+        }
     }
     /*
      * generate a class "HealthModifier" Shields is one

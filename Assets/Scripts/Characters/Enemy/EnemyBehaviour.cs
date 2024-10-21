@@ -36,7 +36,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         {
             return;
         }
-        bool changed = false;
+        bool changed;
         int changeCount = 0;
         do
         {
