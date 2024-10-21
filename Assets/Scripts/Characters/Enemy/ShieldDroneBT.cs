@@ -36,7 +36,6 @@ public class ShieldDroneBT : BehaviourTree
             GameObject shieldTarget = o as GameObject;
             if(shieldTarget != null && shieldTarget.TryGetComponent<Health>(out Health hp) && hp.isAlive)
             {
-                Debug.Log(shieldTarget);
                 AddOrOverwrite("CoverTarget", shieldTarget.transform.position);
             }
             else
@@ -53,7 +52,6 @@ public class ShieldDroneBT : BehaviourTree
             if (memory.ContainsKey("CoverTarget"))
             {
                 memory.Remove("CoverTarget");
-                Debug.Log("removed covertarg");
             }
         }
         base.FixedUpdate();
