@@ -22,7 +22,10 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
     [SerializeField] private SpawnType[] enemyTypes = new [] {SpawnType.Standard};
+    
+    [Header("If unset, these will be randomly generated within fair ranges")]
     [SerializeField] private int[] waves;
+    [SerializeField] private List<GameObject> enemiesToSpawn;
 
     [Header("References")]
     [SerializeField] private GameObject[] spawnPoints;
@@ -35,6 +38,8 @@ public class WaveSpawner : MonoBehaviour
     public UnityEvent onComplete;
     
     private List<GameObject> spawnableEnemies;
+
+    private int enemyToSpawnIndex;
     private Random seededRandom;
     private float waveSpawnCooldown = 3;
     private float waveSpawnCooldownTimer;
@@ -68,8 +73,31 @@ public class WaveSpawner : MonoBehaviour
 
     public void StartSpawning()
     {
+        if (waves == null || waves.Length == 0)
+        {
+            waves = new int[seededRandom.Next(2, 4)];
+
+            for (int i = 0; i < waves.Length; i++)
+            {
+                waves[i] = seededRandom.Next(remainingEnemiesToTriggerNextWave, spawnPoints.Length);
+            }
+        }
+        
+        if (enemiesToSpawn == null || enemiesToSpawn.Count == 0)
+        {
+            enemiesToSpawn = new List<GameObject>();
+
+            for (int i = 0; i < waves.Length; i++)
+            {
+                for (int j = 0; j < waves[i]; j++)
+                {
+                    enemiesToSpawn.Add(spawnableEnemies[seededRandom.Next(0,spawnableEnemies.Count)]);
+                }
+            }
+        }
+
         spawning = true;
-        SpawnWave(waves[0]);
+        waveSpawnCooldownTimer = 0;
         currentWave = 0;
     }
 
@@ -117,24 +145,26 @@ public class WaveSpawner : MonoBehaviour
             {
                 waveSpawnCooldownTimer -= Time.fixedDeltaTime;
             }
-            
-            
         }
     }
 
-    private void SpawnWave(int wavSize)
+    private void SpawnWave(int waveSize)
     {
-        if (wavSize > spawnPoints.Length) wavSize = spawnPoints.Length;
+
+        if (waveSize > spawnPoints.Length) waveSize = spawnPoints.Length;
+        if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex) waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
 
         List<GameObject> availableSpawns = spawnPoints.ToList();
 
-        for (int i = 0; i < wavSize; i++)
+        for (int i = 0; i < waveSize; i++)
         {
             GameObject spawnPoint = availableSpawns[seededRandom.Next(0, availableSpawns.Count)];
             GameObject newSpawn = Instantiate(enemySpawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = spawnableEnemies[seededRandom.Next(0, spawnableEnemies.Count)];
+            availableSpawns.Remove(spawnPoint);
+            newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemiesToSpawn[enemyToSpawnIndex];
             newSpawn.GetComponent<EnemySpawn>().waveSpawner = this;
             incomingEnemySpawners.Add(newSpawn);
+            enemyToSpawnIndex++;
         }
         
         waveSpawnCooldownTimer = waveSpawnCooldown;
