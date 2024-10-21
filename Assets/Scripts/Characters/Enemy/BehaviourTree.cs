@@ -725,7 +725,7 @@ namespace AITree
             else
             {
                 state = BehaviourTreeState.FAILURE;
-                Debug.Log("attemptedfail");
+                //Debug.Log("attemptedfail");
                 return;
             }
 
@@ -735,8 +735,8 @@ namespace AITree
             randVect.y = 0;
             randVect.Normalize();
 
-            Debug.DrawLine(brain.transform.position, brain.transform.position + randVect, Color.blue, 5f);
-            Debug.DrawLine(brain.player.transform.position, brain.player.transform.position + offset, Color.green, 5f);
+            //Debug.DrawLine(brain.transform.position, brain.transform.position + randVect, Color.blue, 5f);
+            //Debug.DrawLine(brain.player.transform.position, brain.player.transform.position + offset, Color.green, 5f);
             if (Vector3.Dot(randVect, offset) < 0)
             {
                 randVect = -randVect;
@@ -756,7 +756,7 @@ namespace AITree
             randVect = (randVect.normalized * minDist + randVect * (maxDist - minDist));
             activeTarget = target + randVect;
             activeTarget.y = brain.transform.position.y;
-            Debug.DrawLine(brain.gameObject.transform.position, activeTarget, Color.red, 5f);
+            //Debug.DrawLine(brain.gameObject.transform.position, activeTarget, Color.red, 5f);
             brain.agent.SetDestination(activeTarget);
             approachRange = Mathf.Max((brain.gameObject.transform.position - activeTarget).magnitude * (1 - stepDist), 0.01f);
         }

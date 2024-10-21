@@ -39,7 +39,8 @@ public class Shielder : MonoBehaviour
         breakEvent.Invoke();
         VFX.shieldedTarget = null;
         VFX.shieldToggle = false;
-        if (targetHealth.TryGetComponent(out HealthBar hb))
+        HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
+        if (hb != null)
         {
             hb.shieldModifiers.Remove(sm);
         }
@@ -64,8 +65,8 @@ public class Shielder : MonoBehaviour
         VFX.shieldToggle = true;
         sm = new ShieldModifier(shieldHealth, this);
         targetHealth.damageMods.Add(sm);
-        HealthBar hb;
-        if(targetHealth.TryGetComponent(out hb))
+        HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
+        if (hb != null)
         {
             hb.shieldModifiers.Add(sm);
         }
