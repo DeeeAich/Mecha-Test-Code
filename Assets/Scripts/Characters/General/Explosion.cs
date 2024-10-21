@@ -14,6 +14,15 @@ public class Explosion : MonoBehaviour
     {
         transform.localScale = new Vector3(1, 1, 1);
         transform.localScale *= linearScale;
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, linearScale / 2);
+        foreach(Collider c in hits)
+        {
+            if(c.TryGetComponent<Health>(out Health hp))
+            {
+                hp.TakeDamage(damage);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -26,14 +35,14 @@ public class Explosion : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Health target;
-        if(other.TryGetComponent<Health>(out target))
-        {
-            target.TakeDamage(damage);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Health target;
+    //    if(other.TryGetComponent<Health>(out target))
+    //    {
+    //        target.TakeDamage(damage);
+    //    }
+    //}
 
     private void OnDrawGizmosSelected()
     {

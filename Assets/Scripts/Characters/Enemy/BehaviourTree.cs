@@ -659,7 +659,7 @@ namespace AITree
 
     public class MoveTo : Approach
     {
-        public MoveTo(string targetLocation) : base(targetLocation, 0.01f)
+        public MoveTo(string targetLocation) : base(targetLocation, 0.5f)
         {
         }
 
