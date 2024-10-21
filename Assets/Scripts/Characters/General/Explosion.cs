@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exposion : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
+    public float damage;
+
     public float explosionTime;
     public float linearScale;
     private float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale *= linearScale;
     }
 
     // Update is called once per frame
@@ -19,17 +22,21 @@ public class Exposion : MonoBehaviour
         timer += Time.deltaTime;
         if(timer > explosionTime)
         {
-
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        Health target;
+        if(other.TryGetComponent<Health>(out target))
+        {
+            target.TakeDamage(damage);
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, transform.localScale.x/2);
+        Gizmos.DrawWireSphere(transform.position, linearScale/2);
     }
 }
