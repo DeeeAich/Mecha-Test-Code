@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5612523921285191674}
   - component: {fileID: 3857274298730472560}
   - component: {fileID: 7577040356813045014}
-  - component: {fileID: 5763381060258031714}
+  - component: {fileID: 5130297260658799289}
   m_Layer: 0
   m_Name: EnemyBomber
   m_TagString: Untagged
@@ -146,10 +146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  maxHealth: 50
+  isAlive: 1
+  canTakeDamage: 1
   entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
   editorTakeDamage: 0
   editorDamageAmount: 100
-  maxHealth: 50
   destroyOnDeath: 1
   destroyTimer: 3
   onTakeDamage:
@@ -170,8 +173,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5763381060258031714}
-        m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 5130297260658799289}
+        m_TargetAssemblyTypeName: AITree.BehaviourTree, Assembly-CSharp
         m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
@@ -194,7 +197,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5763381060258031714}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
         m_MethodName: set_tag
         m_Mode: 5
@@ -207,7 +210,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   meshesRef: {fileID: 6101005390353922607}
---- !u!114 &5763381060258031714
+--- !u!114 &5130297260658799289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,14 +219,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2639150327098342906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b677b0fa782f04c867d81eba2692a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 060aa851b0fdb3c4e98a0929da5345fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBehaviour: 0
-  stopDistance: 5
+  mostRecentTick: 
+  agent: {fileID: 3857274298730472560}
+  player: {fileID: 0}
+  explosion: {fileID: 1163907650012612397, guid: f4aa7eb149043b7449bb017613c407fa,
+    type: 3}
+  approachDistance: 5
   pauseTime: 1
   dashSpeed: 20
   dashAcceleration: 50
+  explosionSize: 10
+  explosionDamage: 50
 --- !u!1001 &8704097870826017423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 3857274298730472560}
   anim: {fileID: 6935391014392750382}
-  leanSpeed: 0.8
+  leanSpeed: 0.1
 --- !u!1 &6101005390353922607 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3197567788320843936, guid: 50c62ee347922b64b951fc54c3644be2,

@@ -37,7 +37,7 @@ namespace AITree
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
         }
-        public virtual void Update()
+        public virtual void FixedUpdate()
         {
             if (!paused)
             {

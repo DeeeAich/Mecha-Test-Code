@@ -28,9 +28,9 @@ public class BomberDroneBT : BehaviourTree
     }
 
     // Update is called once per frame
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         AddOrOverwrite("player", player.transform.position);
     }
 }

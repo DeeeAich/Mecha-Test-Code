@@ -20,9 +20,9 @@ public class TrainingBotBT : BehaviourTree
             );
     }
 
-    override public void Update()
+    override public void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         AddOrOverwrite("player", player.transform.position);
     }
 }

@@ -29,7 +29,7 @@ public class ShieldDroneBT : BehaviourTree
                 )) ;
     }
 
-    override public void Update()
+    override public void FixedUpdate()
     {
         if(memory.TryGetValue("ShieldTarget", out object o))
         {
@@ -56,7 +56,7 @@ public class ShieldDroneBT : BehaviourTree
                 Debug.Log("removed covertarg");
             }
         }
-        base.Update();
+        base.FixedUpdate();
         AddOrOverwrite("player", player.transform.position);
     }
 

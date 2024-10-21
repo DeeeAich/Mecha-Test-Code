@@ -11,6 +11,8 @@ public class Shielder : MonoBehaviour
     [SerializeField] internal float shieldHealth = 100f;
 
     [SerializeField] internal UnityEvent breakEvent;
+
+    ShieldModifier sm;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class Shielder : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (VFX.shieldedTarget == null)
             return;
@@ -37,6 +39,11 @@ public class Shielder : MonoBehaviour
         breakEvent.Invoke();
         VFX.shieldedTarget = null;
         VFX.shieldToggle = false;
+        if (targetHealth.TryGetComponent(out HealthBar hb))
+        {
+            hb.shieldModifiers.Remove(sm);
+        }
+        sm = null;
     }
 
     public void Stop()
@@ -55,7 +62,7 @@ public class Shielder : MonoBehaviour
     internal void ShieldOn()
     {
         VFX.shieldToggle = true;
-        ShieldModifier sm = new ShieldModifier(shieldHealth, this);
+        sm = new ShieldModifier(shieldHealth, this);
         targetHealth.damageMods.Add(sm);
         HealthBar hb;
         if(targetHealth.TryGetComponent(out hb))
