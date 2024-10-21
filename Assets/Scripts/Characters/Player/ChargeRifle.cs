@@ -43,13 +43,14 @@ public class ChargeRifle : Weapon
             lineGen.SetPosition(0, firePoint.position);
             lineGen.SetPosition(1, firePoint.position + firePoint.forward * beamRange);
 
-            charge += Time.deltaTime;
+            charge += Time.fixedDeltaTime;
 
             if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * (charges + 1))
             {
 
                 charges++;
-                
+                myAnim.SetInteger("ChargeLevel", charges);
+
             }
 
         }
@@ -60,10 +61,17 @@ public class ChargeRifle : Weapon
     {
         if (waitOnShot || reloading)
             return;
-
+        else if (curAmmo == 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
         fireHeld = true;
 
         lineGen.enabled = true;
+
+        myAnim.SetInteger("ChargeLevel", 0);
+        myAnim.SetBool("Charge", true);
     }
 
     public override void FireRelease()
@@ -75,18 +83,17 @@ public class ChargeRifle : Weapon
             lineGen.enabled = false;
             return;
         }
+
+        myAnim.SetTrigger("Fire");
         curAmmo -= charges;
-        if (curAmmo == 0)
-            StartCoroutine(Reload());
+
+        myAnim.SetBool("Charge", false);
 
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, beamwidth,
                             firePoint.forward, beamRange, layerMask: hitOptions);
 
-        charge = 0;
-        charges = 0;
-
-        if(hits.Length == 0)
-            for (int i = 0; i < charges; i++)
+        if(hits.Length > 0)
+            for (int i = 0; i < charges || i < hits.Length; i++)
             {
 
                 if (hits[i].collider.TryGetComponent<Health>(out Health health))
@@ -97,7 +104,6 @@ public class ChargeRifle : Weapon
                     GameObject newSparks =  GameObject.Instantiate(sparks, hits[i].point,
                                         Quaternion.LookRotation(hits[i].normal), null);
 
-
                 }
                 else
                 {
@@ -106,12 +112,18 @@ public class ChargeRifle : Weapon
                     GameObject newSparks = GameObject.Instantiate(sparks, hits[i].point,
                                         Quaternion.LookRotation(hits[i].normal), null);
 
-
                     break;
 
                 }
 
             }
+
+
+        fireHeld = false;
+
+
+        charge = 0;
+        charges = 0;
 
         StartCoroutine(FlashBeam());
 
@@ -126,7 +138,6 @@ public class ChargeRifle : Weapon
 
         lineGen.material = materialOptions[0];
         lineGen.enabled = false;
-
 
         yield return null;
     }

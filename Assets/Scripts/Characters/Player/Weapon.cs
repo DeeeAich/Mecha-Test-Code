@@ -23,8 +23,6 @@ public class Weapon : MonoBehaviour
 
     public virtual void Start()
     {
-        myAnim = weapon.GetComponent<Animator>();
-
         myAnim.SetFloat("FireRate", 1 / fireRate);
         myAnim.SetFloat("ReloadSpeed", 1 / reloadTime);
     }
@@ -53,7 +51,7 @@ public class Weapon : MonoBehaviour
 
         reloading = true;
 
-        myAnim.SetTrigger("reload");
+        myAnim.SetTrigger("Reload");
         
         yield return new WaitForSeconds(reloadTime);
 

@@ -110,9 +110,9 @@ public class PlayerBody : MonoBehaviour
     public void SetWeapon(GameObject setWeapon, bool left)
     {
 
-        if (left)
+        if (left && weaponHolder.leftWeapon.gameObject != null)
             Destroy(weaponHolder.leftWeapon.gameObject);
-        else
+        else if (weaponHolder.leftWeapon.gameObject != null)
             Destroy(weaponHolder.rightWeapon.gameObject);
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon, weaponPoints[left ? 0 : 1]);
