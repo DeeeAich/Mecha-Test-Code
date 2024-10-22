@@ -8,6 +8,7 @@ namespace AITree
 {
     public abstract class BehaviourTree : MonoBehaviour
     {
+        public bool debug = false;
         public string mostRecentTick;
 
         public Dictionary<string, object> memory;
@@ -729,10 +730,10 @@ namespace AITree
                 return;
             }
 
-            Vector3 offset = brain.gameObject.transform.position - brain.player.transform.position;
-            Vector3 randVect = Random.insideUnitSphere;
+            Vector3 offset = target - brain.player.transform.position;
+            Vector2 randVect2D = Random.insideUnitCircle;
+            Vector3 randVect = new Vector3(randVect2D.x, 0, randVect2D.y);
             offset.y = 0;
-            randVect.y = 0;
             randVect.Normalize();
 
             //Debug.DrawLine(brain.transform.position, brain.transform.position + randVect, Color.blue, 5f);
