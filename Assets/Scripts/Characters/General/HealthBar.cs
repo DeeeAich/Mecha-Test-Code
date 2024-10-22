@@ -14,6 +14,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image shieldBar;
     
     private Health health;
+    private bool showHealthBar;
     [HideInInspector] public List<ShieldModifier> shieldModifiers;
     
     private float pastHealth;
@@ -37,6 +38,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
+        showHealthBar = ((health.health < health.maxHealth || healthBarHideTimer > 0) && health.isAlive);
         transform.rotation = Quaternion.Euler(Vector3.zero);
         
         if (healthBarHideTimer == 0)
@@ -48,12 +50,12 @@ public class HealthBar : MonoBehaviour
         }
         
         fillBar.fillAmount = health.health / health.maxHealth;
-        canvas.SetActive((health.health < health.maxHealth || healthBarHideTimer > 0) && health.isAlive);
 
         RenderHealthModifications();
         
         if (healthBarHideTimer > 0) healthBarHideTimer -= Time.fixedDeltaTime;
         pastHealth = health.health;
+        canvas.SetActive(showHealthBar);
     }
 
     private void RenderHealthModifications()
@@ -68,6 +70,7 @@ public class HealthBar : MonoBehaviour
             }
             shieldBar.fillAmount = shieldHealth / health.maxHealth;
             shieldBar.gameObject.SetActive(true);
+            showHealthBar = true;
         }
         else
         {
