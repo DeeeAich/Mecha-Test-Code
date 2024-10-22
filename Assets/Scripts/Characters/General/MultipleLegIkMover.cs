@@ -6,6 +6,8 @@ using UnityEngine;
 [DefaultExecutionOrder(-1000)]
 public class MultipleLegIkMover : MonoBehaviour
 {
+    public bool lockLegIks;
+    
     [SerializeField] private GameObject[] legIks;
 
     [Header("Speeds")]
@@ -49,6 +51,15 @@ public class MultipleLegIkMover : MonoBehaviour
         legIkTargets = new Vector3[legIks.Length];
         moveTargets = new Vector3[legIks.Length];
         moveSpeeds = new float[legIks.Length];
+
+        if (zoneCenters != null && zoneCenters.Length > 0)
+        {
+            for (int i = 0; i < zoneCenters.Length; i++)
+            {
+                Destroy(zoneCenters[i]);
+            }
+        }
+        
         zoneCenters = new GameObject[legIks.Length];
 
         for (int i = 0; i < legIks.Length; i++)
@@ -86,7 +97,7 @@ public class MultipleLegIkMover : MonoBehaviour
                 if (legMoving[j]) legMovingCount++;
             }
             
-            if (legMoving[i]) // moves the leg
+            if (legMoving[i] && !lockLegIks) // moves the leg
             {
                 legIkTargets[i] = Vector3.MoveTowards(legIkTargets[i], moveTargets[i], moveSpeeds[i]);
 

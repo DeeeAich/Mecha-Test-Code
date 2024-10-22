@@ -161,10 +161,16 @@ public class WaveSpawner : MonoBehaviour
             GameObject spawnPoint = availableSpawns[seededRandom.Next(0, availableSpawns.Count)];
             GameObject newSpawn = Instantiate(enemySpawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             availableSpawns.Remove(spawnPoint);
+            
             newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemiesToSpawn[enemyToSpawnIndex];
             newSpawn.GetComponent<EnemySpawn>().waveSpawner = this;
             incomingEnemySpawners.Add(newSpawn);
+            
             enemyToSpawnIndex++;
+            if (looping && enemyToSpawnIndex == enemiesToSpawn.Count)
+            {
+                enemyToSpawnIndex = 0;
+            }
         }
         
         waveSpawnCooldownTimer = waveSpawnCooldown;
