@@ -63,12 +63,14 @@ namespace AITree
         {
             if (agent != null)
                 agent.isStopped = true;
+            paused = true;
         }
 
         public virtual void Resume()
         {
             if (agent != null)
                 agent.isStopped = false;
+            paused = false;
         }
 
         public virtual void StopForTime(float time)
@@ -687,7 +689,8 @@ namespace AITree
         }
         public TakeCover(string targetLoc, float minDist, float maxDist, float stepDist) : this(targetLoc, minDist, maxDist)
         {
-            this.stepDist = stepDist;
+            this.stepDist = Mathf.Min(stepDist, 0.97f);
+            this.stepDist = Mathf.Max(this.stepDist, 0.1f);
         }
 
         public override BehaviourTreeState Tick()
