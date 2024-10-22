@@ -45,7 +45,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        SpawnRoom(levelInfo.roomPool.standardRooms[seededRandom.Next(0, levelInfo.roomPool.standardRooms.Length)], StartPosition);
+        SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
         roomIndex = 0;
     }
 
