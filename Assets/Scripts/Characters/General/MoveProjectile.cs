@@ -53,6 +53,7 @@ public class MoveProjectile : Projectile
         }
         else
         {
+            Debug.Log(string.Format("bullet hit {0}", other.gameObject.name));
             Destroy(gameObject, 1f);
             globalVelocity = Vector3.zero;
             transform.GetComponentInChildren<Animator>().SetTrigger("impact");

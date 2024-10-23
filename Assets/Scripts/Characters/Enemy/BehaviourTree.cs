@@ -47,6 +47,11 @@ namespace AITree
                 {
                     root.Restart();
                 }
+                if(debug)
+                {
+
+                    Debug.Log(string.Format("{0} ticked {1} nodes this FixedUpdate",name , root.tickCounter));
+                }
             }
         }
 
@@ -127,6 +132,7 @@ namespace AITree
 
         public virtual BehaviourTreeState Tick()
         {
+            root.tickCounter++;
             brain.mostRecentTick = ToString();
             if (state == BehaviourTreeState.NULL)
             {
@@ -169,8 +175,10 @@ namespace AITree
     public class RootNode : Node
     {
         public NavMeshAgent agent;
+        public int tickCounter;
         public override BehaviourTreeState Tick()
         {
+            tickCounter = 0;
             base.Tick();
             state = children[0].Tick();
             return state;
@@ -178,6 +186,7 @@ namespace AITree
         public RootNode(BehaviourTree brain, params Node[] children) : base(children)
         {
             this.brain = brain;
+            root = this;
         }
     }
 

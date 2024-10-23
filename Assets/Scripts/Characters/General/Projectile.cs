@@ -32,7 +32,9 @@ public class Projectile : MonoBehaviour
 
         }
         else
+        {
             Destroy(gameObject);
+        }
 
         /*if (other.TryGetComponent(out Health health))
         {

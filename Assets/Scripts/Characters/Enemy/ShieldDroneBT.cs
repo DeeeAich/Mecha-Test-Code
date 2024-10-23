@@ -43,7 +43,7 @@ public class ShieldDroneBT : BehaviourTree
                 if (memory.ContainsKey("CoverTarget"))
                 {
                     memory.Remove("CoverTarget");
-                    Debug.Log("removed covertarg");
+                    //Debug.Log("removed covertarg");
                 }
             }
         }

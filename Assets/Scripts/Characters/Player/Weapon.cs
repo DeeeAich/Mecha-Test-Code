@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
 
         reloading = true;
 
-        myAnim.SetTrigger("Reload");
+        myAnim.SetTrigger("reload");
         
         yield return new WaitForSeconds(reloadTime);
 
