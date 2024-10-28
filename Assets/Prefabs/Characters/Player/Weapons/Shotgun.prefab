@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &761973083481097293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4067996033564578625}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4067996033564578625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761973083481097293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.387, y: 0.06, z: 1.612}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1956097079281339446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3096072767103390523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956097079281339446}
+  - component: {fileID: 905507948515026462}
+  m_Layer: 0
+  m_Name: Shotgun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1956097079281339446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096072767103390523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6793198773791793765}
+  - {fileID: 4067996033564578625}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905507948515026462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096072767103390523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6700f3e9a02ac4afe97bb69dbfb121e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curAmmo: 4
+  maxAmmo: 4
+  shotCost: 1
+  fullAuto: 0
+  fireRate: 1
+  reloadTime: 1.5
+  reloading: 0
+  weapon: {fileID: 1151917376468060294}
+  firePoint: {fileID: 4067996033564578625}
+  myAnim: {fileID: 3292855720783512686}
+  fireHeld: 0
+  turnLimit: 0
+  waitOnShot: 0
+  projectile: {fileID: 4874561802893684910, guid: 7a441510d4f424e36a8c07d14f895d41,
+    type: 3}
+  maxDiviation: 0
+  curDivation: 0
+  divPerShot: 0
+  fireCount: 8
+  spreadRange: 0.3
+  evenSpread: 1
+--- !u!1001 &2118142903458429387
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1956097079281339446}
+    m_Modifications:
+    - target: {fileID: 1340183176661561677, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_Name
+      value: 24 Gauge Shotgun Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d674fd0ae0f58aa479ba46a41a0bdb3f, type: 3}
+--- !u!1 &1151917376468060294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1340183176661561677, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118142903458429387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3292855720783512686 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3519481107090079141, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118142903458429387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6793198773791793765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4837831325511441326, guid: d674fd0ae0f58aa479ba46a41a0bdb3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118142903458429387}
+  m_PrefabAsset: {fileID: 0}

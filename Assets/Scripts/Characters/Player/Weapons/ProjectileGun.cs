@@ -21,7 +21,7 @@ public class ProjectileGun : Weapon
         fireHeld = false;
     }
 
-    private IEnumerator RepeatFire()
+    public virtual IEnumerator RepeatFire()
     {
         if (waitOnShot || !fireHeld || reloading)
             yield break;

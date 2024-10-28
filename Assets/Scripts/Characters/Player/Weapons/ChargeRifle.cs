@@ -19,6 +19,7 @@ public class ChargeRifle : Weapon
     public float beamRange;
     public float beamwidth;
     public float damage;
+    [SerializeField] LayerMask walls; 
 
     [SerializeField] LayerMask hitOptions;
 
@@ -40,12 +41,18 @@ public class ChargeRifle : Weapon
         if (fireHeld)
         {
 
+            RaycastHit hit;
+
             lineGen.SetPosition(0, firePoint.position);
-            lineGen.SetPosition(1, firePoint.position + firePoint.forward * beamRange);
+
+            if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, beamRange, layerMask: walls))
+                lineGen.SetPosition(1, hit.point);
+            else
+                lineGen.SetPosition(1, firePoint.position + firePoint.forward * beamRange);
 
             charge += Time.fixedDeltaTime;
 
-            if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * (charges + 1))
+            if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges)
             {
 
                 charges++;
@@ -69,8 +76,11 @@ public class ChargeRifle : Weapon
         fireHeld = true;
 
         lineGen.enabled = true;
+        lineGen.SetPosition(0, firePoint.position);
+        lineGen.SetPosition(1, firePoint.position);
+        charges = 1;
 
-        myAnim.SetInteger("ChargeLevel", 0);
+        myAnim.SetInteger("ChargeLevel", 1);
         myAnim.SetBool("Charge", true);
     }
 
@@ -99,7 +109,7 @@ public class ChargeRifle : Weapon
                 if (hits[i].collider.TryGetComponent<Health>(out Health health))
                 {
 
-                    health.TakeDamage(damage);
+                    health.TakeDamage(damage * charges);
 
                     GameObject newSparks =  GameObject.Instantiate(sparks, hits[i].point,
                                         Quaternion.LookRotation(hits[i].normal), null);

@@ -14,6 +14,7 @@ public class PlayerBody : MonoBehaviour
     public LegInfo curLegs;
     private PlayerInput playerInputs;
     public Camera myCamera;
+    public Transform playerCentre;
 
     [SerializeField] List<Transform> weaponPoints = new();
 
@@ -37,7 +38,6 @@ public class PlayerBody : MonoBehaviour
         isGamepad = playerInputs.currentControlScheme.Equals("Controller");
         SetControls();
         LoadStats();
-        print(curLegs.accelleration);
     }
 
     private void FixedUpdate()
@@ -47,7 +47,7 @@ public class PlayerBody : MonoBehaviour
 
         weaponHolder.LookDirection(isGamepad ?
             look.ReadValue<Vector2>():
-            Input.mousePosition - myCamera.WorldToScreenPoint(transform.position + transform.up * 1.5f));
+            Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position));
 
     }
 
@@ -117,7 +117,7 @@ public class PlayerBody : MonoBehaviour
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon, weaponPoints[left ? 0 : 1]);
 
-        genWeapon.transform.localScale = new Vector3(left ? -1 : 1, 1, 1);
+        genWeapon.transform.localScale = new Vector3(left ? 1 : -1, 1, 1);
 
         if (left)
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
