@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private bool singleUse;
+    public UnityEvent onInteract;
+    
+    public void TriggerInteraction()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        onInteract.Invoke();
+        if (singleUse) enabled = false;
     }
 }
