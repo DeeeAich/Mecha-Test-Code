@@ -32,7 +32,7 @@ public class ProjectileGun : Weapon
         newBullet.transform.parent = null;
         newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
 
-        myAnim.SetTrigger("fire");
+        myAnim.SetTrigger("Fire");
 
         yield return new WaitForSeconds(fireRate);
 

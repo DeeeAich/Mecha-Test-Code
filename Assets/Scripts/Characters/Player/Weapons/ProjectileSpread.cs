@@ -15,23 +15,24 @@ public class ProjectileSpread : ProjectileGun
             yield break;
 
         waitOnShot = true;
-        for (int i = 1; i <= fireCount; i++)
+
+        float spreadDif = 2f / ((float)fireCount - 1f);
+
+        for (int i = 0; i < fireCount; i++)
         {
             float bulDiv = 0;
             if (evenSpread)
-            {
-                bulDiv = i / fireCount;
-
-                bulDiv *= spreadRange * bulDiv > 0.5f ? 1 : -1;
-            }
+                bulDiv = -1f + ((float)i * spreadDif);
             else
-                bulDiv = Random.Range(-fireCount, fireCount);
+                bulDiv = Random.Range(-1.0f, 1.0f);
+
             GameObject newBullet = GameObject.Instantiate(projectile, firePoint);
             newBullet.transform.parent = null;
-            newBullet.transform.position += firePoint.right * bulDiv;
-            newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * (curDivation / spreadRange), 0);
+            newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
+            newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
+
         }
-        myAnim.SetTrigger("fire");
+        myAnim.SetTrigger("Fire");
 
         yield return new WaitForSeconds(fireRate);
 
