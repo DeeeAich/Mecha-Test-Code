@@ -305,15 +305,15 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
+  HasSourceProject: 1
+  HasPlatforms: 1
   sourceProjectPath: ../Mecha-FMOD-Repo/Mecha FMOD project/Mecha FMOD project.fspro
-  sourceBankPath: Assets/Art/Audio/FMOD BUILD/Desktop
+  sourceBankPath: ../Mecha-FMOD-Repo/Mecha FMOD project/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 0
-  BankLoadType: 1
+  BankLoadType: 0
   AutomaticSampleLoading: 0
   EncryptionKey: 
   ImportType: 0
@@ -330,19 +330,13 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Desktop/Master
+  - Master
   Banks:
   - Ambience
-  - Ambience.assets
-  - Desktop/Master.assets
-  - Desktop/SFX
-  - Desktop/SFX.assets
   - DX
-  - DX.assets
   - Music
-  - Music.assets
+  - SFX
   - UI
-  - UI.assets
   BanksToLoad:
   - Master
   - SFX
@@ -368,7 +362,7 @@ MonoBehaviour:
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131620
-  HideSetupWizard: 0
+  HideSetupWizard: 1
   LastEventReferenceScanVersion: 131620
   Platforms:
   - {fileID: -7191036785001328522}

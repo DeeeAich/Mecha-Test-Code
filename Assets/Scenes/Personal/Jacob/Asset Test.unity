@@ -6185,10 +6185,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1786721107604540693, guid: 458637334f9083a438b9711164a49fb6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4064461769817515081, guid: 458637334f9083a438b9711164a49fb6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1890358232}
   m_SourcePrefab: {fileID: 100100000, guid: 458637334f9083a438b9711164a49fb6, type: 3}
 --- !u!1001 &784419284
 PrefabInstance:
@@ -14318,7 +14323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1722330726}
-  - component: {fileID: 1722330725}
+  - component: {fileID: 1722330727}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -14326,18 +14331,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1722330725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722330724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1072e2a30178a394aa84b7b0d17e8157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1722330726
 Transform:
   m_ObjectHideFlags: 0
@@ -14353,6 +14346,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722330727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722330724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f317696a9eff760488f5a0659b2fe07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1726042659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5358131588471708440, guid: 1ca972685abf85c45b39d1b68f53f3b9,
@@ -15557,6 +15562,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873658783}
   m_CullTransparentMesh: 1
+--- !u!1 &1890358230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4064461769817515081, guid: 458637334f9083a438b9711164a49fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 769640917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1890358232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890358230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -65883351
+      Data2: 1296645810
+      Data3: 804754365
+      Data4: 1304222401
+    Path: event:/Placeholder Events/Placeholder Gun Shot
+  - Guid:
+      Data1: 1981293525
+      Data2: 1260435962
+      Data3: 458452127
+      Data4: 660742848
+    Path: event:/Placeholder Events/Placeholder Gun Reload
 --- !u!1 &1893754030
 GameObject:
   m_ObjectHideFlags: 0
@@ -18400,13 +18436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22032ea50954b644db1602ab73b24a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventReferences:
-  - Guid:
-      Data1: -65883351
-      Data2: 1296645810
-      Data3: 804754365
-      Data4: 1304222401
-    Path: event:/Placeholder Events/Placeholder Gun Shot
 --- !u!23 &4514740608811824186
 MeshRenderer:
   m_ObjectHideFlags: 0
