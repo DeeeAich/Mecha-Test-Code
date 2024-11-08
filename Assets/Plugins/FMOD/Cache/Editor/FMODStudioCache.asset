@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6989900281211217586
+--- !u!114 &-7266605523790281908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
+  m_Name: bank:/Ambience.bank
   m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638666831571746012
-  FileSizes:
-  - Name: Desktop
-    Value: 494
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638666831571735992
+  FileSizes: []
   Exists: 1
---- !u!114 &-4776413251788170579
+--- !u!114 &-4000692900463879019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,55 +28,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Name: bank:/DX.bank
   m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638666831571451901
-  FileSizes:
-  - Name: Desktop
-    Value: 988
-  Exists: 1
---- !u!114 &-2459364327862653637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638666831571710875
-  FileSizes:
-  - Name: Desktop
-    Value: 64160
-  Exists: 1
---- !u!114 &-2116135855161887209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638666831571441895
-  FileSizes:
-  - Name: Desktop
-    Value: 670
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/DX.bank
+  Name: DX
+  StudioPath: bank:/DX
+  lastModified: 638666831571756012
+  FileSizes: []
   Exists: 1
 --- !u!114 &-1657699253711310614
 MonoBehaviour:
@@ -99,7 +55,7 @@ MonoBehaviour:
     Data3: 804754365
     Data4: 1304222401
   Banks:
-  - {fileID: -2459364327862653637}
+  - {fileID: 50433936941899422}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -107,26 +63,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-1344092410872628272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/UI.bank
-  m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/UI.bank
-  Name: UI
-  StudioPath: bank:/UI
-  lastModified: 638666831571778570
-  FileSizes:
-  - Name: Desktop
-    Value: 494
-  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,23 +76,41 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -4776413251788170579}
-  - {fileID: 1127714779900155397}
-  - {fileID: 3749301152027723148}
-  - {fileID: -2116135855161887209}
-  - {fileID: -6989900281211217586}
-  - {fileID: -2459364327862653637}
-  - {fileID: -1344092410872628272}
+  - {fileID: 7556294697047085928}
+  - {fileID: -7266605523790281908}
+  - {fileID: -4000692900463879019}
+  - {fileID: 5593465310585452027}
+  - {fileID: 670405647791341858}
+  - {fileID: 50433936941899422}
+  - {fileID: 7487324667341414942}
   EditorEvents:
   - {fileID: -1657699253711310614}
   - {fileID: 187040456462528153}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -2116135855161887209}
+  - {fileID: 5593465310585452027}
   StringsBanks:
-  - {fileID: -4776413251788170579}
-  cacheTime: 638666831571778570
+  - {fileID: 7556294697047085928}
+  cacheTime: 638666859047835766
   cacheVersion: 131620
+--- !u!114 &50433936941899422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638666859047835766
+  FileSizes: []
+  Exists: 1
 --- !u!114 &187040456462528153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +130,7 @@ MonoBehaviour:
     Data3: 458452127
     Data4: 660742848
   Banks:
-  - {fileID: -2459364327862653637}
+  - {fileID: 50433936941899422}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -184,7 +138,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &1127714779900155397
+--- !u!114 &670405647791341858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,17 +148,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Ambience.bank
+  m_Name: bank:/Music.bank
   m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/Ambience.bank
-  Name: Ambience
-  StudioPath: bank:/Ambience
-  lastModified: 638666831571735992
-  FileSizes:
-  - Name: Desktop
-    Value: 494
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638666831571746012
+  FileSizes: []
   Exists: 1
---- !u!114 &3749301152027723148
+--- !u!114 &5593465310585452027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,13 +166,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/DX.bank
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: ../Mecha-FMOD-Repo/Mecha FMOD project/Build/Desktop/DX.bank
-  Name: DX
-  StudioPath: bank:/DX
-  lastModified: 638666831571756012
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638666831571441895
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7487324667341414942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638666831571778570
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7556294697047085928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Art/Audio/FMOD BUILD/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638666831571451901
   FileSizes:
-  - Name: Desktop
-    Value: 494
+  - Name: 
+    Value: 988
   Exists: 1
