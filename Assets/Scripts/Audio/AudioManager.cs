@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        RuntimeManager.PlayOneShot(musicTest);
+       // RuntimeManager.PlayOneShot(musicTest);
 
     }
 

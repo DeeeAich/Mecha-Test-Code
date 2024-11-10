@@ -9952,6 +9952,7 @@ GameObject:
   - component: {fileID: 3519481107090079141}
   - component: {fileID: 2691458419321193602}
   - component: {fileID: 3363715511972540746}
+  - component: {fileID: 3319363121937582855}
   m_Layer: 0
   m_Name: 24 Gauge Shotgun Gun
   m_TagString: Untagged
@@ -10009,7 +10010,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 5475031910337113987}
+  ps2nd: {fileID: 0}
   numberOfParticles: 2
+  numberOfParticles2nd: 1
 --- !u!114 &3363715511972540746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10043,6 +10046,31 @@ MonoBehaviour:
   timeToDelete: 8
   timeBeforeScaleDebris: 6
   scaleSpeed: 1
+--- !u!114 &3319363121937582855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340183176661561677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -1482766278
+      Data2: 1193215313
+      Data3: -417458047
+      Data4: -1262736633
+    Path: event:/SFX Events/Player Weapons/24 Gauge Shotgun/25 Gauge Shotgun Fire
+  - Guid:
+      Data1: 1340591219
+      Data2: 1129046166
+      Data3: 842120890
+      Data4: 733743782
+    Path: event:/SFX Events/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
 --- !u!1 &1398523841481202994
 GameObject:
   m_ObjectHideFlags: 0

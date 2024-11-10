@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2813780090105288838}
   - component: {fileID: 5824948024803828015}
   - component: {fileID: 2212640353575900437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,6 +4899,8 @@ GameObject:
   - component: {fileID: 9068413366962925956}
   - component: {fileID: 4994744740798183927}
   - component: {fileID: 6171763617971810286}
+  - component: {fileID: 5190394237356133355}
+  - component: {fileID: 5035928303311408265}
   m_Layer: 6
   m_Name: NotSoMiniGun Model
   m_TagString: Untagged
@@ -5013,6 +5015,53 @@ MonoBehaviour:
   ps2nd: {fileID: 9039049135565039133}
   numberOfParticles: 1
   numberOfParticles2nd: 1
+--- !u!114 &5190394237356133355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490770718162045760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c7cb02a3e45b64a974d10c1581146f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: -1691089429
+      Data2: 1181122083
+      Data3: 1720673448
+      Data4: 67376939
+    Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire Loop
+  isLooping: 0
+  animatorResponsible: {fileID: 4994744740798183927}
+  nameOfSpeedFloat: FireRate
+--- !u!114 &5035928303311408265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490770718162045760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 1426314433
+      Data2: 1301891525
+      Data3: 1794235813
+      Data4: -927095111
+    Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Stop
+  - Guid:
+      Data1: -743961027
+      Data2: 1187739483
+      Data3: -86373485
+      Data4: 1483442551
+    Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Reload
 --- !u!1 &2667794587378080172
 GameObject:
   m_ObjectHideFlags: 0
@@ -5024,7 +5073,7 @@ GameObject:
   - component: {fileID: 3804517935885499619}
   - component: {fileID: 4920553751695449229}
   - component: {fileID: 8284538151925105814}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5142,7 +5191,7 @@ GameObject:
   - component: {fileID: 4427735516320350372}
   - component: {fileID: 585087912663085642}
   - component: {fileID: 7114367623312576955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10026,7 +10075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4058783347015810963}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10144,7 +10193,7 @@ GameObject:
   - component: {fileID: 7625414949936723180}
   - component: {fileID: 9216340438702707241}
   - component: {fileID: 508562007845215082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15123,7 +15172,7 @@ GameObject:
   - component: {fileID: 6022647197134480628}
   - component: {fileID: 9039049135565039133}
   - component: {fileID: 3938559209243362526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet Casing Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
