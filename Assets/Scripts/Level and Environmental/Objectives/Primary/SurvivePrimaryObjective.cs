@@ -32,7 +32,10 @@ public class SurvivePrimaryObjective : Objective
                 {
                     for (int j = 0; j < spawners[i].spawnedEnemies.Count; j++)
                     {
-                        spawners[i].spawnedEnemies[j].GetComponent<Health>().TriggerDeath();
+                        if (spawners[i].spawnedEnemies[j].TryGetComponent(out Health health))
+                        {
+                            health.TriggerDeath();
+                        }
                     }
 
                     spawners[i].spawning = false;

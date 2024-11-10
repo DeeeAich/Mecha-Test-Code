@@ -15,6 +15,10 @@ public class CaptureZonesPrimaryObjective : Objective
     private void Start()
     {
         zones = room.captureZones;
+        for (int i = 0; i < zones.Length; i++)
+        {
+            zones[i].gameObject.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
