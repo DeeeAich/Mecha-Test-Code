@@ -16,8 +16,8 @@ public class BomberDroneBT : BehaviourTree
         root = new RootNode(this,
             new Sequence(
                 new Approach("player", approachDistance),
-                new StoreValue("player", "destination"),
                 new PauseFixed(pauseTime),
+                new StoreValue("player", "destination"),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new MoveTo("destination"),

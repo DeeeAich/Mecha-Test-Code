@@ -62,6 +62,8 @@ public class TriggerDebrisExplosion : MonoBehaviour
         }
         for (int i = 0; i < objectsToPush.Count; i++)
         {
+            if (objectsToPush[i] == null)
+                continue;
             objectsToPush[i].SetActive(true);
             objectsToPush[i].GetComponent<Rigidbody>().isKinematic = false;
             if (explosionVFX != null) { objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius); } 
