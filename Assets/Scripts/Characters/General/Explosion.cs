@@ -14,6 +14,7 @@ public class Explosion : MonoBehaviour
     {
         transform.localScale = new Vector3(1, 1, 1);
         transform.localScale *= linearScale;
+        transform.localScale = new Vector3(transform.localScale.x, 1, transform.localScale.z);
 
         Collider[] hits = Physics.OverlapSphere(transform.position, linearScale / 2);
         foreach(Collider c in hits)

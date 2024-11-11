@@ -92,6 +92,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     {
         for (int i = 0; i < meshRenderers.Count; i++)
         {
+            if (meshRenderers[i] == null)
+                continue;
             Material[] materialsArray = new Material[(meshRenderers[i].materials.Length - 1)];
             for (int z = 0; z < meshRenderers[i].materials.Length - 1; z++)
             {
