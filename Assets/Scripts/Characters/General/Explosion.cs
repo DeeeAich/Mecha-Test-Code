@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ExplosionEffect
+{
+    noEffect,
+    hack,
+    fire
+}
+
+
+
 public class Explosion : MonoBehaviour
 {
     public float damage;
@@ -9,6 +18,12 @@ public class Explosion : MonoBehaviour
     public float explosionTime;
     public float linearScale;
     private float timer = 0;
+
+    public ExplosionEffect explosionEffect = ExplosionEffect.noEffect;
+    public MeshRenderer aoeRingMeshRenderer;
+    public List<Material> aoeRadiusMaterialType;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +39,20 @@ public class Explosion : MonoBehaviour
                 hp.TakeDamage(damage);
             }
         }
+
+        switch (explosionEffect)
+        {
+            case ExplosionEffect.noEffect:
+                aoeRingMeshRenderer.material = aoeRadiusMaterialType[0];
+                break;
+            case ExplosionEffect.hack:
+                aoeRingMeshRenderer.material = aoeRadiusMaterialType[1];
+                break;
+            case ExplosionEffect.fire:
+                aoeRingMeshRenderer.material = aoeRadiusMaterialType[2];
+                break;
+        }
+
     }
 
     // Update is called once per frame
