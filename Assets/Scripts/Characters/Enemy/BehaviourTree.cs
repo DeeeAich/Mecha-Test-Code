@@ -15,7 +15,7 @@ namespace AITree
         public NavMeshAgent agent;
         public GameObject player;
         public RootNode root;
-        bool paused = false;
+        public bool paused = false;
         internal bool isShieldable = true;
 
         public RootNode replacement;
@@ -660,11 +660,11 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
+            brain.GetComponent<Health>().TriggerDeath();
             GameObject boom = Object.Instantiate(explosion, brain.transform.position, Quaternion.identity, null);
             Explosion spawned = boom.GetComponent<Explosion>();
             spawned.linearScale = size;
             spawned.damage = damage;
-            brain.GetComponent<Health>().TriggerDeath();
             return BehaviourTreeState.SUCCESS;
         }
     }

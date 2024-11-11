@@ -49,7 +49,7 @@ namespace AITree
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new MoveTo("destination"),
-                new AITree.Detonate(explosionSize, explosionDamage, explosion),
+                new Detonate(explosionSize, explosionDamage, explosion),
                 new PauseFixed(999f) //just to stop it from looping before death
                     };
         }

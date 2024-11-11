@@ -48,7 +48,16 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount)
     {
         if(!canTakeDamage || !isAlive) return;
-        
+
+        for (int i = 0; i < damageMods.Count; i++)
+        {
+            if (damageMods[i].removeFlag)
+            {
+                damageMods.RemoveAt(i);
+                i--;
+            }
+        }
+
         float remainingDamage = amount;
         foreach(DamageMod mod in damageMods)
         {
@@ -59,14 +68,7 @@ public class Health : MonoBehaviour
         
         onTakeDamage.Invoke();
 
-        for(int i = 0; i < damageMods.Count; i++)
-        {
-            if(damageMods[i].removeFlag)
-            {
-                damageMods.RemoveAt(i);
-                i--;
-            }
-        }
+        
 
         if (health > maxHealth)
         {

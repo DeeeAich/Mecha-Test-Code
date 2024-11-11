@@ -52,13 +52,16 @@ public class Shielder : MonoBehaviour
     public void Stop()
     {
         VFX.shieldToggle = false;
-        HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
-        if (hb != null)
+        if (targetHealth != null)
         {
-            hb.shieldModifiers.Remove(sm);
+            HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
+            if (hb != null)
+            {
+                hb.shieldModifiers.Remove(sm);
+            }
+            if (sm != null)
+                sm.removeFlag = true;
         }
-        if (sm != null)
-            sm.removeFlag = true;
         sm = null;
         enabled = false;
     }
