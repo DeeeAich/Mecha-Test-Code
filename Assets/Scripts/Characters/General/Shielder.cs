@@ -12,7 +12,7 @@ public class Shielder : MonoBehaviour
     [SerializeField] internal float breakTime = 2f;
 
     [SerializeField] internal UnityEvent breakEvent;
-    internal bool canShield = true;
+    [SerializeField] internal bool canShield = true;
 
     ShieldModifier sm;
     // Start is called before the first frame update
@@ -28,18 +28,22 @@ public class Shielder : MonoBehaviour
             return;
         if (canShield && VFX.shieldToggle == false && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude < rangeInit)
         {
+            //Debug.Log("shielding");
             ShieldOn();
         }
         else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive || !canShield)
         {
             Break();
         }
+        //Debug.Log(string.Format("{0} {1} {2}", canShield, VFX.shieldedTarget, ))
     }
 
     public void Break()
     {
         breakEvent.Invoke();
         VFX.shieldedTarget = null;
+        //Debug.Log("New Target Discarded");
+        targetHealth.onDeath.RemoveListener(TargetDied);
         VFX.shieldToggle = false;
         if(sm!=null)
         sm.removeFlag = true;
@@ -73,6 +77,7 @@ public class Shielder : MonoBehaviour
         targetHealth = target.GetComponentInChildren<Health>();
         targetHealth.onDeath.AddListener(TargetDied);
         VFX.shieldedTarget = targetHealth.meshesRef;
+        //Debug.Log("New Target Set");
     }
 
 
@@ -94,6 +99,7 @@ public class Shielder : MonoBehaviour
     internal void TargetDied()
     {
         StartCoroutine(DisableForTime(breakTime));
+        Break();
     }
 
     IEnumerator DisableForTime(float time)

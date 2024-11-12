@@ -195,7 +195,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7300719402954375497}
         m_TargetAssemblyTypeName: AITree.BehaviourTree, Assembly-CSharp
-        m_MethodName: Stop
+        m_MethodName: Die
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -254,9 +254,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78084b5e2acc3b849937b5de2ffc9d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
+  verboseDebug: 0
   mostRecentTick: 
+  tickPath: 
   agent: {fileID: 7805457920417713782}
   player: {fileID: 0}
+  paused: 0
   approachDist: 9
   strafeMin: 5
   strafeMax: 10

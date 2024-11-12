@@ -123,7 +123,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 10
-  m_Acceleration: 8
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 5130297260658799289}
         m_TargetAssemblyTypeName: AITree.BehaviourTree, Assembly-CSharp
-        m_MethodName: Stop
+        m_MethodName: Die
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -198,18 +198,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
-        m_MethodName: set_tag
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Untagged
-          m_BoolArgument: 0
-        m_CallState: 2
   meshesRef: {fileID: 6101005390353922607}
 --- !u!114 &5130297260658799289
 MonoBehaviour:
@@ -224,7 +212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  verboseDebug: 0
   mostRecentTick: 
+  tickPath: 
   agent: {fileID: 3857274298730472560}
   player: {fileID: 0}
   paused: 0

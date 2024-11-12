@@ -44,6 +44,7 @@ namespace AITree
         {
             if (!paused)
             {
+                tickPath = "";
                 Node.BehaviourTreeState status = root.Tick();
                 if(status!=Node.BehaviourTreeState.RUNNING)
                 {
@@ -110,6 +111,12 @@ namespace AITree
             paused = false;
             Resume();
         }
+
+        public virtual void Die()
+        {
+            Stop();
+            isShieldable = false;
+        }
     }
 
     public abstract class Node
@@ -148,6 +155,7 @@ namespace AITree
         {
             root.tickCounter++;
             brain.mostRecentTick = ToString();
+            brain.tickPath += string.Format("->{0}", ToString().Remove(0,7));
             if (state == BehaviourTreeState.NULL)
             {
                 state = BehaviourTreeState.RUNNING;
