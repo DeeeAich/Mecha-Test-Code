@@ -649,12 +649,18 @@ namespace AITree
     {
         readonly float size, damage;
         readonly GameObject explosion;
+        readonly ExplosionEffect effect;
 
         public Detonate(float size, float damage, GameObject explosion) : base()
         {
             this.size = size;
             this.damage = damage;
             this.explosion = explosion;
+        }
+
+        public Detonate(float size, float damage, GameObject explosion, ExplosionEffect effect) : this(size, damage, explosion)
+        {
+            this.effect = effect;
         }
 
         public override BehaviourTreeState Tick()
@@ -665,6 +671,7 @@ namespace AITree
             Explosion spawned = boom.GetComponent<Explosion>();
             spawned.linearScale = size;
             spawned.damage = damage;
+            spawned.explosionEffect = effect;
             return BehaviourTreeState.SUCCESS;
         }
     }

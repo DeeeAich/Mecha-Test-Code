@@ -23,7 +23,7 @@ public class ShieldDroneBT : BehaviourTree
                 new Fallback(
                     new HasVariable("CoverTarget", typeof(Vector3)),
                     new GetShieldableEnemy(shielder, "ShieldTarget"),
-                    new PackedBomber(approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, explosion)
+                    new PackedBomber(approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, explosion, ExplosionEffect.noEffect)
                     ),
                 new TakeCover("CoverTarget", coverRangeMin, coverRangeMax, coverStep)
                 )) ;

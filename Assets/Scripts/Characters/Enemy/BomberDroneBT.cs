@@ -21,7 +21,7 @@ public class BomberDroneBT : BehaviourTree
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new MoveTo("destination"),
-                new AITree.Detonate(explosionSize, explosionDamage, explosion),
+                new AITree.Detonate(explosionSize, explosionDamage, explosion, ExplosionEffect.hack),
                 new PauseFixed(999f) //just to stop it from looping before death
                 )
             );
@@ -39,7 +39,7 @@ namespace AITree
 {
     public class PackedBomber : Sequence
     {
-        public PackedBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float explosionSize, float explosionDamage, GameObject explosion) : base()
+        public PackedBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float explosionSize, float explosionDamage, GameObject explosion, ExplosionEffect effect) : base()
         {
             children = new List<Node>
                 {
@@ -49,7 +49,7 @@ namespace AITree
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new MoveTo("destination"),
-                new Detonate(explosionSize, explosionDamage, explosion),
+                new Detonate(explosionSize, explosionDamage, explosion, effect),
                 new PauseFixed(999f) //just to stop it from looping before death
                     };
         }
