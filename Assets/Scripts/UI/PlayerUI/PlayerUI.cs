@@ -8,9 +8,9 @@ public class PlayerUI : MonoBehaviour
 {
 
     [SerializeField] Image health;
-    private int newHealth;
-    private int currentHealth;
-    private int maxHealth;
+    private float newHealth;
+    private float currentHealth;
+    private float maxHealth;
     private bool healthChanging;
     [SerializeField] List<TextMeshProUGUI> healthTexts;
     [SerializeField] float healthChangeSpeed;
@@ -38,12 +38,13 @@ public class PlayerUI : MonoBehaviour
                 currentPoint = 0;
             }
             health.fillAmount = currentHealth / maxHealth;
+            healthTexts[0].text = currentHealth.ToString();
 
         }
         
     }
 
-    public void HealthChanged(int nextHealth, int newMaxHealth = 0)
+    public void HealthChanged(float nextHealth, float newMaxHealth = 0)
     {
 
         healthChanging = true;
@@ -57,7 +58,7 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    public void WeaponAmmoLeft(int max, int cur)
+    public void WeaponAmmoLeft(float max, float cur)
     {
 
         leftWeapon.fillAmount = cur / max;
@@ -65,7 +66,7 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    public void WeaponAmmoRight(int max, int cur)
+    public void WeaponAmmoRight(float max, float cur)
     {
 
         rightWeapon.fillAmount = cur / max;
@@ -73,12 +74,12 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    public void LockAndLoad(int mHealth, int curHealth, int leftAm, int rightAm, Sprite left = null, Sprite right = null)
+    public void LockAndLoad(float mHealth, float curHealth, int leftAm, int rightAm, Sprite left = null, Sprite right = null)
     {
 
         healthTexts[0].text = curHealth.ToString();
         currentHealth = curHealth;
-        healthTexts[1].text = maxHealth.ToString();
+        healthTexts[1].text = mHealth.ToString();
         maxHealth = mHealth;
 
         leftAmmo.text = leftAm.ToString();

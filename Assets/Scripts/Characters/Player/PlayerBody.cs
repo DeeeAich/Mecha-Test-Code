@@ -25,11 +25,20 @@ public class PlayerBody : MonoBehaviour
 
     private bool isGamepad = true;
 
+    public PlayerUI myUI;
+    private Health myHealth;
+    private float lastHealth;
+    private float lastMax;
+
     private void Awake()
     {
         playerInputs = GetComponent<PlayerInput>();
         myMovement = GetComponent<PlayerLegs>();
         weaponHolder = GetComponent<PlayerWeaponControl>();
+        myUI = FindObjectOfType<PlayerUI>();
+        myHealth = GetComponent<Health>();
+        lastHealth = myHealth.health;
+        lastMax = myHealth.maxHealth;
     }
 
     private void Start()
@@ -49,6 +58,19 @@ public class PlayerBody : MonoBehaviour
             look.ReadValue<Vector2>():
             Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position));
 
+    }
+
+    private void Update()
+    {
+        if (lastHealth != myHealth.health || lastMax != myHealth.maxHealth)
+        {
+            lastHealth = myHealth.health;
+            lastMax = myHealth.maxHealth;
+            myUI.HealthChanged(lastHealth, lastMax);
+        }
+
+        myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo, weaponHolder.leftWeapon.curAmmo);
+        myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo, weaponHolder.rightWeapon.curAmmo);
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -93,6 +115,9 @@ public class PlayerBody : MonoBehaviour
     private void LoadStats()
     {
         curLegs = legStats.LoadLegs();
+
+        myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
+            weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo);
     }
 
     public struct LegInfo
