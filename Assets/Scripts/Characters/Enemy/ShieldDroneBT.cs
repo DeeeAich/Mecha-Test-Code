@@ -60,13 +60,11 @@ public class ShieldDroneBT : BehaviourTree
 
     private void OnEnable()
     {
-        shielder.breakEvent.AddListener(Stun);
     }
 
 
     private void OnDisable()
     {
-        shielder.breakEvent.RemoveListener(Stun);
     }
 
     internal void Stun()

@@ -9,7 +9,9 @@ namespace AITree
     public abstract class BehaviourTree : MonoBehaviour
     {
         public bool debug = false;
+        public bool verboseDebug = false;
         public string mostRecentTick;
+        public string tickPath;
 
         public Dictionary<string, object> memory;
         public NavMeshAgent agent;
@@ -47,10 +49,14 @@ namespace AITree
                 {
                     root.Restart();
                 }
-                if(debug)
+                if(debug || verboseDebug)
                 {
 
                     Debug.Log(string.Format("{0} ticked {1} nodes this FixedUpdate",name , root.tickCounter));
+                }
+                if(verboseDebug)
+                {
+                    Debug.Log(string.Format("{0} had {1} tick path", name, tickPath));
                 }
             }
         }
@@ -69,6 +75,10 @@ namespace AITree
             if (agent != null)
                 agent.isStopped = true;
             paused = true;
+            if(verboseDebug)
+            {
+                Debug.Log(string.Format("{0} should not move.", name));
+            }
         }
 
         public virtual void Resume()
@@ -76,6 +86,10 @@ namespace AITree
             if (agent != null)
                 agent.isStopped = false;
             paused = false;
+            if (verboseDebug)
+            {
+                Debug.Log(string.Format("{0} should be able to move.", name));
+            }
         }
 
         public virtual void StopForTime(float time)

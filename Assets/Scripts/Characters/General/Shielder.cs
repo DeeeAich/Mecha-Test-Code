@@ -9,8 +9,10 @@ public class Shielder : MonoBehaviour
     [SerializeField] internal Health targetHealth;
     [SerializeField] internal float rangeMax = 7.5f, rangeInit = 5f;
     [SerializeField] internal float shieldHealth = 100f;
+    [SerializeField] internal float breakTime = 2f;
 
     [SerializeField] internal UnityEvent breakEvent;
+    internal bool canShield = true;
 
     ShieldModifier sm;
     // Start is called before the first frame update
@@ -24,11 +26,11 @@ public class Shielder : MonoBehaviour
     {
         if (VFX.shieldedTarget == null)
             return;
-        if (VFX.shieldToggle == false && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude < rangeInit)
+        if (canShield && VFX.shieldToggle == false && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude < rangeInit)
         {
             ShieldOn();
         }
-        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive)
+        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive || !canShield)
         {
             Break();
         }
@@ -69,6 +71,7 @@ public class Shielder : MonoBehaviour
     internal void SetTarget(GameObject target)
     {
         targetHealth = target.GetComponentInChildren<Health>();
+        targetHealth.onDeath.AddListener(TargetDied);
         VFX.shieldedTarget = targetHealth.meshesRef;
     }
 
@@ -88,5 +91,20 @@ public class Shielder : MonoBehaviour
      * generate a class "HealthModifier" Shields is one
      * Health passes health to modifiers & modifiers pass back
      */
+    internal void TargetDied()
+    {
+        StartCoroutine(DisableForTime(breakTime));
+    }
 
+    IEnumerator DisableForTime(float time)
+    {
+        canShield = false;
+        float timer = time;
+        while (timer > 0)
+        {
+            yield return null;
+            timer -= Time.deltaTime;
+        }
+        canShield = true;
+    }
 }
