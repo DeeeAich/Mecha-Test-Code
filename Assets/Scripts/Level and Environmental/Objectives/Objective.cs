@@ -63,7 +63,7 @@ public class Objective : MonoBehaviour
 
             WaveSpawner newWaveSpawner = Instantiate(possibleWaveSpawners[LevelGenerator.instance.seededRandom.Next(0, possibleWaveSpawners.Count)].GetComponent<WaveSpawner>());
             room.waveSpawners = new WaveSpawner[] {newWaveSpawner};
-            Debug.Log(name + "Added new wave spawner: " + newWaveSpawner.name);
+            Debug.Log( "Spawned Wave: " + newWaveSpawner.name);
         }
 
         for (int i = 0; i < room.waveSpawners.Length; i++)

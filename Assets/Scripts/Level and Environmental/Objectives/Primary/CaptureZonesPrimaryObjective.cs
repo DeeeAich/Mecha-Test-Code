@@ -19,6 +19,11 @@ public class CaptureZonesPrimaryObjective : Objective
         {
             zones[i].gameObject.SetActive(true);
         }
+
+        foreach (var waveSpawner in FindObjectsOfType<WaveSpawner>())
+        {
+            waveSpawner.looping = true;
+        }
     }
 
     private void FixedUpdate()
