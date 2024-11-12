@@ -52,7 +52,7 @@ public class ChargeRifle : Weapon
 
             charge += Time.fixedDeltaTime;
 
-            if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges)
+            if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges + 0.5f)
             {
 
                 charges++;
@@ -78,9 +78,9 @@ public class ChargeRifle : Weapon
         lineGen.enabled = true;
         lineGen.SetPosition(0, firePoint.position);
         lineGen.SetPosition(1, firePoint.position);
-        charges = 1;
+        charges = 0;
 
-        myAnim.SetInteger("ChargeLevel", 1);
+        myAnim.SetInteger("ChargeLevel", 0);
         myAnim.SetBool("Charge", true);
     }
 
