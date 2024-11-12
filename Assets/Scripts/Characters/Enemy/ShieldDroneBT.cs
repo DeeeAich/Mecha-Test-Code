@@ -9,7 +9,7 @@ public class ShieldDroneBT : BehaviourTree
     public float coverRangeMin, coverRangeMax, coverStep;
 
     public GameObject explosion;
-    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage;
+    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngularSpeed;
 
     public float unshieldStunTimeMin, unshieldStunTimeMax;
 
@@ -23,7 +23,7 @@ public class ShieldDroneBT : BehaviourTree
                 new Fallback(
                     new HasVariable("CoverTarget", typeof(Vector3)),
                     new GetShieldableEnemy(shielder, "ShieldTarget"),
-                    new PackedBomber(approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, explosion, ExplosionEffect.noEffect)
+                    new PackedBomber(approachDistance, pauseTime, dashSpeed, dashAcceleration, dashAngularSpeed, explosionSize, explosionDamage, explosion, ExplosionEffect.noEffect)
                     ),
                 new TakeCover("CoverTarget", coverRangeMin, coverRangeMax, coverStep)
                 )) ;

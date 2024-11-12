@@ -636,6 +636,14 @@ namespace AITree
                         state = BehaviourTreeState.SUCCESS;
                     }
                     break;
+                case "angularSpeed": //new ModifyAgentStat("angularSpeed", dashAngleSpeed),
+
+                    if (newValue is float extractedAngularSpeed)
+                    {
+                        brain.agent.angularSpeed = extractedAngularSpeed;
+                        state = BehaviourTreeState.SUCCESS;
+                    }
+                    break;
                 default:
                     Debug.Log(string.Format("Stat: {0} does not exist", stat));
                     break;

@@ -6,7 +6,7 @@ using AITree;
 public class BomberDroneBT : BehaviourTree
 {
     public GameObject explosion;
-    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage;
+    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngleSpeed;
 
     // Start is called before the first frame update
     public override void Awake()
@@ -20,6 +20,7 @@ public class BomberDroneBT : BehaviourTree
                 new StoreValue("player", "destination"),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
+                new ModifyAgentStat("angularSpeed", dashAngleSpeed),
                 new MoveTo("destination"),
                 new AITree.Detonate(explosionSize, explosionDamage, explosion, ExplosionEffect.hack),
                 new PauseFixed(999f) //just to stop it from looping before death
@@ -39,7 +40,7 @@ namespace AITree
 {
     public class PackedBomber : Sequence
     {
-        public PackedBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float explosionSize, float explosionDamage, GameObject explosion, ExplosionEffect effect) : base()
+        public PackedBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float dashAngleSpeed, float explosionSize, float explosionDamage, GameObject explosion, ExplosionEffect effect) : base()
         {
             children = new List<Node>
                 {
@@ -48,6 +49,7 @@ namespace AITree
                 new PauseFixed(pauseTime),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
+                new ModifyAgentStat("angularSpeed", dashAngleSpeed),
                 new MoveTo("destination"),
                 new Detonate(explosionSize, explosionDamage, explosion, effect),
                 new PauseFixed(999f) //just to stop it from looping before death
