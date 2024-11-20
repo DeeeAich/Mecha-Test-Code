@@ -7,7 +7,18 @@ public class Interactable : MonoBehaviour
 {
     [SerializeField] private bool singleUse;
     public UnityEvent onInteract;
-    
+
+    public void PlayerInRange(bool inRange)
+    {
+        if (inRange)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
     public void TriggerInteraction()
     {
         onInteract.Invoke();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,19 +16,28 @@ public class Door : MonoBehaviour
     [Header("Lock states")]
     public UnityEvent onUnlock;
     public UnityEvent onLock;
-    
     public UnityEvent onFailToOpen;
 
+    private Animator animator;
+    
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+        if(animator != null) animator.SetBool("IsOpen", true);
+        if(animator != null) animator.SetBool("IsLocked", false);
+    }
 
     public void OpenDoor()
     {
         if (locked)
         {
+            if(animator != null) animator.SetTrigger("AttemptToOpenLockedDoor");
             onFailToOpen.Invoke();
         }
         else
         {
             opened = true;
+            if(animator != null) animator.SetBool("IsOpen", true);
             onOpen.Invoke();
         }
     }
@@ -35,18 +45,21 @@ public class Door : MonoBehaviour
     public void CloseDoor()
     {
         opened = false;
+        if(animator != null) animator.SetBool("IsOpen", false);
         onClose.Invoke();
     }
 
     public void UnlockDoor()
     {
         locked = false;
+        if(animator != null) animator.SetBool("IsLocked", false);
         onUnlock.Invoke();
     }
 
     public void LockDoor()
     {
         locked = true;
+        if(animator != null) animator.SetBool("IsLocked", true);
         onLock.Invoke();
     }
 }
