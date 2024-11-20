@@ -10,7 +10,7 @@ public class ExterminatePrimaryObjective : Objective
 
     private void Start()
     {
-        WaveSpawners = room.GetComponentsInChildren<WaveSpawner>();
+        WaveSpawners = room.waveSpawners;
     }
 
     private void FixedUpdate()
