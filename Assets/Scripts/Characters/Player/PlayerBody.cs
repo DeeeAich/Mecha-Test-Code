@@ -30,6 +30,8 @@ public class PlayerBody : MonoBehaviour
     private float lastHealth;
     private float lastMax;
 
+    private Interactable curInteract;
+
     private void Awake()
     {
         playerInputs = GetComponent<PlayerInput>();
@@ -101,8 +103,16 @@ public class PlayerBody : MonoBehaviour
         rightRe.performed += weaponHolder.ReloadRight;
 
         interact = playerInputs.actions["Interact"];
+        interact.performed += Interact;
 
         playerInputs.onControlsChanged += SetControlScheme;
+    }
+
+    private void Interact(InputAction.CallbackContext context)
+    {
+        
+        curInteract.TriggerInteraction();
+
     }
 
     private void SetControlScheme(PlayerInput input)
@@ -148,6 +158,16 @@ public class PlayerBody : MonoBehaviour
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
         else
             weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
+
+    }
+
+    public void SetInteract(Interactable interact, bool adding = true)
+    {
+        
+        if(adding)
+            curInteract = interact;
+        else if (curInteract == interact)
+            curInteract = null;
 
     }
 
