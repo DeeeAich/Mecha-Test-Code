@@ -1,29 +1,44 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum ObjectiveType
+{
+    exterminate,
+    survival,
+    capturePoint
+}
+
 public class Room : MonoBehaviour
 {
+    [Header("~~~~~~~~~~~ Required References ~~~~~~~~~~~")]
+    [SerializeField] private Door entryDoor;
+    [SerializeField] private ObjectiveType[] possiblePrimaryObjectives;
+    [SerializeField] private ObjectiveType[] possibleSecondaryObjectives;
+    [SerializeField] private GameObject[] nextRoomSpawnPoints;
+    
+    [Header("~~~~~~~~~~~ Dont Touch ~~~~~~~~~~~")]
     public bool isActive;
 
-    [Header("Objectives")]
-    public GameObject[] possiblePrimaryObjectives;
-    public GameObject[] possibleSecondaryObjectives;
+    [Header("Objectives")] 
+    [SerializeField] private GameObject[] allPrimaryObjectives;
+    [SerializeField] private GameObject[] allSecondaryObjectives;
     public Objective primaryObjective;
     public Objective secondaryObjective;
 
     [Header("Public References")]
-    public GameObject[] enemySpawnPoints;
+    public EnemySpawnPoint[] enemySpawnPoints;
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
 
     [Header("Internal References")]
     public GameObject[] nextRooms;
-    [SerializeField] private Door entryDoor;
+
     [SerializeField] private Door[] exitDoors;
-    [SerializeField] private GameObject[] nextRoomSpawnPoints;
+
 
     [Header("Events")] 
     public UnityEvent onStartRoom;
@@ -31,6 +46,13 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+        List<Door> allDoors = GetComponentsInChildren<Door>().ToList();
+        allDoors.Remove(entryDoor);
+        exitDoors = allDoors.ToArray();
+
+        captureZones = GetComponentsInChildren<CaptureZone>();
+        enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+        
         if (exitDoors.Length > 0)
         {
             nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
@@ -67,8 +89,20 @@ public class Room : MonoBehaviour
             exitDoors[i].CloseDoor();
             exitDoors[i].LockDoor();
         }
-        
-        if(primaryObjective == null) primaryObjective = Instantiate(possiblePrimaryObjectives[LevelGenerator.instance.seededRandom.Next(0, possiblePrimaryObjectives.Length)], transform).GetComponent<Objective>();
+
+        if (primaryObjective == null)
+        {
+            List<GameObject> possibleChoices = new List<GameObject>();
+            for (int i = 0; i < allPrimaryObjectives.Length; i++)
+            {
+                if (possiblePrimaryObjectives.Contains(allPrimaryObjectives[i].GetComponent<Objective>().objectiveType))
+                {
+                    possibleChoices.Add(allPrimaryObjectives[i]);
+                }
+            }
+            
+            primaryObjective = Instantiate(possibleChoices[LevelGenerator.instance.seededRandom.Next(0, possiblePrimaryObjectives.Length)], transform).GetComponent<Objective>();
+        }
         primaryObjective.onComplete.AddListener(completeRoom);
 
         isActive = true;

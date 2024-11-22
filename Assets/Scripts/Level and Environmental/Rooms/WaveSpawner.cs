@@ -28,7 +28,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemiesToSpawn;
 
     [Header("References")]
-    [SerializeField] private GameObject[] spawnPoints;
+    [SerializeField] private EnemySpawnPoint[] spawnPoints;
     [SerializeField] private GameObject enemySpawnPrefab;
 
     [Header("Internal References")]
@@ -154,11 +154,11 @@ public class WaveSpawner : MonoBehaviour
         if (waveSize > spawnPoints.Length) waveSize = spawnPoints.Length;
         if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex) waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
 
-        List<GameObject> availableSpawns = spawnPoints.ToList();
+        List<EnemySpawnPoint> availableSpawns = spawnPoints.ToList();
 
         for (int i = 0; i < waveSize; i++)
         {
-            GameObject spawnPoint = availableSpawns[seededRandom.Next(0, availableSpawns.Count)];
+            EnemySpawnPoint spawnPoint = availableSpawns[seededRandom.Next(0, availableSpawns.Count)];
             GameObject newSpawn = Instantiate(enemySpawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             availableSpawns.Remove(spawnPoint);
             
