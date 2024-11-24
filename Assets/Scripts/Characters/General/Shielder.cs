@@ -33,7 +33,7 @@ public class Shielder : MonoBehaviour
         }
         else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive || !canShield)
         {
-            Break();
+            TargetDied();
         }
         //Debug.Log(string.Format("{0} {1} {2}", canShield, VFX.shieldedTarget, ))
     }
