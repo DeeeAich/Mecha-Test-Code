@@ -13,6 +13,7 @@ public class Objective : MonoBehaviour
 {
     public bool isComplete;
 
+    public ObjectiveType objectiveType;
     public WaveSpawnerType[] waveSpawnerTypesToAttemptToSpawn = new WaveSpawnerType[] {WaveSpawnerType.Standard};
     
     public Room room;

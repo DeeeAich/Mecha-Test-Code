@@ -6,6 +6,14 @@ using UnityEngine.AI;
 
 namespace AITree
 {
+    public enum StoreType
+    {
+        NULL,
+        GAMEOBJECT,
+        POSITION,
+        TRANSFORM
+    }
+
     public abstract class BehaviourTree : MonoBehaviour
     {
         public bool debug = false;
@@ -452,19 +460,78 @@ namespace AITree
         public float minDist, maxDist;
         public float approachRange = 0.1f;
         public Vector3 activeTarget;
+        public GameObject gameObjectTarget;
+        public Transform transformTarget;
         readonly string targLoc;
         Vector3 target;
+
+        readonly StoreType type;
 
         public StrafeInRange(string targetLocation, float minDist, float maxDist) : base()
         {
             this.minDist = minDist;
             this.maxDist = maxDist;
             targLoc = targetLocation;
+            type = StoreType.POSITION;
+        }
+        public StrafeInRange(string targetLocation, float minDist, float maxDist, StoreType type) : this(targetLocation, minDist, maxDist)
+        {
+            this.minDist = minDist;
+            this.maxDist = maxDist;
+            targLoc = targetLocation;
+            this.type = type;
         }
 
         public override BehaviourTreeState Tick()
         {
             base.Tick();
+            object recovered;
+            if (!brain.memory.TryGetValue(targLoc, out recovered))
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+            switch (type)
+            {
+                case StoreType.NULL:
+                    if(brain.debug)
+                    {
+                        Debug.Log("You had to put in effirt to end up here");
+                    }
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                case StoreType.GAMEOBJECT:
+                    if(gameObjectTarget==null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        //Hvae I succeeded, or failed?
+                        /*
+                         If I want to stay near something until they die I have succeded if they die
+                         If my follow up to strafe in range is like, kiss the target, then failure might be more appropriate, because target is gone
+                         
+                         If I "StrafeInRange until failure" then loss of target being a failure is a good idea
+                         */
+
+                        return state;
+                    }
+                    target = gameObjectTarget.transform.position;
+                    break;
+                case StoreType.POSITION:
+                    target = (Vector3)recovered;
+                    break;
+                case StoreType.TRANSFORM:
+                    if(transformTarget==null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    }
+                    target = transformTarget.position;
+                    break;
+                default:
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+            }
+
             target = (Vector3)brain.memory[targLoc];
             Vector3 distanceToDest = brain.gameObject.transform.position - activeTarget;
             distanceToDest.y = 0;
@@ -503,7 +570,33 @@ namespace AITree
         public override void Begin()
         {
             base.Begin();
-            target = (Vector3)brain.memory[targLoc];
+
+            if (!brain.memory.TryGetValue(targLoc, out object recovered))
+            {
+                state = BehaviourTreeState.FAILURE;
+
+            }
+
+            switch (type)
+            {
+                case StoreType.NULL:
+                    target = new Vector3(0, 0, 0);
+                    break;
+                case StoreType.GAMEOBJECT:
+                    gameObjectTarget = (GameObject)recovered;
+                    target = gameObjectTarget.transform.position;
+                    break;
+                case StoreType.POSITION:
+                    target = (Vector3)recovered;
+                    break;
+                case StoreType.TRANSFORM:
+                    transformTarget = (Transform)recovered;
+                    target = transformTarget.position;
+                    break;
+                default:
+                    target = new Vector3(0, 0, 0);
+                    break;
+            }
             activeTarget = target;
             GetTargetLocation();
         }
@@ -515,18 +608,25 @@ namespace AITree
         readonly string targetLocation;
         readonly float approachDist;
         Vector3 activeTarget;
+        GameObject objectTarget;
+        Transform transformTarget;
+        StoreType store;
         public Approach(string targetLocation, float approachDist) : base()
         {
             this.targetLocation = targetLocation;
             this.approachDist = approachDist;
+            store = StoreType.POSITION;
+        }
+
+        public Approach(string targetLocation, float approachDist, StoreType type) : this(targetLocation, approachDist)
+        {
+            store = type;
         }
 
         public override void Begin()
         {
             base.Begin();
             state = BehaviourTreeState.RUNNING;
-
-            
         }
 
         public override void Restart()
@@ -536,8 +636,18 @@ namespace AITree
 
         public override BehaviourTreeState Tick()
         {
-            base.Tick(); 
-           
+            base.Tick();
+            switch (store)
+            {
+                case StoreType.NULL:
+                    break;
+                case StoreType.GAMEOBJECT:
+                    break;
+                case StoreType.POSITION:
+                    break;
+                case StoreType.TRANSFORM:
+                    break;
+            }
             if (brain.memory.TryGetValue(targetLocation, out object recovered))
             {
                 activeTarget = (Vector3)recovered;

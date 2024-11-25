@@ -60,11 +60,13 @@ public class ShieldDroneBT : BehaviourTree
 
     private void OnEnable()
     {
+        shielder.breakEvent.AddListener(ShieldBreak);
     }
 
 
     private void OnDisable()
     {
+        shielder.breakEvent.RemoveListener(ShieldBreak);
     }
 
     internal void Stun()
@@ -72,6 +74,12 @@ public class ShieldDroneBT : BehaviourTree
         StopForTime(Random.Range(unshieldStunTimeMin, unshieldStunTimeMax));
         root.Restart();
         memory.Clear();
+    }
+
+    internal void ShieldBreak()
+    {
+        memory.Clear();
+        root.Restart();
     }
 }
 

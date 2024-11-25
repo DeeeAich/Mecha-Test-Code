@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DepreciaatedCode;
 public class ShieldDrone : EnemyBehaviour
 {
     [SerializeField] private Shielder shielder;
@@ -39,7 +39,7 @@ public class ShieldDrone : EnemyBehaviour
             new ModifyAcceleration(dashAcceleration),// 7
             //move to target for time or distance
             new MoveToDestination(),// 8
-            new Detonate(),// 9
+            //new Detonate(),// 9
             new PauseForRandTime(stunTimeMin, stunTimeMax)// 10
         };
         base.Start();

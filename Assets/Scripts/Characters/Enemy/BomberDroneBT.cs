@@ -8,6 +8,8 @@ public class BomberDroneBT : BehaviourTree
     public GameObject explosion;
     public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngleSpeed;
 
+    //bomber drone does short circuit dablage
+
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -22,7 +24,7 @@ public class BomberDroneBT : BehaviourTree
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new ModifyAgentStat("angularSpeed", dashAngleSpeed),
                 new MoveTo("destination"),
-                new AITree.Detonate(explosionSize, explosionDamage, explosion, ExplosionEffect.hack),
+                new Detonate(explosionSize, explosionDamage, explosion, ExplosionEffect.hack),
                 new PauseFixed(999f) //just to stop it from looping before death
                 )
             );

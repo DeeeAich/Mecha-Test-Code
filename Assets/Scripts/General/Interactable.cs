@@ -12,11 +12,11 @@ public class Interactable : MonoBehaviour
     {
         if (inRange)
         {
-            
+            FindObjectOfType<PlayerBody>().SetInteract(this, true);
         }
         else
         {
-            
+            FindObjectOfType<PlayerBody>().SetInteract(this, false);
         }
     }
     public void TriggerInteraction()
