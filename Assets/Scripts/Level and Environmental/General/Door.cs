@@ -36,9 +36,13 @@ public class Door : MonoBehaviour
         }
         else
         {
-            opened = true;
-            if(animator != null) animator.SetBool("IsOpen", true);
-            onOpen.Invoke();
+            if (!opened)
+            {
+                opened = true;
+                if(animator != null) animator.SetBool("IsOpen", true);
+                onOpen.Invoke();
+            }
+
         }
     }
 
