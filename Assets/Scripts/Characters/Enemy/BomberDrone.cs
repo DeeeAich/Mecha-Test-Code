@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DepreciaatedCode;
 public class BomberDrone : EnemyBehaviour
 {
     [SerializeField] float stopDistance = 2f;
@@ -19,7 +19,7 @@ public class BomberDrone : EnemyBehaviour
             new ModifyAcceleration(dashAcceleration),
             //move to target for time or distance
             new MoveToDestination(),
-            new Detonate()
+            //new Detonate()
         };
 
         base.Start();
