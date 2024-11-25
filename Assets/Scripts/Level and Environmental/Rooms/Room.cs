@@ -141,6 +141,8 @@ public class Room : MonoBehaviour
             
             Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
 
+            Destroy(primaryObjective);
+            
             for (int i = 0; i < waveSpawners.Length; i++)
             {
                 waveSpawners[i].isComplete = true;
