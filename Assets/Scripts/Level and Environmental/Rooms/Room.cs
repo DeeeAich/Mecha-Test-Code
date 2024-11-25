@@ -139,7 +139,14 @@ public class Room : MonoBehaviour
                 exitDoors[i].UnlockDoor();
             }
             
-            Debug.Log("Finished Room: " + gameObject.name);
+            Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
+
+            Destroy(primaryObjective);
+            
+            for (int i = 0; i < waveSpawners.Length; i++)
+            {
+                waveSpawners[i].isComplete = true;
+            }
         }
     }
 }
