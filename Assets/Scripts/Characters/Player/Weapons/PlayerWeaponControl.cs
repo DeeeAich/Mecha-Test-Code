@@ -15,13 +15,14 @@ public class PlayerWeaponControl : MonoBehaviour
     public Weapon leftWeapon;
     public Weapon rightWeapon;
 
-    public void LookDirection(Vector2 direction)
+    public void LookDirection(Vector2 direction, bool isGamepad)
     {
 
         if (direction.magnitude > 0)
         {
 
-            Quaternion lookDirection = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y));
+            Quaternion lookDirection = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y / (isGamepad ? 1 :
+                Mathf.Sin(45 * Mathf.Deg2Rad))));
 
             if (firing)
             {
