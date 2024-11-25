@@ -44,14 +44,20 @@ public class Room : MonoBehaviour
     public UnityEvent onStartRoom;
     public UnityEvent onCompleteRoom;
 
+
+    private void Awake()
+    {
+        captureZones = GetComponentsInChildren<CaptureZone>();
+        enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+    }
+
     private void Start()
     {
         List<Door> allDoors = GetComponentsInChildren<Door>().ToList();
         allDoors.Remove(entryDoor);
         exitDoors = allDoors.ToArray();
 
-        captureZones = GetComponentsInChildren<CaptureZone>();
-        enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+
         
         if (exitDoors.Length > 0)
         {
@@ -100,10 +106,23 @@ public class Room : MonoBehaviour
                     possibleChoices.Add(allPrimaryObjectives[i]);
                 }
             }
+
+            if (possibleChoices.Count > 0)
+            {
+                primaryObjective = Instantiate(possibleChoices[LevelGenerator.instance.seededRandom.Next(0, possibleChoices.Count)], transform).GetComponent<Objective>();
+                primaryObjective.onComplete.AddListener(completeRoom);
+            }
+            else
+            {
+                Debug.LogWarning("Room Not Have Objective?");
+            }
             
-            primaryObjective = Instantiate(possibleChoices[LevelGenerator.instance.seededRandom.Next(0, possiblePrimaryObjectives.Length)], transform).GetComponent<Objective>();
         }
-        primaryObjective.onComplete.AddListener(completeRoom);
+        else
+        {
+            primaryObjective.onComplete.AddListener(completeRoom);
+        }
+        
 
         isActive = true;
         onStartRoom.Invoke();
