@@ -58,7 +58,7 @@ public class PlayerBody : MonoBehaviour
 
         weaponHolder.LookDirection(isGamepad ?
             look.ReadValue<Vector2>():
-            Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position));
+            Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position), false);
 
     }
 
