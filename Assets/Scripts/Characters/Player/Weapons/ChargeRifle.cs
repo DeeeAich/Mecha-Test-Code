@@ -100,27 +100,27 @@ public class ChargeRifle : Weapon
         myAnim.SetBool("Charge", false);
 
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, beamwidth,
-                            firePoint.forward, beamRange, layerMask: hitOptions);
+                            firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
         if(hits.Length > 0)
-            for (int i = 0; i < charges || i < hits.Length; i++)
+            foreach (RaycastHit hit in hits)
             {
 
-                if (hits[i].collider.TryGetComponent<Health>(out Health health))
+                if (hit.collider.TryGetComponent<Health>(out Health health))
                 {
 
                     health.TakeDamage(damage * charges);
 
-                    GameObject newSparks =  GameObject.Instantiate(sparks, hits[i].point,
-                                        Quaternion.LookRotation(hits[i].normal), null);
+                    GameObject newSparks =  GameObject.Instantiate(sparks, hit.point,
+                                        Quaternion.LookRotation(hit.normal), null);
 
                 }
                 else
                 {
 
 
-                    GameObject newSparks = GameObject.Instantiate(sparks, hits[i].point,
-                                        Quaternion.LookRotation(hits[i].normal), null);
+                    GameObject newSparks = GameObject.Instantiate(sparks, hit.point,
+                                        Quaternion.LookRotation(hit.normal), null);
 
                     break;
 

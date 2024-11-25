@@ -18,7 +18,7 @@ public class PlayerWeaponControl : MonoBehaviour
     public void LookDirection(Vector2 direction, bool isGamepad)
     {
 
-        if (direction.magnitude > 0)
+        if (direction.magnitude > 0.2f)
         {
 
             Quaternion lookDirection = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y / (isGamepad ? 1 :
