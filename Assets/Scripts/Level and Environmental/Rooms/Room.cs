@@ -47,8 +47,8 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
-        captureZones = GetComponentsInChildren<CaptureZone>();
-        enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+        captureZones = GetComponentsInChildren<CaptureZone>(true);
+        enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
     }
 
     private void Start()
