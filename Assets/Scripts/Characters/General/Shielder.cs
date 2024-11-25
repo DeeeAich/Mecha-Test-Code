@@ -53,6 +53,7 @@ public class Shielder : MonoBehaviour
             hb.shieldModifiers.Remove(sm);
         }
         sm = null;
+        DisableForTime(breakTime);
     }
 
     public void Stop()
