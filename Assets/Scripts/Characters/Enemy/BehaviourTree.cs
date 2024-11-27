@@ -150,7 +150,7 @@ namespace AITree
 
         public void ShortCircuit(float chance, float time)
         {
-
+            throw new System.NotImplementedException();
         }
 
 

@@ -93,7 +93,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
     #region Hackable Interface Implementation
     Coroutine hackCoroutine;
-    Hack hack;
+    HackMod hack;
     float hackTimer;
     public virtual void Hack(float percentage, float chance, float duration)
     {
@@ -101,7 +101,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             if (hackCoroutine == null)
             {
-                hack = new Hack(percentage);
+                hack = new HackMod(percentage);
                 damageMods.Add(hack);
                 hackCoroutine = StartCoroutine(HackDecay());
                 hackTimer = duration;
@@ -143,10 +143,10 @@ public abstract class DamageMod
     public abstract float Modification(float damage);
 }
 
-public class Hack : DamageMod
+public class HackMod : DamageMod
 {
     internal float percent;
-    public Hack(float percent)
+    public HackMod(float percent)
     {
         this.percent = percent;
     }
