@@ -13,7 +13,7 @@ public class ShieldDroneBT : BehaviourTree
 
     public float unshieldStunTimeMin, unshieldStunTimeMax;
 
-    public override void Awake()
+    internal override void Awake()
     {
         isShieldable = false;
         base.Awake();
@@ -80,6 +80,7 @@ public class ShieldDroneBT : BehaviourTree
     {
         memory.Clear();
         root.Restart();
+        
     }
 }
 

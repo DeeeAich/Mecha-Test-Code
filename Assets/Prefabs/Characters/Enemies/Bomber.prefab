@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 721798213909537256}
   - component: {fileID: 5612523921285191674}
   - component: {fileID: 3857274298730472560}
-  - component: {fileID: 7577040356813045014}
   - component: {fileID: 5130297260658799289}
   m_Layer: 0
   m_Name: Bomber
@@ -134,7 +133,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7577040356813045014
+--- !u!114 &5130297260658799289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2639150327098342906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbca16dfe31d284db2c1882484c8c64, type: 3}
+  m_Script: {fileID: 11500000, guid: 060aa851b0fdb3c4e98a0929da5345fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
@@ -174,18 +173,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5130297260658799289}
-        m_TargetAssemblyTypeName: AITree.BehaviourTree, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1022059394801453832}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
@@ -198,19 +185,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  meshesRef: {fileID: 6101005390353922607}
---- !u!114 &5130297260658799289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2639150327098342906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 060aa851b0fdb3c4e98a0929da5345fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 
@@ -432,12 +407,6 @@ MonoBehaviour:
   agent: {fileID: 3857274298730472560}
   anim: {fileID: 6935391014392750382}
   leanSpeed: 0.1
---- !u!1 &6101005390353922607 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3197567788320843936, guid: 50c62ee347922b64b951fc54c3644be2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8704097870826017423}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &6935391014392750382 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1798167173638747041, guid: 50c62ee347922b64b951fc54c3644be2,

@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IHackable, IBurnable
 {
     public float health;
     public float maxHealth;
 
     public bool isAlive = true;
     public bool canTakeDamage = true;
-    
+
     //public string entityType;
     public EntityType entityType;
     [Tooltip("This marks the outer bounds of the entity, for the purposes of positioning and scaling anything attatched to them (ie: healthbars, shield circles etc)")]
-    public Vector3 entityBounds = new Vector3(1,1,1);
+    public Vector3 entityBounds = new Vector3(1, 1, 1);
 
     public bool editorTakeDamage = false;
     public float editorDamageAmount = 100f;
@@ -30,24 +30,25 @@ public class Health : MonoBehaviour
 
     public GameObject meshesRef;//The shield renderer thing needs thee target to be where the meshes are
 
-    private void Update()
+
+    internal virtual void Update()
     {
-        if(editorTakeDamage)
+        if (editorTakeDamage)
         {
             TakeDamage(editorDamageAmount);
             editorTakeDamage = false;
         }
     }
 
-    private void Awake()
+    internal virtual void Awake()
     {
         health = maxHealth;
         damageMods = new List<DamageMod>();
     }
 
-    public void TakeDamage(float amount)
+    internal virtual void TakeDamage(float amount)
     {
-        if(!canTakeDamage || !isAlive) return;
+        if (!canTakeDamage || !isAlive) return;
 
         for (int i = 0; i < damageMods.Count; i++)
         {
@@ -59,16 +60,16 @@ public class Health : MonoBehaviour
         }
 
         float remainingDamage = amount;
-        foreach(DamageMod mod in damageMods)
+        foreach (DamageMod mod in damageMods)
         {
             remainingDamage = mod.Modification(remainingDamage);
         }
 
         health -= remainingDamage;
-        
+
         onTakeDamage.Invoke();
 
-        
+
 
         if (health > maxHealth)
         {
@@ -81,14 +82,51 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TriggerDeath()
+    internal virtual void TriggerDeath()
     {
         isAlive = false;
         canTakeDamage = false;
         onDeath.Invoke();
-        if(destroyOnDeath) Destroy(gameObject, destroyTimer);
+        if (destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
-    
+
+
+    #region Hackable Interface Implementation
+    Coroutine hackCoroutine;
+    Hack hack;
+    float hackTimer;
+    public virtual void Hack(float percentage, float chance, float duration)
+    {
+        if(chance >= UnityEngine.Random.Range(0,100))
+        {
+            if (hackCoroutine == null)
+            {
+                hack = new Hack(percentage);
+                damageMods.Add(hack);
+                hackCoroutine = StartCoroutine(HackDecay());
+                hackTimer = duration;
+            }
+            else
+            {
+                hackTimer = Mathf.Max(hackTimer, duration);
+                hack.percent = Mathf.Max(hack.percent, percentage);
+            }
+        }
+    }
+
+    public virtual IEnumerator HackDecay()
+    {
+        while(hackTimer > 0)
+        {
+            hackTimer -= Time.deltaTime;
+            yield return null;
+        }
+        damageMods.Remove(hack);
+    }
+    #endregion
+    #region Burnable Interface Implementation
+
+    #endregion
     /*SHIELD MECHANICS
     
     Shields can stack
@@ -105,7 +143,21 @@ public abstract class DamageMod
     public abstract float Modification(float damage);
 }
 
-public class ShieldModifier:DamageMod
+public class Hack : DamageMod
+{
+    internal float percent;
+    public Hack(float percent)
+    {
+        this.percent = percent;
+    }
+
+    public override float Modification(float damage)
+    {
+        return damage * (1f+percent/100f);
+    }
+}
+
+public class ShieldModifier : DamageMod
 {
     public float shieldHealth;
     readonly Shielder source;

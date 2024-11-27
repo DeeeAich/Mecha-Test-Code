@@ -218,6 +218,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc9b0df4c699c648bb48473dc609995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  isAlive: 1
+  canTakeDamage: 1
+  entityType: 0
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 

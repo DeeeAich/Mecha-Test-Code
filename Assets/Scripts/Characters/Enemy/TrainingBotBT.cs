@@ -7,12 +7,13 @@ public class TrainingBotBT : BehaviourTree
 {
     public float approachDist, strafeMin, strafeMax, pauseMin, pauseMax;
 
-    public override void Awake()
+    internal override void Awake()
     {
         base.Awake();
-        AddOrOverwrite("player", player.transform.position);
+        AddOrOverwrite("player", player);
         root = new RootNode(this,
                    new Sequence(
+                       //new FindTarget("targetType", "target"),
                        new Approach("player", approachDist),
                        new StrafeInRange("player", strafeMin, strafeMax),
                        new PauseRandom(pauseMin, pauseMax)
@@ -23,6 +24,5 @@ public class TrainingBotBT : BehaviourTree
     override public void FixedUpdate()
     {
         base.FixedUpdate();
-        AddOrOverwrite("player", player.transform.position);
     }
 }

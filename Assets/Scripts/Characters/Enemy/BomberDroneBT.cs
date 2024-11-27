@@ -11,7 +11,7 @@ public class BomberDroneBT : BehaviourTree
     //bomber drone does short circuit dablage
 
     // Start is called before the first frame update
-    public override void Awake()
+    internal override void Awake()
     {
         base.Awake();
         AddOrOverwrite("player", player.transform.position);

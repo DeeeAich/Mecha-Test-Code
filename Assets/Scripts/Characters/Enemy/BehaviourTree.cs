@@ -14,9 +14,11 @@ namespace AITree
         TRANSFORM
     }
 
-    public abstract class BehaviourTree : MonoBehaviour
+    public abstract class BehaviourTree : Health, IShortCircuitable
     {
         public bool debug = false;
+
+
         public bool verboseDebug = false;
         public string mostRecentTick;
         public string tickPath;
@@ -42,8 +44,9 @@ namespace AITree
             }
         }
 
-        public virtual void Awake()
+        internal override void Awake()
         {
+            base.Awake();
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
@@ -70,6 +73,25 @@ namespace AITree
             }
         }
 
+        internal override void TriggerDeath()
+        {
+            base.TriggerDeath();
+            TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
+            if(tde != null)
+            {
+                tde.TriggerExplosion();
+            }
+            Collider[] c = GetComponents<Collider>();
+            if(c.Length >0)
+            {
+                foreach(Collider x in c)
+                {
+                    x.enabled = false;
+                }
+            }
+            Die();
+        }
+
         private void LateUpdate()
         {
             if (replacement != null)
@@ -84,7 +106,7 @@ namespace AITree
             if (agent != null)
                 agent.isStopped = true;
             paused = true;
-            if(verboseDebug)
+            if(verboseDebug || debug)
             {
                 Debug.Log(string.Format("{0} should not move.", name));
             }
@@ -125,6 +147,13 @@ namespace AITree
             Stop();
             isShieldable = false;
         }
+
+        public void ShortCircuit(float chance, float time)
+        {
+
+        }
+
+
     }
 
     public abstract class Node
@@ -455,6 +484,23 @@ namespace AITree
         
     }
 
+    public class FindTarget : Action
+    {
+        string targetType;
+        string storage;
+
+        public FindTarget(string targetType, string storage)
+        {
+            this.targetType = targetType;
+            this.storage = storage;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            return state;
+        }
+    }
     public class StrafeInRange : Action
     {
         public float minDist, maxDist;
