@@ -9,6 +9,15 @@ public class ProjectileSpread : ProjectileGun
     public float spreadRange = 0.3f;
     public bool evenSpread;
 
+    public override void LoadBullets()
+    {
+        for (int i = 0; i < maxAmmo * fireCount; i++)
+        {
+            GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
+            genBullet.name = "PlayerBullet";
+        }
+    }
+
     public override IEnumerator RepeatFire()
     {
         if (waitOnShot || !fireHeld || reloading)
@@ -26,8 +35,10 @@ public class ProjectileSpread : ProjectileGun
             else
                 bulDiv = Random.Range(-1.0f, 1.0f);
 
-            GameObject newBullet = GameObject.Instantiate(projectile, firePoint);
+            GameObject newBullet = projectileHolder.GetChild(0).gameObject;
             newBullet.transform.parent = null;
+            newBullet.transform.position = firePoint.position;
+            newBullet.transform.rotation = firePoint.rotation;
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
             newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
 
@@ -45,8 +56,6 @@ public class ProjectileSpread : ProjectileGun
             StartCoroutine(Reload());
             yield break;
         }
-
-
 
         if (fireHeld && fullAuto)
             StartCoroutine(RepeatFire());

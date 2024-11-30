@@ -5,8 +5,6 @@ using UnityEngine;
 public class WeaponChip : Chip
 {
 
-
-
     public enum WeaponSubType
     {
         Generic, Projectile,

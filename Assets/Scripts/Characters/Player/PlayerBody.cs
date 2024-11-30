@@ -32,6 +32,12 @@ public class PlayerBody : MonoBehaviour
 
     private Interactable curInteract;
 
+    private static PlayerBody playerBody;
+    public static PlayerBody PlayBody()
+    {
+        return playerBody;
+    }
+
     private void Awake()
     {
         playerInputs = GetComponent<PlayerInput>();
@@ -41,6 +47,7 @@ public class PlayerBody : MonoBehaviour
         myHealth = GetComponent<Health>();
         lastHealth = myHealth.health;
         lastMax = myHealth.maxHealth;
+        playerBody = this;
     }
 
     private void Start()

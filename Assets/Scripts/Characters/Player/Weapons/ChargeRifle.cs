@@ -128,13 +128,6 @@ public class ChargeRifle : Weapon
 
             }
 
-
-        fireHeld = false;
-
-
-        charge = 0;
-        charges = 0;
-
         StartCoroutine(FlashBeam());
 
     }
@@ -148,6 +141,18 @@ public class ChargeRifle : Weapon
 
         lineGen.material = materialOptions[0];
         lineGen.enabled = false;
+
+        fireHeld = false;
+
+
+        charge = 0;
+        charges = 0;
+
+
+        if (curAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+        }
 
         yield return null;
     }

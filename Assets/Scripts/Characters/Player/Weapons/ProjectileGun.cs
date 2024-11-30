@@ -5,12 +5,29 @@ using UnityEngine;
 public class ProjectileGun : Weapon
 {
 
+    public Transform projectileHolder;
     public GameObject projectile;
 
     public float maxDiviation;
     public float curDivation;
 
     public float divPerShot;
+
+    public override void Start()
+    {
+        base.Start();
+        LoadBullets();
+    }
+
+    public virtual void LoadBullets()
+    {
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
+            genBullet.name = "PlayerBullet";
+        }
+    }
+
     public override void FirePress()
     {
         fireHeld = true;
@@ -28,8 +45,9 @@ public class ProjectileGun : Weapon
 
         waitOnShot = true;
 
-        GameObject newBullet = GameObject.Instantiate(projectile, firePoint);
-        newBullet.transform.parent = null;
+        GameObject newBullet = projectileHolder.GetChild(0).gameObject;
+        newBullet.transform.position = firePoint.position;
+        newBullet.transform.rotation = firePoint.rotation;
         newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
 
         myAnim.SetTrigger("Fire");
