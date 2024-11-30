@@ -6,7 +6,9 @@ public class TriggerDebrisExplosion : MonoBehaviour
 {
     public bool explosionTrigger = false;
 
+
     public GameObject explosionVFX;
+    public Vector3 breakDirection;
     public Animator animatorToPause;
     public List<GameObject> objectsToPush;
     public List<GameObject> objectsToDelete;
@@ -67,6 +69,10 @@ public class TriggerDebrisExplosion : MonoBehaviour
             objectsToPush[i].SetActive(true);
             objectsToPush[i].GetComponent<Rigidbody>().isKinematic = false;
             if (explosionVFX != null) { objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius); } 
+            else if(breakDirection != null)
+            {
+                objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce + Random.Range(1, 4), breakDirection, explosionRadius + Random.Range(1, 4)); ;
+            }
             else
             {
                 objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
