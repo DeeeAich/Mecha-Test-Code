@@ -6,7 +6,10 @@ public class BasicBullet : Projectile
 {
 
     [SerializeField] float speed;
+    [SerializeField] float resetTime = 2f;
     public ProjectileGun myGun;
+
+    
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -24,6 +27,7 @@ public class BasicBullet : Projectile
                     transform.parent = myGun.projectileHolder;
                     transform.localPosition = new Vector3();
                     transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+                    StopCoroutine(AutoReset());
                 }
             }
         }
@@ -34,6 +38,7 @@ public class BasicBullet : Projectile
             transform.parent = myGun.projectileHolder;
             transform.localPosition = new Vector3();
             transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+            StopCoroutine(AutoReset());
 
         }
     }
@@ -42,6 +47,18 @@ public class BasicBullet : Projectile
     {
         if (gameObject.activeInHierarchy)
             transform.position += transform.forward * speed * Time.deltaTime;
+    }
+
+    public IEnumerator AutoReset()
+    {
+
+        yield return new WaitForSeconds(resetTime);
+
+        gameObject.SetActive(false);
+        transform.parent = myGun.projectileHolder;
+        transform.localPosition = new Vector3();
+
+        yield return null;
     }
 
 }
