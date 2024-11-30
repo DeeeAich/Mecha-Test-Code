@@ -72,4 +72,11 @@ public class Objective : MonoBehaviour
             room.waveSpawners[i].StartSpawning();
         }
     }
+
+    public void TriggerComplete()
+    {
+        print("Completed " + name);
+        onComplete.Invoke();
+        isComplete = true;
+    }
 }

@@ -18,8 +18,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Door entryDoor;
     [SerializeField] private ObjectiveType[] possiblePrimaryObjectives;
     [SerializeField] private ObjectiveType[] possibleSecondaryObjectives;
-    [SerializeField] private GameObject[] nextRoomSpawnPoints;
-    
+
     [Header("~~~~~~~~~~~ Dont Touch ~~~~~~~~~~~")]
     public bool isActive;
 
@@ -53,12 +52,14 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        List<Door> allDoors = GetComponentsInChildren<Door>().ToList();
-        allDoors.Remove(entryDoor);
-        exitDoors = allDoors.ToArray();
+        if (exitDoors.Length == 0)
+        {
+            List<Door> allDoors = GetComponentsInChildren<Door>().ToList();
+            allDoors.Remove(entryDoor);
+            exitDoors = allDoors.ToArray();
+        }
 
 
-        
         if (exitDoors.Length > 0)
         {
             nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
@@ -76,7 +77,7 @@ public class Room : MonoBehaviour
                 }
 
                 int exitIndex = i;
-                exitDoors[i].onOpen.AddListener(delegate { LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], nextRoomSpawnPoints[exitIndex]); });
+                exitDoors[i].onOpen.AddListener(delegate { LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], exitDoors[exitIndex].nextRoomSpawnPoint); });
             }
         }
         

@@ -6,8 +6,10 @@ using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
+    
     public bool opened;
     public bool locked;
+    public GameObject nextRoomSpawnPoint;
     
     [Header("Opening and closing")]
     public UnityEvent onOpen;
@@ -18,13 +20,14 @@ public class Door : MonoBehaviour
     public UnityEvent onLock;
     public UnityEvent onFailToOpen;
 
+
     private Animator animator;
     
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        if(animator != null) animator.SetBool("IsOpen", true);
-        if(animator != null) animator.SetBool("IsLocked", false);
+        if(animator != null) animator.SetBool("IsOpen", opened);
+        if(animator != null) animator.SetBool("IsLocked", locked);
     }
 
     public void OpenDoor()
