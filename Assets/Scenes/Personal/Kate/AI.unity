@@ -273,6 +273,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBomber (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 341098824}
+    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Collider, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8338694704011105290, guid: caeeb1d327e1826409e543a288939050,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,6 +353,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caeeb1d327e1826409e543a288939050, type: 3}
+--- !u!136 &341098824 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 1022059394801453832, guid: caeeb1d327e1826409e543a288939050,
+    type: 3}
+  m_PrefabInstance: {fileID: 341098823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &583443110
 PrefabInstance:
   m_ObjectHideFlags: 0

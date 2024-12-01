@@ -15,5 +15,5 @@ public interface IShortCircuitable
 
 public interface IBurnable
 {
-
+    public void Burn(float chance, float damageTick, float tickTime, int tickCount);
 }
