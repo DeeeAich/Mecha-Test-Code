@@ -57,16 +57,16 @@ namespace AITree
             {
                 tickPath = "";
                 Node.BehaviourTreeState status = root.Tick();
-                if(status!=Node.BehaviourTreeState.RUNNING)
+                if (status != Node.BehaviourTreeState.RUNNING)
                 {
                     root.Restart();
                 }
-                if(debug || verboseDebug)
+                if (debug || verboseDebug)
                 {
 
-                    Debug.Log(string.Format("{0} ticked {1} nodes this FixedUpdate",name , root.tickCounter));
+                    Debug.Log(string.Format("{0} ticked {1} nodes this FixedUpdate", name, root.tickCounter));
                 }
-                if(verboseDebug)
+                if (verboseDebug)
                 {
                     Debug.Log(string.Format("{0} had {1} tick path", name, tickPath));
                 }
@@ -77,18 +77,25 @@ namespace AITree
         {
             base.TriggerDeath();
             TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
-            if(tde != null)
+            if (tde != null)
             {
                 tde.TriggerExplosion();
             }
             Collider[] c = GetComponents<Collider>();
-            if(c.Length >0)
+            if (c.Length > 0)
             {
-                foreach(Collider x in c)
+                foreach (Collider x in c)
                 {
                     x.enabled = false;
                 }
             }
+            gameObject.tag = "Untagged";
+            EnemyGun[] guns = GetComponentsInChildren<EnemyGun>();
+            foreach (EnemyGun g in guns)
+            {
+                g.BeGone();
+            }
+
             Die();
         }
 
@@ -106,7 +113,7 @@ namespace AITree
             if (agent != null)
                 agent.isStopped = true;
             paused = true;
-            if(verboseDebug || debug)
+            if (verboseDebug || debug)
             {
                 Debug.Log(string.Format("{0} should not move.", name));
             }
@@ -123,21 +130,31 @@ namespace AITree
             }
         }
 
+        Coroutine pauseCoroutine;
+        float pauseTimer;
         public virtual void StopForTime(float time)
         {
             paused = true;
             Stop();
-            StartCoroutine(UnpauseAfter(time));
+            if (pauseCoroutine == null || pauseTimer <= 0f)
+            {
+                pauseCoroutine = StartCoroutine(UnpauseAfter(time));
+            }
+            else if (time > pauseTimer)
+            {
+                pauseTimer = time;
+            }
         }
+
 
         IEnumerator UnpauseAfter(float time)
         {
-            float timer = 0;
+            pauseTimer = 0;
             do
             {
                 yield return null;
-                timer += Time.deltaTime;
-            } while (timer < time);
+                pauseTimer += Time.deltaTime;
+            } while (pauseTimer < time);
             paused = false;
             Resume();
         }
@@ -148,11 +165,13 @@ namespace AITree
             isShieldable = false;
         }
 
-        public void ShortCircuit(float chance, float time)
+        public virtual void ShortCircuit(float chance, float time)
         {
-            throw new System.NotImplementedException();
+            if (chance >= UnityEngine.Random.Range(0, 100))
+            {
+                StopForTime(time);
+            }
         }
-
 
     }
 
@@ -192,7 +211,7 @@ namespace AITree
         {
             root.tickCounter++;
             brain.mostRecentTick = ToString();
-            brain.tickPath += string.Format("->{0}", ToString().Remove(0,7));
+            brain.tickPath += string.Format("->{0}", ToString().Remove(0, 7));
             if (state == BehaviourTreeState.NULL)
             {
                 state = BehaviourTreeState.RUNNING;
@@ -481,7 +500,7 @@ namespace AITree
             return state;
         }
 
-        
+
     }
 
     public class FindTarget : Action
@@ -518,7 +537,7 @@ namespace AITree
             this.minDist = minDist;
             this.maxDist = maxDist;
             targLoc = targetLocation;
-            type = StoreType.POSITION;
+            type = StoreType.GAMEOBJECT;
         }
         public StrafeInRange(string targetLocation, float minDist, float maxDist, StoreType type) : this(targetLocation, minDist, maxDist)
         {
@@ -540,14 +559,14 @@ namespace AITree
             switch (type)
             {
                 case StoreType.NULL:
-                    if(brain.debug)
+                    if (brain.debug)
                     {
                         Debug.Log("You had to put in effirt to end up here");
                     }
                     state = BehaviourTreeState.FAILURE;
                     return state;
                 case StoreType.GAMEOBJECT:
-                    if(gameObjectTarget==null)
+                    if (gameObjectTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
                         //Hvae I succeeded, or failed?
@@ -566,7 +585,7 @@ namespace AITree
                     target = (Vector3)recovered;
                     break;
                 case StoreType.TRANSFORM:
-                    if(transformTarget==null)
+                    if (transformTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
                         return state;
@@ -577,8 +596,6 @@ namespace AITree
                     state = BehaviourTreeState.FAILURE;
                     return state;
             }
-
-            target = (Vector3)brain.memory[targLoc];
             Vector3 distanceToDest = brain.gameObject.transform.position - activeTarget;
             distanceToDest.y = 0;
             Vector3 distanceToPlayer = brain.gameObject.transform.position - target;
@@ -661,7 +678,7 @@ namespace AITree
         {
             this.targetLocation = targetLocation;
             this.approachDist = approachDist;
-            store = StoreType.POSITION;
+            store = StoreType.GAMEOBJECT;
         }
 
         public Approach(string targetLocation, float approachDist, StoreType type) : this(targetLocation, approachDist)
@@ -673,6 +690,32 @@ namespace AITree
         {
             base.Begin();
             state = BehaviourTreeState.RUNNING;
+            if (!brain.memory.TryGetValue(targetLocation, out object recovered))
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+
+            switch (store)
+            {
+                case StoreType.NULL:
+                    activeTarget = new Vector3(0, 0, 0);
+                    state = BehaviourTreeState.FAILURE;
+                    break;
+                case StoreType.GAMEOBJECT:
+                    objectTarget = (GameObject)recovered;
+                    activeTarget = objectTarget.transform.position;
+                    break;
+                case StoreType.POSITION:
+                    activeTarget = (Vector3)recovered;
+                    break;
+                case StoreType.TRANSFORM:
+                    transformTarget = (Transform)recovered;
+                    activeTarget = transformTarget.position;
+                    break;
+                default:
+                    activeTarget = new Vector3(0, 0, 0);
+                    break;
+            }
         }
 
         public override void Restart()
@@ -688,22 +731,46 @@ namespace AITree
                 case StoreType.NULL:
                     break;
                 case StoreType.GAMEOBJECT:
+                    if (objectTarget == null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        //Hvae I succeeded, or failed?
+                        /*
+                         If I want to stay near something until they die I have succeded if they die
+                         If my follow up to strafe in range is like, kiss the target, then failure might be more appropriate, because target is gone
+                         
+                         If I "StrafeInRange until failure" then loss of target being a failure is a good idea
+                         */
+
+                        return state;
+                    }
+                    activeTarget = objectTarget.transform.position;
                     break;
                 case StoreType.POSITION:
+                    if (brain.memory.TryGetValue(targetLocation, out object recovered))
+                    {
+                        activeTarget = (Vector3)recovered;
+                    }
+                    else
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    }
                     break;
                 case StoreType.TRANSFORM:
+                    if (transformTarget == null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    }
+                    activeTarget = transformTarget.position;
                     break;
-            }
-            if (brain.memory.TryGetValue(targetLocation, out object recovered))
-            {
-                activeTarget = (Vector3)recovered;
-                brain.agent.SetDestination(activeTarget);
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
+                default:
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
             }
 
+            brain.agent.SetDestination(activeTarget);
             Vector3 distanceFrom = brain.gameObject.transform.position - activeTarget;
             distanceFrom.y = 0;
             if (state == BehaviourTreeState.FAILURE)
@@ -1012,7 +1079,7 @@ namespace AITree
         readonly float distance;
         GameObject target;
 
-        public InRange(string targetLocation, float distance):base()
+        public InRange(string targetLocation, float distance) : base()
         {
             this.targetLocation = targetLocation;
             this.distance = distance;

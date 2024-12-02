@@ -123,9 +123,13 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         }
         damageMods.Remove(hack);
     }
+
     #endregion
     #region Burnable Interface Implementation
-
+    public virtual void Burn(float chance, float damageTick, float tickTime, int tickCount)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
     /*SHIELD MECHANICS
     
