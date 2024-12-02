@@ -34,6 +34,8 @@ public class HealthBar : MonoBehaviour
         pastHealth = health.maxHealth;
         shieldModifiers = new List<ShieldModifier>();
         healthBarHideTimer = 0;
+        
+        health.onTakeDamage.AddListener(delegate { GetComponent<EnemyDamageNumberSpawner>().SpawnDamageNumber(); });
     }
 
     private void Update()

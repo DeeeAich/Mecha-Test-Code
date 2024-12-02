@@ -42,6 +42,7 @@ public class DevKitCheats : MonoBehaviour
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
+                PlayerBody.PlayBody().;
                 devkitCheatMenu.SetActive(true);
             }
             else

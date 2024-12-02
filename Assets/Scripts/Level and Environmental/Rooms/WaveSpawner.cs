@@ -103,7 +103,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (spawning)
+        if (spawning && !isComplete)
         {
             if (spawnedEnemies != null && spawnedEnemies.Count > 0)
             {
@@ -111,7 +111,7 @@ public class WaveSpawner : MonoBehaviour
                 {
                     if(spawnedEnemies[i] == null) spawnedEnemies.RemoveAt(i);
                 }
-            }
+            }// clears null references from list
 
             if (incomingEnemySpawners != null && incomingEnemySpawners.Count > 0)
             {
@@ -119,7 +119,7 @@ public class WaveSpawner : MonoBehaviour
                 {
                     if(incomingEnemySpawners[i] == null) incomingEnemySpawners.RemoveAt(i);
                 }
-            }
+            }// clears null references from list
             
             if (currentWave == waves.Length && (spawnedEnemies == null || spawnedEnemies.Count == 0) && (incomingEnemySpawners == null || incomingEnemySpawners.Count == 0))
             {

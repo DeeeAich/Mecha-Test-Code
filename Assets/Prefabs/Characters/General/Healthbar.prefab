@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8459889940544091439}
   - component: {fileID: 4418701804318552205}
+  - component: {fileID: 8991802115032208620}
   m_Layer: 3
   m_Name: Healthbar
   m_TagString: Untagged
@@ -125,6 +126,26 @@ MonoBehaviour:
   canvas: {fileID: 9218349956717745198}
   fillBar: {fileID: 2560157416850236701}
   shieldBar: {fileID: 1659962078465569829}
+--- !u!114 &8991802115032208620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972839784276234177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7780122c2e71204439f92ab9a1d44a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageNumberInstance: {fileID: 1866234928263035432, guid: 420fa028c2e099743ba09b3459650abc,
+    type: 3}
+  critColor:
+    serializedVersion: 2
+    rgba: 4278244863
+  testSpawn: 0
+  testDamage: 0
+  testCrit: 0
 --- !u!1 &5512465180400083758
 GameObject:
   m_ObjectHideFlags: 0
