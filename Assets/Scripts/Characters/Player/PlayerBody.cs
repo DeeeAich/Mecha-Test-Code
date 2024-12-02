@@ -32,6 +32,9 @@ public class PlayerBody : MonoBehaviour
 
     private Interactable curInteract;
 
+    public bool canMove = true;
+    public bool canShoot = true;
+
     private static PlayerBody playerBody;
     public static PlayerBody PlayBody()
     {
@@ -48,6 +51,7 @@ public class PlayerBody : MonoBehaviour
         lastHealth = myHealth.health;
         lastMax = myHealth.maxHealth;
         playerBody = this;
+        myHealth.onDeath.AddListener(OnDeath);
     }
 
     private void Start()
@@ -60,8 +64,8 @@ public class PlayerBody : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        myMovement.Movement(move.ReadValue<Vector2>());
+        if (canMove)
+            myMovement.Movement(move.ReadValue<Vector2>());
 
         weaponHolder.LookDirection(isGamepad ?
             look.ReadValue<Vector2>():
@@ -178,4 +182,24 @@ public class PlayerBody : MonoBehaviour
 
     }
 
+    public void OnDeath()
+    {
+
+        myCamera.transform.parent = null;
+        StopParts(false, false);
+
+        TriggerDebrisExplosion[] explosions = GetComponentsInChildren<TriggerDebrisExplosion>();
+
+        foreach (TriggerDebrisExplosion explosion in explosions)
+            explosion.explosionTrigger = true;
+
+    }
+
+    [Tooltip("For setting the parts to on or off")]
+    public void StopParts(bool weapons, bool legs)
+    {
+
+        canShoot = weapons;
+        canMove = legs;
+    }
 }

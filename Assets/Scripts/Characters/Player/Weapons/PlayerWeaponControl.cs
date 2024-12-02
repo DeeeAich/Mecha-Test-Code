@@ -8,7 +8,7 @@ public class PlayerWeaponControl : MonoBehaviour
 
     private bool firing = false;
 
-    [SerializeField] Transform turnerObject;
+    public Transform turnerObject;
 
     private PlayerBody myBody;
 
@@ -37,32 +37,38 @@ public class PlayerWeaponControl : MonoBehaviour
 
     public void PressLeft(InputAction.CallbackContext context)
     {
-        leftWeapon.FirePress();
+        if(myBody.canShoot)
+            leftWeapon.FirePress();
     }
 
     public void LiftLeft(InputAction.CallbackContext context)
     {
-        leftWeapon.FireRelease();
+        if (myBody.canShoot)
+            leftWeapon.FireRelease();
     }
 
     public void ReloadLeft(InputAction.CallbackContext context)
     {
-        StartCoroutine(leftWeapon.Reload());
+        if (myBody.canShoot)
+            StartCoroutine(leftWeapon.Reload());
     }
 
     public void FireRight(InputAction.CallbackContext context)
     {
-        rightWeapon.FirePress();
+        if (myBody.canShoot)
+            rightWeapon.FirePress();
     }
 
     public void LiftRight(InputAction.CallbackContext context)
     {
-        rightWeapon.FireRelease();
+        if (myBody.canShoot)
+            rightWeapon.FireRelease();
     }
 
     public void ReloadRight(InputAction.CallbackContext context)
     {
-        StartCoroutine(rightWeapon.Reload());
+        if (myBody.canShoot)
+            StartCoroutine(rightWeapon.Reload());
     }
 
     public virtual void Start()
