@@ -15,6 +15,8 @@ public class ProjectileSpread : ProjectileGun
         {
             GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
             genBullet.name = "PlayerBullet";
+            genBullet.GetComponent<BasicBullet>().myGun = this;
+            genBullet.SetActive(false);
         }
     }
 
@@ -41,6 +43,7 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.rotation = firePoint.rotation;
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
             newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
+            newBullet.SetActive(true);
 
         }
         myAnim.SetTrigger("Fire");

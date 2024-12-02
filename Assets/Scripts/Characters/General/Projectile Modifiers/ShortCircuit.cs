@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShortCircuit : MonoBehaviour
+public class ShortCircuit : ProjectileMod
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public override void AttemptApply(GameObject target)
     {
-        
+        base.AttemptApply(target);
+
+        target.GetComponent<IShortCircuitable>().ShortCircuit(chance, duration);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

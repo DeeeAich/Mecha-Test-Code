@@ -25,6 +25,8 @@ public class ProjectileGun : Weapon
         {
             GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
             genBullet.name = "PlayerBullet";
+            genBullet.GetComponent<BasicBullet>().myGun = this;
+            genBullet.SetActive(false);
         }
     }
 
@@ -46,9 +48,11 @@ public class ProjectileGun : Weapon
         waitOnShot = true;
 
         GameObject newBullet = projectileHolder.GetChild(0).gameObject;
+        newBullet.transform.parent = null;
         newBullet.transform.position = firePoint.position;
         newBullet.transform.rotation = firePoint.rotation;
         newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
+        newBullet.SetActive(true);
 
         myAnim.SetTrigger("Fire");
 

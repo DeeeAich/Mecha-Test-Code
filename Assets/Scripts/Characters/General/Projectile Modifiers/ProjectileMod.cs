@@ -1,3 +1,4 @@
+using ChipClasses;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,17 @@ public class ProjectileMod : MonoBehaviour
 
     }
 
-    public static void AddOrUpdateMode(WeaStaEftChip chipWithMod, GameObject projectileOrWeapon)
+    public virtual void AddOrUpdateMode(StatusInfo statInfo)
     {
 
+        duration += statInfo.effectTime;
+        chance += statInfo.effectChance;
+        damage += statInfo.effectDamage;
 
+    }
 
+    public virtual float AdditiveDamage(float baseDamage)
+    {
+        return baseDamage;
     }
 }

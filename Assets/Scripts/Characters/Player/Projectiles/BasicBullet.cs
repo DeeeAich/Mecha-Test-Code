@@ -9,26 +9,34 @@ public class BasicBullet : Projectile
     [SerializeField] float resetTime = 2f;
     public ProjectileGun myGun;
 
-    
+    private Critical critRoller;
+    public List<ProjectileMod> modList = new List<ProjectileMod>();
+
+    private void Start()
+    {
+        critRoller = GetComponent<Critical>();
+    }
 
     public override void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health health))
         {
-            if (damageableEntities.Contains(health.entityType))
+            float modifiedDamage = critRoller.AdditiveDamage(damage);
+
+            health.TakeDamage(modifiedDamage);
+
+            foreach (ProjectileMod modi in modList)
+                modi.AttemptApply(other.gameObject);
+
+            pierceCount--;
+
+            if (pierceCount == 0)
             {
-                health.TakeDamage(damage);
-
-                pierceCount--;
-
-                if (pierceCount == 0)
-                {
-                    gameObject.SetActive(false);
-                    transform.parent = myGun.projectileHolder;
-                    transform.localPosition = new Vector3();
-                    transform.GetComponentInChildren<Animator>().SetTrigger("impact");
-                    StopCoroutine(AutoReset());
-                }
+                gameObject.SetActive(false);
+                transform.parent = myGun.projectileHolder;
+                transform.localPosition = new Vector3();
+                transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+                StopCoroutine(AutoReset());
             }
         }
         else
