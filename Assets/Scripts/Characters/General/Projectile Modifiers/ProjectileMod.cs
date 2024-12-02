@@ -12,9 +12,6 @@ public class ProjectileMod : MonoBehaviour
 
     public virtual void AttemptApply(GameObject target)
     {
-        int roll = Random.Range(0, 100);
-        if (roll > chance)
-            return;
 
     }
 
