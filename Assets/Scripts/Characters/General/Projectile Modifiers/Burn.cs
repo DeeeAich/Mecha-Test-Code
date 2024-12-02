@@ -9,7 +9,7 @@ public class Burn : ProjectileMod
     {
         base.AttemptApply(target);
 
-        //target.GetComponent<IBurnable>().Burn(damage, chance, duration);
+        //target.GetComponent<IBurnable>().Burn(damage, chance, durationc * 4);
     }
 
 }
