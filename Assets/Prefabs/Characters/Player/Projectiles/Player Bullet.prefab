@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1393508897267807949}
   - component: {fileID: 9195522146666093717}
+  - component: {fileID: 30697706816812945}
   - component: {fileID: 1213229222834994232}
   - component: {fileID: 7414778502107259861}
   m_Layer: 7
@@ -52,6 +53,24 @@ MonoBehaviour:
   damageableEntities: 
   pierceCount: 1
   speed: 25
+  resetTime: 2
+  myGun: {fileID: 0}
+  modList: []
+--- !u!114 &30697706816812945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874561802893684910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a905ca1b6e04bc84daad3d49a9b3ac29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  chance: 0
+  damage: 1
 --- !u!136 &1213229222834994232
 CapsuleCollider:
   m_ObjectHideFlags: 0

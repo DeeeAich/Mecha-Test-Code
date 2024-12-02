@@ -8,7 +8,7 @@ public class Critical : ProjectileMod
     public override float AdditiveDamage(float baseDamage)
     {
 
-        int crit = 0;
+        float crit = 0;
 
         float checkChance = chance;
 
@@ -21,7 +21,9 @@ public class Critical : ProjectileMod
         if (Random.Range(0, 100) <= checkChance)
             crit++;
 
-        return baseDamage * (damage^crit);
+        
+        
+        return baseDamage;
 
     }
 
