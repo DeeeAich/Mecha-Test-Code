@@ -8,7 +8,6 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 {
     public float health;
     public float maxHealth;
-
     public bool isAlive = true;
     public bool canTakeDamage = true;
 
@@ -65,6 +64,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             remainingDamage = mod.Modification(remainingDamage);
         }
 
+
+
         health -= remainingDamage;
 
         onTakeDamage.Invoke();
@@ -97,20 +98,27 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     float hackTimer;
     public virtual void Hack(float percentage, float chance, float duration)
     {
-        if(chance >= UnityEngine.Random.Range(0,100))
+        int application = (int)chance / 100;
+
+        if(chance % 100f >= UnityEngine.Random.Range(0f,100f))
         {
-            if (hackCoroutine == null)
-            {
-                hack = new HackMod(percentage);
-                damageMods.Add(hack);
-                hackCoroutine = StartCoroutine(HackDecay());
-                hackTimer = duration;
-            }
-            else
-            {
-                hackTimer = Mathf.Max(hackTimer, duration);
-                hack.percent = Mathf.Max(hack.percent, percentage);
-            }
+            application += 1;
+        }
+        if(application == 0)
+        {
+            return;
+        }
+        if (hackCoroutine == null)
+        {
+            hack = new HackMod(percentage*application);
+            damageMods.Add(hack);
+            hackCoroutine = StartCoroutine(HackDecay());
+            hackTimer = duration;
+        }
+        else
+        {
+            hackTimer = Mathf.Max(hackTimer, duration);
+            hack.percent = Mathf.Max(hack.percent, percentage*application);
         }
     }
 
@@ -126,9 +134,37 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
     #endregion
     #region Burnable Interface Implementation
-    public virtual void Burn(float chance, float damageTick, float tickTime, int tickCount)
+    IEnumerator BurnDamage(float damagePerTick, int count)
     {
-        throw new NotImplementedException();
+        float timer = 0;
+        float maxTime = 0.25f;
+        int ticks = 0;
+        while(ticks < count)
+        {
+            while(timer < maxTime)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            timer -= maxTime;
+            TakeDamage(damagePerTick);
+            ticks++;
+        }
+        yield return null;
+    }
+    public virtual void Burn(float chance, float damageTick, int tickCount)
+    {
+        //tick length is locked at 0.25s/t
+        int application = (int)chance / 100;
+
+        if (chance % 100f >= UnityEngine.Random.Range(0f, 100f))
+        {
+            application += 1;
+        }
+        for(int i = 0; i < application; i++)
+        {
+            StartCoroutine(BurnDamage(damageTick,tickCount));
+        }
     }
     #endregion
     /*SHIELD MECHANICS
