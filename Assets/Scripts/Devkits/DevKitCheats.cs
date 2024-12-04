@@ -42,12 +42,13 @@ public class DevKitCheats : MonoBehaviour
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
-                PlayerBody.PlayBody().;
+                PlayerBody.PlayBody().StopParts(false,false);
                 devkitCheatMenu.SetActive(true);
             }
             else
             {
                 Time.timeScale = 1;
+                PlayerBody.PlayBody().StopParts(true,true);
                 devkitCheatMenu.SetActive(false);
             }
         }
