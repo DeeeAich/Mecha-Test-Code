@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6075565475206907120}
-  - {fileID: 7764120203561146673}
+  - {fileID: 7682291335271320884}
   - {fileID: 900795155449039135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6142,15 +6142,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2193768042377021803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0.000000067055225, z: -0.000000067055225, w: 0.7071068}
-  m_LocalPosition: {x: 0.08521873, y: 1.3746349, z: 0.024239205}
+  m_LocalRotation: {x: -0.70710677, y: -0.000000089406946, z: -0.000000089406946,
+    w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3013244831512752271}
   - {fileID: 7334938160182360410}
   - {fileID: 5834259079422799665}
-  m_Father: {fileID: 4222898358337214064}
+  m_Father: {fileID: 7682291335271320884}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8534421430089462630
 MeshFilter:
@@ -8559,6 +8560,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &9011513331518918418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7682291335271320884}
+  m_Layer: 0
+  m_Name: Pivot Correction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7682291335271320884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011513331518918418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08521843, y: 1.3746349, z: 0.024239313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7764120203561146673}
+  m_Father: {fileID: 4222898358337214064}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9049908772034419688
 GameObject:
   m_ObjectHideFlags: 0

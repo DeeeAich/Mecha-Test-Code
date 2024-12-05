@@ -14,7 +14,7 @@ public class BomberDroneBT : BehaviourTree
     internal override void Awake()
     {
         base.Awake();
-        AddOrOverwrite("player", player.transform.position);
+        AddOrOverwrite("player", player);
         root = new RootNode(this,
             new Sequence(
                 new Approach("player", approachDistance),
@@ -34,7 +34,6 @@ public class BomberDroneBT : BehaviourTree
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        AddOrOverwrite("player", player.transform.position);
     }
 }
 
