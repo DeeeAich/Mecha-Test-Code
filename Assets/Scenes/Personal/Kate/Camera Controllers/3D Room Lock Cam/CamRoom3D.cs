@@ -14,7 +14,7 @@ public class CamRoom3D : MonoBehaviour
     [SerializeField] private float roomHeight;
     [SerializeField] private CinemachineVirtualCamera cam;
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject tracker;
+    [SerializeField] internal GameObject tracker;
     [SerializeField] private bool update = false;
     [SerializeField] private GameObject projectionRect;
     private CinemachineFramingTransposer transposer;
@@ -34,7 +34,9 @@ public class CamRoom3D : MonoBehaviour
         //I need to construct the plane here
         projectionRect.transform.rotation = Quaternion.LookRotation(camForward, camUp);
         //projectionRect.transform.RotateAround(projectionRect.transform.position, projectionRect.transform.right, projectionAngle - projectionRect.transform.rotation.eulerAngles.x);
-        
+
+        player = PlayerBody.PlayBody().gameObject;
+        cam = FindObjectOfType<CinemachineVirtualCamera>();
 
         //Get the scale right
             //Get the corners

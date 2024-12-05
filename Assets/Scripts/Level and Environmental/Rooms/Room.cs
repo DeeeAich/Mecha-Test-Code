@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -59,9 +60,26 @@ public class Room : MonoBehaviour
             exitDoors = allDoors.ToArray();
         }
 
+        if (exitDoors.Length > 0)
+        {
+            List<Door> possibleExitDoors = exitDoors.ToList();
+
+            for (int i = 0; i < possibleExitDoors.Count; i++)
+            {
+                if (possibleExitDoors[i].transform.position.z <= entryDoor.transform.position.z + 1)
+                {
+                    possibleExitDoors[i].CloseDoor();
+                    possibleExitDoors[i].LockDoor();
+                    possibleExitDoors.RemoveAt(i);
+                }
+            }
+
+            exitDoors = possibleExitDoors.ToArray();
+        }
 
         if (exitDoors.Length > 0)
         {
+
             nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
 
             for (int i = 0; i < exitDoors.Length; i++)
@@ -123,7 +141,12 @@ public class Room : MonoBehaviour
         {
             primaryObjective.onComplete.AddListener(completeRoom);
         }
-        
+
+        CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
+        if (camRoom3D != null)
+        {
+            FindObjectOfType<CinemachineVirtualCamera>().Follow = camRoom3D.tracker.transform;
+        }
 
         isActive = true;
         onStartRoom.Invoke();
@@ -148,6 +171,8 @@ public class Room : MonoBehaviour
             {
                 waveSpawners[i].isComplete = true;
             }
+
+            FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;
         }
     }
 }
