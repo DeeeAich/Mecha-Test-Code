@@ -121,7 +121,7 @@ public class PlayerBody : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext context)
     {
-        
+        if(curInteract!=null)
         curInteract.TriggerInteraction();
 
     }

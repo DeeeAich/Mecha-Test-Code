@@ -18,6 +18,7 @@ public class ShieldDroneBT : BehaviourTree
         isShieldable = false;
         base.Awake();
         memory.Add("CoverTarget", transform.position);
+        AddOrOverwrite("player", player);
         root = new RootNode(this,
             new Sequence(
                 new Fallback(
@@ -55,7 +56,6 @@ public class ShieldDroneBT : BehaviourTree
             }
         }
         base.FixedUpdate();
-        AddOrOverwrite("player", player.transform.position);
     }
 
     private void OnEnable()
@@ -74,11 +74,13 @@ public class ShieldDroneBT : BehaviourTree
         StopForTime(Random.Range(unshieldStunTimeMin, unshieldStunTimeMax));
         root.Restart();
         memory.Clear();
+        AddOrOverwrite("player", player);
     }
 
     internal void ShieldBreak()
     {
         memory.Clear();
+        AddOrOverwrite("player", player);
         root.Restart();
         
     }

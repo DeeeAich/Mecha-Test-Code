@@ -9,9 +9,9 @@ namespace AITree
     public enum StoreType
     {
         NULL,
-        GAMEOBJECT,
         POSITION,
-        TRANSFORM
+        TRANSFORM,
+        GAMEOBJECT
     }
 
     public abstract class BehaviourTree : Health, IShortCircuitable
@@ -934,6 +934,9 @@ namespace AITree
         public MoveTo(string targetLocation) : base(targetLocation, 0.5f)
         {
         }
+        public MoveTo(string targetLocation, StoreType store) : base(targetLocation, 0.5f, store)
+        {
+        }
 
     }
 
@@ -1107,17 +1110,47 @@ namespace AITree
     public class StoreValue : Action
     {
         readonly string current, future;
-
+        readonly StoreType from, to;
         public StoreValue(string current, string future) : base()
         {
             this.current = current;
             this.future = future;
+            from = to = StoreType.NULL;
+        }
+        public StoreValue(string current, string future, StoreType from, StoreType to) : this(current, future)
+        {
+            this.from = from;
+            this.to = to;
         }
 
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            brain.AddOrOverwrite(future, brain.memory[current]);
+            if (from == to || from == StoreType.NULL || to == StoreType.NULL)
+                brain.AddOrOverwrite(future, brain.memory[current]);
+            else if (from != StoreType.POSITION)
+            {
+                if (to == StoreType.GAMEOBJECT && from == StoreType.TRANSFORM)
+                {
+                    brain.AddOrOverwrite(future, ((Transform)brain.memory[current]).gameObject);
+                }
+                else
+                if (to == StoreType.TRANSFORM && from == StoreType.GAMEOBJECT)
+                {
+                    brain.AddOrOverwrite(future, ((GameObject)brain.memory[current]).transform);
+                }
+                else
+
+                if (to == StoreType.POSITION && from == StoreType.TRANSFORM)
+                {
+                    brain.AddOrOverwrite(future, ((Transform)brain.memory[current]).position);
+                }
+                else
+                if (to == StoreType.POSITION && from == StoreType.GAMEOBJECT)
+                {
+                    brain.AddOrOverwrite(future, ((GameObject)brain.memory[current]).transform.position);
+                }
+            }
             state = BehaviourTreeState.SUCCESS;
             return state;
         }

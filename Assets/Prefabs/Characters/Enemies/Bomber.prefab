@@ -161,21 +161,9 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3125012164344278344}
-        m_TargetAssemblyTypeName: TriggerDebrisExplosion, Assembly-CSharp
-        m_MethodName: TriggerExplosion
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1022059394801453832}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
+      - m_Target: {fileID: 7986891165596204273}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -183,7 +171,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   meshesRef: {fileID: 0}
   debug: 0
@@ -374,18 +362,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8704097870826017423}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3125012164344278344 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6022839803560755143, guid: 50c62ee347922b64b951fc54c3644be2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8704097870826017423}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3946711570175696649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b107de7bb2b2e4ab0059f200c5c9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3946711570175696649 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5624612920205675910, guid: 50c62ee347922b64b951fc54c3644be2,
@@ -410,6 +386,12 @@ MonoBehaviour:
 --- !u!95 &6935391014392750382 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1798167173638747041, guid: 50c62ee347922b64b951fc54c3644be2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8704097870826017423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7986891165596204273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1593159188576513662, guid: 50c62ee347922b64b951fc54c3644be2,
     type: 3}
   m_PrefabInstance: {fileID: 8704097870826017423}
   m_PrefabAsset: {fileID: 0}
