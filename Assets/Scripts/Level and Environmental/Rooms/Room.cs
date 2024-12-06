@@ -80,7 +80,7 @@ public class Room : MonoBehaviour
         if (exitDoors.Length > 0)
         {
 
-            nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
+                nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
 
             for (int i = 0; i < exitDoors.Length; i++)
             {
