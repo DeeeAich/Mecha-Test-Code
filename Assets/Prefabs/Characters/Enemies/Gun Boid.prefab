@@ -179,7 +179,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4179377912053861262}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
@@ -395,6 +407,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!1 &4179377912053861262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5602344921234432224, guid: fe771a6c7f9119c4a9db1b3949c3d781,
+    type: 3}
+  m_PrefabInstance: {fileID: 8628796919293012846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5848591045892066733 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2780404893680969411, guid: fe771a6c7f9119c4a9db1b3949c3d781,

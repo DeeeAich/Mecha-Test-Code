@@ -19,11 +19,11 @@ public class BomberDroneBT : BehaviourTree
             new Sequence(
                 new Approach("player", approachDistance),
                 new PauseFixed(pauseTime),
-                new StoreValue("player", "destination"),
+                new StoreValue("player", "destination", StoreType.GAMEOBJECT, StoreType.POSITION),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new ModifyAgentStat("angularSpeed", dashAngleSpeed),
-                new MoveTo("destination"),
+                new MoveTo("destination", StoreType.POSITION),
                 new Detonate(explosionSize, explosionDamage, explosion, ExplosionEffect.hack),
                 new PauseFixed(999f) //just to stop it from looping before death
                 )
@@ -46,12 +46,12 @@ namespace AITree
             children = new List<Node>
                 {
                 new Approach("player", approachDistance),
-                new StoreValue("player", "destination"),
+                new StoreValue("player", "destination",StoreType.GAMEOBJECT, StoreType.POSITION),
                 new PauseFixed(pauseTime),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
                 new ModifyAgentStat("angularSpeed", dashAngleSpeed),
-                new MoveTo("destination"),
+                new MoveTo("destination", StoreType.POSITION),
                 new Detonate(explosionSize, explosionDamage, explosion, effect),
                 new PauseFixed(999f) //just to stop it from looping before death
                     };
