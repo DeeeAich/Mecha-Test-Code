@@ -5,12 +5,21 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public enum ObjectiveType
 {
     exterminate,
     survival,
     capturePoint
+}
+
+public enum LootType
+{
+    weapon,
+    combatChip,
+    ordinance,
+    chassis
 }
 
 public class Room : MonoBehaviour
@@ -33,12 +42,15 @@ public class Room : MonoBehaviour
     public EnemySpawnPoint[] enemySpawnPoints;
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
+    public GameObject lootSpawnPoint;
 
     [Header("Internal References")]
     public GameObject[] nextRooms;
+    public LootType[] nextRoomLoots;
+    public LootType roomLoot;
 
     [SerializeField] private Door[] exitDoors;
-
+    
 
     [Header("Events")] 
     public UnityEvent onStartRoom;
@@ -79,11 +91,13 @@ public class Room : MonoBehaviour
 
         if (exitDoors.Length > 0)
         {
-
-                nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
+            nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
+            nextRoomLoots = LevelGenerator.instance.NextLootSelection(exitDoors.Length);
 
             for (int i = 0; i < exitDoors.Length; i++)
             {
+                exitDoors[i].SetDoorLootType(nextRoomLoots[i]);
+                
                 for (int j = 0; j < exitDoors.Length; j++)
                 {
                     if (j != i)
@@ -95,7 +109,11 @@ public class Room : MonoBehaviour
                 }
 
                 int exitIndex = i;
-                exitDoors[i].onOpen.AddListener(delegate { LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], exitDoors[exitIndex].nextRoomSpawnPoint); });
+                exitDoors[i].onOpen.AddListener(delegate
+                {
+                    LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], exitDoors[exitIndex].nextRoomSpawnPoint);
+                    LevelGenerator.instance.currentRoom.GetComponent<Room>().roomLoot = nextRoomLoots[exitIndex];
+                });
             }
         }
         
@@ -163,15 +181,27 @@ public class Room : MonoBehaviour
                 exitDoors[i].UnlockDoor();
             }
             
-            Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
-
             Destroy(primaryObjective);
+            Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
             
             for (int i = 0; i < waveSpawners.Length; i++)
             {
                 waveSpawners[i].isComplete = true;
+                Destroy(waveSpawners[i]);
             }
 
+            if (lootSpawnPoint != null)
+            {
+                Debug.Log("Spawning Loot");
+
+                GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(3, roomLoot);
+
+                for (int i = 0; i < 1; i++)
+                {
+                    Instantiate(pickupsToSpawn[LevelGenerator.instance.seededRandom.Next(0, pickupsToSpawn.Length)], lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation);
+                }
+            }
+            
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;
         }
     }

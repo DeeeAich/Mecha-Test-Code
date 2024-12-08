@@ -46,6 +46,7 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
+        currentRoom.GetComponent<Room>().roomLoot = NextLootSelection(1)[0];
         roomIndex = 0;
     }
 
@@ -75,6 +76,56 @@ public class LevelGenerator : MonoBehaviour
             if(totalPossibleRooms > selection.Length) possibleRooms.RemoveAt(rand);
         }
 
+        return selection;
+    }
+
+    public LootType[] NextLootSelection(int count)
+    {
+        LootType[] selection = new LootType[count];
+        List<LootType> possibleLoots = new List<LootType>();
+        
+        possibleLoots.Add(LootType.weapon);
+        possibleLoots.Add(LootType.combatChip);
+        possibleLoots.Add(LootType.ordinance);
+        possibleLoots.Add(LootType.chassis);
+        //possibleLoots.AddRange(levelInfo.lootPool.standardOrdinance);
+
+        int totalPossibleLoots = possibleLoots.Count;
+        for (int i = 0; i < selection.Length; i++)
+        {
+            int rand = seededRandom.Next(0, possibleLoots.Count);
+            selection[i] = possibleLoots[rand];
+            if(totalPossibleLoots > selection.Length) possibleLoots.RemoveAt(rand);
+        }
+        
+        return selection;
+    }
+
+    public GameObject[] GenerateLootPickups(int count, LootType type)
+    {
+        GameObject[] selection = new GameObject[count];
+        List<GameObject> possibleSelection = new List<GameObject>();
+        
+        switch (type)
+        {
+            case LootType.weapon:
+                possibleSelection.AddRange(levelInfo.lootPool.standardWeapons);
+                break;
+            
+            case LootType.combatChip:
+                possibleSelection.AddRange(levelInfo.lootPool.standardChips);
+                break;
+            
+            case LootType.ordinance:
+                possibleSelection.AddRange(levelInfo.lootPool.standardOrdinance);
+                break;
+            
+            case LootType.chassis:
+                possibleSelection.AddRange(levelInfo.lootPool.standardChassis); 
+                break;
+        }
+
+        selection = possibleSelection.ToArray();
         return selection;
     }
 

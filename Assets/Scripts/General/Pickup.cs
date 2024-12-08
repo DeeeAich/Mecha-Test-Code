@@ -20,20 +20,24 @@ public class Pickup : MonoBehaviour
     public ScriptableObject ItemScriptableReference;
 
     public GameObject uiPopup;
+    public Sprite itemDisplayImage;
 
     public void TryPickup()
     {
         switch (pickupType)
         {
             case pickupType.Weapon:
+                PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
                 break;
             
             case pickupType.Chassis:
+                PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
                 break;
             
             case pickupType.Ordinance :
+                PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
                 break;
             
@@ -58,6 +62,7 @@ public class Pickup : MonoBehaviour
     
     public void OnPickup(int optionalData)
     {
+        PlayerBody.PlayBody().StopParts(true,true);
         Debug.Log("Picking up " + name);
         
         switch (pickupType)

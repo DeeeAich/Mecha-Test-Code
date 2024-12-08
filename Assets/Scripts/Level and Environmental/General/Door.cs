@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class Door : MonoBehaviour
     public bool opened;
     public bool locked;
     public GameObject nextRoomSpawnPoint;
+    
+    [Header("Loot Display")]
+    public LootType lootType;
+    [SerializeField] private Image nextRoomLootDisplayImage;
+
     
     [Header("Opening and closing")]
     public UnityEvent onOpen;
@@ -19,8 +25,8 @@ public class Door : MonoBehaviour
     public UnityEvent onUnlock;
     public UnityEvent onLock;
     public UnityEvent onFailToOpen;
-
-
+    
+    
     private Animator animator;
     
     private void Awake()
@@ -28,6 +34,30 @@ public class Door : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         if(animator != null) animator.SetBool("IsOpen", opened);
         if(animator != null) animator.SetBool("IsLocked", locked);
+    }
+
+    public void SetDoorLootType(LootType type)
+    {
+        lootType = type;
+
+        switch (type)
+        {
+            case LootType.weapon:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.weaponLootImage;
+                break;
+            
+            case LootType.combatChip:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.combatChipLootImage;
+                break;
+            
+            case LootType.ordinance:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.ordinanceLootImage;
+                break;
+            
+            case LootType.chassis:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.chassisLootImage;
+                break;
+        }
     }
 
     public void OpenDoor()
