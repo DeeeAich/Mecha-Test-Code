@@ -95,7 +95,7 @@ public class ChargeRifle : Weapon
         }
 
         myAnim.SetTrigger("Fire");
-        curAmmo -= charges;
+        curAmmo -= charges * shotCost;
 
         myAnim.SetBool("Charge", false);
 

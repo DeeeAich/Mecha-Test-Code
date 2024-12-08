@@ -14,7 +14,7 @@ public class WeaStaEftChip : WeaponChip
     }
     [Header("Status Adding")]
 
-    public List<ChipClasses.StatusInfo> AddStatuses = new();
+    public List<StatusInfo> AddStatuses = new();
 
 }
 

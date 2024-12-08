@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChipInterface
+public interface IBodyModifiable
 {
-    public interface IBodyModifiable
-    {
 
-        void ApplyChip(Chip newChip);
+    public void ApplyChip(BodyChip newChip);
 
-    }
+}
 
-    public interface ILegModifiable
-    {
-        void ApplyChip(Chip newChip);
-    }
+public interface ILegModifiable
+{
+    public void ApplyChip(MovementChip newChip);
+}
 
-    public interface IWeaponModifiable
-    {
+public interface IWeaponModifiable
+{
 
-        void ApplyChip(Chip newChip);
+    public void ApplyChip(WeaponChip newChip);
 
-        void ApplyWeaponMods(Chip newChip);
+    public void ApplyMods(WeaStaEftChip applyChip);
 
-    }
 }

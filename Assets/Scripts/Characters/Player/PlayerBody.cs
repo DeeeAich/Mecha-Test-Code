@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerBody : MonoBehaviour
+public class PlayerBody : MonoBehaviour, IBodyModifiable
 {
 
     private PlayerLegs myMovement;
@@ -188,6 +188,9 @@ public class PlayerBody : MonoBehaviour
         myCamera.transform.parent = null;
         StopParts(false, false);
 
+        weaponHolder.leftWeapon.FireRelease();
+        weaponHolder.rightWeapon.FireRelease();
+
         TriggerDebrisExplosion[] explosions = GetComponentsInChildren<TriggerDebrisExplosion>();
 
         foreach (TriggerDebrisExplosion explosion in explosions)
@@ -202,4 +205,14 @@ public class PlayerBody : MonoBehaviour
         canShoot = weapons;
         canMove = legs;
     }
+
+    public BodyStats myStats;
+
+    public void ApplyChip(BodyChip chip)
+    {
+
+        chip.statChange.AddStats(myStats);
+
+    }
+
 }

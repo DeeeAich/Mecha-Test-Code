@@ -20,10 +20,9 @@ public class Critical : ProjectileMod
 
         if (Random.Range(0, 100) <= checkChance)
             crit++;
-
         
         
-        return baseDamage;
+        return baseDamage * Mathf.Pow(damage, crit);
 
     }
 

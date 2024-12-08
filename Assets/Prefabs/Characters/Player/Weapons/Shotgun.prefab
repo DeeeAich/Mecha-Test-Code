@@ -63,6 +63,7 @@ Transform:
   m_Children:
   - {fileID: 6793198773791793765}
   - {fileID: 4067996033564578625}
+  - {fileID: 8624168632669874808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &905507948515026462
@@ -90,6 +91,7 @@ MonoBehaviour:
   fireHeld: 0
   turnLimit: 0
   waitOnShot: 0
+  projectileHolder: {fileID: 8624168632669874808}
   projectile: {fileID: 4874561802893684910, guid: 7a441510d4f424e36a8c07d14f895d41,
     type: 3}
   maxDiviation: 7.5
@@ -98,6 +100,37 @@ MonoBehaviour:
   fireCount: 8
   spreadRange: 0.3
   evenSpread: 1
+--- !u!1 &8142957531874074339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8624168632669874808}
+  m_Layer: 0
+  m_Name: Bullet Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8624168632669874808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142957531874074339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1956097079281339446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2118142903458429387
 PrefabInstance:
   m_ObjectHideFlags: 0
