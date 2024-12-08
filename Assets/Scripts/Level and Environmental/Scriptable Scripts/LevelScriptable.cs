@@ -9,4 +9,5 @@ public class LevelScriptable : ScriptableObject
 
     public RoomPoolScriptable roomPool;
     public EnemyPoolScriptable enemyPool;
+    public LootPoolScriptable lootPool;
 }
