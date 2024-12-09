@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ public enum pickupType
     WeaponChip,
     ChassisChip,
     OrdinanceChip,
-    MovementChip
+    MovementChip,
+    LegsChip
 }
 public class Pickup : MonoBehaviour
 {
@@ -21,6 +23,13 @@ public class Pickup : MonoBehaviour
 
     public GameObject uiPopup;
     public Sprite itemDisplayImage;
+
+    public Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 
     public void TryPickup()
     {
@@ -43,6 +52,8 @@ public class Pickup : MonoBehaviour
             
             
             case pickupType.WeaponChip:
+                PlayerBody.PlayBody().StopParts(false,false);
+                uiPopup.SetActive(true);
                 OnPickup(0);
                 break;
             
@@ -88,12 +99,21 @@ public class Pickup : MonoBehaviour
             case pickupType.Ordinance :
                 
                 break;
-            
-            
+
             case pickupType.WeaponChip:
                 
+                if (optionalData == 0)
+                {
+                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, true);
+                }
+                
+                if (optionalData == 1)
+                {
+                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, false);
+                }
+                
                 break;
-            
+
             case pickupType.ChassisChip:
                 
                 break;
@@ -105,8 +125,20 @@ public class Pickup : MonoBehaviour
             case pickupType.MovementChip:
                 
                 break;
+            
+            case pickupType.LegsChip:
+                
+                break;
         }
         
-        Destroy(gameObject);
+        animator.SetTrigger("openLoot");
+
+        foreach (var pickup in FindObjectsOfType<Pickup>())
+        {
+            if (pickup != this)
+            {
+                pickup.animator.SetTrigger("lootLocked");
+            }
+        }
     }
 }
