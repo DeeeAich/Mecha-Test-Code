@@ -58,6 +58,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
         
         isGamepad = playerInputs.currentControlScheme.Equals("Controller");
+        myCamera = Camera.main;
         SetControls();
         LoadStats();
     }

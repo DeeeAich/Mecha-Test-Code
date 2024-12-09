@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class ProjectileGun : Weapon
 {
@@ -29,8 +28,6 @@ public class ProjectileGun : Weapon
             genBullet.GetComponent<BasicBullet>().myGun = this;
             genBullet.SetActive(false);
         }
-
-        myController.ReApplyChips(this == myController.leftWeapon);
     }
 
     public override void FirePress()
@@ -54,7 +51,7 @@ public class ProjectileGun : Weapon
         newBullet.transform.parent = null;
         newBullet.transform.position = firePoint.position;
         newBullet.transform.rotation = firePoint.rotation;
-        newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
+        newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
         newBullet.SetActive(true);
 
         myAnim.SetTrigger("Fire");
@@ -91,18 +88,15 @@ public class ProjectileGun : Weapon
         {
 
             foreach (Transform bullet in projectileHolder)
-                foreach (ProjectileMod mod in bullet.GetComponents<ProjectileMod>())
-                    mod.AddModifiers(modInfo);
+                bullet.GetComponent<ProjectileMod>().AddModifiers(modInfo);
 
         }
         else
             foreach (Transform bullet in projectileHolder)
             {
 
-                bullet.gameObject.AddComponent(Type.GetType(modName));
-                foreach (ProjectileMod mod in bullet.GetComponents<ProjectileMod>())
-                    mod.AddModifiers(modInfo);
-                bullet.GetComponent<BasicBullet>().modList.Add(bullet.GetComponent<ProjectileMod>());
+                UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(bullet.gameObject, "Assets/Scripts/Characters/Player/Weapons/ProjectileGun.cs (98,17)", modName);
+
             }
 
     }

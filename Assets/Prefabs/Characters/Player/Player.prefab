@@ -202,6 +202,12 @@ MonoBehaviour:
   myUI: {fileID: 0}
   canMove: 1
   canShoot: 1
+  myStats:
+    health: 0
+    armour: 0
+    shield: 0
+    shieldRegen: 0
+    percentage: 0
 --- !u!114 &8033736023942219050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBody: {fileID: 0}
-  myLegs: {fileID: 0}
+  myLegs: {fileID: 8502822608867003491}
   dashing: 0
   dashDirection: {x: 0, y: 0, z: 0}
   ridBy: {fileID: 0}
@@ -233,7 +239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnerObject: {fileID: 5710632104132506964}
   leftWeapon: {fileID: 7262335305633254386}
+  leftMods: []
   rightWeapon: {fileID: 737184082610962960}
+  rightMods: []
 --- !u!114 &3339494783938837665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +717,12 @@ PrefabInstance:
 --- !u!4 &4815321303703217461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8820847715316038942, guid: 4e2aa23d0359a422c93d3af6809099fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4087728551252695083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8502822608867003491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5673021955256489032, guid: 4e2aa23d0359a422c93d3af6809099fd,
     type: 3}
   m_PrefabInstance: {fileID: 4087728551252695083}
   m_PrefabAsset: {fileID: 0}
