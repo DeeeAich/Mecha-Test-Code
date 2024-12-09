@@ -75,8 +75,9 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public virtual void Start()
     {
-
         myBody = GetComponent<PlayerBody>();
+        rightWeapon.myController = this;
+        leftWeapon.myController = this;
     }
 
     public void ApplyChip(WeaponChip newChip, bool left)

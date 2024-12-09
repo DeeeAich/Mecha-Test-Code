@@ -18,6 +18,8 @@ public class ProjectileSpread : ProjectileGun
             genBullet.GetComponent<BasicBullet>().myGun = this;
             genBullet.SetActive(false);
         }
+
+        myController.ReApplyChips(this == myController.leftWeapon);
     }
 
     public override IEnumerator RepeatFire()

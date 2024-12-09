@@ -29,6 +29,8 @@ public class ProjectileGun : Weapon
             genBullet.GetComponent<BasicBullet>().myGun = this;
             genBullet.SetActive(false);
         }
+
+        myController.ReApplyChips(this == myController.leftWeapon);
     }
 
     public override void FirePress()
@@ -52,7 +54,7 @@ public class ProjectileGun : Weapon
         newBullet.transform.parent = null;
         newBullet.transform.position = firePoint.position;
         newBullet.transform.rotation = firePoint.rotation;
-        newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
+        newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
         newBullet.SetActive(true);
 
         myAnim.SetTrigger("Fire");

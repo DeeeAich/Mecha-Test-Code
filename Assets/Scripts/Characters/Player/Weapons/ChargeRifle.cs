@@ -36,6 +36,9 @@ public class ChargeRifle : Weapon
         lineGen.enabled = false;
 
         lineGen.SetPosition(0, firePoint.position);
+
+
+        myController.ReApplyChips(this == myController.leftWeapon);
     }
 
     private void FixedUpdate()
