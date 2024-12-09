@@ -13,7 +13,9 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     private PlayerBody myBody;
 
     public Weapon leftWeapon;
+    public List<WeaponChip> leftMods;
     public Weapon rightWeapon;
+    public List<WeaponChip> rightMods;
 
     public void LookDirection(Vector2 direction, bool isGamepad)
     {
@@ -80,6 +82,11 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void ApplyChip(WeaponChip newChip, bool left)
     {
 
+        if (left)
+            leftMods.Add(newChip);
+        else
+            rightMods.Add(newChip);
+
         switch (newChip.supType)
         {
             case (WeaponChip.WeaponSubType.Generic):
@@ -102,6 +109,17 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             modableObject.AddMod(info);
 
         }
+
+    }
+
+    public void ReApplyChips(bool left)
+    {
+        if (left)
+            foreach (WeaponChip chip in leftMods)
+                ApplyChip(chip, left);
+        else
+            foreach (WeaponChip chip in rightMods)
+                ApplyChip(chip, false);
 
     }
 

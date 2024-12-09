@@ -20,7 +20,6 @@ public class Weapon : MonoBehaviour, IModable
 
     public bool waitOnShot;
 
-
     public virtual void Start()
     {
         myAnim.SetFloat("FireRate", 1 / fireRate);

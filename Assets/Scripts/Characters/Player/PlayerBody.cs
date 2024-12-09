@@ -170,6 +170,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         else
             weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
 
+        weaponHolder.ReApplyChips(left);
+
     }
 
     public void SetInteract(Interactable interact, bool adding = true)
