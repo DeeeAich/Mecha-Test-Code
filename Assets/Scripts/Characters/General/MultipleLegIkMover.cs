@@ -9,6 +9,7 @@ public class MultipleLegIkMover : MonoBehaviour
     public bool lockLegIks;
     
     [SerializeField] private GameObject[] legIks;
+    [SerializeField] private Animator[] legDashVFXAnimators;
 
     [Header("Speeds")]
     [SerializeField] private int maxLegsMovingAtOnce = 1;
@@ -125,7 +126,13 @@ public class MultipleLegIkMover : MonoBehaviour
         }
     }
 
-
+    public void ToggleDashParticles(bool dashParticlesON)
+    {
+            for (int i = 0; i < legDashVFXAnimators.Length; i++)
+            {
+                legDashVFXAnimators[i].SetBool("Emit", dashParticlesON);
+            }
+    }
 
     private void OnDrawGizmosSelected()
     {
