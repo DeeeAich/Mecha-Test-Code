@@ -12,6 +12,8 @@ public class SpiderLegs : PlayerLegs
         if (dashing || myBody.curLegs.dashCharges == 0)
             yield break;
 
+        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+
         dashDirection = new Vector2();
 
         if (stickAmount.magnitude != 0)
@@ -38,6 +40,8 @@ public class SpiderLegs : PlayerLegs
 
         yield return new WaitForSeconds(myBody.curLegs.dashTime);
         dashing = false;
+
+        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(false);
 
         mover.enabled = true;
 

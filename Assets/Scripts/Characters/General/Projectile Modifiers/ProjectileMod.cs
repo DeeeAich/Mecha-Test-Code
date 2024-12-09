@@ -31,8 +31,8 @@ public class ProjectileMod : MonoBehaviour
     public virtual void AddModifiers(StatusInfo statusInfo, bool percentage = false)
     {
 
-        duration += statusInfo.effectTime;
-        damage += statusInfo.effectDamage;
+        duration = duration < statusInfo.effectTime || duration == 0 ? duration : statusInfo.effectTime;
+        damage = damage < statusInfo.effectDamage || damage == 0 ? statusInfo.effectDamage : damage;
         chance += statusInfo.effectChance;
 
     }

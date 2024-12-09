@@ -36,6 +36,8 @@ public class PlayerLegs : MonoBehaviour
         if (dashing || myBody.curLegs.dashCharges == 0)
             yield break;
 
+        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+
         dashDirection = new Vector2();
 
         if(stickAmount.magnitude != 0)

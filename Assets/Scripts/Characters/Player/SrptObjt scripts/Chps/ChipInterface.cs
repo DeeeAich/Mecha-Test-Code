@@ -19,7 +19,7 @@ public interface IWeaponModifiable
 
     public void ApplyChip(WeaponChip newChip, bool left);
 
-    public void ApplyMods(WeaStaEftChip applyChip, bool left);
+    public void ApplyMods(WeaStaEftChip applyChip, Weapon target);
 
 }
 
