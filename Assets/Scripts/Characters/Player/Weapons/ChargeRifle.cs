@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ChargeRifle : Weapon
 {
@@ -22,6 +23,8 @@ public class ChargeRifle : Weapon
     [SerializeField] LayerMask walls; 
 
     [SerializeField] LayerMask hitOptions;
+
+    public List<ProjectileMod> myMods;
 
     public override void Start()
     {
@@ -102,14 +105,20 @@ public class ChargeRifle : Weapon
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, beamwidth,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
-        if(hits.Length > 0)
+
+        float damageModed = GetComponent<Critical>().AdditiveDamage(damage);
+
+        if (hits.Length > 0)
             foreach (RaycastHit hit in hits)
             {
 
                 if (hit.collider.TryGetComponent<Health>(out Health health))
                 {
 
-                    health.TakeDamage(damage * charges);
+
+                    health.TakeDamage(damageModed * charges);
+                    foreach (ProjectileMod mod in myMods)
+                        mod.AttemptApply(hit.collider.gameObject);
 
                     GameObject newSparks =  GameObject.Instantiate(sparks, hit.point,
                                         Quaternion.LookRotation(hit.normal), null);
@@ -119,6 +128,8 @@ public class ChargeRifle : Weapon
                 {
 
 
+                    foreach (ProjectileMod mod in myMods)
+                        mod.AttemptApply(hit.collider.gameObject);
                     GameObject newSparks = GameObject.Instantiate(sparks, hit.point,
                                         Quaternion.LookRotation(hit.normal), null);
 
@@ -155,6 +166,23 @@ public class ChargeRifle : Weapon
         }
 
         yield return null;
+    }
+
+    public override void AddMod(StatusInfo ModInfo)
+    {
+
+        string modName = ModInfo.statusType.ToString();
+
+        if (GetComponent(modName) == null)
+            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+                mod.AddModifiers(ModInfo);
+        else
+        {
+            gameObject.AddComponent(Type.GetType(modName));
+            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+                mod.AddModifiers(ModInfo);
+        }
+
     }
 
 }

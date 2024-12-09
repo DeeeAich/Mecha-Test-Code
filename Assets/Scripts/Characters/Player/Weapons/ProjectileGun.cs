@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ProjectileGun : Weapon
 {
@@ -88,9 +89,19 @@ public class ProjectileGun : Weapon
         {
 
             foreach (Transform bullet in projectileHolder)
-                bullet.GetComponent<ProjectileMod>().AddModifiers(modInfo);
+                foreach (ProjectileMod mod in bullet.GetComponents<ProjectileMod>())
+                    mod.AddModifiers(modInfo);
 
         }
+        else
+            foreach (Transform bullet in projectileHolder)
+            {
+
+                bullet.gameObject.AddComponent(Type.GetType(modName));
+                foreach (ProjectileMod mod in bullet.GetComponents<ProjectileMod>())
+                    mod.AddModifiers(modInfo);
+                bullet.GetComponent<BasicBullet>().modList.Add(bullet.GetComponent<ProjectileMod>());
+            }
 
     }
 
