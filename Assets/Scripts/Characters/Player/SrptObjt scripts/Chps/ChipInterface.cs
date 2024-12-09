@@ -17,8 +17,15 @@ public interface ILegModifiable
 public interface IWeaponModifiable
 {
 
-    public void ApplyChip(WeaponChip newChip);
+    public void ApplyChip(WeaponChip newChip, bool left);
 
-    public void ApplyMods(WeaStaEftChip applyChip);
+    public void ApplyMods(WeaStaEftChip applyChip, bool left);
+
+}
+
+public interface IModable
+{
+
+    public void AddMod(StatusInfo mod);
 
 }

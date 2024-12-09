@@ -18,6 +18,7 @@ public class Chip : ScriptableObject
     [Header("Chip Type")]
     public string chipName;
     public Sprite chipImage;
+    public Material chipTexture;
     public ChipTypes chipType = ChipTypes.Body;
     [TextArea(3,5)]
     public string chipDes;

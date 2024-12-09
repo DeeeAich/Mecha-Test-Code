@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IModable
 {
     public int curAmmo;
     public int maxAmmo;
@@ -62,6 +62,11 @@ public class Weapon : MonoBehaviour
             FirePress();
 
         yield return null;
+
+    }
+
+    public virtual void AddMod(StatusInfo ModInfo)
+    {
 
     }
 }

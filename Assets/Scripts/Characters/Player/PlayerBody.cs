@@ -211,7 +211,15 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void ApplyChip(BodyChip chip)
     {
 
-        chip.statChange.AddStats(myStats);
+        if(chip.percentage)
+        {
+            myHealth.maxHealth *= Mathf.RoundToInt(1 + chip.statChange.health);
+            //Add shielding
+        }
+
+
+
+        myHealth.health += myHealth.maxHealth - lastMax;
 
     }
 

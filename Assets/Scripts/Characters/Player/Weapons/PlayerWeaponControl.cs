@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWeaponControl : MonoBehaviour
+public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 {
 
     private bool firing = false;
@@ -75,6 +75,34 @@ public class PlayerWeaponControl : MonoBehaviour
     {
 
         myBody = GetComponent<PlayerBody>();
+    }
+
+    public void ApplyChip(WeaponChip newChip, bool left)
+    {
+
+        switch (newChip.supType)
+        {
+            case (WeaponChip.WeaponSubType.Generic):
+
+                break;
+            case (WeaponChip.WeaponSubType.StatusEffect):
+                ApplyMods((WeaStaEftChip)newChip, left ? leftWeapon : rightWeapon);
+                break;
+        }
+
+    }
+
+    public void ApplyMods(WeaStaEftChip applyChip, Weapon target)
+    {
+
+        IModable modableObject = target.GetComponent<IModable>();
+        foreach(StatusInfo info in applyChip.AddStatuses)
+        {
+
+            modableObject.AddMod(info);
+
+        }
+
     }
 
 }

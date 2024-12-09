@@ -27,4 +27,13 @@ public class ProjectileMod : MonoBehaviour
     {
         return baseDamage;
     }
+
+    public virtual void AddModifiers(StatusInfo statusInfo, bool percentage = false)
+    {
+
+        duration += statusInfo.effectTime;
+        damage += statusInfo.effectDamage;
+        chance += statusInfo.effectChance;
+
+    }
 }

@@ -80,4 +80,18 @@ public class ProjectileGun : Weapon
         yield return null;
     }
 
+    public override void AddMod(StatusInfo modInfo)
+    {
+
+        string modName = modInfo.statusType.ToString();
+        if(projectileHolder.GetChild(0).GetComponent(modName) != null)
+        {
+
+            foreach (Transform bullet in projectileHolder)
+                bullet.GetComponent<ProjectileMod>().AddModifiers(modInfo);
+
+        }
+
+    }
+
 }

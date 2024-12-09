@@ -11,4 +11,6 @@ public class WeaponChip : Chip
         StatusEffect
     }
 
+    public WeaponSubType supType;
+
 }

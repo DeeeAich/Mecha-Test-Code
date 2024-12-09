@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,16 +78,8 @@ public class Pickup : MonoBehaviour
         switch (pickupType)
         {
             case pickupType.Weapon:
-                
-                if (optionalData == 0)
-                {
-                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, true);
-                }
-                
-                if (optionalData == 1)
-                {
-                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, false);
-                }
+
+                PlayerBody.PlayBody().SetWeapon(itemReference, optionalData == 0);
                 
                 break;
             
@@ -101,19 +92,9 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.WeaponChip:
-                
-                if (optionalData == 0)
-                {
-                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, true);
-                }
-                
-                if (optionalData == 1)
-                {
-                    FindObjectOfType<PlayerBody>().SetWeapon(itemReference, false);
-                }
-                
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)ItemScriptableReference, optionalData == 0);
                 break;
-
+            
             case pickupType.ChassisChip:
                 
                 break;
