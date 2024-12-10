@@ -12,9 +12,6 @@ public class SpiderLegs : PlayerLegs
         if (dashing || myBody.curLegs.dashCharges == 0)
             yield break;
 
-        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
-        myBody.myUI.Dashed();
-
         dashDirection = new Vector2();
 
         if (stickAmount.magnitude != 0)
@@ -29,6 +26,10 @@ public class SpiderLegs : PlayerLegs
         {
             yield break;
         }
+
+
+        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+        myBody.myUI.Dashed();
 
         myBody.curLegs.dashCharges--;
         dashing = true;
