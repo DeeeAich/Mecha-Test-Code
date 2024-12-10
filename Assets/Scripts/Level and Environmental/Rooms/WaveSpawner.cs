@@ -101,6 +101,21 @@ public class WaveSpawner : MonoBehaviour
         currentWave = 0;
     }
 
+    public void StopSpawning()
+    {
+        isComplete = true;
+        
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
+        }
+
+        for (int i = 0; i < incomingEnemySpawners.Count; i++)
+        {
+            Destroy(incomingEnemySpawners[i]);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (spawning && !isComplete)
@@ -162,6 +177,7 @@ public class WaveSpawner : MonoBehaviour
             GameObject newSpawn = Instantiate(enemySpawnPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             availableSpawns.Remove(spawnPoint);
             
+            newSpawn.transform.SetParent(transform);
             newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemiesToSpawn[enemyToSpawnIndex];
             newSpawn.GetComponent<EnemySpawn>().waveSpawner = this;
             incomingEnemySpawners.Add(newSpawn);

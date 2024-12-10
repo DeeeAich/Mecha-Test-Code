@@ -61,13 +61,14 @@ public class Room : MonoBehaviour
     {
         captureZones = GetComponentsInChildren<CaptureZone>(true);
         enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
+        waveSpawners = GetComponentsInChildren<WaveSpawner>(true);
     }
 
     private void Start()
     {
         if (exitDoors.Length == 0)
         {
-            List<Door> allDoors = GetComponentsInChildren<Door>().ToList();
+            List<Door> allDoors = GetComponentsInChildren<Door>(true).ToList();
             allDoors.Remove(entryDoor);
             exitDoors = allDoors.ToArray();
         }
@@ -78,11 +79,12 @@ public class Room : MonoBehaviour
 
             for (int i = 0; i < possibleExitDoors.Count; i++)
             {
-                if (possibleExitDoors[i].transform.position.z <= entryDoor.transform.position.z + 1)
+                if (possibleExitDoors[i].transform.rotation.eulerAngles.y < 90 || possibleExitDoors[i].transform.rotation.eulerAngles.y > 360 -90)
                 {
                     possibleExitDoors[i].CloseDoor();
                     possibleExitDoors[i].LockDoor();
                     possibleExitDoors.RemoveAt(i);
+
                 }
             }
 
@@ -117,6 +119,14 @@ public class Room : MonoBehaviour
             }
         }
         
+        if (lootSpawnPoint != null)
+        {
+            Debug.Log("Spawning Loot");
+
+            GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(3, roomLoot);
+
+            Instantiate(pickupsToSpawn[LevelGenerator.instance.seededRandom.Next(0, pickupsToSpawn.Length - 1)], lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation);
+        }
     }
     
 
@@ -190,16 +200,10 @@ public class Room : MonoBehaviour
                 Destroy(waveSpawners[i]);
             }
 
-            if (lootSpawnPoint != null)
+            foreach (var pickup in FindObjectsOfType<Pickup>())
             {
-                Debug.Log("Spawning Loot");
-
-                GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(3, roomLoot);
-
-                for (int i = 0; i < 1; i++)
-                {
-                    Instantiate(pickupsToSpawn[LevelGenerator.instance.seededRandom.Next(0, pickupsToSpawn.Length)], lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation);
-                }
+                pickup.animator.SetTrigger("spawnLoot");
+                pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
             
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;

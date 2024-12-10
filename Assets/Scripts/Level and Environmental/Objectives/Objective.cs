@@ -62,7 +62,7 @@ public class Objective : MonoBehaviour
                 }
             }
 
-            WaveSpawner newWaveSpawner = Instantiate(possibleWaveSpawners[LevelGenerator.instance.seededRandom.Next(0, possibleWaveSpawners.Count)].GetComponent<WaveSpawner>());
+            WaveSpawner newWaveSpawner = Instantiate(possibleWaveSpawners[LevelGenerator.instance.seededRandom.Next(0, possibleWaveSpawners.Count)], transform.parent).GetComponent<WaveSpawner>();
             room.waveSpawners = new WaveSpawner[] {newWaveSpawner};
             Debug.Log( "Spawned Wave: " + newWaveSpawner.name);
         }
@@ -76,6 +76,10 @@ public class Objective : MonoBehaviour
     public void TriggerComplete()
     {
         print("Completed " + name);
+        for (int i = 0; i < room.waveSpawners.Length; i++)
+        {
+            room.waveSpawners[i].StopSpawning();
+        }
         onComplete.Invoke();
         isComplete = true;
     }

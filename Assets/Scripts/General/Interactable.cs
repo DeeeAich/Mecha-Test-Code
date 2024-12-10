@@ -22,6 +22,11 @@ public class Interactable : MonoBehaviour
     public void TriggerInteraction()
     {
         onInteract.Invoke();
-        if (singleUse) enabled = false;
+        
+        if (singleUse)
+        {
+            FindObjectOfType<PlayerBody>().SetInteract(this, false);
+            enabled = false;
+        }
     }
 }

@@ -16,6 +16,7 @@ public enum pickupType
 }
 public class Pickup : MonoBehaviour
 {
+    public int pickupRarity = 0;
     public pickupType pickupType = pickupType.ChassisChip;
     public GameObject itemReference;
     public ScriptableObject ItemScriptableReference;
@@ -28,6 +29,7 @@ public class Pickup : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        animator.SetInteger("lootRarity", pickupRarity);
     }
 
     public void TryPickup()
@@ -53,7 +55,6 @@ public class Pickup : MonoBehaviour
             case pickupType.WeaponChip:
                 PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
-                OnPickup(0);
                 break;
             
             case pickupType.ChassisChip:
@@ -121,5 +122,7 @@ public class Pickup : MonoBehaviour
                 pickup.animator.SetTrigger("lootLocked");
             }
         }
+        
+        if(uiPopup != null) uiPopup.SetActive(false);
     }
 }

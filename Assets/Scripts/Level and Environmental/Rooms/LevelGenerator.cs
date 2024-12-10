@@ -86,9 +86,10 @@ public class LevelGenerator : MonoBehaviour
         
         possibleLoots.Add(LootType.weapon);
         possibleLoots.Add(LootType.combatChip);
-        possibleLoots.Add(LootType.ordinance);
-        possibleLoots.Add(LootType.chassis);
-        //possibleLoots.AddRange(levelInfo.lootPool.standardOrdinance);
+        possibleLoots.Add(LootType.combatChip);
+
+        //possibleLoots.Add(LootType.ordinance);
+        //possibleLoots.Add(LootType.chassis);
 
         int totalPossibleLoots = possibleLoots.Count;
         for (int i = 0; i < selection.Length; i++)
@@ -125,7 +126,15 @@ public class LevelGenerator : MonoBehaviour
                 break;
         }
 
-        selection = possibleSelection.ToArray();
+        int totalPossiblePickups = possibleSelection.Count;
+        
+        for (int i = 0; i < selection.Length; i++)
+        {
+            int rand = seededRandom.Next(0, possibleSelection.Count);
+            selection[i] = possibleSelection[rand];
+            if(totalPossiblePickups > selection.Length) possibleSelection.RemoveAt(rand);
+        }
+
         return selection;
     }
 
