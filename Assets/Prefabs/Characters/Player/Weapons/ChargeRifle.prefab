@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3059066467986654651}
   - component: {fileID: 7746198852882748275}
   - component: {fileID: 8952822849177311315}
+  - component: {fileID: 7313789592785451425}
   m_Layer: 0
   m_Name: ChargeRifle
   m_TagString: Untagged
@@ -91,6 +92,7 @@ MonoBehaviour:
   fireHeld: 0
   turnLimit: 0
   waitOnShot: 0
+  myController: {fileID: 0}
   materialOptions:
   - {fileID: 2100000, guid: cf5e94f9403794b13af9a992eecb497b, type: 2}
   - {fileID: 2100000, guid: ff817eb7f70914e8c8b693dc313f1e07, type: 2}
@@ -106,6 +108,7 @@ MonoBehaviour:
   hitOptions:
     serializedVersion: 2
     m_Bits: 2561
+  myMods: []
 --- !u!120 &8952822849177311315
 LineRenderer:
   serializedVersion: 2
@@ -210,6 +213,21 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7313789592785451425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697915078526519092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a905ca1b6e04bc84daad3d49a9b3ac29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  chance: 15
+  damage: 2
 --- !u!1001 &3176552351803985031
 PrefabInstance:
   m_ObjectHideFlags: 0

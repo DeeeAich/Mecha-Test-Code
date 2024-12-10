@@ -95,7 +95,7 @@ public class ProjectileGun : Weapon
             foreach (Transform bullet in projectileHolder)
             {
 
-                UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(bullet.gameObject, "Assets/Scripts/Characters/Player/Weapons/ProjectileGun.cs (98,17)", modName);
+                bullet.gameObject.AddComponent(System.Type.GetType(modName));
 
             }
 

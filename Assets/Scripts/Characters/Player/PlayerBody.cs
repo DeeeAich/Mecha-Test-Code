@@ -139,7 +139,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         curLegs = legStats.LoadLegs();
 
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
-            weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo);
+            weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo,
+            legStats.dashRecharge, legStats.dashCharges);
     }
 
     public struct LegInfo
@@ -165,6 +166,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         GameObject genWeapon = GameObject.Instantiate(setWeapon, weaponPoints[left ? 0 : 1]);
 
         genWeapon.transform.localScale = new Vector3(left ? 1 : -1, 1, 1);
+
+        genWeapon.GetComponent<Weapon>().myController = weaponHolder;
 
         if (left)
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();

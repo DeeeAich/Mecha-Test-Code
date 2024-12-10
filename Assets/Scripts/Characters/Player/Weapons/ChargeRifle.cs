@@ -108,7 +108,6 @@ public class ChargeRifle : Weapon
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, beamwidth,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
-
         float damageModed = GetComponent<Critical>().AdditiveDamage(damage);
 
         if (hits.Length > 0)

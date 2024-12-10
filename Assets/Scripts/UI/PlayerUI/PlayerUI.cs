@@ -20,6 +20,13 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Image rightWeapon;
     [SerializeField] TextMeshProUGUI rightAmmo;
     [SerializeField] List<Image> dashCharges = new();
+    [SerializeField] TextMeshProUGUI dashCountTxt;
+    private bool dashCharging;
+    private float dashChargeTime;
+    private float curCharge;
+    private int dashCount;
+    private int dashTotal;
+    [SerializeField] Color32 dashColour;
     [SerializeField] Image ultimate;
 
     private void FixedUpdate()
@@ -39,6 +46,30 @@ public class PlayerUI : MonoBehaviour
             }
             health.fillAmount = currentHealth / maxHealth;
             healthTexts[0].text = currentHealth.ToString();
+
+        }
+
+        //dash charge
+        if (dashCharging)
+        {
+            curCharge += Time.deltaTime;
+            dashCharges[0].fillAmount = curCharge / dashChargeTime;
+
+            if(curCharge >= dashChargeTime)
+            {
+                dashCount++;
+
+                dashCharging = dashCount != dashTotal;
+
+                curCharge = 0;
+
+                dashCountTxt.text = dashCount.ToString();
+            }
+
+            if (dashCount == 0)
+                dashCharges[1].color = Color.gray;
+            else
+                dashCharges[1].color = dashColour;
 
         }
         
@@ -74,7 +105,18 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    public void LockAndLoad(float mHealth, float curHealth, int leftAm, int rightAm, Sprite left = null, Sprite right = null)
+    public void Dashed()
+    {
+
+        dashCount--;
+
+        dashCountTxt.text = dashCount.ToString();
+
+        dashCharging = true;
+
+    }
+
+    public void LockAndLoad(float mHealth, float curHealth, int leftAm, int rightAm, float dashCha, int dashMax, Sprite left = null, Sprite right = null)
     {
 
         healthTexts[0].text = curHealth.ToString();
@@ -89,6 +131,13 @@ public class PlayerUI : MonoBehaviour
             leftWeapon.sprite = left;
         if (right != null)
             rightWeapon.sprite = right;
+
+        dashCount = dashMax;
+        dashTotal = dashMax;
+
+        dashCountTxt.text = dashMax.ToString();
+
+        dashChargeTime = dashCha;
 
     }
 }

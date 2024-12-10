@@ -37,6 +37,7 @@ public class PlayerLegs : MonoBehaviour
             yield break;
 
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+        myBody.myUI.Dashed();
 
         dashDirection = new Vector2();
 

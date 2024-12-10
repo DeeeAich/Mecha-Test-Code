@@ -13,6 +13,7 @@ public class SpiderLegs : PlayerLegs
             yield break;
 
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+        myBody.myUI.Dashed();
 
         dashDirection = new Vector2();
 
