@@ -106,6 +106,7 @@ public class Shielder : MonoBehaviour
     IEnumerator DisableForTime(float time)
     {
         canShield = false;
+        Debug.Log("shield stop");
         float timer = time;
         while (timer > 0)
         {
@@ -113,5 +114,6 @@ public class Shielder : MonoBehaviour
             timer -= Time.deltaTime;
         }
         canShield = true;
+        Debug.Log("shield resume");
     }
 }
