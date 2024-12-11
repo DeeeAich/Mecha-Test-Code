@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AITree;
+using UnityEngine.Events;
 
 public class BomberDroneBT : BehaviourTree
 {
     public GameObject explosion;
     public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngleSpeed;
-
+    internal UnityEvent OnCharge;
     //bomber drone does short circuit dablage
 
     // Start is called before the first frame update
     internal override void Awake()
     {
+        OnCharge = new();
         base.Awake();
         AddOrOverwrite("player", player);
         root = new RootNode(this,
             new Sequence(
                 new Approach("player", approachDistance),
+                new InvokeEvent(OnCharge),
                 new PauseFixed(pauseTime),
                 new StoreValue("player", "destination", StoreType.GAMEOBJECT, StoreType.POSITION),
                 new ModifyAgentStat("speed", dashSpeed),
@@ -30,10 +33,26 @@ public class BomberDroneBT : BehaviourTree
             );
     }
 
+    private void OnEnable()
+    {
+        OnCharge.AddListener(SetAnimation);
+    }
+
+    private void OnDisable()
+    {
+        OnCharge.RemoveListener(SetAnimation);
+    }
+
     // Update is called once per frame
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    public void SetAnimation()
+    {
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.SetTrigger("Activate");
     }
 }
 

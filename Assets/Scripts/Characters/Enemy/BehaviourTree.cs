@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Events;
 
 namespace AITree
 {
@@ -50,6 +50,7 @@ namespace AITree
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
+            meshesRef = GetComponentInChildren<MeshFilter>().gameObject;
         }
         public virtual void FixedUpdate()
         {
@@ -170,6 +171,7 @@ namespace AITree
             if (chance >= UnityEngine.Random.Range(0, 100))
             {
                 StopForTime(time);
+                //apply VFX for time
             }
         }
 
@@ -1104,6 +1106,23 @@ namespace AITree
         {
             base.Begin();
             target = brain.memory[targetLocation] as GameObject;
+        }
+    }
+
+    public class InvokeEvent : Action
+    {
+        UnityEvent invoked;
+
+        public InvokeEvent(UnityEvent invoked):base()
+        {
+            this.invoked = invoked;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            invoked.Invoke();
+            return BehaviourTreeState.SUCCESS;
         }
     }
 

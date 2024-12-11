@@ -120,6 +120,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             hackTimer = Mathf.Max(hackTimer, duration);
             hack.percent = Mathf.Max(hack.percent, percentage*application);
         }
+        //apply VFX for time
     }
 
     public virtual IEnumerator HackDecay()
@@ -165,6 +166,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             StartCoroutine(BurnDamage(damageTick,tickCount));
         }
+        //apply VFX for time
     }
     #endregion
     /*SHIELD MECHANICS

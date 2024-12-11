@@ -273,31 +273,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBomber (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
-        type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
-        type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
-        type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 341098824}
-    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
-        type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_enabled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5130297260658799289, guid: caeeb1d327e1826409e543a288939050,
-        type: 3}
-      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Collider, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8338694704011105290, guid: caeeb1d327e1826409e543a288939050,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -353,12 +328,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caeeb1d327e1826409e543a288939050, type: 3}
---- !u!136 &341098824 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 1022059394801453832, guid: caeeb1d327e1826409e543a288939050,
-    type: 3}
-  m_PrefabInstance: {fileID: 341098823}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &583443110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,6 +390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Test Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403575456930618702, guid: 855968ce7383f2144b3a39fc654dd10f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -967,6 +941,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6665594459993960248, guid: 97394da52111d76448d4c96ce174435e,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665594459993960248, guid: 97394da52111d76448d4c96ce174435e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 5f2f2ebaee5d9ab48ab52822d74d18b3,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
