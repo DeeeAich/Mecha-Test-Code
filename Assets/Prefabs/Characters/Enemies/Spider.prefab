@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7540247172903497033}
   - component: {fileID: 957631725851569747}
   - component: {fileID: 228252570287709851}
-  - component: {fileID: 540608885084303935}
   - component: {fileID: 8787705873125773069}
+  - component: {fileID: 540608885084303935}
   - component: {fileID: 3189654505093655842}
   m_Layer: 9
   m_Name: Spider
@@ -71,7 +71,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 30
@@ -83,24 +83,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &540608885084303935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151759185807588539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93659c88b1248bf418a49b7b0bb58ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunPoint: {fileID: 4295328394095660205}
-  shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
-    type: 3}
-  minDelay: 1.5
-  maxDelay: 3
-  anim: {fileID: 1929975439001648074}
 --- !u!114 &8787705873125773069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78084b5e2acc3b849937b5de2ffc9d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 200
+  maxHealth: 200
   isAlive: 1
   canTakeDamage: 1
   entityType: 0
@@ -142,6 +124,24 @@ MonoBehaviour:
   strafeMax: 10
   pauseMin: 0
   pauseMax: 0.5
+--- !u!114 &540608885084303935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151759185807588539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93659c88b1248bf418a49b7b0bb58ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPoint: {fileID: 4295328394095660205}
+  shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
+    type: 3}
+  minDelay: 1.5
+  maxDelay: 1.51
+  anim: {fileID: 1929975439001648074}
 --- !u!114 &3189654505093655842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
     type: 3}
   minDelay: 1.5
-  maxDelay: 3
+  maxDelay: 1.51
   anim: {fileID: 4253703802609884915}
 --- !u!1 &155357140011744439
 GameObject:

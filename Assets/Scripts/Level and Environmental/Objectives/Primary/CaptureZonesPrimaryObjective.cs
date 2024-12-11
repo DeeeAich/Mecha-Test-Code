@@ -43,8 +43,7 @@ public class CaptureZonesPrimaryObjective : Objective
 
             if (zonesCaptured == zones.Length)
             {
-                isComplete = true;
-                onComplete.Invoke();
+                TriggerComplete();
             }
         }
     }

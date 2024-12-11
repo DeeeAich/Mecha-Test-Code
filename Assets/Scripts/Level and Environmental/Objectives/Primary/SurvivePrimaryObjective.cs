@@ -41,8 +41,7 @@ public class SurvivePrimaryObjective : Objective
                     spawners[i].spawning = false;
                 }
                 
-                isComplete = true;
-                onComplete.Invoke();
+                TriggerComplete();
             }
             
             uiText.text = "Survive: " + Mathf.CeilToInt(timer);

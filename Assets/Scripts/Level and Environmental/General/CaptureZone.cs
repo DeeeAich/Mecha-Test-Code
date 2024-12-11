@@ -26,7 +26,8 @@ public class CaptureZone : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             Health health = hits[i].collider.gameObject.GetComponent<Health>();
-            playerPresent = health.entityType == EntityType.PLAYER;
+
+            if (health.entityType == EntityType.PLAYER) playerPresent = true;
 
             if (health.entityType == EntityType.ENEMY)
             {

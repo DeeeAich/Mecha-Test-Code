@@ -28,8 +28,7 @@ public class ExterminatePrimaryObjective : Objective
 
             if (waveSpawnersComplete == WaveSpawners.Length)
             {
-                isComplete = true;
-                onComplete.Invoke();
+                TriggerComplete();
             }
         }
     }

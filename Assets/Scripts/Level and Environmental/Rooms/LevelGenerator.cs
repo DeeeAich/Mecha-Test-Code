@@ -37,7 +37,8 @@ public class LevelGenerator : MonoBehaviour
         
         if (randomizeSeedOnAwake)
         {
-            randomSeed = Mathf.CeilToInt(System.DateTime.Now.Ticks);
+            randomSeed = (int)(System.DateTime.Now.Ticks);
+            Debug.Log("Starting game with seed: " + randomSeed);
         }
         
         seededRandom = new Random(randomSeed);
