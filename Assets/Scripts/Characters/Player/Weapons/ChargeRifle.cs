@@ -19,7 +19,9 @@ public class ChargeRifle : Weapon
     public float chargeTime = 1f;
     public float beamRange;
     public float beamwidth;
-    public float damage;
+    public float beamMaxWidth;
+    private float lineWidth;
+    public float damageScale;
     [SerializeField] LayerMask walls; 
 
     [SerializeField] LayerMask hitOptions;
@@ -58,11 +60,15 @@ public class ChargeRifle : Weapon
 
             charge += Time.fixedDeltaTime;
 
+            lineWidth = (beamMaxWidth - beamwidth) * (charge / (chargeTime * maxCharge + 0.5f)) + beamMaxWidth;
+            lineGen.endWidth = lineWidth;
+
             if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges + 0.5f)
             {
 
                 charges++;
                 myAnim.SetInteger("ChargeLevel", charges);
+                lineGen.material = materialOptions[charges];
 
             }
 
@@ -105,10 +111,10 @@ public class ChargeRifle : Weapon
 
         myAnim.SetBool("Charge", false);
 
-        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, beamwidth,
+        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
-        float damageModed = GetComponent<Critical>().AdditiveDamage(damage);
+        float damageModed = GetComponent<Critical>().AdditiveDamage(damage) * (float)Math.Pow(damageScale, charges - 1) * charges;
 
         if (hits.Length > 0)
             foreach (RaycastHit hit in hits)
@@ -118,7 +124,7 @@ public class ChargeRifle : Weapon
                 {
 
 
-                    health.TakeDamage(damageModed * charges);
+                    health.TakeDamage(damageModed);
                     foreach (ProjectileMod mod in myMods)
                         mod.AttemptApply(hit.collider.gameObject);
 
@@ -148,7 +154,7 @@ public class ChargeRifle : Weapon
     private IEnumerator FlashBeam()
     {
 
-        lineGen.material = materialOptions[1];
+        lineGen.material = materialOptions[materialOptions.Count - 1];
 
         yield return new WaitForSeconds(0.3f);
 

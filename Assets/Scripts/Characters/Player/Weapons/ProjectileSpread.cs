@@ -46,6 +46,7 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
             newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
             newBullet.SetActive(true);
+            newBullet.GetComponent<BasicBullet>().damage = damage;
 
         }
         myAnim.SetTrigger("Fire");

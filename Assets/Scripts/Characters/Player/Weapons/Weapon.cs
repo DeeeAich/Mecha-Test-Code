@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour, IModable
     public float fireRate;
     public float reloadTime;
     public bool reloading;
+    public float damage;
     public GameObject weapon;
     public Transform firePoint;
     public Animator myAnim;

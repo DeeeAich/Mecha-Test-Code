@@ -53,6 +53,7 @@ public class ProjectileGun : Weapon
         newBullet.transform.rotation = firePoint.rotation;
         newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
         newBullet.SetActive(true);
+        newBullet.GetComponent<BasicBullet>().damage = damage;
 
         myAnim.SetTrigger("Fire");
 
