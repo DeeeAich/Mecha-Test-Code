@@ -11,6 +11,9 @@ public class EnemyPoolScriptable : ScriptableObject
     public GameObject[] miniBosses;
     public GameObject[] bosses;
 
+    public List<GameObject> allEnemies;
+    public GameObject[] allEnemySpawnAnimationPrefabs;
+
     [Header("Normal Wave Spawners")]
     public GameObject[] standardWaveSpawners;
     public GameObject[] rareWaveSpawners;
