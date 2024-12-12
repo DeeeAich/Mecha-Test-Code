@@ -125,16 +125,28 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
     public virtual IEnumerator HackDecay()
     {
-        while(hackTimer > 0)
+        CharacterVFXManager manager = GetComponentInChildren<CharacterVFXManager>();
+        if (manager != null)
+        {
+            manager.ToggleEffectVFX(effect.Hack, true);
+        }
+        while (hackTimer > 0)
         {
             hackTimer -= Time.deltaTime;
             yield return null;
         }
-        damageMods.Remove(hack);
+        damageMods.Remove(hack); 
+        if (manager != null)
+        {
+            manager.ToggleEffectVFX(effect.Hack, false);
+        }
     }
+
 
     #endregion
     #region Burnable Interface Implementation
+    List<Coroutine> burns;
+    bool activeBurnEffect;
     IEnumerator BurnDamage(float damagePerTick, int count)
     {
         float timer = 0;
@@ -164,10 +176,31 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         }
         for(int i = 0; i < application; i++)
         {
-            StartCoroutine(BurnDamage(damageTick,tickCount));
+            burns.Add(StartCoroutine(BurnDamage(damageTick,tickCount)));
         }
-        //apply VFX for time
+        if(!activeBurnEffect)
+        StartCoroutine(BurnFX());
     }
+
+    IEnumerator BurnFX()
+    {
+        CharacterVFXManager manager = GetComponentInChildren<CharacterVFXManager>();
+        if(manager!=null)
+        {
+            manager.ToggleEffectVFX(effect.Burn, true);
+        }
+        activeBurnEffect = true;
+        foreach(Coroutine c in burns)
+        {
+            yield return c;
+        }
+        activeBurnEffect = false;
+        if (manager != null)
+        {
+            manager.ToggleEffectVFX(effect.Burn, false);
+        }
+    }
+
     #endregion
     /*SHIELD MECHANICS
     

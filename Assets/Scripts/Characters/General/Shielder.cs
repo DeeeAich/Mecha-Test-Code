@@ -53,6 +53,7 @@ public class Shielder : MonoBehaviour
             hb.shieldModifiers.Remove(sm);
         }
         sm = null;
+        if(canShield)
         DisableForTime(breakTime);
     }
 
@@ -99,6 +100,7 @@ public class Shielder : MonoBehaviour
      */
     internal void TargetDied()
     {
+        if(canShield)
         StartCoroutine(DisableForTime(breakTime));
         Break();
     }
@@ -106,7 +108,6 @@ public class Shielder : MonoBehaviour
     IEnumerator DisableForTime(float time)
     {
         canShield = false;
-        Debug.Log("shield stop");
         float timer = time;
         while (timer > 0)
         {
@@ -114,6 +115,5 @@ public class Shielder : MonoBehaviour
             timer -= Time.deltaTime;
         }
         canShield = true;
-        Debug.Log("shield resume");
     }
 }

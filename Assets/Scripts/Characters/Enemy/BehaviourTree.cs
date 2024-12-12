@@ -31,6 +31,7 @@ namespace AITree
         internal bool isShieldable = true;
 
         public RootNode replacement;
+        CharacterVFXManager VFXManager;
 
         public virtual void AddOrOverwrite(string key, object o)
         {
@@ -46,7 +47,8 @@ namespace AITree
 
         internal override void Awake()
         {
-            base.Awake();
+            base.Awake(); 
+            VFXManager = GetComponentInChildren<CharacterVFXManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
@@ -156,7 +158,11 @@ namespace AITree
                 yield return null;
                 pauseTimer += Time.deltaTime;
             } while (pauseTimer < time);
-            paused = false;
+            paused = false; 
+            if (VFXManager != null)
+            {
+                VFXManager.ToggleEffectVFX(effect.ShortCircuit, false);
+            }
             Resume();
         }
 
@@ -170,6 +176,10 @@ namespace AITree
         {
             if (chance >= UnityEngine.Random.Range(0, 100))
             {
+                if (VFXManager != null)
+                {
+                    VFXManager.ToggleEffectVFX(effect.ShortCircuit, true);
+                }
                 StopForTime(time);
                 //apply VFX for time
             }
