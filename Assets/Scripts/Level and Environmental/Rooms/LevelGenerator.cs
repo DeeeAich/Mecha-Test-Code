@@ -141,18 +141,9 @@ public class LevelGenerator : MonoBehaviour
 
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
+        if(oldRoom != null) Destroy(oldRoom);
         if(currentRoom != null) oldRoom = currentRoom;
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
         roomIndex++;
-        
-        Room thisRoom = currentRoom.GetComponent<Room>();
-
-        thisRoom.onStartRoom.AddListener(delegate
-        {
-            if (currentRoom != null)
-            {
-                Destroy(oldRoom);
-            }
-        });
     }
 }
