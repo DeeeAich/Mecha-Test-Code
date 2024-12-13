@@ -32,7 +32,7 @@ namespace AITree
 
         public RootNode replacement;
         CharacterVFXManager VFXManager;
-
+        EnemyDamageNumberSpawner numbers;
         public virtual void AddOrOverwrite(string key, object o)
         {
             if (!memory.ContainsKey(key))
@@ -47,7 +47,8 @@ namespace AITree
 
         internal override void Awake()
         {
-            base.Awake(); 
+            base.Awake();
+            numbers = GetComponentInChildren<EnemyDamageNumberSpawner>();
             VFXManager = GetComponentInChildren<CharacterVFXManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
@@ -183,6 +184,12 @@ namespace AITree
                 StopForTime(time);
                 //apply VFX for time
             }
+        }
+
+        internal override void TakeDamage(float amount)
+        {
+            base.TakeDamage(amount);
+            numbers.SpawnDamageNumber(amount, false);
         }
 
     }

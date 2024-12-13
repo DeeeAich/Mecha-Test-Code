@@ -29,7 +29,6 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
     public GameObject meshesRef;//The shield renderer thing needs thee target to be where the meshes are
 
-
     internal virtual void Update()
     {
         if (editorTakeDamage)
