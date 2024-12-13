@@ -18,23 +18,6 @@ public class CaptureZone : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position, transform.localScale/2, transform.forward, transform.rotation, 0, characterLayers, QueryTriggerInteraction.Collide);
-
-        enemiesPresent = 0;
-        playerPresent = false;
-        
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Health health = hits[i].collider.gameObject.GetComponent<Health>();
-
-            if (health.entityType == EntityType.PLAYER) playerPresent = true;
-
-            if (health.entityType == EntityType.ENEMY)
-            {
-                enemiesPresent++;
-            }
-        }
-
         if (playerPresent && enemiesPresent == 0)
         {
             captureProgress += captureProgressPerSecond * Time.fixedDeltaTime;
@@ -45,5 +28,15 @@ public class CaptureZone : MonoBehaviour
             isCaptured = true;
             onCapture.Invoke();
         }
+        
+        enemiesPresent = 0;
+        playerPresent = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlayerBody>()) playerPresent = true;
+
+        if (other.gameObject.layer == 9) enemiesPresent++;
     }
 }
