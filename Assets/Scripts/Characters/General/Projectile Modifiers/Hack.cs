@@ -12,4 +12,17 @@ public class Hack : ProjectileMod
         target.GetComponent<IHackable>().Hack(damage, chance, duration);
     }
 
+    public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
+    {
+        if (statusInfo.statusType != WeaStaEftChip.StatusType.Hack)
+            return;
+
+
+        chance += statusInfo.effectChance;
+        damage += statusInfo.effectDamage;
+        duration = duration < statusInfo.effectTime || damage == 0 ?
+            statusInfo.effectTime : duration;
+
+    }
+
 }

@@ -29,3 +29,10 @@ public interface IModable
     public void AddMod(StatusInfo mod);
 
 }
+
+public interface IMod
+{
+
+    public void AddModifiers(StatusInfo statusInfo, bool percentage = false);
+
+}

@@ -9,7 +9,22 @@ public class Burn : ProjectileMod
     {
         base.AttemptApply(target);
 
-        //target.GetComponent<IBurnable>().Burn(damage, chance, durationc * 4);
+        target.GetComponent<IBurnable>().Burn(damage, chance, (int)duration * 4);
+    }
+
+    public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
+    {
+        if (statusInfo.statusType != WeaStaEftChip.StatusType.Burn)
+            return;
+
+
+        chance += statusInfo.effectChance;
+
+        damage = damage < statusInfo.effectDamage || damage == 0 ?
+            statusInfo.effectDamage : damage;
+        duration = duration < statusInfo.effectTime || duration == 0 ?
+            statusInfo.effectTime : duration;
+
     }
 
 }

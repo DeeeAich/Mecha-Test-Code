@@ -29,6 +29,9 @@ public class ChargeRifle : Weapon
     public List<ProjectileMod> myMods;
 
     private bool isFiring;
+
+    private ParticleSystem burstParticle;
+
     public override void Start()
     {
         base.Start();

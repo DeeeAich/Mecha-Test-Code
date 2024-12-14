@@ -12,4 +12,18 @@ public class ShortCircuit : ProjectileMod
         target.GetComponent<IShortCircuitable>().ShortCircuit(chance, duration);
     }
 
+    public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
+    {
+
+        if (statusInfo.statusType != WeaStaEftChip.StatusType.ShortCircuit)
+            return;
+
+        print("Adding to mod");
+
+        chance += statusInfo.effectChance;
+        if (duration < statusInfo.effectTime)
+            duration = statusInfo.effectTime;
+
+    }
+
 }

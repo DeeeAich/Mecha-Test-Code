@@ -89,14 +89,21 @@ public class ProjectileGun : Weapon
         {
 
             foreach (Transform bullet in projectileHolder)
-                bullet.GetComponent<ProjectileMod>().AddModifiers(modInfo);
+                foreach (IMod mod in bullet.GetComponents<IMod>())
+                    mod.AddModifiers(modInfo);
 
         }
         else
             foreach (Transform bullet in projectileHolder)
             {
 
-                bullet.gameObject.AddComponent(System.Type.GetType(modName));
+                var newMod = bullet.gameObject.AddComponent(System.Type.GetType(modName));
+
+                bullet.GetComponent<BasicBullet>().modList.Add((ProjectileMod)newMod);
+
+                foreach (IMod mod in bullet.GetComponents<IMod>())
+                    mod.AddModifiers(modInfo);
+
 
             }
 

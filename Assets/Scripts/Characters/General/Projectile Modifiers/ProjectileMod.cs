@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMod : MonoBehaviour
+public class ProjectileMod : MonoBehaviour, IMod
 {
 
     public float duration;
