@@ -28,6 +28,7 @@ public class ChargeRifle : Weapon
 
     public List<ProjectileMod> myMods;
 
+    private bool isFiring;
     public override void Start()
     {
         base.Start();
@@ -45,22 +46,28 @@ public class ChargeRifle : Weapon
 
     private void FixedUpdate()
     {
-
-        if (fireHeld)
+        
+        
+        if (fireHeld && !isFiring)
         {
-
             RaycastHit hit;
-
+            
             lineGen.SetPosition(0, firePoint.position);
 
             if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, beamRange, layerMask: walls))
                 lineGen.SetPosition(1, hit.point);
             else
                 lineGen.SetPosition(1, firePoint.position + firePoint.forward * beamRange);
+            
+            //particleSystem.shape.scale = new Vector3(particleSystem.shape.scale.x, particleSystem.shape.scale.y, Vector3.Distance(firePoint.position, hit.point));
 
-            charge += Time.fixedDeltaTime;
+            if(!isFiring) charge += Time.fixedDeltaTime;
+            if (charge > maxCharge) charge = maxCharge;
 
-            lineWidth = (beamMaxWidth - beamwidth) * (charge / (chargeTime * maxCharge + 0.5f)) + beamMaxWidth;
+            
+            //lineWidth = (beamMaxWidth - beamwidth) * (charge / (chargeTime * maxCharge + 0.5f)) + beamMaxWidth;
+            lineWidth = beamwidth + ((beamMaxWidth - beamwidth) / maxCharge) * Mathf.Clamp(charges - 1, 0, maxCharge);
+            lineGen.startWidth = lineWidth;
             lineGen.endWidth = lineWidth;
 
             if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges + 0.5f)
@@ -111,7 +118,7 @@ public class ChargeRifle : Weapon
 
         myAnim.SetBool("Charge", false);
 
-        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth,
+        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth * 2,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
         float damageModed = GetComponent<Critical>().AdditiveDamage(damage) * (float)Math.Pow(damageScale, charges - 1) * charges;
@@ -153,8 +160,9 @@ public class ChargeRifle : Weapon
 
     private IEnumerator FlashBeam()
     {
-
+        isFiring = true;
         lineGen.material = materialOptions[materialOptions.Count - 1];
+        lineWidth = beamMaxWidth * 1.2f;
 
         yield return new WaitForSeconds(0.3f);
 
@@ -173,6 +181,7 @@ public class ChargeRifle : Weapon
             StartCoroutine(Reload());
         }
 
+        isFiring = false;
         yield return null;
     }
 
