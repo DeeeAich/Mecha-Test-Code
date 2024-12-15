@@ -30,7 +30,7 @@ public class ChargeRifle : Weapon
 
     private bool isFiring;
 
-    private ParticleSystem burstParticle;
+    private BeamParticles myParticles;
 
     public override void Start()
     {
@@ -45,7 +45,12 @@ public class ChargeRifle : Weapon
 
 
         myController.ReApplyChips(this == myController.leftWeapon);
+
+        myParticles = GetComponentInChildren<BeamParticles>();
+
     }
+
+    private float hitDistance;
 
     private void FixedUpdate()
     {
@@ -58,9 +63,15 @@ public class ChargeRifle : Weapon
             lineGen.SetPosition(0, firePoint.position);
 
             if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, beamRange, layerMask: walls))
+            {
                 lineGen.SetPosition(1, hit.point);
+                hitDistance = hit.distance;
+            }
             else
+            {
                 lineGen.SetPosition(1, firePoint.position + firePoint.forward * beamRange);
+                hitDistance = hit.distance;
+            }
             
             //particleSystem.shape.scale = new Vector3(particleSystem.shape.scale.x, particleSystem.shape.scale.y, Vector3.Distance(firePoint.position, hit.point));
 
@@ -116,6 +127,7 @@ public class ChargeRifle : Weapon
             return;
         }
 
+        myParticles.LaunchParticles(hitDistance);
         myAnim.SetTrigger("Fire");
         curAmmo -= charges * shotCost;
 
