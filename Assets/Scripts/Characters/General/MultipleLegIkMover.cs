@@ -10,6 +10,7 @@ public class MultipleLegIkMover : MonoBehaviour
     
     [SerializeField] private GameObject[] legIks;
     [SerializeField] private Animator[] legDashVFXAnimators;
+    [SerializeField] private GameObject legDashSFX;
 
     [Header("Speeds")]
     [SerializeField] private int maxLegsMovingAtOnce = 1;
@@ -131,6 +132,7 @@ public class MultipleLegIkMover : MonoBehaviour
             for (int i = 0; i < legDashVFXAnimators.Length; i++)
             {
                 legDashVFXAnimators[i].SetBool("Emit", dashParticlesON);
+                legDashSFX.SetActive(dashParticlesON);
             }
     }
 
