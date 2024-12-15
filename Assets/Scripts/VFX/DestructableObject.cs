@@ -7,6 +7,7 @@ public class DestructableObject : MonoBehaviour
     public bool hasHealth;
     public float health;
     private bool destroyed;
+    public Transform pushPos;
     public TriggerDebrisExplosion debrisExplosion;
 
     private void Start()
@@ -15,6 +16,7 @@ public class DestructableObject : MonoBehaviour
         {
             debrisExplosion = GetComponent<TriggerDebrisExplosion>();
         }
+        pushPos.localPosition = new Vector3(pushPos.localPosition.x, pushPos.localPosition.y + Random.Range(-1f, 1f), pushPos.localPosition.z);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,8 +24,9 @@ public class DestructableObject : MonoBehaviour
         if (destroyed) 
             return;
 
+        if (other.CompareTag("Debris"))
+            return;
 
-            debrisExplosion.breakDirection = other.transform.position;
             debrisExplosion.explosionTrigger = true;
             destroyed = true;
 
