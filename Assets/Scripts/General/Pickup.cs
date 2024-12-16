@@ -129,6 +129,8 @@ public class Pickup : MonoBehaviour
         }
         
         if(uiPopup != null) uiPopup.SetActive(false);
+
+        GetComponentInChildren<Interactable>().enabled = false;
     }
 
     public void CancelPickup()

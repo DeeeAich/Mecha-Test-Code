@@ -21,7 +21,7 @@ public class PickupUiManager : MonoBehaviour
     {
         for (int i = 0; i < uiButtons.Length; i++)
         {
-            if (EventSystem.current.currentSelectedGameObject == uiButtons[i])
+            if (EventSystem.current.currentSelectedGameObject == uiButtons[i].gameObject)
             {
                 animator.SetInteger("itemSelect", i);
             }
