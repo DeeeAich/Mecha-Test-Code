@@ -105,10 +105,19 @@ public class WaveSpawner : MonoBehaviour
     {
         isComplete = true;
         
-        for (int i = 0; i < spawnedEnemies.Count; i++)
+        if (spawnedEnemies != null && spawnedEnemies.Count > 0)
         {
-            spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
-        }
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                if(spawnedEnemies[i] == null) {spawnedEnemies.RemoveAt(i);}
+            }
+            
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
+            }
+        }// clears null references from list
+
 
         for (int i = 0; i < incomingEnemySpawners.Count; i++)
         {
