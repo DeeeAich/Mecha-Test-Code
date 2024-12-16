@@ -15,6 +15,7 @@ public class CaptureZone : MonoBehaviour
     public int enemiesPresent;
 
     [SerializeField] private LayerMask characterLayers;
+    
 
     private void FixedUpdate()
     {

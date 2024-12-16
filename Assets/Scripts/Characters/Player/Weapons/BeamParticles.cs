@@ -34,6 +34,8 @@ public class BeamParticles : MonoBehaviour
             particles[0].emission.SetBurst(0, burst);
 
         }
+        
+        
 
         foreach (ParticleSystem particle in particles)
             particle.Play();

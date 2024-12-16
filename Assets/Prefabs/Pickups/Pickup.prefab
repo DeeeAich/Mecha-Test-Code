@@ -120,10 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3ed5cbeae630a4da4c1a44de946473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupRarity: 0
   pickupType: 4
   itemReference: {fileID: 0}
   ItemScriptableReference: {fileID: 0}
   uiPopup: {fileID: 0}
+  initiallySelectedButton: {fileID: 0}
   itemDisplayImage: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1001 &1017701353408967890
@@ -307,6 +309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235875301289797221, guid: 1a3433bff993968429711260cf8925fe,
+        type: 3}
+      propertyPath: disableAfterEntry
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8194602978596685451, guid: 1a3433bff993968429711260cf8925fe,
         type: 3}

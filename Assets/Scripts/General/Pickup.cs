@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum pickupType
 {
@@ -22,6 +23,7 @@ public class Pickup : MonoBehaviour
     public ScriptableObject ItemScriptableReference;
 
     public GameObject uiPopup;
+    [SerializeField] private Button initiallySelectedButton;
     public Sprite itemDisplayImage;
 
     public Animator animator;
@@ -39,22 +41,25 @@ public class Pickup : MonoBehaviour
             case pickupType.Weapon:
                 PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
+                initiallySelectedButton.Select();
                 break;
             
             case pickupType.Chassis:
                 PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
+                initiallySelectedButton.Select();
                 break;
             
             case pickupType.Ordinance :
                 PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
+                initiallySelectedButton.Select();
                 break;
-            
             
             case pickupType.WeaponChip:
                 PlayerBody.PlayBody().StopParts(false,false);
                 uiPopup.SetActive(true);
+                initiallySelectedButton.Select();
                 break;
             
             case pickupType.ChassisChip:
@@ -123,6 +128,12 @@ public class Pickup : MonoBehaviour
             }
         }
         
+        if(uiPopup != null) uiPopup.SetActive(false);
+    }
+
+    public void CancelPickup()
+    {
+        PlayerBody.PlayBody().StopParts(true,true);
         if(uiPopup != null) uiPopup.SetActive(false);
     }
 }

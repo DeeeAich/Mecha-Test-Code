@@ -16,7 +16,7 @@ public class DestructableObject : MonoBehaviour
         {
             debrisExplosion = GetComponent<TriggerDebrisExplosion>();
         }
-        pushPos.localPosition = new Vector3(pushPos.localPosition.x, pushPos.localPosition.y + Random.Range(-1f, 1f), pushPos.localPosition.z);
+        if(pushPos != null) pushPos.localPosition = new Vector3(pushPos.localPosition.x, pushPos.localPosition.y + Random.Range(-1f, 1f), pushPos.localPosition.z);
     }
 
     private void OnTriggerEnter(Collider other)

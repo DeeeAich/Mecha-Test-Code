@@ -125,7 +125,12 @@ public class Room : MonoBehaviour
 
             GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(3, roomLoot);
 
-            Instantiate(pickupsToSpawn[LevelGenerator.instance.seededRandom.Next(0, pickupsToSpawn.Length - 1)], lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation);
+
+            for (int i = 0; i < pickupsToSpawn.Length; i++)
+            {
+                Instantiate(pickupsToSpawn[i], lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation);
+            }
+            
         }
     }
     
