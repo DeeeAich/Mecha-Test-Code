@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 
-public enum MusicState
+public enum musicState
 {
     idle,
-    combat,
-    muffled,
-    stopImmediately,
-    fadeOut
+    combat
 }
 
 public class AudioManager : MonoBehaviour
@@ -18,8 +16,10 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [Header("Music")]
-    public MusicState musicState;
-    public EventReference music;
+    public musicState musicState;
+    public EventReference combatMusic;
+    public EventReference nonCombatMusic;
+    public EventInstance currentMusic;
 
     [Header("Ambience")]
     public EventReference ambience;
@@ -35,8 +35,8 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       RuntimeManager.PlayOneShot(music);
        RuntimeManager.PlayOneShot(ambience);
+        ChangeMusicState(musicState.idle);
 
     }
 
@@ -45,8 +45,22 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
-    public void ChangeMusicState(MusicState newState)
+    public void ChangeMusicState(musicState newState)
     {
-        
+        switch (newState)
+        {
+            case musicState.idle:
+                Debug.Log("idle");
+                currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                currentMusic = RuntimeManager.CreateInstance(nonCombatMusic);
+                currentMusic.start();
+                break;
+            case musicState.combat:
+                Debug.Log("combat");
+                currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                currentMusic = RuntimeManager.CreateInstance(combatMusic);
+                currentMusic.start();
+                break;
+        }
     }
 }

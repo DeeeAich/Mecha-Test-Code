@@ -56,7 +56,6 @@ public class Room : MonoBehaviour
     public UnityEvent onStartRoom;
     public UnityEvent onCompleteRoom;
 
-
     private void Awake()
     {
         captureZones = GetComponentsInChildren<CaptureZone>(true);
@@ -139,6 +138,9 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Starting Room: " + name);
         
+        // hello tom
+        AudioManager.instance.ChangeMusicState(musicState.combat);
+
         entryDoor.CloseDoor();
         entryDoor.LockDoor();
         
@@ -189,16 +191,19 @@ public class Room : MonoBehaviour
     {
         if (isActive)
         {
+            // goodbye tom
+            AudioManager.instance.ChangeMusicState(musicState.idle);
+
             onCompleteRoom.Invoke();
-            
+
             for (int i = 0; i < exitDoors.Length; i++)
             {
                 exitDoors[i].UnlockDoor();
             }
-            
+
             Destroy(primaryObjective.gameObject);
             Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
-            
+
             for (int i = 0; i < waveSpawners.Length; i++)
             {
                 waveSpawners[i].isComplete = true;
@@ -210,7 +215,7 @@ public class Room : MonoBehaviour
                 pickup.animator.SetTrigger("spawnLoot");
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
-            
+
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;
         }
     }
