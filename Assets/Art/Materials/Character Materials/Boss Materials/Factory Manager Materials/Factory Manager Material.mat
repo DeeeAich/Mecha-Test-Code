@@ -20,17 +20,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player Material
+  m_Name: Factory Manager Material
   m_Shader: {fileID: 4800000, guid: 933f24cde1e3f6a41818f56d729421ab, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _EMISSION
   - _HALFTONESHAPE_DOT
   - _OUTLINE
+  - _SPECULARHIGHLIGHTS_OFF
   - _TOON_SHADING_ON
   m_InvalidKeywords:
   - _STEPVIARAMPTEXTURE_ON
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2050
@@ -42,7 +44,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 30bbcf1e66fc4c245ae093303ddad2cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56bd638b425d3be469371daac0f1e5b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -66,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 4831381d1ca071f4a8a570f73462fc94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3f1ab2c297c9b5c41a188e98bbd04a7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FaceShadowMap:
@@ -90,7 +92,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 30bbcf1e66fc4c245ae093303ddad2cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56bd638b425d3be469371daac0f1e5b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -144,7 +146,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseStep: 0
+    - _DiffuseStep: -0.14
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
     - _DstBlend: 0
@@ -182,7 +184,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineEnabled: 1
     - _OutlineMode: 0
-    - _OutlineWidth: 9
+    - _OutlineWidth: 10
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -197,7 +199,7 @@ Material:
     - _SpecShadowStrength: 1
     - _SpecularClipStrength: 0
     - _SpecularFalloff: 1
-    - _SpecularHighlights: 1
+    - _SpecularHighlights: 0
     - _SpecularSize: 1
     - _SpherizeNormalEnabled: 0
     - _SrcBlend: 1
@@ -214,7 +216,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
+    - _EmissionColor: {r: 2.1185474, g: 0.44649878, b: 0, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
