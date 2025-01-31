@@ -1,0 +1,97 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OverseerLaserAnimation : MonoBehaviour
+{
+    public Transform start;
+    public Transform target;
+    public LineRenderer aimLineRenderer;
+    public LineRenderer laserLineRenderer;
+    public GameObject LaserTop;
+
+    public ParticleSystem targetParticle1;
+    public ParticleSystem targetParticle2;
+
+    public bool aimOn;
+    public bool laserOn;
+
+    private void Start()
+    {
+        var emmision1 = targetParticle1.emission;
+        var emmision2 = targetParticle2.emission;
+        emmision1.rateOverTime = 0;
+        emmision2.rateOverTime = 0;
+        aimOn = false;
+        laserOn = false;
+    }
+
+    public void ToggleAimLine(int i)
+    {
+        if (i == 0)
+        {
+            aimOn = false;
+        }
+        else
+        {
+            aimOn = true;
+        }
+    }
+    public void ToggleLaserLine(int i)
+    {
+        if (i == 0)
+        {
+            laserOn = false;
+        }
+        else
+        {
+            laserOn = true;
+        }
+    }
+
+    private void Update()
+    {
+
+        if (aimOn)
+        {
+            aimLineRenderer.enabled = true;
+            LaserTop.transform.LookAt(target.position);
+            aimLineRenderer.SetPosition(0, start.position);
+            aimLineRenderer.SetPosition(1, target.position);
+        }
+        else
+        {
+            aimLineRenderer.enabled = false;
+            aimLineRenderer.SetPosition(0, start.position);
+            aimLineRenderer.SetPosition(1, target.position);
+        }
+
+        if (laserOn)
+        {
+            laserLineRenderer.enabled = true;
+            LaserTop.transform.LookAt(target.position);
+            laserLineRenderer.SetPosition(0, start.position);
+            laserLineRenderer.SetPosition(1, target.position);
+            var emmision1 = targetParticle1.emission;
+            var emmision2 = targetParticle2.emission;
+            emmision1.rateOverTime = 50;
+            emmision2.rateOverTime = 50;
+
+        }
+        else
+        {
+            laserLineRenderer.enabled = false;
+            laserLineRenderer.SetPosition(0, start.position);
+            laserLineRenderer.SetPosition(1, target.position);
+            var emmision1 = targetParticle1.emission;
+            var emmision2 = targetParticle2.emission;
+            emmision1.rateOverTime = 0;
+            emmision2.rateOverTime = 0;
+        }
+
+        if (!laserOn && !aimOn)
+        {
+            LaserTop.transform.localRotation = Quaternion.Euler(90, 0, 0);
+        }
+    }
+}
