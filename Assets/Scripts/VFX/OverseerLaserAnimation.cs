@@ -55,29 +55,23 @@ public class OverseerLaserAnimation : MonoBehaviour
     private void Update()
     {
 
-
-
-
-
-
-
         if (aimOn)
         {
             aimLineRenderer.enabled = true;
             LaserTop.transform.LookAt(target.position);
 
-        RaycastHit hit;
-        if (Physics.Raycast(start.position, start.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
+            RaycastHit hit;
+            if (Physics.Raycast(start.position, start.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
 
-        {
-            Debug.DrawRay(start.position, start.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-            hitPoint.position = hit.point;
-        }
-        else
-        {
-            Debug.DrawRay(start.position, start.TransformDirection(Vector3.down) * 1000, Color.white);
-            hitPoint.position = target.position;
-        }
+            {
+                Debug.DrawRay(start.position, start.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
+                hitPoint.position = hit.point;
+            }
+            else
+            {
+                Debug.DrawRay(start.position, start.TransformDirection(Vector3.down) * 1000, Color.white);
+                hitPoint.position = target.position;
+            }
 
             aimLineRenderer.SetPosition(0, start.position);
             aimLineRenderer.SetPosition(1, hitPoint.position);
