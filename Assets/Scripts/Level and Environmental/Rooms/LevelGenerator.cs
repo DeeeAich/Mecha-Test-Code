@@ -8,14 +8,17 @@ using Random = System.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [Header("Generation Numbers")]
     public int floor;
     public int roomIndex;
     public int roomsInThisFloor;
     public int[] minibossRoomIndexes;
     
+    [Header("Public References")]
     public GameObject currentRoom;
     public GameObject oldRoom;
     
+    [Header("Internal References")]
     [SerializeField] private GameObject StartPosition;
     [SerializeField] private int randomSeed;
     [SerializeField] private bool randomizeSeedOnAwake;
@@ -47,7 +50,7 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
-        currentRoom.GetComponent<Room>().roomLoot = NextLootSelection(1)[0];
+        currentRoom.GetComponent<Room>().roomLoot = GenerateNextLootType(1)[0];
         roomIndex = 0;
     }
 
@@ -80,7 +83,7 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
 
-    public LootType[] NextLootSelection(int count)
+    public LootType[] GenerateNextLootType(int count)
     {
         LootType[] selection = new LootType[count];
         List<LootType> possibleLoots = new List<LootType>();
@@ -139,6 +142,44 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
 
+    /*
+    public LootPickupVariable[] GenerateLootPickups(int count, LootType type)
+    {
+        LootPickupVariable[] selection = new LootPickupVariable[count];
+        List<LootPickupVariable> possibleSelection = new List<LootPickupVariable>();
+        
+        switch (type)
+        {
+            case LootType.weapon:
+                possibleSelection.AddRange(levelInfo.lootPool.standardWeapons);
+                break;
+            
+            case LootType.combatChip:
+                possibleSelection.AddRange(levelInfo.lootPool.standardChips);
+                break;
+            
+            case LootType.ordinance:
+                possibleSelection.AddRange(levelInfo.lootPool.standardOrdinance);
+                break;
+            
+            case LootType.chassis:
+                possibleSelection.AddRange(levelInfo.lootPool.standardChassis); 
+                break;
+        }
+
+        int totalPossiblePickups = possibleSelection.Count;
+        
+        for (int i = 0; i < selection.Length; i++)
+        {
+            int rand = seededRandom.Next(0, possibleSelection.Count);
+            selection[i] = possibleSelection[rand];
+            if(totalPossiblePickups > selection.Length) possibleSelection.RemoveAt(rand);
+        }
+
+        return selection;
+    }
+    */
+    
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
         if(oldRoom != null) Destroy(oldRoom);

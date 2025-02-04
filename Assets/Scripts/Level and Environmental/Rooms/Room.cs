@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Door entryDoor;
     [SerializeField] private ObjectiveType[] possiblePrimaryObjectives;
     [SerializeField] private ObjectiveType[] possibleSecondaryObjectives;
+    [SerializeField] private int lootCount = 3;
 
     [Header("~~~~~~~~~~~ Dont Touch ~~~~~~~~~~~")]
     public bool isActive;
@@ -93,7 +94,7 @@ public class Room : MonoBehaviour
         if (exitDoors.Length > 0)
         {
             nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
-            nextRoomLoots = LevelGenerator.instance.NextLootSelection(exitDoors.Length);
+            nextRoomLoots = LevelGenerator.instance.GenerateNextLootType(exitDoors.Length);
 
             for (int i = 0; i < exitDoors.Length; i++)
             {
@@ -120,16 +121,7 @@ public class Room : MonoBehaviour
         
         if (lootSpawnPoint != null)
         {
-            Debug.Log("Spawning Loot");
-
-            GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(3, roomLoot);
-
-
-            for (int i = 0; i < pickupsToSpawn.Length; i++)
-            {
-                Instantiate(pickupsToSpawn[i], lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation);
-            }
-            
+            SpawnLoot();
         }
     }
     
@@ -139,6 +131,7 @@ public class Room : MonoBehaviour
         Debug.Log("Starting Room: " + name);
         
         // hello tom
+        // hi jacob :3
         AudioManager.instance.ChangeMusicState(musicState.combat);
 
         entryDoor.CloseDoor();
@@ -218,5 +211,32 @@ public class Room : MonoBehaviour
 
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;
         }
+    }
+
+    private void SpawnLoot()
+    {
+        Debug.Log("Spawning Loot");
+
+        GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLoot);
+        
+        for (int i = 0; i < pickupsToSpawn.Length; i++)
+        {
+            Instantiate(pickupsToSpawn[i], lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation);
+        }
+        
+        /*
+        LootPickupVariable[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLoot);
+        
+        for (int i = 0; i < pickupsToSpawn.Length; i++)
+        {
+            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, 
+                lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+
+            newLoot.pickupRarity = pickupsToSpawn[i].rarity;
+
+            if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
+            if (pickupsToSpawn[i].ItemScriptableReference != null) newLoot.ItemScriptableReference = pickupsToSpawn[i].ItemScriptableReference;
+        }
+        */
     }
 }
