@@ -42,11 +42,12 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     {
         health = maxHealth;
         damageMods = new List<DamageMod>();
+        burns = new List<Coroutine>();
     }
 
-    internal virtual void TakeDamage(float amount, bool isCrit = false)
+    internal virtual float TakeDamage(float amount, bool isCrit = false)
     {
-        if (!canTakeDamage || !isAlive) return;
+        if (!canTakeDamage || !isAlive) return 0f;
 
         for (int i = 0; i < damageMods.Count; i++)
         {
@@ -60,7 +61,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         float remainingDamage = amount;
         foreach (DamageMod mod in damageMods)
         {
+            //Debug.Log("Current Damage: " + remainingDamage);
             remainingDamage = mod.Modification(remainingDamage);
+            //Debug.Log("New Damage: " + remainingDamage);
         }
 
 
@@ -80,6 +83,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             TriggerDeath();
         }
+
+        return remainingDamage;
     }
 
     internal virtual void TriggerDeath()
@@ -97,7 +102,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     float hackTimer;
     public virtual void Hack(float percentage, float chance, float duration)
     {
-        int application = (int)chance / 100;
+        int application = (int)(chance / 100f);
 
         if(chance % 100f >= UnityEngine.Random.Range(0f,100f))
         {
@@ -167,8 +172,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     public virtual void Burn(float chance, float damageTick, int tickCount)
     {
         //tick length is locked at 0.25s/t
-        int application = (int)chance / 100;
-
+        //Debug.Log(chance);
+        int application = (int)(chance / 100f);
+        //Debug.Log(application);
         if (chance % 100f >= UnityEngine.Random.Range(0f, 100f))
         {
             application += 1;
@@ -227,7 +233,11 @@ public class HackMod : DamageMod
 
     public override float Modification(float damage)
     {
-        return damage * (1f+percent/100f);
+        //Debug.Log("hack");
+        float multiplier = percent / 100f;
+        multiplier += 1f;
+        //Debug.Log(multiplier);
+        return damage * multiplier;
     }
 }
 

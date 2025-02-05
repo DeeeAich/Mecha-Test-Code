@@ -186,12 +186,19 @@ namespace AITree
             }
         }
 
-        internal override void TakeDamage(float amount, bool isCrit = false)
+        internal override float TakeDamage(float amount, bool isCrit = false)
         {
-            base.TakeDamage(amount, isCrit);
-            numbers.SpawnDamageNumber(amount, isCrit);
+            float moddedAmount = base.TakeDamage(amount, isCrit);
+            numbers.SpawnDamageNumber(moddedAmount, isCrit);
+            return moddedAmount;
         }
 
+
+        public override void Burn(float chance, float damageTick, int tickCount)
+        {
+            //Debug.Log("Burn start");
+            base.Burn(chance, damageTick, tickCount);
+        }
     }
 
     public abstract class Node

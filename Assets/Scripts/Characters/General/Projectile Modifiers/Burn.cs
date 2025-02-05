@@ -9,7 +9,7 @@ public class Burn : ProjectileMod
     {
         base.AttemptApply(target);
 
-        target.GetComponent<IBurnable>().Burn(damage, chance, (int)duration * 4);
+        target.GetComponent<IBurnable>().Burn(chance, damage, (int)duration * 4);
     }
 
     public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
