@@ -44,7 +44,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         damageMods = new List<DamageMod>();
     }
 
-    internal virtual void TakeDamage(float amount)
+    internal virtual void TakeDamage(float amount, bool isCrit = false)
     {
         if (!canTakeDamage || !isAlive) return;
 
