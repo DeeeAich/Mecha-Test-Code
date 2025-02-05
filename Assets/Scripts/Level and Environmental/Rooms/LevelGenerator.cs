@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = System.Random;
 
 public class LevelGenerator : MonoBehaviour
@@ -26,6 +27,8 @@ public class LevelGenerator : MonoBehaviour
 
     public Random seededRandom;
     public static LevelGenerator instance;
+
+    public UnityEvent onSpawnRoom;
 
     private void Awake()
     {
@@ -185,6 +188,7 @@ public class LevelGenerator : MonoBehaviour
         if(oldRoom != null) Destroy(oldRoom);
         if(currentRoom != null) oldRoom = currentRoom;
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
+        onSpawnRoom.Invoke();
         roomIndex++;
     }
 }

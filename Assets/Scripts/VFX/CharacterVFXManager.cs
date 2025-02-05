@@ -64,7 +64,7 @@ public class CharacterVFXManager : MonoBehaviour
     {
         for (int i = 0; i < burnObjects.Count; i++)
         {
-            burnObjects[i].SetActive(isOn);
+            if(burnObjects[i] != null) burnObjects[i].SetActive(isOn);
         }
     }
 
@@ -72,7 +72,7 @@ public class CharacterVFXManager : MonoBehaviour
     {
         for (int i = 0; i < hackObjects.Count; i++)
         {
-            hackObjects[i].SetActive(isOn);
+            if(hackObjects[i] != null) hackObjects[i].SetActive(isOn);
         }
     }
 
@@ -80,7 +80,7 @@ public class CharacterVFXManager : MonoBehaviour
     {
         for (int i = 0; i < shortCircuitObjects.Count; i++)
         {
-            shortCircuitObjects[i].SetActive(isOn);
+            if(shortCircuitObjects[i] != null) shortCircuitObjects[i].SetActive(isOn);
         }
     }
 }
