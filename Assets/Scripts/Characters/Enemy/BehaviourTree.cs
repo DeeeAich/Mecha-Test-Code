@@ -186,10 +186,10 @@ namespace AITree
             }
         }
 
-        internal override void TakeDamage(float amount)
+        internal override void TakeDamage(float amount, bool isCrit = false)
         {
-            base.TakeDamage(amount);
-            numbers.SpawnDamageNumber(amount, false);
+            base.TakeDamage(amount, isCrit);
+            numbers.SpawnDamageNumber(amount, isCrit);
         }
 
     }
