@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,16 +20,23 @@ public class Pickup : MonoBehaviour
 {
     public int pickupRarity = 0;
     public pickupType pickupType = pickupType.ChassisChip;
+    
+    [Header("Ui Stuff")]
+    public GameObject uiPopup;
+    [SerializeField] private Button initiallySelectedButton;
+    
+    public Sprite itemDisplayImage;
+    public TMP_Text pickupName;
+    public TMP_Text pickupDescription;
+    
     public GameObject itemReference;
     public ScriptableObject ItemScriptableReference;
 
-    public GameObject uiPopup;
-    [SerializeField] private Button initiallySelectedButton;
-    public Sprite itemDisplayImage;
+
 
     public Animator animator;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponentInChildren<Animator>();
         animator.SetInteger("lootRarity", pickupRarity);
@@ -125,6 +133,7 @@ public class Pickup : MonoBehaviour
             if (pickup != this)
             {
                 pickup.animator.SetTrigger("lootLocked");
+                pickup.GetComponentInChildren<Interactable>().enabled = false;
             }
         }
         

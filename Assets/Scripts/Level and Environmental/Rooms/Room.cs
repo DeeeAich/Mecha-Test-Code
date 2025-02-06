@@ -47,8 +47,8 @@ public class Room : MonoBehaviour
 
     [Header("Internal References")]
     public GameObject[] nextRooms;
-    public LootType[] nextRoomLoots;
-    public LootType roomLoot;
+    public LootType[] nextRoomLootTypes;
+    public LootType roomLootType;
 
     [SerializeField] private Door[] exitDoors;
     
@@ -94,11 +94,11 @@ public class Room : MonoBehaviour
         if (exitDoors.Length > 0)
         {
             nextRooms = LevelGenerator.instance.NextRoomSelection(exitDoors.Length);
-            nextRoomLoots = LevelGenerator.instance.GenerateNextLootType(exitDoors.Length);
+            nextRoomLootTypes = LevelGenerator.instance.GenerateNextLootType(exitDoors.Length);
 
             for (int i = 0; i < exitDoors.Length; i++)
             {
-                exitDoors[i].SetDoorLootType(nextRoomLoots[i]);
+                exitDoors[i].SetDoorLootType(nextRoomLootTypes[i]);
                 
                 for (int j = 0; j < exitDoors.Length; j++)
                 {
@@ -114,7 +114,7 @@ public class Room : MonoBehaviour
                 exitDoors[i].onOpen.AddListener(delegate
                 {
                     LevelGenerator.instance.SpawnRoom(nextRooms[exitIndex], exitDoors[exitIndex].nextRoomSpawnPoint);
-                    LevelGenerator.instance.currentRoom.GetComponent<Room>().roomLoot = nextRoomLoots[exitIndex];
+                    LevelGenerator.instance.currentRoom.GetComponent<Room>().roomLootType = nextRoomLootTypes[exitIndex];
                 });
             }
         }
@@ -216,27 +216,22 @@ public class Room : MonoBehaviour
     private void SpawnLoot()
     {
         Debug.Log("Spawning Loot");
-
-        GameObject[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLoot);
+        
+        LootPickupVariable[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
         
         for (int i = 0; i < pickupsToSpawn.Length; i++)
         {
-            Instantiate(pickupsToSpawn[i], lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation);
-        }
-        
-        /*
-        LootPickupVariable[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLoot);
-        
-        for (int i = 0; i < pickupsToSpawn.Length; i++)
-        {
-            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, 
-                lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
-
+            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+            
             newLoot.pickupRarity = pickupsToSpawn[i].rarity;
+            newLoot.pickupType = pickupsToSpawn[i].PickupType;
 
+            newLoot.pickupName.text = pickupsToSpawn[i].lootName;
+            newLoot.pickupDescription.text = pickupsToSpawn[i].lootDescription;
+            
             if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
             if (pickupsToSpawn[i].ItemScriptableReference != null) newLoot.ItemScriptableReference = pickupsToSpawn[i].ItemScriptableReference;
         }
-        */
+        
     }
 }

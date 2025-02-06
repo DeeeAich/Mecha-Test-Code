@@ -53,7 +53,7 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
-        currentRoom.GetComponent<Room>().roomLoot = GenerateNextLootType(1)[0];
+        currentRoom.GetComponent<Room>().roomLootType = GenerateNextLootType(1)[0];
         roomIndex = 0;
     }
 
@@ -109,43 +109,6 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
 
-    public GameObject[] GenerateLootPickups(int count, LootType type)
-    {
-        GameObject[] selection = new GameObject[count];
-        List<GameObject> possibleSelection = new List<GameObject>();
-        
-        switch (type)
-        {
-            case LootType.weapon:
-                possibleSelection.AddRange(levelInfo.lootPool.standardWeapons);
-                break;
-            
-            case LootType.combatChip:
-                possibleSelection.AddRange(levelInfo.lootPool.standardChips);
-                break;
-            
-            case LootType.ordinance:
-                possibleSelection.AddRange(levelInfo.lootPool.standardOrdinance);
-                break;
-            
-            case LootType.chassis:
-                possibleSelection.AddRange(levelInfo.lootPool.standardChassis); 
-                break;
-        }
-
-        int totalPossiblePickups = possibleSelection.Count;
-        
-        for (int i = 0; i < selection.Length; i++)
-        {
-            int rand = seededRandom.Next(0, possibleSelection.Count);
-            selection[i] = possibleSelection[rand];
-            if(totalPossiblePickups > selection.Length) possibleSelection.RemoveAt(rand);
-        }
-
-        return selection;
-    }
-
-    /*
     public LootPickupVariable[] GenerateLootPickups(int count, LootType type)
     {
         LootPickupVariable[] selection = new LootPickupVariable[count];
@@ -154,34 +117,56 @@ public class LevelGenerator : MonoBehaviour
         switch (type)
         {
             case LootType.weapon:
-                possibleSelection.AddRange(levelInfo.lootPool.standardWeapons);
+                possibleSelection.AddRange(levelInfo.lootPool.Weapons);
                 break;
             
             case LootType.combatChip:
-                possibleSelection.AddRange(levelInfo.lootPool.standardChips);
+                possibleSelection.AddRange(levelInfo.lootPool.Chips);
                 break;
             
             case LootType.ordinance:
-                possibleSelection.AddRange(levelInfo.lootPool.standardOrdinance);
+                possibleSelection.AddRange(levelInfo.lootPool.Ordinance);
                 break;
             
             case LootType.chassis:
-                possibleSelection.AddRange(levelInfo.lootPool.standardChassis); 
+                possibleSelection.AddRange(levelInfo.lootPool.Chassis); 
                 break;
         }
 
+    
+        int totalSpawnChance = 0;
+
+        for (int i = 0; i < possibleSelection.Count; i++)
+        {
+            totalSpawnChance += possibleSelection[i].spawnChance;
+        }
+        
         int totalPossiblePickups = possibleSelection.Count;
         
         for (int i = 0; i < selection.Length; i++)
         {
-            int rand = seededRandom.Next(0, possibleSelection.Count);
-            selection[i] = possibleSelection[rand];
-            if(totalPossiblePickups > selection.Length) possibleSelection.RemoveAt(rand);
+            int rand = seededRandom.Next(0, totalSpawnChance);
+            float currentSpawnChance = 0;
+
+            for (int j = 0; j < possibleSelection.Count; j++)
+            {
+                currentSpawnChance += possibleSelection[j].spawnChance;
+                if (currentSpawnChance > rand)
+                {
+                    selection[i] = possibleSelection[j];
+                    if (totalPossiblePickups > selection.Length)
+                    {
+                        totalSpawnChance -= possibleSelection[j].spawnChance;
+                        possibleSelection.RemoveAt(j);
+                    }
+                    break;
+                }
+            }
         }
 
         return selection;
     }
-    */
+    
     
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {

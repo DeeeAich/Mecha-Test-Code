@@ -12,20 +12,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ace75bc956d7b44ad43dd678f582ff, type: 3}
   m_Name: Loot Pool
   m_EditorClassIdentifier: 
-  standardChips:
-  - {fileID: 3501766641670427817, guid: 61eb21e8f7eb41141b2d0dea601af402, type: 3}
-  - {fileID: 3469261961752157723, guid: 9c6b4f1da990d6d42b55b16bcabe539d, type: 3}
-  rareChips: []
-  legendaryChips: []
-  standardWeapons:
-  - {fileID: 8350512133116276809, guid: ab74d74a7bfefe847b344aad8c3463b8, type: 3}
-  - {fileID: 4353621541079906498, guid: b0beaf5671b3b164bb48bbc7053330c7, type: 3}
-  rareWeapons: []
-  legendaryWeapons: []
-  standardOrdinance: []
-  rareOrdinance: []
-  legendaryOrdinance: []
-  standardChassis: []
+  pickupPrefab: {fileID: 5730834191945102218, guid: 45074ada127c18a4caaa88ccbcac01a9,
+    type: 3}
+  Chips:
+  - lootName: Incindiary Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 20% chance to set targets on fire
+    spawnChance: 10
+    rarity: 0
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 425310ac49fc442dab6e85af2868519d,
+      type: 2}
+  - lootName: Legendary Incindiary Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 100% chance to set targets on fire
+    spawnChance: 1
+    rarity: 2
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 76ad5f17fcb0829499a2b892f94a9702,
+      type: 2}
+  - lootName: Critical Chance Chip
+    PickupType: 3
+    lootDescription: Adds a 30% chance to critically strike, dealing 1.5x damage
+    spawnChance: 10
+    rarity: 0
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 1c0cc58599bcc434199fb5cc49bf1d59,
+      type: 2}
+  - lootName: Legendary Critical Chance Chip
+    PickupType: 3
+    lootDescription: Adds a 100% chance to critically strike, dealing 1.5x damage
+    spawnChance: 1
+    rarity: 2
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 97db506ab9008074d8ce2ffee5e65332,
+      type: 2}
+  - lootName: Virus Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 30% chance to hack enemies, causing them to take more
+      damage
+    spawnChance: 10
+    rarity: 0
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: fd66ca269a371429e8cacebfe7bdb91c,
+      type: 2}
+  - lootName: Legendary Virus Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 100% chance to hack enemies, causing them to take more
+      damage
+    spawnChance: 1
+    rarity: 2
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: ffef8e9e950dc344dbc4d4e74674edf4,
+      type: 2}
+  - lootName: Electrified Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 15% chance to stun targets for 3 seconds
+    spawnChance: 10
+    rarity: 0
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 0028264c64b42447eab8324a1631c5b5,
+      type: 2}
+  - lootName: Legendary Electrified Rounds Chip
+    PickupType: 3
+    lootDescription: Adds a 100% chance to stun targets for 3 seconds
+    spawnChance: 1
+    rarity: 2
+    itemReference: {fileID: 0}
+    ItemScriptableReference: {fileID: 11400000, guid: 0061772d540c6094eabc32a05a14eb62,
+      type: 2}
+  Weapons:
+  - lootName: Shotgun
+    PickupType: 0
+    lootDescription: Fires a spread of bullets
+    spawnChance: 1
+    rarity: 2
+    itemReference: {fileID: 3096072767103390523, guid: 78b7e1a61da0448f0a1a4128cbcaa3c0,
+      type: 3}
+    ItemScriptableReference: {fileID: 0}
+  - lootName: Charge Rifle
+    PickupType: 0
+    lootDescription: Hold fire to charge up to 3 levels, release to fire
+    spawnChance: 2
+    rarity: 1
+    itemReference: {fileID: 4697915078526519092, guid: 477a7dc3c60e8471d85a0dfb5efd8ad9,
+      type: 3}
+    ItemScriptableReference: {fileID: 0}
+  Ordinance: []
+  Chassis:
+  - lootName: Standard Mech Legs
+    PickupType: 1
+    lootDescription: Simple legs for mechanised drones, gets the job done
+    spawnChance: 1
+    rarity: 0
+    itemReference: {fileID: 3888168663044195736, guid: 4e2aa23d0359a422c93d3af6809099fd,
+      type: 3}
+    ItemScriptableReference: {fileID: 0}
   weaponLootImage: {fileID: 21300000, guid: ebd1b05ddc612264c82531303f377572, type: 3}
   combatChipLootImage: {fileID: 21300000, guid: 1e180518d02de3e4f99b5074daf22f1f,
     type: 3}
