@@ -306,6 +306,36 @@ namespace AITree
         }
     }
 
+    public class Invert : Decorator
+    {
+        public Invert(Node child) : base(child)
+        {
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            if (children.Count == 0)
+                state = BehaviourTreeState.FAILURE;
+            else
+            {
+                BehaviourTreeState childState = children[0].Tick();
+                switch (childState)
+                {
+                    case BehaviourTreeState.NULL:
+                        break;
+                    case BehaviourTreeState.RUNNING:
+                        return BehaviourTreeState.RUNNING;
+                    case BehaviourTreeState.SUCCESS:
+                        return BehaviourTreeState.FAILURE;
+                    case BehaviourTreeState.FAILURE:
+                        return BehaviourTreeState.SUCCESS;
+                }
+            }
+            return BehaviourTreeState.FAILURE;
+        }
+    }
+
     public class WeightedRandomChoice : Decorator
     {
         internal float Weight;
@@ -559,9 +589,9 @@ namespace AITree
             }
             float choice = Random.Range(0f, weightTotal);
             float runningDecision = 0f;
-            for(int i = 0; i < data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                if(runningDecision < choice && runningDecision + data[i].weight >= choice)
+                if (runningDecision < choice && runningDecision + data[i].weight >= choice)
                 {
                     childIndex = children.IndexOf(data[i].w);
                     break;
