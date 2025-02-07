@@ -8,4 +8,5 @@ public class ComponentMasterListScriptable : ScriptableObject
     public GameObject[] chassis;
     public GameObject[] weapons;
     public GameObject[] ultimates;
+    public ScriptableObject[] chips;
 }
