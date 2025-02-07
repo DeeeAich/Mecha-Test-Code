@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
 
 namespace AITree
 {
@@ -308,7 +309,6 @@ namespace AITree
     public class WeightedRandomChoice : Decorator
     {
         internal float Weight;
-        internal bool include;
         public virtual float weight
         {
             get
@@ -518,7 +518,8 @@ namespace AITree
 
     public class RandomBranching : Control
     {
-
+        internal int lastIndex = -1;
+        internal bool allowRepeat = true;
         public RandomBranching(params Node[] children) : base(children)
         {
         }
@@ -526,6 +527,10 @@ namespace AITree
         public RandomBranching(params WeightedRandomChoice[] children) : base(children)
         {
 
+        }
+        public RandomBranching(bool repeats, params WeightedRandomChoice[] children) : this(children)
+        {
+            allowRepeat = repeats;
         }
 
         struct ChoiceData
@@ -543,11 +548,7 @@ namespace AITree
             foreach (WeightedRandomChoice w in children)
             {
                 float childWeight = w.weight;
-                if (w.Weight < 0.01f)
-                {
-                    w.include = false;
-                }
-                else
+                if (w.Weight > 0.01f && (allowRepeat || children.IndexOf(w) != lastIndex))
                 {
                     ChoiceData freshData = new ChoiceData();
                     freshData.w = w;
