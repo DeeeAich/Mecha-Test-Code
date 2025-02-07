@@ -103,8 +103,12 @@ namespace AITree
             {
                 g.BeGone();
             }
-
+            foreach(Transform child in transform)
+            {
+                child.parent = null;
+            }
             Die();
+            Destroy(gameObject);
         }
 
         private void LateUpdate()
