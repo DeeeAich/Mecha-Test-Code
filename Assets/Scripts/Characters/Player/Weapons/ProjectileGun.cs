@@ -22,7 +22,7 @@ public class ProjectileGun : Weapon
 
     public virtual void LoadBullets()
     {
-        for (int i = 0; i < maxAmmo; i++)
+        for (int i = 0; i < (1 / fireRate) * 4f; i++)
         {
             GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
             genBullet.name = "PlayerBullet";
