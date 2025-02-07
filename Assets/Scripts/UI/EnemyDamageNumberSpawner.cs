@@ -27,6 +27,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         int damage = Mathf.FloorToInt(damageAmount);
 
         GameObject newDamageNumberInstance = Instantiate(damageNumberInstance, null);
+        newDamageNumberInstance.hideFlags = HideFlags.HideInHierarchy;
         newDamageNumberInstance.GetComponent<RectTransform>().anchoredPosition3D = transform.position;
         newDamageNumberInstance.GetComponent<Animator>().SetFloat("Horizontal", Random.Range(0f, 1f));
         newDamageNumberInstance.GetComponent<TextMeshProUGUI>().text = damage.ToString();
