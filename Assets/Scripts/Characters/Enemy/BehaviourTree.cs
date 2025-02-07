@@ -591,6 +591,39 @@ namespace AITree
                     weightTotal += childWeight;
                 }
             }
+            if(data.Count == 0)
+            {
+                if(allowRepeat)
+                {
+                    Debug.LogWarning("Boss Move Selector Failed");
+                    childIndex = 0;
+                    return;
+                }
+                else
+                {
+                    allowRepeat = true; 
+                    weightTotal = 0f;
+                    foreach (WeightedRandomChoice w in children)
+                    {
+                        float childWeight = w.weight;
+                        if (w.Weight > 0.01f)
+                        {
+                            ChoiceData freshData = new ChoiceData();
+                            freshData.w = w;
+                            freshData.weight = childWeight;
+                            data.Add(freshData);
+                            weightTotal += childWeight;
+                        }
+                    }
+                    if(data.Count == 0)
+                    {
+                        Debug.LogWarning("Boss Move Selector Failed (even tried to repeat)");
+                        childIndex = 0;
+                        return;
+                    }
+                }
+            }
+
             float choice = Random.Range(0f, weightTotal);
             float runningDecision = 0f;
             for (int i = 0; i < data.Count; i++)
