@@ -92,8 +92,6 @@ public class ProjectileGun : Weapon
                 mod.AddModifiers(modInfo);
         else
         {
-            if (modInfo.statusType == WeaStaEftChip.StatusType.Critical)
-                return;
             gameObject.AddComponent(Type.GetType(modName));
             foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
                 mod.AddModifiers(modInfo);

@@ -7,6 +7,7 @@ public class BasicBullet : Projectile
 
     [SerializeField] float speed;
     [SerializeField] float resetTime = 2f;
+    bool animating = false;
     public ProjectileGun myGun;
 
     private Critical critRoller;
@@ -21,11 +22,14 @@ public class BasicBullet : Projectile
 
     public override void OnTriggerEnter(Collider other)
     {
+        if (animating)
+            return;
+
         if (other.TryGetComponent(out Health health))
         {
             float modifiedDamage = critRoller.AdditiveDamage(damage);
 
-            health.TakeDamage(modifiedDamage);
+            health.TakeDamage(modifiedDamage, modifiedDamage != damage);
 
             foreach (ProjectileMod modi in myGun.GetComponents<ProjectileMod>())
                 modi.AttemptApply(other.gameObject);
@@ -34,29 +38,22 @@ public class BasicBullet : Projectile
 
             if (pierceCounter == 0)
             {
-                gameObject.SetActive(false);
-                transform.parent = myGun.projectileHolder;
-                transform.localPosition = new Vector3();
-                transform.GetComponentInChildren<Animator>().SetTrigger("impact");
                 StopCoroutine(AutoReset());
+                StartCoroutine(AnimationTimer());
             }
         }
         else
         {
 
-            gameObject.SetActive(false);
-            transform.parent = myGun.projectileHolder;
-            transform.localPosition = new Vector3();
-            transform.GetComponentInChildren<Animator>().SetTrigger("impact");
-            pierceCounter = myGun.pierceCount;
             StopCoroutine(AutoReset());
+            StartCoroutine(AnimationTimer());
 
         }
     }
 
     public void FixedUpdate()
     {
-        if (gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy && !animating)
             transform.position += transform.forward * speed * Time.deltaTime;
     }
 
@@ -73,4 +70,19 @@ public class BasicBullet : Projectile
         yield return null;
     }
 
+    public IEnumerator AnimationTimer()
+    {
+
+        animating = true;
+        transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+
+        yield return new WaitForSeconds(1.2f);
+
+        gameObject.SetActive(false);
+        transform.parent = myGun.projectileHolder;
+        transform.localPosition = new Vector3();
+
+
+        yield return null;
+    }
 }

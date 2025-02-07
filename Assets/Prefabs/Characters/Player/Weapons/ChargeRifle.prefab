@@ -103,7 +103,11 @@ MonoBehaviour:
   fireRate: 1
   reloadTime: 2
   reloading: 0
-  damage: 50
+  damage:
+  - 20
+  - 50
+  - 90
+  pierceCount: 0
   weapon: {fileID: 587135707003273017}
   firePoint: {fileID: 4358877156491748401}
   myAnim: {fileID: 1737810142018156286}
@@ -250,6 +254,7 @@ MonoBehaviour:
   duration: 0
   chance: 15
   damage: 2
+  lastCrit: 0
 --- !u!1 &7126255625389724331
 GameObject:
   m_ObjectHideFlags: 0

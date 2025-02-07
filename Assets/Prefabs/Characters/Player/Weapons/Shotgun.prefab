@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956097079281339446}
   - component: {fileID: 905507948515026462}
+  - component: {fileID: 2893156105795303936}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -85,7 +86,9 @@ MonoBehaviour:
   fireRate: 0.7
   reloadTime: 1.5
   reloading: 0
-  damage: 15
+  damage:
+  - 5
+  pierceCount: 1
   weapon: {fileID: 1151917376468060294}
   firePoint: {fileID: 4067996033564578625}
   myAnim: {fileID: 3292855720783512686}
@@ -102,6 +105,22 @@ MonoBehaviour:
   fireCount: 8
   spreadRange: 0.3
   evenSpread: 1
+--- !u!114 &2893156105795303936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096072767103390523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a905ca1b6e04bc84daad3d49a9b3ac29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  chance: 0
+  damage: 0
+  lastCrit: 0
 --- !u!1 &8142957531874074339
 GameObject:
   m_ObjectHideFlags: 0
