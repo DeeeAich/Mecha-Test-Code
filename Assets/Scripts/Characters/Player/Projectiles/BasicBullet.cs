@@ -78,10 +78,11 @@ public class BasicBullet : Projectile
 
         yield return new WaitForSeconds(1.2f);
 
+        transform.GetComponentInChildren<Animator>().SetTrigger("return");
         gameObject.SetActive(false);
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
-
+        animating = false;
 
         yield return null;
     }
