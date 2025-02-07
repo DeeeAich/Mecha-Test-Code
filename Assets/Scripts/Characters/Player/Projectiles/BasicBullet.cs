@@ -10,11 +10,13 @@ public class BasicBullet : Projectile
     public ProjectileGun myGun;
 
     private Critical critRoller;
-    public List<ProjectileMod> modList = new List<ProjectileMod>();
+    private int pierceCounter = 0;
 
     private void Start()
     {
-        critRoller = GetComponent<Critical>();
+        critRoller = myGun.GetComponent<Critical>();
+        pierceCounter = myGun.pierceCount;
+
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -25,12 +27,12 @@ public class BasicBullet : Projectile
 
             health.TakeDamage(modifiedDamage);
 
-            foreach (ProjectileMod modi in modList)
+            foreach (ProjectileMod modi in myGun.GetComponents<ProjectileMod>())
                 modi.AttemptApply(other.gameObject);
 
-            pierceCount--;
+            pierceCounter--;
 
-            if (pierceCount == 0)
+            if (pierceCounter == 0)
             {
                 gameObject.SetActive(false);
                 transform.parent = myGun.projectileHolder;
@@ -46,6 +48,7 @@ public class BasicBullet : Projectile
             transform.parent = myGun.projectileHolder;
             transform.localPosition = new Vector3();
             transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+            pierceCounter = myGun.pierceCount;
             StopCoroutine(AutoReset());
 
         }
@@ -65,6 +68,7 @@ public class BasicBullet : Projectile
         gameObject.SetActive(false);
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
+        pierceCounter = myGun.pierceCount;
 
         yield return null;
     }

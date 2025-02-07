@@ -15,6 +15,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private PlayerInput playerInputs;
     public Camera myCamera;
     public Transform playerCentre;
+    public BodyStats baseStats;
+    [SerializeField] List<BodyChip> myMods = new List<BodyChip>();
 
     [SerializeField] List<Transform> weaponPoints = new();
 
@@ -215,16 +217,26 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void ApplyChip(BodyChip chip)
     {
 
-        if(chip.percentage)
+        if (myMods.Contains(chip))
         {
-            myHealth.maxHealth *= Mathf.RoundToInt(1 + chip.statChange.health);
-            //Add shielding
+
         }
+        else
+            myMods.Add(chip);
 
 
-
-        myHealth.health += myHealth.maxHealth - lastMax;
 
     }
 
+    private void ApplyStatusChange()
+    {
+
+        foreach(BStatChip bStat in myMods)
+        {
+
+
+
+        }
+
+    }
 }

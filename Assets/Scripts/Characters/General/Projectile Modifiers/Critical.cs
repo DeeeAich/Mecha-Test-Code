@@ -5,10 +5,12 @@ using UnityEngine;
 public class Critical : ProjectileMod
 {
 
+    public int lastCrit = 0;
+
     public override float AdditiveDamage(float baseDamage)
     {
 
-        float crit = 0;
+        float crit = 1;
 
         float checkChance = chance;
 
@@ -20,9 +22,10 @@ public class Critical : ProjectileMod
 
         if (Random.Range(0, 100) <= checkChance)
             crit++;
+
+        lastCrit = (int)crit;
         
-        
-        return baseDamage * Mathf.Pow(damage, crit);
+        return baseDamage * damage * crit;
 
     }
 

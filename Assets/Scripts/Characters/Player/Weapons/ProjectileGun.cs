@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ProjectileGun : Weapon
 {
@@ -51,9 +52,10 @@ public class ProjectileGun : Weapon
         newBullet.transform.parent = null;
         newBullet.transform.position = firePoint.position;
         newBullet.transform.rotation = firePoint.rotation;
-        newBullet.transform.rotation *= Quaternion.Euler(0, Random.Range(-curDivation, curDivation), 0);
+        newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
         newBullet.SetActive(true);
-        newBullet.GetComponent<BasicBullet>().damage = damage;
+        newBullet.GetComponent<BasicBullet>().damage = damage[0];
+        
 
         myAnim.SetTrigger("Fire");
 
@@ -83,29 +85,19 @@ public class ProjectileGun : Weapon
 
     public override void AddMod(StatusInfo modInfo)
     {
-
         string modName = modInfo.statusType.ToString();
-        if(projectileHolder.GetChild(0).GetComponent(modName) != null)
-        {
 
-            foreach (Transform bullet in projectileHolder)
-                foreach (IMod mod in bullet.GetComponents<IMod>())
-                    mod.AddModifiers(modInfo);
-
-        }
+        if (GetComponent(modName) == null)
+            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+                mod.AddModifiers(modInfo);
         else
-            foreach (Transform bullet in projectileHolder)
-            {
-
-                var newMod = bullet.gameObject.AddComponent(System.Type.GetType(modName));
-
-                bullet.GetComponent<BasicBullet>().modList.Add((ProjectileMod)newMod);
-
-                foreach (IMod mod in bullet.GetComponents<IMod>())
-                    mod.AddModifiers(modInfo);
-
-
-            }
+        {
+            if (modInfo.statusType == WeaStaEftChip.StatusType.Critical)
+                return;
+            gameObject.AddComponent(Type.GetType(modName));
+            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+                mod.AddModifiers(modInfo);
+        }
 
     }
 

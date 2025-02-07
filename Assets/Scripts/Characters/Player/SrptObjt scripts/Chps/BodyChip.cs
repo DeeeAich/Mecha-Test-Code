@@ -7,8 +7,17 @@ using System;
 public class BodyChip : Chip
 {
 
-    [Header("Stat Increase")]
-    public BodyStats statChange;
-    public bool percentage = false;
+    public virtual void DoAction(PlayerBody myBody)
+    {
 
+
+
+    }
+
+    public virtual void ChangeStats(BodyChip addChip)
+    {
+
+
+
+    }
 }

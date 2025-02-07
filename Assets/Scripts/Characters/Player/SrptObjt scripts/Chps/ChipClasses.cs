@@ -18,7 +18,7 @@ public class StatusInfo
 [Serializable]
 public class BodyStats
 {
-    public float health, armour, shield, shieldRegen;
+    public float health, armour;
     public bool percentage;
 
     public void AddStats(BodyStats stats)
@@ -27,17 +27,21 @@ public class BodyStats
         {
 
             stats.health *= 1 + health / 100;
-            stats.shieldRegen *= 1 + shieldRegen / 100;
             stats.armour *= armour / 100 + 1;
-            stats.shield *= shield / 100 + 1;
         }
         else
         {
             stats.health += health;
-            stats.shieldRegen += shieldRegen;
             stats.armour += armour;
-            stats.shield += shield;
         }
+    }
+
+    public void SetStats(BodyStats stats)
+    {
+
+        health = stats.health;
+        armour = stats.armour;
+
     }
 }
 
