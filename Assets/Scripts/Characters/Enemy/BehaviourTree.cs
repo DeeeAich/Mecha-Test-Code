@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace AITree
 {
+
     public enum StoreType
     {
         NULL,
@@ -159,7 +162,7 @@ namespace AITree
                 yield return null;
                 pauseTimer += Time.deltaTime;
             } while (pauseTimer < time);
-            paused = false; 
+            paused = false;
             if (VFXManager != null)
             {
                 VFXManager.ToggleEffectVFX(effect.ShortCircuit, false);
@@ -302,6 +305,80 @@ namespace AITree
         }
     }
 
+    public class WeightedRandomChoice : Decorator
+    {
+        internal float Weight;
+        internal bool include;
+        public virtual float weight
+        {
+            get
+            {
+                return Weight;
+            }
+            private set
+            {
+                Weight = value;
+            }
+        }
+        public WeightedRandomChoice(Node child) : base(child)
+        {
+        }
+
+        public WeightedRandomChoice(Node child, float weight) : this(child)
+        {
+            this.weight = weight;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = children[0].Tick();
+            return state;
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+        }
+
+        public override void End()
+        {
+            base.End();
+        }
+    }
+
+    public class CalcingRandomChoice : WeightedRandomChoice
+    {
+        Func<float> calculate;
+        public CalcingRandomChoice(Node child) : base(child)
+        {
+        }
+
+        public CalcingRandomChoice(Node child, float weight) : base(child, weight)
+        {
+        }
+
+        public CalcingRandomChoice(Node child, Func<float> calculation) : this(child)
+        {
+            calculate = calculation;
+        }
+
+        public override float weight
+        {
+            get
+            {
+                if (calculate != null)
+                    Weight = calculate();
+                return Weight;
+            }
+        }
+    }
+
     //Inverter
 
     //Repeat
@@ -435,6 +512,76 @@ namespace AITree
                         break;
                 }
             } while (childState == BehaviourTreeState.FAILURE);
+            return state;
+        }
+    }
+
+    public class RandomBranching : Control
+    {
+
+        public RandomBranching(params Node[] children) : base(children)
+        {
+        }
+
+        public RandomBranching(params WeightedRandomChoice[] children) : base(children)
+        {
+
+        }
+
+        struct ChoiceData
+        {
+            internal WeightedRandomChoice w;
+            internal float weight;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+            //choose now
+            List<ChoiceData> data = new List<ChoiceData>();
+            float weightTotal = 0f;
+            foreach (WeightedRandomChoice w in children)
+            {
+                float childWeight = w.weight;
+                if (w.Weight < 0.01f)
+                {
+                    w.include = false;
+                }
+                else
+                {
+                    ChoiceData freshData = new ChoiceData();
+                    freshData.w = w;
+                    freshData.weight = childWeight;
+                    data.Add(freshData);
+                    weightTotal += childWeight;
+                }
+            }
+            float choice = Random.Range(0f, weightTotal);
+            float runningDecision = 0f;
+            for(int i = 0; i < data.Count; i++)
+            {
+                if(runningDecision < choice && runningDecision + data[i].weight >= choice)
+                {
+                    childIndex = children.IndexOf(data[i].w);
+                    break;
+                }
+            }
+        }
+
+        public override void End()
+        {
+            base.End();
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = children[childIndex].Tick();
             return state;
         }
     }
@@ -599,7 +746,7 @@ namespace AITree
                         /*
                          If I want to stay near something until they die I have succeded if they die
                          If my follow up to strafe in range is like, kiss the target, then failure might be more appropriate, because target is gone
-                         
+
                          If I "StrafeInRange until failure" then loss of target being a failure is a good idea
                          */
 
@@ -764,7 +911,7 @@ namespace AITree
                         /*
                          If I want to stay near something until they die I have succeded if they die
                          If my follow up to strafe in range is like, kiss the target, then failure might be more appropriate, because target is gone
-                         
+
                          If I "StrafeInRange until failure" then loss of target being a failure is a good idea
                          */
 
@@ -1137,7 +1284,7 @@ namespace AITree
     {
         UnityEvent invoked;
 
-        public InvokeEvent(UnityEvent invoked):base()
+        public InvokeEvent(UnityEvent invoked) : base()
         {
             this.invoked = invoked;
         }

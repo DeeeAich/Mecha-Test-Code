@@ -6,11 +6,25 @@ public class EnemyGun : MonoBehaviour
 {
     public GameObject gunPoint;
     public GameObject shotPattern;
+    public float startDelayMin, startDelayMax;
     public float minDelay, maxDelay;
     public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(StartDelay());
+    }
+
+    IEnumerator StartDelay()
+    {
+        float timer = 0f;
+        float randTime = Random.Range(startDelayMin, startDelayMax);
+        while (timer < randTime)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
+
         StartCoroutine(FireOnRepeat());
     }
 
@@ -18,10 +32,10 @@ public class EnemyGun : MonoBehaviour
     {
         float timer = 0f;
         float randTime;
-        while(true)
+        while (true)
         {
             randTime = Random.Range(minDelay, maxDelay);
-            while(timer < randTime)
+            while (timer < randTime)
             {
                 yield return null;
                 timer += Time.deltaTime;
