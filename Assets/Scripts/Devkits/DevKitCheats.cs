@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
@@ -10,30 +11,43 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private ComponentMasterListScriptable componentMasterListScriptable;
     
     [SerializeField] private TMP_Dropdown leftGunDropdown;
-    [SerializeField] private TMP_Dropdown RightGunDropdown;
+    [SerializeField] private TMP_Dropdown rightGunDropdown;
     [SerializeField] private TMP_Dropdown chassisDropdown;
+
+    [SerializeField] private TMP_Dropdown addChipDropdownLeft;
+    [SerializeField] private TMP_Dropdown addChipDropdownRight;
     
     public GameObject devkitCheatMenu;
     private int[] loadout;
 
     private void Start()
     {
-        loadout = new int[3];
+        
         Canvas childedCanvas = GetComponentInChildren<Canvas>(true);
-        if(childedCanvas!=null)
-        devkitCheatMenu = childedCanvas.gameObject;
+        if(childedCanvas!=null) devkitCheatMenu = childedCanvas.gameObject;
         DontDestroyOnLoad(gameObject);
 
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
-        RightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
+        rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
-
+        addChipDropdownLeft.options = new List<TMP_Dropdown.OptionData>();
+        addChipDropdownRight.options = new List<TMP_Dropdown.OptionData>();
+        
         for (int i = 0; i < componentMasterListScriptable.weapons.Length; i++)
         {
             leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
-            RightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
+            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
         }
+
+        for (int i = 0; i < componentMasterListScriptable.chips.Length; i++)
+        {
+            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.chips[i].name));
+            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.chips[i].name));
+        }
+
+        loadout = new int[3];
     }
+    
 
     private void Update()
     {
@@ -98,7 +112,7 @@ public class DevKitCheats : MonoBehaviour
 
         newLoadout[0] = chassisDropdown.value;
         newLoadout[1] = leftGunDropdown.value;
-        newLoadout[2] = RightGunDropdown.value;
+        newLoadout[2] = rightGunDropdown.value;
 
         if (newLoadout != loadout)
         {
@@ -109,5 +123,18 @@ public class DevKitCheats : MonoBehaviour
             
             loadout = newLoadout;
         }
+    }
+
+    public void AddChip(bool applyToLeft)
+    {
+        if (applyToLeft)
+        {
+            PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)componentMasterListScriptable.chips[addChipDropdownLeft.value], applyToLeft);
+        }
+        else
+        {
+            PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)componentMasterListScriptable.chips[addChipDropdownRight.value], applyToLeft);
+        }
+
     }
 }
