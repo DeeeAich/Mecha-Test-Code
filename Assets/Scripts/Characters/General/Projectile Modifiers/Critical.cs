@@ -10,7 +10,7 @@ public class Critical : ProjectileMod
     public override float AdditiveDamage(float baseDamage)
     {
 
-        float crit = 1;
+        float crit = 0;
 
         float checkChance = chance;
 
@@ -24,9 +24,11 @@ public class Critical : ProjectileMod
             crit++;
 
         lastCrit = (int)crit;
-        
-        return baseDamage * damage * crit;
 
+        if (crit > 0)
+            return baseDamage * damage * crit;
+        else
+            return baseDamage;
     }
 
     public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)

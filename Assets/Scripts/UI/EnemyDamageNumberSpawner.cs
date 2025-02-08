@@ -12,6 +12,8 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
     public GameObject damageNumberInstance;
     public Color32 critColor;
     public bool testSpawn;
+    public int minFont;
+    public int maxFont;
     public float testDamage;
     public bool testCrit;
 
@@ -35,7 +37,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         if (testSpawn)
         {
             testSpawn = false;
-            SpawnDamageNumber(testDamage, testCrit);
+            SpawnDamageNumber(testDamage, testCrit, PlayerBody.PlayBody().transform.position);
 
         }
 
@@ -43,21 +45,23 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
 
     }
 
-    public void SpawnDamageNumber(float damageAmount, bool isCritical = false)
+    public void SpawnDamageNumber(float damageAmount, bool isCritical = false, Vector3 myLocation = new Vector3())
     {
         int damage = Mathf.FloorToInt(damageAmount);
 
+        Vector3 canvasPoint = Camera.main.WorldToScreenPoint(myLocation);
+
         GameObject newDamageNumberInstance = Instantiate(damageNumberInstance, transform);
 
+        newDamageNumberInstance.transform.position = canvasPoint;
         newDamageNumberInstance.hideFlags = HideFlags.HideInHierarchy;
         newDamageNumberInstance.GetComponent<Animator>().SetFloat("Horizontal", Random.Range(0f, 1f));
         newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
-        if (isCritical)
-        {
-         newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = critColor;
-        }
 
-        if (damage <= 10) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 10f; }
+        if (isCritical)
+            newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = critColor;
+
+        /*if (damage <= 10) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 10f; }
 
         if (damage <= 20 && damage > 10) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 15f; }
         if (damage <= 30 && damage > 20) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 20f; }
@@ -77,8 +81,16 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         if (damage <= 800 && damage > 700) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 90f; }
         if (damage <= 900 && damage > 800) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 95f; }
 
-        if (damage > 1000) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 100f; } 
-        
+        if (damage > 1000) { newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = 100f; } */
+
+        int fontSize = 10;
+
+        if (damage > 500)
+            fontSize = maxFont;
+        else
+            fontSize = Mathf.RoundToInt((damage / 500) * (maxFont - minFont)) + minFont;
+
+        newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = fontSize;
         
         damageNumbers.Add(newDamageNumberInstance);
 
