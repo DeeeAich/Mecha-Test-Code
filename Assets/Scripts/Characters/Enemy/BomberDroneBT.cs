@@ -9,12 +9,14 @@ public class BomberDroneBT : BehaviourTree
     public GameObject explosion;
     public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngleSpeed;
     internal UnityEvent OnCharge;
+    internal BomberLean lean;
     //bomber drone does short circuit dablage
 
     // Start is called before the first frame update
     internal override void Awake()
     {
         OnCharge = new();
+        lean = GetComponentInChildren<BomberLean>();
         base.Awake();
         AddOrOverwrite("player", player);
         root = new RootNode(this,
@@ -53,6 +55,18 @@ public class BomberDroneBT : BehaviourTree
     {
         Animator anim = GetComponentInChildren<Animator>();
         anim.SetTrigger("Activate");
+    }
+
+    internal override void TriggerDeath()
+    {
+        Destroy(lean);
+        base.TriggerDeath();
+
+    }
+
+    public override void Die()
+    {
+        base.Die();
     }
 }
 
