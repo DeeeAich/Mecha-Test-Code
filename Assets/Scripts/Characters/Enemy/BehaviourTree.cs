@@ -103,7 +103,7 @@ namespace AITree
             {
                 g.BeGone();
             }
-            foreach(Transform child in transform)
+            foreach (Transform child in transform)
             {
                 child.parent = null;
             }
@@ -197,6 +197,7 @@ namespace AITree
         internal override float TakeDamage(float amount, bool isCrit = false)
         {
             float moddedAmount = base.TakeDamage(amount, isCrit);
+            if(numbers!=null)
             numbers.SpawnDamageNumber(moddedAmount, isCrit);
             return moddedAmount;
         }
@@ -591,9 +592,9 @@ namespace AITree
                     weightTotal += childWeight;
                 }
             }
-            if(data.Count == 0)
+            if (data.Count == 0)
             {
-                if(allowRepeat)
+                if (allowRepeat)
                 {
                     Debug.LogWarning("Boss Move Selector Failed");
                     childIndex = 0;
@@ -601,7 +602,7 @@ namespace AITree
                 }
                 else
                 {
-                    allowRepeat = true; 
+                    allowRepeat = true;
                     weightTotal = 0f;
                     foreach (WeightedRandomChoice w in children)
                     {
@@ -615,7 +616,7 @@ namespace AITree
                             weightTotal += childWeight;
                         }
                     }
-                    if(data.Count == 0)
+                    if (data.Count == 0)
                     {
                         Debug.LogWarning("Boss Move Selector Failed (even tried to repeat)");
                         childIndex = 0;
@@ -1040,7 +1041,8 @@ namespace AITree
             base.Begin();
             timer = 0;
             state = BehaviourTreeState.RUNNING;
-            brain.agent.isStopped = true;
+            if (brain.agent != null && brain.agent.isOnNavMesh)
+                brain.agent.isStopped = true;
         }
 
         public override BehaviourTreeState Tick()
