@@ -9,7 +9,7 @@ public class CornLean : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        gameObject.hideFlags = HideFlags.HideInHierarchy;
     }
 
     // Update is called once per frame
