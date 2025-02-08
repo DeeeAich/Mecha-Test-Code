@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyDamageNumberDelete : MonoBehaviour
 {
-    
+
+    [SerializeField] float deathTimer = 0.75f;
 
     void Start()
     {
