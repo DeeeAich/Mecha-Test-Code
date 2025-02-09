@@ -232,6 +232,5 @@ public class Room : MonoBehaviour
             if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
             if (pickupsToSpawn[i].ItemScriptableReference != null) newLoot.ItemScriptableReference = pickupsToSpawn[i].ItemScriptableReference;
         }
-        
     }
 }
