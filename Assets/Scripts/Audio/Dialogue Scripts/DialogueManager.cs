@@ -6,19 +6,16 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI textBox;
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
     public RawImage profileImage;
-    public GameObject dialogueBox;
     public Animator dialogueBoxAnimator;
-    public Texture defaultProfileImage;
-    public GameObject audioPrefab;
-    public AudioClip transitionSound;
-    public GameObject skipButton;
-    public GameObject interactButton;
+    public Animator npcAnimator;
+    public GameObject dialogueBox;
 
-    private float smallFontSize = 25;
-    private float mediumFontSize = 35;
-    private float largeFontSize = 45;
+    public bool inRange;
+    public GameObject interactionPrompt;
+    public GameObject interactionCamera;
 
     private float textDelay;
     private float slowTextDelay = 0.2f;
@@ -39,12 +36,32 @@ public class DialogueManager : MonoBehaviour
     public int currentLine = 0;
     private DialogueObject currnetDialogueObject;
     private bool isTyping;
-    private bool isTransitioning;
 
     private List<DialogueObject> currentInteractionList;
     public List<DialogueObject> Interaction_1;
     public List<DialogueObject> Interaction_2;
     public List<DialogueObject> Interaction_3;
+
+
+
+
+    /////////////////////////////////////////////////// OPEN
+    void OpenDialogueBoxAndStart()
+    {
+        dialogueBox.SetActive(true);
+        interactionCamera.SetActive(true);
+        interactionPrompt.SetActive(false);
+        isTyping = true;
+        dialogueText.text = "";
+        npcAnimator.SetBool("Talking", true);
+        StopAllCoroutines();
+        StartCoroutine(OpenDialogueWait());
+    }
+    IEnumerator OpenDialogueWait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        DisplayNext(true);
+    }
 
 
     public void DisplayNext(bool isFirstLine = false)
@@ -55,65 +72,23 @@ public class DialogueManager : MonoBehaviour
         {
             case 1:
                 currentInteractionList = Interaction_1;
-                if (currentLine == 0) { OpenDialogueBoxAndStart(); } else { TriggerNextDialogueTransition(); }
+                DisplayNewDialogue(Interaction_1[currentLine]);
                 break;
             case 2:
                 currentInteractionList = Interaction_2;
-                if (currentLine == 0) { OpenDialogueBoxAndStart(); } else { TriggerNextDialogueTransition(); }
+                DisplayNewDialogue(Interaction_2[currentLine]);
                 break;
             case 3:
                 currentInteractionList = Interaction_3;
-                if (currentLine == 0) { OpenDialogueBoxAndStart(); } else { TriggerNextDialogueTransition(); }
+                DisplayNewDialogue(Interaction_3[currentLine]);
                 break;
             default:
                 return;
         }
     }
-    void OpenDialogueBoxAndStart()
-    {
-        dialogueBox.SetActive(true);
-        interactButton.SetActive(false);
-        profileImage.texture = defaultProfileImage;
-        textBox.text = "";
-    }
-    public void DialougeBoxOpenAnimationComplete()
-    {
-        TriggerNextDialogueTransition();
-    }
-    void TriggerNextDialogueTransition()
-    {
-        dialogueBoxAnimator.SetTrigger("transition");
-        isTransitioning = true;
-        PlaySFX(transitionSound);
-        skipButton.SetActive(false);
-    }
-    public void TriggerNextDialogueFromTransitionAnimation()
-    {
-        DisplayNewDialogue(currentInteractionList[currentLine]);
-        isTransitioning = false;
-        skipButton.SetActive(true);
-    }
-
     void DisplayNewDialogue(DialogueObject dialogueObject)
     {
         currnetDialogueObject = dialogueObject;
-
-        if (dialogueObject.entranceAudio != null)
-        {
-            PlaySFX(dialogueObject.entranceAudio);
-        }
-        switch (dialogueObject.fontSize)
-        {
-            case FontSize.Small:
-                textBox.fontSize = smallFontSize;
-                break;
-            case FontSize.Medium:
-                textBox.fontSize = mediumFontSize;
-                break;
-            case FontSize.Large:
-                textBox.fontSize = largeFontSize;
-                break;
-        }
         switch (dialogueObject.textSpeed)
         {
             case TextSpeed.Slow:
@@ -138,57 +113,41 @@ public class DialogueManager : MonoBehaviour
                 automaticSkipDelay = fastAutomaticSkipDelay;
                 break;
         }
-        if (dialogueObject.isBold) textBox.fontStyle = FontStyles.Bold;
-        if (dialogueObject.isItalic) textBox.fontStyle = FontStyles.Italic;
+        if (dialogueObject.isBold) dialogueText.fontStyle = FontStyles.Bold;
+        if (dialogueObject.isItalic) dialogueText.fontStyle = FontStyles.Italic;
 
         finalText = dialogueObject.dialogueText + " ";
         profileImage.texture = dialogueObject.character;
 
 
+        if (dialogueObject.triggerActionAnimation) 
+        {
+            npcAnimator.SetInteger("ActionID", dialogueObject.actionAnimationID);
+            npcAnimator.SetTrigger("Action");
+        }
+
+
+        StopAllCoroutines();
 
         StartCoroutine(DisplayText(finalText));
         StartCoroutine(WaitForTextToEnd(finalText.Length * textDelay + 1f, automaticSkipDelay));
 
     }
+
+
     IEnumerator DisplayText(string text)
     {
         for (int i = 0; i < text.Length; i++)
         {
             currentText = text.Substring(0, i);
-            textBox.text = currentText;
+            dialogueText.text = currentText;
             if (i > 1)
             {
                 string lastChar = currentText.Substring(currentText.Length - 1);
-                if (lastChar != " ")
-                {
-                    PlayTypingSFX(currnetDialogueObject.typingAudio);
-                }
-            }
-            else
-            {
-                PlayTypingSFX(currnetDialogueObject.typingAudio);
+
             }
             yield return new WaitForSeconds(textDelay);
         }       
-    }
-    void PlayTypingSFX(AudioClip clip)
-    {
-        if (!isTyping) return;
-
-        GameObject newSFX = Instantiate(audioPrefab);
-        newSFX.GetComponent<AudioSource>().clip = clip;
-        newSFX.GetComponent<AudioSource>().Play();
-        Destroy(newSFX, clip.length);
-
-    }
-    void PlaySFX(AudioClip clip)
-    {
-        if (!dialogueBox.activeInHierarchy) return;
-
-        GameObject newSFX = Instantiate(audioPrefab);
-        newSFX.GetComponent<AudioSource>().clip = clip;
-        newSFX.GetComponent<AudioSource>().Play();
-        Destroy(newSFX, clip.length);
     }
     IEnumerator WaitForTextToEnd(float length, float automaticSkipDelay)
     {
@@ -200,45 +159,71 @@ public class DialogueManager : MonoBehaviour
         currentLine++;
         if (currentLine < currentInteractionList.Count)
         { 
-            DisplayNext();
-        }
-    }
-
-    public void SkipCurrentText()
-    {   
-        if (isTransitioning) return;
-
-        if (isTyping)
-        {
-            StopAllCoroutines();
-            currentText = finalText;
-            textBox.text = currentText;
-            isTyping = false;
+            DisplayNext(false);
         }
         else
         {
-            currentLine++;
-            if (currentLine < currentInteractionList.Count)
+            CloseDialogue();
+        }
+    }
+
+
+    /////////////////////////////////////////////////// CLOSE
+
+    void CloseDialogue()
+    {
+        dialogueBoxAnimator.SetTrigger("Close");
+        npcAnimator.SetBool("Talking", false);
+        StopAllCoroutines();
+        StartCoroutine(CloseDialogueWait());
+    }
+    IEnumerator CloseDialogueWait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        dialogueBox.SetActive(false);
+        interactionCamera.SetActive(false);
+    }
+
+
+
+
+    /////////////////////////////////////////////////// Interaction
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = true;
+            interactionPrompt.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = false;
+            interactionPrompt.SetActive(false);
+            dialogueBox.SetActive(false);
+            interactionCamera.SetActive(false);
+            npcAnimator.SetBool("Talking", false);
+            npcAnimator.SetTrigger("Exit");
+            isTyping = false;
+            StopAllCoroutines();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if(isTyping==false)
             {
-                DisplayNext();
-            }
-            else
-            {
-                currentLine = 0;
-                currentInteraction++;
-                CloseDialogue();
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    OpenDialogueBoxAndStart();
+                }
             }
         }
     }
 
-    void CloseDialogue()
-    {
-        dialogueBoxAnimator.SetTrigger("exit");
-        skipButton.SetActive(false);
-    }
-    public void DialougeBoxCloseAnimationComplete()
-    {
-        dialogueBox.SetActive(false);
-        interactButton.SetActive(true);
-    }
 }

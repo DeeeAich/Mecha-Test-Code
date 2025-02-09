@@ -13,27 +13,16 @@ public class DialogueObject : ScriptableObject
     [Header("Text")]
     [TextArea]
     public string dialogueText;
-    public FontSize fontSize;
     public TextSpeed textSpeed;
     public AutomaticSkipDelay automaticSkipDelay;
     public bool isBold = false;
     public bool isItalic = false;
 
     [Header("Audio")]
-    public AudioClip typingAudio;
-    public AudioClip entranceAudio;
-
-
-
-
+    public bool triggerActionAnimation;
+    public int actionAnimationID;
 }
 
-public enum FontSize
-{    
-    Medium,
-    Small,
-    Large
-}
 public enum TextSpeed
 {
     Medium,
