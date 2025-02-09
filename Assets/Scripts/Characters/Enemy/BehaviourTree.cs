@@ -414,8 +414,6 @@ namespace AITree
         }
     }
 
-    //Inverter
-
     //Repeat
 
     //RepeatUntilFail
@@ -655,7 +653,102 @@ namespace AITree
         }
     }
 
+    public class Parallel : Control
+    {
+        internal int successThresh = 0;
+        int successCount = 0;
+        int completeCount = 0;
+
+        public Parallel(params Node[] children) : base(children)
+        {
+        }
+
+        public Parallel(int threshold, params Node[] children): this(children)
+        {
+            successThresh = threshold;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+        }
+
+        public override void End()
+        {
+            base.End();
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            foreach(Node n in children)
+            {
+                if(n.state == BehaviourTreeState.RUNNING || n.state == BehaviourTreeState.NULL)
+                {
+                    n.Tick();
+                    if(n.state == BehaviourTreeState.SUCCESS)
+                    {
+                        successCount++;
+                        completeCount++;
+                    }
+                    else if(n.state == BehaviourTreeState.FAILURE)
+                    {
+                        completeCount++;
+                    }
+                }
+            }
+            if (completeCount >= children.Count)
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+            if (successCount >= successThresh)
+            {
+                state = BehaviourTreeState.SUCCESS;
+            }
+            return state;
+        }
+    }
     //Parallel?
+
+    public class MultiRoot : Control
+    {
+        public MultiRoot(params Node[] children) : base(children)
+        {
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+        }
+
+        public override void End()
+        {
+            base.End();
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            foreach(Node n in children)
+            {
+                if(n.Tick()!=BehaviourTreeState.RUNNING)
+                {
+                    n.Restart();
+                }
+            }
+            return BehaviourTreeState.RUNNING;
+        }
+    }
 
     public abstract class Condition : Node
     {
