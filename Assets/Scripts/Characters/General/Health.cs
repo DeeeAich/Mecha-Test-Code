@@ -10,6 +10,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     public float maxHealth;
     public bool isAlive = true;
     public bool canTakeDamage = true;
+    public bool canDie = true;
 
     //public string entityType;
     public EntityType entityType;
@@ -79,7 +80,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             health = maxHealth;
         }
 
-        if (health <= 0)
+        if (health <= 0 && canDie)
         {
             TriggerDeath();
         }
