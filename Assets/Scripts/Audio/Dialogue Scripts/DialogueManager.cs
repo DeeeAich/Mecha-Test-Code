@@ -88,6 +88,7 @@ public class DialogueManager : MonoBehaviour
     }
     void DisplayNewDialogue(DialogueObject dialogueObject)
     {
+        profileImage.texture = dialogueObject.character;
         currnetDialogueObject = dialogueObject;
         switch (dialogueObject.textSpeed)
         {
@@ -117,7 +118,6 @@ public class DialogueManager : MonoBehaviour
         if (dialogueObject.isItalic) dialogueText.fontStyle = FontStyles.Italic;
 
         finalText = dialogueObject.dialogueText + " ";
-        profileImage.texture = dialogueObject.character;
 
 
         if (dialogueObject.triggerActionAnimation) 
