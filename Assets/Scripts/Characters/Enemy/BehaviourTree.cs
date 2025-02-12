@@ -36,7 +36,7 @@ namespace AITree
 
         public RootNode replacement;
         CharacterVFXManager VFXManager;
-        EnemyDamageNumberSpawner numbers;
+
         public virtual void AddOrOverwrite(string key, object o)
         {
             if (!memory.ContainsKey(key))
@@ -105,7 +105,10 @@ namespace AITree
             }
             foreach (Transform child in transform)
             {
-                child.parent = null;
+                if (transform.parent.parent != null)
+                    child.parent = transform.parent.parent;
+                else
+                    child.parent = null;
             }
             Die();
             Destroy(gameObject);
@@ -122,7 +125,7 @@ namespace AITree
 
         public virtual void Stop()
         {
-            if (agent != null)
+            if (agent != null && agent.isOnNavMesh)
                 agent.isStopped = true;
             paused = true;
             if (verboseDebug || debug)
@@ -133,7 +136,7 @@ namespace AITree
 
         public virtual void Resume()
         {
-            if (agent != null)
+            if (agent != null && agent.isOnNavMesh)
                 agent.isStopped = false;
             paused = false;
             if (verboseDebug)
@@ -197,8 +200,7 @@ namespace AITree
         internal override float TakeDamage(float amount, bool isCrit = false)
         {
             float moddedAmount = base.TakeDamage(amount, isCrit);
-            if(numbers!=null)
-            numbers.SpawnDamageNumber(moddedAmount, transform.position, isCrit);
+            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit);
             return moddedAmount;
         }
 
@@ -343,16 +345,16 @@ namespace AITree
 
     public class WeightedRandomChoice : Decorator
     {
-        internal float Weight;
-        public virtual float weight
+        internal float weight;
+        public virtual float Weight
         {
             get
             {
-                return Weight;
+                return weight;
             }
             private set
             {
-                Weight = value;
+                weight = value;
             }
         }
         public WeightedRandomChoice(Node child) : base(child)
@@ -361,7 +363,7 @@ namespace AITree
 
         public WeightedRandomChoice(Node child, float weight) : this(child)
         {
-            this.weight = weight;
+            Weight = weight;
         }
 
         public override BehaviourTreeState Tick()
@@ -389,7 +391,7 @@ namespace AITree
 
     public class CalcingRandomChoice : WeightedRandomChoice
     {
-        Func<float> calculate;
+        readonly Func<float> calculate;
         public CalcingRandomChoice(Node child) : base(child)
         {
         }
@@ -403,13 +405,13 @@ namespace AITree
             calculate = calculation;
         }
 
-        public override float weight
+        public override float Weight
         {
             get
             {
                 if (calculate != null)
-                    Weight = calculate();
-                return Weight;
+                    weight = calculate();
+                return weight;
             }
         }
     }
@@ -580,8 +582,8 @@ namespace AITree
             float weightTotal = 0f;
             foreach (WeightedRandomChoice w in children)
             {
-                float childWeight = w.weight;
-                if (w.Weight > 0.01f && (allowRepeat || children.IndexOf(w) != lastIndex))
+                float childWeight = w.Weight;
+                if (w.weight > 0.01f && (allowRepeat || children.IndexOf(w) != lastIndex))
                 {
                     ChoiceData freshData = new ChoiceData();
                     freshData.w = w;
@@ -604,8 +606,8 @@ namespace AITree
                     weightTotal = 0f;
                     foreach (WeightedRandomChoice w in children)
                     {
-                        float childWeight = w.weight;
-                        if (w.Weight > 0.01f)
+                        float childWeight = w.Weight;
+                        if (w.weight > 0.01f)
                         {
                             ChoiceData freshData = new ChoiceData();
                             freshData.w = w;
@@ -663,7 +665,7 @@ namespace AITree
         {
         }
 
-        public Parallel(int threshold, params Node[] children): this(children)
+        public Parallel(int threshold, params Node[] children) : this(children)
         {
             successThresh = threshold;
         }
@@ -686,17 +688,17 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            foreach(Node n in children)
+            foreach (Node n in children)
             {
-                if(n.state == BehaviourTreeState.RUNNING || n.state == BehaviourTreeState.NULL)
+                if (n.state == BehaviourTreeState.RUNNING || n.state == BehaviourTreeState.NULL)
                 {
                     n.Tick();
-                    if(n.state == BehaviourTreeState.SUCCESS)
+                    if (n.state == BehaviourTreeState.SUCCESS)
                     {
                         successCount++;
                         completeCount++;
                     }
-                    else if(n.state == BehaviourTreeState.FAILURE)
+                    else if (n.state == BehaviourTreeState.FAILURE)
                     {
                         completeCount++;
                     }
@@ -739,9 +741,9 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            foreach(Node n in children)
+            foreach (Node n in children)
             {
-                if(n.Tick()!=BehaviourTreeState.RUNNING)
+                if (n.Tick() != BehaviourTreeState.RUNNING)
                 {
                     n.Restart();
                 }
@@ -840,8 +842,12 @@ namespace AITree
 
     public class FindTarget : Action
     {
+#pragma warning disable IDE0052 // Remove unread private members
+#pragma warning disable IDE0044
         string targetType;
         string storage;
+#pragma warning restore IDE0052 // Remove unread private members
+#pragma warning restore IDE0044
 
         public FindTarget(string targetType, string storage)
         {
@@ -885,8 +891,7 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            object recovered;
-            if (!brain.memory.TryGetValue(targLoc, out recovered))
+            if (!brain.memory.TryGetValue(targLoc, out object recovered))
             {
                 state = BehaviourTreeState.FAILURE;
                 return state;
@@ -1008,7 +1013,7 @@ namespace AITree
         Vector3 activeTarget;
         GameObject objectTarget;
         Transform transformTarget;
-        StoreType store;
+        readonly StoreType store;
         public Approach(string targetLocation, float approachDist) : base()
         {
             this.targetLocation = targetLocation;
@@ -1445,7 +1450,7 @@ namespace AITree
 
     public class InvokeEvent : Action
     {
-        UnityEvent invoked;
+        readonly UnityEvent invoked;
 
         public InvokeEvent(UnityEvent invoked) : base()
         {
