@@ -10,7 +10,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private PlayerWeaponControl weaponHolder;
     public Legs legStats;
     public Ultimate ultimate;
-    public List<ChipBasic> chipsInserted;
+    public List<Chip> chipsInserted;
     public LegInfo curLegs;
     private PlayerInput playerInputs;
     public Camera myCamera;
@@ -62,6 +62,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         isGamepad = playerInputs.currentControlScheme.Equals("Controller");
         myCamera = Camera.main;
         SetControls();
+        SetHooks();
         LoadStats();
     }
 
@@ -87,6 +88,26 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo, weaponHolder.leftWeapon.curAmmo);
         myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo, weaponHolder.rightWeapon.curAmmo);
+    }
+
+    private void TriggerEndOfRoom()
+    {
+        foreach(Chip chip in chipsInserted)
+        {
+            if((BEndChip)chip)
+                chip.TriggerAbility();
+
+        }
+    }
+
+    private void TriggerOnKill()
+    {
+
+    }
+
+    private void TriggerOnDamage()
+    {
+        
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -120,6 +141,13 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         interact.performed += Interact;
 
         playerInputs.onControlsChanged += SetControlScheme;
+    }
+
+    private void SetHooks()
+    {
+
+        LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
+
     }
 
     private void Interact(InputAction.CallbackContext context)

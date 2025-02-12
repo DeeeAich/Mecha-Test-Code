@@ -23,4 +23,10 @@ public class Chip : ScriptableObject
     [TextArea(3,5)]
     public string chipDes;
 
+
+    public virtual void TriggerAbility()
+    {
+
+    }
+
 }

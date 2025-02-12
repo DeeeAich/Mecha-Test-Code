@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "NewBodyChip", menuName = "Player/Chip/BodyChip")]
+//[CreateAssetMenu(fileName = "NewBodyChip", menuName = "Player/Chip/BodyChip")]
 public class BodyChip : Chip
 {
+
+    public enum BodyType
+    {
+        Stat, EndRoom,
+        Constant
+    }
+
+    public BodyType bodyType;
 
     public virtual void DoAction(PlayerBody myBody)
     {
@@ -20,4 +28,6 @@ public class BodyChip : Chip
 
 
     }
+
+
 }
