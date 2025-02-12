@@ -33,5 +33,4 @@ public class LegStats
     public int dashCharges;
     public float dashRecharge;
 
-    p
 }
