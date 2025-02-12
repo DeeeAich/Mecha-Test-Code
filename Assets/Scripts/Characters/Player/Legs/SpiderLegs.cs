@@ -9,7 +9,7 @@ public class SpiderLegs : PlayerLegs
     public override IEnumerator Dash(Vector2 stickAmount)
     {
 
-        if (dashing || myBody.curLegs.dashCharges == 0)
+        if (dashing || myStats.curLegStats.dashCharges == 0)
             yield break;
 
         dashDirection = new Vector2();
@@ -31,25 +31,25 @@ public class SpiderLegs : PlayerLegs
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
         myBody.myUI.Dashed();
 
-        myBody.curLegs.dashCharges--;
+        myStats.curLegStats.dashCharges--;
         dashing = true;
 
-        curSpeed = dashDirection * (myBody.curLegs.dashDistance / myBody.curLegs.dashTime);
+        curSpeed = dashDirection * (myStats.curLegStats.dashDistance / myStats.curLegStats.dashTime);
 
         MultipleLegIkMover mover = GetComponentInChildren<MultipleLegIkMover>();
 
         mover.enabled = false;
 
-        yield return new WaitForSeconds(myBody.curLegs.dashTime);
+        yield return new WaitForSeconds(myStats.curLegStats.dashTime);
         dashing = false;
 
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(false);
 
         mover.enabled = true;
 
-        yield return new WaitForSeconds(myBody.curLegs.dashRecharge);
+        yield return new WaitForSeconds(myStats.curLegStats.dashRecharge);
 
-        myBody.curLegs.dashCharges++;
+        myStats.curLegStats.dashCharges++;
 
         yield return null;
 

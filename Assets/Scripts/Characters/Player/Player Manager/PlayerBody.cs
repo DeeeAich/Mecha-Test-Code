@@ -48,7 +48,6 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         playerInputs = GetComponent<PlayerInput>();
         myMovement = GetComponent<PlayerLegs>();
         weaponHolder = GetComponent<PlayerWeaponControl>();
-        myUI = FindObjectOfType<PlayerUI>();
         myHealth = GetComponent<Health>();
         lastHealth = myHealth.health;
         lastMax = myHealth.maxHealth;

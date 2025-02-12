@@ -46,13 +46,13 @@ public class BodyStats
 }
 
 [Serializable]
-public class LegStats
+public class LegStatChange
 {
 
     public float speed, acceleration, turnSpeed;
     public bool percentage;
 
-    public void AddStats(LegStats stats)
+    public void AddStats(LegStatChange stats)
     {
 
         if (percentage)
@@ -71,6 +71,20 @@ public class LegStats
 
 
     }
+
+}
+
+[Serializable]
+public class DashStatChange
+{
+    [Tooltip("Add additional charges or remove")]
+    public int dashCharges;
+    [Tooltip("Add for slower, minus for faster")]
+    public float dashTime;
+    [Tooltip("Add distance or remove distance")]
+    public float dashDistance;
+    [Tooltip("Add to increase time, minus to decrease")]
+    public float dashRecharge;
 
 }
 

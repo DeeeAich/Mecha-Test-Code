@@ -17,14 +17,14 @@ public class PlayerLegs : MonoBehaviour
         
         if (stickAmount.magnitude != 0 && !dashing)
         {
-            curSpeed += stickAmount * myStats.curLegStats.acceleration * Time.deltaTime;
+            curSpeed += stickAmount * myStats.curLegStats.accelleration * Time.deltaTime;
 
             if (curSpeed.magnitude > (stickAmount * myStats.curLegStats.speed).magnitude)
                 curSpeed = stickAmount * myStats.curLegStats.speed;
         }
         else if(!dashing)
         {
-            curSpeed -= curSpeed.normalized * Time.deltaTime * myStats.curLegStats.acceleration;
+            curSpeed -= curSpeed.normalized * Time.deltaTime * myStats.curLegStats.accelleration;
             if (curSpeed.magnitude <= 0.5f)
                 curSpeed = new Vector2();
         }
@@ -63,6 +63,7 @@ public class PlayerLegs : MonoBehaviour
     {
         myBody = GetComponent<PlayerBody>();
         ridBy = GetComponent<Rigidbody>();
+        myStats = GetComponent<PlayerStatus>();
     }
 
     public virtual void OnCollisionEnter(Collision collision)

@@ -397,12 +397,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341edb866a18a0043b984eb257283a49, type: 3}
+--- !u!1 &882406777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5041930653980852429, guid: 9e71a777bf80b491fba3b95931b04c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2066194640}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1762745058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5338708035899863324, guid: 9e71a777bf80b491fba3b95931b04c7f,
     type: 3}
   m_PrefabInstance: {fileID: 2066194640}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762745067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882406777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf0013ac5d4a474a9d2327d85182b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLegs: {fileID: 0}
+  curLegStats:
+    speed: 0
+    accelleration: 0
+    turnSpeed: 0
+    dashTime: 0
+    dashDistance: 0
+    dashCharges: 0
+    dashRecharge: 0
 --- !u!1001 &1957085831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -808,7 +835,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5041930653980852429, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1762745067}
   m_SourcePrefab: {fileID: 100100000, guid: 9e71a777bf80b491fba3b95931b04c7f, type: 3}
 --- !u!1001 &6170033891109827548
 PrefabInstance:
