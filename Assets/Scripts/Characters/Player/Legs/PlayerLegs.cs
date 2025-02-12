@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLegs : MonoBehaviour
 {
     public PlayerBody myBody;
+    public PlayerStatus myStats;
     public static Vector2 curSpeed;
     public GameObject myLegs;
     public bool dashing = false;
@@ -16,14 +17,14 @@ public class PlayerLegs : MonoBehaviour
         
         if (stickAmount.magnitude != 0 && !dashing)
         {
-            curSpeed += stickAmount * myBody.curLegs.accelleration * Time.deltaTime;
+            curSpeed += stickAmount * myStats.curLegStats.acceleration * Time.deltaTime;
 
-            if (curSpeed.magnitude > (stickAmount * myBody.curLegs.speed).magnitude)
-                curSpeed = stickAmount * myBody.curLegs.speed;
+            if (curSpeed.magnitude > (stickAmount * myStats.curLegStats.speed).magnitude)
+                curSpeed = stickAmount * myStats.curLegStats.speed;
         }
         else if(!dashing)
         {
-            curSpeed -= curSpeed.normalized * Time.deltaTime * myBody.curLegs.accelleration;
+            curSpeed -= curSpeed.normalized * Time.deltaTime * myStats.curLegStats.acceleration;
             if (curSpeed.magnitude <= 0.5f)
                 curSpeed = new Vector2();
         }
@@ -33,7 +34,7 @@ public class PlayerLegs : MonoBehaviour
 
     public virtual IEnumerator Dash(Vector2 stickAmount)
     {
-        if (dashing || myBody.curLegs.dashCharges == 0)
+        if (dashing || myStats.curLegStats.dashCharges == 0)
             yield break;
 
         dashDirection = new Vector2();
