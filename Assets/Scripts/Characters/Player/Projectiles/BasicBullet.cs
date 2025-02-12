@@ -39,14 +39,12 @@ public class BasicBullet : Projectile
             if (pierceCounter == 0)
             {
 
-                print("Bullet hitting enemy and attempting reset");
                 StopCoroutine(AutoReset());
                 StartCoroutine(AnimationTimer());
             }
         }
         else
         {
-            print("Bullet hitting wall and resetting");
             StopCoroutine(AutoReset());
             StartCoroutine(AnimationTimer());
 

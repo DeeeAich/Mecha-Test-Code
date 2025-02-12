@@ -39,7 +39,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void PressLeft(InputAction.CallbackContext context)
     {
-        if(myBody.canShoot)
+        if (myBody.canShoot)
             leftWeapon.FirePress();
     }
 
