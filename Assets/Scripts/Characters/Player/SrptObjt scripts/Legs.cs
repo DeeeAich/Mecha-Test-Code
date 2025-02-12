@@ -1,26 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "New Leg data", menuName = "Player/Leg Data")]
 public class Legs : ScriptableObject
-{
-    public LegStatList myStats;
-
-    [Header("Attachable")]
-    public GameObject legPrefab;
-    public enum Scripts
-    {
-        PlayerLegs,
-        Treads,
-        Hover
-    }
-
-}
-
-[Serializable]
-public class LegStatList
 {
     [Header("Basic Info")]
     public float speed;
@@ -33,32 +16,27 @@ public class LegStatList
     public int dashCharges;
     public float dashRecharge;
 
-    public LegStatList SetStats()
+    [Header("Attachable")]
+    public GameObject legPrefab;
+    public enum Scripts
     {
-
-        LegStatList newStatList = new();
-
-        newStatList.speed = speed;
-        newStatList.accelleration = accelleration;
-        newStatList.turnSpeed = turnSpeed;
-        newStatList.dashTime = turnSpeed;
-        newStatList.dashDistance = dashDistance;
-        newStatList.dashRecharge = dashRecharge;
-        newStatList.dashCharges = dashCharges;
-
-        return newStatList;
+        PlayerLegs,
+        Treads,
+        Hover
     }
+    public Scripts myScript;
 
-    public void ModifyLegs(LegStatList statList, LegStatChange legChange)
+    public PlayerBody.LegInfo LoadLegs()
     {
+        PlayerBody.LegInfo legsToFill = new PlayerBody.LegInfo();
 
+        legsToFill.speed = speed;
+        legsToFill.accelleration = accelleration;
+        legsToFill.dashDistance = dashDistance;
+        legsToFill.dashTime = dashTime;
+        legsToFill.dashCharges = dashCharges;
+        legsToFill.dashRecharge = dashRecharge;
 
+        return legsToFill;
     }
-
-    public void ModifyDash(LegStatList statList, DashStatChange dashChange)
-    {
-
-
-    }
-
 }
