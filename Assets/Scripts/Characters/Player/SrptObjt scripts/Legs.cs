@@ -6,7 +6,7 @@ using System;
 [CreateAssetMenu(fileName = "New Leg data", menuName = "Player/Leg Data")]
 public class Legs : ScriptableObject
 {
-    LegStats myStats;
+    LegStatList myStats;
 
     [Header("Attachable")]
     public GameObject legPrefab;
@@ -20,7 +20,7 @@ public class Legs : ScriptableObject
 }
 
 [Serializable]
-public class LegStats
+public class LegStatList
 {
     [Header("Basic Info")]
     public float speed;
