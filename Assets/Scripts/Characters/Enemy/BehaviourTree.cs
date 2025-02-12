@@ -104,10 +104,8 @@ namespace AITree
             }
             foreach (Transform child in transform)
             {
-                if (transform.parent.parent != null)
+                if (transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
                     child.parent = transform.parent.parent;
-                else
-                    child.parent = null;
             }
             Die();
             Destroy(gameObject);

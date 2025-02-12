@@ -84,6 +84,14 @@ public class ShieldDroneBT : BehaviourTree
         root.Restart();
         
     }
+
+
+    public override void Die()
+    {
+        memory.Clear();
+        shielder.Break();
+        base.Die();
+    }
 }
 
 

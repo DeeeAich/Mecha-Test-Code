@@ -31,7 +31,7 @@ public class Shielder : MonoBehaviour
             //Debug.Log("shielding");
             ShieldOn();
         }
-        else if(VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive || !canShield)
+        else if (VFX.shieldToggle && (VFX.shieldedTarget.transform.position - gameObject.transform.position).magnitude > rangeMax || targetHealth == null || !targetHealth.isAlive || !canShield)
         {
             TargetDied();
         }
@@ -42,17 +42,21 @@ public class Shielder : MonoBehaviour
     {
         breakEvent.Invoke();
         VFX.shieldedTarget = null;
-        //Debug.Log("New Target Discarded");
-        targetHealth.onDeath.RemoveListener(TargetDied);
+        if (targetHealth != null)
+            targetHealth.onDeath.RemoveListener(TargetDied);
         VFX.shieldToggle = false;
-        if(sm!=null)
-        sm.removeFlag = true;
-        HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
-        if (hb != null)
+        if (sm != null)
+            sm.removeFlag = true;
+        if (targetHealth != null)
         {
-            hb.shieldModifiers.Remove(sm);
+            HealthBar hb = targetHealth.GetComponentInChildren<HealthBar>();
+            if (hb != null)
+            {
+                hb.shieldModifiers.Remove(sm);
+            }
         }
         sm = null;
+        targetHealth = null;
         if (canShield)
             StartCoroutine(DisableForTime(breakTime));
     }
@@ -69,6 +73,7 @@ public class Shielder : MonoBehaviour
             }
             if (sm != null)
                 sm.removeFlag = true;
+            targetHealth = null;
         }
         sm = null;
         enabled = false;
@@ -100,8 +105,8 @@ public class Shielder : MonoBehaviour
      */
     internal void TargetDied()
     {
-        if(canShield)
-        StartCoroutine(DisableForTime(breakTime));
+        if (canShield)
+            StartCoroutine(DisableForTime(breakTime));
         Break();
     }
 
