@@ -38,13 +38,15 @@ public class BasicBullet : Projectile
 
             if (pierceCounter == 0)
             {
+
+                print("Bullet hitting enemy and attempting reset");
                 StopCoroutine(AutoReset());
                 StartCoroutine(AnimationTimer());
             }
         }
         else
         {
-
+            print("Bullet hitting wall and resetting");
             StopCoroutine(AutoReset());
             StartCoroutine(AnimationTimer());
 
@@ -66,6 +68,7 @@ public class BasicBullet : Projectile
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
         pierceCounter = myGun.pierceCount;
+        animating = false;
 
         yield return null;
     }
@@ -82,6 +85,7 @@ public class BasicBullet : Projectile
         gameObject.SetActive(false);
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
+        pierceCount = myGun.pierceCount;
         animating = false;
 
         yield return null;

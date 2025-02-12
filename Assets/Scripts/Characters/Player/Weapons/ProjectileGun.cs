@@ -55,7 +55,7 @@ public class ProjectileGun : Weapon
         newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
         newBullet.SetActive(true);
         newBullet.GetComponent<BasicBullet>().damage = damage[0];
-        
+        StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
 
         myAnim.SetTrigger("Fire");
 
@@ -86,6 +86,8 @@ public class ProjectileGun : Weapon
     public override void AddMod(StatusInfo modInfo)
     {
         string modName = modInfo.statusType.ToString();
+
+        print(modName);
 
         if (GetComponent(modName) == null)
             foreach (ProjectileMod mod in GetComponents<ProjectileMod>())

@@ -40,7 +40,9 @@ public class SpiderLegs : PlayerLegs
 
         mover.enabled = false;
 
+        GetComponent<Health>().canTakeDamage = !myBody.legStats.invincibleDuringDash;
         yield return new WaitForSeconds(myBody.legStats.dashTime);
+        GetComponent<Health>().canTakeDamage = true;
         dashing = false;
 
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(false);

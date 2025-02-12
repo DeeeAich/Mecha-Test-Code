@@ -9,8 +9,8 @@ public class WeaStaEftChip : WeaponChip
 {
     public enum StatusType
     {
-        Critical, Burn,
-        Hack, ShortCircuit
+        Critical,Burn,
+        Hack,ShortCircuit
     }
     [Header("Status Adding")]
 

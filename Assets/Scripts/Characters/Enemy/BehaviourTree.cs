@@ -198,7 +198,7 @@ namespace AITree
         {
             float moddedAmount = base.TakeDamage(amount, isCrit);
             if(numbers!=null)
-            numbers.SpawnDamageNumber(moddedAmount, isCrit);
+            numbers.SpawnDamageNumber(moddedAmount, transform.position, isCrit);
             return moddedAmount;
         }
 

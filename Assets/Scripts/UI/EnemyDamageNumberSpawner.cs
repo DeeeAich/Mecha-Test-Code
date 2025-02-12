@@ -37,7 +37,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         if (testSpawn)
         {
             testSpawn = false;
-            SpawnDamageNumber(testDamage, testCrit, PlayerBody.PlayBody().transform.position);
+            SpawnDamageNumber(testDamage, PlayerBody.PlayBody().transform.position, testCrit);
 
         }
 
@@ -45,7 +45,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
 
     }
 
-    public void SpawnDamageNumber(float damageAmount, bool isCritical = false, Vector3 myLocation = new Vector3())
+    public void SpawnDamageNumber(float damageAmount, Vector3 myLocation, bool isCritical = false)
     {
         int damage = Mathf.FloorToInt(damageAmount);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-[CreateAssetMenu(fileName = "newEndOfRoomChip", menuName = "Player/Chip/EndRoomChip")]
+//[CreateAssetMenu(fileName = "newEndOfRoomChip", menuName = "Player/Chip/EndRoomChip")]
 public class BEndChip : BodyChip
 {
 

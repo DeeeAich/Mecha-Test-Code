@@ -15,6 +15,7 @@ public class Legs : ScriptableObject
     public float dashDistance;
     public int dashCharges;
     public float dashRecharge;
+    public bool invincibleDuringDash;
 
     [Header("Attachable")]
     public GameObject legPrefab;
