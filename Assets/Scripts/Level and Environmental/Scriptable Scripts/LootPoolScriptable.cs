@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable] public struct LootPickupVariable
+[Serializable] public struct LootPickupStruct
 {
     public string lootName;
     public pickupType PickupType;
@@ -22,16 +22,16 @@ public class LootPoolScriptable : ScriptableObject
     public GameObject pickupPrefab; 
     
     [Header("Chips")]
-    public LootPickupVariable[] Chips;
+    public LootPickupStruct[] Chips;
 
     [Header("Weapons")]
-    public LootPickupVariable[] Weapons;
+    public LootPickupStruct[] Weapons;
 
     [Header("Ordinance")]
-    public LootPickupVariable[] Ordinance;
+    public LootPickupStruct[] Ordinance;
 
     [Header("Chassis")]
-    public LootPickupVariable[] Chassis;
+    public LootPickupStruct[] Chassis;
     
     [Header("Images for display on things like doors and crates")]
     public Sprite weaponLootImage;
