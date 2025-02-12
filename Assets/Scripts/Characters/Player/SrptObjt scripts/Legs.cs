@@ -1,9 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Leg data", menuName = "Player/Leg Data")]
 public class Legs : ScriptableObject
+{
+    LegStats myStats;
+
+    [Header("Attachable")]
+    public GameObject legPrefab;
+    public enum Scripts
+    {
+        PlayerLegs,
+        Treads,
+        Hover
+    }
+
+}
+
+[Serializable]
+public class LegStats
 {
     [Header("Basic Info")]
     public float speed;
@@ -16,27 +33,5 @@ public class Legs : ScriptableObject
     public int dashCharges;
     public float dashRecharge;
 
-    [Header("Attachable")]
-    public GameObject legPrefab;
-    public enum Scripts
-    {
-        PlayerLegs,
-        Treads,
-        Hover
-    }
-    public Scripts myScript;
-
-    public PlayerBody.LegInfo LoadLegs()
-    {
-        PlayerBody.LegInfo legsToFill = new PlayerBody.LegInfo();
-
-        legsToFill.speed = speed;
-        legsToFill.accelleration = accelleration;
-        legsToFill.dashDistance = dashDistance;
-        legsToFill.dashTime = dashTime;
-        legsToFill.dashCharges = dashCharges;
-        legsToFill.dashRecharge = dashRecharge;
-
-        return legsToFill;
-    }
+    p
 }
