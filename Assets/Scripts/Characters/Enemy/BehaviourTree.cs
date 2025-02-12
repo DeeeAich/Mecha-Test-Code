@@ -52,7 +52,6 @@ namespace AITree
         internal override void Awake()
         {
             base.Awake();
-            numbers = GetComponentInChildren<EnemyDamageNumberSpawner>();
             VFXManager = GetComponentInChildren<CharacterVFXManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshAgent>();
