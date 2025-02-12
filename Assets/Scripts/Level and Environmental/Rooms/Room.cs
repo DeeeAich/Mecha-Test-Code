@@ -217,7 +217,7 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Spawning Loot");
         
-        LootPickupStruct[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
+        LootPickupVariable[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
         
         for (int i = 0; i < pickupsToSpawn.Length; i++)
         {

@@ -8,10 +8,8 @@ using Random = System.Random;
 
 public enum SpawnType
 {
-    Standard, MiniBoss, Boss
+    Standard, Rare, MiniBoss, Boss
 }
-
-
 public class WaveSpawner : MonoBehaviour
 {
     public bool spawning;
@@ -27,7 +25,7 @@ public class WaveSpawner : MonoBehaviour
     
     [Header("If unset, these will be randomly generated within fair ranges")]
     [SerializeField] private int[] waves;
-    [SerializeField] private List<EnemySpawnStruct> enemiesToSpawn;
+    [SerializeField] private List<GameObject> enemiesToSpawn;
 
     [Header("References")]
     [SerializeField] private EnemySpawnPoint[] spawnPoints;
@@ -39,14 +37,14 @@ public class WaveSpawner : MonoBehaviour
     
     public UnityEvent onComplete;
     
-    private List<EnemySpawnStruct> spawnableEnemies;
+    private List<GameObject> spawnableEnemies;
 
     private int enemyToSpawnIndex;
     private Random seededRandom;
     private float waveSpawnCooldown = 3;
     private float waveSpawnCooldownTimer;
     
-    private void Awake() // creates enemy spawn pool
+    private void Awake()
     {
         seededRandom = new Random(LevelGenerator.instance.seededRandom.Next());
         
@@ -55,13 +53,16 @@ public class WaveSpawner : MonoBehaviour
             Debug.LogWarning("No waves set, not implemented");
         }
 
-        spawnableEnemies = new List<EnemySpawnStruct>();
+        spawnableEnemies = new List<GameObject>();
         if(enemyTypes.Contains(SpawnType.Standard)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.standardEnemies);
+        if(enemyTypes.Contains(SpawnType.Rare)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.rareEnemies);
         if(enemyTypes.Contains(SpawnType.MiniBoss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.miniBosses);
         if(enemyTypes.Contains(SpawnType.Boss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.bosses);
+        
+        
     }
 
-    private void Start() // finds spawn points
+    private void Start()
     {
         if (spawnPoints.Length == 0)
         {
@@ -70,7 +71,7 @@ public class WaveSpawner : MonoBehaviour
         if(spawnOnStart) LevelGenerator.instance.currentRoom.GetComponent<Room>().onStartRoom.AddListener(delegate { StartSpawning(); });
     }
 
-    public void StartSpawning() // selects which enemies will be spawned
+    public void StartSpawning()
     {
         if (waves == null || waves.Length == 0)
         {
@@ -84,7 +85,7 @@ public class WaveSpawner : MonoBehaviour
         
         if (enemiesToSpawn == null || enemiesToSpawn.Count == 0)
         {
-            enemiesToSpawn = new List<EnemySpawnStruct>();
+            enemiesToSpawn = new List<GameObject>();
 
             for (int i = 0; i < waves.Length; i++)
             {

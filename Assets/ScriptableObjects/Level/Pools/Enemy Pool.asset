@@ -13,66 +13,29 @@ MonoBehaviour:
   m_Name: Enemy Pool
   m_EditorClassIdentifier: 
   standardEnemies:
-  - Name: Gun Boid
-    prefab: {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f,
-      type: 3}
-    spawnAnimationPrefab: {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563,
-      type: 3}
-    spawnChance: 1
-    rarity: 1
-  - Name: Shield Drone
-    prefab: {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e,
-      type: 3}
-    spawnAnimationPrefab: {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b,
-      type: 3}
-    spawnChance: 1
-    rarity: 1
-  - Name: Bomber
-    prefab: {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050,
-      type: 3}
-    spawnAnimationPrefab: {fileID: 1321408075392612775, guid: 07c573759e7e7a64fb2ab42e87d5232d,
-      type: 3}
-    spawnChance: 1
-    rarity: 1
-  - Name: Spider
-    prefab: {fileID: 151759185807588539, guid: 36eb5a0966608ee458e89346355829ce, type: 3}
-    spawnAnimationPrefab: {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563,
-      type: 3}
-    spawnChance: 1
-    rarity: 1
+  - {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f, type: 3}
+  - {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050, type: 3}
+  - {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e, type: 3}
+  - {fileID: 151759185807588539, guid: 36eb5a0966608ee458e89346355829ce, type: 3}
+  rareEnemies:
+  - {fileID: 8148536073903077524, guid: a41a20c2ec035f745ad718eb94076836, type: 3}
+  - {fileID: 5757977707119931830, guid: 6a71e0f9fac9b1d4da1df332903cbbf2, type: 3}
   miniBosses: []
   bosses: []
   allEnemies:
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
-  - Name: 
-    prefab: {fileID: 0}
-    spawnAnimationPrefab: {fileID: 0}
-    spawnChance: 0
-    rarity: 0
+  - {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f, type: 3}
+  - {fileID: 5757977707119931830, guid: 6a71e0f9fac9b1d4da1df332903cbbf2, type: 3}
+  - {fileID: 8148536073903077524, guid: a41a20c2ec035f745ad718eb94076836, type: 3}
+  - {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050, type: 3}
+  - {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e, type: 3}
+  - {fileID: 151759185807588539, guid: 36eb5a0966608ee458e89346355829ce, type: 3}
+  allEnemySpawnAnimationPrefabs:
+  - {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563, type: 3}
+  - {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563, type: 3}
+  - {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563, type: 3}
+  - {fileID: 1321408075392612775, guid: 07c573759e7e7a64fb2ab42e87d5232d, type: 3}
+  - {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b, type: 3}
+  - {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563, type: 3}
   standardWaveSpawners:
   - {fileID: 19575749529987131, guid: b79b1dc32af68994ba57ff8a57a35d01, type: 3}
   - {fileID: 6767212152696474178, guid: 734d4feb3d77bcb4fbbbc17514b5ca94, type: 3}

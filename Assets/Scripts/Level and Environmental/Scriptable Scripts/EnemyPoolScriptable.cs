@@ -1,26 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable] public struct EnemySpawnStruct
-{
-    public string Name;
-    public GameObject prefab;
-    public GameObject spawnAnimationPrefab;
-    public int spawnChance;
-    public int rarity;
-}
 
 [CreateAssetMenu(fileName = "Enemy Pool", menuName = "ScriptableObjects/Level Scriptables/Enemy Pool")]
 public class EnemyPoolScriptable : ScriptableObject
 {
     [Header("Enemies")]
-    public EnemySpawnStruct[] standardEnemies;
-    public EnemySpawnStruct[] miniBosses;
-    public EnemySpawnStruct[] bosses;
+    public GameObject[] standardEnemies;
+    public GameObject[] rareEnemies;
+    public GameObject[] miniBosses;
+    public GameObject[] bosses;
 
-    public List<EnemySpawnStruct> allEnemies;
+    public List<GameObject> allEnemies;
+    public GameObject[] allEnemySpawnAnimationPrefabs;
 
     [Header("Normal Wave Spawners")]
     public GameObject[] standardWaveSpawners;

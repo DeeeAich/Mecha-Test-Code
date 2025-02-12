@@ -109,10 +109,10 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
 
-    public LootPickupStruct[] GenerateLootPickups(int count, LootType type)
+    public LootPickupVariable[] GenerateLootPickups(int count, LootType type)
     {
-        LootPickupStruct[] selection = new LootPickupStruct[count];
-        List<LootPickupStruct> possibleSelection = new List<LootPickupStruct>();
+        LootPickupVariable[] selection = new LootPickupVariable[count];
+        List<LootPickupVariable> possibleSelection = new List<LootPickupVariable>();
         
         switch (type)
         {
