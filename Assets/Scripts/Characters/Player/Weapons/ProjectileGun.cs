@@ -85,20 +85,8 @@ public class ProjectileGun : Weapon
 
     public override void AddMod(StatusInfo modInfo)
     {
-        string modName = modInfo.statusType.ToString();
-
-        print(modName);
-
-        if (GetComponent(modName) == null)
-            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-                mod.AddModifiers(modInfo);
-        else
-        {
-            gameObject.AddComponent(Type.GetType(modName));
-            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-                mod.AddModifiers(modInfo);
-        }
-
+        foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+            mod.AddModifiers(modInfo);
     }
 
 }
