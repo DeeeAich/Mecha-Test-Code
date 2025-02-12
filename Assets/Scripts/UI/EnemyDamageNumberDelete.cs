@@ -14,11 +14,11 @@ public class EnemyDamageNumberDelete : MonoBehaviour
 
     IEnumerator Kill()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(deathTimer);
         if (EnemyDamageNumberSpawner.instance.damageNumbers.Contains(gameObject))
         {
             EnemyDamageNumberSpawner.instance.damageNumbers.Remove(gameObject);
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 
