@@ -98,7 +98,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         {
             GameObject oldestnumber = damageNumbers[0];
             damageNumbers.Remove(oldestnumber);
-            DestroyImmediate(oldestnumber);
+            Destroy(oldestnumber);
         }
     }
 }

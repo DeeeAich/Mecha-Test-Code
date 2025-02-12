@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image fillBar;
     [SerializeField] private Image shieldBar;
     
-    private Health health;
+    [SerializeField]private Health health;
     private bool showHealthBar;
     [HideInInspector] public List<ShieldModifier> shieldModifiers;
     
@@ -38,6 +38,11 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
+        if(health == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         showHealthBar = ((health.health < health.maxHealth || healthBarHideTimer > 0) && health.isAlive);
         transform.rotation = Quaternion.Euler(Vector3.zero);
         

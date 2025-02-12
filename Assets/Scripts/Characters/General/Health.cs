@@ -165,8 +165,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
                 yield return null;
             }
             timer -= maxTime;
-            TakeDamage(damagePerTick);
             ticks++;
+            TakeDamage(damagePerTick);
         }
         yield return null;
     }

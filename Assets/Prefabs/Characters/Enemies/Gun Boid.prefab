@@ -97,6 +97,8 @@ MonoBehaviour:
   gunPoint: {fileID: 3903511325216272645}
   shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
     type: 3}
+  startDelayMin: 0
+  startDelayMax: 0
   minDelay: 1.5
   maxDelay: 3
   anim: {fileID: 5848591045892066733}
@@ -116,11 +118,12 @@ MonoBehaviour:
   maxHealth: 100
   isAlive: 1
   canTakeDamage: 1
+  canDie: 1
   entityType: 0
   entityBounds: {x: 1, y: 1, z: 1}
   editorTakeDamage: 0
   editorDamageAmount: 100
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   destroyTimer: 3
   onTakeDamage:
     m_PersistentCalls:

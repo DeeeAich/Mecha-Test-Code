@@ -99,11 +99,12 @@ MonoBehaviour:
   maxHealth: 200
   isAlive: 1
   canTakeDamage: 1
+  canDie: 1
   entityType: 0
   entityBounds: {x: 1, y: 1, z: 1}
   editorTakeDamage: 0
   editorDamageAmount: 100
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   destroyTimer: 3
   onTakeDamage:
     m_PersistentCalls:
@@ -139,6 +140,8 @@ MonoBehaviour:
   gunPoint: {fileID: 4295328394095660205}
   shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
     type: 3}
+  startDelayMin: 0
+  startDelayMax: 0
   minDelay: 1.1
   maxDelay: 1.1
   anim: {fileID: 1929975439001648074}
@@ -157,6 +160,8 @@ MonoBehaviour:
   gunPoint: {fileID: 560468887961000211}
   shotPattern: {fileID: 1200799258251537264, guid: 4d0728400e0f8604eabf881785cb1aad,
     type: 3}
+  startDelayMin: 0
+  startDelayMax: 0
   minDelay: 1.1
   maxDelay: 1.1
   anim: {fileID: 4253703802609884915}
