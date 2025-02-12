@@ -41,7 +41,7 @@ public class Objective : MonoBehaviour
                         break;
                     
                     case WaveSpawnerType.Miniboss:
-                        possibleWaveSpawners.AddRange(LevelGenerator.instance.levelInfo.enemyPool.miniBOssWaveSpawners);
+                        possibleWaveSpawners.AddRange(LevelGenerator.instance.levelInfo.enemyPool.miniBossWaveSpawners);
                         break;
                     
                     case WaveSpawnerType.Boss:

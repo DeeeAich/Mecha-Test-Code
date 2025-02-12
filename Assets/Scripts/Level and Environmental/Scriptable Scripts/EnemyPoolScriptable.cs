@@ -20,12 +20,10 @@ public class EnemyPoolScriptable : ScriptableObject
     public EnemySpawnStruct[] miniBosses;
     public EnemySpawnStruct[] bosses;
 
-    public List<EnemySpawnStruct> allEnemies;
-
     [Header("Normal Wave Spawners")]
     public GameObject[] standardWaveSpawners;
     public GameObject[] rareWaveSpawners;
-    public GameObject[] miniBOssWaveSpawners;
+    public GameObject[] miniBossWaveSpawners;
     public GameObject[] bossWaveSpawners;
 
     [Header("Specific objective wave spawners")]

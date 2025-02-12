@@ -88,9 +88,29 @@ public class WaveSpawner : MonoBehaviour
 
             for (int i = 0; i < waves.Length; i++)
             {
+                int totalSpawnChance = 0;
+
+                for (int j = 0; j < spawnableEnemies.Count; j++)
+                {
+                    totalSpawnChance += spawnableEnemies[j].spawnChance;
+                }
+
+
                 for (int j = 0; j < waves[i]; j++)
                 {
-                    enemiesToSpawn.Add(spawnableEnemies[seededRandom.Next(0,spawnableEnemies.Count)]);
+                    int rand = seededRandom.Next(0, totalSpawnChance);
+                    float currentChance = 0;
+                    
+                    for (int k = 0; k < spawnableEnemies.Count; k++)
+                    {
+                        currentChance += spawnableEnemies[k].spawnChance;
+                        if (currentChance > rand)
+                        {
+                            enemiesToSpawn.Add(spawnableEnemies[k]);
+                            break;
+                        }
+                    }
+          
                 }
             }
         }
