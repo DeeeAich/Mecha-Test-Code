@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using UnityEngine.UIElements;
 
 
 public enum musicState
@@ -17,8 +18,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Music")]
     public musicState musicState;
-    public EventReference combatMusic;
-    public EventReference nonCombatMusic;
+    public EventReference Level2BaseMusic;
     public EventInstance currentMusic;
 
     [Header("Ambience")]
@@ -36,13 +36,25 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
        RuntimeManager.PlayOneShot(ambience);
+        currentMusic = RuntimeManager.CreateInstance(Level2BaseMusic);
+        currentMusic.start();
         ChangeMusicState(musicState.idle);
 
     }
 
-    public void PlayOneShotSFX(EventReference sound, Vector3 worldPos)
+    public void PlayOneShotSFX(EventReference sound, Vector3 worldPos, string parameterName = "none", float parameterValue = 0)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
+
+        var instance = RuntimeManager.CreateInstance(sound);
+        instance.set3DAttributes(RuntimeUtils.To3DAttributes(worldPos));
+        if (parameterName != "none")
+        {
+            instance.setParameterByName(parameterName, parameterValue);
+        }
+        instance.start();
+        instance.release();
+
     }
 
     public void ChangeMusicState(musicState newState)
@@ -51,15 +63,12 @@ public class AudioManager : MonoBehaviour
         {
             case musicState.idle:
                 Debug.Log("idle");
-                currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                currentMusic = RuntimeManager.CreateInstance(nonCombatMusic);
-                currentMusic.start();
+                RuntimeManager.StudioSystem.setParameterByName("inCombat", 0);
+                
                 break;
             case musicState.combat:
                 Debug.Log("combat");
-                currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                currentMusic = RuntimeManager.CreateInstance(combatMusic);
-                currentMusic.start();
+                RuntimeManager.StudioSystem.setParameterByName("inCombat", 1);
                 break;
         }
     }
