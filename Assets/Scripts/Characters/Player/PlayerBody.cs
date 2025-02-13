@@ -222,6 +222,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         myCamera.transform.parent = null;
         StopParts(false, false);
 
+        StartCoroutine(myUI.StartDeath());
+
         weaponHolder.leftWeapon.FireRelease();
         weaponHolder.rightWeapon.FireRelease();
 
@@ -229,6 +231,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         foreach (TriggerDebrisExplosion explosion in explosions)
             explosion.explosionTrigger = true;
+
 
     }
 

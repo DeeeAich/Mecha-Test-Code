@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
-public class Ultimate : MonoBehaviour
+public class Ultimate : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public float rechargeTime;
+    public int[] damages;
+
+
+    public void ActivateUltimate()
     {
-        
+
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EndUltimate()
     {
-        
+
+
+
     }
+
+    public void UltUpdate()
+    {
+
+
+
+    }
+
 }

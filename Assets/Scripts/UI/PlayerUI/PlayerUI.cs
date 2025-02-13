@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class PlayerUI : MonoBehaviour
     private int dashTotal;
     [SerializeField] Color32 dashColour;
     [SerializeField] Image ultimate;
+
+    [SerializeField] GameObject deathImage;
+    [SerializeField] float deathTime;
 
     private void FixedUpdate()
     {
@@ -139,6 +143,19 @@ public class PlayerUI : MonoBehaviour
         dashCountTxt.text = dashMax.ToString();
 
         dashChargeTime = dashCha;
+
+    }
+
+    public IEnumerator StartDeath()
+    {
+
+        deathImage.SetActive(true);
+
+        yield return new WaitForSeconds(deathTime);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        yield return null;
 
     }
 }
