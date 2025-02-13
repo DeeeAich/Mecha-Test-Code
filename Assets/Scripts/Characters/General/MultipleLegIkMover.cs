@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 [DefaultExecutionOrder(-1000)]
@@ -11,6 +12,8 @@ public class MultipleLegIkMover : MonoBehaviour
     [SerializeField] private GameObject[] legIks;
     [SerializeField] private Animator[] legDashVFXAnimators;
     [SerializeField] private GameObject legDashSFX;
+    [SerializeField] private EventReference footstepSound;
+    
 
     [Header("Speeds")]
     [SerializeField] private int maxLegsMovingAtOnce = 1;
@@ -105,6 +108,7 @@ public class MultipleLegIkMover : MonoBehaviour
 
                 if ((legIkTargets[i] - moveTargets[i]).magnitude < ikMoveStopDistance) // stops leg once finished moving
                 {
+                    RuntimeManager.PlayOneShot(footstepSound, legIks[i].transform.position);
                     legMoving[i] = false;
                 }
             }
