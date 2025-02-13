@@ -601,7 +601,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8078738772298752416}
   - component: {fileID: 2610230229843740392}
-  - component: {fileID: 7225065300969946197}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -638,93 +637,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 1779653893273987569}
---- !u!114 &7225065300969946197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345569376576539819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 23ebe7a4ef5674d60b4d093b1da9de5f,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 359f8959-f298-4473-bbbf-96584e2ef06e
-    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 351f9a70-bda3-422b-9d0a-7a2d69b26dc2
-    m_ActionName: Gameplay/Look
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 978e4c72-d958-4a61-ab3f-c23e1729bb77
-    m_ActionName: Gameplay/Dash[/Keyboard/leftShift]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3fb2bbd5-e604-4c0e-b7ab-85b194f5fe97
-    m_ActionName: Gameplay/Left Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 53e03bd1-2347-41f9-958e-f54407c19a2c
-    m_ActionName: Gameplay/Left Reload[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 26a26228-859c-4dba-a06d-b8cff0d8853a
-    m_ActionName: Gameplay/Right Fire[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c706ef3a-274e-48da-ac4f-cc84ccba7da9
-    m_ActionName: Gameplay/Right Reload[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 98f479c7-cf5b-418f-a384-1d34231177b0
-    m_ActionName: Gameplay/Ultimate
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 35643725-fd14-4a97-82b9-4976722c4a14
-    m_ActionName: Gameplay/Interact[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2610230229843740392}
-        m_TargetAssemblyTypeName: pauseMenu, Assembly-CSharp
-        m_MethodName: onPauseButtonPressed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 2204bc28-dcd1-431e-acee-5a747525ec6c
-    m_ActionName: Gameplay/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a5dca0cd-66f3-4cd9-9116-a4193257eee9
-    m_ActionName: UI/New action
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &7361395703994558381
 GameObject:
   m_ObjectHideFlags: 0
