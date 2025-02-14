@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class OverseerAnimationManager : MonoBehaviour
 {
+    public bool animationIsPlaying;
+
+
     public Animator groundSlamAnim;
 
     public Animator bodybackAnim;
@@ -20,17 +23,18 @@ public class OverseerAnimationManager : MonoBehaviour
     public Animator laser1Anim;
     public Animator laser2Anim;
 
+    /*
     public bool testfire;
-    public int testnum;
 
     private void Update()
     {
         if (testfire)
         {
-            PhaseTransition();
+            GroundSlamAttack(2);
             testfire = false;
         }
     }
+    */
 
     /*
     1 = straight narrow and in            Distance from boss center = 40                Desired Player distance = 35
@@ -40,6 +44,7 @@ public class OverseerAnimationManager : MonoBehaviour
     */
     public void LaserPatternAttack(int attackType)
     {
+        StartCoroutine(Action(5.5f));
         laser1Anim.SetTrigger("Fire");
         laser2Anim.SetTrigger("Fire");
         laserTargetAnim.enabled = true;
@@ -48,6 +53,7 @@ public class OverseerAnimationManager : MonoBehaviour
     }
     public void LaserTrackingAttack()
     {
+        StartCoroutine(Action(5.5f));
         laser1Anim.SetTrigger("Fire");
         laser2Anim.SetTrigger("Fire");
         laserTargetAnim.enabled = false;
@@ -55,7 +61,8 @@ public class OverseerAnimationManager : MonoBehaviour
 
     public void GroundSlamAttack(int phase)
     {
-        if(phase == 1)
+        StartCoroutine(Action(3.5f));
+        if (phase == 1)
         {
             groundSlamAnim.SetTrigger("SlamOne");
         }
@@ -71,7 +78,15 @@ public class OverseerAnimationManager : MonoBehaviour
         bodyPhase2Anim.SetTrigger("PhaseTwo");
         bodybackAnim.SetTrigger("PhaseTwo");
         groundSlamAnim.SetTrigger("PhaseTwo");
+        StartCoroutine(Action(2.5f));
     }
 
+
+    IEnumerator Action(float actionTime)
+    {
+        animationIsPlaying = true;
+        yield return new WaitForSeconds(actionTime);
+        animationIsPlaying = false;
+    }
 
 }
