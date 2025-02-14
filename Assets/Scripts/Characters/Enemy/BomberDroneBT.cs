@@ -45,12 +45,6 @@ public class BomberDroneBT : BehaviourTree
         OnCharge.RemoveListener(SetAnimation);
     }
 
-    // Update is called once per frame
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
-
     public void SetAnimation()
     {
         Animator anim = GetComponentInChildren<Animator>();

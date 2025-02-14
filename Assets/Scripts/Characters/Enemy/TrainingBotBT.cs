@@ -21,7 +21,7 @@ public class TrainingBotBT : BehaviourTree
             );
     }
 
-    override public void FixedUpdate()
+    override internal void FixedUpdate()
     {
         base.FixedUpdate();
     }

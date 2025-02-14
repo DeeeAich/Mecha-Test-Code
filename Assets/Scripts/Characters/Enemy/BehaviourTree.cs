@@ -58,7 +58,7 @@ namespace AITree
             memory = new Dictionary<string, object>();
             meshesRef = GetComponentInChildren<MeshFilter>().gameObject;
         }
-        public virtual void FixedUpdate()
+        internal virtual void FixedUpdate()
         {
             if (!paused)
             {
@@ -413,6 +413,84 @@ namespace AITree
         }
     }
 
+    public class Selector : Control
+    {
+        int selectedIndex = -1;
+
+        public Selector(Node Test, Node Success, Node Failure)
+        {
+            children = new List<Node> { Test, Success, Failure };
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+            selectedIndex = -1;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+
+            if (children.Count != 3)
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+            else
+            {
+                BehaviourTreeState DeciderState = children[0].Tick();
+                switch (DeciderState)
+                {
+                    case BehaviourTreeState.NULL:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    case BehaviourTreeState.RUNNING:
+                        state = BehaviourTreeState.RUNNING;
+                        return state;
+                    case BehaviourTreeState.SUCCESS:
+                        selectedIndex = 1;
+                        state = children[selectedIndex].Tick();
+                        return state;
+                    case BehaviourTreeState.FAILURE:
+                        selectedIndex = 2;
+                        state = children[selectedIndex].Tick();
+                        return state;
+                    default:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                }
+            }
+        }
+    }
+
+    public class BooleanFunction : Condition
+    {
+        readonly Func<bool> calculate;
+        public BooleanFunction()
+        {
+        }
+        public BooleanFunction(Func<bool> calculation) : this()
+        {
+            calculate = calculation;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            bool result = calculate();
+            if(result)
+            {
+                state = BehaviourTreeState.SUCCESS;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+            return state;
+        }
+    }
+
     //Repeat
 
     //RepeatUntilFail
@@ -712,10 +790,10 @@ namespace AITree
             return state;
         }
     }
-    //Parallel?
 
     public class MultiRoot : Control
     {
+        //parallel but restart childed nodes on completion
         public MultiRoot(params Node[] children) : base(children)
         {
         }
@@ -1391,8 +1469,8 @@ namespace AITree
     public class HasVariable : Condition
     {
         readonly string varName;
-        readonly System.Type varType;
-        public HasVariable(string variableName, System.Type variableType) : base()
+        readonly Type varType;
+        public HasVariable(string variableName, Type variableType) : base()
         {
             varName = variableName;
             varType = variableType;
@@ -1444,6 +1522,70 @@ namespace AITree
             target = brain.memory[targetLocation] as GameObject;
         }
     }
+
+    public class EnsureInRange : Fallback
+    {
+
+        public EnsureInRange(string targetLocation, float range, float approachDist)
+        {
+            children = new List<Node> { new InRange(targetLocation, range), new Approach(targetLocation, approachDist) };
+        }
+    }
+
+    public class GetOffset : Action
+    {
+        private readonly string target, storage;
+        private readonly float distance;
+        public GetOffset(string target, string storage, float distance)
+        {
+            this.storage = storage;
+            this.target = target;
+            this.distance = distance;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            if(brain.memory.TryGetValue(target, out object recovered))
+            {
+                Vector3 targetVector = Vector3.zero;
+                if(recovered is GameObject)
+                {
+                    targetVector = (recovered as GameObject).transform.position;
+                }
+                else if (recovered is Transform)
+                {
+                    targetVector = (recovered as Transform).position;
+                }
+                else if (recovered is Vector3)
+                {
+                    targetVector = (Vector3)recovered;
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                }
+                Vector3 offset = brain.gameObject.transform.position - targetVector;
+                offset = offset.normalized * distance;
+                offset.y = 0;
+                brain.AddOrOverwrite(storage, offset);
+                state = BehaviourTreeState.SUCCESS;
+                return state;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+            return state;
+        }
+    }
+
 
     public class InvokeEvent : Action
     {
