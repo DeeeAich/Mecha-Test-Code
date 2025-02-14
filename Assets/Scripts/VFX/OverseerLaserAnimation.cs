@@ -10,6 +10,7 @@ public class OverseerLaserAnimation : MonoBehaviour
     public LineRenderer aimLineRenderer;
     public LineRenderer laserLineRenderer;
     public GameObject LaserTop;
+    public Collider hitPointCollider;
 
     public ParticleSystem targetParticle1;
     public ParticleSystem targetParticle2;
@@ -52,6 +53,17 @@ public class OverseerLaserAnimation : MonoBehaviour
         }
     }
 
+    public void ToggleCollider(int i)
+    {
+        if (i == 0)
+        {
+            hitPointCollider.enabled = false;
+        }
+        else
+        {
+            hitPointCollider.enabled = true;
+        }
+    }
     private void Update()
     {
 
