@@ -193,10 +193,21 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   paused: 0
+  weaponsPivot: {fileID: 3706613987007461513}
   approachDist: 25
   biggestRange: 35
   targetOffsetAngle: 10
   offsetDistance: 20
+  inwardMaxRange: 35
+  inwardMinRange: 30
+  wideMaxRange: 45
+  wideMinRange: 15
+  zigzagMaxRange: 20
+  zigzagMinRange: 18
+  circleMaxRange: 24
+  circleMinRange: 22
+  slamMaxRange: 5
+  slamMinRange: 0
 --- !u!1001 &5375722804594049362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,8 +274,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8785096398092204507, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4304123311262241812}
   m_SourcePrefab: {fileID: 100100000, guid: 8e669a9946637c54da70f145562ccad7, type: 3}
+--- !u!1 &3706613987007461513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8785096398092204507, guid: 8e669a9946637c54da70f145562ccad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5375722804594049362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4304123311262241812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706613987007461513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e0fe0711c9d7048a783b964fbfac62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 2
 --- !u!4 &7679363271813014452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2308362393531654886, guid: 8e669a9946637c54da70f145562ccad7,

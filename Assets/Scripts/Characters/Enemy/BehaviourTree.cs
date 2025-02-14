@@ -413,6 +413,25 @@ namespace AITree
         }
     }
 
+    public class RepeatUntilSuccess : Decorator
+    {
+        public RepeatUntilSuccess(Node child) : base(child)
+        {
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = children[0].Tick();
+            if(state!=BehaviourTreeState.SUCCESS)
+            {
+                state = BehaviourTreeState.RUNNING;
+                return state;
+            }
+            return state;
+        }
+    }
+
     public class Selector : Control
     {
         int selectedIndex = -1;
@@ -671,7 +690,7 @@ namespace AITree
             {
                 if (allowRepeat)
                 {
-                    Debug.LogWarning("Boss Move Selector Failed");
+                    //Debug.LogWarning("Boss Move Selector Failed");
                     childIndex = 0;
                     return;
                 }
@@ -693,7 +712,7 @@ namespace AITree
                     }
                     if (data.Count == 0)
                     {
-                        Debug.LogWarning("Boss Move Selector Failed (even tried to repeat)");
+                        //Debug.LogWarning("Boss Move Selector Failed (even tried to repeat)");
                         childIndex = 0;
                         return;
                     }
@@ -709,6 +728,7 @@ namespace AITree
                     childIndex = children.IndexOf(data[i].w);
                     break;
                 }
+                runningDecision += data[i].weight;
             }
         }
 
@@ -1260,6 +1280,37 @@ namespace AITree
             {
                 state = BehaviourTreeState.SUCCESS;
                 brain.agent.isStopped = false;
+            }
+            return state;
+        }
+    }
+
+    public class YieldTime : Action
+    {
+        float time;
+        float timer;
+        public YieldTime(float time)
+        {
+            this.time = time;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+            timer = 0;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            timer += Time.deltaTime;
+            if (timer >= time)
+            {
+                state = BehaviourTreeState.SUCCESS;
+            }
+            else
+            {
+                state = BehaviourTreeState.RUNNING;
             }
             return state;
         }

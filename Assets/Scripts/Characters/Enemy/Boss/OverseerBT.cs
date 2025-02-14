@@ -10,12 +10,23 @@ public class OverseerBT : BehaviourTree
     Node secondPhaseBrain;
     Node transitionBrain;
 
+    [SerializeField] GameObject weaponsPivot;
+
     [SerializeField] float approachDist = 10f;
     [SerializeField] float biggestRange = 15f;
 
     [SerializeField] float targetOffsetAngle = 30f;
     [SerializeField] float offsetDistance = 10f;
 
+    [Header("Weight Calc Vars")]
+    [SerializeField] float inwardMaxRange = 35f; 
+    [SerializeField] float inwardMinRange = 30f;
+    [SerializeField] float wideMaxRange = 45f, wideMinRange = 15f;
+    [SerializeField] float zigzagMaxRange = 20f, zigzagMinRange = 18f;
+    [SerializeField] float circleMaxRange = 24f, circleMinRange = 22f;
+    [SerializeField] float slamMaxRange = 5f, slamMinRange = 0f;
+
+    OverseerAnimationManager animManage;
 
     private void OnDrawGizmosSelected()
     {
@@ -27,6 +38,8 @@ public class OverseerBT : BehaviourTree
     {
         base.Awake();
 
+        animManage = GetComponentInChildren<OverseerAnimationManager>();
+
         InitialiseBrains();
 
         AddOrOverwrite("player", player);
@@ -37,11 +50,22 @@ public class OverseerBT : BehaviourTree
 
     void InitialiseBrains()
     {
-        weaponsBrain = new RandomBranching(false,
-            new CalcingRandomChoice(new Sequence(), WeightOneCalc)
-            
+        weaponsBrain = new Sequence(new RandomBranching(false,
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightTwo),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightOne),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightThree),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightFour),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.GroundSlamAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), SlamWeight)
+            ), new YieldTime(3f)
+
             //replace sequence with actual behaviour
-            
+
+            /*
+            1 = straight narrow and in            Distance from boss center = 40                Desired Player distance = 35 //Maximum is 35, min is 30
+            2 = straight wide and out             Distance from boss center = 12                Desired Player distance = between 15-45
+            3 = zigzag                            Distance from boss center = 12                Desired Player distance = 18
+            4 = circle                            Distance from boss center = 22                Desired Player distance = 22
+            */
             );
 
         motionBrain = new Sequence(
@@ -57,11 +81,90 @@ public class OverseerBT : BehaviourTree
         base.FixedUpdate();
     }
 
-    float WeightOneCalc()
+    float LaserWeightOne()
     {
-        return 1f;
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if(distToTarget > inwardMinRange && distToTarget <= inwardMaxRange)
+        {
+            distToTarget -= inwardMinRange;
+            float rangeDif = inwardMaxRange - inwardMinRange;
+            distanceScore = distToTarget / rangeDif;
+        }
+        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore * facingScore;
+        return calc;
+    }
+    float LaserWeightTwo()
+    {
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if (distToTarget > wideMinRange && distToTarget <= wideMaxRange)
+        {
+            float idealDist = (wideMaxRange + wideMinRange) / 2;
+            distToTarget -= idealDist;
+            distToTarget = Mathf.Abs(distToTarget);
+            float offset = (wideMaxRange - idealDist) - distToTarget;
+            distanceScore = offset / (wideMaxRange - idealDist);
+        }
+        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore * facingScore;
+        return calc;
+    }
+    float LaserWeightThree()
+    {
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if (distToTarget > inwardMinRange && distToTarget <= inwardMaxRange)
+        {
+            distToTarget -= inwardMinRange;
+            float rangeDif = inwardMaxRange - inwardMinRange;
+            distanceScore = 1- (distToTarget / rangeDif);
+        }
+        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore * facingScore;
+        return calc;
+    }
+    float LaserWeightFour()
+    {
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if (distToTarget > circleMinRange && distToTarget <= circleMaxRange)
+        {
+            float idealDist = (circleMaxRange + circleMinRange) / 2;
+            distToTarget -= idealDist;
+            distToTarget = Mathf.Abs(distToTarget);
+            float offset = (circleMaxRange - idealDist) - distToTarget;
+            distanceScore = offset / (circleMaxRange - idealDist);
+        }
+        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore * facingScore;
+        return calc;
+    }
+    float SlamWeight()
+    {
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if (distToTarget > slamMinRange && distToTarget <= slamMaxRange)
+        {
+            distToTarget -= slamMinRange;
+            float rangeDif = slamMaxRange - slamMinRange;
+            distanceScore = distToTarget / rangeDif;
+        }
+        //float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore;
+        return calc;
     }
 
+    bool CheckAnimBool()
+    {
+        return !animManage.animationIsPlaying;
+    }
 
     bool ValidateOffset()
     {
@@ -176,6 +279,26 @@ namespace AITree
             Vector3 targetPosition = playerPos.transform.position + (targetOffset.normalized * Mathf.Min(distance, (playerPos.transform.position - brain.transform.position).magnitude - 0.01f)) /*+ (playerPos.TryGetComponent<Rigidbody>(out Rigidbody rigid) ? rigid.velocity.normalized : Vector3.zero)*/;
             targetPosition.y = 0;
             brain.AddOrOverwrite(move, targetPosition);
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+
+    public class CallVoidFunctionWithInt : Action
+    {
+        System.Action<int> action;
+        int suppliedInt;
+
+        public CallVoidFunctionWithInt(System.Action<int> func, int value)
+        {
+            action = func;
+            suppliedInt = value;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            action(suppliedInt);
             state = BehaviourTreeState.SUCCESS;
             return state;
         }
