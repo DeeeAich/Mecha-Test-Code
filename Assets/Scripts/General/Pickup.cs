@@ -25,7 +25,8 @@ public class Pickup : MonoBehaviour
     public GameObject uiPopup;
     [SerializeField] private Button initiallySelectedButton;
     
-    public Sprite itemDisplayImage;
+    public Sprite itemDisplaySprite;
+    public SpriteRenderer itemDisplayImage;
     public TMP_Text pickupName;
     public TMP_Text pickupDescription;
     
@@ -40,6 +41,7 @@ public class Pickup : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         animator.SetInteger("lootRarity", pickupRarity);
+        if(itemDisplayImage != null && itemDisplaySprite != null) itemDisplayImage.sprite = itemDisplaySprite;
     }
 
     public void TryPickup()

@@ -14,6 +14,7 @@ using UnityEngine;
 
     public GameObject itemReference;
     public ScriptableObject ItemScriptableReference;
+    public Sprite itemDisplayImage;
 }
 
 [CreateAssetMenu(fileName = "Loot Pool", menuName = "ScriptableObjects/Level Scriptables/Loot Pool")]

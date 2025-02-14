@@ -228,6 +228,7 @@ public class Room : MonoBehaviour
 
             newLoot.pickupName.text = pickupsToSpawn[i].lootName;
             newLoot.pickupDescription.text = pickupsToSpawn[i].lootDescription;
+            newLoot.itemDisplaySprite = pickupsToSpawn[i].itemDisplayImage;
             
             if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
             if (pickupsToSpawn[i].ItemScriptableReference != null) newLoot.ItemScriptableReference = pickupsToSpawn[i].ItemScriptableReference;
