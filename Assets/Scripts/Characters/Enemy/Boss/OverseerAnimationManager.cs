@@ -65,7 +65,6 @@ public class OverseerAnimationManager : MonoBehaviour
         }
     }
 
-
     public void PhaseTransition()
     {
         basePhase2Anim.SetTrigger("PhaseTwo");
@@ -73,5 +72,6 @@ public class OverseerAnimationManager : MonoBehaviour
         bodybackAnim.SetTrigger("PhaseTwo");
         groundSlamAnim.SetTrigger("PhaseTwo");
     }
+
 
 }
