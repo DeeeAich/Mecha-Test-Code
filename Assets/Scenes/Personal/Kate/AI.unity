@@ -318,7 +318,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -20
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 25
   orthographic: 0
@@ -346,8 +346,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152067317}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.436562, y: 0, z: -17.384418}
+  m_LocalRotation: {x: 0.1943407, y: 0, z: 0, w: 0.9809341}
+  m_LocalPosition: {x: -9.436562, y: 35.69, z: -66.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,6 +443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyBomber (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8338694704011105290, guid: caeeb1d327e1826409e543a288939050,
         type: 3}
@@ -748,6 +753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8403575456930618702, guid: 855968ce7383f2144b3a39fc654dd10f,
         type: 3}
       propertyPath: m_Enabled
@@ -857,37 +867,37 @@ PrefabInstance:
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 35.69
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.384418
+      value: -66.86
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9809341
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.1943407
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 22.412
       objectReference: {fileID: 0}
     - target: {fileID: 1709660239597604004, guid: ec48dd3189c37314593a504c59b43e5b,
         type: 3}
@@ -898,6 +908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709660239597604005, guid: ec48dd3189c37314593a504c59b43e5b,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1002,14 +1017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicState: 0
-  combatMusic:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  nonCombatMusic:
+  Level2BaseMusic:
     Guid:
       Data1: 0
       Data2: 0
@@ -1185,6 +1193,7 @@ MonoBehaviour:
   maxHealth: 1e+9
   isAlive: 1
   canTakeDamage: 1
+  canDie: 1
   entityType: 0
   entityBounds: {x: 1, y: 1, z: 1}
   editorTakeDamage: 0
@@ -1416,6 +1425,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shield Drone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5309172495042634644, guid: 97394da52111d76448d4c96ce174435e,
         type: 3}
@@ -1756,53 +1770,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dual Wielder Split
       objectReference: {fileID: 0}
+    - target: {fileID: 8148536073903077524, guid: a41a20c2ec035f745ad718eb94076836,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a41a20c2ec035f745ad718eb94076836, type: 3}
---- !u!1 &2100726392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6650565202339733482, guid: d06a43d8cb81fc14688670c5cb0f4ce2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3168443721869715947}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2100726396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100726392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2967b120b5624dc4a89cc39054d572f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 5000
-  isAlive: 1
-  canTakeDamage: 1
-  entityType: 1
-  entityBounds: {x: 9.088417, y: 9.8488, z: 18.328579}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 1
-  destroyTimer: 3
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 0}
-  debug: 0
-  verboseDebug: 0
-  mostRecentTick: 
-  tickPath: 
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  paused: 0
 --- !u!1001 &157762786178299888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1815,6 +1792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spider
+      objectReference: {fileID: 0}
+    - target: {fileID: 151759185807588539, guid: 36eb5a0966608ee458e89346355829ce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7540247172903497033, guid: 36eb5a0966608ee458e89346355829ce,
         type: 3}
@@ -2007,6 +1989,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dual Wielder
       objectReference: {fileID: 0}
+    - target: {fileID: 5757977707119931830, guid: 6a71e0f9fac9b1d4da1df332903cbbf2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2078,11 +2065,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6650565202339733482, guid: d06a43d8cb81fc14688670c5cb0f4ce2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2100726396}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06a43d8cb81fc14688670c5cb0f4ce2, type: 3}
 --- !u!1001 &3977003733576288711
 PrefabInstance:

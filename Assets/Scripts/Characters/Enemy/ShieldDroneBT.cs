@@ -30,7 +30,7 @@ public class ShieldDroneBT : BehaviourTree
                 )) ;
     }
 
-    override public void FixedUpdate()
+    internal override void FixedUpdate()
     {
         if(memory.TryGetValue("ShieldTarget", out object o))
         {
