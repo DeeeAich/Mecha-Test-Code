@@ -13,6 +13,9 @@ public class CharacterVFXManager : MonoBehaviour
     [Header("Burn")]
     public List<GameObject> burnObjects;
     public bool testBurn;
+    public Material burnMaterial;
+    public List<MeshRenderer> meshRenderers;
+
 
     [Header("Hack")]
     public List<GameObject> hackObjects;
@@ -20,7 +23,22 @@ public class CharacterVFXManager : MonoBehaviour
 
     [Header("Short Circuit")]
     public List<GameObject> shortCircuitObjects;
-    public bool testShortCircuit;
+
+    private void Start()
+    {
+        if (GetComponent<MeshRenderer>() != null)
+        {
+            meshRenderers.Add(GetComponent<MeshRenderer>());
+        }
+
+        // get mesh renderers childed to main object
+        MeshRenderer[] childedMeshRenderers;
+        childedMeshRenderers = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < childedMeshRenderers.Length; i++)
+        {
+            meshRenderers.Add(childedMeshRenderers[i]);
+        }
+    }
 
     private void Update()
     {
@@ -31,13 +49,8 @@ public class CharacterVFXManager : MonoBehaviour
         }
         if (testHack)
         {
-            ToggleEffectVFX(effect.Hack, true);
+            ToggleEffectVFX(effect.Burn, false);
             testHack = !testHack;
-        }
-        if (testShortCircuit)
-        {
-            ToggleEffectVFX(effect.ShortCircuit, true);
-            testShortCircuit = !testShortCircuit;
         }
     }
 
@@ -62,11 +75,39 @@ public class CharacterVFXManager : MonoBehaviour
 
     void ToggleBurn(bool isOn)
     {
+        
         for (int i = 0; i < burnObjects.Count; i++)
         {
             if(burnObjects[i] != null) burnObjects[i].SetActive(isOn);
         }
+        
+
+
+        if (isOn)
+        {
+            if (GetComponent<MeshRenderer>() != null)
+            {
+                meshRenderers.Add(GetComponent<MeshRenderer>());
+            }
+
+            // get mesh renderers childed to main object
+            MeshRenderer[] childedMeshRenderers;
+            childedMeshRenderers = GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < childedMeshRenderers.Length; i++)
+            {
+                meshRenderers.Add(childedMeshRenderers[i]);
+            }
+
+            SetAdditionalMaterial(burnMaterial);
+        }
+        else
+        {
+            ClearAdditionalMaterial();
+        }
     }
+
+
+
 
     void ToggleHack(bool isOn)
     {
@@ -81,6 +122,34 @@ public class CharacterVFXManager : MonoBehaviour
         for (int i = 0; i < shortCircuitObjects.Count; i++)
         {
             if(shortCircuitObjects[i] != null) shortCircuitObjects[i].SetActive(isOn);
+        }
+    }  
+    
+    
+    
+    
+    public void SetAdditionalMaterial(Material mat)
+    {
+        for (int i = 0; i < meshRenderers.Count; i++)
+        {
+            Material[] materialsArray = new Material[(meshRenderers[i].materials.Length + 1)];
+            meshRenderers[i].materials.CopyTo(materialsArray, 0);
+            materialsArray[materialsArray.Length - 1] = mat;
+            meshRenderers[i].materials = materialsArray;
+        }
+    }
+    public void ClearAdditionalMaterial()
+    {
+        for (int i = 0; i < meshRenderers.Count; i++)
+        {
+            if (meshRenderers[i] == null)
+                continue;
+            Material[] materialsArray = new Material[(meshRenderers[i].materials.Length - 1)];
+            for (int z = 0; z < meshRenderers[i].materials.Length - 1; z++)
+            {
+                materialsArray[z] = meshRenderers[i].materials[z];
+            }
+            meshRenderers[i].materials = materialsArray;
         }
     }
 }
