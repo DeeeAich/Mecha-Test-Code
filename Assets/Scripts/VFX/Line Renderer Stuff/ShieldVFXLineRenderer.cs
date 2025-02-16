@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShieldVFXLineRenderer : MonoBehaviour
@@ -68,10 +69,11 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     {
         for (int i = 0; i < meshRenderers.Count; i++)
         {
-            Material[] materialsArray = new Material[(meshRenderers[i].materials.Length + 1)];
-            meshRenderers[i].materials.CopyTo(materialsArray, 0);
-            materialsArray[materialsArray.Length - 1] = shieldedMaterial;
-            meshRenderers[i].materials = materialsArray;
+            if (meshRenderers[i] == null) continue;
+            
+            List<Material> materials = meshRenderers[i].materials.ToList();
+            materials.Add(shieldedMaterial);
+            meshRenderers[i].materials = materials.ToArray();
         }
     }
 
@@ -92,14 +94,11 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     {
         for (int i = 0; i < meshRenderers.Count; i++)
         {
-            if (meshRenderers[i] == null)
-                continue;
-            Material[] materialsArray = new Material[(meshRenderers[i].materials.Length - 1)];
-            for (int z = 0; z < meshRenderers[i].materials.Length - 1; z++)
-            {
-                materialsArray[z] = meshRenderers[i].materials[z];
-            }
-            meshRenderers[i].materials = materialsArray;
+            if (meshRenderers[i] == null) continue;
+            
+            List<Material> materials = meshRenderers[i].materials.ToList();
+            if (materials.Contains(shieldedMaterial)) materials.Remove(shieldedMaterial);
+            meshRenderers[i].materials = materials.ToArray();
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
