@@ -81,7 +81,7 @@ public class CharacterVFXManager : MonoBehaviour
             if(burnObjects[i] != null) burnObjects[i].SetActive(isOn);
         }
         
-
+        /*
 
         if (isOn)
         {
@@ -104,6 +104,8 @@ public class CharacterVFXManager : MonoBehaviour
         {
             ClearAdditionalMaterial();
         }
+
+        */
     }
 
 
