@@ -32,15 +32,11 @@ public class DialogueManager : MonoBehaviour
     [TextArea]
     public string finalText = "";
 
-    public int currentInteraction = 1;
+    public int currentInteractionNum = 0;
     public int currentLine = 0;
-    private DialogueObject currnetDialogueObject;
     private bool isTyping;
 
-    private List<DialogueObject> currentInteractionList;
-    public List<DialogueObject> Interaction_1;
-    public List<DialogueObject> Interaction_2;
-    public List<DialogueObject> Interaction_3;
+    public List<DialogueInteraction> Interaction;
 
 
 
@@ -68,28 +64,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (isFirstLine) currentLine = 0;
 
-        switch (currentInteraction)
-        {
-            case 1:
-                currentInteractionList = Interaction_1;
-                DisplayNewDialogue(Interaction_1[currentLine]);
-                break;
-            case 2:
-                currentInteractionList = Interaction_2;
-                DisplayNewDialogue(Interaction_2[currentLine]);
-                break;
-            case 3:
-                currentInteractionList = Interaction_3;
-                DisplayNewDialogue(Interaction_3[currentLine]);
-                break;
-            default:
-                return;
-        }
+        DisplayNewDialogue(Interaction[currentInteractionNum].dialogueObject[currentLine]);
     }
     void DisplayNewDialogue(DialogueObject dialogueObject)
     {
         profileImage.texture = dialogueObject.character;
-        currnetDialogueObject = dialogueObject;
         switch (dialogueObject.textSpeed)
         {
             case TextSpeed.Slow:
@@ -157,13 +136,14 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Finished");
         yield return new WaitForSeconds(automaticSkipDelay);
         currentLine++;
-        if (currentLine < currentInteractionList.Count)
+        if (currentLine < Interaction[currentInteractionNum].dialogueObject.Count)
         { 
             DisplayNext(false);
         }
         else
         {
             CloseDialogue();
+            currentInteractionNum++;
         }
     }
 
