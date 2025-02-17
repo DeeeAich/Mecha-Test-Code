@@ -124,6 +124,7 @@ public class ChargeRifle : Weapon
         {
             fireHeld = false;
             lineGen.enabled = false;
+            myAnim.SetBool("Charge", false);
             return;
         }
 
