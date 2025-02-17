@@ -11,6 +11,7 @@ public class PlayerUltyControl : MonoBehaviour
     private void Start()
     {
         myBody = GetComponent<PlayerBody>();
+        currentUltimate = myBody.ultimate;
     }
 
     public void UseUltimate()
@@ -29,8 +30,8 @@ public class PlayerUltyControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
 
+        currentUltimate.UltUpdate();
 
     }
 }
