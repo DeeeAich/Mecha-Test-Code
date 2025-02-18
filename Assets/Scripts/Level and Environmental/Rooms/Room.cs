@@ -223,11 +223,13 @@ public class Room : MonoBehaviour
         {
             Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
             
+            newLoot.transform.SetParent(transform);
+            
             newLoot.pickupRarity = pickupsToSpawn[i].rarity;
             newLoot.pickupType = pickupsToSpawn[i].PickupType;
 
-            newLoot.pickupName.text = pickupsToSpawn[i].lootName;
-            newLoot.pickupDescription.text = pickupsToSpawn[i].lootDescription;
+            newLoot.pickupName = pickupsToSpawn[i].lootName;
+            newLoot.pickupDescription = pickupsToSpawn[i].lootDescription;
             newLoot.itemDisplaySprite = pickupsToSpawn[i].itemDisplayImage;
             
             if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
