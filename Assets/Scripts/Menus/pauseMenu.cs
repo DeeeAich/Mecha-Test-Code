@@ -14,6 +14,9 @@ public class pauseMenu : MonoBehaviour
 
     private InputAction pauseAction;
 
+    public UnityEvent onPause;
+    public UnityEvent onUnpause;
+
     private void Start()
     {
         pauseAction = PlayerBody.PlayBody().GetComponent<PlayerInput>().actions["Pause"];
@@ -32,15 +35,17 @@ public class pauseMenu : MonoBehaviour
 
             if (Time.timeScale == 1)
             {
-                Time.timeScale = 0;
                 PlayerBody.PlayBody().StopParts(false, false);
                 menu.SetActive(true);
+                onPause.Invoke();
+                Time.timeScale = 0;
             }
             else if (Time.timeScale == 0)
             {
-                Time.timeScale = 1;
                 PlayerBody.PlayBody().StopParts(true, true);
                 menu.SetActive(false);
+                onUnpause.Invoke();
+                Time.timeScale = 1;
             }
         }
     }
