@@ -9,9 +9,10 @@ public class Ultimate : ScriptableObject
     public bool recharging = false;
     public float castTime;
     public int[] damages;
-    public GameObject ultimateCaster;
-    public GameObject ultimateObject;
+    public GameObject ultCaster;
+    public GameObject ultObject;
     public PlayerUltyControl myController;
+    public Animator myAnimator;
 
 
     public virtual void ActivateUltimate()

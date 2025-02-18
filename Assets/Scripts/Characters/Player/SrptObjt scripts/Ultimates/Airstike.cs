@@ -7,26 +7,63 @@ using System;
 public class Airstike : Ultimate
 {
 
-    private AITree.BehaviourTree enemies;
+    private AITree.BehaviourTree[] enemies;
+    public int enemiesToHit = 9;
+    public float betweenShots = 0.2f;
+
 
     public override void ActivateUltimate()
     {
         if (recharging)
             return;
 
-        AITree.BehaviourTree enemies = FindObjectOfType<AITree.BehaviourTree>();
+        if (myAnimator == null)
+            myAnimator = ultCaster.GetComponent<Animator>();
 
+        recharging = true;
+        
+    }
+
+    private IEnumerator Firing()
+    {
+
+        myAnimator.SetTrigger("Fire");
+
+        yield return new WaitForSeconds(castTime);
+
+        foreach (AITree.BehaviourTree enemy in enemies)
+        {
+
+            GameObject launchedObject = GameObject.Instantiate(ultObject, enemy.transform);
+            launchedObject.transform.SetParent(null);
+
+            yield return new WaitForSeconds(betweenShots);
+
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator ResetShot()
+    {
+
+
+        yield return new WaitForSeconds(rechargeTime);
+
+
+
+        yield return null;
 
     }
 
     public override void EndUltimate()
     {
-        base.EndUltimate();
+        
     }
 
     public override void UltUpdate()
     {
-        base.UltUpdate();
+        
     }
 
 }
