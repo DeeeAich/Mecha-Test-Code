@@ -7,7 +7,7 @@ using System;
 public class Airstike : Ultimate
 {
 
-    private AITree.BehaviourTree[] enemies;
+    private List<GameObject> missiles = new();
     public int enemiesToHit = 9;
     public float betweenShots = 0.2f;
 
@@ -21,6 +21,8 @@ public class Airstike : Ultimate
             myAnimator = ultCaster.GetComponent<Animator>();
 
         recharging = true;
+
+        Firing();
         
     }
 
@@ -31,11 +33,10 @@ public class Airstike : Ultimate
 
         yield return new WaitForSeconds(castTime);
 
-        foreach (AITree.BehaviourTree enemy in enemies)
+        foreach (GameObject missile in missiles)
         {
 
-            GameObject launchedObject = GameObject.Instantiate(ultObject, enemy.transform);
-            launchedObject.transform.SetParent(null);
+            missile.GetComponent<Animator>().SetTrigger("Fire");
 
             yield return new WaitForSeconds(betweenShots);
 

@@ -9,9 +9,10 @@ public class Ultimate : ScriptableObject
     public bool recharging = false;
     public float castTime;
     public int[] damages;
+    [Tooltip("Object to add to player")]
     public GameObject ultCaster;
+    [Tooltip("Object to spawn for ult")]
     public GameObject ultObject;
-    public PlayerUltyControl myController;
     public Animator myAnimator;
 
 
