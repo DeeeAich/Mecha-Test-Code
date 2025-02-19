@@ -206,13 +206,11 @@ public class Pickup : MonoBehaviour
             if (pickup != this)
             {
                 pickup.animator.SetTrigger("lootLocked");
-                pickup.GetComponentInChildren<Interactable>().enabled = false;
+                pickup.GetComponentInChildren<Interactable>(true).canInteract = false;
             }
         }
         
         if(uiPopup != null) uiPopup.SetActive(false);
-
-        GetComponentInChildren<Interactable>().enabled = false;
     }
 
     public void CancelPickup()

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private bool singleUse;
+    public bool canInteract = true;
+    
     public UnityEvent onInteract;
 
     public void PlayerInRange(bool inRange)
@@ -21,12 +23,14 @@ public class Interactable : MonoBehaviour
     }
     public void TriggerInteraction()
     {
+        if(!canInteract) return;
+        
         onInteract.Invoke();
         
         if (singleUse)
         {
             FindObjectOfType<PlayerBody>().SetInteract(this, false);
-            enabled = false;
+            canInteract = false;
         }
     }
 }
