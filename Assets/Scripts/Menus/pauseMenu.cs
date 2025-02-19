@@ -33,7 +33,7 @@ public class pauseMenu : MonoBehaviour
                 devkit.devkitCheatMenu.SetActive(false);
             }
 
-            if (Time.timeScale == 1)
+            if (Time.timeScale == 1 || Time.timeScale == 1.5)
             {
                 PlayerBody.PlayBody().StopParts(false, false);
                 menu.SetActive(true);
@@ -45,7 +45,7 @@ public class pauseMenu : MonoBehaviour
                 PlayerBody.PlayBody().StopParts(true, true);
                 menu.SetActive(false);
                 onUnpause.Invoke();
-                Time.timeScale = 1;
+                Time.timeScale = 1.5f;
             }
         }
     }

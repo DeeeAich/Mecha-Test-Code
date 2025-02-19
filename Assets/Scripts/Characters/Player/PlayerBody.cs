@@ -16,7 +16,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public Camera myCamera;
     public Transform playerCentre;
     public BodyStats baseStats;
-    [SerializeField] List<BodyChip> myMods = new List<BodyChip>();
+    public List<BodyChip> myMods = new List<BodyChip>();
 
     [SerializeField] List<Transform> weaponPoints = new();
 

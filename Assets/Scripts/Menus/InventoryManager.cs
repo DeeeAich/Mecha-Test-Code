@@ -136,13 +136,13 @@ public class InventoryManager : MonoBehaviour
                 break;
             
             case 2: // body chips
-                if (index >= PlayerBody.PlayBody().chipsInserted.Count)
+                if (index >= PlayerBody.PlayBody().myMods.Count)
                 {
                     return;
                 }
                 
                 inspectionCard.transform.position = bodyChipsImages[index].transform.position;
-                chip = PlayerBody.PlayBody().chipsInserted[index];
+                chip = PlayerBody.PlayBody().myMods[index];
                 break;
         }
 
