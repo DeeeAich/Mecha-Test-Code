@@ -11,19 +11,22 @@ public enum effect
 }
 public class CharacterVFXManager : MonoBehaviour
 {
+    public bool testBool;
+
     [Header("Burn")]
     public List<GameObject> burnObjects;
-    public bool testBurn;
     public Material burnMaterial;
     public List<MeshRenderer> meshRenderers;
 
 
     [Header("Hack")]
     public List<GameObject> hackObjects;
-    public bool testHack;
 
     [Header("Short Circuit")]
     public List<GameObject> shortCircuitObjects;
+
+    [Header("Heal")]
+    public ParticleSystem healParticleSystem;
 
     private void Start()
     {
@@ -43,16 +46,17 @@ public class CharacterVFXManager : MonoBehaviour
 
     private void Update()
     {
-        if (testBurn)
+        if (testBool)
         {
-            ToggleEffectVFX(effect.Burn, true);
-            testBurn = !testBurn;
+            SpawnHealParticles(100);
+            testBool = false;
         }
-        if (testHack)
-        {
-            ToggleEffectVFX(effect.Burn, false);
-            testHack = !testHack;
-        }
+    }
+
+
+    public void SpawnHealParticles(int amountOfHealing)
+    {
+        healParticleSystem.Emit(amountOfHealing);
     }
 
     public void ToggleEffectVFX(effect effect, bool isOn)
