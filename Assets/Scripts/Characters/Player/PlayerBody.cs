@@ -143,6 +143,21 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         playerInputs.onControlsChanged += SetControlScheme;
     }
 
+    private void UnsetControls()
+    {
+
+        dash.performed += Dash;
+        leftFire.performed -= weaponHolder.PressLeft;
+        leftFire.canceled -= weaponHolder.LiftLeft;
+        leftRe.performed -= weaponHolder.ReloadLeft;
+        rightFire.performed -= weaponHolder.FireRight;
+        rightFire.canceled -= weaponHolder.LiftRight;
+        rightRe.performed -= weaponHolder.ReloadRight;
+        interact.performed -= Interact;
+        playerInputs.onControlsChanged -= SetControlScheme;
+
+    }
+
     private void SetHooks()
     {
 
@@ -248,14 +263,18 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void ApplyChip(BodyChip chip)
     {
 
-        if (myMods.Contains(chip))
+        myMods.Add(chip);
+
+        switch (chip.bodyType)
         {
 
+            case (BodyChip.BodyType.Stat):
+                ApplyStatusChange();
+                break;
+            case (BodyChip.BodyType):
+
+                break;
         }
-        else
-            myMods.Add(chip);
-
-
 
     }
 
@@ -268,6 +287,13 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
 
         }
+
+    }
+
+    private void OnDestroy()
+    {
+
+        UnsetControls();
 
     }
 }

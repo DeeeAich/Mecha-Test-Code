@@ -206,15 +206,9 @@ public class ChargeRifle : Weapon
 
         string modName = ModInfo.statusType.ToString();
 
-        if (GetComponent(modName) == null)
-            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-                mod.AddModifiers(ModInfo);
-        else
-        {
-            gameObject.AddComponent(Type.GetType(modName));
-            foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-                mod.AddModifiers(ModInfo);
-        }
+        gameObject.AddComponent(Type.GetType(modName));
+        foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+            mod.AddModifiers(ModInfo);
 
     }
 
