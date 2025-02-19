@@ -290,8 +290,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     }
 
-    public void Preform(Coroutine corout)
-        => StartCoroutine(corout.ToString());
+    public void Preform(IEnumerator corout)
+        => StartCoroutine(corout);
 
     private void OnDestroy()
     {
