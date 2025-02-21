@@ -23,18 +23,18 @@ public class OverseerAnimationManager : MonoBehaviour
     public Animator laser1Anim;
     public Animator laser2Anim;
 
-    /*
+    
     public bool testfire;
 
     private void Update()
     {
         if (testfire)
         {
-            GroundSlamAttack(2);
+            PlayDeathAnimation();
             testfire = false;
         }
     }
-    */
+    
 
     /*
     1 = straight narrow and in            Distance from boss center = 40                Desired Player distance = 35
@@ -81,7 +81,12 @@ public class OverseerAnimationManager : MonoBehaviour
         StartCoroutine(Action(2.5f));
     }
 
-
+    public void PlayDeathAnimation()
+    {
+        animationIsPlaying = true;
+        groundSlamAnim.SetTrigger("Death");
+        bodybackAnim.SetTrigger("Death");
+    }
     IEnumerator Action(float actionTime)
     {
         animationIsPlaying = true;
