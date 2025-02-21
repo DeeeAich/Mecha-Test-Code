@@ -78,7 +78,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
                 continue;
             objectsToPush[i].SetActive(true);
             objectsToPush[i].layer = LayerMask.NameToLayer("Debris");
-            objectsToPush[i].transform.parent = null;
+            objectsToPush[i].transform.parent = transform.parent;
             objectsToPush[i].GetComponent<Rigidbody>().isKinematic = false;
             if (explosionVFX != null) { objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius); } 
             else
