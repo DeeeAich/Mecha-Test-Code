@@ -47,7 +47,6 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
         if (materialSetter)
         {
-            MeshRenderer[] childedMeshRenderers;
             // get mesh renderer on main object
             if (GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.GetComponent<MeshRenderer>() != null)
             {
@@ -55,13 +54,14 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             }
 
             // get mesh renderers childed to main object
+            MeshRenderer[] childedMeshRenderers;
             childedMeshRenderers = GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.GetComponentsInChildren<MeshRenderer>();
             for (int i = 0; i < childedMeshRenderers.Length; i++)
             {
                 meshRenderers.Add(childedMeshRenderers[i]);
             }
 
-            SetAdditionalMaterial();
+             SetAdditionalMaterial();
         }
     }
 
@@ -72,7 +72,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             if (meshRenderers[i] == null) continue;
             
             List<Material> materials = meshRenderers[i].materials.ToList();
-            if(!materials.Contains(shieldedMaterial)) materials.Add(shieldedMaterial);
+            materials.Add(shieldedMaterial);
             meshRenderers[i].materials = materials.ToArray();
         }
     }
@@ -97,11 +97,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             if (meshRenderers[i] == null) continue;
             
             List<Material> materials = meshRenderers[i].materials.ToList();
-            if (materials.Contains(shieldedMaterial))
-            {
-                print("Removing shield material");
-                materials.Remove(shieldedMaterial);
-            }
+            if (materials.Contains(shieldedMaterial)) materials.Remove(shieldedMaterial);
             meshRenderers[i].materials = materials.ToArray();
         }
     }
