@@ -9,7 +9,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private PlayerLegs myMovement;
     private PlayerWeaponControl weaponHolder;
     public Legs legStats;
-    public Ultimate ultimate;
+    public PlayerUltyControl ultController;
     public List<Chip> chipsInserted;
     public LegInfo curLegs;
     private PlayerInput playerInputs;
@@ -48,6 +48,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         playerInputs = GetComponent<PlayerInput>();
         myMovement = GetComponent<PlayerLegs>();
         weaponHolder = GetComponent<PlayerWeaponControl>();
+        ultController = GetComponent<PlayerUltyControl>();
         myUI = FindObjectOfType<PlayerUI>();
         myHealth = GetComponent<Health>();
         lastHealth = myHealth.health;
@@ -68,12 +69,13 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void FixedUpdate()
     {
-        if (canMove)
-            myMovement.Movement(move.ReadValue<Vector2>());
-
-        weaponHolder.LookDirection(isGamepad ?
-            look.ReadValue<Vector2>():
-            Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position), false);
+        myMovement.Movement( canMove ? move.ReadValue<Vector2>() : new Vector2());
+        
+        if (canShoot)
+            weaponHolder.LookDirection(isGamepad ?
+                look.ReadValue<Vector2>():
+                Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
+                isGamepad);
 
     }
 
@@ -140,13 +142,17 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         interact = playerInputs.actions["Interact"];
         interact.performed += Interact;
 
+        ultUse = playerInputs.actions["Ultimate"];
+        ultUse.performed += ultController.UseUltimate;
+        ultUse.canceled += ultController.EndUltimate;
+
         playerInputs.onControlsChanged += SetControlScheme;
     }
 
     private void UnsetControls()
     {
 
-        dash.performed += Dash;
+        dash.performed -= Dash;
         leftFire.performed -= weaponHolder.PressLeft;
         leftFire.canceled -= weaponHolder.LiftLeft;
         leftRe.performed -= weaponHolder.ReloadLeft;

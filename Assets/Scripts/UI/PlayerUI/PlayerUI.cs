@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PlayerUI : MonoBehaviour
 {
 
-    [SerializeField] Image health;
+    [SerializeField] List<Image> healthBars;
     private float newHealth;
     private float currentHealth;
     private float maxHealth;
@@ -48,7 +49,9 @@ public class PlayerUI : MonoBehaviour
                 healthChanging = false;
                 currentPoint = 0;
             }
-            health.fillAmount = currentHealth / maxHealth;
+
+            foreach(Image health in healthBars)
+                health.fillAmount = currentHealth / maxHealth;
             healthTexts[0].text = currentHealth.ToString();
 
         }

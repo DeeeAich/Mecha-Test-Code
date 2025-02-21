@@ -1,70 +1,68 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-using System;
 
-[CreateAssetMenu(fileName = "Airstrike", menuName = "Player/Ultimates")]
+[CreateAssetMenu(fileName = "Airstrike", menuName = "Player/Ultimates/AirStrike")]
 public class Airstike : Ultimate
 {
 
-    private List<GameObject> missiles = new();
     public int enemiesToHit = 9;
     public float betweenShots = 0.2f;
-
+    public float locationRandom = 0.5f;
 
     public override void ActivateUltimate()
     {
-        if (recharging)
+        if (FindObjectsOfType<AITree.BehaviourTree>().Length == 0)
             return;
 
-        if (myAnimator == null)
-            myAnimator = ultCaster.GetComponent<Animator>();
+        PlayerUltyControl.instance.recharging = true;
 
-        recharging = true;
-
-        Firing();
+        StartCoroutine(Firing());
         
     }
 
-    private IEnumerator Firing()
+    public IEnumerator Firing()
     {
 
-        myAnimator.SetTrigger("Fire");
+        PlayerUltyControl.instance.RunAnimation("Fire");
 
         yield return new WaitForSeconds(castTime);
+
+        AITree.BehaviourTree[] enemies = FindObjectsOfType<AITree.BehaviourTree>();
+        int listLoop = 0;
+        List<GameObject> missiles = new();
+        for (int i = 0; i < enemiesToHit; i++)
+        {
+            if (i == enemies.Length * (1 + listLoop))
+                listLoop++;
+
+            Vector3 location = enemies[i - (listLoop * enemies.Length)].transform.position
+                + new Vector3(Random.Range(-locationRandom, locationRandom), 0, Random.Range(-locationRandom, locationRandom));
+            GameObject newMissile = GameObject.Instantiate(ultObject, location, ultObject.transform.rotation, null);
+            missiles.Add(newMissile);
+
+            newMissile.GetComponentInChildren<BasicBullet>().damage = damages[0];
+
+        }
 
         foreach (GameObject missile in missiles)
         {
 
-            missile.GetComponent<Animator>().SetTrigger("Fire");
+            missile.SetActive(true);
 
             yield return new WaitForSeconds(betweenShots);
 
         }
 
-        yield return null;
-    }
+        yield return new WaitForSeconds(rechargeTime - (betweenShots * enemiesToHit));
 
-    private IEnumerator ResetShot()
-    {
-
-
-        yield return new WaitForSeconds(rechargeTime);
-
-
+        PlayerUltyControl.instance.RunAnimation("Reload");
+        PlayerUltyControl.instance.recharging = false;
 
         yield return null;
 
-    }
-
-    public override void EndUltimate()
-    {
-        
-    }
-
-    public override void UltUpdate()
-    {
-        
     }
 
 }

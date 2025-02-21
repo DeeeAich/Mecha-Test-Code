@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerPickup : ScriptableObject
 {
 
+    public string itemName;
+    [TextArea(3, 5)]
+    public string description;
+    public GameObject pickup;
+    public Sprite mySprite;
+    public Sprite myMenuIcon;
 
     protected void StartCoroutine(IEnumerator corout)
     {

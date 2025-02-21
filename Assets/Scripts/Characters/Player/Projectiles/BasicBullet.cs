@@ -13,9 +13,10 @@ public class BasicBullet : Projectile
     private Critical critRoller;
     private int pierceCounter = 0;
 
-    private void Start()
+    public virtual void Start()
     {
-        critRoller = myGun.GetComponent<Critical>();
+        myGun.TryGetComponent<Critical>(out critRoller);
+
         pierceCounter = myGun.pierceCount;
 
     }
@@ -51,7 +52,7 @@ public class BasicBullet : Projectile
         }
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (gameObject.activeInHierarchy && !animating)
             transform.position += transform.forward * speed * Time.deltaTime;

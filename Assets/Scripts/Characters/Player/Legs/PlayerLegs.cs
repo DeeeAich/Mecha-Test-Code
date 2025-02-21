@@ -13,15 +13,15 @@ public class PlayerLegs : MonoBehaviour
 
     public virtual void Movement(Vector2 stickAmount)
     {
-        
+
         if (stickAmount.magnitude != 0 && !dashing)
         {
-            curSpeed += stickAmount * myBody.legStats.accelleration * Time.deltaTime;
+            curSpeed += stickAmount * myBody.legStats.speed;
 
             if (curSpeed.magnitude > (stickAmount * myBody.legStats.speed).magnitude)
                 curSpeed = stickAmount * myBody.legStats.speed;
         }
-        else if(!dashing)
+        else if (!dashing)
         {
             curSpeed -= curSpeed.normalized * Time.deltaTime * myBody.legStats.accelleration;
             if (curSpeed.magnitude <= 0.5f)

@@ -1,27 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerUltyControl : MonoBehaviour
 {
 
     PlayerBody myBody;
     public Ultimate currentUltimate;
+    private GameObject ultimateCaster;
+    private Animator ultAnimation;
+
+    public static PlayerUltyControl instance;
+
+    public bool recharging = false;
 
     private void Start()
     {
-        myBody = GetComponent<PlayerBody>();
-        currentUltimate = myBody.ultimate;
+        myBody = PlayerBody.PlayBody();
+
+        LoadUltimate(currentUltimate);
+
+        instance = this;
+
     }
 
-    public void UseUltimate()
+    public void UseUltimate(InputAction.CallbackContext context)
     {
-
-        currentUltimate.ActivateUltimate();
-
+        if (!recharging)
+        {
+            
+            currentUltimate.ActivateUltimate();
+        }
     }
 
-    public void EndUltimate()
+    public void EndUltimate(InputAction.CallbackContext context)
     {
 
         currentUltimate.EndUltimate();
@@ -32,6 +45,24 @@ public class PlayerUltyControl : MonoBehaviour
     {
 
         currentUltimate.UltUpdate();
+
+    }
+
+    private void LoadUltimate(Ultimate newUlt)
+    {
+
+        currentUltimate = newUlt;
+
+        ultimateCaster = GameObject.Instantiate(currentUltimate.ultCaster, transform.GetChild(0));
+
+        ultAnimation = ultimateCaster.GetComponentInChildren<Animator>();
+
+    }
+
+    public void RunAnimation(string animationTrigger)
+    {
+
+        ultAnimation.SetTrigger(animationTrigger);
 
     }
 }
