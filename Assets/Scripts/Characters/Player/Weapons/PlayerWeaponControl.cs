@@ -12,8 +12,10 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     private PlayerBody myBody;
 
+    public WeaponPickup leftWInfo;
     public Weapon leftWeapon;
     public List<WeaponChip> leftMods;
+    public WeaponPickup rightWInfo;
     public Weapon rightWeapon;
     public List<WeaponChip> rightMods;
 

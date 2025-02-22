@@ -221,10 +221,15 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         genWeapon.GetComponent<Weapon>().myController = weaponHolder;
 
         if (left)
+        {
+            weaponHolder.leftWInfo = setWeapon;
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
+        }
         else
+        {
+            weaponHolder.rightWInfo = setWeapon;
             weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
-
+        }
     }
 
     public void SetInteract(Interactable interact, bool adding = true)
