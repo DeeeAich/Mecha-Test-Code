@@ -206,7 +206,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     }
 
     [Tooltip("Add Prefab, if using left")]
-    public void SetWeapon(GameObject setWeapon, bool left)
+    public void SetWeapon(WeaponPickup setWeapon, bool left)
     {
 
         if (left && weaponHolder.leftWeapon.gameObject != null)
@@ -214,7 +214,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         else if (weaponHolder.leftWeapon.gameObject != null)
             Destroy(weaponHolder.rightWeapon.gameObject);
 
-        GameObject genWeapon = GameObject.Instantiate(setWeapon, weaponPoints[left ? 0 : 1]);
+        GameObject genWeapon = GameObject.Instantiate(setWeapon.weaponPrefab, weaponPoints[left ? 0 : 1]);
 
         genWeapon.transform.localScale = new Vector3(left ? 1 : -1, 1, 1);
 

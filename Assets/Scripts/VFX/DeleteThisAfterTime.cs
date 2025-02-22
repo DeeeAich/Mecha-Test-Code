@@ -14,6 +14,4 @@ public class DeleteThisAfterTime : MonoBehaviour
             transform.parent = null;
         }
     }
-
-
 }
