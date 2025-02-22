@@ -83,8 +83,6 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void ApplyChip(WeaponChip newChip, bool left)
     {
 
-        print("Getting modified by " + newChip.chipName);
-
         if (left)
             leftMods.Add(newChip);
         else
