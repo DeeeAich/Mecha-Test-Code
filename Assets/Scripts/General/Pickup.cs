@@ -227,7 +227,7 @@ public class Pickup : MonoBehaviour
         {
             if (i < leftChips.Count)
             {
-                currentLeftWeaponChipImages[i].sprite = leftChips[i].chipImage;
+                currentLeftWeaponChipImages[i].sprite = leftChips[i].mySprite;
                 currentLeftWeaponChipImages[i].enabled = true;
             }
             else
@@ -242,7 +242,7 @@ public class Pickup : MonoBehaviour
         {
             if (i < rightChips.Count)
             {
-                currentRightWeaponChipImages[i].sprite = rightChips[i].chipImage;
+                currentRightWeaponChipImages[i].sprite = rightChips[i].mySprite;
                 currentRightWeaponChipImages[i].enabled = true;
             }
             else

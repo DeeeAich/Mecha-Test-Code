@@ -69,7 +69,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (i < leftMods.Count)
             {
-                WeaponsLeftChipsImages[i].sprite = leftMods[i].chipImage;
+                WeaponsLeftChipsImages[i].sprite = leftMods[i].mySprite;
                 WeaponsLeftChipsImages[i].enabled = true;
             }
             else
@@ -83,7 +83,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (i < rightMods.Count)
             {
-                WeaponsRightChipsImages[i].sprite = rightMods[i].chipImage;
+                WeaponsRightChipsImages[i].sprite = rightMods[i].mySprite;
                 WeaponsRightChipsImages[i].enabled = true;
             }
             else
@@ -98,7 +98,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (i < bodyChips.Count)
             {
-                bodyChipsImages[i].sprite = bodyChips[i].chipImage;
+                bodyChipsImages[i].sprite = bodyChips[i].mySprite;
                 bodyChipsImages[i].enabled = true;
             }
             else
@@ -148,9 +148,9 @@ public class InventoryManager : MonoBehaviour
 
         if (chip != null)
         {
-            inspectionCardImage.sprite = chip.chipImage;
-            inspectionCardDescription.text = chip.chipDes;
-            inspectionCardTitle.text = chip.chipName;
+            inspectionCardImage.sprite = chip.mySprite;
+            inspectionCardDescription.text = chip.description;
+            inspectionCardTitle.text = chip.itemName;
         }
 
         inspectionCard.SetActive(true);

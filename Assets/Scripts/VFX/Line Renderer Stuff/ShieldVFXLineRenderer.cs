@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ShieldVFXLineRenderer : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
     public Material shieldedMaterial;
     public List<MeshRenderer> meshRenderers;
+    private int[] meshRendererShieldIndexes;
     public bool materialSetter;     // only one of the line renderers needs this enabled 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +50,9 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
         if (materialSetter)
         {
+            meshRenderers = new List<MeshRenderer>();
+            
+            
             // get mesh renderer on main object
             if (GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.GetComponent<MeshRenderer>() != null)
             {
@@ -61,7 +67,9 @@ public class ShieldVFXLineRenderer : MonoBehaviour
                 meshRenderers.Add(childedMeshRenderers[i]);
             }
 
-             SetAdditionalMaterial();
+            meshRendererShieldIndexes = new int[meshRenderers.Count];
+            
+            SetAdditionalMaterial();
         }
     }
 
@@ -71,9 +79,23 @@ public class ShieldVFXLineRenderer : MonoBehaviour
         {
             if (meshRenderers[i] == null) continue;
             
-            List<Material> materials = meshRenderers[i].materials.ToList();
-            materials.Add(shieldedMaterial);
-            meshRenderers[i].materials = materials.ToArray();
+            bool needsToAddMaterial = true;
+            
+            for (int j = 0; j < meshRenderers[i].materials.Length; j++)
+            {
+                if (meshRenderers[i].materials[j].name == shieldedMaterial.name)
+                {
+                    needsToAddMaterial = false;
+                }
+            }
+
+            if (needsToAddMaterial)
+            {
+                List<Material> materials = meshRenderers[i].materials.ToList();
+                materials.Add(shieldedMaterial);
+                meshRendererShieldIndexes[i] = materials.Count - 1;
+                meshRenderers[i].materials = materials.ToArray();
+            }
         }
     }
 
@@ -90,6 +112,16 @@ public class ShieldVFXLineRenderer : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        if (materialSetter)
+        {
+            ClearAdditionalMaterial();
+            meshRenderers.Clear();
+        }
+    }
+
     public void ClearAdditionalMaterial()
     {
         for (int i = 0; i < meshRenderers.Count; i++)
@@ -97,7 +129,29 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             if (meshRenderers[i] == null) continue;
             
             List<Material> materials = meshRenderers[i].materials.ToList();
-            if (materials.Contains(shieldedMaterial)) materials.Remove(shieldedMaterial);
+
+            /*
+            bool materialRemoved = false;
+            for (int j = 0; j < materials.Count; j++)
+            {
+                if (materials[j].name == shieldedMaterial.name)
+                {
+                    materialRemoved = true;
+                    materials.RemoveAt(j);
+                }
+            }
+
+            if (materialRemoved)
+            {
+                Debug.Log("Didnt");
+            }
+            else
+            {
+                Debug.Log("Removed shield");
+            }
+            */
+            
+            materials.RemoveAt(meshRendererShieldIndexes[i]);
             meshRenderers[i].materials = materials.ToArray();
         }
     }
