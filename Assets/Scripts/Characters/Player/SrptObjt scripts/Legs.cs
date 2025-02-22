@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Leg data", menuName = "Player/Leg Data")]
-public class Legs : ScriptableObject
+public class Legs : PlayerPickup
 {
     [Header("Basic Info")]
     public float speed;
