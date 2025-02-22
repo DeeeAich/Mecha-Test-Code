@@ -35,8 +35,8 @@ public class DevKitCheats : MonoBehaviour
         
         for (int i = 0; i < componentMasterListScriptable.weapons.Length; i++)
         {
-            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
-            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].name));
+            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].itemName));
+            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].itemName));
         }
 
         for (int i = 0; i < componentMasterListScriptable.chips.Length; i++)
@@ -118,8 +118,8 @@ public class DevKitCheats : MonoBehaviour
         {
             PlayerBody body = FindObjectOfType<PlayerBody>();
             
-            if(newLoadout[1] != loadout[1]) body.SetWeapon(componentMasterListScriptable.weapons[newLoadout[1]], true);
-            if(newLoadout[2] != loadout[2]) body.SetWeapon(componentMasterListScriptable.weapons[newLoadout[2]], false);
+            if(newLoadout[1] != loadout[1]) body.SetWeapon((WeaponPickup)componentMasterListScriptable.weapons[newLoadout[1]], true);
+            if(newLoadout[2] != loadout[2]) body.SetWeapon((WeaponPickup)componentMasterListScriptable.weapons[newLoadout[2]], false);
             
             loadout = newLoadout;
         }

@@ -153,7 +153,16 @@ public class CharacterVFXManager : MonoBehaviour
             if (meshRenderers[i] == null) continue;
             
             List<Material> materials = meshRenderers[i].materials.ToList();
-            if (materials.Contains(mat)) materials.Remove(mat);
+            
+            bool materialRemoved = false;
+            for (int j = 0; j < materials.Count; j++)
+            {
+                if (materials[j].shader == mat.shader)
+                {
+                    materialRemoved = true;
+                    materials.RemoveAt(j);
+                }
+            }
             meshRenderers[i].materials = materials.ToArray();
         }
     }

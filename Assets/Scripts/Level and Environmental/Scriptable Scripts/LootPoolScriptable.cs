@@ -3,19 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable] public struct LootPickupStruct
-{
-    public string lootName;
-    public pickupType PickupType;
-    public string lootDescription;
-    
-    public int spawnChance;
-    public int rarity;
 
-    public GameObject itemReference;
-    public ScriptableObject ItemScriptableReference;
-    public Sprite itemDisplayImage;
-}
 
 [CreateAssetMenu(fileName = "Loot Pool", menuName = "ScriptableObjects/Level Scriptables/Loot Pool")]
 public class LootPoolScriptable : ScriptableObject
@@ -23,16 +11,16 @@ public class LootPoolScriptable : ScriptableObject
     public GameObject pickupPrefab; 
     
     [Header("Chips")]
-    public LootPickupStruct[] Chips;
+    public PlayerPickup[] Chips;
 
     [Header("Weapons")]
-    public LootPickupStruct[] Weapons;
+    public PlayerPickup[] Weapons;
 
     [Header("Ordinance")]
-    public LootPickupStruct[] Ordinance;
+    public PlayerPickup[] Ordinance;
 
     [Header("Chassis")]
-    public LootPickupStruct[] Chassis;
+    public PlayerPickup[] Chassis;
     
     [Header("Images for display on things like doors and crates")]
     public Sprite weaponLootImage;

@@ -21,9 +21,12 @@ public class Pickup : MonoBehaviour
 {
     public int pickupRarity = 0;
     public pickupType pickupType = pickupType.ChassisChip;
+    public PlayerPickup PlayerPickup;
     
     [Header("Ui Stuff")]
+    public SpriteRenderer itemDisplayImage;
     public GameObject uiPopup;
+    
     [SerializeField] private GameObject singleItemPopup;
     [SerializeField] private GameObject twoOptionItemPopup;
     [SerializeField] private GameObject weaponPopup;
@@ -43,15 +46,6 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Image[] currentLeftWeaponChipImages;
     [SerializeField] private Image[] currentRightWeaponChipImages;
 
-    [Header("Item Stuff")]
-    public Sprite itemDisplaySprite;
-    public SpriteRenderer itemDisplayImage;
-    public string pickupName;
-    public string pickupDescription;
-    
-    public GameObject itemReference;
-    public ScriptableObject ItemScriptableReference;
-    
     public Animator animator;
 
     private void Start()
@@ -66,31 +60,22 @@ public class Pickup : MonoBehaviour
         
         animator.SetInteger("lootRarity", pickupRarity);
         
-        if(itemDisplayImage != null && itemDisplaySprite != null) itemDisplayImage.sprite = itemDisplaySprite;
-
-        if (itemDisplaySprite != null)
+        itemDisplayImage.sprite = PlayerPickup.mySprite;
+        for (int i = 0; i < newLootImages.Length; i++)
         {
-            for (int i = 0; i < newLootImages.Length; i++)
-            {
-                newLootImages[i].sprite = itemDisplaySprite;
-            }
+            newLootImages[i].sprite = PlayerPickup.mySprite;
         }
 
-        if (pickupName != "")
+        for (int i = 0; i < newLootNames.Length; i++) 
         {
-            for (int i = 0; i < newLootNames.Length; i++)
-            {
-                newLootNames[i].text = pickupName;
-            }
+            newLootNames[i].text = PlayerPickup.itemName;
         }
-
-        if (pickupDescription != "")
+        
+        for (int i = 0; i < newLootDescriptions.Length; i++)
         {
-            for (int i = 0; i < newLootDescriptions.Length; i++)
-            {
-                newLootDescriptions[i].text = pickupDescription;
-            }
+            newLootDescriptions[i].text = PlayerPickup.description;
         }
+        
     }
 
     public void TryPickup()
@@ -166,7 +151,7 @@ public class Pickup : MonoBehaviour
         {
             case pickupType.Weapon:
 
-                PlayerBody.PlayBody().SetWeapon(itemReference, optionalData == 0);
+                PlayerBody.PlayBody().SetWeapon((WeaponPickup)PlayerPickup, optionalData == 0);
                 
                 break;
             
@@ -179,7 +164,7 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.WeaponChip:
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)ItemScriptableReference, optionalData == 0);
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) PlayerPickup, optionalData == 0);
                 break;
             
             case pickupType.ChassisChip:

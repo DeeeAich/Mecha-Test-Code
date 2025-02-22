@@ -130,28 +130,17 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             
             List<Material> materials = meshRenderers[i].materials.ToList();
 
-            /*
+            
             bool materialRemoved = false;
             for (int j = 0; j < materials.Count; j++)
             {
-                if (materials[j].name == shieldedMaterial.name)
+                if (materials[j].shader == shieldedMaterial.shader)
                 {
                     materialRemoved = true;
                     materials.RemoveAt(j);
                 }
             }
-
-            if (materialRemoved)
-            {
-                Debug.Log("Didnt");
-            }
-            else
-            {
-                Debug.Log("Removed shield");
-            }
-            */
             
-            materials.RemoveAt(meshRendererShieldIndexes[i]);
             meshRenderers[i].materials = materials.ToArray();
         }
     }

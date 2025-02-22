@@ -217,23 +217,14 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Spawning Loot");
         
-        LootPickupStruct[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
+        PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
         
         for (int i = 0; i < pickupsToSpawn.Length; i++)
         {
             Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
             
             newLoot.transform.SetParent(transform);
-            
-            newLoot.pickupRarity = pickupsToSpawn[i].rarity;
-            newLoot.pickupType = pickupsToSpawn[i].PickupType;
-
-            newLoot.pickupName = pickupsToSpawn[i].lootName;
-            newLoot.pickupDescription = pickupsToSpawn[i].lootDescription;
-            newLoot.itemDisplaySprite = pickupsToSpawn[i].itemDisplayImage;
-            
-            if (pickupsToSpawn[i].itemReference != null) newLoot.itemReference = pickupsToSpawn[i].itemReference;
-            if (pickupsToSpawn[i].ItemScriptableReference != null) newLoot.ItemScriptableReference = pickupsToSpawn[i].ItemScriptableReference;
+            newLoot.PlayerPickup = pickupsToSpawn[i];
         }
     }
 }

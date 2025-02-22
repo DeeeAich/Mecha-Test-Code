@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Components Master List", menuName = "ScriptableObjects/Components Master List")]
 public class ComponentMasterListScriptable : ScriptableObject
 {
-    public GameObject[] chassis;
-    public GameObject[] weapons;
-    public GameObject[] ultimates;
-    public ScriptableObject[] chips;
+    public PlayerPickup[] chassis;
+    public PlayerPickup[] weapons;
+    public PlayerPickup[] ultimates;
+    public PlayerPickup[] chips;
 }

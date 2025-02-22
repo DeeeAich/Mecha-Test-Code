@@ -109,10 +109,10 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
 
-    public LootPickupStruct[] GenerateLootPickups(int count, LootType type)
+    public PlayerPickup[] GenerateLootPickups(int count, LootType type)
     {
-        LootPickupStruct[] selection = new LootPickupStruct[count];
-        List<LootPickupStruct> possibleSelection = new List<LootPickupStruct>();
+        PlayerPickup[] selection = new PlayerPickup[count];
+        List<PlayerPickup> possibleSelection = new List<PlayerPickup>();
         
         switch (type)
         {
@@ -138,7 +138,7 @@ public class LevelGenerator : MonoBehaviour
 
         for (int i = 0; i < possibleSelection.Count; i++)
         {
-            totalSpawnChance += possibleSelection[i].spawnChance;
+            totalSpawnChance += possibleSelection[i].spawnRate;
         }
         
         int totalPossiblePickups = possibleSelection.Count;
@@ -150,13 +150,13 @@ public class LevelGenerator : MonoBehaviour
 
             for (int j = 0; j < possibleSelection.Count; j++)
             {
-                currentSpawnChance += possibleSelection[j].spawnChance;
+                currentSpawnChance += possibleSelection[j].spawnRate;
                 if (currentSpawnChance > rand)
                 {
                     selection[i] = possibleSelection[j];
                     if (totalPossiblePickups > selection.Length)
                     {
-                        totalSpawnChance -= possibleSelection[j].spawnChance;
+                        totalSpawnChance -= possibleSelection[j].spawnRate;
                         possibleSelection.RemoveAt(j);
                     }
                     break;
