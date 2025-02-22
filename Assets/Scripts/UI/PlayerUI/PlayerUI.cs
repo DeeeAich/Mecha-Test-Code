@@ -30,9 +30,21 @@ public class PlayerUI : MonoBehaviour
     private int dashTotal;
     [SerializeField] Color32 dashColour;
     [SerializeField] Image ultimate;
+    private bool ultCharging = false;
+    private float ultCharge;
+    private float ultChargeTime;
 
     [SerializeField] GameObject deathImage;
     [SerializeField] float deathTime;
+
+    public static PlayerUI instance;
+
+    private void Awake()
+    {
+
+        instance = this;
+
+    }
 
     private void FixedUpdate()
     {
@@ -62,7 +74,7 @@ public class PlayerUI : MonoBehaviour
             curCharge += Time.deltaTime;
             dashCharges[0].fillAmount = curCharge / dashChargeTime;
 
-            if(curCharge >= dashChargeTime)
+            if(curCharge >= dashChargeTime * 0.97)
             {
                 dashCount++;
 
@@ -77,6 +89,23 @@ public class PlayerUI : MonoBehaviour
                 dashCharges[1].color = Color.gray;
             else
                 dashCharges[1].color = dashColour;
+
+        }
+
+        if (ultCharging)
+        {
+
+            ultCharge += Time.deltaTime;
+            ultimate.fillAmount = ultCharge / ultChargeTime;
+
+            if(ultCharge >= ultChargeTime * 99)
+            {
+
+                ultCharge = 0;
+                ultimate.fillAmount = 1;
+                ultCharging = false;
+
+            }
 
         }
         
@@ -123,8 +152,16 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    public void UltUsed()
+    {
+
+        ultCharging = true;
+        ultCharge = 0;
+
+    }
+
     public void LockAndLoad(float mHealth, float curHealth, int leftAm, int rightAm, float dashCha,
-        int dashMax, Sprite left = null, Sprite right = null)
+        int dashMax, float ultCha, Sprite left = null, Sprite right = null)
     {
 
         healthTexts[0].text = curHealth.ToString();
@@ -146,6 +183,8 @@ public class PlayerUI : MonoBehaviour
         dashCountTxt.text = dashMax.ToString();
 
         dashChargeTime = dashCha;
+
+        ultChargeTime = ultCha;
 
     }
 

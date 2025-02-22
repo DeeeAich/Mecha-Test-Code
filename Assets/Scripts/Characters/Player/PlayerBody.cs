@@ -191,7 +191,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
             weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo,
-            legStats.dashRecharge, legStats.dashCharges);
+            legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime);
     }
 
     public struct LegInfo

@@ -30,6 +30,8 @@ public class Airstike : Ultimate
 
         yield return new WaitForSeconds(castTime);
 
+        PlayerUI.instance.UltUsed();
+
         AITree.BehaviourTree[] enemies = FindObjectsOfType<AITree.BehaviourTree>();
         int listLoop = 0;
         List<GameObject> missiles = new();
