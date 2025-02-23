@@ -28,11 +28,8 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             Quaternion lookDirection = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y / (isGamepad ? 1 :
                 Mathf.Sin(45 * Mathf.Deg2Rad))));
 
-            if (firing)
-            {
-
-            }
-
+            
+            
             turnerObject.rotation = lookDirection;
 
         }

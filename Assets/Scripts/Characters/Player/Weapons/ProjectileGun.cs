@@ -53,12 +53,13 @@ public class ProjectileGun : Weapon
         
         waitOnShot = true;
 
-        myAnim.SetTrigger("Fire");
 
 
         for (int i = 0; i < burstCount; i++)
         {
-            GameObject newBullet = new();
+
+            myAnim.SetTrigger("Fire");
+            GameObject newBullet;
 
             if (projectileHolder.GetChild(0) == null)
                 newBullet = GameObject.Instantiate(projectile, projectileHolder);
