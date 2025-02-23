@@ -24,10 +24,12 @@ public class Weapon : MonoBehaviour, IModable
 
     public PlayerWeaponControl myController;
 
+    public WeaponStats modifiers;
+    public WeaponStats tempMods;
+
     public virtual void Start()
     {
-        myAnim.SetFloat("FireRate", 1 / fireRate);
-        myAnim.SetFloat("ReloadSpeed", 1 / reloadTime);
+        SetAnimation();
     }
 
     public virtual void FirePress()
@@ -49,7 +51,7 @@ public class Weapon : MonoBehaviour, IModable
     public virtual IEnumerator Reload()
     {
 
-        if (reloading || waitOnShot)
+        if (reloading || waitOnShot || curAmmo == maxAmmo)
             yield break;
 
         reloading = true;
@@ -58,7 +60,7 @@ public class Weapon : MonoBehaviour, IModable
         
         yield return new WaitForSeconds(reloadTime);
 
-        curAmmo = maxAmmo;
+        curAmmo = Mathf.RoundToInt(maxAmmo * modifiers.ammoCount);
         reloading = false;
 
         if (fireHeld && fullAuto)
@@ -68,8 +70,37 @@ public class Weapon : MonoBehaviour, IModable
 
     }
 
+    public virtual void AddStats(WeaStatChip addStats)
+    {
+
+        addStats.myStatChange.AddStats(modifiers);
+        SetAnimation();
+
+    }
+
+    public virtual void TempStatsAdd(WeaponStats addStats)
+    {
+
+        addStats.AddStats(tempMods);
+
+    }
+
+    public virtual void TempStatsRemove(WeaponStats removeStats)
+    {
+
+
+    }
+
+
     public virtual void AddMod(StatusInfo ModInfo)
     {
 
     }
+
+    public void SetAnimation()
+    {
+        myAnim.SetFloat("FireRate", 1 / fireRate * modifiers.attackSpeed);
+        myAnim.SetFloat("ReloadSpeed", 1 / reloadTime * modifiers.reloadSpeed);
+    }
+
 }

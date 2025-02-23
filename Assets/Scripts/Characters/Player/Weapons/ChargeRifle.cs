@@ -84,7 +84,7 @@ public class ChargeRifle : Weapon
             lineGen.startWidth = lineWidth;
             lineGen.endWidth = lineWidth;
 
-            if(charges != maxCharge && charges != curAmmo && charge >= chargeTime * charges + 0.5f)
+            if(charges != maxCharge && charges != curAmmo && charge >= (chargeTime * charges + 0.5f) * modifiers.attackSpeed)
             {
 
                 charges++;
@@ -137,7 +137,7 @@ public class ChargeRifle : Weapon
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth * 2,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
-        float damageModed = GetComponent<Critical>().AdditiveDamage(damage[charges - 1]);
+        float damageModed = GetComponent<Critical>().AdditiveDamage(damage[charges - 1] * modifiers.damage);
 
         if (hits.Length > 0)
             foreach (RaycastHit hit in hits)
@@ -147,7 +147,7 @@ public class ChargeRifle : Weapon
                 {
 
 
-                    health.TakeDamage(damageModed);
+                    health.TakeDamage(damageModed, damageModed != damage[charges - 1] * modifiers.damage);
                     foreach (ProjectileMod mod in myMods)
                         mod.AttemptApply(hit.collider.gameObject);
 

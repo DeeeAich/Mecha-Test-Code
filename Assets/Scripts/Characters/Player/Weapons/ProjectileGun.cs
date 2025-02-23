@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class ProjectileGun : Weapon
 {
@@ -14,6 +15,10 @@ public class ProjectileGun : Weapon
 
     public float divPerShot;
 
+    public bool hasBurst;
+    public float timeBetweenBurst;
+    public int burstCount = 1;
+
     public override void Start()
     {
         base.Start();
@@ -22,7 +27,7 @@ public class ProjectileGun : Weapon
 
     public virtual void LoadBullets()
     {
-        for (int i = 0; i < (1 / fireRate) * 4f; i++)
+        for (int i = 0; i < maxAmmo; i++)
         {
             GameObject genBullet = GameObject.Instantiate(projectile, projectileHolder);
             genBullet.name = "PlayerBullet";
@@ -45,35 +50,50 @@ public class ProjectileGun : Weapon
     {
         if (waitOnShot || !fireHeld || reloading)
             yield break;
-
+        
         waitOnShot = true;
-
-        GameObject newBullet = projectileHolder.GetChild(0).gameObject;
-        newBullet.transform.parent = null;
-        newBullet.transform.position = firePoint.position;
-        newBullet.transform.rotation = firePoint.rotation;
-        newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
-        newBullet.SetActive(true);
-        newBullet.GetComponent<BasicBullet>().damage = damage[0];
-        StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
 
         myAnim.SetTrigger("Fire");
 
-        yield return new WaitForSeconds(fireRate);
+
+        for (int i = 0; i < burstCount; i++)
+        {
+            GameObject newBullet = new();
+
+            if (projectileHolder.GetChild(0) == null)
+                newBullet = GameObject.Instantiate(projectile, projectileHolder);
+            else
+                newBullet = projectileHolder.GetChild(0).gameObject;
+            newBullet.transform.parent = null;
+            newBullet.transform.position = firePoint.position;
+            newBullet.transform.rotation = firePoint.rotation;
+            newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
+            newBullet.SetActive(true);
+            newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
+            StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
+
+            curDivation += divPerShot;
+            if (curDivation > maxDiviation)
+                curDivation = maxDiviation;
+
+            if (hasBurst)
+            {
+                yield return new WaitForSeconds(timeBetweenBurst);
+            }
+
+        }
+
+        yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
 
         waitOnShot = false;
 
         curAmmo -= shotCost;
 
-        if(curAmmo <= 0)
+        if (curAmmo <= 0)
         {
             StartCoroutine(Reload());
             yield break;
         }
-
-        curDivation += divPerShot;
-        if (curDivation > maxDiviation)
-            curDivation = maxDiviation;
 
         if (fireHeld && fullAuto)
             StartCoroutine(RepeatFire());

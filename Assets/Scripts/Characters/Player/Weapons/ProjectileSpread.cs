@@ -46,12 +46,12 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
             newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
             newBullet.SetActive(true);
-            newBullet.GetComponent<BasicBullet>().damage = damage[0];
+            newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
 
         }
         myAnim.SetTrigger("Fire");
 
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate * fireRate);
 
         waitOnShot = false;
 

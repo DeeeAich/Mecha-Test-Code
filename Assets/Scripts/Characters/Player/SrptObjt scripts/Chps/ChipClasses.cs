@@ -92,6 +92,35 @@ public class DashStatChange
 public class WeaponStats
 {
 
-    public float attackSpeed, damage, ammoCount, shotCost;
+    public float attackSpeed = 1;
+    public float minAttackSpeed = 0.2f;
+    public float damage = 1;
+    public float ammoCount = 1;
+    public float shotCost = 0;
+    public float reloadSpeed = 1;
+    public float minReloadSpeed = 0.4f;
+
+    public void AddStats(WeaponStats statsToUpdate)
+    {
+
+        statsToUpdate.attackSpeed -= attackSpeed;
+        if (statsToUpdate.attackSpeed < statsToUpdate.minAttackSpeed)
+            statsToUpdate.attackSpeed = statsToUpdate.minAttackSpeed;
+        statsToUpdate.damage += damage;
+        statsToUpdate.ammoCount += ammoCount;
+        statsToUpdate.shotCost += shotCost;
+        statsToUpdate.reloadSpeed -= reloadSpeed;
+        if (statsToUpdate.reloadSpeed < statsToUpdate.minReloadSpeed)
+            statsToUpdate.reloadSpeed = statsToUpdate.minReloadSpeed;
+
+    }
+
+    public void RemoveStats(WeaponStats statsToUpdate)
+    {
+
+        statsToUpdate.attackSpeed -= attackSpeed;
+        statsToUpdate.damage -= damage;
+
+    }
 
 }

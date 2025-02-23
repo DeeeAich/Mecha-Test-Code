@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerBody : MonoBehaviour, IBodyModifiable
 {
 
-    private PlayerLegs myMovement;
-    private PlayerWeaponControl weaponHolder;
+    public PlayerLegs myMovement;
+    public PlayerWeaponControl weaponHolder;
     public Legs legStats;
     public PlayerUltyControl ultController;
     public List<Chip> chipsInserted;
@@ -88,8 +88,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             myUI.HealthChanged(lastHealth, lastMax);
         }
 
-        myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo, weaponHolder.leftWeapon.curAmmo);
-        myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo, weaponHolder.rightWeapon.curAmmo);
+        myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
+        myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
     }
 
     private void TriggerEndOfRoom()

@@ -85,15 +85,22 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void ApplyChip(WeaponChip newChip, bool left)
     {
 
-        if (left)
-            leftMods.Add(newChip);
-        else
-            rightMods.Add(newChip);
+        Weapon weapon = null;
 
+        if (left)
+        {
+            leftMods.Add(newChip);
+            weapon = leftWeapon;
+        }
+        else
+        {
+            rightMods.Add(newChip);
+            weapon = rightWeapon;
+        }
         switch (newChip.supType)
         {
             case (WeaponChip.WeaponSubType.Generic):
-
+                weapon.AddStats((WeaStatChip)newChip);
                 break;
             case (WeaponChip.WeaponSubType.StatusEffect):
                 ApplyMods((WeaStaEftChip)newChip, left ? leftWeapon : rightWeapon);
