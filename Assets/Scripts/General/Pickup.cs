@@ -40,7 +40,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Image[] newLootImages;
     [SerializeField] private TMP_Text[] newLootNames;
     [SerializeField] private TMP_Text[] newLootDescriptions;
-    
+
     [SerializeField] private Image currentLeftWeaponImage;
     [SerializeField] private Image currentRightWeaponImage;
     [SerializeField] private Image[] currentLeftWeaponChipImages;
@@ -57,10 +57,13 @@ public class Pickup : MonoBehaviour
             {
             }
         }
+
+        pickupRarity = PlayerPickup.rarity;
+        itemDisplayImage.sprite = PlayerPickup.mySprite;
+        pickupType = PlayerPickup.PickupType;
         
         animator.SetInteger("lootRarity", pickupRarity);
         
-        itemDisplayImage.sprite = PlayerPickup.mySprite;
         for (int i = 0; i < newLootImages.Length; i++)
         {
             newLootImages[i].sprite = PlayerPickup.mySprite;
@@ -206,33 +209,45 @@ public class Pickup : MonoBehaviour
 
     private void DisplayWeaponChips()
     {
-        List<WeaponChip> leftChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods;
-                
-        for (int i = 0; i < currentLeftWeaponChipImages.Length; i++)
+        if (PlayerBody.PlayBody().weaponHolder.leftWeapon != null)
         {
-            if (i < leftChips.Count)
+            currentLeftWeaponImage.sprite = PlayerBody.PlayBody().weaponHolder.leftWInfo.mySprite;
+            currentLeftWeaponImage.enabled = true;
+            
+            List<WeaponChip> leftChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods;
+                
+            for (int i = 0; i < currentLeftWeaponChipImages.Length; i++)
             {
-                currentLeftWeaponChipImages[i].sprite = leftChips[i].mySprite;
-                currentLeftWeaponChipImages[i].enabled = true;
-            }
-            else
-            {
-                currentLeftWeaponChipImages[i].enabled = false;
+                if (i < leftChips.Count)
+                {
+                    currentLeftWeaponChipImages[i].sprite = leftChips[i].mySprite;
+                    currentLeftWeaponChipImages[i].enabled = true;
+                }
+                else
+                {
+                    currentLeftWeaponChipImages[i].enabled = false;
+                }
             }
         }
 
-        List<WeaponChip> rightChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods;
-                
-        for (int i = 0; i < currentRightWeaponChipImages.Length; i++)
+        if (PlayerBody.PlayBody().weaponHolder.rightWeapon != null)
         {
-            if (i < rightChips.Count)
+            currentRightWeaponImage.sprite = PlayerBody.PlayBody().weaponHolder.rightWInfo.mySprite;
+            currentRightWeaponImage.enabled = true;
+
+            List<WeaponChip> rightChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods;
+                
+            for (int i = 0; i < currentRightWeaponChipImages.Length; i++)
             {
-                currentRightWeaponChipImages[i].sprite = rightChips[i].mySprite;
-                currentRightWeaponChipImages[i].enabled = true;
-            }
-            else
-            {
-                currentRightWeaponChipImages[i].enabled = false;
+                if (i < rightChips.Count)
+                {
+                    currentRightWeaponChipImages[i].sprite = rightChips[i].mySprite;
+                    currentRightWeaponChipImages[i].enabled = true;
+                }
+                else
+                {
+                    currentRightWeaponChipImages[i].enabled = false;
+                }
             }
         }
     }

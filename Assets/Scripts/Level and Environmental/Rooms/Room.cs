@@ -28,7 +28,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Door entryDoor;
     [SerializeField] private ObjectiveType[] possiblePrimaryObjectives;
     [SerializeField] private ObjectiveType[] possibleSecondaryObjectives;
-    [SerializeField] private int lootCount = 3;
+
 
     [Header("~~~~~~~~~~~ Dont Touch ~~~~~~~~~~~")]
     public bool isActive;
@@ -44,6 +44,7 @@ public class Room : MonoBehaviour
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
     public GameObject lootSpawnPoint;
+    public int lootCount = 3;
 
     [Header("Internal References")]
     public GameObject[] nextRooms;
@@ -51,7 +52,7 @@ public class Room : MonoBehaviour
     public LootType roomLootType;
 
     [SerializeField] private Door[] exitDoors;
-    
+    private float lootSeperationDistance = 7.5f;
 
     [Header("Events")] 
     public UnityEvent onStartRoom;
@@ -221,7 +222,7 @@ public class Room : MonoBehaviour
         
         for (int i = 0; i < pickupsToSpawn.Length; i++)
         {
-            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * 5 * (i - 1), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * lootSeperationDistance * (i - Mathf.FloorToInt(lootCount/2)), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
             
             newLoot.transform.SetParent(transform);
             newLoot.PlayerPickup = pickupsToSpawn[i];

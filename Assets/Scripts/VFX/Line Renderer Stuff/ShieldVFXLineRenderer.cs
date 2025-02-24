@@ -129,7 +129,6 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             if (meshRenderers[i] == null) continue;
             
             List<Material> materials = meshRenderers[i].materials.ToList();
-
             
             bool materialRemoved = false;
             for (int j = 0; j < materials.Count; j++)
@@ -141,7 +140,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
                 }
             }
             
-            meshRenderers[i].materials = materials.ToArray();
+            if(materialRemoved) meshRenderers[i].materials = materials.ToArray();
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

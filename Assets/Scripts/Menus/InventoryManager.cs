@@ -10,13 +10,28 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private bool editorUpdateInventory;
 
     public List<Image> bodyChipsImages;
-    public List<Image> WeaponsLeftChipsImages;
-    public List<Image> WeaponsRightChipsImages;
-    public Sprite weaponChipEmptySprite;
-
     public Button[] bodyChipsButtons;
-    public Button[] weaponLeftChipsButtons;
-    public Button[] weaponRightChipsButtons;
+
+    [SerializeField] private TMP_Text chassisTitle;
+    [SerializeField] private TMP_Text chassisDescription;
+    [SerializeField] private Image chassisImage;
+
+    [SerializeField] private TMP_Text ordinanceTitle;
+    [SerializeField] private TMP_Text ordinanceDescription;
+    [SerializeField] private Image ordinanceImage;
+
+    [Header("Weapon Slots")] 
+    [SerializeField] private TMP_Text leftWeaponTitle;
+    [SerializeField] private TMP_Text rightWeaponTitle;
+    
+    [SerializeField] private Image leftWeaponImage;
+    [SerializeField] private Image rightWeaponImage;
+    
+    [SerializeField] private List<Image> WeaponsLeftChipsImages;
+    [SerializeField] private List<Image> WeaponsRightChipsImages;
+
+    [SerializeField] private Button[] weaponLeftChipsButtons;
+    [SerializeField] private Button[] weaponRightChipsButtons;
 
     [Header("Inspection Card")] 
     [SerializeField] private GameObject inspectionCard;
@@ -59,37 +74,19 @@ public class InventoryManager : MonoBehaviour
     public void UpdateInventory()
     {
         print("Updating Inventory");
-        
         inspectionCard.SetActive(false);
-        
-        List<WeaponChip> leftMods = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods;
-        List<WeaponChip> rightMods = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods;
 
-        for (int i = 0; i < WeaponsLeftChipsImages.Count; i++)
+        PlayerBody playerBody = PlayerBody.PlayBody();
+
+        chassisTitle.text = playerBody.legStats.itemName;
+        chassisDescription.text = playerBody.legStats.description;
+        chassisImage.sprite = playerBody.legStats.mySprite;
+
+        if (playerBody.ultController.currentUltimate != null)
         {
-            if (i < leftMods.Count)
-            {
-                WeaponsLeftChipsImages[i].sprite = leftMods[i].mySprite;
-                WeaponsLeftChipsImages[i].enabled = true;
-            }
-            else
-            {
-                WeaponsLeftChipsImages[i].enabled = false;
-            }
-
-        }
-
-        for (int i = 0; i < WeaponsRightChipsImages.Count; i++)
-        {
-            if (i < rightMods.Count)
-            {
-                WeaponsRightChipsImages[i].sprite = rightMods[i].mySprite;
-                WeaponsRightChipsImages[i].enabled = true;
-            }
-            else
-            {
-                WeaponsRightChipsImages[i].enabled = false;
-            }
+            ordinanceTitle.text = playerBody.ultController.currentUltimate.itemName;
+            ordinanceDescription.text = playerBody.ultController.currentUltimate.description;
+            ordinanceImage.sprite = playerBody.ultController.currentUltimate.mySprite;
         }
 
         List<Chip> bodyChips = PlayerBody.PlayBody().chipsInserted;
@@ -105,6 +102,62 @@ public class InventoryManager : MonoBehaviour
             {
                 bodyChipsImages[i].enabled = false;
             }
+        }
+
+        PlayerWeaponControl weapons = PlayerBody.PlayBody().weaponHolder;
+
+        if (weapons.leftWeapon != null)
+        {
+            leftWeaponTitle.text = weapons.leftWInfo.itemName;
+            leftWeaponTitle.gameObject.SetActive(true);
+            leftWeaponImage.sprite = weapons.leftWInfo.mySprite;
+            leftWeaponImage.gameObject.SetActive(true);
+            
+            List<WeaponChip> leftMods = weapons.leftMods;
+            for (int i = 0; i < WeaponsLeftChipsImages.Count; i++)
+            {
+                if (i < leftMods.Count)
+                {
+                    WeaponsLeftChipsImages[i].sprite = leftMods[i].mySprite;
+                    WeaponsLeftChipsImages[i].enabled = true;
+                }
+                else
+                {
+                    WeaponsLeftChipsImages[i].enabled = false;
+                }
+            }
+        }
+        else
+        {
+            leftWeaponTitle.gameObject.SetActive(false);
+            leftWeaponImage.gameObject.SetActive(false);
+        }
+
+        if (weapons.rightWeapon != null)
+        {
+            rightWeaponTitle.text = weapons.rightWInfo.itemName;
+            rightWeaponTitle.gameObject.SetActive(true);
+            rightWeaponImage.sprite = weapons.rightWInfo.mySprite;
+            rightWeaponTitle.gameObject.SetActive(true);
+            
+            List<WeaponChip> rightMods = weapons.rightMods;
+            for (int i = 0; i < WeaponsRightChipsImages.Count; i++)
+            {
+                if (i < rightMods.Count)
+                {
+                    WeaponsRightChipsImages[i].sprite = rightMods[i].mySprite;
+                    WeaponsRightChipsImages[i].enabled = true;
+                }
+                else
+                {
+                    WeaponsRightChipsImages[i].enabled = false;
+                }
+            }
+        }
+        else
+        {
+            rightWeaponTitle.gameObject.SetActive(false);
+            rightWeaponTitle.gameObject.SetActive(false);
         }
     }
 

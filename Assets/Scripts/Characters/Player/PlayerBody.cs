@@ -208,6 +208,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     [Tooltip("Add Prefab, if using left")]
     public void SetWeapon(WeaponPickup setWeapon, bool left)
     {
+        Debug.Log("Picking up " + setWeapon.itemName);
 
         if (left && weaponHolder.leftWeapon.gameObject != null)
             Destroy(weaponHolder.leftWeapon.gameObject);

@@ -163,7 +163,8 @@ public class CharacterVFXManager : MonoBehaviour
                     materials.RemoveAt(j);
                 }
             }
-            meshRenderers[i].materials = materials.ToArray();
+            
+            if(materialRemoved) meshRenderers[i].materials = materials.ToArray();
         }
     }
 }
