@@ -23,9 +23,7 @@ public class PlayerLegs : MonoBehaviour
         }
         else if (!dashing)
         {
-            curSpeed -= curSpeed.normalized * Time.deltaTime * myBody.legStats.accelleration;
-            if (curSpeed.magnitude <= 0.5f)
-                curSpeed = new Vector2();
+            curSpeed = new Vector2();
         }
 
         ridBy.velocity = new Vector3(curSpeed.x, 0, curSpeed.y);

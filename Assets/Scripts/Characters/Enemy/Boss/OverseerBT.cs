@@ -10,6 +10,8 @@ public class OverseerBT : BehaviourTree
     Node secondPhaseBrain;
     Node transitionBrain;
 
+    [SerializeField] OverseerNailGun[] guns; 
+
     [SerializeField] GameObject weaponsPivot;
 
     [SerializeField] float approachDist = 10f;

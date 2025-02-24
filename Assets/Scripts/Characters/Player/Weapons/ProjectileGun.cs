@@ -110,4 +110,13 @@ public class ProjectileGun : Weapon
             mod.AddModifiers(modInfo);
     }
 
+    public override void SetAnimation()
+    {
+        base.SetAnimation();
+
+        if (hasBurst)
+            myAnim.SetFloat("FireRate", timeBetweenBurst);
+
+    }
+
 }

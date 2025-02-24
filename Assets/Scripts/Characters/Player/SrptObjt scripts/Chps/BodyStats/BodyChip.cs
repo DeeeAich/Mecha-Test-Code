@@ -10,7 +10,8 @@ public class BodyChip : Chip
     public enum BodyType
     {
         Stat, EndRoom,
-        Constant
+        Constant, OnKill,
+        OnDamage, OnHeal
     }
 
     public BodyType bodyType;
