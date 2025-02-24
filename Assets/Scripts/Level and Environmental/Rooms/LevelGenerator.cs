@@ -121,7 +121,7 @@ public class LevelGenerator : MonoBehaviour
                 break;
             
             case LootType.combatChip:
-                possibleSelection.AddRange(levelInfo.lootPool.Chips);
+                possibleSelection.AddRange(levelInfo.lootPool.WeaponChips);
                 break;
             
             case LootType.ordinance:

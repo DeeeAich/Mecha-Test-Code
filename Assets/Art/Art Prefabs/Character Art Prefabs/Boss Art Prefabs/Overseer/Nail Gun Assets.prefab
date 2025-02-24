@@ -5074,6 +5074,7 @@ GameObject:
   - component: {fileID: 965797756468402767}
   - component: {fileID: 7836849821938280372}
   - component: {fileID: 6694868061474150769}
+  - component: {fileID: 6962541421053659806}
   m_Layer: 0
   m_Name: Nail Gun Assets
   m_TagString: Untagged
@@ -5097,6 +5098,7 @@ Transform:
   - {fileID: 2230797494417473623}
   - {fileID: 5794888927263772615}
   - {fileID: 7688044426861583158}
+  - {fileID: 7648423786639093857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5045538402615775563
@@ -5184,5 +5186,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 4751936672790201460}
   ps2nd: {fileID: 0}
+  ps3rd: {fileID: 0}
+  ps4th: {fileID: 0}
   numberOfParticles: 1
   numberOfParticles2nd: 1
+  numberOfParticles3rd: 1
+  numberOfParticles4th: 1
+--- !u!114 &6962541421053659806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6426229136960214398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16f3def80a98d3409baacd1a41937e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7836849821938280372}
+  gunPoint: {fileID: 7362076151765697277}
+  shotPattern: {fileID: 4789316471330969975, guid: e412bc63904affb46aa6d59cd1d3e730,
+    type: 3}
+  startDelayMin: 5
+  startDelayMax: 5
+  minDelay: 1
+  maxDelay: 1
+  reloadTime: 0
+  magSize: 10
+  pause: 0
+--- !u!1 &7362076151765697277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7648423786639093857}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7648423786639093857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362076151765697277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -3.665, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3290223511162961573}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
