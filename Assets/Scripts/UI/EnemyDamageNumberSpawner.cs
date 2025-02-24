@@ -62,7 +62,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
 
         if (hitShield)
         {
-            newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = critColor;
+            newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = shieldColor;
         } 
         else if (isCritical)
         {
