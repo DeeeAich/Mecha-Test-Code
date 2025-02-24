@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour, IModable
 
         myAnim.SetTrigger("Reload");
         
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadTime * modifiers.reloadSpeed);
 
         curAmmo = Mathf.RoundToInt(maxAmmo * modifiers.ammoCount);
         reloading = false;
