@@ -9,6 +9,8 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private bool editorUpdateInventory;
 
+    [SerializeField] private Color[] rarityColors;
+
     public List<Image> bodyChipsImages;
     public Button[] bodyChipsButtons;
 
@@ -81,12 +83,14 @@ public class InventoryManager : MonoBehaviour
         chassisTitle.text = playerBody.legStats.itemName;
         chassisDescription.text = playerBody.legStats.description;
         chassisImage.sprite = playerBody.legStats.mySprite;
+        chassisImage.color = rarityColors[playerBody.legStats.rarity];
 
         if (playerBody.ultController.currentUltimate != null)
         {
             ordinanceTitle.text = playerBody.ultController.currentUltimate.itemName;
             ordinanceDescription.text = playerBody.ultController.currentUltimate.description;
             ordinanceImage.sprite = playerBody.ultController.currentUltimate.mySprite;
+            ordinanceImage.color = rarityColors[playerBody.ultController.currentUltimate.rarity];
         }
 
         List<Chip> bodyChips = PlayerBody.PlayBody().chipsInserted;
@@ -96,6 +100,7 @@ public class InventoryManager : MonoBehaviour
             if (i < bodyChips.Count)
             {
                 bodyChipsImages[i].sprite = bodyChips[i].mySprite;
+                bodyChipsImages[i].color = rarityColors[bodyChips[i].rarity];
                 bodyChipsImages[i].enabled = true;
             }
             else
@@ -119,6 +124,7 @@ public class InventoryManager : MonoBehaviour
                 if (i < leftMods.Count)
                 {
                     WeaponsLeftChipsImages[i].sprite = leftMods[i].mySprite;
+                    WeaponsLeftChipsImages[i].color = rarityColors[leftMods[i].rarity];
                     WeaponsLeftChipsImages[i].enabled = true;
                 }
                 else
@@ -146,6 +152,7 @@ public class InventoryManager : MonoBehaviour
                 if (i < rightMods.Count)
                 {
                     WeaponsRightChipsImages[i].sprite = rightMods[i].mySprite;
+                    WeaponsRightChipsImages[i].color = rarityColors[rightMods[i].rarity];
                     WeaponsRightChipsImages[i].enabled = true;
                 }
                 else
@@ -202,6 +209,7 @@ public class InventoryManager : MonoBehaviour
         if (chip != null)
         {
             inspectionCardImage.sprite = chip.mySprite;
+            inspectionCardImage.color = rarityColors[chip.rarity];
             inspectionCardDescription.text = chip.description;
             inspectionCardTitle.text = chip.itemName;
         }

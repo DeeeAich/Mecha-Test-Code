@@ -183,7 +183,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (addChipDropdownLeft.value != 0)
             {
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value], true);
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value -1], true);
                 addChipDropdownLeft.value = 0;
             }
 
@@ -192,7 +192,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (addChipDropdownRight.value != 0)
             {
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value], false);
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value - 1], false);
                 addChipDropdownRight.value = 0;
             }
         }
@@ -204,7 +204,7 @@ public class DevKitCheats : MonoBehaviour
         {
             LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
-            PlayerBody.PlayBody().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value]);
+            PlayerBody.PlayBody().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value - 1]);
 
             addChipDropdownLeft.value = 0;
         }
