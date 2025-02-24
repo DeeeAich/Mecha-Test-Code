@@ -16,6 +16,8 @@ public class DevKitCheats : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown addChipDropdownLeft;
     [SerializeField] private TMP_Dropdown addChipDropdownRight;
+
+    [SerializeField] private TMP_Dropdown bodyChipsDropdown;
     
     public GameObject devkitCheatMenu;
     private int[] loadout;
@@ -32,17 +34,39 @@ public class DevKitCheats : MonoBehaviour
         chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
         addChipDropdownLeft.options = new List<TMP_Dropdown.OptionData>();
         addChipDropdownRight.options = new List<TMP_Dropdown.OptionData>();
+        bodyChipsDropdown.options = new List<TMP_Dropdown.OptionData>();
         
-        for (int i = 0; i < componentMasterListScriptable.weapons.Length; i++)
+        leftGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(true); });
+        rightGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(false); });
+        
+        addChipDropdownLeft.onValueChanged.AddListener(delegate{ AddChip(true);});
+        addChipDropdownRight.onValueChanged.AddListener(delegate{ AddChip(false);});
+        bodyChipsDropdown.onValueChanged.AddListener(delegate{AddBodyChip();});
+
+        leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( "Change Left Weapon"));
+        rightGunDropdown.options.Add(new TMP_Dropdown.OptionData("Change Right Weapon"));
+        chassisDropdown.options.Add(new TMP_Dropdown.OptionData("Change Chassis"));
+        addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData("Add Chip to Left Slot"));
+        addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData("Add Chip to Right Slot"));
+        bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData("Add Chip To Body"));
+
+        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        
+        for (int i = 0; i <  lootPool.Weapons.Length; i++)
         {
-            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].itemName));
-            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.weapons[i].itemName));
+            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName));
+            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName));
         }
 
-        for (int i = 0; i < componentMasterListScriptable.chips.Length; i++)
+        for (int i = 0; i <  lootPool.WeaponChips.Length; i++)
         {
-            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.chips[i].name));
-            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(componentMasterListScriptable.chips[i].name));
+            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name));
+            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name));
+        }
+
+        for (int i = 0; i < lootPool.BodyChips.Length; i++)
+        {
+            bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(lootPool.BodyChips[i].name));
         }
 
         loadout = new int[3];
@@ -113,27 +137,76 @@ public class DevKitCheats : MonoBehaviour
         newLoadout[0] = chassisDropdown.value;
         newLoadout[1] = leftGunDropdown.value;
         newLoadout[2] = rightGunDropdown.value;
+        
+        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
 
         if (newLoadout != loadout)
         {
             PlayerBody body = FindObjectOfType<PlayerBody>();
             
-            if(newLoadout[1] != loadout[1]) body.SetWeapon((WeaponPickup)componentMasterListScriptable.weapons[newLoadout[1]], true);
-            if(newLoadout[2] != loadout[2]) body.SetWeapon((WeaponPickup)componentMasterListScriptable.weapons[newLoadout[2]], false);
+            if(newLoadout[1] != loadout[1]) body.SetWeapon((WeaponPickup)lootPool.Weapons[newLoadout[1]], true);
+            if(newLoadout[2] != loadout[2]) body.SetWeapon((WeaponPickup)lootPool.Weapons[newLoadout[2]], false);
             
             loadout = newLoadout;
         }
     }
 
-    public void AddChip(bool applyToLeft)
+    public void AddWeapon(bool applyToLeft)
     {
+        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        
         if (applyToLeft)
         {
-            PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)componentMasterListScriptable.chips[addChipDropdownLeft.value], applyToLeft);
+            if (leftGunDropdown.value != 0)
+            {
+                PlayerBody.PlayBody().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
+
+                leftGunDropdown.value = 0;
+            }        
         }
         else
         {
-            PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip)componentMasterListScriptable.chips[addChipDropdownRight.value], applyToLeft);
+            if (rightGunDropdown.value != 0)
+            {
+                PlayerBody.PlayBody().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
+
+                rightGunDropdown.value = 0;
+            }
+        }
+    }
+
+    public void AddChip(bool applyToLeft)
+    {
+        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        
+        if (applyToLeft)
+        {
+            if (addChipDropdownLeft.value != 0)
+            {
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value], true);
+                addChipDropdownLeft.value = 0;
+            }
+
+        }
+        else
+        {
+            if (addChipDropdownRight.value != 0)
+            {
+                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value], false);
+                addChipDropdownRight.value = 0;
+            }
+        }
+    }
+
+    public void AddBodyChip()
+    {
+        if (bodyChipsDropdown.value != 0)
+        {
+            LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        
+            PlayerBody.PlayBody().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value]);
+
+            addChipDropdownLeft.value = 0;
         }
 
     }

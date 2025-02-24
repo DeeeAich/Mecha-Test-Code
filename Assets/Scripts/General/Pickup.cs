@@ -171,7 +171,7 @@ public class Pickup : MonoBehaviour
                 break;
             
             case pickupType.ChassisChip:
-                
+                PlayerBody.PlayBody().ApplyChip((BodyChip)PlayerPickup);
                 break;
             
             case pickupType.OrdinanceChip:

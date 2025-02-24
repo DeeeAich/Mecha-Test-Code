@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79187593d7d56d74f8a678cdfc318fa4, type: 3}
-  m_Name: ReloadSpeedUp
+  m_Name: ReloadSpeedUp (Common)
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Reload Speed Chip
   PickupType: 3
   rarity: 0
-  spawnRate: 0
-  description: 
-  mySprite: {fileID: 0}
+  spawnRate: 10
+  description: Increases reload speed by 30/5
+  mySprite: {fileID: 21300000, guid: 413fb6657c21c5c4da7d4b71bad2dec8, type: 3}
   objectReference: {fileID: 0}
   chipType: 1
   supType: 0
@@ -27,5 +27,6 @@ MonoBehaviour:
     damage: 0
     ammoCount: 0
     shotCost: 0
-    reloadSpeed: 0.5
-    minReloadSpeed: 0
+    reloadSpeed: 0.3
+    minReloadSpeed: 0.1
+    piercing: 0
