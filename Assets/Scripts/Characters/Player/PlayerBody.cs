@@ -102,14 +102,19 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         }
     }
 
-    private void TriggerOnKill()
+    public void TriggerOnKill()
     {
 
     }
 
-    private void TriggerOnDamage()
+    public void TriggerOnDamage()
     {
         
+    }
+
+    public void TriggerOnHeal()
+    {
+
     }
 
     private void Dash(InputAction.CallbackContext context)
