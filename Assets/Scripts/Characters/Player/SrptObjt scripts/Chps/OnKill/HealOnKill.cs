@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "NewHealOnKillChip", menuName = "Player/Chips/OnKill/HealOnKill")]
 public class HealOnKill : OnHealChip
 {
     public float chanceToHeal = 15;
