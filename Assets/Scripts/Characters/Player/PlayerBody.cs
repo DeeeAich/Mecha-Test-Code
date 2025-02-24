@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     public PlayerLegs myMovement;
     public PlayerWeaponControl weaponHolder;
+    private CharacterVFXManager vfxManager;
     public Legs legStats;
     public PlayerUltyControl ultController;
     public List<Chip> chipsInserted;
@@ -46,6 +48,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private void Awake()
     {
         playerInputs = GetComponent<PlayerInput>();
+        vfxManager = GetComponentInChildren<CharacterVFXManager>();
         myMovement = GetComponent<PlayerLegs>();
         weaponHolder = GetComponent<PlayerWeaponControl>();
         ultController = GetComponent<PlayerUltyControl>();
@@ -94,27 +97,32 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void TriggerEndOfRoom()
     {
-        foreach(Chip chip in chipsInserted)
-        {
-            if((BEndChip)chip)
+        foreach(BodyChip chip in myMods)
+            if(chip.bodyType == BodyChip.BodyType.EndRoom)
                 chip.TriggerAbility();
-
-        }
     }
 
     public void TriggerOnKill()
     {
 
+        foreach (BodyChip chip in myMods)
+            if (chip.bodyType == BodyChip.BodyType.OnKill)
+                chip.TriggerAbility();
     }
 
     public void TriggerOnDamage()
     {
-        
+        foreach (BodyChip chip in myMods)
+            if (chip.bodyType == BodyChip.BodyType.OnDamage)
+                chip.TriggerAbility();
     }
 
-    public void TriggerOnHeal()
+    public void TriggerOnHeal(int amount)
     {
-
+        vfxManager.SpawnHealParticles(-amount);
+        foreach (BodyChip chip in myMods)
+            if (chip.bodyType == BodyChip.BodyType.OnHeal)
+                chip.TriggerAbility();
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -264,6 +272,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         foreach (TriggerDebrisExplosion explosion in explosions)
             explosion.explosionTrigger = true;
 
+        UnsetControls();
+
+        LevelGenerator.instance.onSpawnRoom.RemoveListener(TriggerEndOfRoom);
 
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8033736023942219050}
   - component: {fileID: 2772350036050259412}
   - component: {fileID: 5131012082131279984}
-  - component: {fileID: 3339494783938837665}
+  - component: {fileID: 7768998558301955401}
   - component: {fileID: 7604659684895359705}
   - component: {fileID: 6881146945266648394}
   - component: {fileID: 8621664997091532869}
@@ -65,7 +65,8 @@ MonoBehaviour:
     health: 0
     armour: 0
     percentage: 0
-  myMods: []
+  myMods:
+  - {fileID: 11400000, guid: ac5bf828cf2474cbbb365e1c5a5c4840, type: 2}
   weaponPoints:
   - {fileID: 7730225897642374141}
   - {fileID: 4054117787783875094}
@@ -88,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d6e9501baad46f3b2e0de0a65446af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPlayerPickup: {fileID: 11400000, guid: c8ebf0e75726c4fb4af9fe40d510eb71, type: 2}
   myBody: {fileID: 0}
   myLegs: {fileID: 8502822608867003491}
   dashing: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentUltimate: {fileID: 11400000, guid: 177588e168de700498e305f21521a64a, type: 2}
   recharging: 0
---- !u!114 &3339494783938837665
+--- !u!114 &7768998558301955401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5041930653980852429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbca16dfe31d284db2c1882484c8c64, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3b9b2526750b34ba07881be8f0ae7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
@@ -148,8 +148,8 @@ MonoBehaviour:
   entityBounds: {x: 2, y: 3, z: 2}
   editorTakeDamage: 0
   editorDamageAmount: 100
-  destroyOnDeath: 0
-  destroyTimer: 0
+  destroyOnDeath: 1
+  destroyTimer: 3
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -340,6 +340,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5338708035899863324}
     m_Modifications:
+    - target: {fileID: 1658262939334446273, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
+        type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4874561802893684910, guid: 0fb69d76919eebf4d84f329fc0bf44e0,
+        type: 3}
+    - target: {fileID: 1658262939334446273, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
+        type: 3}
+      propertyPath: maxDiviation
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4362747258823225959, guid: 1771c0d23dcbf4e2c94ffbe2fac35b2e,
         type: 3}
       propertyPath: m_LocalPosition.x

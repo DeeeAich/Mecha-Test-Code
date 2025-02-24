@@ -97,7 +97,7 @@ public class Weapon : MonoBehaviour, IModable
 
     }
 
-    public void SetAnimation()
+    public override void SetAnimation()
     {
         myAnim.SetFloat("FireRate", 1 / fireRate * modifiers.attackSpeed);
         myAnim.SetFloat("ReloadSpeed", 1 / reloadTime * modifiers.reloadSpeed);
