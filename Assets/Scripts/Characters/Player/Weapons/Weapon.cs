@@ -99,8 +99,8 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void SetAnimation()
     {
-        myAnim.SetFloat("FireRate", 1 / fireRate * modifiers.attackSpeed);
-        myAnim.SetFloat("ReloadSpeed", 1 / reloadTime * modifiers.reloadSpeed);
+        myAnim.SetFloat("FireRate", 1 / (fireRate * modifiers.attackSpeed));
+        myAnim.SetFloat("ReloadSpeed", 1 / (reloadTime * modifiers.reloadSpeed));
     }
 
 }
