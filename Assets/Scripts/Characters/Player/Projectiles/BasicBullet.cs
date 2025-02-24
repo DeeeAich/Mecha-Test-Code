@@ -17,7 +17,7 @@ public class BasicBullet : Projectile
     {
         myGun.TryGetComponent<Critical>(out critRoller);
 
-        pierceCounter = myGun.pierceCount;
+        pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
 
     }
 
@@ -84,7 +84,7 @@ public class BasicBullet : Projectile
         gameObject.SetActive(false);
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
-        pierceCount = myGun.pierceCount;
+        pierceCount = myGun.pierceCount + myGun.modifiers.piercing;
         animating = false;
 
         yield return null;

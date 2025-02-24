@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using JetBrains.Annotations;
 
 [Serializable]
 public class StatusInfo
@@ -96,9 +97,10 @@ public class WeaponStats
     public float minAttackSpeed = 0.2f;
     public float damage = 1;
     public float ammoCount = 1;
-    public float shotCost = 0;
+    public int shotCost = 0;
     public float reloadSpeed = 1;
     public float minReloadSpeed = 0.4f;
+    public int piercing;
 
     public void AddStats(WeaponStats statsToUpdate)
     {
@@ -112,6 +114,10 @@ public class WeaponStats
         statsToUpdate.reloadSpeed -= reloadSpeed;
         if (statsToUpdate.reloadSpeed < statsToUpdate.minReloadSpeed)
             statsToUpdate.reloadSpeed = statsToUpdate.minReloadSpeed;
+        if (piercing < 0)
+            piercing = 0;
+        else
+            statsToUpdate.piercing += piercing;
 
     }
 
