@@ -11,7 +11,7 @@ public class pauseMenu : MonoBehaviour
     public bool canPause = true;
     public float gameSpeed = 1f;
     
-    [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject[] objectsToActivateWhenPaused;
 
     private InputAction pauseAction;
 
@@ -37,14 +37,24 @@ public class pauseMenu : MonoBehaviour
             if (Time.timeScale == 1 || Time.timeScale == gameSpeed)
             {
                 PlayerBody.PlayBody().StopParts(false, false);
-                menu.SetActive(true);
+
+                for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
+                {
+                    objectsToActivateWhenPaused[i].SetActive(true);
+                }
+                
                 onPause.Invoke();
                 Time.timeScale = 0;
             }
             else if (Time.timeScale == 0)
             {
                 PlayerBody.PlayBody().StopParts(true, true);
-                menu.SetActive(false);
+      
+                for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
+                {
+                    objectsToActivateWhenPaused[i].SetActive(false);
+                }
+                
                 onUnpause.Invoke();
                 Time.timeScale = gameSpeed;
             }

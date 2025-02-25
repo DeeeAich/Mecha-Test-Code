@@ -93,7 +93,7 @@ public class InventoryManager : MonoBehaviour
             ordinanceImage.color = rarityColors[playerBody.ultController.currentUltimate.rarity];
         }
 
-        List<Chip> bodyChips = PlayerBody.PlayBody().chipsInserted;
+        List<BodyChip> bodyChips = PlayerBody.PlayBody().myMods;
 
         for (int i = 0; i < bodyChipsImages.Count; i++)
         {
