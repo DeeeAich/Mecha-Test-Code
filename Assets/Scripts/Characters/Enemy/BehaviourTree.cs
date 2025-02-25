@@ -194,10 +194,11 @@ namespace AITree
             }
         }
 
-        internal override float TakeDamage(float amount, bool isCrit = false)
+        internal override float TakeDamage(float amount, out bool isShield, bool isCrit = false)
         {
-            float moddedAmount = base.TakeDamage(amount, isCrit);
-            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit);
+            float moddedAmount = base.TakeDamage(amount, out bool discardShield, isCrit);
+            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit, discardShield);
+            isShield = discardShield;
             return moddedAmount;
         }
 

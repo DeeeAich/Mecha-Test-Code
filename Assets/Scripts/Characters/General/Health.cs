@@ -34,7 +34,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     {
         if (editorTakeDamage)
         {
-            TakeDamage(editorDamageAmount);
+            TakeDamage(editorDamageAmount, out bool discard);
             editorTakeDamage = false;
         }
     }
@@ -46,10 +46,13 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         burns = new List<Coroutine>();
     }
 
-    internal virtual float TakeDamage(float amount, bool isCrit = false)
+    internal virtual float TakeDamage(float amount, out bool isShield, bool isCrit = false)
     {
-        if (!canTakeDamage || !isAlive) return 0f;
-
+        isShield = false;
+        if (!canTakeDamage || !isAlive)
+        {
+            return 0f;
+        }
         for (int i = 0; i < damageMods.Count; i++)
         {
             if (damageMods[i].removeFlag)
@@ -58,13 +61,17 @@ public class Health : MonoBehaviour, IHackable, IBurnable
                 i--;
             }
         }
-
+        float damageTaken = 0f;
         float remainingDamage = amount;
         foreach (DamageMod mod in damageMods)
         {
             //Debug.Log("Current Damage: " + remainingDamage);
-            remainingDamage = mod.Modification(remainingDamage);
+            damageTaken += mod.Modification(remainingDamage, out remainingDamage);
             //Debug.Log("New Damage: " + remainingDamage);
+            if(mod is ShieldModifier)
+            {
+                isShield = true;
+            }
         }
 
 
@@ -168,7 +175,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             }
             timer -= maxTime;
             ticks++;
-            TakeDamage(damagePerTick);
+            TakeDamage(damagePerTick, out bool discard);
         }
         yield return null;
     }
@@ -223,7 +230,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 public abstract class DamageMod
 {
     public bool removeFlag = false;
-    public abstract float Modification(float damage);
+    public abstract float Modification(float damage, out float remainingDamage);
+    //return damage dealt, input damage to process, modify remaining damage
 }
 
 public class HackMod : DamageMod
@@ -234,13 +242,14 @@ public class HackMod : DamageMod
         this.percent = percent;
     }
 
-    public override float Modification(float damage)
+    public override float Modification(float damage, out float remaining)
     {
         //Debug.Log("hack");
         float multiplier = percent / 100f;
         multiplier += 1f;
         //Debug.Log(multiplier);
-        return damage * multiplier;
+        remaining = damage * multiplier;
+        return 0f;
     }
 }
 
@@ -254,19 +263,20 @@ public class ShieldModifier : DamageMod
         this.source = source;
     }
 
-    public override float Modification(float damage)
+    public override float Modification(float damage, out float remaining)
     {
-        float returnDamage;
+        float returnDamage = damage;
         if (damage >= shieldHealth)
         {
-            returnDamage = damage - shieldHealth;
+            remaining = damage - shieldHealth;
+            returnDamage = shieldHealth;
             shieldHealth = 0;
             source.Break();
             removeFlag = true;
         }
         else
         {
-            returnDamage = 0;
+            remaining = 0;
             shieldHealth -= damage;
         }
         return returnDamage;
