@@ -21066,6 +21066,8 @@ GameObject:
   - component: {fileID: 1798167173638747041}
   - component: {fileID: 6022839803560755143}
   - component: {fileID: 1536307686967418002}
+  - component: {fileID: 9108582310933810204}
+  - component: {fileID: 5942410082354097416}
   m_Layer: 0
   m_Name: Unalive Drone Assets
   m_TagString: Untagged
@@ -21184,6 +21186,60 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 3521320645236796552}
   healParticleSystem: {fileID: 2165614697735575270}
+--- !u!114 &9108582310933810204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624612920205675910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf83ecd62d265f419d3508984b6b206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSound:
+    Guid:
+      Data1: 145761874
+      Data2: 1104036115
+      Data3: 1606671767
+      Data4: 1850280540
+    Path: event:/Sound Effects/Enemy/Bomber/Bomber Spawn
+  disableSound:
+    Guid:
+      Data1: 382784731
+      Data2: 1135490374
+      Data3: -777399629
+      Data4: 2004198361
+    Path: event:/Sound Effects/Enemy/Bomber/Bomber Death
+  idleSound:
+    Guid:
+      Data1: -1839067371
+      Data2: 1288994425
+      Data3: -1809492833
+      Data4: -44493713
+    Path: event:/Sound Effects/Enemy/Bomber/Bomber Idle
+  hasIdleSound: 1
+--- !u!114 &5942410082354097416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624612920205675910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 551676837
+      Data2: 1108273120
+      Data3: -1158039150
+      Data4: -2146237417
+    Path: event:/Sound Effects/Enemy/Bomber/Bomber Activate
+  parameterName: none
 --- !u!1 &6163037374569039964
 GameObject:
   m_ObjectHideFlags: 0

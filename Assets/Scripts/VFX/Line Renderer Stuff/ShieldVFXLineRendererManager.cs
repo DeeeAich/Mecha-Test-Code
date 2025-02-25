@@ -8,6 +8,7 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
 
     public GameObject shieldedTarget;
     public bool shieldToggle;
+    private bool playSound;
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

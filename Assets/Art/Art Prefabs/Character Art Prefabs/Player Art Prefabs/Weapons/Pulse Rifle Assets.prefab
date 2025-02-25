@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9011268805391056603}
   - component: {fileID: 3274109615436347593}
   - component: {fileID: 1701648137328691947}
-  m_Layer: 13
+  m_Layer: 6
   m_Name: Pulse Rifle Top Barrel Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3182965364467186628}
   - component: {fileID: 6364526792270007271}
   - component: {fileID: 6126478692754595990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5066,7 +5066,7 @@ GameObject:
   - component: {fileID: 2008953971152049011}
   - component: {fileID: 4210540455577626570}
   - component: {fileID: 5854523681205607842}
-  m_Layer: 13
+  m_Layer: 6
   m_Name: Pulse Rifle Assets Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5197,7 +5197,7 @@ GameObject:
   - component: {fileID: 8608036682026233525}
   - component: {fileID: 230706346125763983}
   - component: {fileID: 5256448077250918656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Top Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5284,7 +5284,7 @@ GameObject:
   - component: {fileID: 7882292284965608513}
   - component: {fileID: 4663871554645534350}
   - component: {fileID: 943632890599632811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5367,7 +5367,7 @@ GameObject:
   - component: {fileID: 8468874302352456572}
   - component: {fileID: 4215018798459504143}
   - component: {fileID: 1544369866078900479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5453,7 +5453,8 @@ GameObject:
   - component: {fileID: 106333392011552568}
   - component: {fileID: 7900310081252255178}
   - component: {fileID: 2440510352270764048}
-  m_Layer: 0
+  - component: {fileID: 2397840282058191528}
+  m_Layer: 6
   m_Name: Pulse Rifle Assets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5468,7 +5469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765360500345261637}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.000000104308114, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5624,6 +5625,32 @@ MonoBehaviour:
   timeToDelete: 80
   timeBeforeScaleDebris: 75
   scaleSpeed: 1
+--- !u!114 &2397840282058191528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765360500345261637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -1640917618
+      Data2: 1342108516
+      Data3: 1326592901
+      Data4: -1655976344
+    Path: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Fire
+  - Guid:
+      Data1: 822694741
+      Data2: 1198641612
+      Data3: 613855164
+      Data4: -103683388
+    Path: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Reload
+  parameterName: none
 --- !u!1 &2148230162865164181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5633,7 +5660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5270747748847098897}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5672,7 +5699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5825000164476429269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5713,7 +5740,7 @@ GameObject:
   - component: {fileID: 6756546529368264132}
   - component: {fileID: 1604500912463838665}
   - component: {fileID: 5517224629408817194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5796,7 +5823,7 @@ GameObject:
   - component: {fileID: 835079966621092294}
   - component: {fileID: 8000168049302920780}
   - component: {fileID: 9181742852270181544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10682,7 +10709,7 @@ GameObject:
   - component: {fileID: 8217195261464755125}
   - component: {fileID: 874560819317028932}
   - component: {fileID: 4706329563593235137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Energy Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10765,7 +10792,7 @@ GameObject:
   - component: {fileID: 3198793732979633192}
   - component: {fileID: 2687622202063079546}
   - component: {fileID: 4298959594820738504}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10848,7 +10875,7 @@ GameObject:
   - component: {fileID: 3476226030819955296}
   - component: {fileID: 8163894760817424528}
   - component: {fileID: 2487916327797252821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10931,7 +10958,7 @@ GameObject:
   - component: {fileID: 7098872258598536441}
   - component: {fileID: 7200042420551760258}
   - component: {fileID: 6695235585669731810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11014,7 +11041,7 @@ GameObject:
   - component: {fileID: 7835155353372176970}
   - component: {fileID: 8975078962093151163}
   - component: {fileID: 1915911618912023437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11097,7 +11124,7 @@ GameObject:
   - component: {fileID: 2786740838497933836}
   - component: {fileID: 2603894159450977544}
   - component: {fileID: 7193140929703736284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11180,7 +11207,7 @@ GameObject:
   - component: {fileID: 8181185657714838486}
   - component: {fileID: 3501507164106530257}
   - component: {fileID: 9076368756478302872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11263,7 +11290,7 @@ GameObject:
   - component: {fileID: 8345701718446136621}
   - component: {fileID: 6054357731016778239}
   - component: {fileID: 1176553439085224460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11346,7 +11373,7 @@ GameObject:
   - component: {fileID: 2371296408392779706}
   - component: {fileID: 4918954651068777081}
   - component: {fileID: 7455101407161751800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wires
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11429,7 +11456,7 @@ GameObject:
   - component: {fileID: 2476167499305872108}
   - component: {fileID: 7374508363943184871}
   - component: {fileID: 5405832743113673403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11512,7 +11539,7 @@ GameObject:
   - component: {fileID: 4192611982077182693}
   - component: {fileID: 3337593254682048652}
   - component: {fileID: 9029441389610870460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16398,7 +16425,7 @@ GameObject:
   - component: {fileID: 697415105950983783}
   - component: {fileID: 7272535527572804223}
   - component: {fileID: 401364060824400055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16483,7 +16510,7 @@ GameObject:
   - component: {fileID: 8028109640915807856}
   - component: {fileID: 2608546082456363644}
   - component: {fileID: 4933279690830552914}
-  m_Layer: 13
+  m_Layer: 6
   m_Name: Pulse Rifle Mag Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16614,7 +16641,7 @@ GameObject:
   - component: {fileID: 2456929044445312405}
   - component: {fileID: 4313840878080945771}
   - component: {fileID: 2878278144338200526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16732,7 +16759,7 @@ GameObject:
   - component: {fileID: 7352338856599748971}
   - component: {fileID: 3941565140573492533}
   - component: {fileID: 1068233780387482910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16815,7 +16842,7 @@ GameObject:
   - component: {fileID: 5491682183087921754}
   - component: {fileID: 4696397452285387846}
   - component: {fileID: 6175400977259245662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16896,7 +16923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2299517828548067221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Muzzle Flash VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16932,7 +16959,7 @@ GameObject:
   - component: {fileID: 3955109296437705249}
   - component: {fileID: 746503288101393343}
   - component: {fileID: 2506535028539810974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17015,7 +17042,7 @@ GameObject:
   - component: {fileID: 3577619931715675637}
   - component: {fileID: 7108278308590600590}
   - component: {fileID: 6890319338321979493}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pulse Rifle Chain.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

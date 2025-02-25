@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4222898358337214064}
   - component: {fileID: 1749915856606272293}
   - component: {fileID: 3451128468440089342}
+  - component: {fileID: 6893698300692450955}
   m_Layer: 0
   m_Name: Spider Mech Assets
   m_TagString: Untagged
@@ -159,6 +160,40 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 7194635703055084388}
   healParticleSystem: {fileID: 2566496872056168645}
+--- !u!114 &6893698300692450955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274570988243285334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf83ecd62d265f419d3508984b6b206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSound:
+    Guid:
+      Data1: 384345866
+      Data2: 1213557477
+      Data3: 1378709179
+      Data4: 476049796
+    Path: event:/Sound Effects/Enemy/Spider/Spider Spawn
+  disableSound:
+    Guid:
+      Data1: 1379659151
+      Data2: 1228901844
+      Data3: 982382744
+      Data4: -1380576400
+    Path: event:/Sound Effects/Enemy/Spider/Spider Attack
+  idleSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  hasIdleSound: 0
 --- !u!1 &442558619194873818
 GameObject:
   m_ObjectHideFlags: 0
@@ -15337,6 +15372,7 @@ GameObject:
   - component: {fileID: 1335064735528624703}
   - component: {fileID: 2334042326607018800}
   - component: {fileID: 1358990924008658741}
+  - component: {fileID: 4557154029741407182}
   m_Layer: 0
   m_Name: 'Spider Mech Gun '
   m_TagString: Untagged
@@ -15456,6 +15492,26 @@ MonoBehaviour:
   numberOfParticles2nd: 1
   numberOfParticles3rd: 1
   numberOfParticles4th: 1
+--- !u!114 &4557154029741407182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176020676638592580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 1379659151
+      Data2: 1228901844
+      Data3: 982382744
+      Data4: -1380576400
+    Path: event:/Sound Effects/Enemy/Spider/Spider Attack
+  parameterName: none
 --- !u!1 &1543958047397840563
 GameObject:
   m_ObjectHideFlags: 0
@@ -35507,11 +35563,11 @@ MonoBehaviour:
   legDashSFX: {fileID: 0}
   footstepSound:
     Guid:
-      Data1: -1450471258
-      Data2: 1087209813
-      Data3: -368216921
-      Data4: -89517189
-    Path: event:/Sound Effects/Player/Movement/Player Step
+      Data1: 1278211139
+      Data2: 1312688519
+      Data3: 79390349
+      Data4: 1619757530
+    Path: event:/Sound Effects/Enemy/Spider/Spider Step
   maxLegsMovingAtOnce: 1
   legMoveSpeed: 0.4
   legMoveSpeedBonusPerSpeedMultiplier: 1.5
@@ -66456,6 +66512,7 @@ GameObject:
   - component: {fileID: 3533159120402894329}
   - component: {fileID: 118422198926089737}
   - component: {fileID: 4545731075834202186}
+  - component: {fileID: 1075132215978217848}
   m_Layer: 0
   m_Name: 'Spider Mech Gun '
   m_TagString: Untagged
@@ -66575,6 +66632,26 @@ MonoBehaviour:
   numberOfParticles2nd: 1
   numberOfParticles3rd: 1
   numberOfParticles4th: 1
+--- !u!114 &1075132215978217848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582359385855027345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 1379659151
+      Data2: 1228901844
+      Data3: 982382744
+      Data4: -1380576400
+    Path: event:/Sound Effects/Enemy/Spider/Spider Attack
+  parameterName: none
 --- !u!1 &7998970004836931424
 GameObject:
   m_ObjectHideFlags: 0
