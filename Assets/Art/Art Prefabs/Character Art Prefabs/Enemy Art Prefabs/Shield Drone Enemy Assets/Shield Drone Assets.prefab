@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 1887462045129869607}
   - component: {fileID: 4086375033582959397}
   - component: {fileID: 5152170141646630947}
+  - component: {fileID: 268413459223855273}
   m_Layer: 0
   m_Name: Shield Drone Assets
   m_TagString: Untagged
@@ -356,6 +357,40 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 8862994536515210782}
   healParticleSystem: {fileID: 3943101659584905511}
+--- !u!114 &268413459223855273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458112603376352351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf83ecd62d265f419d3508984b6b206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSound:
+    Guid:
+      Data1: -993881442
+      Data2: 1140026041
+      Data3: -291741563
+      Data4: 1255683379
+    Path: event:/Sound Effects/Enemy/Shielder/Shielder Spawn
+  disableSound:
+    Guid:
+      Data1: -211918915
+      Data2: 1326143827
+      Data3: 1074913976
+      Data4: 1871492801
+    Path: event:/Sound Effects/Enemy/Shielder/Shielder Death
+  idleSound:
+    Guid:
+      Data1: 1726192064
+      Data2: 1099432013
+      Data3: 281931937
+      Data4: 716042631
+    Path: event:/Sound Effects/Enemy/Shielder/Shielder Idle
+  hasIdleSound: 1
 --- !u!1 &888638595438835452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5721,6 +5756,20 @@ MonoBehaviour:
   meshRenderers:
   - {fileID: 0}
   materialSetter: 0
+  attachSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  detachSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1956861201095675713
 GameObject:
   m_ObjectHideFlags: 0
@@ -15857,6 +15906,20 @@ MonoBehaviour:
   meshRenderers:
   - {fileID: 0}
   materialSetter: 0
+  attachSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  detachSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &3051062539122691579
 GameObject:
   m_ObjectHideFlags: 0
@@ -41500,6 +41563,20 @@ MonoBehaviour:
   shieldedMaterial: {fileID: 2100000, guid: fbad90206cc3e4f4aa1ee2390b5f3ef9, type: 2}
   meshRenderers: []
   materialSetter: 1
+  attachSound:
+    Guid:
+      Data1: 410484459
+      Data2: 1324948507
+      Data3: 1571253434
+      Data4: -1450645351
+    Path: event:/Sound Effects/Enemy/Shielder/Shielder Attach
+  detachSound:
+    Guid:
+      Data1: -427926941
+      Data2: 1085237187
+      Data3: -887068247
+      Data4: 1460849390
+    Path: event:/Sound Effects/Enemy/Shielder/Shielder Detach
 --- !u!1 &8158214179751509856
 GameObject:
   m_ObjectHideFlags: 0

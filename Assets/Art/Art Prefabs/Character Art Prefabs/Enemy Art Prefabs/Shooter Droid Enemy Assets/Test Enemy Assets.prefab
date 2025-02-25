@@ -15647,6 +15647,7 @@ GameObject:
   - component: {fileID: 265560231387622590}
   - component: {fileID: 4768459190567260339}
   - component: {fileID: 1623958882268172563}
+  - component: {fileID: 5790763468996996566}
   m_Layer: 0
   m_Name: Test Enemy Assets
   m_TagString: Untagged
@@ -15794,6 +15795,40 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 4737694980087413285}
   healParticleSystem: {fileID: 2031108960671699237}
+--- !u!114 &5790763468996996566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710280227372935900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf83ecd62d265f419d3508984b6b206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSound:
+    Guid:
+      Data1: -315629697
+      Data2: 1245924006
+      Data3: 12838074
+      Data4: -1867497101
+    Path: event:/Sound Effects/Enemy/Boid/Boid Spawn
+  disableSound:
+    Guid:
+      Data1: -257471773
+      Data2: 1308414699
+      Data3: -318295900
+      Data4: 289594594
+    Path: event:/Sound Effects/Enemy/Boid/Boid Death
+  idleSound:
+    Guid:
+      Data1: 126438974
+      Data2: 1292216779
+      Data3: -405549377
+      Data4: -1367623770
+    Path: event:/Sound Effects/Enemy/Boid/Boid Idle
+  hasIdleSound: 1
 --- !u!1 &3807451145983107091
 GameObject:
   m_ObjectHideFlags: 0
@@ -15938,6 +15973,7 @@ GameObject:
   - component: {fileID: 196914359612187565}
   - component: {fileID: 2780404893680969411}
   - component: {fileID: 1498169680167756732}
+  - component: {fileID: 1486842543132973549}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -16004,6 +16040,26 @@ MonoBehaviour:
   numberOfParticles2nd: 1
   numberOfParticles3rd: 1
   numberOfParticles4th: 1
+--- !u!114 &1486842543132973549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877764164013489633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -815251135
+      Data2: 1237040113
+      Data3: 731014060
+      Data4: 80185633
+    Path: event:/Sound Effects/Enemy/Boid/Boid Attack
+  parameterName: none
 --- !u!1 &4074438030480901259
 GameObject:
   m_ObjectHideFlags: 0

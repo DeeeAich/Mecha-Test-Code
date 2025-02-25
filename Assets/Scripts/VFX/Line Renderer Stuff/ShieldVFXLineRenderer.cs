@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using FMODUnity;
 using Random = UnityEngine.Random;
 
 public class ShieldVFXLineRenderer : MonoBehaviour
@@ -26,6 +27,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     public List<MeshRenderer> meshRenderers;
     private int[] meshRendererShieldIndexes;
     public bool materialSetter;     // only one of the line renderers needs this enabled 
+    public EventReference attachSound;
+    public EventReference detachSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////// manual update called by parent script "ShieldVFXLineRendererManager"
@@ -50,6 +53,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
         if (materialSetter)
         {
+            AudioManager.instance.PlayOneShotSFX(attachSound, GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.transform.position);
+
             meshRenderers = new List<MeshRenderer>();
             
             
@@ -124,6 +129,10 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
     public void ClearAdditionalMaterial()
     {
+
+        AudioManager.instance.PlayOneShotSFX(detachSound, GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.transform.position);
+
+
         for (int i = 0; i < meshRenderers.Count; i++)
         {
             if (meshRenderers[i] == null) continue;
