@@ -96,7 +96,51 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
         return remainingDamage;
     }
+    internal virtual float TakeDamage(float amount, bool isCrit = false)
+    {
+        if (!canTakeDamage || !isAlive)
+        {
+            return 0f;
+        }
+        for (int i = 0; i < damageMods.Count; i++)
+        {
+            if (damageMods[i].removeFlag)
+            {
+                damageMods.RemoveAt(i);
+                i--;
+            }
+        }
+        float damageTaken = 0f;
+        float remainingDamage = amount;
+        foreach (DamageMod mod in damageMods)
+        {
+            //Debug.Log("Current Damage: " + remainingDamage);
+            damageTaken += mod.Modification(remainingDamage, out remainingDamage);
+            //Debug.Log("New Damage: " + remainingDamage);
+        }
 
+
+
+        health -= remainingDamage;
+
+        onTakeDamage.Invoke();
+
+
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        if (health <= 0 && canDie)
+        {
+            if (gameObject.tag != "Player")
+                PlayerBody.PlayBody().TriggerOnKill();
+            TriggerDeath();
+        }
+
+        return remainingDamage;
+    }
     internal virtual void TriggerDeath()
     {
         isAlive = false;

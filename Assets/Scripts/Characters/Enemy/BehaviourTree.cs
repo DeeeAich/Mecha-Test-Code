@@ -201,6 +201,12 @@ namespace AITree
             isShield = discardShield;
             return moddedAmount;
         }
+        internal override float TakeDamage(float amount, bool isCrit = false)
+        {
+            float moddedAmount = base.TakeDamage(amount, out bool discardShield, isCrit);
+            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit, discardShield);
+            return moddedAmount;
+        }
 
 
         public override void Burn(float chance, float damageTick, int tickCount)
