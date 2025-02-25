@@ -125,6 +125,16 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    public void WeaponChange(Sprite weaponImage, bool left)
+    {
+
+        if(left)
+            leftWeapon.sprite = weaponImage;
+        else
+            rightWeapon.sprite = weaponImage;
+
+    }
+
     public void WeaponAmmoLeft(float max, float cur)
     {
 

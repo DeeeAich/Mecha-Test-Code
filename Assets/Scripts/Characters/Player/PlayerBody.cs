@@ -204,7 +204,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
             weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo,
-            legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime);
+            legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime,
+            weaponHolder.leftWInfo.mySprite, weaponHolder.rightWInfo.mySprite);
     }
 
     public struct LegInfo
@@ -221,7 +222,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     [Tooltip("Add Prefab, if using left")]
     public void SetWeapon(WeaponPickup setWeapon, bool left)
     {
-        Debug.Log("Picking up " + setWeapon.itemName);
+
+        myUI.WeaponChange(setWeapon.mySprite, left);
 
         if (left && weaponHolder.leftWeapon.gameObject != null)
             Destroy(weaponHolder.leftWeapon.gameObject);

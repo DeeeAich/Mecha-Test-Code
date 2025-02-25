@@ -39,7 +39,11 @@ public class ProjectileSpread : ProjectileGun
             else
                 bulDiv = Random.Range(-1.0f, 1.0f);
 
-            GameObject newBullet = projectileHolder.GetChild(0).gameObject;
+            GameObject newBullet;
+            if (projectileHolder.GetChild(0) == null)
+                newBullet = GameObject.Instantiate(projectile, projectileHolder);
+            else
+                newBullet = projectileHolder.GetChild(0).gameObject;
             newBullet.transform.parent = null;
             newBullet.transform.position = firePoint.position;
             newBullet.transform.rotation = firePoint.rotation;
