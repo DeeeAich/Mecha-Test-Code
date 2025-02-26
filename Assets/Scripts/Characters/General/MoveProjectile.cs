@@ -8,6 +8,7 @@ public class MoveProjectile : Projectile
     [SerializeField] private Vector3 globalVelocity;
     private bool piercing;
 
+
     // Start is called before the first frame update
     void Start()
     {

@@ -104,7 +104,7 @@ namespace AITree
             }
             foreach (Transform child in transform)
             {
-                if (transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
+                if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
                     child.parent = transform.parent.parent;
             }
             Die();
@@ -1328,7 +1328,7 @@ namespace AITree
     {
         readonly string stat;
         readonly object newValue;
-        [Tooltip("stat can be: 1. speed 2. acceleration")]
+        [Tooltip("stat can be: 1. speed 2. acceleration 3. angularSpeed")]
         public ModifyAgentStat(string stat, object newValue) : base()
         {
             this.stat = stat;

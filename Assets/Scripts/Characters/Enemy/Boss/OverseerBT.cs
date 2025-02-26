@@ -10,7 +10,9 @@ public class OverseerBT : BehaviourTree
     Node secondPhaseBrain;
     Node transitionBrain;
 
-    [SerializeField] OverseerNailGun[] guns; 
+    [SerializeField] float transitionThreshold = 300f;
+
+    [SerializeField] OverseerNailGun[] guns;
 
     [SerializeField] GameObject weaponsPivot;
 
@@ -21,7 +23,7 @@ public class OverseerBT : BehaviourTree
     [SerializeField] float offsetDistance = 10f;
 
     [Header("Weight Calc Vars")]
-    [SerializeField] float inwardMaxRange = 35f; 
+    [SerializeField] float inwardMaxRange = 35f;
     [SerializeField] float inwardMinRange = 30f;
     [SerializeField] float wideMaxRange = 45f, wideMinRange = 15f;
     [SerializeField] float zigzagMaxRange = 20f, zigzagMinRange = 18f;
@@ -30,16 +32,19 @@ public class OverseerBT : BehaviourTree
 
     OverseerAnimationManager animManage;
 
+    [SerializeField] OverseerWeaponsLook look;
+
     private void OnDrawGizmosSelected()
     {
-        if(player!=null)
-        Gizmos.DrawLine(player.transform.position, (memory.TryGetValue("targetOffset", out object val) ? player.transform.position + (Vector3)val : player.transform.position));
+        if (player != null)
+            Gizmos.DrawLine(player.transform.position, (memory.TryGetValue("targetOffset", out object val) ? player.transform.position + (Vector3)val : player.transform.position));
     }
 
     internal override void Awake()
     {
         base.Awake();
 
+        look = GetComponentInChildren<OverseerWeaponsLook>();
         animManage = GetComponentInChildren<OverseerAnimationManager>();
 
         InitialiseBrains();
@@ -53,10 +58,10 @@ public class OverseerBT : BehaviourTree
     void InitialiseBrains()
     {
         weaponsBrain = new Sequence(new RandomBranching(false,
-            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightTwo),
-            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightOne),
-            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightThree),
-            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), LaserWeightFour),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightTwo),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightOne),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightThree),
+            new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightFour),
             new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.GroundSlamAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), SlamWeight)
             ), new YieldTime(3f)
 
@@ -75,6 +80,7 @@ public class OverseerBT : BehaviourTree
             new Selector(new BooleanFunction(ValidateOffset), new Sequence(new CalcOffsetTarget("targetOffset", "player", "moveLocation", offsetDistance), new MoveTo("moveLocation", StoreType.POSITION)), new GetOffset("player", "targetOffset", offsetDistance))
 
             );
+
         //head empty open inside
     }
 
@@ -88,7 +94,7 @@ public class OverseerBT : BehaviourTree
         float calc;
         float distanceScore = 0f;
         float distToTarget = (player.transform.position - transform.position).magnitude;
-        if(distToTarget > inwardMinRange && distToTarget <= inwardMaxRange)
+        if (distToTarget > inwardMinRange && distToTarget <= inwardMaxRange)
         {
             distToTarget -= inwardMinRange;
             float rangeDif = inwardMaxRange - inwardMinRange;
@@ -124,7 +130,7 @@ public class OverseerBT : BehaviourTree
         {
             distToTarget -= inwardMinRange;
             float rangeDif = inwardMaxRange - inwardMinRange;
-            distanceScore = 1- (distToTarget / rangeDif);
+            distanceScore = 1 - (distToTarget / rangeDif);
         }
         float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
         calc = distanceScore * facingScore;
@@ -285,7 +291,6 @@ namespace AITree
             return state;
         }
     }
-
     public class CallVoidFunctionWithInt : Action
     {
         System.Action<int> action;
@@ -303,6 +308,64 @@ namespace AITree
             action(suppliedInt);
             state = BehaviourTreeState.SUCCESS;
             return state;
+        }
+    }
+    public class CallVoidFunctionWithBool : Action
+    {
+        System.Action<bool> action;
+        bool suppliedInt;
+
+        public CallVoidFunctionWithBool(System.Action<bool> func, bool value)
+        {
+            action = func;
+            suppliedInt = value;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            action(suppliedInt);
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+
+    public class ToggleObject : Action
+    {
+        GameObject objToToggle;
+
+        public ToggleObject(GameObject thing) : base()
+        {
+            objToToggle = thing;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = BehaviourTreeState.SUCCESS;
+            objToToggle.SetActive(!objToToggle.activeSelf);
+            return state;
+        }
+    }
+
+    public class ChargeAttack : Sequence
+    {
+        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc) : base()
+        {
+            children = new List<Node> {
+            new ModifyAgentStat("speed", 0f), //no speed,
+            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new RepeatUntilSuccess(new BooleanFunction(facingFunc)),
+            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+            new ModifyAgentStat("speed", chargeSpeed), //big speed
+            new ToggleObject(damageZone),
+            new Approach(target, 0f),
+            new ToggleObject(damageZone),
+            new ModifyAgentStat("angularSpeed", 30f), //base speed,
+            new ModifyAgentStat("speed", 3.5f) //rotate base,
+
+
+            };
         }
     }
 }
