@@ -41,7 +41,12 @@ public class ProjectileSpread : ProjectileGun
 
             GameObject newBullet;
             if (projectileHolder.GetChild(0) == null)
+            {
                 newBullet = GameObject.Instantiate(projectile, projectileHolder);
+                newBullet.name = "PlayerBullet";
+                newBullet.GetComponent<BasicBullet>().myGun = this;
+                newBullet.SetActive(false);
+            }
             else
                 newBullet = projectileHolder.GetChild(0).gameObject;
             newBullet.transform.parent = null;
@@ -51,6 +56,8 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv, 0);
             newBullet.SetActive(true);
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
+            StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
+            newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
 
         }
         myAnim.SetTrigger("Fire");

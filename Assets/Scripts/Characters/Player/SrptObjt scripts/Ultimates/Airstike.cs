@@ -42,7 +42,7 @@ public class Airstike : Ultimate
 
             Vector3 location = enemies[i - (listLoop * enemies.Length)].transform.position
                 + new Vector3(Random.Range(-locationRandom, locationRandom), 0, Random.Range(-locationRandom, locationRandom));
-            GameObject newMissile = GameObject.Instantiate(ultObject, location, ultObject.transform.rotation, null);
+            GameObject newMissile = GameObject.Instantiate(ultObject, location, ultObject.transform.rotation, enemies[i - (listLoop * enemies.Length)].transform);
             missiles.Add(newMissile);
 
             newMissile.GetComponentInChildren<BasicBullet>().damage = damages[0];
@@ -53,6 +53,8 @@ public class Airstike : Ultimate
         {
 
             missile.SetActive(true);
+
+            missile.transform.parent = null;
 
             yield return new WaitForSeconds(betweenShots);
 

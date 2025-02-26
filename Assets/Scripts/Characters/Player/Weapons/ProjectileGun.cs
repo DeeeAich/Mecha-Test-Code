@@ -62,7 +62,12 @@ public class ProjectileGun : Weapon
             GameObject newBullet;
 
             if (projectileHolder.GetChild(0) == null)
+            {
                 newBullet = GameObject.Instantiate(projectile, projectileHolder);
+                newBullet.name = "PlayerBullet";
+                newBullet.GetComponent<BasicBullet>().myGun = this;
+                newBullet.SetActive(false);
+            }
             else
                 newBullet = projectileHolder.GetChild(0).gameObject;
             newBullet.transform.parent = null;
@@ -70,6 +75,7 @@ public class ProjectileGun : Weapon
             newBullet.transform.rotation = firePoint.rotation;
             newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation, curDivation), 0);
             newBullet.SetActive(true);
+            newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
             StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
 

@@ -8,7 +8,8 @@ public class SpawnPrefabAtOrigin : MonoBehaviour
     public bool unparent;
     public bool spawnOnEnable;
     public bool spawnOnDisable;
-
+    public Transform[] missileLocations;
+    /*
     private void OnEnable()
     {
         if (spawnOnEnable)
@@ -22,15 +23,10 @@ public class SpawnPrefabAtOrigin : MonoBehaviour
         {
             SpawnPrefab();
         }
-    }
+    }*/
 
-    public void SpawnPrefab()
+    public void SpawnPrefab(int missileNum)
     {
-       GameObject newprefab = Instantiate(prefabToSpawn);
-       newprefab.transform.position = transform.position;
-        if (unparent)
-        {
-            newprefab.transform.parent = null;
-        }
+       GameObject newprefab = Instantiate(prefabToSpawn, missileLocations[missileNum].position, transform.rotation);
     }
 }

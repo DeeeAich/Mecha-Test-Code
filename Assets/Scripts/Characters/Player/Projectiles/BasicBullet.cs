@@ -66,7 +66,7 @@ public class BasicBullet : Projectile
         gameObject.SetActive(false);
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
-        pierceCounter = myGun.pierceCount;
+        pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
         animating = false;
 
         yield return null;
