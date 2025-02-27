@@ -94,6 +94,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             rightMods.Add(newChip);
             weapon = rightWeapon;
         }
+
         switch (newChip.supType)
         {
             case (WeaponChip.WeaponSubType.Generic):
@@ -121,12 +122,21 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void ReApplyChips(bool left)
     {
+
+        List<WeaponChip> movedChips = left ? leftMods : rightMods;
+
         if (left)
-            foreach (WeaponChip chip in leftMods)
+        {
+            leftMods = new();
+            foreach (WeaponChip chip in movedChips)
                 ApplyChip(chip, left);
+        }
         else
-            foreach (WeaponChip chip in rightMods)
-                ApplyChip(chip, false);
+        {
+            rightMods = new();
+            foreach (WeaponChip chip in movedChips)
+                ApplyChip(chip, left);
+        }
 
     }
 

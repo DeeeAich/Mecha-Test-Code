@@ -201,14 +201,4 @@ public class ChargeRifle : Weapon
         yield return null;
     }
 
-    public override void AddMod(StatusInfo ModInfo)
-    {
-
-        string modName = ModInfo.statusType.ToString();
-
-        foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-            mod.AddModifiers(ModInfo);
-
-    }
-
 }

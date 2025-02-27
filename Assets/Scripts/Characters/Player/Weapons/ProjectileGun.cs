@@ -61,7 +61,7 @@ public class ProjectileGun : Weapon
             myAnim.SetTrigger("Fire");
             GameObject newBullet;
 
-            if (projectileHolder.GetChild(0) == null)
+            if (projectileHolder.childCount == 0)
             {
                 newBullet = GameObject.Instantiate(projectile, projectileHolder);
                 newBullet.name = "PlayerBullet";
@@ -110,11 +110,6 @@ public class ProjectileGun : Weapon
         yield return null;
     }
 
-    public override void AddMod(StatusInfo modInfo)
-    {
-        foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
-            mod.AddModifiers(modInfo);
-    }
 
     public override void SetAnimation()
     {

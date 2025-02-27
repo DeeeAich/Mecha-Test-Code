@@ -92,9 +92,10 @@ public class Weapon : MonoBehaviour, IModable
     }
 
 
-    public virtual void AddMod(StatusInfo ModInfo)
+    public virtual void AddMod(StatusInfo modInfo)
     {
-
+        foreach (ProjectileMod mod in GetComponents<ProjectileMod>())
+            mod.AddModifiers(modInfo);
     }
 
     public virtual void SetAnimation()
