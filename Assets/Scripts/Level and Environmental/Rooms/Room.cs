@@ -186,6 +186,9 @@ public class Room : MonoBehaviour
         if (isActive)
         {
             // goodbye tom
+            // goodbye jacob
+            
+            if(MetricsTracker.instance != null) MetricsTracker.instance.currentGameRuntimeMetrics.levelRuntimeMetricsList[^1].roomRuntimeMetricsList.Add(new RoomRuntimeMetrics());
             AudioManager.instance.ChangeMusicState(musicState.idle);
 
             onCompleteRoom.Invoke();

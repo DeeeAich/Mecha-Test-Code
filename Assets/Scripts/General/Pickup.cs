@@ -188,6 +188,7 @@ public class Pickup : MonoBehaviour
         }
         
         animator.SetTrigger("openLoot");
+        GetComponentInChildren<Interactable>(true).canInteract = false;
 
         foreach (var pickup in FindObjectsOfType<Pickup>())
         {
