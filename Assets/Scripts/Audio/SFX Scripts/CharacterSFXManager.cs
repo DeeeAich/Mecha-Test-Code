@@ -18,8 +18,11 @@ public class CharacterSFXManager : MonoBehaviour
 
     private void Start()
     {
-        idleSoundInstance = RuntimeManager.CreateInstance(idleSound);
-        RuntimeManager.AttachInstanceToGameObject(idleSoundInstance, gameObject);
+        if (hasIdleSound)
+        {
+            idleSoundInstance = RuntimeManager.CreateInstance(idleSound);
+            RuntimeManager.AttachInstanceToGameObject(idleSoundInstance, gameObject);
+        }
     }
     public void SwitchIdleSFX(int state)
     {

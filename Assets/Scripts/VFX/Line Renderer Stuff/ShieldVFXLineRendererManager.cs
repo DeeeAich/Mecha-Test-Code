@@ -31,6 +31,7 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
         {
             for (int i = 0; i < shieldVFXLineRenderers.Count; i++)
             {
+                if(shieldVFXLineRenderers[i]!=null)
                 shieldVFXLineRenderers[i].gameObject.SetActive(false);              
             }
         }

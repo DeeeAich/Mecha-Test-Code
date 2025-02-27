@@ -94,7 +94,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             TriggerDeath();
         }
 
-        return remainingDamage;
+        return damageTaken + remainingDamage;
     }
     internal virtual float TakeDamage(float amount, bool isCrit = false)
     {
@@ -139,7 +139,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             TriggerDeath();
         }
 
-        return remainingDamage;
+        return damageTaken + remainingDamage;
     }
     internal virtual void TriggerDeath()
     {
