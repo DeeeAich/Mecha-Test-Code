@@ -131,6 +131,7 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Starting Room: " + name);
         
+        if(MetricsTracker.instance != null) MetricsTracker.instance.RoomStarted();
         // hello tom
         // hi jacob :3
         AudioManager.instance.ChangeMusicState(musicState.combat);
@@ -188,7 +189,8 @@ public class Room : MonoBehaviour
             // goodbye tom
             // goodbye jacob
             
-            if(MetricsTracker.instance != null) MetricsTracker.instance.currentGameRuntimeMetrics.levelRuntimeMetricsList[^1].roomRuntimeMetricsList.Add(new RoomRuntimeMetrics());
+            if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
+            
             AudioManager.instance.ChangeMusicState(musicState.idle);
 
             onCompleteRoom.Invoke();

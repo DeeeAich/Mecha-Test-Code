@@ -56,7 +56,12 @@ public class MetricsTracker : MonoBehaviour
     public static MetricsTracker instance;
 
     public GameRuntimeMetrics currentGameRuntimeMetrics;
+    public LevelRuntimeMetrics currentLevelRuntimeMetrics;
+    public RoomRuntimeMetrics currentRoomRuntimeMetrics;
 
+    private float roomTimer;
+    private float levelTimer;
+    private float gameTimer;
 
     public void RecordEvent(TrackableEvent trackableEvent) // this is for others to call to record damage data
     {
@@ -80,6 +85,18 @@ public class MetricsTracker : MonoBehaviour
         }
 
         SceneManager.sceneLoaded += HandleSceneChange();
+        
+        StartGameRuntimeTracking();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isTracking)
+        {
+            gameTimer += Time.fixedDeltaTime;
+            levelTimer += Time.fixedDeltaTime;
+            roomTimer += Time.fixedDeltaTime;
+        }
     }
 
     public void StartGameRuntimeTracking()
@@ -87,12 +104,38 @@ public class MetricsTracker : MonoBehaviour
         isTracking = true;
 
         currentGameRuntimeMetrics = new GameRuntimeMetrics();
+        currentLevelRuntimeMetrics = new LevelRuntimeMetrics();
+        currentRoomRuntimeMetrics = new RoomRuntimeMetrics();
     }
 
     private void StopGameRuntimeTracking()
     {
     }
 
+    public void RoomStarted()
+    {
+        roomTimer = 0;
+    }
+    public void RoomCompleted(Room room)
+    {
+        currentRoomRuntimeMetrics.roomName = room.name;
+        currentRoomRuntimeMetrics.objectiveName = room.primaryObjective.name;
+
+        currentRoomRuntimeMetrics.timeTaken = roomTimer;
+        roomTimer = 0;
+        
+        currentLevelRuntimeMetrics.roomRuntimeMetricsList.Add(currentRoomRuntimeMetrics);
+        currentRoomRuntimeMetrics = new RoomRuntimeMetrics();
+    }
+
+    public void LevelCompleted()
+    {
+        currentLevelRuntimeMetrics.timeTakenForLevel = levelTimer;
+        levelTimer = 0;
+        
+        currentGameRuntimeMetrics.levelRuntimeMetricsList.Add(currentLevelRuntimeMetrics);
+        currentLevelRuntimeMetrics = new LevelRuntimeMetrics();
+    }
 
     private UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.LoadSceneMode> HandleSceneChange()
     {
