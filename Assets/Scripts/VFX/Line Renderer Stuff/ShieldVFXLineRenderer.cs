@@ -129,8 +129,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
     public void ClearAdditionalMaterial()
     {
-
-        AudioManager.instance.PlayOneShotSFX(detachSound, GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.transform.position);
+        if(transform.parent.TryGetComponent<ShieldVFXLineRendererManager>(out ShieldVFXLineRendererManager manager) && manager.shieldedTarget!=null)
+        AudioManager.instance.PlayOneShotSFX(detachSound, manager.shieldedTarget.transform.position);
 
 
         for (int i = 0; i < meshRenderers.Count; i++)
@@ -146,6 +146,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
                 {
                     materialRemoved = true;
                     materials.RemoveAt(j);
+                    j--;
                 }
             }
             

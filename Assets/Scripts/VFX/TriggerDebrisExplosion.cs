@@ -36,6 +36,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
             scale -= Time.deltaTime * scaleSpeed;
             for (int i = 0; i < objectsToPush.Count; i++)
             {
+                if(objectsToPush[i] != null)
                 objectsToPush[i].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
