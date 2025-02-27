@@ -7,6 +7,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 {
 
     private bool firing = false;
+    private float turnSpeed;
 
     public Transform turnerObject;
 
@@ -28,9 +29,11 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             Quaternion lookDirection = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y / (isGamepad ? 1 :
                 Mathf.Sin(45 * Mathf.Deg2Rad))));
 
-            
-            
-            turnerObject.rotation = lookDirection;
+
+            if (firing)
+                turnerObject.rotation = Quaternion.Lerp(turnerObject.rotation, lookDirection, turnSpeed * Time.deltaTime);
+            else
+                turnerObject.rotation = lookDirection;
 
         }
 
@@ -127,6 +130,15 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
         else
             foreach (WeaponChip chip in rightMods)
                 ApplyChip(chip, false);
+
+    }
+
+    public void TurnSpeedEffected(bool turnAffected, float turnSpeedSet)
+    {
+
+        firing = turnAffected;
+
+        turnSpeed = turnSpeedSet;
 
     }
 

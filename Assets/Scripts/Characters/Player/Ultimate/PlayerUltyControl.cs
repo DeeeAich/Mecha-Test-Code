@@ -8,8 +8,10 @@ public class PlayerUltyControl : MonoBehaviour
 
     PlayerBody myBody;
     public Ultimate currentUltimate;
-    private GameObject ultimateCaster;
+    public GameObject ultimateCaster;
     private Animator ultAnimation;
+
+    public Transform firePoint;
 
     public static PlayerUltyControl instance;
 
@@ -36,7 +38,7 @@ public class PlayerUltyControl : MonoBehaviour
 
     public void EndUltimate(InputAction.CallbackContext context)
     {
-
+        
         currentUltimate.EndUltimate();
 
     }
