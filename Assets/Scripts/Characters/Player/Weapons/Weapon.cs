@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IModable
@@ -72,7 +73,6 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void AddStats(WeaStatChip addStats)
     {
-
         addStats.myStatChange.AddStats(modifiers);
         SetAnimation();
 
@@ -87,7 +87,6 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void TempStatsRemove(WeaponStats removeStats)
     {
-
 
     }
 

@@ -85,6 +85,8 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void ApplyChip(WeaponChip newChip, bool left)
     {
 
+        print("Applying chip " + newChip.name);
+
         Weapon weapon = null;
 
         if (left)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using JetBrains.Annotations;
 
 public class ChargeRifle : Weapon
 {
@@ -34,6 +35,7 @@ public class ChargeRifle : Weapon
 
     public override void Start()
     {
+
         base.Start();
 
         lineGen = GetComponent<LineRenderer>();
@@ -42,9 +44,6 @@ public class ChargeRifle : Weapon
         lineGen.enabled = false;
 
         lineGen.SetPosition(0, firePoint.position);
-
-
-        myController.ReApplyChips(this == myController.leftWeapon);
 
         myParticles = GetComponentInChildren<BeamParticles>();
 
@@ -199,6 +198,11 @@ public class ChargeRifle : Weapon
 
         isFiring = false;
         yield return null;
+    }
+
+    public override void SetAnimation()
+    {
+        myAnim.SetFloat("ReloadSpeed", 1 / (reloadTime * modifiers.reloadSpeed));
     }
 
 }

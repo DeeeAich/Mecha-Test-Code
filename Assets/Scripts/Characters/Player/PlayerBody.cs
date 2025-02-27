@@ -222,7 +222,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     [Tooltip("Add Prefab, if using left")]
     public void SetWeapon(WeaponPickup setWeapon, bool left)
     {
-        print("Adding: " + setWeapon.name + left.ToString());
+
         myUI.WeaponChange(setWeapon.mySprite, left);
 
         if (left && weaponHolder.leftWeapon.gameObject != null)
