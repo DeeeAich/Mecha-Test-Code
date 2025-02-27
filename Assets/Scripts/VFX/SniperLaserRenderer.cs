@@ -20,10 +20,5 @@ public class SniperLaserRenderer : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, hit.point);
         }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            lineRenderer.enabled = false;
-        }
     }
 }
