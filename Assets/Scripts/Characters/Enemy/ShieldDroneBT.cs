@@ -9,7 +9,7 @@ public class ShieldDroneBT : BehaviourTree
     public float coverRangeMin, coverRangeMax, coverStep;
 
     public GameObject explosion;
-    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngularSpeed;
+    public float approachDistance, pauseTime, dashSpeed, dashAcceleration, explosionSize, explosionDamage, dashAngularSpeed, maxHideAngle;
 
     public float unshieldStunTimeMin, unshieldStunTimeMax;
 
