@@ -66,6 +66,10 @@ public class LevelGenerator : MonoBehaviour
         {
             possibleRooms = levelInfo.roomPool.bossRooms.ToList();
         }
+        else if (roomIndex == roomsInThisFloor)
+        {
+            possibleRooms = levelInfo.roomPool.finalRooms.ToList();
+        }
         else if (minibossRoomIndexes.Contains(roomIndex))
         {
             possibleRooms = levelInfo.roomPool.miniBossRooms.ToList();

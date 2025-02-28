@@ -25,7 +25,7 @@ MonoBehaviour:
       type: 3}
     spawnAnimationPrefab: {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b,
       type: 3}
-    spawnChance: 10
+    spawnChance: 8
     rarity: 1
   - Name: Bomber
     prefab: {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050,
@@ -41,7 +41,13 @@ MonoBehaviour:
     spawnChance: 5
     rarity: 1
   miniBosses: []
-  bosses: []
+  bosses:
+  - Name: Overseer
+    prefab: {fileID: 6650565202339733482, guid: d06a43d8cb81fc14688670c5cb0f4ce2,
+      type: 3}
+    spawnAnimationPrefab: {fileID: 0}
+    spawnChance: 1
+    rarity: 0
   standardWaveSpawners:
   - {fileID: 19575749529987131, guid: b79b1dc32af68994ba57ff8a57a35d01, type: 3}
   - {fileID: 6767212152696474178, guid: 734d4feb3d77bcb4fbbbc17514b5ca94, type: 3}
