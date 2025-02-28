@@ -1421,6 +1421,7 @@ namespace AITree
         Vector3 activeTarget;
         float approachRange = 0.001f;
         readonly float minDist, maxDist, stepDist;
+        float maxHideAngle = 45f;
 
         public TakeCover() : base()
         {
@@ -1437,6 +1438,12 @@ namespace AITree
         {
             this.stepDist = Mathf.Min(stepDist, 0.97f);
             this.stepDist = Mathf.Max(this.stepDist, 0.1f);
+        }
+        public TakeCover(string targetLoc, float minDist, float maxDist, float stepDist, float hideAngle) : this(targetLoc, minDist, maxDist, stepDist)
+        {
+            this.stepDist = Mathf.Min(stepDist, 0.97f);
+            this.stepDist = Mathf.Max(this.stepDist, 0.1f);
+            maxHideAngle = hideAngle;
         }
 
         public override BehaviourTreeState Tick()
@@ -1485,13 +1492,15 @@ namespace AITree
             offset.y = 0;
             randVect.Normalize();
 
+            
+
             //Debug.DrawLine(brain.transform.position, brain.transform.position + randVect, Color.blue, 5f);
             //Debug.DrawLine(brain.player.transform.position, brain.player.transform.position + offset, Color.green, 5f);
             if (Vector3.Dot(randVect, offset) < 0)
             {
                 randVect = -randVect;
             }
-            if (Vector3.Dot(randVect, offset) < Mathf.Cos(45f * Mathf.Deg2Rad))
+            if (Vector3.Dot(randVect, offset) < Mathf.Cos(maxHideAngle * Mathf.Deg2Rad))
             {
                 Vector3 left = Vector3.Cross(randVect, Vector3.up);
                 Vector3 right = Vector3.Cross(Vector3.up, randVect);
