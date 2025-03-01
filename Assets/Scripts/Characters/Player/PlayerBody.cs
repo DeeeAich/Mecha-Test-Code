@@ -180,7 +180,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private void SetHooks()
     {
 
-        LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
+        if(LevelGenerator.instance != null) LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
 
     }
 

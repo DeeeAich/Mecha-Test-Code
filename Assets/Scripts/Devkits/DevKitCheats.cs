@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
 {
-    [SerializeField] private ComponentMasterListScriptable componentMasterListScriptable;
-    
+    [SerializeField] private LootPoolScriptable lootPool;
+
     [SerializeField] private TMP_Dropdown leftGunDropdown;
     [SerializeField] private TMP_Dropdown rightGunDropdown;
     [SerializeField] private TMP_Dropdown chassisDropdown;
@@ -50,7 +50,7 @@ public class DevKitCheats : MonoBehaviour
         addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData("Add Chip to Right Slot"));
         bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData("Add Chip To Body"));
 
-        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
         for (int i = 0; i <  lootPool.Weapons.Length; i++)
         {
@@ -138,7 +138,7 @@ public class DevKitCheats : MonoBehaviour
         newLoadout[1] = leftGunDropdown.value;
         newLoadout[2] = rightGunDropdown.value;
         
-        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
 
         if (newLoadout != loadout)
         {
@@ -153,7 +153,7 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddWeapon(bool applyToLeft)
     {
-        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
         if (applyToLeft)
         {
@@ -177,7 +177,7 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddChip(bool applyToLeft)
     {
-        LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
         if (applyToLeft)
         {
@@ -202,7 +202,7 @@ public class DevKitCheats : MonoBehaviour
     {
         if (bodyChipsDropdown.value != 0)
         {
-            LootPoolScriptable lootPool = LevelGenerator.instance.levelInfo.lootPool;
+            if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
             PlayerBody.PlayBody().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value - 1]);
 
