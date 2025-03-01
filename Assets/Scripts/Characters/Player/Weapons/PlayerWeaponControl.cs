@@ -41,45 +41,48 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void PressLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && leftWeapon != null)
             leftWeapon.FirePress();
     }
 
     public void LiftLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && leftWeapon != null)
             leftWeapon.FireRelease();
     }
 
     public void ReloadLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && leftWeapon != null)
             StartCoroutine(leftWeapon.Reload());
     }
 
     public void FireRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && rightWeapon != null)
             rightWeapon.FirePress();
     }
 
     public void LiftRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && rightWeapon != null)
             rightWeapon.FireRelease();
     }
 
     public void ReloadRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot)
+        if (myBody.canShoot && rightWeapon != null)
             StartCoroutine(rightWeapon.Reload());
     }
 
     public virtual void Start()
     {
         myBody = GetComponent<PlayerBody>();
-        rightWeapon.myController = this;
-        leftWeapon.myController = this;
+
+        if(rightWeapon != null)
+            rightWeapon.myController = this;
+        if (leftWeapon != null)
+            leftWeapon.myController = this;
     }
 
     public void ApplyChip(WeaponChip newChip, bool left)
