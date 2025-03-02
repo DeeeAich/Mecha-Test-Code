@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 {
@@ -19,6 +20,9 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public WeaponPickup rightWInfo;
     public Weapon rightWeapon;
     public List<WeaponChip> rightMods;
+
+    public UnityEvent leftFire;
+    public UnityEvent rightFire;
 
     public void LookDirection(Vector2 direction, bool isGamepad)
     {
@@ -42,7 +46,10 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void PressLeft(InputAction.CallbackContext context)
     {
         if (myBody.canShoot && leftWeapon != null)
+        {
+            leftFire.Invoke();
             leftWeapon.FirePress();
+        }
     }
 
     public void LiftLeft(InputAction.CallbackContext context)
@@ -60,7 +67,10 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void FireRight(InputAction.CallbackContext context)
     {
         if (myBody.canShoot && rightWeapon != null)
+        {
+            rightFire.Invoke();
             rightWeapon.FirePress();
+        }
     }
 
     public void LiftRight(InputAction.CallbackContext context)
