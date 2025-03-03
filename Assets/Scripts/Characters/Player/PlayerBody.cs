@@ -94,7 +94,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         if(weaponHolder.leftWeapon != null)
             myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
         if(weaponHolder.rightWeapon != null)
-            myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
+            myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.rightWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
     }
 
     private void TriggerEndOfRoom()
@@ -208,7 +208,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             weaponHolder.leftWeapon != null ? weaponHolder.leftWeapon.curAmmo : 0,
             weaponHolder.rightWeapon != null ? weaponHolder.rightWeapon.curAmmo : 0,
             legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime,
-            weaponHolder.leftWInfo.mySprite, weaponHolder.rightWInfo.mySprite);
+            weaponHolder.leftWInfo != null ? weaponHolder.leftWInfo.mySprite : null,
+            weaponHolder.rightWInfo != null ? weaponHolder.rightWInfo.mySprite : null);
     }
 
     public struct LegInfo
