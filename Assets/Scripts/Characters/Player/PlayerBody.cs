@@ -91,8 +91,10 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             myUI.HealthChanged(lastHealth, lastMax);
         }
 
-        myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
-        myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
+        if(weaponHolder.leftWeapon != null)
+            myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
+        if(weaponHolder.rightWeapon != null)
+            myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
     }
 
     private void TriggerEndOfRoom()
@@ -203,7 +205,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         curLegs = legStats.LoadLegs();
 
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
-            weaponHolder.leftWeapon.curAmmo, weaponHolder.rightWeapon.curAmmo,
+            weaponHolder.leftWeapon != null ? weaponHolder.leftWeapon.curAmmo : 0,
+            weaponHolder.rightWeapon != null ? weaponHolder.rightWeapon.curAmmo : 0,
             legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime,
             weaponHolder.leftWInfo.mySprite, weaponHolder.rightWInfo.mySprite);
     }
@@ -225,9 +228,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         myUI.WeaponChange(setWeapon.mySprite, left);
 
-        if (left && weaponHolder.leftWeapon.gameObject != null)
+        if (left && weaponHolder.leftWeapon != null)
             Destroy(weaponHolder.leftWeapon.gameObject);
-        else if (weaponHolder.leftWeapon.gameObject != null)
+        else if (weaponHolder.leftWeapon != null)
             Destroy(weaponHolder.rightWeapon.gameObject);
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon.weaponPrefab, weaponPoints[left ? 0 : 1]);
