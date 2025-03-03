@@ -77,8 +77,8 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6650565202339733482}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_AgentTypeID: -1372625422
+  m_Radius: 8
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 600
-  maxHealth: 600
+  maxHealth: 10000
   isAlive: 1
   canTakeDamage: 1
   canDie: 1
@@ -193,12 +193,25 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   paused: 0
+  arcSteps: 6
+  attackColours:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  gizmoYOffset: {x: 0, y: 0, z: 0}
+  transitionThreshold: 300
   guns:
   - {fileID: 1216254483072760945}
   - {fileID: 1307579932631440478}
   weaponsPivot: {fileID: 3706613987007461513}
   approachDist: 25
   biggestRange: 35
+  chargeSpeed: 10
+  chargeDamageZone: {fileID: 0}
   targetOffsetAngle: 10
   offsetDistance: 20
   inwardMaxRange: 35
@@ -209,8 +222,14 @@ MonoBehaviour:
   zigzagMinRange: 18
   circleMaxRange: 24
   circleMinRange: 22
-  slamMaxRange: 5
+  slamMaxRange: 15
   slamMinRange: 0
+  chargeMaxRange: 39.66
+  chargeMinRange: 26.15
+  frontRadius: 90
+  chargePatienceWeightBuildup: 0.2
+  chargePatienceWeightDropoff: 0.2
+  look: {fileID: 0}
 --- !u!1001 &5375722804594049362
 PrefabInstance:
   m_ObjectHideFlags: 0
