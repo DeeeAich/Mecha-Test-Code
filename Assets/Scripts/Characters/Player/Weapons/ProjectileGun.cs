@@ -119,5 +119,4 @@ public class ProjectileGun : Weapon
             myAnim.SetFloat("FireRate", timeBetweenBurst);
 
     }
-
 }

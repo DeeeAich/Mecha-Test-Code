@@ -40,7 +40,7 @@ public class ProjectileSpread : ProjectileGun
                 bulDiv = Random.Range(-1.0f, 1.0f);
 
             GameObject newBullet;
-            if (projectileHolder.GetChild(0) == null)
+            if (projectileHolder.childCount == 0)
             {
                 newBullet = GameObject.Instantiate(projectile, projectileHolder);
                 newBullet.name = "PlayerBullet";
