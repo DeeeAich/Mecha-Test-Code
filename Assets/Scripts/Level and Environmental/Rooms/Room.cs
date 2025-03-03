@@ -227,7 +227,9 @@ public class Room : MonoBehaviour
         
         for (int i = 0; i < pickupsToSpawn.Length; i++)
         {
-            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * lootSeperationDistance * (i - Mathf.FloorToInt(lootCount/2)), lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,
+                lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * lootSeperationDistance * (i - Mathf.FloorToInt(lootCount/2)), 
+                lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
             
             newLoot.transform.SetParent(transform);
             newLoot.PlayerPickup = pickupsToSpawn[i];

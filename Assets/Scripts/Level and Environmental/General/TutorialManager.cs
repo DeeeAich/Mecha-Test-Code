@@ -35,11 +35,20 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialStage)
         {
             case 0:
-                // player left shoot
+                PlayerBody.PlayBody().weaponHolder.rightFire.AddListener(delegate
+                {
+                    CompleteTutorialStage();
+                    PlayerBody.PlayBody().weaponHolder.rightFire.RemoveAllListeners();
+                });
                 break;
             
             case 2:
-                // player right shoot
+                
+                PlayerBody.PlayBody().weaponHolder.leftFire.AddListener(delegate
+                {
+                    CompleteTutorialStage();
+                    PlayerBody.PlayBody().weaponHolder.leftFire.RemoveAllListeners();
+                });
                 
                 break;
             

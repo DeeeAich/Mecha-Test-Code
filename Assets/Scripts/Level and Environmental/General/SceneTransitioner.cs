@@ -6,15 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitioner : MonoBehaviour
 {
-    public Scene nextScene;
+    [SerializeField] private bool setTargetSceneToNextInIndex = true;
+    [SerializeField] public int targetScene;
     
     [SerializeField] private float sceneTransitionTime;
     [SerializeField] private float sceneTransitionTimer;
 
+    private bool transitioning;
+
+    private void Awake()
+    {
+        if (setTargetSceneToNextInIndex)
+        {
+            targetScene = SceneManager.GetActiveScene().buildIndex + 1;
+        }
+    }
+
     public void StartSceneTransition()
     {
-        PlayerBody.PlayBody().StopParts(true, true);
-        sceneTransitionTimer = sceneTransitionTime;
+        if (!transitioning)
+        {
+            PlayerBody.PlayBody().StopParts(true, true);
+            sceneTransitionTimer = sceneTransitionTime;
+            transitioning = true;
+        }
     }
 
     private void FixedUpdate()
@@ -24,7 +39,7 @@ public class SceneTransitioner : MonoBehaviour
             sceneTransitionTimer -= Time.fixedDeltaTime;
             if (sceneTransitionTimer <= 0)
             {
-                SceneManager.LoadScene(nextScene.name);
+                SceneManager.LoadScene(targetScene);
             }
         }
     }
