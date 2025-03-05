@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private int tutorialStage = 0;
     public UnityEvent[] onStageStarts;
     public UnityEvent[] onStageCompletes;
+
+    private InputAction dash;
 
     private void FixedUpdate()
     {
@@ -28,6 +31,12 @@ public class TutorialManager : MonoBehaviour
         onStageCompletes[tutorialStage].Invoke();
     }
 
+    private void CompleteDashChallenge(InputAction.CallbackContext context)
+    {
+        CompleteTutorialStage();
+        dash.performed -= CompleteDashChallenge;
+    }
+
     public void StartTutorialStage(int stage)
     {
         tutorialStage = stage;
@@ -40,6 +49,11 @@ public class TutorialManager : MonoBehaviour
                     CompleteTutorialStage();
                     PlayerBody.PlayBody().weaponHolder.rightFire.RemoveAllListeners();
                 });
+                break;
+            
+            case 1:
+                dash = PlayerBody.PlayBody().GetComponent<PlayerInput>().actions["Dash"];
+                dash.performed += CompleteDashChallenge;
                 break;
             
             case 2:
