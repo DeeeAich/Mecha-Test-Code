@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD;
+using FMOD.Studio;
+using FMODUnity;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -119,6 +122,7 @@ public class DialogueManager : MonoBehaviour
             npcAnimator.SetTrigger("Action");
         }
 
+        EntryAudio();
 
         StopAllCoroutines();
 
@@ -132,6 +136,8 @@ public class DialogueManager : MonoBehaviour
     {
         for (int i = 0; i < text.Length; i++)
         {
+            AudioManager.instance.PlayOneShotSFX(Interaction[currentInteractionNum].dialogueObject[currentLine].characterDialogue, transform.position);
+
             currentText = text.Substring(0, i);
             dialogueText.text = currentText;
             if (i > 1)
@@ -140,6 +146,13 @@ public class DialogueManager : MonoBehaviour
 
             }
             yield return new WaitForSeconds(textDelay);
+
+            if (i == text.Length - 1)
+            {
+                UnityEngine.Debug.Log("finished typing");
+
+                ExitAudio();
+            }
         }       
     }
     IEnumerator WaitForTextToEnd(float length, float automaticSkipDelay)
@@ -147,7 +160,7 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
         yield return new WaitForSeconds(length);
         isTyping = false;
-        Debug.Log("Dialogue Text Finished");
+
         yield return new WaitForSeconds(automaticSkipDelay);
         currentLine++;
         if (currentLine < Interaction[currentInteractionNum].dialogueObject.Count)
@@ -167,8 +180,8 @@ public class DialogueManager : MonoBehaviour
     void CloseDialogue()
     {
         dialogueBoxAnimator.SetTrigger("Close");
-        
-        if(hasNpc) npcAnimator.SetBool("Talking", false);
+        CloseAudio();
+        if (hasNpc) npcAnimator.SetBool("Talking", false);
         StopAllCoroutines();
         StartCoroutine(CloseDialogueWait());
     }
@@ -179,8 +192,50 @@ public class DialogueManager : MonoBehaviour
         if(interactionCamera != null) interactionCamera.SetActive(false);
     }
 
+    /////////////////////////////////////////////////// Audio
 
+    private EventInstance eventInstance;
 
+    void EntryAudio()
+    {
+        if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerEntryAudio)
+        {
+            eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].entryAudioEvent);
+            RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
+
+            eventInstance.setParameterByNameWithLabel("Emotional State", Interaction[currentInteractionNum].dialogueObject[currentLine].entryCharacterEmotion.ToString());
+
+            eventInstance.start();
+            eventInstance.release();
+        }
+    }
+    void ExitAudio()
+    {
+        if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerExitAudio)
+        {
+            eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].exitAudioEvent);
+            RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
+
+            eventInstance.setParameterByNameWithLabel("Emotional State", Interaction[currentInteractionNum].dialogueObject[currentLine].exitCharacterEmotion.ToString());
+
+            eventInstance.start();
+            eventInstance.release();
+        }
+    }
+
+    void CloseAudio()
+    {
+        if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerCloseAudio)
+        {
+            eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].closeAudioEvent);
+            RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
+
+            eventInstance.setParameterByNameWithLabel("Emotional State", Interaction[currentInteractionNum].dialogueObject[currentLine].closeCharacterEmotion.ToString());
+
+            eventInstance.start();
+            eventInstance.release();
+        }
+    }
 
     /////////////////////////////////////////////////// Interaction
 

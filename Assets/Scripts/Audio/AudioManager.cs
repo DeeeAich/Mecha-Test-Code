@@ -42,19 +42,9 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void PlayOneShotSFX(EventReference sound, Vector3 worldPos, string parameterName = "none", float parameterValue = 0)
+    public void PlayOneShotSFX(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
-
-        var instance = RuntimeManager.CreateInstance(sound);
-        instance.set3DAttributes(RuntimeUtils.To3DAttributes(worldPos));
-        if (parameterName != "none")
-        {
-            instance.setParameterByName(parameterName, parameterValue);
-        }
-        instance.start();
-        instance.release();
-
     }
 
     public void ChangeMusicState(musicState newState)
