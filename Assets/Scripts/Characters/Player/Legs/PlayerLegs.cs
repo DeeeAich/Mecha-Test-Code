@@ -10,6 +10,7 @@ public class PlayerLegs : MonoBehaviour
     public bool dashing = false;
     public Vector3 dashDirection;
     public Rigidbody ridBy;
+    public int dashCount;
 
     public virtual void Movement(Vector2 stickAmount)
     {
@@ -60,6 +61,7 @@ public class PlayerLegs : MonoBehaviour
     {
         myBody = GetComponent<PlayerBody>();
         ridBy = GetComponent<Rigidbody>();
+        dashCount = myBody.curLegs.dashCharges;
     }
 
     public virtual void OnCollisionEnter(Collision collision)

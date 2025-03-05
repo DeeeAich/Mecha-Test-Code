@@ -31,7 +31,7 @@ public class SpiderLegs : PlayerLegs
         myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
         myBody.myUI.Dashed();
 
-        myBody.legStats.dashCharges--;
+        dashCount--;
         dashing = true;
 
         curSpeed = dashDirection * (myBody.legStats.dashDistance / myBody.legStats.dashTime);
@@ -51,7 +51,7 @@ public class SpiderLegs : PlayerLegs
 
         yield return new WaitForSeconds(myBody.legStats.dashRecharge);
 
-        myBody.legStats.dashCharges++;
+        dashCount++;
 
         yield return null;
 
