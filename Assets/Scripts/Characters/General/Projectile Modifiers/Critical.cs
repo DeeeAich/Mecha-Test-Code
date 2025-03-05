@@ -25,10 +25,8 @@ public class Critical : ProjectileMod
 
         lastCrit = (int)crit;
 
-        if (crit > 0)
-            return baseDamage * damage * crit;
-        else
-            return baseDamage;
+        return baseDamage * (damage * crit + 1);
+        
     }
 
     public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
@@ -39,8 +37,7 @@ public class Critical : ProjectileMod
             return;
 
         chance += statusInfo.effectChance;
-        damage = damage < statusInfo.effectDamage || damage == 0 ?
-            statusInfo.effectDamage : damage;
+        damage *= (1 + statusInfo.effectDamage);
 
     }
 }

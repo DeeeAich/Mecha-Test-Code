@@ -37,7 +37,7 @@ public class BasicBullet : Projectile
 
             pierceCounter--;
 
-            if (pierceCounter == 0)
+            if (pierceCounter == -1)
             {
 
                 StopCoroutine(AutoReset());
