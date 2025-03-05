@@ -20,6 +20,9 @@ namespace AITree
 
     public abstract class BehaviourTree : Health, IShortCircuitable
     {
+
+
+
         public bool debug = false;
 
 
@@ -48,12 +51,17 @@ namespace AITree
                 memory[key] = o;
             }
         }
+        private void OnDisable()
+        {
 
+            player.GetComponent<Health>().onDeath.RemoveListener(Stop);
+        }
         internal override void Awake()
         {
             base.Awake();
             VFXManager = GetComponentInChildren<CharacterVFXManager>();
             player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Health>().onDeath.AddListener(Stop);
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
             meshesRef = GetComponentInChildren<MeshFilter>().gameObject;
@@ -493,6 +501,8 @@ namespace AITree
     public class BooleanFunction : Condition
     {
         readonly Func<bool> calculate;
+        readonly Func<string, bool> calcString;
+        readonly string text;
         public BooleanFunction()
         {
         }
@@ -500,11 +510,16 @@ namespace AITree
         {
             calculate = calculation;
         }
+        public BooleanFunction(Func<string, bool> calculation, string text) : this()
+        {
+            calcString = calculation;
+            this.text = text;
+        }
 
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            bool result = calculate();
+            bool result = calculate != null && calculate() || calcString != null && calcString(text);
             if(result)
             {
                 state = BehaviourTreeState.SUCCESS;
@@ -513,6 +528,25 @@ namespace AITree
             {
                 state = BehaviourTreeState.FAILURE;
             }
+            return state;
+        }
+    }
+
+    public class AlwaysSucceed : Decorator
+    {
+        public AlwaysSucceed(Node child) : base(child)
+        {
+        }
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = children[0].Tick();
+            if (state == BehaviourTreeState.RUNNING)
+            {
+                state = BehaviourTreeState.RUNNING;
+                return state;
+            }
+            state = BehaviourTreeState.SUCCESS;
             return state;
         }
     }
@@ -1155,9 +1189,10 @@ namespace AITree
                     activeTarget = transformTarget.position;
                     break;
                 default:
-                    activeTarget = new Vector3(0, 0, 0);
+                    activeTarget = brain.transform.position;
                     break;
             }
+
         }
 
         public override void Restart()
@@ -1222,6 +1257,15 @@ namespace AITree
             if ((distanceFrom).magnitude <= approachDist)
             {
                 state = BehaviourTreeState.SUCCESS;
+            }
+
+
+            if (brain.agent.pathStatus != NavMeshPathStatus.PathComplete)
+            {
+                if(brain.agent.velocity.magnitude < 0.01f)
+                {
+                    state = BehaviourTreeState.FAILURE;
+                }
             }
             return state;
         }
@@ -1717,6 +1761,242 @@ namespace AITree
             }
             state = BehaviourTreeState.SUCCESS;
             return state;
+        }
+    }
+    public class CalcOffsetTarget : Action
+    {
+        string offset, target, move;
+        float distance;
+        public CalcOffsetTarget(string offsetLocation, string targetLocation, string moveLocation, float distance)
+        {
+            offset = offsetLocation;
+            target = targetLocation;
+            move = moveLocation;
+            this.distance = distance;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            GameObject playerPos = null;
+            Vector3 targetOffset = Vector3.zero;
+            if (brain.memory.TryGetValue(target, out object found))
+            {
+                if (found is GameObject)
+                {
+                    playerPos = (found as GameObject);
+                }
+                else if (found is Transform)
+                {
+                    playerPos = (found as Transform).gameObject;
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                }
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+            if (brain.memory.TryGetValue(offset, out object foundOffset))
+            {
+                if (foundOffset is Vector3)
+                {
+                    targetOffset = (Vector3)foundOffset;
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                }
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+
+            Vector3 targetPosition = playerPos.transform.position + (targetOffset.normalized * Mathf.Min(distance, (playerPos.transform.position - brain.transform.position).magnitude - 0.01f)) /*+ (playerPos.TryGetComponent<Rigidbody>(out Rigidbody rigid) ? rigid.velocity.normalized : Vector3.zero)*/;
+            targetPosition.y = 0;
+            brain.AddOrOverwrite(move, targetPosition);
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+    public class CallVoidFunctionWithInt : Action
+    {
+        System.Action<int> action;
+        int suppliedInt;
+
+        public CallVoidFunctionWithInt(System.Action<int> func, int value)
+        {
+            action = func;
+            suppliedInt = value;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            action(suppliedInt);
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+    public class CallVoidFunction : Action
+    {
+        System.Action action;
+
+        public CallVoidFunction(System.Action func)
+        {
+            action = func;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            action();
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+    public class CallVoidFunctionWithBool : Action
+    {
+        System.Action<bool> action;
+        bool suppliedInt;
+
+        public CallVoidFunctionWithBool(System.Action<bool> func, bool value)
+        {
+            action = func;
+            suppliedInt = value;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            action(suppliedInt);
+            state = BehaviourTreeState.SUCCESS;
+            return state;
+        }
+    }
+
+    public class ToggleObject : Action
+    {
+        GameObject objToToggle;
+
+        public ToggleObject(GameObject thing) : base()
+        {
+            objToToggle = thing;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = BehaviourTreeState.SUCCESS;
+            objToToggle.SetActive(!objToToggle.activeSelf);
+            return state;
+        }
+    }
+
+    public class ChargeAttack : Sequence
+    {
+        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc, System.Action<bool> resetter) : base()
+        {
+            children = new List<Node> {
+            new ModifyAgentStat("speed", 0.1f), //no speed,
+            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new RepeatUntilSuccess(new BooleanFunction(facingFunc)),
+            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+            new ModifyAgentStat("speed", chargeSpeed), //big speed
+            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+            new ToggleObject(damageZone),
+            new SavePositionOfObject(target, "chargeTarget"),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new ToggleObject(damageZone),
+            new ModifyAgentStat("angularSpeed", 30f), //reset vals
+            new ModifyAgentStat("speed", 3.5f),
+            new ModifyAgentStat("acceleration", 8f), //big speed
+            new CallVoidFunctionWithBool(resetter, true)
+            };
+        }
+        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter) : base()
+        {
+            children = new List<Node> {
+            new ModifyAgentStat("speed", 0.1f), //no speed,
+            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+            new ModifyAgentStat("speed", chargeSpeed), //big speed
+            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+            new ToggleObject(damageZone),
+            new SavePositionOfObject(target, "chargeTarget"),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new ToggleObject(damageZone),
+            new ModifyAgentStat("angularSpeed", 30f), //reset vals
+            new ModifyAgentStat("speed", 3.5f),
+            new ModifyAgentStat("acceleration", 8f), //big speed
+            new CallVoidFunctionWithBool(resetter, true)
+            };
+        }
+        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter, System.Action<bool> overrideToggle) : base()
+        {
+            children = new List<Node> {
+            new CallVoidFunctionWithBool(overrideToggle, true),
+            new ModifyAgentStat("speed", 0.1f), //no speed,
+            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+            new ModifyAgentStat("speed", chargeSpeed), //big speed
+            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+            new ToggleObject(damageZone),
+            new SavePositionOfObject(target, "chargeTarget"),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new ToggleObject(damageZone),
+            new ModifyAgentStat("angularSpeed", 30f), //reset vals
+            new ModifyAgentStat("speed", 3.5f),
+            new ModifyAgentStat("acceleration", 8f), //big speed
+            new CallVoidFunctionWithBool(overrideToggle, false),
+            new CallVoidFunctionWithBool(resetter, true)
+            };
+        }
+    }
+
+    public class SavePositionOfObject : Action
+    {
+        string obj, sto;
+        public SavePositionOfObject(string objectRef, string positionStorage)
+        {
+            obj = objectRef;
+            sto = positionStorage;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            if (brain.memory.TryGetValue(obj, out object o))
+            {
+                if (o is Transform)
+                {
+                    brain.AddOrOverwrite(sto, (o as Transform).position);
+                }
+                else if (o is GameObject)
+                {
+                    brain.AddOrOverwrite(sto, (o as GameObject).transform.position);
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                }
+                state = BehaviourTreeState.SUCCESS;
+                return state;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
         }
     }
 }

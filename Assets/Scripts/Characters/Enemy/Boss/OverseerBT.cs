@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class OverseerBT : BehaviourTree
 {
+    [SerializeField] Animator[] walls;
     [Header("Gizmo Settings")]
     [SerializeField] [Range(1, 100)] internal int arcSteps = 8;
     [SerializeField] internal Color[] attackColours;
@@ -17,11 +18,12 @@ public class OverseerBT : BehaviourTree
     Node secondPhaseBrain;
     Node transitionBrain;
 
-    [SerializeField] float transitionThreshold = 300f;
+    [SerializeField] [Range(0f, 1f)] float transitionThreshold = 0.5f;
 
     [SerializeField] OverseerNailGun[] guns;
 
     [SerializeField] GameObject weaponsPivot;
+    [SerializeField] GameObject weaponsPivotOffset;
 
     [SerializeField] float approachDist = 10f;
     [SerializeField] float biggestRange = 15f;
@@ -44,9 +46,11 @@ public class OverseerBT : BehaviourTree
     [SerializeField] float chargePatienceWeightDropoff = 0.2f;
     float chargePatienceWeight = 0f;
     OverseerAnimationManager animManage;
+    bool isCharging = false;
+    [SerializeField] bool pauseLookOnAttack = false;
 
     [SerializeField] OverseerWeaponsLook look;
-
+    bool trans = false;
     private void OnDrawGizmosSelected()
     {
         frontRadiusRadians = frontRadius * Mathf.Deg2Rad;
@@ -104,20 +108,23 @@ public class OverseerBT : BehaviourTree
     }
 
 
-    private void DrawCurvedRegions(float radStep, float minRange, float maxRange, bool halfAngle = false)
+    private void DrawCurvedRegions(float radStep, float minRange, float maxRange, bool halfAngle = false, bool useWeaponsPivot = true)
     {
+        GameObject usedPivot = useWeaponsPivot ? weaponsPivotOffset : gameObject;
+
+
         float useAngle = halfAngle ? frontRadiusRadians / 2 : frontRadiusRadians;
         Vector3 rightLineBoundary = Vector3.zero;
         rightLineBoundary.z = Mathf.Cos(useAngle);
         rightLineBoundary.x = Mathf.Sin(useAngle);
-        rightLineBoundary = transform.rotation * rightLineBoundary;
+        rightLineBoundary = usedPivot.transform.rotation * rightLineBoundary;
         Vector3 leftLineBoundary = Vector3.zero;
         leftLineBoundary.z = -Mathf.Cos(useAngle);
         leftLineBoundary.x = Mathf.Sin(useAngle);
-        leftLineBoundary = transform.rotation * leftLineBoundary;
+        leftLineBoundary = usedPivot.transform.rotation * leftLineBoundary;
         //Draw default attack (2)
-        Gizmos.DrawLine(gizmoYOffset + transform.position + rightLineBoundary * minRange, gizmoYOffset + transform.position + rightLineBoundary * maxRange);
-        Gizmos.DrawLine(gizmoYOffset + transform.position - leftLineBoundary * minRange, gizmoYOffset + transform.position - leftLineBoundary * maxRange);
+        Gizmos.DrawLine(gizmoYOffset + usedPivot.transform.position + rightLineBoundary * minRange, gizmoYOffset + usedPivot.transform.position + rightLineBoundary * maxRange);
+        Gizmos.DrawLine(gizmoYOffset + usedPivot.transform.position - leftLineBoundary * minRange, gizmoYOffset + usedPivot.transform.position - leftLineBoundary * maxRange);
         leftLineBoundary = -leftLineBoundary;
         for (int a = 0; a < 2 * arcSteps; a++)
         {
@@ -131,16 +138,16 @@ public class OverseerBT : BehaviourTree
             dir0.z = Mathf.Sin(rad0);
             dir1.x = Mathf.Cos(rad1);
             dir1.z = Mathf.Sin(rad1);
-            dir0 = transform.rotation * dir0;
-            dir1 = transform.rotation * dir1;
+            dir0 = usedPivot.transform.rotation * dir0;
+            dir1 = usedPivot.transform.rotation * dir1;
 
             if (a * radStep < Mathf.PI / 2 - useAngle)
                 dir0 = rightLineBoundary;
             if ((a + 1) * radStep > Mathf.PI / 2 + useAngle)
                 dir1 = leftLineBoundary;
 
-            Gizmos.DrawLine(gizmoYOffset + transform.position + dir0 * minRange, gizmoYOffset + transform.position + dir1 * minRange);
-            Gizmos.DrawLine(gizmoYOffset + transform.position + dir0 * maxRange, gizmoYOffset + transform.position + dir1 * maxRange);
+            Gizmos.DrawLine(gizmoYOffset + usedPivot.transform.position + dir0 * minRange, gizmoYOffset + usedPivot.transform.position + dir1 * minRange);
+            Gizmos.DrawLine(gizmoYOffset + usedPivot.transform.position + dir0 * maxRange, gizmoYOffset + usedPivot.transform.position + dir1 * maxRange);
         }
     }
 
@@ -168,14 +175,17 @@ public class OverseerBT : BehaviourTree
     void InitialiseBrains()
     {
         weaponsBrain =
-            new Sequence(
+            new Sequence(new BooleanFunction(CheckAnimBool),
                 new RandomBranching(false,
-                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightTwo),
-                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightOne),
-                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightThree),
-                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, true), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightFour),
+                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightTwo),
+                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightOne),
+                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightThree),
+                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightFour),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.GroundSlamAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), SlamWeight),
-                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeDamageZone, "player", Facing), ChargeWeight)),
+                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride), ChargeWeight),
+                    new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunction(animManage.LaserTrackingAttack), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), FollowLaserWeight)
+
+                    ),
                 new YieldTime(3f)
 
             //replace sequence with actual behaviour
@@ -188,26 +198,80 @@ public class OverseerBT : BehaviourTree
             */
             );
 
-        motionBrain = new Sequence(
+        motionBrain =
+            new Selector(new BooleanFunction(IsCharging), new RepeatUntilSuccess(new Invert(new BooleanFunction(IsCharging))),
+            new Sequence(
             new EnsureInRange("player", biggestRange, approachDist),
             new Selector(new BooleanFunction(ValidateOffset), new Sequence(new CalcOffsetTarget("targetOffset", "player", "moveLocation", offsetDistance), new MoveTo("moveLocation", StoreType.POSITION)), new GetOffset("player", "targetOffset", offsetDistance))
-
+            )
             );
 
+        transitionBrain =
+            new Sequence(
+                new CallVoidFunction(animManage.PhaseTransition), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)),
+                //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointOne", Facing, ResetChargeWeight),
+                //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointTwo", Facing, ResetChargeWeight),
+                new CallVoidFunctionWithBool(SwapBrain, true)
+                );
+
         //head empty open inside
+    }
+
+    void SwapBrain(bool direction)
+    {
+        if (direction)
+        {
+            replacement = new RootNode(this,
+                new MultiRoot(motionBrain, weaponsBrain)
+                );
+            OverseerMoltenSpewing spew = GetComponentInChildren<OverseerMoltenSpewing>();
+            if(spew !=null)
+            {
+                spew.isSpawning = true;
+            }
+
+        }
+    }
+
+    bool IsCharging()
+    {
+        return isCharging;
+    }
+
+    void ToggleLegOverride(bool overrideValue)
+    {
+        isCharging = overrideValue;
     }
 
     internal override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(isCharging && agent.speed < 1f)
+        {
+            agent.SetDestination(player.transform.position);
+        }
+        if (!trans && health < maxHealth * transitionThreshold)
+        {
+            replacement = new RootNode(this, transitionBrain);
+            if (CheckAnimBool())
+            {
+                animManage.PhaseTransition();
+                foreach(Animator anim in walls)
+                {
+                    anim.SetTrigger("Transition");
+                }
+                trans = true;
+            }
+        }
     }
 
     float ChargeWeight()
     {
-        float facingScore = Vector3.Dot(gameObject.transform.forward, (player.transform.position - transform.position).normalized);
-        if (Mathf.Acos(facingScore) < frontRadiusRadians / 2)
-            return 0f;
-        return 0f;
+        float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+        if (Mathf.Acos(facingScore) > frontRadiusRadians / 2)
+            facingScore = 0f;
+        Debug.Log("charge Score: " + facingScore * chargePatienceWeight + " from p=" + chargePatienceWeight + " and f=" + facingScore);
+        return facingScore * chargePatienceWeight;
     }
 
     float LaserWeightOne()
@@ -221,10 +285,11 @@ public class OverseerBT : BehaviourTree
             float rangeDif = inwardMaxRange - inwardMinRange;
             distanceScore = distToTarget / rangeDif;
         }
-        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
-        if (Mathf.Acos(facingScore) < frontRadiusRadians)
+        float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+        if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
+        //Debug.Log("inward Score: " + calc + " from d=" + distanceScore + " and f=" + facingScore);
         return calc;
     }
     float LaserWeightTwo()
@@ -240,8 +305,8 @@ public class OverseerBT : BehaviourTree
             float offset = (wideMaxRange - idealDist) - distToTarget;
             distanceScore = offset / (wideMaxRange - idealDist);
         }
-        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
-        if (Mathf.Acos(facingScore) < frontRadiusRadians)
+        float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+        if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
         return calc;
@@ -257,8 +322,8 @@ public class OverseerBT : BehaviourTree
             float rangeDif = inwardMaxRange - inwardMinRange;
             distanceScore = 1 - (distToTarget / rangeDif);
         }
-        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
-        if (Mathf.Acos(facingScore) < frontRadiusRadians)
+        float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+        if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
         return calc;
@@ -276,8 +341,8 @@ public class OverseerBT : BehaviourTree
             float offset = (circleMaxRange - idealDist) - distToTarget;
             distanceScore = offset / (circleMaxRange - idealDist);
         }
-        float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
-        if (Mathf.Acos(facingScore) < frontRadiusRadians)
+        float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+        if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
         return calc;
@@ -293,9 +358,18 @@ public class OverseerBT : BehaviourTree
             float rangeDif = slamMaxRange - slamMinRange;
             distanceScore = distToTarget / rangeDif;
         }
-        //float facingScore = Vector3.Dot(-weaponsPivot.transform.up, (player.transform.position - transform.position).normalized);
+        //float facingScore = Vector3.Dot(-weaponsPivotOffset.transform.up, (player.transform.position - transform.position).normalized);
         calc = distanceScore;
         return calc;
+    }
+
+    float FollowLaserWeight()
+    {
+        if (health < transitionThreshold * maxHealth)
+        {
+            return 1f;
+        }
+        return 0f;
     }
 
     bool CheckAnimBool()
@@ -353,10 +427,32 @@ public class OverseerBT : BehaviourTree
         return angle <= targetOffsetAngle;
     }
 
-    bool Facing()
+    bool Facing(string target)
     {
-        float facingScore = Vector3.Dot(gameObject.transform.forward, (player.transform.position - transform.position).normalized);
-        return Mathf.Acos(facingScore) > frontRadiusRadians / 2;
+        Vector3 targetVector = Vector3.zero;
+        if (memory.TryGetValue(target, out object o))
+        {
+            if (o is GameObject)
+            {
+                targetVector = (o as GameObject).transform.position;
+            }
+            else if (o is Transform)
+            {
+                targetVector = (o as Transform).position;
+            }
+            else if (o is Vector3)
+            {
+                targetVector = (Vector3)o;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+            return false;
+        float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
+        return Mathf.Acos(facingScore) < frontRadiusRadians / 2;
     }
 
 
@@ -364,7 +460,13 @@ public class OverseerBT : BehaviourTree
     {
         while (true)
         {
-            if (Facing())
+            if(player == null)
+            {
+                yield break;
+            }
+
+            float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
+            if (Mathf.Acos(facingScore) < frontRadiusRadians / 2)
             {
                 chargePatienceWeight = Mathf.Min(chargePatienceWeight + chargePatienceWeightBuildup * Time.deltaTime, 5f);
             }
@@ -372,188 +474,34 @@ public class OverseerBT : BehaviourTree
             {
                 chargePatienceWeight = Mathf.Max(chargePatienceWeight - chargePatienceWeightDropoff * Time.deltaTime, 0f);
             }
-            yield return null; 
+            yield return null;
+        }
+    }
+
+    void ResetChargeWeight(bool ignore = false)
+    {
+        chargePatienceWeight = 0f;
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        OverseerNailGun[] guns = weaponsPivot.GetComponents<OverseerNailGun>();
+        foreach(OverseerNailGun g in guns)
+        {
+            g.pause = true;
+        }
+    }
+
+    public override void Resume()
+    {
+        base.Resume();
+        OverseerNailGun[] guns = weaponsPivot.GetComponents<OverseerNailGun>();
+        foreach (OverseerNailGun g in guns)
+        {
+            g.pause = false;
         }
     }
 }
 
 
-namespace AITree
-{
-    public class CalcOffsetTarget : Action
-    {
-        string offset, target, move;
-        float distance;
-        public CalcOffsetTarget(string offsetLocation, string targetLocation, string moveLocation, float distance)
-        {
-            offset = offsetLocation;
-            target = targetLocation;
-            move = moveLocation;
-            this.distance = distance;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            GameObject playerPos = null;
-            Vector3 targetOffset = Vector3.zero;
-            if (brain.memory.TryGetValue(target, out object found))
-            {
-                if (found is GameObject)
-                {
-                    playerPos = (found as GameObject);
-                }
-                else if (found is Transform)
-                {
-                    playerPos = (found as Transform).gameObject;
-                }
-                else
-                {
-                    state = BehaviourTreeState.FAILURE;
-                    return state;
-                }
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
-                return state;
-            }
-            if (brain.memory.TryGetValue(offset, out object foundOffset))
-            {
-                if (foundOffset is Vector3)
-                {
-                    targetOffset = (Vector3)foundOffset;
-                }
-                else
-                {
-                    state = BehaviourTreeState.FAILURE;
-                    return state;
-                }
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
-                return state;
-            }
-
-            Vector3 targetPosition = playerPos.transform.position + (targetOffset.normalized * Mathf.Min(distance, (playerPos.transform.position - brain.transform.position).magnitude - 0.01f)) /*+ (playerPos.TryGetComponent<Rigidbody>(out Rigidbody rigid) ? rigid.velocity.normalized : Vector3.zero)*/;
-            targetPosition.y = 0;
-            brain.AddOrOverwrite(move, targetPosition);
-            state = BehaviourTreeState.SUCCESS;
-            return state;
-        }
-    }
-    public class CallVoidFunctionWithInt : Action
-    {
-        System.Action<int> action;
-        int suppliedInt;
-
-        public CallVoidFunctionWithInt(System.Action<int> func, int value)
-        {
-            action = func;
-            suppliedInt = value;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            action(suppliedInt);
-            state = BehaviourTreeState.SUCCESS;
-            return state;
-        }
-    }
-    public class CallVoidFunctionWithBool : Action
-    {
-        System.Action<bool> action;
-        bool suppliedInt;
-
-        public CallVoidFunctionWithBool(System.Action<bool> func, bool value)
-        {
-            action = func;
-            suppliedInt = value;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            action(suppliedInt);
-            state = BehaviourTreeState.SUCCESS;
-            return state;
-        }
-    }
-
-    public class ToggleObject : Action
-    {
-        GameObject objToToggle;
-
-        public ToggleObject(GameObject thing) : base()
-        {
-            objToToggle = thing;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            state = BehaviourTreeState.SUCCESS;
-            objToToggle.SetActive(!objToToggle.activeSelf);
-            return state;
-        }
-    }
-
-    public class ChargeAttack : Sequence
-    {
-        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc) : base()
-        {
-            children = new List<Node> {
-            new ModifyAgentStat("speed", 0f), //no speed,
-            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
-            new RepeatUntilSuccess(new BooleanFunction(facingFunc)),
-            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
-            new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ToggleObject(damageZone),
-            new SavePositionOfObject(target, "chargeTarget"),
-            new Approach("chargeTarget", 0f, StoreType.POSITION),
-            new ToggleObject(damageZone),
-            new ModifyAgentStat("angularSpeed", 30f), //reset vals
-            new ModifyAgentStat("speed", 3.5f)
-            };
-        }
-    }
-
-    public class SavePositionOfObject : Action
-    {
-        string obj, sto;
-        public SavePositionOfObject(string objectRef, string positionStorage)
-        {
-            obj = objectRef;
-            sto = positionStorage;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            if (brain.memory.TryGetValue(obj, out object o))
-            {
-                if (o is Transform)
-                {
-                    brain.AddOrOverwrite(sto, (o as Transform).position);
-                }
-                else if (o is GameObject)
-                {
-                    brain.AddOrOverwrite(sto, (o as GameObject).transform.position);
-                }
-                else
-                {
-                    state = BehaviourTreeState.FAILURE;
-                    return state;
-                }
-                state = BehaviourTreeState.SUCCESS;
-                return state;
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
-                return state;
-            }
-        }
-    }
-}

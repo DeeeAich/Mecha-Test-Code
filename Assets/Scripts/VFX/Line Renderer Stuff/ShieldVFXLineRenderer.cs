@@ -56,8 +56,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             AudioManager.instance.PlayOneShotSFX(attachSound, GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.transform.position);
 
             meshRenderers = new List<MeshRenderer>();
-            
-            
+
+
             // get mesh renderer on main object
             if (GetComponentInParent<ShieldVFXLineRendererManager>().shieldedTarget.GetComponent<MeshRenderer>() != null)
             {
@@ -73,7 +73,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
             }
 
             meshRendererShieldIndexes = new int[meshRenderers.Count];
-            
+
             SetAdditionalMaterial();
         }
     }
@@ -83,9 +83,9 @@ public class ShieldVFXLineRenderer : MonoBehaviour
         for (int i = 0; i < meshRenderers.Count; i++)
         {
             if (meshRenderers[i] == null) continue;
-            
+
             bool needsToAddMaterial = true;
-            
+
             for (int j = 0; j < meshRenderers[i].materials.Length; j++)
             {
                 if (meshRenderers[i].materials[j].name == shieldedMaterial.name)
@@ -129,16 +129,26 @@ public class ShieldVFXLineRenderer : MonoBehaviour
 
     public void ClearAdditionalMaterial()
     {
-        if(transform.parent.TryGetComponent<ShieldVFXLineRendererManager>(out ShieldVFXLineRendererManager manager) && manager.shieldedTarget!=null)
-        AudioManager.instance.PlayOneShotSFX(detachSound, manager.shieldedTarget.transform.position);
+        if (transform.parent.TryGetComponent<ShieldVFXLineRendererManager>(out ShieldVFXLineRendererManager manager) && manager.shieldedTarget != null)
+        { 
+            AudioManager.instance.PlayOneShotSFX(detachSound, manager.shieldedTarget.transform.position); 
+            if(manager.shieldedTarget.TryGetComponent<Health>(out Health hp))
+            {
+                foreach(ShieldModifier sm in hp.damageMods)
+                {
+                    if (!sm.removeFlag)
+                        return;
+                }
+            }
+        }
 
 
         for (int i = 0; i < meshRenderers.Count; i++)
         {
             if (meshRenderers[i] == null) continue;
-            
+
             List<Material> materials = meshRenderers[i].materials.ToList();
-            
+
             bool materialRemoved = false;
             for (int j = 0; j < materials.Count; j++)
             {
@@ -149,8 +159,8 @@ public class ShieldVFXLineRenderer : MonoBehaviour
                     j--;
                 }
             }
-            
-            if(materialRemoved) meshRenderers[i].materials = materials.ToArray();
+
+            if (materialRemoved) meshRenderers[i].materials = materials.ToArray();
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,13 +168,13 @@ public class ShieldVFXLineRenderer : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void SetLinePositionsBetweenStartEnd()
     {
-        line02.localPosition = GetCenterPoint(lineEnd.localPosition,lineStart.localPosition);
-        line01.localPosition = GetCenterPoint(line02.localPosition,lineStart.localPosition);
-        line03.localPosition = GetCenterPoint(lineEnd.localPosition,line02.localPosition);
+        line02.localPosition = GetCenterPoint(lineEnd.localPosition, lineStart.localPosition);
+        line01.localPosition = GetCenterPoint(line02.localPosition, lineStart.localPosition);
+        line03.localPosition = GetCenterPoint(lineEnd.localPosition, line02.localPosition);
     }
     public Vector3 GetCenterPoint(Vector3 A, Vector3 B)
     {
-        Vector3 P = (B + A)/2;
+        Vector3 P = (B + A) / 2;
         return P;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,7 +195,7 @@ public class ShieldVFXLineRenderer : MonoBehaviour
         SetLinePointRandomLocalPosition(point02);
         SetLinePointRandomLocalPosition(point03);
         yield return new WaitForSeconds(timeBetweenSet);
- 
+
         StartCoroutine(TimeBetweenSetPos());
     }
 }

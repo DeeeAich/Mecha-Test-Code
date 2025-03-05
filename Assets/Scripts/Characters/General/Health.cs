@@ -249,9 +249,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             manager.ToggleEffectVFX(effect.Burn, true);
         }
         activeBurnEffect = true;
-        foreach(Coroutine c in burns)
+        while(burns.Count > 0)
         {
-            yield return c;
+            yield return null;
         }
         activeBurnEffect = false;
         if (manager != null)

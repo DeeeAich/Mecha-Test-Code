@@ -167,6 +167,8 @@ public class CamRoom3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+            return;
         if (update)
         {
             Start();

@@ -18,6 +18,9 @@ public class OverseerGunTilt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+            return;
+
         height = Vector3.zero;
         height.y = transform.position.y - player.transform.position.y;
         distance = player.transform.position - transform.position;

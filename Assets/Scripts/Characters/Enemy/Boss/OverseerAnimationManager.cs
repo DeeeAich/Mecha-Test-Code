@@ -22,6 +22,9 @@ public class OverseerAnimationManager : MonoBehaviour
     public GameObject laserTargetPos;
     public Animator laser1Anim;
     public Animator laser2Anim;
+    public FollowGameObjectDelayed laser1TargetTracker;
+    public FollowGameObjectDelayed laser2TargetTracker;
+
 
     
     public bool testfire;
@@ -44,6 +47,9 @@ public class OverseerAnimationManager : MonoBehaviour
     */
     public void LaserPatternAttack(int attackType)
     {
+        laser1TargetTracker.pauseAnimation = true;
+        laser2TargetTracker.pauseAnimation = true;
+
         StartCoroutine(Action(5.5f));
         laser1Anim.SetTrigger("Fire");
         laser2Anim.SetTrigger("Fire");
@@ -92,6 +98,8 @@ public class OverseerAnimationManager : MonoBehaviour
         animationIsPlaying = true;
         yield return new WaitForSeconds(actionTime);
         animationIsPlaying = false;
+        laser1TargetTracker.pauseAnimation = false;
+        laser2TargetTracker.pauseAnimation = false;
     }
 
 }

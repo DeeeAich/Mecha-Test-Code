@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2198544353261910240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6966393914791417951}
+  - component: {fileID: 6516014361894294956}
+  - component: {fileID: 3663114705400385765}
+  m_Layer: 0
+  m_Name: ChargeDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6966393914791417951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198544353261910240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6199570638191850685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6516014361894294956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198544353261910240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733e5d2398a325a45a259a3642798b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryDamage: 25
+  continuous: 1
+  dotDamage: 25
+  dotTime: 1
+--- !u!65 &3663114705400385765
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198544353261910240}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 8, z: 1}
+  m_Center: {x: 0, y: 4, z: 6}
 --- !u!1 &6474239719825910063
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,11 +111,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6199570638191850685}
+  - component: {fileID: 2273035456643779407}
   - component: {fileID: 1259000513520919617}
   - component: {fileID: 5815882550307500303}
   - component: {fileID: 8107298558014915492}
   - component: {fileID: 4124273715742297104}
-  - component: {fileID: 2273035456643779407}
+  - component: {fileID: 4791769845658784720}
   m_Layer: 0
   m_Name: Overseer
   m_TagString: Untagged
@@ -67,8 +138,86 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4998756055709684745}
+  - {fileID: 6966393914791417951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2273035456643779407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650565202339733482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2967b120b5624dc4a89cc39054d572f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 600
+  maxHealth: 10000
+  isAlive: 1
+  canTakeDamage: 1
+  canDie: 1
+  entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  meshesRef: {fileID: 0}
+  debug: 0
+  verboseDebug: 0
+  mostRecentTick: 
+  tickPath: 
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  paused: 0
+  walls: []
+  arcSteps: 6
+  attackColours:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  gizmoYOffset: {x: 0, y: 0, z: 0}
+  transitionThreshold: 0.5
+  guns:
+  - {fileID: 1216254483072760945}
+  - {fileID: 1307579932631440478}
+  weaponsPivot: {fileID: 3706613987007461513}
+  weaponsPivotOffset: {fileID: 2518350424523212683}
+  approachDist: 25
+  biggestRange: 35
+  chargeSpeed: 10
+  chargeDamageZone: {fileID: 2198544353261910240}
+  targetOffsetAngle: 10
+  offsetDistance: 20
+  inwardMaxRange: 35
+  inwardMinRange: 30
+  wideMaxRange: 45
+  wideMinRange: 15
+  zigzagMaxRange: 20
+  zigzagMinRange: 18
+  circleMaxRange: 24
+  circleMinRange: 22
+  slamMaxRange: 15
+  slamMinRange: 0
+  chargeMaxRange: 39.66
+  chargeMinRange: 26.15
+  frontRadius: 90
+  chargePatienceWeightBuildup: 0.2
+  chargePatienceWeightDropoff: 0.2
+  pauseLookOnAttack: 0
+  look: {fileID: 0}
 --- !u!195 &1259000513520919617
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -88,7 +237,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &5815882550307500303
@@ -156,80 +305,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 4.5, z: 0}
---- !u!114 &2273035456643779407
-MonoBehaviour:
+--- !u!135 &4791769845658784720
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6650565202339733482}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2967b120b5624dc4a89cc39054d572f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 600
-  maxHealth: 10000
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 1
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 1
-  destroyTimer: 3
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 0}
-  debug: 0
-  verboseDebug: 0
-  mostRecentTick: 
-  tickPath: 
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  paused: 0
-  arcSteps: 6
-  attackColours:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  gizmoYOffset: {x: 0, y: 0, z: 0}
-  transitionThreshold: 300
-  guns:
-  - {fileID: 1216254483072760945}
-  - {fileID: 1307579932631440478}
-  weaponsPivot: {fileID: 3706613987007461513}
-  approachDist: 25
-  biggestRange: 35
-  chargeSpeed: 10
-  chargeDamageZone: {fileID: 0}
-  targetOffsetAngle: 10
-  offsetDistance: 20
-  inwardMaxRange: 35
-  inwardMinRange: 30
-  wideMaxRange: 45
-  wideMinRange: 15
-  zigzagMaxRange: 20
-  zigzagMinRange: 18
-  circleMaxRange: 24
-  circleMinRange: 22
-  slamMaxRange: 15
-  slamMinRange: 0
-  chargeMaxRange: 39.66
-  chargeMinRange: 26.15
-  frontRadius: 90
-  chargePatienceWeightBuildup: 0.2
-  chargePatienceWeightDropoff: 0.2
-  look: {fileID: 0}
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5375722804594049362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,6 +389,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8415257191825918189, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: laser1TargetTracker
+      value: 
+      objectReference: {fileID: 5673778784630912764}
+    - target: {fileID: 8415257191825918189, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: laser2TargetTracker
+      value: 
+      objectReference: {fileID: 3479731056955335918}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -301,6 +407,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4304123311262241812}
+    - targetCorrespondingSourceObject: {fileID: 8762197819556973990, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5673778784630912764}
+    - targetCorrespondingSourceObject: {fileID: 6796598731540406424, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3479731056955335918}
   m_SourcePrefab: {fileID: 100100000, guid: 8e669a9946637c54da70f145562ccad7, type: 3}
 --- !u!114 &1216254483072760945 stripped
 MonoBehaviour:
@@ -326,6 +440,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16f3def80a98d3409baacd1a41937e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1497510518399541706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6796598731540406424, guid: 8e669a9946637c54da70f145562ccad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5375722804594049362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3479731056955335918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497510518399541706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
+  step: 0.01
+  usePlayer: 1
+  pauseAnimation: 0
+--- !u!1 &2518350424523212683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7523436036993746649, guid: 8e669a9946637c54da70f145562ccad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5375722804594049362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3676048999173770484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8762197819556973990, guid: 8e669a9946637c54da70f145562ccad7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5375722804594049362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5673778784630912764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676048999173770484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 1
+  step: 0.01
+  usePlayer: 1
+  pauseAnimation: 0
 --- !u!1 &3706613987007461513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8785096398092204507, guid: 8e669a9946637c54da70f145562ccad7,
