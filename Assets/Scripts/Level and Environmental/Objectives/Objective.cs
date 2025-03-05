@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum ObjectiveType
+{
+    nullObjective,
+    exterminate,
+    survival,
+    capturePoint
+}
 public enum WaveSpawnerType
 {
     Standard, Rare, Miniboss, Boss, Exterminate, Survival, Capture
@@ -62,24 +69,36 @@ public class Objective : MonoBehaviour
                 }
             }
 
-            WaveSpawner newWaveSpawner = Instantiate(possibleWaveSpawners[LevelGenerator.instance.seededRandom.Next(0, possibleWaveSpawners.Count)], transform.parent).GetComponent<WaveSpawner>();
-            room.waveSpawners = new WaveSpawner[] {newWaveSpawner};
-            Debug.Log( "Spawned Wave: " + newWaveSpawner.name);
+            if (possibleWaveSpawners.Count > 0)
+            {
+                WaveSpawner newWaveSpawner = Instantiate(possibleWaveSpawners[LevelGenerator.instance.seededRandom.Next(0, possibleWaveSpawners.Count)], transform.parent).GetComponent<WaveSpawner>();
+                room.waveSpawners = new WaveSpawner[] {newWaveSpawner};
+                Debug.Log( "Spawned Wave: " + newWaveSpawner.name);
+            }
         }
 
-        for (int i = 0; i < room.waveSpawners.Length; i++)
+        if (room.waveSpawners.Length > 0)
         {
-            room.waveSpawners[i].StartSpawning();
+            for (int i = 0; i < room.waveSpawners.Length; i++)
+            {
+                room.waveSpawners[i].StartSpawning();
+            }
         }
+
     }
 
     public void TriggerComplete()
     {
         print("Completed " + name);
-        for (int i = 0; i < room.waveSpawners.Length; i++)
+        if (room.waveSpawners.Length > 0)
         {
-            room.waveSpawners[i].StopSpawning();
+            for (int i = 0; i < room.waveSpawners.Length; i++)
+            {
+                room.waveSpawners[i].StopSpawning();
+            }
         }
+
+
         onComplete.Invoke();
         isComplete = true;
     }

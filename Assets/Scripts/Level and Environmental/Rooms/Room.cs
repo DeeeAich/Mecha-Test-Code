@@ -7,12 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public enum ObjectiveType
-{
-    exterminate,
-    survival,
-    capturePoint
-}
+
 
 public enum LootType
 {
@@ -70,7 +65,7 @@ public class Room : MonoBehaviour
         if (exitDoors.Length == 0)
         {
             List<Door> allDoors = GetComponentsInChildren<Door>(true).ToList();
-            allDoors.Remove(entryDoor);
+            if(entryDoor != null) allDoors.Remove(entryDoor);
             exitDoors = allDoors.ToArray();
         }
 
@@ -136,9 +131,12 @@ public class Room : MonoBehaviour
         // hi jacob :3
         AudioManager.instance.ChangeMusicState(musicState.combat);
 
-        entryDoor.CloseDoor();
-        entryDoor.LockDoor();
-        
+        if (entryDoor != null)
+        {
+            entryDoor.CloseDoor();
+            entryDoor.LockDoor();
+        }
+
         for (int i = 0; i < exitDoors.Length; i++)
         {
             exitDoors[i].CloseDoor();

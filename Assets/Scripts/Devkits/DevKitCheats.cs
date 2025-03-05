@@ -27,7 +27,7 @@ public class DevKitCheats : MonoBehaviour
         
         Canvas childedCanvas = GetComponentInChildren<Canvas>(true);
         if(childedCanvas!=null) devkitCheatMenu = childedCanvas.gameObject;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
