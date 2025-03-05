@@ -9,7 +9,7 @@ public class SpiderLegs : PlayerLegs
     public override IEnumerator Dash(Vector2 stickAmount)
     {
 
-        if (dashing || myBody.legStats.dashCharges == 0)
+        if (dashing || dashCount == 0)
             yield break;
 
         dashDirection = new Vector2();

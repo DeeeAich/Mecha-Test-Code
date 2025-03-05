@@ -62,7 +62,7 @@ public class ProjectileSpread : ProjectileGun
         }
         myAnim.SetTrigger("Fire");
 
-        yield return new WaitForSeconds(fireRate * fireRate);
+        yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
 
         waitOnShot = false;
 
