@@ -968,7 +968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &403086683
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,7 +1025,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 16.14, y: 49.87, z: 16.21}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 21.04, z: 0}
 --- !u!1 &407302945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2282,7 @@ PrefabInstance:
     - target: {fileID: 4158992090911601242, guid: 4e534d45e345aae47961143a74b58126,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -48.45
+      value: -49.63
       objectReference: {fileID: 0}
     - target: {fileID: 4650702899387978002, guid: 4e534d45e345aae47961143a74b58126,
         type: 3}
@@ -2463,6 +2463,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106180350931292346, guid: 4e534d45e345aae47961143a74b58126,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9180010142404275372, guid: 4e534d45e345aae47961143a74b58126,
         type: 3}
@@ -2712,6 +2717,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1616385634}
+    - targetCorrespondingSourceObject: {fileID: 8512259691079512117, guid: 4e534d45e345aae47961143a74b58126,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1616385638}
     - targetCorrespondingSourceObject: {fileID: 2784795597035541525, guid: 4e534d45e345aae47961143a74b58126,
         type: 3}
       insertIndex: -1
@@ -3445,10 +3454,10 @@ MonoBehaviour:
           m_StringArgument: open
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 403086684}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutorialDashTrain, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3496,10 +3505,10 @@ MonoBehaviour:
           m_StringArgument: close
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 403086684}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutorialDashTrain, Assembly-CSharp
+        m_MethodName: Return
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4602,7 +4611,7 @@ MonoBehaviour:
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
@@ -4658,7 +4667,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1616385634}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: open
+          m_BoolArgument: 0
+        m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1978972444}
@@ -4698,6 +4719,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3460f83c654ef8a48856aa560d81c96b, type: 2}
   - {fileID: 11400000, guid: a45c5e74f83c1244c90844eec50c4629, type: 2}
   - {fileID: 11400000, guid: 2e2c729830299e448b83bfbe49d7e3f3, type: 2}
+  dialogueSkipsAutomaticallyWhenDone: 0
   hasNpc: 0
   npcAnimator: {fileID: 0}
   inRange: 0
@@ -4925,6 +4947,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1616385638
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616385629}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 13.31681, y: 30.063541, z: 14.337283}
+  m_Center: {x: -0.000030486832, y: 1.031771, z: 0.16864201}
 --- !u!1001 &1627328986
 PrefabInstance:
   m_ObjectHideFlags: 0

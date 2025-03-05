@@ -24,7 +24,8 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialogueBox;
     public List<DialogueInteraction> Interaction;
 
-    [Header("Non-required npc references")] 
+    [Header("Non-required npc references")] [SerializeField]
+    private bool dialogueSkipsAutomaticallyWhenDone = true;
     [SerializeField] private bool hasNpc;
     public Animator npcAnimator;
     public bool inRange;
@@ -122,7 +123,7 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
 
         StartCoroutine(DisplayText(finalText));
-        StartCoroutine(WaitForTextToEnd(finalText.Length * textDelay + 1f, automaticSkipDelay));
+        if(dialogueSkipsAutomaticallyWhenDone) StartCoroutine(WaitForTextToEnd(finalText.Length * textDelay + 1f, automaticSkipDelay));
 
     }
 
