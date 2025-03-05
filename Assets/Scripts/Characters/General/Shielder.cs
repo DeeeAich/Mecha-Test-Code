@@ -63,6 +63,7 @@ public class Shielder : MonoBehaviour
 
     public void Stop()
     {
+        if (VFX != null)
         VFX.shieldToggle = false;
         if (targetHealth != null)
         {
