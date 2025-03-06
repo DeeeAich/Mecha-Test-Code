@@ -55,7 +55,8 @@ public class LevelGenerator : MonoBehaviour
         SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
         currentRoom.GetComponent<Room>().roomLootType = GenerateNextLootType(1)[0];
         roomIndex = 0;
-        PlayerManager.instance.SetStats();
+        if(PlayerManager.instance != null)
+            PlayerManager.instance.SetStats();
     }
 
     public GameObject[] NextRoomSelection(int count)

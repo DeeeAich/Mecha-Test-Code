@@ -530,6 +530,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 193766837}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &215073969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215073971}
+  - component: {fileID: 215073970}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &215073970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215073969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e02a890969c407459808568cd1a548d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyMods: []
+  leftWeapon: {fileID: 0}
+  leftWeaponChips: []
+  rightWeapon: {fileID: 0}
+  rightWeaponChips: []
+--- !u!4 &215073971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215073969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960.20105, y: 202.05502, z: -1.2958984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &218211554
 GameObject:
   m_ObjectHideFlags: 0
@@ -6101,3 +6150,4 @@ SceneRoots:
   - {fileID: 496293308}
   - {fileID: 904046392}
   - {fileID: 1198037781}
+  - {fileID: 215073971}
