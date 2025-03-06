@@ -247,12 +247,14 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         if (left)
         {
             weaponHolder.leftWInfo = setWeapon;
-            PlayerManager.instance.leftWeapon = setWeapon;
+            if (PlayerManager.instance != null)
+                PlayerManager.instance.leftWeapon = setWeapon;
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
         }
         else
         {
-            PlayerManager.instance.rightWeapon = setWeapon;
+            if (PlayerManager.instance != null)
+                PlayerManager.instance.rightWeapon = setWeapon;
             weaponHolder.rightWInfo = setWeapon;
             weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
         }
