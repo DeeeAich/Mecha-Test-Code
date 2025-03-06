@@ -27,7 +27,6 @@ public class DevKitCheats : MonoBehaviour
         
         Canvas childedCanvas = GetComponentInChildren<Canvas>(true);
         if(childedCanvas!=null) devkitCheatMenu = childedCanvas.gameObject;
-        // DontDestroyOnLoad(gameObject);
 
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
@@ -107,15 +106,12 @@ public class DevKitCheats : MonoBehaviour
 
     public void KillAllPlayers()
     {
-        Health[] healths = FindObjectsOfType<Health>();
-        for (int i = 0; i < healths.Length; i++)
-        {
-            if (healths[i].entityType == EntityType.PLAYER)
-            {
-                healths[i].health = 0;
-                healths[i].TriggerDeath();
-            }
-        }
+        PlayerBody.PlayBody().GetComponent<Health>().health = 0;
+    }
+
+    public void ToggleGodmode()
+    {
+        PlayerBody.PlayBody().GetComponent<Health>().canDie = false;
     }
 
     public void CompleteRoom()

@@ -26,6 +26,7 @@ public class Pickup : MonoBehaviour
     [Header("Ui Stuff")]
     public SpriteRenderer itemDisplayImage;
     public GameObject uiPopup;
+    public Animator uiPopupAnimator;
     
     [SerializeField] private GameObject singleItemPopup;
     [SerializeField] private GameObject twoOptionItemPopup;
@@ -33,7 +34,9 @@ public class Pickup : MonoBehaviour
     [SerializeField] private GameObject weaponChipPopup;
     [SerializeField] private GameObject ordinancePopup;
     [SerializeField] private GameObject mechChipPopup;
-    
+
+    [SerializeField] private Button leftSelectButton;
+    [SerializeField] private Button rightSelectButton;
     [SerializeField] private Button initiallySelectedButton;
     [SerializeField] private Button singleItemInitiallySelectedButton;
 
@@ -78,6 +81,7 @@ public class Pickup : MonoBehaviour
         {
             newLootDescriptions[i].text = PlayerPickup.description;
         }
+        
         
     }
 
