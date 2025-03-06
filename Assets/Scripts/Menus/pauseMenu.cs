@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class pauseMenu : MonoBehaviour
 {
+    public bool paused;
     public bool canPause = true;
+    
     public float gameSpeed = 1f;
     
     [SerializeField] private GameObject[] objectsToActivateWhenPaused;
@@ -34,7 +36,7 @@ public class pauseMenu : MonoBehaviour
                 devkit.devkitCheatMenu.SetActive(false);
             }
 
-            if (Time.timeScale == 1 || Time.timeScale == gameSpeed)
+            if (!paused)
             {
                 PlayerBody.PlayBody().StopParts(false, false);
 
@@ -44,9 +46,10 @@ public class pauseMenu : MonoBehaviour
                 }
                 
                 onPause.Invoke();
+                paused = true;
                 Time.timeScale = 0;
             }
-            else if (Time.timeScale == 0)
+            else if (paused)
             {
                 PlayerBody.PlayBody().StopParts(true, true);
       
@@ -56,6 +59,7 @@ public class pauseMenu : MonoBehaviour
                 }
                 
                 onUnpause.Invoke();
+                paused = false;
                 Time.timeScale = gameSpeed;
             }
         }

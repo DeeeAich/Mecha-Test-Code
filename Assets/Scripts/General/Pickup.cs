@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum pickupType
@@ -82,7 +84,30 @@ public class Pickup : MonoBehaviour
             newLootDescriptions[i].text = PlayerPickup.description;
         }
         
-        
+    }
+
+    private void Update()
+    {
+        if (uiPopup.activeSelf)
+        {
+            GameObject curSelected = EventSystem.current.currentSelectedGameObject;
+
+            if (curSelected == leftSelectButton.gameObject)
+            {
+                print("animating pickup");
+                uiPopupAnimator.SetInteger("Selected", 1);
+            }
+            
+            if (curSelected == initiallySelectedButton.gameObject)
+            {
+                uiPopupAnimator.SetInteger("Selected", 2);
+            }
+
+            if (curSelected == rightSelectButton.gameObject)
+            {
+                uiPopupAnimator.SetInteger("Selected", 3);
+            }
+        }
     }
 
     public void TryPickup()

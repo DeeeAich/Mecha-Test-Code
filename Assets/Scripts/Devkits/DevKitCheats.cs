@@ -22,6 +22,8 @@ public class DevKitCheats : MonoBehaviour
     public GameObject devkitCheatMenu;
     private int[] loadout;
 
+    private pauseMenu pauseMenu;
+
     private void Start()
     {
         
@@ -69,6 +71,8 @@ public class DevKitCheats : MonoBehaviour
         }
 
         loadout = new int[3];
+
+        pauseMenu = FindObjectOfType<pauseMenu>();
     }
     
 
@@ -76,7 +80,7 @@ public class DevKitCheats : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Slash))
         {
-            if (Time.timeScale == 1)
+            if (Time.timeScale == 1 && !pauseMenu.paused)
             {
                 Time.timeScale = 0;
                 PlayerBody.PlayBody().StopParts(false,false);
@@ -84,6 +88,11 @@ public class DevKitCheats : MonoBehaviour
             }
             else
             {
+                if (pauseMenu.paused)
+                {
+                    pauseMenu.PauseGame();
+                    return;
+                }
                 Time.timeScale = 1;
                 PlayerBody.PlayBody().StopParts(true,true);
                 devkitCheatMenu.SetActive(false);

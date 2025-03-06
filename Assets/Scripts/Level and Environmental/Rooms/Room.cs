@@ -198,14 +198,18 @@ public class Room : MonoBehaviour
                 exitDoors[i].UnlockDoor();
             }
 
-            Destroy(primaryObjective.gameObject);
+            if(primaryObjective != null) Destroy(primaryObjective.gameObject);
             Debug.Log("Finished Room: " + LevelGenerator.instance.roomIndex);
 
-            for (int i = 0; i < waveSpawners.Length; i++)
+            if (waveSpawners.Length > 0)
             {
-                waveSpawners[i].isComplete = true;
-                Destroy(waveSpawners[i].gameObject);
+                for (int i = 0; i < waveSpawners.Length; i++)
+                {
+                    waveSpawners[i].isComplete = true;
+                    Destroy(waveSpawners[i].gameObject);
+                }
             }
+ 
 
             foreach (var pickup in FindObjectsOfType<Pickup>())
             {
