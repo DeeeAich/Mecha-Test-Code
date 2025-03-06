@@ -117,6 +117,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         foreach (BodyChip chip in myMods)
             if (chip.bodyType == BodyChip.BodyType.OnDamage)
                 chip.TriggerAbility();
+
+        PlayerUI.instance.OnHealthChange(false);
     }
 
     public void TriggerOnHeal(int amount)
@@ -125,6 +127,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         foreach (BodyChip chip in myMods)
             if (chip.bodyType == BodyChip.BodyType.OnHeal)
                 chip.TriggerAbility();
+        PlayerUI.instance.OnHealthChange(true);
+
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -231,7 +235,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         if (left && weaponHolder.leftWeapon != null)
             Destroy(weaponHolder.leftWeapon.gameObject);
-        else if (weaponHolder.leftWeapon != null)
+        else if (weaponHolder.rightWeapon != null)
             Destroy(weaponHolder.rightWeapon.gameObject);
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon.weaponPrefab, weaponPoints[left ? 0 : 1]);
@@ -243,10 +247,12 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         if (left)
         {
             weaponHolder.leftWInfo = setWeapon;
+            PlayerManager.instance.leftWeapon = setWeapon;
             weaponHolder.leftWeapon = genWeapon.GetComponent<Weapon>();
         }
         else
         {
+            PlayerManager.instance.rightWeapon = setWeapon;
             weaponHolder.rightWInfo = setWeapon;
             weaponHolder.rightWeapon = genWeapon.GetComponent<Weapon>();
         }

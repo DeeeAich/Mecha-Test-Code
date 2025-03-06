@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using UnityEditor;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] float deathTime;
 
     public static PlayerUI instance;
+
+    [SerializeField] Animator healthChanges;
 
     private void Awake()
     {
@@ -205,9 +208,16 @@ public class PlayerUI : MonoBehaviour
 
         yield return new WaitForSeconds(deathTime);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1);
 
         yield return null;
+
+    }
+
+    public void OnHealthChange(bool healing)
+    {
+
+        healthChanges.SetTrigger(healing ? "Heal" : "Hit");
 
     }
 }

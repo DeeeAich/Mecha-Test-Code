@@ -106,11 +106,13 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
         {
             leftMods.Add(newChip);
             weapon = leftWeapon;
+            PlayerManager.instance.leftWeaponChips.Add(newChip);
         }
         else
         {
             rightMods.Add(newChip);
             weapon = rightWeapon;
+            PlayerManager.instance.rightWeaponChips.Add(newChip);
         }
 
         switch (newChip.supType)
