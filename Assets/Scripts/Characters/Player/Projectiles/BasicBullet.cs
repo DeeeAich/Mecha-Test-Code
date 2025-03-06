@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD;
+using FMODUnity;
+using Unity.VisualScripting;
 
 public class BasicBullet : Projectile
 {
@@ -9,6 +12,8 @@ public class BasicBullet : Projectile
     [SerializeField] float resetTime = 2f;
     bool animating = false;
     public ProjectileGun myGun;
+    public EventReference hitMarkerSound;
+    public bool hasHitMarkerSound =false;
 
     private Critical critRoller;
     private int pierceCounter = 0;
@@ -28,6 +33,11 @@ public class BasicBullet : Projectile
 
         if (other.TryGetComponent(out Health health))
         {
+            if (hasHitMarkerSound)
+            {
+                AudioManager.instance.PlayOneShotSFX(hitMarkerSound, transform.position);
+            }
+
             float modifiedDamage = critRoller.AdditiveDamage(damage);
 
             health.TakeDamage(modifiedDamage,out bool discard, modifiedDamage != damage);

@@ -42,6 +42,11 @@ public class DialogueObject : ScriptableObject
     public EventReference exitAudioEvent;
     public CharacterEmotion exitCharacterEmotion;
 
+    [Header("Close Dialogue Audio")]
+    public bool triggerCloseAudio;
+    public EventReference closeAudioEvent;
+    public CharacterEmotion closeCharacterEmotion;
+
 }
 
 public enum TextSpeed
