@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public enum pickupType
@@ -24,8 +25,9 @@ public class Pickup : MonoBehaviour
     public int pickupRarity = 0;
     public pickupType pickupType = pickupType.ChassisChip;
     public PlayerPickup PlayerPickup;
-    
-    [Header("Ui Stuff")]
+
+    [Header("Ui Stuff")] 
+    public bool mouseControls = true;
     public SpriteRenderer itemDisplayImage;
     public GameObject uiPopup;
     public Animator uiPopupAnimator;
@@ -92,22 +94,57 @@ public class Pickup : MonoBehaviour
         {
             GameObject curSelected = EventSystem.current.currentSelectedGameObject;
 
-            if (curSelected == leftSelectButton.gameObject)
+            if (mouseControls)
             {
-                print("animating pickup");
-                uiPopupAnimator.SetInteger("Selected", 1);
+                if (CheckMouseInBounds(leftSelectButton.GetComponent<RectTransform>()))
+                {
+                    print("left select");
+                    uiPopupAnimator.SetInteger("Selected", 1);
+                }
+                else if (CheckMouseInBounds(initiallySelectedButton.GetComponent<RectTransform>()))
+                {
+                    print("entry select");
+                    uiPopupAnimator.SetInteger("Selected", 2);
+                }
+                else if (CheckMouseInBounds(rightSelectButton.GetComponent<RectTransform>()))
+                {
+                    print("Right select");
+                    uiPopupAnimator.SetInteger("Selected", 3);
+                }
+
             }
-            
-            if (curSelected == initiallySelectedButton.gameObject)
+            else
             {
-                uiPopupAnimator.SetInteger("Selected", 2);
+                if (curSelected == leftSelectButton.gameObject)
+                {
+                    print("left select");
+                    uiPopupAnimator.SetInteger("Selected", 1);
+                }
+                else if (curSelected == initiallySelectedButton.gameObject)
+                {
+                    print("entry select");
+                    uiPopupAnimator.SetInteger("Selected", 2);
+                }
+                else if (curSelected == rightSelectButton.gameObject)
+                {
+                    print("Right select");
+                    uiPopupAnimator.SetInteger("Selected", 3);
+                }
             }
 
-            if (curSelected == rightSelectButton.gameObject)
-            {
-                uiPopupAnimator.SetInteger("Selected", 3);
-            }
         }
+    }
+
+    private bool CheckMouseInBounds(RectTransform bounds)
+    {
+        bool inBounds = true;
+
+        if (Mouse.current.position.x.value < bounds.position.x - bounds.rect.width / 2) inBounds = false;
+        if (Mouse.current.position.x.value > bounds.position.x + bounds.rect.width / 2) inBounds = false;
+        if (Mouse.current.position.y.value < bounds.position.y - bounds.rect.height / 2) inBounds = false;
+        if (Mouse.current.position.y.value > bounds.position.y + bounds.rect.height / 2) inBounds = false;
+
+        return inBounds;
     }
 
     public void TryPickup()
