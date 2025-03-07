@@ -33,7 +33,7 @@ public class OverseerAnimationManager : MonoBehaviour
     {
         if (testfire)
         {
-            PhaseTransition();
+            PlayDeathAnimation();
             testfire = false;
         }
     }

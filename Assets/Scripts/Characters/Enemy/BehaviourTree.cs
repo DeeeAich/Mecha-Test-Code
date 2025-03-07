@@ -53,7 +53,7 @@ namespace AITree
         }
         private void OnDisable()
         {
-
+            if(player !=null)
             player.GetComponent<Health>().onDeath.RemoveListener(Stop);
         }
         internal override void Awake()
@@ -191,7 +191,7 @@ namespace AITree
 
         public virtual void ShortCircuit(float chance, float time)
         {
-            if (chance >= UnityEngine.Random.Range(0, 100))
+            if (chance > UnityEngine.Random.Range(0f, 100f))
             {
                 if (VFXManager != null)
                 {

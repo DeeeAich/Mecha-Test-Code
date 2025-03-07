@@ -138,6 +138,8 @@ public class OverseerBT : BehaviourTree
             dir0.z = Mathf.Sin(rad0);
             dir1.x = Mathf.Cos(rad1);
             dir1.z = Mathf.Sin(rad1);
+            //dir0.y = -usedPivot.transform.position.y;
+            //dir1.y = dir0.y;
             dir0 = usedPivot.transform.rotation * dir0;
             dir1 = usedPivot.transform.rotation * dir1;
 
@@ -491,6 +493,7 @@ public class OverseerBT : BehaviourTree
         {
             g.pause = true;
         }
+        Debug.Log(StackTraceUtility.ExtractStackTrace());
     }
 
     public override void Resume()
@@ -501,6 +504,37 @@ public class OverseerBT : BehaviourTree
         {
             g.pause = false;
         }
+    }
+
+    internal override void TriggerDeath()
+    {
+        animManage.PlayDeathAnimation();
+        TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
+        if (tde != null)
+        {
+            tde.TriggerExplosion();
+        }
+        Collider[] c = GetComponents<Collider>();
+        if (c.Length > 0)
+        {
+            foreach (Collider x in c)
+            {
+                x.enabled = false;
+            }
+        }
+        gameObject.tag = "Untagged";
+        EnemyGun[] guns = GetComponentsInChildren<EnemyGun>();
+        foreach (EnemyGun g in guns)
+        {
+            g.BeGone();
+        }
+        foreach (Transform child in transform)
+        {
+            if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
+                child.parent = transform.parent.parent;
+        }
+        Die();
+        if (destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
 }
 

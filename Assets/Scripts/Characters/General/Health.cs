@@ -20,8 +20,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     public bool editorTakeDamage = false;
     public float editorDamageAmount = 100f;
 
-    [SerializeField] private bool destroyOnDeath = true;
-    [SerializeField] private float destroyTimer = 3f;
+    [SerializeField] internal bool destroyOnDeath = true;
+    [SerializeField] internal float destroyTimer = 3f;
 
     public UnityEvent onTakeDamage;
     public UnityEvent onDeath;
