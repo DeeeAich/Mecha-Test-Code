@@ -81,6 +81,7 @@ public class InputDeviceManager : MonoBehaviour
     {
         if (instance == null)
         {
+            transform.parent = null;
             instance = this;
             DontDestroyOnLoad(this);
         }

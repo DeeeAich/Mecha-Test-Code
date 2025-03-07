@@ -54,6 +54,9 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Image[] currentRightWeaponChipImages;
 
     public Animator animator;
+    private bool open;
+
+    private float closeUiTimer;
 
     private void Start()
     {
@@ -99,15 +102,18 @@ public class Pickup : MonoBehaviour
                 if (CheckMouseInBounds(leftSelectButton.GetComponent<RectTransform>()))
                 {
                     print("left select");
+                    leftSelectButton.Select();
                     uiPopupAnimator.SetInteger("Selected", 1);
                 }
                 else if (CheckMouseInBounds(initiallySelectedButton.GetComponent<RectTransform>()))
                 {
                     print("entry select");
+                    initiallySelectedButton.Select();
                     uiPopupAnimator.SetInteger("Selected", 2);
                 }
                 else if (CheckMouseInBounds(rightSelectButton.GetComponent<RectTransform>()))
                 {
+                    rightSelectButton.Select();
                     print("Right select");
                     uiPopupAnimator.SetInteger("Selected", 3);
                 }
@@ -135,6 +141,19 @@ public class Pickup : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (closeUiTimer > 0)
+        {
+            closeUiTimer -= Time.fixedDeltaTime;
+
+            if (closeUiTimer <= 0)
+            {
+                uiPopup.SetActive(false);
+            }
+        }
+    }
+
     private bool CheckMouseInBounds(RectTransform bounds)
     {
         bool inBounds = true;
@@ -151,64 +170,72 @@ public class Pickup : MonoBehaviour
     {
         singleItemPopup.SetActive(false);
         twoOptionItemPopup.SetActive(false);
-        
-        switch (pickupType)
+
+        if (!open)
         {
-            case pickupType.Weapon:
-                PlayerBody.PlayBody().StopParts(false,false);
+            switch (pickupType)
+            {
+                case pickupType.Weapon:
+                    PlayerBody.PlayBody().StopParts(false,false);
 
-                DisplayWeaponChips();
+                    DisplayWeaponChips();
 
-                uiPopup.SetActive(true);
-                twoOptionItemPopup.SetActive(true);
-                weaponPopup.SetActive(true);
+                    uiPopup.SetActive(true);
+                    twoOptionItemPopup.SetActive(true);
+                    weaponPopup.SetActive(true);
                 
-                initiallySelectedButton.Select();
-                break;
+                    initiallySelectedButton.Select();
+                    break;
             
-            case pickupType.Chassis:
-                PlayerBody.PlayBody().StopParts(false,false);
+                case pickupType.Chassis:
+                    PlayerBody.PlayBody().StopParts(false,false);
                 
-                uiPopup.SetActive(true);
-                singleItemPopup.SetActive(true);
+                    uiPopup.SetActive(true);
+                    singleItemPopup.SetActive(true);
                 
-                singleItemInitiallySelectedButton.Select();
-                break;
+                    singleItemInitiallySelectedButton.Select();
+                    break;
             
-            case pickupType.Ordinance :
-                PlayerBody.PlayBody().StopParts(false,false);
+                case pickupType.Ordinance :
+                    PlayerBody.PlayBody().StopParts(false,false);
                 
-                uiPopup.SetActive(true);
-                singleItemPopup.SetActive(true);
-                ordinancePopup.SetActive(true);
+                    uiPopup.SetActive(true);
+                    singleItemPopup.SetActive(true);
+                    ordinancePopup.SetActive(true);
                 
-                singleItemInitiallySelectedButton.Select();
-                break;
+                    singleItemInitiallySelectedButton.Select();
+                    break;
             
-            case pickupType.WeaponChip:
-                PlayerBody.PlayBody().StopParts(false,false);
+                case pickupType.WeaponChip:
+                    PlayerBody.PlayBody().StopParts(false,false);
                 
-                DisplayWeaponChips();
+                    DisplayWeaponChips();
                 
-                uiPopup.SetActive(true);
-                twoOptionItemPopup.SetActive(true);
-                weaponChipPopup.SetActive(true);
+                    uiPopup.SetActive(true);
+                    twoOptionItemPopup.SetActive(true);
+                    weaponChipPopup.SetActive(true);
                 
-                initiallySelectedButton.Select();
-                break;
+                    initiallySelectedButton.Select();
+                    break;
             
-            case pickupType.ChassisChip:
-                OnPickup(0);
-                break;
+                case pickupType.ChassisChip:
+                    OnPickup(0);
+                    break;
             
-            case pickupType.OrdinanceChip:
-                OnPickup(0);
-                break;
+                case pickupType.OrdinanceChip:
+                    OnPickup(0);
+                    break;
             
-            case pickupType.MovementChip:
-                OnPickup(0);
-                break;
+                case pickupType.MovementChip:
+                    OnPickup(0);
+                    break;
+            }
+            
+            GetComponentInChildren<Interactable>(true).canInteract = false;
+            open = true;
         }
+
+
     }
     
     public void OnPickup(int optionalData)
@@ -265,12 +292,14 @@ public class Pickup : MonoBehaviour
             }
         }
         
-        if(uiPopup != null) uiPopup.SetActive(false);
+        if(uiPopup != null) closeUiTimer = 0.5f;
     }
 
     public void CancelPickup()
     {
+        open = false;
         PlayerBody.PlayBody().StopParts(true,true);
+        GetComponentInChildren<Interactable>(true).canInteract = true;
         if(uiPopup != null) uiPopup.SetActive(false);
     }
 
