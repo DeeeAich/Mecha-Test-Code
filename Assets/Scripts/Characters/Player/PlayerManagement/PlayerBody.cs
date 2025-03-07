@@ -55,7 +55,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         myHealth = GetComponent<Health>();
         lastHealth = myHealth.health;
         lastMax = myHealth.maxHealth;
-        playerBody = this;
+        instance = this;
         myHealth.onDeath.AddListener(OnDeath);
     }
 
