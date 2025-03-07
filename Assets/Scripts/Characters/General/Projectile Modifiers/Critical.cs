@@ -20,7 +20,7 @@ public class Critical : ProjectileMod
             crit++;
         }
 
-        if (Random.Range(0, 100) <= checkChance)
+        if (Random.Range(0f, 100f) < checkChance)
             crit++;
 
         lastCrit = (int)crit;

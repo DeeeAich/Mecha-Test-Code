@@ -13,7 +13,6 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public Legs legStats;
     public PlayerUltyControl ultController;
     public List<Chip> chipsInserted;
-    public LegInfo curLegs;
     private PlayerInput playerInputs;
     public Camera myCamera;
     public Transform playerCentre;
@@ -206,7 +205,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void LoadStats()
     {
-        curLegs = legStats.LoadLegs();
+        myMovement.curLegs = legStats.LoadLegs();
 
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
             weaponHolder.leftWeapon != null ? weaponHolder.leftWeapon.curAmmo : 0,

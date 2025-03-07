@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerLegs : MonoBehaviour
 {
     public PlayerBody myBody;
+    public PlayerBody.LegInfo curLegs;
     public static Vector2 curSpeed;
     public GameObject myLegs;
     public bool dashing = false;
     public Vector3 dashDirection;
     public Rigidbody ridBy;
-    public int dashCount;
 
     public virtual void Movement(Vector2 stickAmount)
     {
@@ -57,11 +57,10 @@ public class PlayerLegs : MonoBehaviour
 
     }
 
-    private void Start()
+    public virtual void Start()
     {
         myBody = GetComponent<PlayerBody>();
         ridBy = GetComponent<Rigidbody>();
-        dashCount = myBody.curLegs.dashCharges;
     }
 
     public virtual void OnCollisionEnter(Collision collision)
