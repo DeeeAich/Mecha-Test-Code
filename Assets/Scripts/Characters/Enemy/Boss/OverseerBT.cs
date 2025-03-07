@@ -24,7 +24,7 @@ public class OverseerBT : BehaviourTree
 
     [SerializeField] GameObject weaponsPivot;
     [SerializeField] GameObject weaponsPivotOffset;
-
+    [SerializeField] GameObject phaseTwoBullets;
     [SerializeField] float approachDist = 10f;
     [SerializeField] float biggestRange = 15f;
     [SerializeField] float chargeSpeed = 10f;
@@ -231,7 +231,10 @@ public class OverseerBT : BehaviourTree
             {
                 spew.isSpawning = true;
             }
-
+            foreach(OverseerNailGun n in guns)
+            {
+                n.shotPattern = phaseTwoBullets;
+            }
         }
     }
 
