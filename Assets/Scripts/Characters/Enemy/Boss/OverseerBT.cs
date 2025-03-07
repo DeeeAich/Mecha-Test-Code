@@ -493,7 +493,7 @@ public class OverseerBT : BehaviourTree
         {
             g.pause = true;
         }
-        Debug.Log(StackTraceUtility.ExtractStackTrace());
+        //Debug.Log(StackTraceUtility.ExtractStackTrace());
     }
 
     public override void Resume()
