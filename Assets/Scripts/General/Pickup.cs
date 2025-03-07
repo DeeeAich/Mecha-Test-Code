@@ -54,9 +54,11 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Image[] currentRightWeaponChipImages;
 
     public Animator animator;
+    
     private bool open;
-
+    private float buttonInteractBlockTimer;
     private float closeUiTimer;
+    private Button buttonToInitiallySelect;
 
     private void Start()
     {
@@ -138,6 +140,19 @@ public class Pickup : MonoBehaviour
                 }
             }
 
+            if (buttonInteractBlockTimer > 0)
+            {
+                buttonInteractBlockTimer -= Time.deltaTime;
+
+                if (buttonInteractBlockTimer <= 0)
+                {
+                    leftSelectButton.interactable = true;
+                    rightSelectButton.interactable = true;
+                    initiallySelectedButton.interactable = true;
+                    
+                    buttonToInitiallySelect.Select();
+                }
+            }
         }
     }
 
@@ -184,7 +199,7 @@ public class Pickup : MonoBehaviour
                     twoOptionItemPopup.SetActive(true);
                     weaponPopup.SetActive(true);
                 
-                    initiallySelectedButton.Select();
+                    buttonToInitiallySelect = initiallySelectedButton;
                     break;
             
                 case pickupType.Chassis:
@@ -193,7 +208,7 @@ public class Pickup : MonoBehaviour
                     uiPopup.SetActive(true);
                     singleItemPopup.SetActive(true);
                 
-                    singleItemInitiallySelectedButton.Select();
+                    buttonToInitiallySelect = singleItemInitiallySelectedButton;
                     break;
             
                 case pickupType.Ordinance :
@@ -203,7 +218,7 @@ public class Pickup : MonoBehaviour
                     singleItemPopup.SetActive(true);
                     ordinancePopup.SetActive(true);
                 
-                    singleItemInitiallySelectedButton.Select();
+                    buttonToInitiallySelect = singleItemInitiallySelectedButton;
                     break;
             
                 case pickupType.WeaponChip:
@@ -215,7 +230,7 @@ public class Pickup : MonoBehaviour
                     twoOptionItemPopup.SetActive(true);
                     weaponChipPopup.SetActive(true);
                 
-                    initiallySelectedButton.Select();
+                    buttonToInitiallySelect = initiallySelectedButton;
                     break;
             
                 case pickupType.ChassisChip:
@@ -232,6 +247,11 @@ public class Pickup : MonoBehaviour
             }
             
             GetComponentInChildren<Interactable>(true).canInteract = false;
+            
+            leftSelectButton.interactable = false;
+            rightSelectButton.interactable = false;
+            initiallySelectedButton.interactable = false;
+            buttonInteractBlockTimer = 0.25f;
             open = true;
         }
 
