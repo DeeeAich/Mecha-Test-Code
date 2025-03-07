@@ -83,7 +83,7 @@ public class DevKitCheats : MonoBehaviour
             if (Time.timeScale == 1 && !pauseMenu.paused)
             {
                 Time.timeScale = 0;
-                PlayerBody.PlayBody().StopParts(false,false);
+                PlayerBody.Instance().StopParts(false,false);
                 devkitCheatMenu.SetActive(true);
             }
             else
@@ -94,7 +94,7 @@ public class DevKitCheats : MonoBehaviour
                     return;
                 }
                 Time.timeScale = 1;
-                PlayerBody.PlayBody().StopParts(true,true);
+                PlayerBody.Instance().StopParts(true,true);
                 devkitCheatMenu.SetActive(false);
             }
         }
@@ -115,12 +115,12 @@ public class DevKitCheats : MonoBehaviour
 
     public void KillAllPlayers()
     {
-        PlayerBody.PlayBody().GetComponent<Health>().health = 0;
+        PlayerBody.Instance().GetComponent<Health>().health = 0;
     }
 
     public void ToggleGodmode()
     {
-        PlayerBody.PlayBody().GetComponent<Health>().canDie = false;
+        PlayerBody.Instance().GetComponent<Health>().canDie = false;
     }
 
     public void CompleteRoom()
@@ -164,7 +164,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (leftGunDropdown.value != 0)
             {
-                PlayerBody.PlayBody().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
+                PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
 
                 leftGunDropdown.value = 0;
             }        
@@ -173,7 +173,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (rightGunDropdown.value != 0)
             {
-                PlayerBody.PlayBody().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
+                PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
 
                 rightGunDropdown.value = 0;
             }
@@ -188,7 +188,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (addChipDropdownLeft.value != 0)
             {
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value -1], true);
+                PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value -1], true);
                 addChipDropdownLeft.value = 0;
             }
 
@@ -197,7 +197,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (addChipDropdownRight.value != 0)
             {
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value - 1], false);
+                PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value - 1], false);
                 addChipDropdownRight.value = 0;
             }
         }
@@ -209,7 +209,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
         
-            PlayerBody.PlayBody().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value - 1]);
+            PlayerBody.Instance().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value - 1]);
 
             addChipDropdownLeft.value = 0;
         }

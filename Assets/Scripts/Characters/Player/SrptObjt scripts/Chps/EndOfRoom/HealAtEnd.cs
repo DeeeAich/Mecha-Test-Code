@@ -12,7 +12,7 @@ public class HealAtEnd : BEndChip
 
     public override void TriggerAbility()
     {
-        Health health = PlayerBody.PlayBody().GetComponent<Health>();
+        Health health = PlayerBody.Instance().GetComponent<Health>();
         health.TakeDamage(-(health.maxHealth * healPercent )/100);
 
     }

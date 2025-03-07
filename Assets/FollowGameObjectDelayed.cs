@@ -16,7 +16,7 @@ public class FollowGameObjectDelayed : MonoBehaviour
     {
         if(usePlayer)
         {
-            target = PlayerBody.PlayBody().gameObject;
+            target = PlayerBody.Instance().gameObject;
         }
         positions = new List<Vector3>();
         StartCoroutine(Follow());

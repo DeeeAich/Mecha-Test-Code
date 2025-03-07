@@ -22,7 +22,7 @@ public class pauseMenu : MonoBehaviour
 
     private void Start()
     {
-        pauseAction = PlayerBody.PlayBody().GetComponent<PlayerInput>().actions["Pause"];
+        pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
         pauseAction.performed += onPauseButtonPressed;
     }
 
@@ -38,7 +38,7 @@ public class pauseMenu : MonoBehaviour
 
             if (!paused)
             {
-                PlayerBody.PlayBody().StopParts(false, false);
+                PlayerBody.Instance().StopParts(false, false);
 
                 for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
                 {
@@ -51,7 +51,7 @@ public class pauseMenu : MonoBehaviour
             }
             else if (paused)
             {
-                PlayerBody.PlayBody().StopParts(true, true);
+                PlayerBody.Instance().StopParts(true, true);
       
                 for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
                 {

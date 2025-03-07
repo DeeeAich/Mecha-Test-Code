@@ -176,7 +176,7 @@ public class Pickup : MonoBehaviour
             switch (pickupType)
             {
                 case pickupType.Weapon:
-                    PlayerBody.PlayBody().StopParts(false,false);
+                    PlayerBody.Instance().StopParts(false,false);
 
                     DisplayWeaponChips();
 
@@ -188,7 +188,7 @@ public class Pickup : MonoBehaviour
                     break;
             
                 case pickupType.Chassis:
-                    PlayerBody.PlayBody().StopParts(false,false);
+                    PlayerBody.Instance().StopParts(false,false);
                 
                     uiPopup.SetActive(true);
                     singleItemPopup.SetActive(true);
@@ -197,7 +197,7 @@ public class Pickup : MonoBehaviour
                     break;
             
                 case pickupType.Ordinance :
-                    PlayerBody.PlayBody().StopParts(false,false);
+                    PlayerBody.Instance().StopParts(false,false);
                 
                     uiPopup.SetActive(true);
                     singleItemPopup.SetActive(true);
@@ -207,7 +207,7 @@ public class Pickup : MonoBehaviour
                     break;
             
                 case pickupType.WeaponChip:
-                    PlayerBody.PlayBody().StopParts(false,false);
+                    PlayerBody.Instance().StopParts(false,false);
                 
                     DisplayWeaponChips();
                 
@@ -240,14 +240,14 @@ public class Pickup : MonoBehaviour
     
     public void OnPickup(int optionalData)
     {
-        PlayerBody.PlayBody().StopParts(true,true);
+        PlayerBody.Instance().StopParts(true,true);
         Debug.Log("Picking up " + name);
         
         switch (pickupType)
         {
             case pickupType.Weapon:
 
-                PlayerBody.PlayBody().SetWeapon((WeaponPickup)PlayerPickup, optionalData == 0);
+                PlayerBody.Instance().SetWeapon((WeaponPickup)PlayerPickup, optionalData == 0);
                 
                 break;
             
@@ -260,11 +260,11 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.WeaponChip:
-                PlayerBody.PlayBody().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) PlayerPickup, optionalData == 0);
+                PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) PlayerPickup, optionalData == 0);
                 break;
             
             case pickupType.ChassisChip:
-                PlayerBody.PlayBody().ApplyChip((BodyChip)PlayerPickup);
+                PlayerBody.Instance().ApplyChip((BodyChip)PlayerPickup);
                 break;
             
             case pickupType.OrdinanceChip:
@@ -298,19 +298,19 @@ public class Pickup : MonoBehaviour
     public void CancelPickup()
     {
         open = false;
-        PlayerBody.PlayBody().StopParts(true,true);
+        PlayerBody.Instance().StopParts(true,true);
         GetComponentInChildren<Interactable>(true).canInteract = true;
         if(uiPopup != null) uiPopup.SetActive(false);
     }
 
     private void DisplayWeaponChips()
     {
-        if (PlayerBody.PlayBody().weaponHolder.leftWeapon != null)
+        if (PlayerBody.Instance().weaponHolder.leftWeapon != null)
         {
-            currentLeftWeaponImage.sprite = PlayerBody.PlayBody().weaponHolder.leftWInfo.mySprite;
+            currentLeftWeaponImage.sprite = PlayerBody.Instance().weaponHolder.leftWInfo.mySprite;
             currentLeftWeaponImage.enabled = true;
             
-            List<WeaponChip> leftChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods;
+            List<WeaponChip> leftChips = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().leftMods;
                 
             for (int i = 0; i < currentLeftWeaponChipImages.Length; i++)
             {
@@ -326,12 +326,12 @@ public class Pickup : MonoBehaviour
             }
         }
 
-        if (PlayerBody.PlayBody().weaponHolder.rightWeapon != null)
+        if (PlayerBody.Instance().weaponHolder.rightWeapon != null)
         {
-            currentRightWeaponImage.sprite = PlayerBody.PlayBody().weaponHolder.rightWInfo.mySprite;
+            currentRightWeaponImage.sprite = PlayerBody.Instance().weaponHolder.rightWInfo.mySprite;
             currentRightWeaponImage.enabled = true;
 
-            List<WeaponChip> rightChips = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods;
+            List<WeaponChip> rightChips = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().rightMods;
                 
             for (int i = 0; i < currentRightWeaponChipImages.Length; i++)
             {

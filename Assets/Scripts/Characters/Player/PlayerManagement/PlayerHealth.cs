@@ -9,9 +9,9 @@ public class PlayerHealth : Health
     {
 
         if (amount < 0 && health != maxHealth)
-            PlayerBody.PlayBody().TriggerOnHeal((int)amount);
+            PlayerBody.Instance().TriggerOnHeal((int)amount);
         else if (amount > 0)
-            PlayerBody.PlayBody().TriggerOnDamage();
+            PlayerBody.Instance().TriggerOnDamage();
 
         return base.TakeDamage(amount, isCrit);
     }

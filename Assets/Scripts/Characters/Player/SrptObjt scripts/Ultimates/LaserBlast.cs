@@ -19,7 +19,7 @@ public class LaserBlast : Ultimate
 
         PlayerUltyControl.instance.RunAnimation("Fire");
         PlayerUltyControl.instance.recharging = true;
-        PlayerBody.PlayBody().weaponHolder.TurnSpeedEffected(true, turnSpeed);
+        PlayerBody.Instance().weaponHolder.TurnSpeedEffected(true, turnSpeed);
         ultTime = 0;
         firing = true;
 
@@ -70,7 +70,7 @@ public class LaserBlast : Ultimate
 
             StartCoroutine(RechargeReset());
 
-            PlayerBody.PlayBody().weaponHolder.TurnSpeedEffected(false, 0);
+            PlayerBody.Instance().weaponHolder.TurnSpeedEffected(false, 0);
             PlayerUltyControl.instance.RunAnimation("Reset");
 
         }

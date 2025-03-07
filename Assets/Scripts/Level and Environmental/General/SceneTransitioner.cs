@@ -26,7 +26,7 @@ public class SceneTransitioner : MonoBehaviour
     {
         if (!transitioning)
         {
-            PlayerBody.PlayBody().StopParts(true, true);
+            PlayerBody.Instance().StopParts(true, true);
             sceneTransitionTimer = sceneTransitionTime;
             transitioning = true;
         }

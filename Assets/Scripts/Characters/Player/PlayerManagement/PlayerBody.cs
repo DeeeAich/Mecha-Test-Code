@@ -38,10 +38,10 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public bool canMove = true;
     public bool canShoot = true;
 
-    private static PlayerBody playerBody;
-    public static PlayerBody PlayBody()
+    private static PlayerBody instance;
+    public static PlayerBody Instance()
     {
-        return playerBody;
+        return instance;
     }
 
     private void Awake()

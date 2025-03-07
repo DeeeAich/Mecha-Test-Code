@@ -12,7 +12,7 @@ public class HealOnKill : OnHealChip
     public override void TriggerAbility()
     {
 
-        Health health = PlayerBody.PlayBody().GetComponent<Health>();
+        Health health = PlayerBody.Instance().GetComponent<Health>();
         health.TakeDamage(-health.maxHealth * 5 / 100);
 
     }

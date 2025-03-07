@@ -25,7 +25,7 @@ public class ChipAdderTest : MonoBehaviour
                     break;
                 case Chip.ChipTypes.Weapon:
 
-                    PlayerBody.PlayBody().weaponHolder.ApplyChip((WeaponChip)chip, true);
+                    PlayerBody.Instance().weaponHolder.ApplyChip((WeaponChip)chip, true);
 
                     break;
                 case Chip.ChipTypes.Movement:

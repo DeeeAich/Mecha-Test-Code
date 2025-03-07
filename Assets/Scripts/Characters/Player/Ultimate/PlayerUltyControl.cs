@@ -19,7 +19,7 @@ public class PlayerUltyControl : MonoBehaviour
 
     private void Start()
     {
-        myBody = PlayerBody.PlayBody();
+        myBody = PlayerBody.Instance();
 
         LoadUltimate(currentUltimate);
 

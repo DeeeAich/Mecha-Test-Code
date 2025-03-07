@@ -217,7 +217,7 @@ public class Room : MonoBehaviour
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
 
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.PlayBody().transform;
+            FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
         }
     }
 

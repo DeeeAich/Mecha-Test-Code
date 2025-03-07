@@ -44,24 +44,24 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialStage)
         {
             case 0:
-                PlayerBody.PlayBody().weaponHolder.rightFire.AddListener(delegate
+                PlayerBody.Instance().weaponHolder.rightFire.AddListener(delegate
                 {
                     CompleteTutorialStage();
-                    PlayerBody.PlayBody().weaponHolder.rightFire.RemoveAllListeners();
+                    PlayerBody.Instance().weaponHolder.rightFire.RemoveAllListeners();
                 });
                 break;
             
             case 1:
-                dash = PlayerBody.PlayBody().GetComponent<PlayerInput>().actions["Dash"];
+                dash = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Dash"];
                 dash.performed += CompleteDashChallenge;
                 break;
             
             case 2:
                 
-                PlayerBody.PlayBody().weaponHolder.leftFire.AddListener(delegate
+                PlayerBody.Instance().weaponHolder.leftFire.AddListener(delegate
                 {
                     CompleteTutorialStage();
-                    PlayerBody.PlayBody().weaponHolder.leftFire.RemoveAllListeners();
+                    PlayerBody.Instance().weaponHolder.leftFire.RemoveAllListeners();
                 });
                 
                 break;

@@ -38,7 +38,7 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
         if (testSpawn)
         {
             testSpawn = false;
-            SpawnDamageNumber(testDamage, PlayerBody.PlayBody().transform.position, testCrit);
+            SpawnDamageNumber(testDamage, PlayerBody.Instance().transform.position, testCrit);
 
         }
 

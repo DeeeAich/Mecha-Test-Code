@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        playerBody = PlayerBody.PlayBody();
+        playerBody = PlayerBody.Instance();
 
         bodyMods = playerBody.myMods;
 
@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
     public void SetStats()
     {
 
-        playerBody = PlayerBody.PlayBody();
+        playerBody = PlayerBody.Instance();
 
         playerBody.myMods = bodyMods;
 

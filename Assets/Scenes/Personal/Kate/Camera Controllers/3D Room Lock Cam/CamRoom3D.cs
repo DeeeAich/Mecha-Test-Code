@@ -35,7 +35,7 @@ public class CamRoom3D : MonoBehaviour
         projectionRect.transform.rotation = Quaternion.LookRotation(camForward, camUp);
         //projectionRect.transform.RotateAround(projectionRect.transform.position, projectionRect.transform.right, projectionAngle - projectionRect.transform.rotation.eulerAngles.x);
 
-        player = PlayerBody.PlayBody().gameObject;
+        player = PlayerBody.Instance().gameObject;
         cam = FindObjectOfType<CinemachineVirtualCamera>();
 
         //Get the scale right

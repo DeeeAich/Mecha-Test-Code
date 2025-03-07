@@ -8,7 +8,7 @@ public class SelfHeal : Ultimate
     public override void ActivateUltimate()
     {
 
-        Health myHealth = PlayerBody.PlayBody().GetComponent<Health>();
+        Health myHealth = PlayerBody.Instance().GetComponent<Health>();
 
         myHealth.TakeDamage(-damages[0] * myHealth.maxHealth);
 

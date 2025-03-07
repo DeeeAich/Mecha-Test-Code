@@ -24,7 +24,7 @@ public class PlayerPickup : ScriptableObject
             return;
         }
 
-        PlayerBody.PlayBody().Preform(corout);
+        PlayerBody.Instance().Preform(corout);
     }
 
 }

@@ -90,7 +90,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         if (health <= 0 && canDie)
         {
             if (gameObject.tag != "Player")
-                PlayerBody.PlayBody().TriggerOnKill();
+                PlayerBody.Instance().TriggerOnKill();
             TriggerDeath();
         }
 
@@ -135,7 +135,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         if (health <= 0 && canDie)
         {
             if (gameObject.tag != "Player")
-                PlayerBody.PlayBody().TriggerOnKill();
+                PlayerBody.Instance().TriggerOnKill();
             TriggerDeath();
         }
 

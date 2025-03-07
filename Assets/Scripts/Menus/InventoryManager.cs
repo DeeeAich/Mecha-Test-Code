@@ -78,7 +78,7 @@ public class InventoryManager : MonoBehaviour
         print("Updating Inventory");
         inspectionCard.SetActive(false);
 
-        PlayerBody playerBody = PlayerBody.PlayBody();
+        PlayerBody playerBody = PlayerBody.Instance();
 
         chassisTitle.text = playerBody.legStats.itemName;
         chassisDescription.text = playerBody.legStats.description;
@@ -93,7 +93,7 @@ public class InventoryManager : MonoBehaviour
             ordinanceImage.color = rarityColors[playerBody.ultController.currentUltimate.rarity];
         }
 
-        List<BodyChip> bodyChips = PlayerBody.PlayBody().myMods;
+        List<BodyChip> bodyChips = PlayerBody.Instance().myMods;
 
         for (int i = 0; i < bodyChipsImages.Count; i++)
         {
@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        PlayerWeaponControl weapons = PlayerBody.PlayBody().weaponHolder;
+        PlayerWeaponControl weapons = PlayerBody.Instance().weaponHolder;
 
         if (weapons.leftWeapon != null)
         {
@@ -176,33 +176,33 @@ public class InventoryManager : MonoBehaviour
         switch (section)
         {
             case 0: // left weapon
-                if (index >= PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods.Count)
+                if (index >= PlayerBody.Instance().GetComponent<PlayerWeaponControl>().leftMods.Count)
                 {
                     return;
                 }
                 
                 inspectionCard.transform.position = WeaponsLeftChipsImages[index].transform.position;
-                chip = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().leftMods[index];
+                chip = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().leftMods[index];
                 break;
             
             case 1: // right weapon
-                if (index >= PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods.Count)
+                if (index >= PlayerBody.Instance().GetComponent<PlayerWeaponControl>().rightMods.Count)
                 {
                     return;
                 }
                 
                 inspectionCard.transform.position = WeaponsRightChipsImages[index].transform.position;
-                chip = PlayerBody.PlayBody().GetComponent<PlayerWeaponControl>().rightMods[index];
+                chip = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().rightMods[index];
                 break;
             
             case 2: // body chips
-                if (index >= PlayerBody.PlayBody().myMods.Count)
+                if (index >= PlayerBody.Instance().myMods.Count)
                 {
                     return;
                 }
                 
                 inspectionCard.transform.position = bodyChipsImages[index].transform.position;
-                chip = PlayerBody.PlayBody().myMods[index];
+                chip = PlayerBody.Instance().myMods[index];
                 break;
         }
 
