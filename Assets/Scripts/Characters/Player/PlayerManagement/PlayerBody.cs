@@ -234,7 +234,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         if (left && weaponHolder.leftWeapon != null)
             Destroy(weaponHolder.leftWeapon.gameObject);
-        else if (weaponHolder.rightWeapon != null)
+        else if (! left && weaponHolder.rightWeapon != null)
             Destroy(weaponHolder.rightWeapon.gameObject);
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon.weaponPrefab, weaponPoints[left ? 0 : 1]);
