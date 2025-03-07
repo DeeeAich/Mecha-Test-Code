@@ -270,7 +270,7 @@ public class OverseerBT : BehaviourTree
         float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
         if (Mathf.Acos(facingScore) > frontRadiusRadians / 2)
             facingScore = 0f;
-        Debug.Log("charge Score: " + facingScore * chargePatienceWeight + " from p=" + chargePatienceWeight + " and f=" + facingScore);
+        //Debug.Log("charge Score: " + facingScore * chargePatienceWeight + " from p=" + chargePatienceWeight + " and f=" + facingScore);
         return facingScore * chargePatienceWeight;
     }
 
