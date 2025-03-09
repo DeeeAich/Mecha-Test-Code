@@ -18,8 +18,7 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private TMP_Dropdown addChipDropdownRight;
 
     [SerializeField] private TMP_Dropdown bodyChipsDropdown;
-    
-    public GameObject devkitCheatMenu;
+
     private int[] loadout;
 
     private void Start()
