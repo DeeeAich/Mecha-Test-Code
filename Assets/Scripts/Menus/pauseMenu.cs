@@ -33,9 +33,11 @@ public class pauseMenu : MonoBehaviour
         
         pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
         openInventoryAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Inventory"];
+        openDevkitCheatsAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["DevkitCheats"];
         
         pauseAction.performed += onPauseButtonPressed;
         openInventoryAction.performed += OpenInventory;
+        openDevkitCheatsAction.performed += OpenDevkitCheats;
     }
 
     public void TogglePause()
@@ -131,5 +133,6 @@ public class pauseMenu : MonoBehaviour
     {
         pauseAction.performed -= onPauseButtonPressed;
         openInventoryAction.performed -= OpenInventory;
+        openDevkitCheatsAction.performed -= OpenDevkitCheats;
     }
 }
