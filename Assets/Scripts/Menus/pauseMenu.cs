@@ -13,69 +13,123 @@ public class pauseMenu : MonoBehaviour
     
     public float gameSpeed = 1f;
     
-    [SerializeField] private GameObject[] objectsToActivateWhenPaused;
+    [SerializeField] private GameObject pauseCanvas;
+    [SerializeField] private GameObject mainPauseMenu;
+    [SerializeField] private GameObject inventoryMenu;
+    [SerializeField] private GameObject devkitCheatsMenu;
+
+    [SerializeField] private InventoryManager InventoryManager;
 
     private InputAction pauseAction;
+    private InputAction openInventoryAction;
+    private InputAction openDevkitCheatsAction;
 
     public UnityEvent onPause;
     public UnityEvent onUnpause;
 
     private void Start()
     {
+        devkitCheatsMenu = FindObjectOfType<DevKitCheats>(true).gameObject;
+        
         pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
+        openInventoryAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Inventory"];
+        
         pauseAction.performed += onPauseButtonPressed;
+        openInventoryAction.performed += OpenInventory;
     }
 
-    public void PauseGame()
+    public void TogglePause()
     {
         if (canPause)
         {
-            DevKitCheats devkit = FindObjectOfType<DevKitCheats>();
-            if (devkit != null && devkit.devkitCheatMenu.activeSelf) // gets rid of devkit menu
+            if (paused)
             {
-                devkit.devkitCheatMenu.SetActive(false);
-            }
+                PlayerBody.Instance().StopParts(true, true);
 
-            if (!paused)
+                onUnpause.Invoke();
+                paused = false;
+                Time.timeScale = gameSpeed;
+            }
+            else
             {
                 PlayerBody.Instance().StopParts(false, false);
-
-                for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
-                {
-                    objectsToActivateWhenPaused[i].SetActive(true);
-                }
                 
                 onPause.Invoke();
                 paused = true;
                 Time.timeScale = 0;
             }
-            else if (paused)
-            {
-                PlayerBody.Instance().StopParts(true, true);
-      
-                for (int i = 0; i < objectsToActivateWhenPaused.Length; i++)
-                {
-                    objectsToActivateWhenPaused[i].SetActive(false);
-                }
-                
-                onUnpause.Invoke();
-                paused = false;
-                Time.timeScale = gameSpeed;
-            }
         }
+        else
+        {
+            Debug.LogWarning("Cant TogglePause Right Now");
+        }
+    }
+
+    public void OpenInventory(InputAction.CallbackContext context)
+    {
+        if (paused)
+        {
+            devkitCheatsMenu.SetActive(false);
+            mainPauseMenu.SetActive(false);
+            inventoryMenu.SetActive(false);
+        }
+        else
+        {
+            inventoryMenu.SetActive(true);
+            InventoryManager.UpdateInventory();
+        }
+
+        TogglePause();
+    }
+
+    public void OpenDevkitCheats(InputAction.CallbackContext context)
+    {
+        if (paused)
+        {
+            devkitCheatsMenu.SetActive(false);
+            mainPauseMenu.SetActive(false);
+            inventoryMenu.SetActive(false);
+        }
+        else
+        {
+            devkitCheatsMenu.SetActive(true);
+        }
+        
+        TogglePause();
     }
 
     public void onPauseButtonPressed(InputAction.CallbackContext context)
     {
         print("Pause button");
-        PauseGame();
+
+        if (paused)
+        {
+            devkitCheatsMenu.SetActive(false);
+            mainPauseMenu.SetActive(false);
+            inventoryMenu.SetActive(false);
+        }
+        else
+        {
+            mainPauseMenu.SetActive(true);
+        }
+        
+        TogglePause();
     }
 
     public void Reset()
     {
         Debug.Log("Resetting Game");
+        
         pauseAction.performed -= onPauseButtonPressed;
-        PauseGame();
+        openInventoryAction.performed -= OpenInventory;
+        
+        TogglePause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnDestroy()
+    {
+        pauseAction.performed -= onPauseButtonPressed;
+        openInventoryAction.performed -= OpenInventory;
     }
 }

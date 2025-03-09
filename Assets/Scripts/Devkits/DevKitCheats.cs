@@ -22,14 +22,8 @@ public class DevKitCheats : MonoBehaviour
     public GameObject devkitCheatMenu;
     private int[] loadout;
 
-    private pauseMenu pauseMenu;
-
     private void Start()
     {
-        
-        Canvas childedCanvas = GetComponentInChildren<Canvas>(true);
-        if(childedCanvas!=null) devkitCheatMenu = childedCanvas.gameObject;
-
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
@@ -71,41 +65,16 @@ public class DevKitCheats : MonoBehaviour
         }
 
         loadout = new int[3];
-
-        pauseMenu = FindObjectOfType<pauseMenu>();
-    }
-    
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Slash))
-        {
-            if (Time.timeScale == 1 && !pauseMenu.paused)
-            {
-                Time.timeScale = 0;
-                PlayerBody.Instance().StopParts(false,false);
-                devkitCheatMenu.SetActive(true);
-            }
-            else
-            {
-                if (pauseMenu.paused)
-                {
-                    pauseMenu.PauseGame();
-                    return;
-                }
-                Time.timeScale = 1;
-                PlayerBody.Instance().StopParts(true,true);
-                devkitCheatMenu.SetActive(false);
-            }
-        }
     }
 
     public void KillAllEnemies()
     {
         Health[] healths = FindObjectsOfType<Health>();
+        Health playerHealth = PlayerBody.Instance().GetComponent<Health>();
+        
         for (int i = 0; i < healths.Length; i++)
         {
-            if (healths[i].entityType == EntityType.ENEMY)
+            if (healths[i] != playerHealth)
             {
                 healths[i].health = 0;
                 healths[i].TriggerDeath();

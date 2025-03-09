@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "501c12a3-6936-46e6-a15f-cb614c83139f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -177,7 +186,7 @@
                 {
                     "name": "",
                     "id": "6872243f-00ec-409f-a3c9-a6620d540d0c",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -221,7 +230,7 @@
                 {
                     "name": "",
                     "id": "cafd35bc-24e9-4154-bb44-9581231857b8",
-                    "path": "<Gamepad>/dpad/right",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -243,7 +252,7 @@
                 {
                     "name": "",
                     "id": "656264fd-ed38-4a0f-b922-8bf95a1a446f",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -287,7 +296,7 @@
                 {
                     "name": "",
                     "id": "933637c7-e804-488f-81ed-3d249cbbb1ec",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -347,6 +356,39 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfc81515-cde2-4b50-b8aa-69fc6dc934e3",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "549e6838-3916-4d06-a796-c92184da074b",
+                    "path": "<DualShockGamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d75f602-f47f-45de-8ba1-6cdb8b164db1",
+                    "path": "<XInputController>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

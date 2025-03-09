@@ -28,6 +28,9 @@ public class InventoryManager : MonoBehaviour
     
     [SerializeField] private Image leftWeaponImage;
     [SerializeField] private Image rightWeaponImage;
+
+    [SerializeField] private TMP_Text leftWeaponAmmo;
+    [SerializeField] private TMP_Text rightWeaponAmmo;
     
     [SerializeField] private List<Image> WeaponsLeftChipsImages;
     [SerializeField] private List<Image> WeaponsRightChipsImages;
@@ -116,6 +119,7 @@ public class InventoryManager : MonoBehaviour
             leftWeaponTitle.text = weapons.leftWInfo.itemName;
             leftWeaponTitle.gameObject.SetActive(true);
             leftWeaponImage.sprite = weapons.leftWInfo.mySprite;
+            leftWeaponAmmo.text = weapons.leftWeapon.curAmmo.ToString();
             leftWeaponImage.gameObject.SetActive(true);
             
             List<WeaponChip> leftMods = weapons.leftMods;
@@ -144,6 +148,7 @@ public class InventoryManager : MonoBehaviour
             rightWeaponTitle.text = weapons.rightWInfo.itemName;
             rightWeaponTitle.gameObject.SetActive(true);
             rightWeaponImage.sprite = weapons.rightWInfo.mySprite;
+            rightWeaponAmmo.text = weapons.rightWeapon.curAmmo.ToString();
             rightWeaponTitle.gameObject.SetActive(true);
             
             List<WeaponChip> rightMods = weapons.rightMods;
