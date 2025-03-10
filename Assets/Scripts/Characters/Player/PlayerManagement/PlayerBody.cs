@@ -280,7 +280,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         myCamera.transform.parent = null;
         StopParts(false, false);
 
-        StartCoroutine(myUI.StartDeath());
+        myUI.StartCoroutine(myUI.StartDeath());
 
         weaponHolder.leftWeapon.FireRelease();
         weaponHolder.rightWeapon.FireRelease();
