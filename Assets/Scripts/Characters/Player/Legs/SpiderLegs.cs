@@ -12,6 +12,8 @@ public class SpiderLegs : PlayerLegs
         if (dashing || curLegs.dashCharges == 0)
             yield break;
 
+        print(curLegs.dashCharges);
+
         dashDirection = new Vector2();
 
         if (stickAmount.magnitude != 0)
@@ -51,7 +53,7 @@ public class SpiderLegs : PlayerLegs
 
         yield return new WaitForSeconds(myBody.legStats.dashRecharge);
 
-        curLegs.dashCharges--;
+        curLegs.dashCharges++;
 
         yield return null;
 

@@ -208,7 +208,7 @@ public class PlayerUI : MonoBehaviour
 
         yield return new WaitForSeconds(deathTime);
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
 
         yield return null;
 

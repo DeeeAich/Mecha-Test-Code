@@ -200,7 +200,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
         isGamepad = input.currentControlScheme.Equals("Controller");
 
-        Debug.Log("Control scheme is now " + input.currentControlScheme);
+        InputDeviceManager.instance.UpdateInputDevice(isGamepad ? InputDevice.PlaystationController : InputDevice.MouseAndKeyboard);
+
+        //Debug.Log("Control scheme is now " + input.currentControlScheme);
     }
 
     private void LoadStats()
