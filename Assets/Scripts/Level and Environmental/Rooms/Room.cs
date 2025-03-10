@@ -23,7 +23,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Door entryDoor;
     [SerializeField] private ObjectiveType[] possiblePrimaryObjectives;
     [SerializeField] private ObjectiveType[] possibleSecondaryObjectives;
-
+    [SerializeField] private bool triggersMusic = true;
 
     [Header("~~~~~~~~~~~ Dont Touch ~~~~~~~~~~~")]
     public bool isActive;
@@ -189,7 +189,7 @@ public class Room : MonoBehaviour
             
             if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
             
-            AudioManager.instance.ChangeMusicState(musicState.idle);
+            if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
 
             onCompleteRoom.Invoke();
 
