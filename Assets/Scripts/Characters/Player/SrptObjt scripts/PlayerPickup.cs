@@ -15,6 +15,7 @@ public class PlayerPickup : ScriptableObject
     
     [Header("Optional GameObject Reference")]
     public GameObject objectReference;
+    public GameObject hologramReference;
 
     protected void StartCoroutine(IEnumerator corout)
     {

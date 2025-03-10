@@ -52,8 +52,11 @@ public class Pickup : MonoBehaviour
     [SerializeField] private Image currentRightWeaponImage;
     [SerializeField] private Image[] currentLeftWeaponChipImages;
     [SerializeField] private Image[] currentRightWeaponChipImages;
-
+    
+    [Header("Other References")]
     public Animator animator;
+    [SerializeField] private GameObject imageDisplayPoint;
+    [SerializeField] private GameObject hologramSpawnPoint;
     
     private bool open;
     private float buttonInteractBlockTimer;
@@ -89,6 +92,15 @@ public class Pickup : MonoBehaviour
         for (int i = 0; i < newLootDescriptions.Length; i++)
         {
             newLootDescriptions[i].text = PlayerPickup.description;
+        }
+
+        switch (pickupType)
+        {
+            case pickupType.Weapon:
+                animator.SetBool("isWeapon", true);
+                imageDisplayPoint.SetActive(false);
+                if(PlayerPickup.hologramReference != null) Instantiate(PlayerPickup.hologramReference, hologramSpawnPoint.transform);
+                break;
         }
         
     }
