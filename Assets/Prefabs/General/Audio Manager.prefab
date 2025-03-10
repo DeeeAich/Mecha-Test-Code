@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f317696a9eff760488f5a0659b2fe07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicState: 0
+  currentMusicTrack: 0
+  currentMusicState: 0
   Level2BaseMusic:
     Guid:
       Data1: -808070906
@@ -52,10 +53,22 @@ MonoBehaviour:
       Data3: -336339269
       Data4: -77293693
     Path: event:/Music/mx Track 1
-  ambience:
+  tutorialMusic:
+    Guid:
+      Data1: -1746638730
+      Data2: 1087796141
+      Data3: -1618001755
+      Data4: 1019284157
+    Path: event:/Music/mx Track 2
+  level2MusicEmitter: {fileID: 0}
+  tutorialMusicEmitter: {fileID: 0}
+  currentAmbienceTrack: 0
+  Level2BaseAmbience:
     Guid:
       Data1: -2083586026
       Data2: 1234618911
       Data3: -2121751618
       Data4: 1507562590
     Path: event:/Ambience/Factory Soundscape
+  level2SceneName: Level 2
+  tutorialSceneName: Hub World
