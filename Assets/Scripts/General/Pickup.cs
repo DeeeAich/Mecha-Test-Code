@@ -72,7 +72,12 @@ public class Pickup : MonoBehaviour
             {
             }
         }
+        
+        RigLootBox();
+    }
 
+    private void RigLootBox()
+    {
         pickupRarity = PlayerPickup.rarity;
         itemDisplayImage.sprite = PlayerPickup.mySprite;
         pickupType = PlayerPickup.PickupType;
@@ -102,7 +107,6 @@ public class Pickup : MonoBehaviour
                 if(PlayerPickup.hologramReference != null) Instantiate(PlayerPickup.hologramReference, hologramSpawnPoint.transform);
                 break;
         }
-        
     }
 
     private void Update()
@@ -279,7 +283,20 @@ public class Pickup : MonoBehaviour
         {
             case pickupType.Weapon:
 
+                PlayerPickup newPickup;
+                if (optionalData == 0)
+                {
+                    newPickup = PlayerBody.Instance().weaponHolder.leftWInfo;
+                }
+                else
+                {
+                    newPickup = PlayerBody.Instance().weaponHolder.rightWInfo;
+                }
+                
                 PlayerBody.Instance().SetWeapon((WeaponPickup)PlayerPickup, optionalData == 0);
+
+                PlayerPickup = newPickup;
+                RigLootBox();
                 
                 break;
             
