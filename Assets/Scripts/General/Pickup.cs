@@ -78,6 +78,7 @@ public class Pickup : MonoBehaviour
 
     private void RigLootBox()
     {
+        Debug.Log(PlayerPickup);
         pickupRarity = PlayerPickup.rarity;
         itemDisplayImage.sprite = PlayerPickup.mySprite;
         pickupType = PlayerPickup.PickupType;
@@ -284,6 +285,7 @@ public class Pickup : MonoBehaviour
             case pickupType.Weapon:
 
                 PlayerPickup newPickup;
+                
                 if (optionalData == 0)
                 {
                     newPickup = PlayerBody.Instance().weaponHolder.leftWInfo;
@@ -296,7 +298,15 @@ public class Pickup : MonoBehaviour
                 PlayerBody.Instance().SetWeapon((WeaponPickup)PlayerPickup, optionalData == 0);
 
                 PlayerPickup = newPickup;
-                RigLootBox();
+                if (PlayerPickup != null)
+                {
+                    RigLootBox();
+                    // keep box open, swap loot from hand to box
+                }
+                else
+                {
+                    // insert animation close box stuff
+                }
                 
                 break;
             
