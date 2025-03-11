@@ -210,6 +210,10 @@ public class PlayerUI : MonoBehaviour
 
         SceneManager.LoadScene(1, LoadSceneMode.Single);
 
+        yield return new WaitForSeconds(1);
+
+        FadeCanvas.instance.FadeToBlack();
+
         yield return null;
 
     }
