@@ -91,7 +91,7 @@ public class pauseMenu : MonoBehaviour
         openInventoryAction.performed -= OpenInventory;
         
         TogglePause();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1);
     }
 
     private void OnDestroy()
