@@ -66,6 +66,40 @@ public class pauseMenu : MonoBehaviour
             Debug.LogWarning("Cant TogglePause Right Now");
         }
     }
+    
+    public void TriggerPauseFromMenu()
+    {
+        if(paused) onPauseButtonPressed(new InputAction.CallbackContext());
+    }
+
+    public void TriggerOpenInventoryFromMenu()
+    {
+        if (paused)
+        {
+            devkitCheatsMenu.SetActive(false);
+            mainPauseMenu.SetActive(false);
+            inventoryMenu.SetActive(true);
+            InventoryManager.UpdateInventory();
+        }
+    }
+
+    public void Reset()
+    {
+        Debug.Log("Resetting Game");
+        
+        pauseAction.performed -= onPauseButtonPressed;
+        openInventoryAction.performed -= OpenInventory;
+        
+        TogglePause();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnDestroy()
+    {
+        pauseAction.performed -= onPauseButtonPressed;
+        openInventoryAction.performed -= OpenInventory;
+        openDevkitCheatsAction.performed -= OpenDevkitCheats;
+    }
 
     public void OpenInventory(InputAction.CallbackContext context)
     {
@@ -118,21 +152,5 @@ public class pauseMenu : MonoBehaviour
         TogglePause();
     }
 
-    public void Reset()
-    {
-        Debug.Log("Resetting Game");
-        
-        pauseAction.performed -= onPauseButtonPressed;
-        openInventoryAction.performed -= OpenInventory;
-        
-        TogglePause();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 
-    private void OnDestroy()
-    {
-        pauseAction.performed -= onPauseButtonPressed;
-        openInventoryAction.performed -= OpenInventory;
-        openDevkitCheatsAction.performed -= OpenDevkitCheats;
-    }
 }
