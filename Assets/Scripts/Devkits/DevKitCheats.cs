@@ -48,19 +48,19 @@ public class DevKitCheats : MonoBehaviour
         
         for (int i = 0; i <  lootPool.Weapons.Length; i++)
         {
-            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName));
-            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName));
+            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName, lootPool.Weapons[i].mySprite));
+            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName, lootPool.Weapons[i].mySprite));
         }
 
         for (int i = 0; i <  lootPool.WeaponChips.Length; i++)
         {
-            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name));
-            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name));
+            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name, lootPool.WeaponChips[i].mySprite));
+            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name, lootPool.WeaponChips[i].mySprite));
         }
 
         for (int i = 0; i < lootPool.BodyChips.Length; i++)
         {
-            bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(lootPool.BodyChips[i].name));
+            bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(lootPool.BodyChips[i].name, lootPool.BodyChips[i].mySprite));
         }
 
         loadout = new int[3];
