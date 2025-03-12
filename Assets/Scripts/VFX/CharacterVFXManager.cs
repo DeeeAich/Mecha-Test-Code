@@ -28,19 +28,37 @@ public class CharacterVFXManager : MonoBehaviour
     [Header("Heal")]
     public ParticleSystem healParticleSystem;
 
+
+
+    [Header("Player ONLY")]
+    public bool isPlayer = false;
+    public GameObject playerParent;
+
     private void Start()
     {
-        if (GetComponent<MeshRenderer>() != null)
+        if (!isPlayer)
         {
-            meshRenderers.Add(GetComponent<MeshRenderer>());
-        }
+            if (GetComponent<MeshRenderer>() != null)
+            {
+                meshRenderers.Add(GetComponent<MeshRenderer>());
+            }
 
-        // get mesh renderers childed to main object
-        MeshRenderer[] childedMeshRenderers;
-        childedMeshRenderers = GetComponentsInChildren<MeshRenderer>();
-        for (int i = 0; i < childedMeshRenderers.Length; i++)
+            // get mesh renderers childed to main object
+            MeshRenderer[] childedMeshRenderers;
+            childedMeshRenderers = GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < childedMeshRenderers.Length; i++)
+            {
+                meshRenderers.Add(childedMeshRenderers[i]);
+            }
+        }
+        else
         {
-            meshRenderers.Add(childedMeshRenderers[i]);
+            MeshRenderer[] childedMeshRenderers;
+            childedMeshRenderers = playerParent.GetComponentsInChildren<MeshRenderer>();
+            for (int i = 0; i < childedMeshRenderers.Length; i++)
+            {
+                meshRenderers.Add(childedMeshRenderers[i]);
+            }
         }
     }
 
@@ -48,7 +66,7 @@ public class CharacterVFXManager : MonoBehaviour
     {
         if (testBool)
         {
-            SpawnHealParticles(100);
+            ToggleEffectVFX(effect.Burn, true);
             testBool = false;
         }
     }
@@ -85,7 +103,16 @@ public class CharacterVFXManager : MonoBehaviour
         {
             if(burnObjects[i] != null) burnObjects[i].SetActive(isOn);
         }
-        
+
+        if (isOn)
+        {
+            SetAdditionalMaterial(burnMaterial);
+        }
+        else
+        {
+            ClearAdditionalMaterial(burnMaterial);
+        }
+
         /*
 
         if (isOn)
