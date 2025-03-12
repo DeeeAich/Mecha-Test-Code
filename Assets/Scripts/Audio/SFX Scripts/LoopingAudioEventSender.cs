@@ -9,24 +9,34 @@ public class LoopingAudioEventSender : MonoBehaviour
     [Header("Sound")]
     public EventReference sound;
     public bool isLooping;
+    public bool isPlayingAuido;
 
     private EventInstance eventInstance;
 
-    public void StartLoopingAudio()
+    public void LoopingAudio(int trueFalse)
     {
-        if (!isLooping)
+        if (!isPlayingAuido)
+            return;
+
+        if (trueFalse == 0)
         {
-            eventInstance = RuntimeManager.CreateInstance(sound);
-            RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
-            eventInstance.start();
-            isLooping = true;
+            if (!isLooping)
+            {
+                eventInstance = RuntimeManager.CreateInstance(sound);
+                RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
+                eventInstance.start();
+                isLooping = true;
+                Debug.Log(gameObject.name + " started looping audio");
+            }
         }
-    }
-    public void StopLoopingAudio()
-    {
+        else
+        {
         eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         isLooping = false;
+        Debug.Log(gameObject.name + " stopped looping audio");
+        }
     }
+
 
     private void OnDestroy()
     {
