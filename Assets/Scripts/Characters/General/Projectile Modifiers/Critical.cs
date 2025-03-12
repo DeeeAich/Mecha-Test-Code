@@ -25,7 +25,10 @@ public class Critical : ProjectileMod
 
         lastCrit = (int)crit;
 
-        return baseDamage * (damage * crit + 1);
+        if(crit > 0)
+            return baseDamage * (damage * crit);
+        else
+            return baseDamage;
         
     }
 
