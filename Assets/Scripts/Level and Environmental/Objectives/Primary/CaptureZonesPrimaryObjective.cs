@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class CaptureZonesPrimaryObjective : Objective
 {
-    [SerializeField] private Image progressBar;
     private float totalProgress;
     
     private CaptureZone[] zones;

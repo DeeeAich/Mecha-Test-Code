@@ -3,14 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public enum ObjectiveType
-{
-    nullObjective,
-    exterminate,
-    survival,
-    capturePoint
-}
 public enum WaveSpawnerType
 {
     Standard, Rare, Miniboss, Boss, Exterminate, Survival, Capture
@@ -19,13 +13,14 @@ public enum WaveSpawnerType
 public class Objective : MonoBehaviour
 {
     public bool isComplete;
-
-    public ObjectiveType objectiveType;
+    
     public WaveSpawnerType[] waveSpawnerTypesToAttemptToSpawn = new WaveSpawnerType[] {WaveSpawnerType.Standard};
     
     public Room room;
     
     public UnityEvent onComplete;
+
+    public Image progressBar;
 
     private void Awake()
     {

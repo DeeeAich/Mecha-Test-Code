@@ -18,6 +18,7 @@ public class LevelGenerator : MonoBehaviour
     [Header("Public References")]
     public GameObject currentRoom;
     public GameObject oldRoom;
+    private GameObject mostrecentyUsedRoomPrefab;
     
     [Header("Internal References")]
     [SerializeField] private GameObject StartPosition;
@@ -81,6 +82,8 @@ public class LevelGenerator : MonoBehaviour
             possibleRooms = levelInfo.roomPool.standardRooms.ToList();
         }
 
+        possibleRooms.Remove(mostrecentyUsedRoomPrefab);
+        
         int totalPossibleRooms = possibleRooms.Count;
         for (int i = 0; i < selection.Length; i++)
         {
@@ -176,6 +179,7 @@ public class LevelGenerator : MonoBehaviour
     
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
+        mostrecentyUsedRoomPrefab = room;
         if(oldRoom != null) Destroy(oldRoom);
         if(currentRoom != null) oldRoom = currentRoom;
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);

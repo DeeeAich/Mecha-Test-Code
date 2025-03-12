@@ -17,6 +17,8 @@ public class WaveSpawner : MonoBehaviour
     public bool spawning;
     public bool isComplete;
     public int currentWave;
+    public int enemiesKilled;
+    public int totalEnemiesToSpawn;
 
     [Header("Settings")]
     public bool looping;
@@ -38,7 +40,7 @@ public class WaveSpawner : MonoBehaviour
     public List<GameObject> incomingEnemySpawners = new List<GameObject>();
     
     public UnityEvent onComplete;
-    
+
     private List<EnemySpawnStruct> spawnableEnemies;
 
     private int enemyToSpawnIndex;
@@ -114,6 +116,8 @@ public class WaveSpawner : MonoBehaviour
                 }
             }
         }
+
+        totalEnemiesToSpawn = enemiesToSpawn.Count;
 
         spawning = true;
         waveSpawnCooldownTimer = 0;
