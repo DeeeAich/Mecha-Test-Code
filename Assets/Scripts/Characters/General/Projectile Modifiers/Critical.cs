@@ -37,7 +37,7 @@ public class Critical : ProjectileMod
             return;
 
         chance += statusInfo.effectChance;
-        damage *= (1 + statusInfo.effectDamage);
+        damage += statusInfo.effectDamage;
 
     }
 }
