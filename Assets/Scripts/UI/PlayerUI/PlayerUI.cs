@@ -208,11 +208,11 @@ public class PlayerUI : MonoBehaviour
 
         yield return new WaitForSeconds(deathTime);
 
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        FadeCanvas.instance.FadeToBlack();
 
         yield return new WaitForSeconds(1);
 
-        FadeCanvas.instance.FadeToBlack();
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
 
         yield return null;
 
