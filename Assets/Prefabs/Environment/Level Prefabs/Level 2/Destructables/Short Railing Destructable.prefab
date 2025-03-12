@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7837680829727947692}
   - component: {fileID: 3815842359462757359}
   - component: {fileID: 7377619681801034424}
+  - component: {fileID: 6273808317145240499}
   m_Layer: 0
   m_Name: Short Railing Destructable
   m_TagString: Untagged
@@ -134,8 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionTrigger: 0
   explosionVFX: {fileID: 7668591756216008744}
-  breakDirection: {x: 0, y: 0, z: 0}
   animatorToPause: {fileID: 0}
+  animatorsToPause: []
   objectsToPush:
   - {fileID: 8806184849646503915}
   - {fileID: 1287985745025694753}
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasHealth: 0
   health: 0
+  pushPos: {fileID: 0}
   debrisExplosion: {fileID: 7837680829727947692}
 --- !u!65 &7377619681801034424
 BoxCollider:
@@ -183,6 +185,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 1.5}
   m_Center: {x: -0.5, y: 0, z: 0.5}
+--- !u!54 &6273808317145240499
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690034719319501883}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &4342184448542845587
 PrefabInstance:
   m_ObjectHideFlags: 0

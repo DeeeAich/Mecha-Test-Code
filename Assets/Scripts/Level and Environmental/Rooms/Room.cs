@@ -54,6 +54,10 @@ public class Room : MonoBehaviour
         captureZones = GetComponentsInChildren<CaptureZone>(true);
         enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
         waveSpawners = GetComponentsInChildren<WaveSpawner>(true);
+        if (TryGetComponent(out Objective objective))
+        {
+            primaryObjective = objective;
+        }
     }
 
     private void Start()
