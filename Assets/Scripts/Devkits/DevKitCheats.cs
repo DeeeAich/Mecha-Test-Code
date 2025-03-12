@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
 {
+
+    
     [SerializeField] private LootPoolScriptable lootPool;
 
     [SerializeField] private TMP_Dropdown leftGunDropdown;
@@ -23,6 +26,7 @@ public class DevKitCheats : MonoBehaviour
 
     private void Start()
     {
+
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
@@ -65,6 +69,7 @@ public class DevKitCheats : MonoBehaviour
 
         loadout = new int[3];
     }
+    
 
     public void KillAllEnemies()
     {
@@ -182,5 +187,10 @@ public class DevKitCheats : MonoBehaviour
             addChipDropdownLeft.value = 0;
         }
 
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

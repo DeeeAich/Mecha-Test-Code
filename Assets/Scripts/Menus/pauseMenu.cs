@@ -8,8 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class pauseMenu : MonoBehaviour
 {
+    [Tooltip("Set to zero to ignore")]
+    [SerializeField] private float inactivityTime;
+    private float inactivityTimer = 0;
+    private bool useInactivityTimer;
+    
     public bool paused;
     public bool canPause = true;
+    public bool canUseDevkit = true;
     
     public float gameSpeed = 1f;
     
@@ -23,6 +29,7 @@ public class pauseMenu : MonoBehaviour
     private InputAction pauseAction;
     private InputAction openInventoryAction;
     private InputAction openDevkitCheatsAction;
+    private InputAction anyAction;
 
     public UnityEvent onPause;
     public UnityEvent onUnpause;
@@ -34,10 +41,33 @@ public class pauseMenu : MonoBehaviour
         pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
         openInventoryAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Inventory"];
         openDevkitCheatsAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["DevkitCheats"];
+        anyAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Any Action"];
         
         pauseAction.performed += onPauseButtonPressed;
         openInventoryAction.performed += OpenInventory;
         openDevkitCheatsAction.performed += OpenDevkitCheats;
+        anyAction.performed += anyActionPressed;
+        
+        if (inactivityTime != 0)
+        {
+            useInactivityTimer = true;
+            inactivityTimer = inactivityTime;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (useInactivityTimer && !paused)
+        {
+            if (inactivityTimer > 0)
+            {
+                inactivityTimer -= Time.fixedDeltaTime;
+                if (inactivityTimer <= 0)
+                {
+                    SceneManager.LoadScene(0);
+                }
+            }
+        }
     }
 
     public void TogglePause()
@@ -81,6 +111,11 @@ public class pauseMenu : MonoBehaviour
             inventoryMenu.SetActive(true);
             InventoryManager.UpdateInventory();
         }
+    }
+
+    public void TriggerBackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void Reset()
@@ -150,6 +185,14 @@ public class pauseMenu : MonoBehaviour
         }
         
         TogglePause();
+    }
+
+    public void anyActionPressed(InputAction.CallbackContext context)
+    {
+        if (useInactivityTimer)
+        {
+            inactivityTimer = inactivityTime;
+        }
     }
 
 
