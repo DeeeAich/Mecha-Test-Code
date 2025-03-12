@@ -95,9 +95,11 @@ public class AudioManager : MonoBehaviour
         {
             case musicTrack.Level2Combat:
 
+                Debug.Log("started " + currentMusicState);
+                ChangeMusicState(musicState.idle);
                 currentMusic = RuntimeManager.CreateInstance(Level2BaseMusic);
                 currentMusic.start();
-                ChangeMusicState(musicState.idle);
+                
 
                 break;
 

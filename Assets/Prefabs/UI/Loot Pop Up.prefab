@@ -349,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5759059470871730255}
   - component: {fileID: 5422189618663510176}
+  - component: {fileID: 1263711146210036310}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -449,6 +450,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1263711146210036310}
+        m_TargetAssemblyTypeName: OneShotAudioEventSender, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &1263711146210036310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168444139685683374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -1273432547
+      Data2: 1220894223
+      Data3: -220753772
+      Data4: -875914642
+    Path: event:/Sound Effects/General/UI/UI Back
+  parameterName: none
 --- !u!1 &176090612766398225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,6 +6515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1110906791350693537}
   - component: {fileID: 7579102762214307825}
+  - component: {fileID: 8303560130753248236}
   m_Layer: 5
   m_Name: Weapon Right Button
   m_TagString: Untagged
@@ -6569,6 +6603,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8303560130753248236}
+        m_TargetAssemblyTypeName: OneShotAudioEventSender, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8303560130753248236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911669212701618379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 44706977
+      Data2: 1178562705
+      Data3: 372762041
+      Data4: 410891581
+    Path: event:/Sound Effects/General/UI/UI Confirm
+  parameterName: none
 --- !u!1 &1937256412174302781
 GameObject:
   m_ObjectHideFlags: 0
@@ -9161,6 +9227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 649645783297825708}
   - component: {fileID: 4441635329419668867}
+  - component: {fileID: 5234007751777204740}
   m_Layer: 5
   m_Name: Weapon or Weapon Chip
   m_TagString: Untagged
@@ -9214,6 +9281,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5234007751777204740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622815970698361196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 214490764
+      Data2: 1181700034
+      Data3: -1152340571
+      Data4: -346643714
+    Path: event:/Sound Effects/General/UI/Pause Open
+  - Guid:
+      Data1: 1385572435
+      Data2: 1262617538
+      Data3: 1889354114
+      Data4: 309712115
+    Path: event:/Sound Effects/General/UI/Pause Close
+  parameterName: none
 --- !u!1 &2623425713588857213
 GameObject:
   m_ObjectHideFlags: 0
@@ -12180,6 +12273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3535911814851155216}
   - component: {fileID: 2137951296544523656}
+  - component: {fileID: 4806940596979542838}
   m_Layer: 5
   m_Name: Weapon Left Button
   m_TagString: Untagged
@@ -12267,6 +12361,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4806940596979542838}
+        m_TargetAssemblyTypeName: OneShotAudioEventSender, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4806940596979542838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3449672180889021472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 44706977
+      Data2: 1178562705
+      Data3: 372762041
+      Data4: 410891581
+    Path: event:/Sound Effects/General/UI/UI Confirm
+  parameterName: none
 --- !u!1 &3488553039027831137
 GameObject:
   m_ObjectHideFlags: 0
