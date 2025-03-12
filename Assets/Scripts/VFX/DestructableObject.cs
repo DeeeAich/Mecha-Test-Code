@@ -27,8 +27,11 @@ public class DestructableObject : MonoBehaviour
         if (other.CompareTag("Debris"))
             return;
 
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        {
+
             debrisExplosion.explosionTrigger = true;
             destroyed = true;
-
+        }
     }
 }

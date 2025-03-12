@@ -31,7 +31,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
             explosionTrigger = false;
             TriggerExplosion();
         }
-        if (scaleDown && scale>0)
+        if (scaleDown && scale>0.005)
         {
             scale -= Time.deltaTime * scaleSpeed;
             for (int i = 0; i < objectsToPush.Count; i++)
