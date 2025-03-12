@@ -8,7 +8,6 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 
-
 public enum LootType
 {
     weapon,
@@ -121,7 +120,6 @@ public class Room : MonoBehaviour
         }
     }
     
-
     public void startRoom()
     {
         Debug.Log("Starting Room: " + name);
@@ -190,9 +188,7 @@ public class Room : MonoBehaviour
             if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
             
             if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
-
-            onCompleteRoom.Invoke();
-
+            
             for (int i = 0; i < exitDoors.Length; i++)
             {
                 exitDoors[i].UnlockDoor();
@@ -218,6 +214,8 @@ public class Room : MonoBehaviour
             }
 
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
+            
+            onCompleteRoom.Invoke();
         }
     }
 
