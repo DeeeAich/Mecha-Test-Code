@@ -48,6 +48,7 @@ public class AudioManager : MonoBehaviour
     [Header("Scenes")]
     public string level2SceneName;
     public string tutorialSceneName;
+    public string mainMenuSceneName;
 
     private void Awake()
     {
@@ -69,11 +70,18 @@ public class AudioManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name.ToString() == level2SceneName)
         {
             ChangeMusicTrack(musicTrack.Level2Combat);
+            ChangeMusicState(musicState.idle);
             ChangeAmbienceTrack(ambienceTrack.Level2Ambience);
         }
         if (SceneManager.GetActiveScene().name.ToString() == tutorialSceneName)
         {
             ChangeMusicTrack(musicTrack.Tutorial);
+            ChangeAmbienceTrack(ambienceTrack.None);
+        }
+        if (SceneManager.GetActiveScene().name.ToString() == mainMenuSceneName)
+        {
+            ChangeMusicTrack(musicTrack.Level2Combat);
+            ChangeMusicState(musicState.combat);
             ChangeAmbienceTrack(ambienceTrack.None);
         }
     }
@@ -95,8 +103,6 @@ public class AudioManager : MonoBehaviour
         {
             case musicTrack.Level2Combat:
 
-                Debug.Log("started " + currentMusicState);
-                ChangeMusicState(musicState.idle);
                 currentMusic = RuntimeManager.CreateInstance(Level2BaseMusic);
                 currentMusic.start();
                 
