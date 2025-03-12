@@ -15408,6 +15408,8 @@ GameObject:
   - component: {fileID: 4328909185788537474}
   - component: {fileID: 98967235770875687}
   - component: {fileID: 6064979238679352774}
+  - component: {fileID: 2270263798983967698}
+  - component: {fileID: 6129385342237821567}
   m_Layer: 0
   m_Name: Overseer Laser
   m_TagString: Untagged
@@ -15479,6 +15481,46 @@ MonoBehaviour:
   targetParticle2: {fileID: 6304240609383354546}
   aimOn: 0
   laserOn: 0
+--- !u!114 &2270263798983967698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572514649811556978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -2077313332
+      Data2: 1290526032
+      Data3: -308034662
+      Data4: -611508959
+    Path: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Idle
+  parameterName: none
+--- !u!114 &6129385342237821567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572514649811556978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c7cb02a3e45b64a974d10c1581146f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    Guid:
+      Data1: -2077313332
+      Data2: 1290526032
+      Data3: -308034662
+      Data4: -611508959
+    Path: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Idle
+  isLooping: 0
 --- !u!1 &6680718631901054120
 GameObject:
   m_ObjectHideFlags: 0

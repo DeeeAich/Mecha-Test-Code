@@ -10,11 +10,6 @@ public class LoopingAudioEventSender : MonoBehaviour
     public EventReference sound;
     public bool isLooping;
 
-
-    [Header("If speed changes (optional)")]
-    public Animator animatorResponsible;
-    public string nameOfSpeedFloat;
-
     private EventInstance eventInstance;
 
     public void StartLoopingAudio()
@@ -25,16 +20,11 @@ public class LoopingAudioEventSender : MonoBehaviour
             RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject);
             eventInstance.start();
             isLooping = true;
-            if (animatorResponsible != null)
-            {
-                eventInstance.setParameterByName("Action Speed", animatorResponsible.GetFloat(nameOfSpeedFloat));
-            }
         }
     }
     public void StopLoopingAudio()
     {
         eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        eventInstance.release();
         isLooping = false;
     }
 
@@ -42,8 +32,14 @@ public class LoopingAudioEventSender : MonoBehaviour
     {
         if (isLooping)
         {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            eventInstance.release();
+            eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+    private void OnDisable()
+    {
+        if (isLooping)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
