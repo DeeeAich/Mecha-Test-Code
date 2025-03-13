@@ -53,7 +53,7 @@ public class TriggerDebrisExplosion : MonoBehaviour
     public void TriggerExplosion()
     {
         Destroy(gameObject, timeToDelete);
-        if (explosionVFX != null && !explosionVFX.activeInHierarchy) { explosionVFX.SetActive(true); }
+        if (explosionVFX != null && !explosionVFX.activeInHierarchy) { explosionVFX.SetActive(true); explosionVFX.transform.parent = null; }
         if (animatorToPause!= null && animatorToPause.enabled) { animatorToPause.speed = 0; }
         if (animatorsToPause != null)
         {
