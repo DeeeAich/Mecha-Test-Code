@@ -191,6 +191,12 @@ public class DevKitCheats : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+    
+    public void SetGameSpeedSlider(Slider slider)
+    {
+        FindObjectOfType<pauseMenu>().gameSpeed = slider.value;
     }
 }

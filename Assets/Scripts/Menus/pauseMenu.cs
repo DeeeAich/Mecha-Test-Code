@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class pauseMenu : MonoBehaviour
 {
@@ -115,6 +116,7 @@ public class pauseMenu : MonoBehaviour
 
     public void TriggerBackToMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
@@ -194,6 +196,7 @@ public class pauseMenu : MonoBehaviour
             inactivityTimer = inactivityTime;
         }
     }
+
 
 
 }

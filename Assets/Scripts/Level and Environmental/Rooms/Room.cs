@@ -193,8 +193,11 @@ public class Room : MonoBehaviour
             {
                 for (int i = 0; i < waveSpawners.Length; i++)
                 {
-                    waveSpawners[i].isComplete = true;
-                    Destroy(waveSpawners[i].gameObject);
+                    if (waveSpawners[i] != null)
+                    {
+                        waveSpawners[i].isComplete = true;
+                        Destroy(waveSpawners[i].gameObject);
+                    }
                 }
             }
  
