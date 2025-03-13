@@ -1949,7 +1949,7 @@ namespace AITree
             new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
             new ModifyAgentStat("angularSpeed", 0f), //no rotate,
             new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+            new ModifyAgentStat("acceleration", 200f), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
             new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),

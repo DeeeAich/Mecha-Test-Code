@@ -502,7 +502,6 @@ public class OverseerBT : BehaviourTree
     public override void Resume()
     {
         base.Resume();
-        OverseerNailGun[] guns = weaponsPivot.GetComponents<OverseerNailGun>();
         foreach (OverseerNailGun g in guns)
         {
             g.pause = false;
