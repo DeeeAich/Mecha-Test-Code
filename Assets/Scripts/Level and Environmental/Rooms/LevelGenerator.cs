@@ -53,11 +53,9 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        SpawnRoom(levelInfo.roomPool.entryRooms[seededRandom.Next(0, levelInfo.roomPool.entryRooms.Length)], StartPosition);
+        SpawnRoom(levelInfo.roomPool.entryRooms[0], StartPosition);
         currentRoom.GetComponent<Room>().roomLootType = GenerateNextLootType(1)[0];
-        roomIndex = 0;
-        if(PlayerManager.instance != null)
-            PlayerManager.instance.SetStats();
+        if(PlayerManager.instance != null) PlayerManager.instance.SetStats();
     }
 
     public GameObject[] NextRoomSelection(int count)
@@ -65,11 +63,16 @@ public class LevelGenerator : MonoBehaviour
         GameObject[] selection = new GameObject[count];
         List<GameObject> possibleRooms = new List<GameObject>();
 
-        if (roomIndex == roomsInThisFloor - 1)
+        if (roomIndex  < levelInfo.roomPool.entryRooms.Length)
+        {
+            print("Using entry rooms");
+            possibleRooms.Add(levelInfo.roomPool.entryRooms[roomIndex]);
+        }
+        else if (roomIndex == roomsInThisFloor)
         {
             possibleRooms = levelInfo.roomPool.bossRooms.ToList();
         }
-        else if (roomIndex == roomsInThisFloor)
+        else if (roomIndex == roomsInThisFloor + 1)
         {
             possibleRooms = levelInfo.roomPool.finalRooms.ToList();
         }
@@ -81,8 +84,18 @@ public class LevelGenerator : MonoBehaviour
         {
             possibleRooms = levelInfo.roomPool.standardRooms.ToList();
         }
+        
+        Debug.Log("There are " + possibleRooms.Count + " rooms available");
 
-        possibleRooms.Remove(mostrecentyUsedRoomPrefab);
+        
+        if (possibleRooms.Contains(mostrecentyUsedRoomPrefab))
+        {
+            print("Removing " + mostrecentyUsedRoomPrefab.name);
+            possibleRooms.Remove(mostrecentyUsedRoomPrefab);
+        }
+        
+        
+        if(possibleRooms.Count == 0) Debug.LogError("FUCK AHH THERE ARE NO FUCKING ROOMS TO GENERATE");
         
         int totalPossibleRooms = possibleRooms.Count;
         for (int i = 0; i < selection.Length; i++)
@@ -179,11 +192,12 @@ public class LevelGenerator : MonoBehaviour
     
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
+        roomIndex++;
         mostrecentyUsedRoomPrefab = room;
         if(oldRoom != null) Destroy(oldRoom);
         if(currentRoom != null) oldRoom = currentRoom;
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
         onSpawnRoom.Invoke();
-        roomIndex++;
+   
     }
 }

@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &19575749529987131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7087960124568107892}
+  - component: {fileID: 5983627224697668776}
+  m_Layer: 0
+  m_Name: Lvl 2 First Wave Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7087960124568107892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19575749529987131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5983627224697668776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19575749529987131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9c2ff29cfaaa94f9dc7d4a62e3ec4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawning: 0
+  isComplete: 0
+  currentWave: 0
+  enemiesKilled: 0
+  totalEnemiesToSpawn: 0
+  looping: 0
+  spawnOnStart: 1
+  remainingEnemiesToTriggerNextWave: 1
+  enemyTypes: 00000000
+  waves: 010000000200000003000000
+  enemiesToSpawn:
+  - Name: Hi Meow
+    prefab: {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f,
+      type: 3}
+    spawnAnimationPrefab: {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563,
+      type: 3}
+    spawnChance: 1
+    rarity: 0
+  - Name: Hi Meow
+    prefab: {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e,
+      type: 3}
+    spawnAnimationPrefab: {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b,
+      type: 3}
+    spawnChance: 1
+    rarity: 0
+  - Name: Hi Meow
+    prefab: {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f,
+      type: 3}
+    spawnAnimationPrefab: {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563,
+      type: 3}
+    spawnChance: 1
+    rarity: 0
+  - Name: Hi Meow
+    prefab: {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e,
+      type: 3}
+    spawnAnimationPrefab: {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b,
+      type: 3}
+    spawnChance: 1
+    rarity: 0
+  spawnPoints: []
+  enemySpawnPrefab: {fileID: 2025918306934670692, guid: 9021f149eb192824093a81baddb9e885,
+    type: 3}
+  spawnedEnemies: []
+  incomingEnemySpawners: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []

@@ -62,6 +62,7 @@ public class Pickup : MonoBehaviour
     private float buttonInteractBlockTimer;
     private float closeUiTimer;
     private Button buttonToInitiallySelect;
+    private bool canUse = true;
 
     private void Start()
     {
@@ -120,20 +121,17 @@ public class Pickup : MonoBehaviour
             {
                 if (CheckMouseInBounds(leftSelectButton.GetComponent<RectTransform>()))
                 {
-                    print("left select");
                     leftSelectButton.Select();
                     uiPopupAnimator.SetInteger("Selected", 1);
                 }
                 else if (CheckMouseInBounds(initiallySelectedButton.GetComponent<RectTransform>()))
                 {
-                    print("entry select");
                     initiallySelectedButton.Select();
                     uiPopupAnimator.SetInteger("Selected", 2);
                 }
                 else if (CheckMouseInBounds(rightSelectButton.GetComponent<RectTransform>()))
                 {
                     rightSelectButton.Select();
-                    print("Right select");
                     uiPopupAnimator.SetInteger("Selected", 3);
                 }
 
@@ -277,6 +275,8 @@ public class Pickup : MonoBehaviour
     
     public void OnPickup(int optionalData)
     {
+        if(!canUse) return;
+
         PlayerBody.Instance().StopParts(true,true);
         Debug.Log("Picking up " + name);
         
@@ -352,6 +352,8 @@ public class Pickup : MonoBehaviour
         }
         
         if(uiPopup != null) closeUiTimer = 0.5f;
+
+        canUse = false;
     }
 
     public void CancelPickup()

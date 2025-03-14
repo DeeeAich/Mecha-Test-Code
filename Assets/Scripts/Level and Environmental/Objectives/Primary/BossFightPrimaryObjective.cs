@@ -12,4 +12,12 @@ public class BossFightPrimaryObjective : Objective
     {
         progressBar.fillAmount = bossHealth.health / bossHealth.maxHealth;
     }
+
+    private void FixedUpdate()
+    {
+        if (bossHealth == null || bossHealth.health <= 0)
+        {
+            TriggerComplete();
+        }
+    }
 }

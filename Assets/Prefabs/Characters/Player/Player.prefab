@@ -113,6 +113,12 @@ MonoBehaviour:
   rightWInfo: {fileID: 11400000, guid: 3721998139341f34f930225454512e35, type: 2}
   rightWeapon: {fileID: 737184082610962960}
   rightMods: []
+  leftFire:
+    m_PersistentCalls:
+      m_Calls: []
+  rightFire:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5131012082131279984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentUltimate: {fileID: 11400000, guid: 177588e168de700498e305f21521a64a, type: 2}
+  ultimateCaster: {fileID: 0}
+  firePoint: {fileID: 0}
   recharging: 0
 --- !u!114 &7768998558301955401
 MonoBehaviour:
@@ -139,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3b9b2526750b34ba07881be8f0ae7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  maxHealth: 200
+  health: 300
+  maxHealth: 300
   isAlive: 1
   canTakeDamage: 1
   canDie: 1
