@@ -662,12 +662,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889274244183271014}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3686, y: 2.5849, z: 167.9}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.36859894, y: 2.5849, z: 19.899994}
   m_LocalScale: {x: 88.16196, y: 6.1698, z: 7.2842073}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6675383436235064975}
+  m_Father: {fileID: 8941150690522430576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &950485292625669888
 MeshFilter:
@@ -1424,12 +1424,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3256277509902856008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3686, y: 2.5849, z: 3.14}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.36859894, y: 2.5849, z: -144.86}
   m_LocalScale: {x: 88.16196, y: 6.1698, z: 7.2842073}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6675383436235064975}
+  m_Father: {fileID: 8941150690522430576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7342494574211585074
 MeshFilter:
@@ -2286,11 +2286,11 @@ Transform:
   m_GameObject: {fileID: 4103903883215031536}
   serializedVersion: 2
   m_LocalRotation: {x: -0.11650175, y: 0.0049334597, z: 0.042020097, w: 0.992289}
-  m_LocalPosition: {x: 29.389, y: 5.57, z: 144.807}
+  m_LocalPosition: {x: 29.389, y: 5.57, z: -3.1929932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6675383436235064975}
+  m_Father: {fileID: 8941150690522430576}
   m_LocalEulerAnglesHint: {x: -13.393, y: 0, z: 4.85}
 --- !u!33 &3892629812222307148
 MeshFilter:
@@ -7824,6 +7824,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Wave Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5892307996166623703, guid: d549a863e08f77346a6ad1a99715672f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7299772783369826842, guid: d549a863e08f77346a6ad1a99715672f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9136,6 +9141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bosswalls (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11594,6 +11604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bosswalls (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11889,6 +11904,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bosswalls (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14934,6 +14954,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bosswalls (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17114,6 +17139,11 @@ PrefabInstance:
       objectReference: {fileID: 9185770508605036652}
     - target: {fileID: 5005838686600819629, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
+      propertyPath: primaryObjective
+      value: 
+      objectReference: {fileID: 991179752737582098}
+    - target: {fileID: 5005838686600819629, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
       propertyPath: possiblePrimaryObjectives.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -17186,18 +17216,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 394759739386243060, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3724818249689808796}
-    - targetCorrespondingSourceObject: {fileID: 394759739386243060, guid: 72e0cda6293c9f440b70602cbf332fa9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6242535587187108082}
-    - targetCorrespondingSourceObject: {fileID: 394759739386243060, guid: 72e0cda6293c9f440b70602cbf332fa9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7526362691526841350}
-    - targetCorrespondingSourceObject: {fileID: 394759739386243060, guid: 72e0cda6293c9f440b70602cbf332fa9,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7335667691703296818}
     - targetCorrespondingSourceObject: {fileID: 7967020406941017702, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
@@ -17227,6 +17245,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 341203920944501101}
+    - targetCorrespondingSourceObject: {fileID: 2723717988589804811, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3724818249689808796}
+    - targetCorrespondingSourceObject: {fileID: 2723717988589804811, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6242535587187108082}
+    - targetCorrespondingSourceObject: {fileID: 2723717988589804811, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7526362691526841350}
     - targetCorrespondingSourceObject: {fileID: 3818425605392596512, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
       insertIndex: -1
@@ -17705,6 +17735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bosswalls
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20700,6 +20735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bosswalls (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5720013020274619554, guid: ae85611ce8a9a8a43b5c5111d1a77352,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.88
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21450,6 +21490,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Fight Objective
       objectReference: {fileID: 0}
+    - target: {fileID: 8037628669114507086, guid: 50b82ef20dd79f343b501c568b9b34c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8561443352811630671, guid: 50b82ef20dd79f343b501c568b9b34c8,
         type: 3}
       propertyPath: bossHealth
@@ -21460,6 +21505,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50b82ef20dd79f343b501c568b9b34c8, type: 3}
+--- !u!114 &991179752737582098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8561443352811630671, guid: 50b82ef20dd79f343b501c568b9b34c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8867934999199669341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d09b69a9038114991434b6a7a9b038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7335667691703296818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2223860140703235951, guid: 50b82ef20dd79f343b501c568b9b34c8,

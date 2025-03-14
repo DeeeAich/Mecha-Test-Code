@@ -241,7 +241,7 @@ public class DevKitCheats : MonoBehaviour
             else
             {
                 bullet.enabled = true;
-                bullet.StartCoroutine(bullet.AutoReset());
+                if(bullet.gameObject.activeSelf) bullet.StartCoroutine(bullet.AutoReset());
             }
         }
         

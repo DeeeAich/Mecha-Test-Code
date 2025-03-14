@@ -22995,6 +22995,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 6208013785010978532}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 5979327928251961574}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -32104,6 +32116,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8393812595187494764}
         m_TargetAssemblyTypeName: pauseMenu, Assembly-CSharp
         m_MethodName: TriggerOpenInventoryFromMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6054246922214105206}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62606,7 +62630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad6bdfac2268ab4191cdf59840105e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inactivityTime: 20
+  usesDevkitButtons: 1
+  inactivityTime: 30
+  inactivityTimer: 0
+  hasInputsPressed: 0
   paused: 0
   canPause: 1
   canUseDevkit: 1
@@ -62615,6 +62642,8 @@ MonoBehaviour:
   mainPauseMenu: {fileID: 6208013785010978532}
   inventoryMenu: {fileID: 5979327928251961574}
   devkitCheatsMenu: {fileID: 9092242474897630701}
+  mainPauseMenuInitialButton: {fileID: 4575647324973419453}
+  inventoryMenuInitialButton: {fileID: 6054246922214105206}
   InventoryManager: {fileID: 8114501566531991416}
   onPause:
     m_PersistentCalls:

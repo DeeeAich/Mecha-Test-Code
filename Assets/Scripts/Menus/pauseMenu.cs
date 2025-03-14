@@ -82,11 +82,11 @@ public class pauseMenu : MonoBehaviour
     
     private void Update()
     {
-        if (usesDevkitButtons)
+        if (usesDevkitButtons && Input.GetKey(KeyCode.RightBracket))
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
-                FindObjectOfType<DevKitCheats>().ToggleEnemyTime();
+                FindObjectOfType<DevKitCheats>(true).ToggleEnemyTime();
             }
 
             if (Input.GetKeyDown(KeyCode.P))

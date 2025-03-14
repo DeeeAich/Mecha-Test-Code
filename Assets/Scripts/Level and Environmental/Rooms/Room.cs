@@ -54,8 +54,7 @@ public class Room : MonoBehaviour
         captureZones = GetComponentsInChildren<CaptureZone>(true);
         enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
         waveSpawners = GetComponentsInChildren<WaveSpawner>(true);
-
-        if (GetComponentInChildren<Objective>(true) != null) primaryObjective = GetComponentInChildren<Objective>();
+        
     }
 
     private void Start()
@@ -139,6 +138,14 @@ public class Room : MonoBehaviour
             exitDoors[i].CloseDoor();
             exitDoors[i].LockDoor();
         }
+        
+        if (waveSpawners != null || waveSpawners.Length > 0)
+        {
+            for (int i = 0; i < waveSpawners.Length; i++)
+            {
+                waveSpawners[i].gameObject.SetActive(true);
+            }
+        }
 
         if (primaryObjective == null)
         {
@@ -158,6 +165,8 @@ public class Room : MonoBehaviour
             primaryObjective.gameObject.SetActive(true);
             primaryObjective.onComplete.AddListener(completeRoom);
         }
+
+
 
         CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
         if (camRoom3D != null)
