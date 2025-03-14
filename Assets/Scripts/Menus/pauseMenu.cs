@@ -9,10 +9,14 @@ using UnityEngine.UI;
 
 public class pauseMenu : MonoBehaviour
 {
+    [SerializeField] private bool usesDevkitButtons = true;
+    
     [Tooltip("Set to zero to ignore")]
     [SerializeField] private float inactivityTime;
-    private float inactivityTimer = 0;
+    public float inactivityTimer = 0;
     private bool useInactivityTimer;
+    public bool hasInputsPressed;
+    
     
     public bool paused;
     public bool canPause = true;
@@ -24,6 +28,9 @@ public class pauseMenu : MonoBehaviour
     [SerializeField] private GameObject mainPauseMenu;
     [SerializeField] private GameObject inventoryMenu;
     [SerializeField] private GameObject devkitCheatsMenu;
+    
+    [SerializeField] private Button mainPauseMenuInitialButton;
+    [SerializeField] private Button inventoryMenuInitialButton;
 
     [SerializeField] private InventoryManager InventoryManager;
 
@@ -47,7 +54,9 @@ public class pauseMenu : MonoBehaviour
         pauseAction.performed += onPauseButtonPressed;
         openInventoryAction.performed += OpenInventory;
         openDevkitCheatsAction.performed += OpenDevkitCheats;
+        
         anyAction.performed += anyActionPressed;
+        anyAction.canceled += anyActionReleased;
         
         if (inactivityTime != 0)
         {
@@ -58,7 +67,7 @@ public class pauseMenu : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (useInactivityTimer && !paused)
+        if (useInactivityTimer && !paused && !hasInputsPressed)
         {
             if (inactivityTimer > 0)
             {
@@ -67,6 +76,22 @@ public class pauseMenu : MonoBehaviour
                 {
                     SceneManager.LoadScene(0);
                 }
+            }
+        }
+    }
+    
+    private void Update()
+    {
+        if (usesDevkitButtons)
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                FindObjectOfType<DevKitCheats>().ToggleEnemyTime();
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                SceneManager.LoadScene(0);
             }
         }
     }
@@ -136,6 +161,9 @@ public class pauseMenu : MonoBehaviour
         pauseAction.performed -= onPauseButtonPressed;
         openInventoryAction.performed -= OpenInventory;
         openDevkitCheatsAction.performed -= OpenDevkitCheats;
+        anyAction.performed -= anyActionPressed;
+        anyAction.started -= anyActionPressed;
+        anyAction.canceled -= anyActionPressed;
     }
 
     public void OpenInventory(InputAction.CallbackContext context)
@@ -150,6 +178,7 @@ public class pauseMenu : MonoBehaviour
         {
             inventoryMenu.SetActive(true);
             InventoryManager.UpdateInventory();
+            inventoryMenuInitialButton.Select();
         }
 
         TogglePause();
@@ -184,6 +213,7 @@ public class pauseMenu : MonoBehaviour
         else
         {
             mainPauseMenu.SetActive(true);
+            mainPauseMenuInitialButton.Select();
         }
         
         TogglePause();
@@ -194,7 +224,17 @@ public class pauseMenu : MonoBehaviour
         if (useInactivityTimer)
         {
             inactivityTimer = inactivityTime;
+            hasInputsPressed = true;
         }
+    }
+
+    public void anyActionReleased(InputAction.CallbackContext context)
+    {
+        if (useInactivityTimer)
+        {
+            hasInputsPressed = false;
+        }
+        
     }
 
 

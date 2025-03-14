@@ -54,10 +54,8 @@ public class Room : MonoBehaviour
         captureZones = GetComponentsInChildren<CaptureZone>(true);
         enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
         waveSpawners = GetComponentsInChildren<WaveSpawner>(true);
-        if (TryGetComponent(out Objective objective))
-        {
-            primaryObjective = objective;
-        }
+
+        if (GetComponentInChildren<Objective>(true) != null) primaryObjective = GetComponentInChildren<Objective>();
     }
 
     private void Start()
@@ -157,6 +155,7 @@ public class Room : MonoBehaviour
         }
         else
         {
+            primaryObjective.gameObject.SetActive(true);
             primaryObjective.onComplete.AddListener(completeRoom);
         }
 

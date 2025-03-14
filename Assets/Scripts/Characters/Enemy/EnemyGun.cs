@@ -28,7 +28,7 @@ public class EnemyGun : MonoBehaviour
         StartCoroutine(FireOnRepeat());
     }
 
-    IEnumerator FireOnRepeat()
+    public IEnumerator FireOnRepeat()
     {
         float timer = 0f;
         float randTime;

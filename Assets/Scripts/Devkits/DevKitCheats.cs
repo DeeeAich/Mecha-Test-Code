@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AITree;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -9,8 +11,6 @@ using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
 {
-
-    
     [SerializeField] private LootPoolScriptable lootPool;
 
     [SerializeField] private TMP_Dropdown leftGunDropdown;
@@ -23,6 +23,7 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private TMP_Dropdown bodyChipsDropdown;
 
     private int[] loadout;
+    private bool timeIsGoing;
 
     private void Start()
     {
@@ -69,7 +70,6 @@ public class DevKitCheats : MonoBehaviour
 
         loadout = new int[3];
     }
-    
 
     public void KillAllEnemies()
     {
@@ -198,5 +198,75 @@ public class DevKitCheats : MonoBehaviour
     public void SetGameSpeedSlider(Slider slider)
     {
         FindObjectOfType<pauseMenu>().gameSpeed = slider.value;
+    }
+
+    public void ToggleEnemyTime()
+    {
+        bool freeze = !timeIsGoing;
+        timeIsGoing = !timeIsGoing;
+        
+        foreach (BehaviourTree enemy in FindObjectsOfType<BehaviourTree>(true))
+        {
+            if (freeze)
+            {
+                enemy.Stop();
+            }
+            else
+            {
+                enemy.Resume();
+            }
+        }
+        
+        foreach (EnemyGun gun in FindObjectsOfType<EnemyGun>(true))
+        {
+            if (freeze)
+            {
+                gun.enabled = false;
+                gun.StopAllCoroutines();
+            }
+            else
+            {
+                gun.enabled = true;
+                gun.StartCoroutine(gun.FireOnRepeat());
+            }
+        }
+
+        foreach (BasicBullet bullet in FindObjectsOfType<BasicBullet>(true))
+        {
+            if (freeze)
+            {
+                bullet.enabled = false;
+                bullet.StopAllCoroutines();
+            }
+            else
+            {
+                bullet.enabled = true;
+                bullet.StartCoroutine(bullet.AutoReset());
+            }
+        }
+        
+        foreach (MoveProjectile bullet in FindObjectsOfType<MoveProjectile>(true))
+        {
+            if (freeze)
+            {
+                bullet.enabled = false;
+            }
+            else
+            {
+                bullet.enabled = true;
+            }
+        }
+        
+        foreach (TurretLook turret in FindObjectsOfType<TurretLook>(true))
+        {
+            if (freeze)
+            {
+                turret.enabled = false;
+            }
+            else
+            {
+                turret.enabled = true;
+            }
+        }
     }
 }
