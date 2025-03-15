@@ -60,7 +60,7 @@ public class Airstike : Ultimate
 
         }
 
-        yield return new WaitForSeconds(rechargeTime - (betweenShots * enemiesToHit));
+        yield return new WaitForSeconds(rechargeTime);
 
         PlayerUltyControl.instance.RunAnimation("Reload");
         PlayerUltyControl.instance.recharging = false;

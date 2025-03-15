@@ -133,7 +133,7 @@ public class ChargeRifle : Weapon
 
         myAnim.SetBool("Charge", false);
 
-        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth * 2,
+        RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth * 3.5f,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
         float damageModed = GetComponent<Critical>().AdditiveDamage(damage[charges - 1] * modifiers.damage);
