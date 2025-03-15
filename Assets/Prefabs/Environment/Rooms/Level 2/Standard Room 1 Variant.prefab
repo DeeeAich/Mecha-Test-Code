@@ -662,7 +662,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6904608076792150735}
-  - component: {fileID: 1788702880251371528}
   m_Layer: 0
   m_Name: Corner Yoke
   m_TagString: Untagged
@@ -695,25 +694,6 @@ Transform:
   - {fileID: 8008964690851747760}
   m_Father: {fileID: 6019325378028744993}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &1788702880251371528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4644558570029641482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 1
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1 &4795312148715572529
 GameObject:
   m_ObjectHideFlags: 0
@@ -10888,10 +10868,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
+      propertyPath: m_Size.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 88fffda2416ddce4da1d6cdaaf8f49c4,
         type: 2}
+    - target: {fileID: 1741534106530285847, guid: 72e0cda6293c9f440b70602cbf332fa9,
+        type: 3}
+      propertyPath: m_CollectObjects
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4652148494111523589, guid: 72e0cda6293c9f440b70602cbf332fa9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14059,6 +14064,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level_2_Cover_PowerBox (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550874284794667850, guid: 85063ef65b9f7114d919b57c9a25e8bf,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5504849293097971104, guid: 85063ef65b9f7114d919b57c9a25e8bf,
         type: 3}
