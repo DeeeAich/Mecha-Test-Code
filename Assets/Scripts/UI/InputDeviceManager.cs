@@ -47,6 +47,10 @@ public class InputDeviceManager : MonoBehaviour
                 return Instance;
             }
         }
+        private set
+        {
+            Instance = value;
+        }
     }
     public InputDevice currentInputDevice;
 
