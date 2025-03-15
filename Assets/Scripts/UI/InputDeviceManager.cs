@@ -31,7 +31,23 @@ public enum InputDevice
 
 public class InputDeviceManager : MonoBehaviour
 {
-    public static InputDeviceManager instance;
+    private static InputDeviceManager Instance;
+
+    public static InputDeviceManager instance
+    {
+        get
+        {
+            if(Instance != null)
+            {
+                return Instance;
+            }
+            else
+            {
+                Instance = FindObjectOfType<InputDeviceManager>();
+                return Instance;
+            }
+        }
+    }
     public InputDevice currentInputDevice;
 
 

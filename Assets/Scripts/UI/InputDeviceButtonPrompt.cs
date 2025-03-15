@@ -29,7 +29,8 @@ public class InputDeviceButtonPrompt : MonoBehaviour
         {
             buttomImage.preserveAspect = true;
         }
-
+        if (InputDeviceManager.instance == null)
+            return;
         switch (buttonAction)
         {
 
