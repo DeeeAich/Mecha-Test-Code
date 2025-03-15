@@ -57,6 +57,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         lastMax = myHealth.maxHealth;
         instance = this;
         myHealth.onDeath.AddListener(OnDeath);
+        SetControlScheme(playerInputs);
     }
 
     private void Start()

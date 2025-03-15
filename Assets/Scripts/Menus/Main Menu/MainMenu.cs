@@ -5,7 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    float timer = 0f;
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if(timer > 5f)
+        {
+            UnityEngine.UI.Button selected = GetComponentInChildren<UnityEngine.UI.Button>();
+            selected.Select();
+            timer = 0f;
+        }
+    }
 
     public void StartGame()
     {
