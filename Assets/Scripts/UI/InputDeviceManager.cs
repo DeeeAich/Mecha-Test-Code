@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//Jacob was here
 
 public enum ButtonAction
 {
@@ -43,12 +43,21 @@ public class InputDeviceManager : MonoBehaviour
             }
             else
             {
-                Instance = FindObjectOfType<InputDeviceManager>();
+                InputDeviceManager[] managers = FindObjectsOfType<InputDeviceManager>();
+                foreach (InputDeviceManager l in managers)
+                {
+                    
+                        if (l.gameObject.TryGetComponent<InputDeviceManager>(out Instance))
+                        {
+                        return Instance;
+                        }
+                }
                 return Instance;
             }
         }
         private set
         {
+            if(Instance!=null)
             Instance = value;
         }
     }
@@ -101,9 +110,9 @@ public class InputDeviceManager : MonoBehaviour
     {
         if (instance == null)
         {
+            DontDestroyOnLoad(this);
             transform.parent = null;
             instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {

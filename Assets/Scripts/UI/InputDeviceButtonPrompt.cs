@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Jacob was here
+
 public class InputDeviceButtonPrompt : MonoBehaviour
 {
 
@@ -14,23 +16,26 @@ public class InputDeviceButtonPrompt : MonoBehaviour
         UpdateButton();
     }
 
-    private void OnEnable()
+    private void LateUpdate()
+    {
+        UpdateButton();
+    }
+
+    private void Awake()
     {
         UpdateButton();
     }
     public void UpdateButton()
     {
-  if (buttomImage == null)
+        if (buttomImage == null)
         {
-            buttomImage = GetComponent<Image>(); 
+            buttomImage = GetComponent<Image>();
         }
 
-        if (buttomImage.preserveAspect==false)
+        if (buttomImage.preserveAspect == false)
         {
             buttomImage.preserveAspect = true;
         }
-        if (InputDeviceManager.instance == null)
-            return;
         switch (buttonAction)
         {
 
