@@ -14,7 +14,7 @@ public class Airstike : Ultimate
 
     public override void ActivateUltimate()
     {
-        if (FindObjectsOfType<AITree.BehaviourTree>().Length == 0)
+        if (FindObjectsOfType<AITree.BehaviourTree>().Length == 0 || PlayerUltyControl.instance.recharging)
             return;
 
         PlayerUltyControl.instance.recharging = true;
@@ -29,8 +29,6 @@ public class Airstike : Ultimate
         PlayerUltyControl.instance.RunAnimation("Fire");
 
         yield return new WaitForSeconds(castTime);
-
-        PlayerUI.instance.UltUsed();
 
         AITree.BehaviourTree[] enemies = FindObjectsOfType<AITree.BehaviourTree>();
         int listLoop = 0;
@@ -51,14 +49,17 @@ public class Airstike : Ultimate
 
         foreach (GameObject missile in missiles)
         {
+            if (missile != null)
+            {
+                missile.SetActive(true);
 
-            missile.SetActive(true);
+                missile.transform.parent = null;
 
-            missile.transform.parent = null;
-
-            yield return new WaitForSeconds(betweenShots);
-
+                yield return new WaitForSeconds(betweenShots);
+            }
         }
+
+        PlayerUI.instance.UltUsed();
 
         yield return new WaitForSeconds(rechargeTime);
 

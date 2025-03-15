@@ -86,15 +86,19 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
         if (lastHealth != myHealth.health || lastMax != myHealth.maxHealth)
         {
-            lastHealth = myHealth.health;
+            lastHealth = myHealth.health + myHealth.maxHealth - lastMax;
             lastMax = myHealth.maxHealth;
             myUI.HealthChanged(lastHealth, lastMax);
         }
 
-        if(weaponHolder.leftWeapon != null)
+        if (weaponHolder.leftWeapon != null)
             myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
+        else
+            myUI.WeaponAmmoLeft(100, 0);
         if(weaponHolder.rightWeapon != null)
             myUI.WeaponAmmoRight(weaponHolder.rightWeapon.maxAmmo * weaponHolder.rightWeapon.modifiers.ammoCount, weaponHolder.rightWeapon.curAmmo);
+        else
+            myUI.WeaponAmmoRight(100, 0);
     }
 
     private void TriggerEndOfRoom()
@@ -180,7 +184,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         rightRe.performed -= weaponHolder.ReloadRight;
         interact.performed -= Interact;
         playerInputs.onControlsChanged -= SetControlScheme;
-
+        myHealth.onDeath.RemoveListener(OnDeath);
     }
 
     private void SetHooks()

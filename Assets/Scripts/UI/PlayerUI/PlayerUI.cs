@@ -18,9 +18,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> healthTexts;
     [SerializeField] float healthChangeSpeed;
     float currentPoint;
-    [SerializeField] Image leftWeapon;
+    [SerializeField] Image[] weaponImages;
     [SerializeField] TextMeshProUGUI leftAmmo;
-    [SerializeField] Image rightWeapon;
     [SerializeField] TextMeshProUGUI rightAmmo;
     [SerializeField] List<Image> dashCharges = new();
     [SerializeField] TextMeshProUGUI dashCountTxt;
@@ -131,17 +130,26 @@ public class PlayerUI : MonoBehaviour
     public void WeaponChange(Sprite weaponImage, bool left)
     {
 
-        if(left)
-            leftWeapon.sprite = weaponImage;
+        if (left)
+        {
+            weaponImages[0].gameObject.SetActive(true);
+            weaponImages[1].gameObject.SetActive(true);
+            weaponImages[0].sprite = weaponImage;
+            weaponImages[1].sprite = weaponImage;
+        }
         else
-            rightWeapon.sprite = weaponImage;
-
+        {
+            weaponImages[2].gameObject.SetActive(true);
+            weaponImages[3].gameObject.SetActive(true);
+            weaponImages[2].sprite = weaponImage;
+            weaponImages[3].sprite = weaponImage;
+        }
     }
 
     public void WeaponAmmoLeft(float max, float cur)
     {
 
-        leftWeapon.fillAmount = cur / max;
+        weaponImages[0].fillAmount = cur / max;
         leftAmmo.text = cur.ToString();
 
     }
@@ -149,7 +157,7 @@ public class PlayerUI : MonoBehaviour
     public void WeaponAmmoRight(float max, float cur)
     {
 
-        rightWeapon.fillAmount = cur / max;
+        weaponImages[2].fillAmount = cur / max;
         rightAmmo.text = cur.ToString();
 
     }
@@ -186,9 +194,27 @@ public class PlayerUI : MonoBehaviour
         rightAmmo.text = rightAm.ToString();
 
         if (left != null)
-            leftWeapon.sprite = left;
+        {
+            weaponImages[0].sprite = left;
+            weaponImages[1].sprite = left;
+        }
+        else
+        {
+            weaponImages[0].gameObject.SetActive(false);
+            weaponImages[1].gameObject.SetActive(false);
+        }
         if (right != null)
-            rightWeapon.sprite = right;
+        {
+            weaponImages[2].sprite = right;
+            weaponImages[3].sprite = right;
+        }
+        else
+        {
+
+            weaponImages[1].gameObject.SetActive(false);
+            weaponImages[1].gameObject.SetActive(false);
+        }
+        
 
         dashCount = dashMax;
         dashTotal = dashMax;

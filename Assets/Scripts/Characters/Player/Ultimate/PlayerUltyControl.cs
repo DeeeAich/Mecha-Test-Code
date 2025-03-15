@@ -21,19 +21,17 @@ public class PlayerUltyControl : MonoBehaviour
     {
         myBody = PlayerBody.Instance();
 
-        LoadUltimate(currentUltimate);
-
         instance = this;
+
+        LoadUltimate(currentUltimate);
 
     }
 
     public void UseUltimate(InputAction.CallbackContext context)
     {
         if (!recharging)
-        {
-            
             currentUltimate.ActivateUltimate();
-        }
+
     }
 
     public void EndUltimate(InputAction.CallbackContext context)
