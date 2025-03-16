@@ -63977,7 +63977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad6bdfac2268ab4191cdf59840105e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usesDevkitButtons: 1
   inactivityTime: 0
   inactivityTimer: 0
   hasInputsPressed: 0
@@ -63988,7 +63987,7 @@ MonoBehaviour:
   pauseCanvas: {fileID: 2041403017421846312}
   mainPauseMenu: {fileID: 6208013785010978532}
   inventoryMenu: {fileID: 5979327928251961574}
-  devkitCheatsMenu: {fileID: 9092242474897630701}
+  devkitCheatsMenu: {fileID: 5149904744275290900}
   mainPauseMenuInitialButton: {fileID: 4575647324973419453}
   inventoryMenuInitialButton: {fileID: 6054246922214105206}
   InventoryManager: {fileID: 8114501566531991416}
@@ -83505,12 +83504,7 @@ PrefabInstance:
     - target: {fileID: 6926241484567578801, guid: a31cb133a0a20074caed164a07e0a8b3,
         type: 3}
       propertyPath: m_Name
-      value: Devkit Cheats (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6926241484567578801, guid: a31cb133a0a20074caed164a07e0a8b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: 'Devkit Cheats '
       objectReference: {fileID: 0}
     - target: {fileID: 7208128629856649291, guid: a31cb133a0a20074caed164a07e0a8b3,
         type: 3}
@@ -83562,20 +83556,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8825876160500972645, guid: a31cb133a0a20074caed164a07e0a8b3,
+        type: 3}
+      propertyPath: screenBorderAnimator
+      value: 
+      objectReference: {fileID: 5057163379204772434}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a31cb133a0a20074caed164a07e0a8b3, type: 3}
---- !u!4 &8806995200597142807 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7208128629856649291, guid: a31cb133a0a20074caed164a07e0a8b3,
+--- !u!1 &5149904744275290900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6433658841109677640, guid: a31cb133a0a20074caed164a07e0a8b3,
     type: 3}
   m_PrefabInstance: {fileID: 2175469196878835036}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9092242474897630701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6926241484567578801, guid: a31cb133a0a20074caed164a07e0a8b3,
+--- !u!4 &8806995200597142807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7208128629856649291, guid: a31cb133a0a20074caed164a07e0a8b3,
     type: 3}
   m_PrefabInstance: {fileID: 2175469196878835036}
   m_PrefabAsset: {fileID: 0}

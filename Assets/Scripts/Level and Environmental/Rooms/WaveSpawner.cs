@@ -132,12 +132,15 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < spawnedEnemies.Count; i++)
             {
-                if(spawnedEnemies[i] == null) {spawnedEnemies.RemoveAt(i);}
+                if(spawnedEnemies[i] == null) spawnedEnemies.RemoveAt(i);
             }
-            
-            for (int i = 0; i < spawnedEnemies.Count; i++)
+        }// clears null references from list
+
+        if (incomingEnemySpawners != null && incomingEnemySpawners.Count > 0)
+        {
+            for (int i = 0; i < incomingEnemySpawners.Count; i++)
             {
-                spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
+                if(incomingEnemySpawners[i] == null) incomingEnemySpawners.RemoveAt(i);
             }
         }// clears null references from list
 

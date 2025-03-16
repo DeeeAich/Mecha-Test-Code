@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class pauseMenu : MonoBehaviour
 {
-    [SerializeField] private bool usesDevkitButtons = true;
+
     
     [Tooltip("Set to zero to ignore")]
     [SerializeField] private float inactivityTime;
@@ -76,22 +76,6 @@ public class pauseMenu : MonoBehaviour
                 {
                     SceneManager.LoadScene(0);
                 }
-            }
-        }
-    }
-    
-    private void Update()
-    {
-        if (usesDevkitButtons && Input.GetKey(KeyCode.RightBracket))
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                FindObjectOfType<DevKitCheats>(true).ToggleEnemyTime();
-            }
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                SceneManager.LoadScene(0);
             }
         }
     }

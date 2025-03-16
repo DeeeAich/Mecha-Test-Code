@@ -11,6 +11,11 @@ using UnityEngine.UI;
 
 public class DevKitCheats : MonoBehaviour
 {
+    [SerializeField] private bool usesDevkitButtons = true;
+
+    [SerializeField] private Animator screenBorderAnimator;
+    
+    [Header("Loot addition stuff")]
     [SerializeField] private LootPoolScriptable lootPool;
 
     [SerializeField] private TMP_Dropdown leftGunDropdown;
@@ -23,7 +28,7 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private TMP_Dropdown bodyChipsDropdown;
 
     private int[] loadout;
-    private bool timeIsGoing;
+    private bool timeIsGoing = true;
 
     private void Start()
     {
@@ -69,6 +74,23 @@ public class DevKitCheats : MonoBehaviour
         }
 
         loadout = new int[3];
+    }
+
+    private void Update()
+    {
+        if (usesDevkitButtons && Input.GetKey(KeyCode.RightBracket))
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                ToggleEnemyTime();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.P))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 
     public void KillAllEnemies()
@@ -202,8 +224,15 @@ public class DevKitCheats : MonoBehaviour
 
     public void ToggleEnemyTime()
     {
-        bool freeze = !timeIsGoing;
         timeIsGoing = !timeIsGoing;
+        bool freeze = !timeIsGoing;
+
+        screenBorderAnimator.SetBool("TimeFreeze", !timeIsGoing);
+
+        foreach (WaveSpawner spawner in FindObjectsOfType<WaveSpawner>(true))
+        {
+            spawner.spawning = !freeze;
+        }
         
         foreach (BehaviourTree enemy in FindObjectsOfType<BehaviourTree>(true))
         {
