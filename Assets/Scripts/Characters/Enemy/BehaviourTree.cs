@@ -1501,7 +1501,6 @@ namespace AITree
             distance.y = 0;
             if ((distance).magnitude > approachRange)
             {
-                brain.agent.SetDestination(activeTarget);
                 state = BehaviourTreeState.RUNNING;
                 return state;
             }
