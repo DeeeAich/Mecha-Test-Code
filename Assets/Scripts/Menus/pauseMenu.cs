@@ -44,8 +44,6 @@ public class pauseMenu : MonoBehaviour
 
     private void Start()
     {
-        devkitCheatsMenu = FindObjectOfType<DevKitCheats>(true).gameObject;
-        
         pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
         openInventoryAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Inventory"];
         openDevkitCheatsAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["DevkitCheats"];
