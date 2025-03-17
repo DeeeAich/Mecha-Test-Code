@@ -88,4 +88,48 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
             Destroy(oldestnumber);
         }
     }
+
+    public void SpawnDamageNumber(Health.DamageEventInfo info, Vector3 myLocation)
+    {
+        int damage = (int)info.totalDamge;
+
+        Vector3 canvasPoint = Camera.main.WorldToScreenPoint(myLocation);
+
+        GameObject newDamageNumberInstance = Instantiate(damageNumberInstance, transform);
+
+        newDamageNumberInstance.transform.position = canvasPoint;
+        newDamageNumberInstance.hideFlags = HideFlags.HideInHierarchy;
+        newDamageNumberInstance.GetComponent<Animator>().SetFloat("Horizontal", Random.Range(0f, 1f));
+        newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString(); 
+        
+        
+        
+        if (info.isShielded)
+        {
+            newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = shieldColor;
+        }
+        else if (info.critCount > 0)
+        {
+            newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().color = critColor;
+        }
+
+
+        int fontSize = 10;
+
+        if (damage > 500)
+            fontSize = maxFont;
+        else
+            fontSize = Mathf.RoundToInt((damage / 500) * (maxFont - minFont)) + minFont;
+
+        newDamageNumberInstance.GetComponentInChildren<TextMeshProUGUI>().fontSize = fontSize;
+
+        damageNumbers.Add(newDamageNumberInstance);
+
+        if (damageNumbers.Count > 5)
+        {
+            GameObject oldestnumber = damageNumbers[0];
+            damageNumbers.Remove(oldestnumber);
+            Destroy(oldestnumber);
+        }
+    }
 }

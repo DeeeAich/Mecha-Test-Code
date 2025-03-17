@@ -46,6 +46,84 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         burns = new List<Coroutine>();
     }
 
+    public struct DamageEventInfo
+    {
+        public DamageEventInfo(float hD, float sD, int cC, string s)
+        {
+            healthDamage = hD;
+            shieldDamage = sD;
+            critCount = cC;
+            source = s;
+            encounteredMods = new List<string>();
+        }
+
+        public float healthDamage;
+        public float shieldDamage;
+        public int critCount;
+        public string source;
+
+        public List<string> encounteredMods;
+        internal float totalDamge
+        {
+            get
+            {
+                return healthDamage + shieldDamage;
+            }
+            private set
+            {
+                //you can't set this value
+            }
+        }
+        internal bool isShielded
+        {
+            get
+            {
+                return encounteredMods.Contains("ShieldModifier");
+            }
+        }
+        internal static DamageEventInfo NULL
+        {
+            get
+            {
+                return new DamageEventInfo(0f, 0f, 0, "");
+            }
+        }
+    }
+
+    internal virtual DamageEventInfo TakeDamage(float amount, string source, int critCount = 0)
+    {
+        DamageEventInfo damageInfo = new DamageEventInfo();
+        if (!canTakeDamage || !isAlive)
+        {
+            damageInfo = DamageEventInfo.NULL;
+            damageInfo.source = source;
+        }
+        for (int i = 0; i < damageMods.Count; i++)
+        {
+            if (damageMods[i].removeFlag)
+            {
+                damageMods.RemoveAt(i);
+                i--;
+            }
+        }
+        float calculating = amount;
+        foreach (DamageMod mod in damageMods)
+        {
+            if (mod is ShieldModifier)
+                continue;
+            mod.Modification(calculating, out calculating);
+            damageInfo.encounteredMods.Add(mod.ToString());
+        }
+        foreach(ShieldModifier sM in damageMods)
+        {
+            damageInfo.shieldDamage += sM.Modification(calculating, out calculating);
+            damageInfo.encounteredMods.Add(sM.ToString());
+        }
+        health -= calculating;
+        damageInfo.healthDamage = calculating;
+        return damageInfo;
+    }
+
     internal virtual float TakeDamage(float amount, out bool isShield, bool isCrit = false)
     {
         isShield = false;
@@ -68,7 +146,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             //Debug.Log("Current Damage: " + remainingDamage);
             damageTaken += mod.Modification(remainingDamage, out remainingDamage);
             //Debug.Log("New Damage: " + remainingDamage);
-            if(mod is ShieldModifier)
+            if (mod is ShieldModifier)
             {
                 isShield = true;
             }
@@ -158,17 +236,17 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     {
         int application = (int)(chance / 100f);
 
-        if(chance % 100f >= UnityEngine.Random.Range(0f,100f))
+        if (chance % 100f >= UnityEngine.Random.Range(0f, 100f))
         {
             application += 1;
         }
-        if(application == 0)
+        if (application == 0)
         {
             return;
         }
         if (hackCoroutine == null)
         {
-            hack = new HackMod(percentage*application);
+            hack = new HackMod(percentage * application);
             damageMods.Add(hack);
             hackCoroutine = StartCoroutine(HackDecay());
             hackTimer = duration;
@@ -176,7 +254,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         else
         {
             hackTimer = Mathf.Max(hackTimer, duration);
-            hack.percent = Mathf.Max(hack.percent, percentage*application);
+            hack.percent = Mathf.Max(hack.percent, percentage * application);
         }
         //apply VFX for time
     }
@@ -193,7 +271,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             hackTimer -= Time.deltaTime;
             yield return null;
         }
-        damageMods.Remove(hack); 
+        damageMods.Remove(hack);
         if (manager != null)
         {
             manager.ToggleEffectVFX(effect.Hack, false);
@@ -204,15 +282,56 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     #endregion
     #region Burnable Interface Implementation
     List<Coroutine> burns;
+    Coroutine singleBurn;
     bool activeBurnEffect;
+    List<BurnInfo> burnEffects;
+    internal struct BurnInfo
+    {
+        internal BurnInfo(float damage, int ticks)
+        {
+            damagePerTick = damage;
+            ticksLeft = ticks;
+        }
+        internal float damagePerTick;
+        internal int ticksLeft;
+    }
+
+    IEnumerator BurnDamage()
+    {
+        yield return null;
+        float timer = 0f;
+        float maxTime = 0.25f;
+        while(burnEffects.Count > 0)
+        {
+            while (timer < maxTime)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            timer -= maxTime;
+            float totalDamage = 0f;
+            for(int i = 0; i < burnEffects.Count; i++)
+            {
+                totalDamage += burnEffects[i].damagePerTick;
+                if(burnEffects[i].ticksLeft <=1)
+                {
+                    burnEffects.RemoveAt(i);
+                    i--;
+                }
+                else
+                burnEffects[i] = new BurnInfo(burnEffects[i].damagePerTick, burnEffects[i].ticksLeft - 1);
+            }
+            TakeDamage(totalDamage, "Burn");
+        }
+    }
     IEnumerator BurnDamage(float damagePerTick, int count)
     {
         float timer = 0;
         float maxTime = 0.25f;
         int ticks = 0;
-        while(ticks < count)
+        while (ticks < count)
         {
-            while(timer < maxTime)
+            while (timer < maxTime)
             {
                 timer += Time.deltaTime;
                 yield return null;
@@ -233,25 +352,41 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             application += 1;
         }
-        for(int i = 0; i < application; i++)
+
+        //burns.Add(StartCoroutine(BurnDamage(damageTick * application, tickCount)));
+        burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
+        if (!activeBurnEffect)
         {
-            burns.Add(StartCoroutine(BurnDamage(damageTick,tickCount)));
+            StartCoroutine(BurnDamage());
+            StartCoroutine(BurnFX());
         }
-        if(!activeBurnEffect)
-        StartCoroutine(BurnFX());
     }
 
     IEnumerator BurnFX()
     {
         CharacterVFXManager manager = GetComponentInChildren<CharacterVFXManager>();
-        if(manager!=null)
+        if (manager != null)
         {
             manager.ToggleEffectVFX(effect.Burn, true);
         }
         activeBurnEffect = true;
-        while(burns.Count > 0)
+        //bool allNull = false;
+        while (burns.Count > 0 || burnEffects.Count > 0)//&& !allNull)
         {
+            //allNull = true;
+            //foreach(Coroutine b in burns)
+            //{
+            //    if(b is null)
+            //    {
+            //        continue;
+            //    }
+            //    allNull = false;
+            //}
+            //if (!allNull)
+            //{
+            burns.RemoveAll(null);
             yield return null;
+            //}
         }
         activeBurnEffect = false;
         if (manager != null)

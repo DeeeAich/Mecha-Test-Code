@@ -202,6 +202,13 @@ namespace AITree
             }
         }
 
+        internal override DamageEventInfo TakeDamage(float amount, string source, int critCount)
+        {
+            DamageEventInfo info = base.TakeDamage(amount, source, critCount);
+            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(info, transform.position);
+            return info;
+        }
+
         internal override float TakeDamage(float amount, out bool isShield, bool isCrit = false)
         {
             float moddedAmount = base.TakeDamage(amount, out bool discardShield, isCrit);
