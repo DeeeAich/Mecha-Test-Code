@@ -203,7 +203,7 @@ public class OverseerBT : BehaviourTree
             new Selector(new BooleanFunction(IsCharging), new RepeatUntilSuccess(new Invert(new BooleanFunction(IsCharging))),
             new Sequence(
             new EnsureInRange("player", biggestRange, approachDist),
-            new Selector(new BooleanFunction(ValidateOffset), new Sequence(new CalcOffsetTarget("targetOffset", "player", "moveLocation", offsetDistance), new MoveTo("moveLocation", StoreType.POSITION)), new GetOffset("player", "targetOffset", offsetDistance))
+            new Selector(new BooleanFunction(ValidateOffset), new Sequence(new CalcOffsetTarget("targetOffset", "player", "moveLocation", offsetDistance), new MoveTo("moveLocation", PositionStoreType.VECTOR3)), new GetOffset("player", "targetOffset", offsetDistance))
             )
             );
 

@@ -10,23 +10,19 @@ using Object = UnityEngine.Object;
 namespace AITree
 {
 
-    public enum StoreType
+    public enum PositionStoreType
     {
         NULL,
-        POSITION,
+        VECTOR3,
         TRANSFORM,
         GAMEOBJECT
     }
 
     public abstract class BehaviourTree : Health, IShortCircuitable
     {
-
-
-
         public bool debug = false;
-
-
         public bool verboseDebug = false;
+
         public string mostRecentTick;
         public string tickPath;
 
@@ -448,41 +444,6 @@ namespace AITree
         }
     }
 
-
-    public class BooleanFunction : Condition
-    {
-        readonly Func<bool> calculate;
-        readonly Func<string, bool> calcString;
-        readonly string text;
-        public BooleanFunction()
-        {
-        }
-        public BooleanFunction(Func<bool> calculation) : this()
-        {
-            calculate = calculation;
-        }
-        public BooleanFunction(Func<string, bool> calculation, string text) : this()
-        {
-            calcString = calculation;
-            this.text = text;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            bool result = calculate != null && calculate() || calcString != null && calcString(text);
-            if(result)
-            {
-                state = BehaviourTreeState.SUCCESS;
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
-            }
-            return state;
-        }
-    }
-
     public class AlwaysSucceed : Decorator
     {
         public AlwaysSucceed(Node child) : base(child)
@@ -888,6 +849,8 @@ namespace AITree
         }
     }
 
+
+
     public abstract class Condition : Node
     {
 
@@ -902,6 +865,40 @@ namespace AITree
         protected Action()
         {
             children = new List<Node>();
+        }
+    }
+
+    public class BooleanFunction : Condition
+    {
+        readonly Func<bool> calculate;
+        readonly Func<string, bool> calcString;
+        readonly string text;
+        public BooleanFunction()
+        {
+        }
+        public BooleanFunction(Func<bool> calculation) : this()
+        {
+            calculate = calculation;
+        }
+        public BooleanFunction(Func<string, bool> calculation, string text) : this()
+        {
+            calcString = calculation;
+            this.text = text;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            bool result = calculate != null && calculate() || calcString != null && calcString(text);
+            if (result)
+            {
+                state = BehaviourTreeState.SUCCESS;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+            return state;
         }
     }
 
@@ -997,6 +994,7 @@ namespace AITree
             return state;
         }
     }
+
     public class StrafeInRange : Action
     {
         public float minDist, maxDist;
@@ -1007,16 +1005,16 @@ namespace AITree
         readonly string targLoc;
         Vector3 target;
 
-        readonly StoreType type;
+        readonly PositionStoreType type;
 
         public StrafeInRange(string targetLocation, float minDist, float maxDist) : base()
         {
             this.minDist = minDist;
             this.maxDist = maxDist;
             targLoc = targetLocation;
-            type = StoreType.GAMEOBJECT;
+            type = PositionStoreType.GAMEOBJECT;
         }
-        public StrafeInRange(string targetLocation, float minDist, float maxDist, StoreType type) : this(targetLocation, minDist, maxDist)
+        public StrafeInRange(string targetLocation, float minDist, float maxDist, PositionStoreType type) : this(targetLocation, minDist, maxDist)
         {
             this.minDist = minDist;
             this.maxDist = maxDist;
@@ -1034,14 +1032,14 @@ namespace AITree
             }
             switch (type)
             {
-                case StoreType.NULL:
+                case PositionStoreType.NULL:
                     if (brain.debug)
                     {
                         Debug.Log("You had to put in effirt to end up here");
                     }
                     state = BehaviourTreeState.FAILURE;
                     return state;
-                case StoreType.GAMEOBJECT:
+                case PositionStoreType.GAMEOBJECT:
                     if (gameObjectTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
@@ -1057,10 +1055,10 @@ namespace AITree
                     }
                     target = gameObjectTarget.transform.position;
                     break;
-                case StoreType.POSITION:
+                case PositionStoreType.VECTOR3:
                     target = (Vector3)recovered;
                     break;
-                case StoreType.TRANSFORM:
+                case PositionStoreType.TRANSFORM:
                     if (transformTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
@@ -1118,17 +1116,17 @@ namespace AITree
 
             switch (type)
             {
-                case StoreType.NULL:
+                case PositionStoreType.NULL:
                     target = new Vector3(0, 0, 0);
                     break;
-                case StoreType.GAMEOBJECT:
+                case PositionStoreType.GAMEOBJECT:
                     gameObjectTarget = (GameObject)recovered;
                     target = gameObjectTarget.transform.position;
                     break;
-                case StoreType.POSITION:
+                case PositionStoreType.VECTOR3:
                     target = (Vector3)recovered;
                     break;
-                case StoreType.TRANSFORM:
+                case PositionStoreType.TRANSFORM:
                     transformTarget = (Transform)recovered;
                     target = transformTarget.position;
                     break;
@@ -1149,15 +1147,15 @@ namespace AITree
         Vector3 activeTarget;
         GameObject objectTarget;
         Transform transformTarget;
-        readonly StoreType store;
+        readonly PositionStoreType store;
         public Approach(string targetLocation, float approachDist) : base()
         {
             this.targetLocation = targetLocation;
             this.approachDist = approachDist;
-            store = StoreType.GAMEOBJECT;
+            store = PositionStoreType.GAMEOBJECT;
         }
 
-        public Approach(string targetLocation, float approachDist, StoreType type) : this(targetLocation, approachDist)
+        public Approach(string targetLocation, float approachDist, PositionStoreType type) : this(targetLocation, approachDist)
         {
             store = type;
         }
@@ -1173,18 +1171,18 @@ namespace AITree
 
             switch (store)
             {
-                case StoreType.NULL:
+                case PositionStoreType.NULL:
                     activeTarget = new Vector3(0, 0, 0);
                     state = BehaviourTreeState.FAILURE;
                     break;
-                case StoreType.GAMEOBJECT:
+                case PositionStoreType.GAMEOBJECT:
                     objectTarget = (GameObject)recovered;
                     activeTarget = objectTarget.transform.position;
                     break;
-                case StoreType.POSITION:
+                case PositionStoreType.VECTOR3:
                     activeTarget = (Vector3)recovered;
                     break;
-                case StoreType.TRANSFORM:
+                case PositionStoreType.TRANSFORM:
                     transformTarget = (Transform)recovered;
                     activeTarget = transformTarget.position;
                     break;
@@ -1205,9 +1203,9 @@ namespace AITree
             base.Tick();
             switch (store)
             {
-                case StoreType.NULL:
+                case PositionStoreType.NULL:
                     break;
-                case StoreType.GAMEOBJECT:
+                case PositionStoreType.GAMEOBJECT:
                     if (objectTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
@@ -1223,7 +1221,7 @@ namespace AITree
                     }
                     activeTarget = objectTarget.transform.position;
                     break;
-                case StoreType.POSITION:
+                case PositionStoreType.VECTOR3:
                     if (brain.memory.TryGetValue(targetLocation, out object recovered))
                     {
                         activeTarget = (Vector3)recovered;
@@ -1234,7 +1232,7 @@ namespace AITree
                         return state;
                     }
                     break;
-                case StoreType.TRANSFORM:
+                case PositionStoreType.TRANSFORM:
                     if (transformTarget == null)
                     {
                         state = BehaviourTreeState.FAILURE;
@@ -1367,7 +1365,6 @@ namespace AITree
         }
     }
 
-
     public class ModifyAgentStat : Condition
     {
         readonly string stat;
@@ -1415,7 +1412,6 @@ namespace AITree
         }
     }
 
-
     public class Detonate : Action
     {
         readonly float size, damage;
@@ -1452,7 +1448,7 @@ namespace AITree
         public MoveTo(string targetLocation) : base(targetLocation, 0.5f)
         {
         }
-        public MoveTo(string targetLocation, StoreType store) : base(targetLocation, 0.5f, store)
+        public MoveTo(string targetLocation, PositionStoreType store) : base(targetLocation, 0.5f, store)
         {
         }
 
@@ -1696,7 +1692,6 @@ namespace AITree
         }
     }
 
-
     public class InvokeEvent : Action
     {
         readonly UnityEvent invoked;
@@ -1717,14 +1712,14 @@ namespace AITree
     public class StoreValue : Action
     {
         readonly string current, future;
-        readonly StoreType from, to;
+        readonly PositionStoreType from, to;
         public StoreValue(string current, string future) : base()
         {
             this.current = current;
             this.future = future;
-            from = to = StoreType.NULL;
+            from = to = PositionStoreType.NULL;
         }
-        public StoreValue(string current, string future, StoreType from, StoreType to) : this(current, future)
+        public StoreValue(string current, string future, PositionStoreType from, PositionStoreType to) : this(current, future)
         {
             this.from = from;
             this.to = to;
@@ -1733,27 +1728,27 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            if (from == to || from == StoreType.NULL || to == StoreType.NULL)
+            if (from == to || from == PositionStoreType.NULL || to == PositionStoreType.NULL)
                 brain.AddOrOverwrite(future, brain.memory[current]);
-            else if (from != StoreType.POSITION)
+            else if (from != PositionStoreType.VECTOR3)
             {
-                if (to == StoreType.GAMEOBJECT && from == StoreType.TRANSFORM)
+                if (to == PositionStoreType.GAMEOBJECT && from == PositionStoreType.TRANSFORM)
                 {
                     brain.AddOrOverwrite(future, ((Transform)brain.memory[current]).gameObject);
                 }
                 else
-                if (to == StoreType.TRANSFORM && from == StoreType.GAMEOBJECT)
+                if (to == PositionStoreType.TRANSFORM && from == PositionStoreType.GAMEOBJECT)
                 {
                     brain.AddOrOverwrite(future, ((GameObject)brain.memory[current]).transform);
                 }
                 else
 
-                if (to == StoreType.POSITION && from == StoreType.TRANSFORM)
+                if (to == PositionStoreType.VECTOR3 && from == PositionStoreType.TRANSFORM)
                 {
                     brain.AddOrOverwrite(future, ((Transform)brain.memory[current]).position);
                 }
                 else
-                if (to == StoreType.POSITION && from == StoreType.GAMEOBJECT)
+                if (to == PositionStoreType.VECTOR3 && from == PositionStoreType.GAMEOBJECT)
                 {
                     brain.AddOrOverwrite(future, ((GameObject)brain.memory[current]).transform.position);
                 }
@@ -1762,6 +1757,7 @@ namespace AITree
             return state;
         }
     }
+
     public class CalcOffsetTarget : Action
     {
         string offset, target, move;
@@ -1825,6 +1821,7 @@ namespace AITree
             return state;
         }
     }
+
     public class CallVoidFunctionWithInt : Action
     {
         System.Action<int> action;
@@ -1844,6 +1841,7 @@ namespace AITree
             return state;
         }
     }
+
     public class CallVoidFunction : Action
     {
         System.Action action;
@@ -1861,6 +1859,7 @@ namespace AITree
             return state;
         }
     }
+
     public class CallVoidFunctionWithBool : Action
     {
         System.Action<bool> action;
@@ -1912,7 +1911,7 @@ namespace AITree
             new ModifyAgentStat("acceleration", 100f), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
@@ -1931,7 +1930,7 @@ namespace AITree
             new ModifyAgentStat("acceleration", 100f), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
@@ -1951,7 +1950,7 @@ namespace AITree
             new ModifyAgentStat("acceleration", 200f), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, StoreType.POSITION)),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
