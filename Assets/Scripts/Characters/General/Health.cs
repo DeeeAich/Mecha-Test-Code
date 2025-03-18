@@ -122,7 +122,22 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             damageInfo.encounteredMods.Add(sM.ToString());
         }
         health -= calculating;
-        damageInfo.healthDamage = calculating;
+        damageInfo.healthDamage = calculating; 
+        onTakeDamage.Invoke();
+
+
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        if (health <= 0 && canDie)
+        {
+            if (gameObject.tag != "Player")
+                PlayerBody.Instance().TriggerOnKill();
+            TriggerDeath();
+        }
         return damageInfo;
     }
 
@@ -356,6 +371,12 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         }
         if (burnEffects == null)
             burnEffects = new List<BurnInfo>();
+
+        if(application <=0)
+        {
+            return;
+        }
+
         //burns.Add(StartCoroutine(BurnDamage(damageTick * application, tickCount)));
         burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
         if (!activeBurnEffect)
