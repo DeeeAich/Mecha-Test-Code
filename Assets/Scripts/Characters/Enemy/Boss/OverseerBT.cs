@@ -107,7 +107,6 @@ public class OverseerBT : BehaviourTree
 
     }
 
-
     private void DrawCurvedRegions(float radStep, float minRange, float maxRange, bool halfAngle = false, bool useWeaponsPivot = true)
     {
         GameObject usedPivot = useWeaponsPivot ? weaponsPivotOffset : gameObject;

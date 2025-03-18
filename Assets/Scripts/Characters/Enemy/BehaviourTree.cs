@@ -224,11 +224,6 @@ namespace AITree
         }
 
 
-        public override void Burn(float chance, float damageTick, int tickCount)
-        {
-            //Debug.Log("Burn start");
-            base.Burn(chance, damageTick, tickCount);
-        }
     }
 
     public abstract class Node
@@ -283,7 +278,6 @@ namespace AITree
             {
                 child.Restart();
             }
-            return;
         }
 
         public virtual void Begin()
@@ -454,56 +448,6 @@ namespace AITree
         }
     }
 
-    public class Selector : Control
-    {
-        int selectedIndex = -1;
-
-        public Selector(Node Test, Node Success, Node Failure)
-        {
-            children = new List<Node> { Test, Success, Failure };
-        }
-
-        public override void Restart()
-        {
-            base.Restart();
-            selectedIndex = -1;
-        }
-
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-
-            if (children.Count != 3)
-            {
-                state = BehaviourTreeState.FAILURE;
-                return state;
-            }
-            else
-            {
-                BehaviourTreeState DeciderState = children[0].Tick();
-                switch (DeciderState)
-                {
-                    case BehaviourTreeState.NULL:
-                        state = BehaviourTreeState.FAILURE;
-                        return state;
-                    case BehaviourTreeState.RUNNING:
-                        state = BehaviourTreeState.RUNNING;
-                        return state;
-                    case BehaviourTreeState.SUCCESS:
-                        selectedIndex = 1;
-                        state = children[selectedIndex].Tick();
-                        return state;
-                    case BehaviourTreeState.FAILURE:
-                        selectedIndex = 2;
-                        state = children[selectedIndex].Tick();
-                        return state;
-                    default:
-                        state = BehaviourTreeState.FAILURE;
-                        return state;
-                }
-            }
-        }
-    }
 
     public class BooleanFunction : Condition
     {
@@ -561,8 +505,6 @@ namespace AITree
     //Repeat
 
     //RepeatUntilFail
-
-    //RepeatUntilSuccess
 
     public abstract class Control : Node
     {
@@ -692,7 +634,58 @@ namespace AITree
             return state;
         }
     }
+    
+    public class Selector : Control
+    {
+        int selectedIndex = -1;
 
+        public Selector(Node Test, Node Success, Node Failure)
+        {
+            children = new List<Node> { Test, Success, Failure };
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+            selectedIndex = -1;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+
+            if (children.Count != 3)
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+            else
+            {
+                BehaviourTreeState DeciderState = children[0].Tick();
+                switch (DeciderState)
+                {
+                    case BehaviourTreeState.NULL:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    case BehaviourTreeState.RUNNING:
+                        state = BehaviourTreeState.RUNNING;
+                        return state;
+                    case BehaviourTreeState.SUCCESS:
+                        selectedIndex = 1;
+                        state = children[selectedIndex].Tick();
+                        return state;
+                    case BehaviourTreeState.FAILURE:
+                        selectedIndex = 2;
+                        state = children[selectedIndex].Tick();
+                        return state;
+                    default:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                }
+            }
+        }
+    }
+    
     public class RandomBranching : Control
     {
         internal int lastIndex = -1;

@@ -97,7 +97,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             damageInfo = DamageEventInfo.NULL;
             damageInfo.source = source;
+            return damageInfo;
         }
+        damageInfo.encounteredMods = new List<string>();
         for (int i = 0; i < damageMods.Count; i++)
         {
             if (damageMods[i].removeFlag)
@@ -352,7 +354,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             application += 1;
         }
-
+        if (burnEffects == null)
+            burnEffects = new List<BurnInfo>();
         //burns.Add(StartCoroutine(BurnDamage(damageTick * application, tickCount)));
         burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
         if (!activeBurnEffect)
@@ -384,7 +387,6 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             //}
             //if (!allNull)
             //{
-            burns.RemoveAll(null);
             yield return null;
             //}
         }

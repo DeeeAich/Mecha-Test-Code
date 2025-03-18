@@ -66,16 +66,16 @@ public class BomberDroneBT : BehaviourTree
 
 namespace AITree
 {
-    public class PackedBomber : Sequence
+    public class ShieldBomber : Sequence
     {
-        public PackedBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float dashAngleSpeed, float explosionSize, float explosionDamage, GameObject explosion, ExplosionEffect effect, Shielder shielder, string shieldTarget) : base()
+        public ShieldBomber(float approachDistance, float pauseTime, float dashSpeed, float dashAcceleration, float dashAngleSpeed, float explosionSize, float explosionDamage, GameObject explosion, ExplosionEffect effect, Shielder shielder, string shieldTarget) : base()
         {
             children = new List<Node>
                 {
                 new Approach("player", approachDistance),
-                new StoreValue("player", "destination",StoreType.GAMEOBJECT, StoreType.POSITION),
                 new Invert(new GetShieldableEnemy(shielder, shieldTarget)),
                 new PauseFixed(pauseTime),
+                new StoreValue("player", "destination",StoreType.GAMEOBJECT, StoreType.POSITION),
                 new Invert(new GetShieldableEnemy(shielder, shieldTarget)),
                 new ModifyAgentStat("speed", dashSpeed),
                 new ModifyAgentStat("acceleration", dashAcceleration),
