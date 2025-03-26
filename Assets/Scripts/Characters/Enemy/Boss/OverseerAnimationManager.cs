@@ -89,6 +89,7 @@ public class OverseerAnimationManager : MonoBehaviour
 
     public void PlayDeathAnimation()
     {
+        Debug.Log("BOSS SHOULD EXPLODE");
         animationIsPlaying = true;
         groundSlamAnim.SetTrigger("Death");
         bodybackAnim.SetTrigger("Death");
