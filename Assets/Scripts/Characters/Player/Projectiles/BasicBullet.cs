@@ -49,14 +49,13 @@ public class BasicBullet : Projectile
 
             if (pierceCounter == -1)
             {
-
-                StopCoroutine(AutoReset());
+                StopAllCoroutines();
                 StartCoroutine(AnimationTimer());
             }
         }
         else
         {
-            StopCoroutine(AutoReset());
+            StopAllCoroutines();
             StartCoroutine(AnimationTimer());
 
         }
