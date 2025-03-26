@@ -50,8 +50,8 @@ namespace AITree
         }
         private void OnDisable()
         {
-            if(player !=null)
-            player.GetComponent<Health>().onDeath.RemoveListener(Stop);
+            if (player != null)
+                player.GetComponent<Health>().onDeath.RemoveListener(Stop);
         }
         internal virtual void Awake()
         {
@@ -84,7 +84,7 @@ namespace AITree
             }
         }
 
-        
+
 
         private void LateUpdate()
         {
@@ -150,13 +150,13 @@ namespace AITree
             Resume();
         }
 
-        
+
 
         internal virtual void Die()
         {
 
         }
-        
+
 
 
     }
@@ -378,7 +378,7 @@ namespace AITree
         {
             base.Tick();
             state = children[0].Tick();
-            if(state!=BehaviourTreeState.SUCCESS)
+            if (state != BehaviourTreeState.SUCCESS)
             {
                 state = BehaviourTreeState.RUNNING;
                 return state;
@@ -541,7 +541,7 @@ namespace AITree
             return state;
         }
     }
-    
+
     public class Selector : Control
     {
         int selectedIndex = -1;
@@ -592,7 +592,7 @@ namespace AITree
             }
         }
     }
-    
+
     public class RandomBranching : Control
     {
         internal int lastIndex = -1;
@@ -1207,7 +1207,7 @@ namespace AITree
 
             if (brain.agent.pathStatus != NavMeshPathStatus.PathComplete)
             {
-                if(brain.agent.velocity.magnitude < 0.01f)
+                if (brain.agent.velocity.magnitude < 0.01f)
                 {
                     state = BehaviourTreeState.FAILURE;
                 }
@@ -1478,7 +1478,7 @@ namespace AITree
             offset.y = 0;
             randVect.Normalize();
 
-            
+
 
             //Debug.DrawLine(brain.transform.position, brain.transform.position + randVect, Color.blue, 5f);
             //Debug.DrawLine(brain.player.transform.position, brain.player.transform.position + offset, Color.green, 5f);
@@ -1604,10 +1604,10 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            if(brain.memory.TryGetValue(target, out object recovered))
+            if (brain.memory.TryGetValue(target, out object recovered))
             {
                 Vector3 targetVector = Vector3.zero;
-                if(recovered is GameObject)
+                if (recovered is GameObject)
                 {
                     targetVector = (recovered as GameObject).transform.position;
                 }
@@ -1895,6 +1895,27 @@ namespace AITree
             new ModifyAgentStat("angularSpeed", 0f), //no rotate,
             new ModifyAgentStat("speed", chargeSpeed), //big speed
             new ModifyAgentStat("acceleration", 200f), //big speed acceleration
+            new ToggleObject(damageZone),
+            new SavePositionOfObject(target, "chargeTarget"),
+            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
+            new ToggleObject(damageZone),
+            new ModifyAgentStat("angularSpeed", 30f), //reset vals
+            new ModifyAgentStat("speed", 3.5f),
+            new ModifyAgentStat("acceleration", 8f), //big speed
+            new CallVoidFunctionWithBool(overrideToggle, false),
+            new CallVoidFunctionWithBool(resetter, true)
+            };
+        }
+        public ChargeAttack(float chargeSpeed, float chargeAcceleration, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter, System.Action<bool> overrideToggle) : base()
+        {
+            children = new List<Node> {
+            new CallVoidFunctionWithBool(overrideToggle, true),
+            new ModifyAgentStat("speed", 0.1f), //no speed,
+            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+            new ModifyAgentStat("speed", chargeSpeed), //big speed
+            new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
             new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),

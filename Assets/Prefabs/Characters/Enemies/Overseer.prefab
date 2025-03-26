@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8107298558014915492}
   - component: {fileID: 4124273715742297104}
   - component: {fileID: 4791769845658784720}
+  - component: {fileID: -8931675275034030346}
   m_Layer: 0
   m_Name: Overseer
   m_TagString: Untagged
@@ -153,24 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2967b120b5624dc4a89cc39054d572f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8000
-  maxHealth: 8000
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 1
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 9999
-  destroyOnDeath: 1
-  destroyTimer: 4
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 
@@ -328,6 +311,36 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8931675275034030346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650565202339733482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73b73c909f5c664a90995493b53f6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10000
+  maxHealth: 10000
+  isAlive: 1
+  canTakeDamage: 1
+  canDie: 1
+  entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 9999
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  meshesRef: {fileID: 0}
 --- !u!1001 &5375722804594049362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 0.1
   step: 0.01
   usePlayer: 1
   pauseAnimation: 0
@@ -488,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 0.1
   step: 0.01
   usePlayer: 1
   pauseAnimation: 0

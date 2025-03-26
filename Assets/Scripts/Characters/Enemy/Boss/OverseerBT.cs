@@ -28,6 +28,7 @@ public class OverseerBT : BehaviourTree
     [SerializeField] float approachDist = 10f;
     [SerializeField] float biggestRange = 15f;
     [SerializeField] float chargeSpeed = 10f;
+    [SerializeField] float chargeAcceleration = 200f;
     [SerializeField] GameObject chargeDamageZone;
     [SerializeField] float targetOffsetAngle = 30f;
     [SerializeField] float offsetDistance = 10f;
@@ -183,7 +184,7 @@ public class OverseerBT : BehaviourTree
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightThree),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightFour),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.GroundSlamAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), SlamWeight),
-                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride), ChargeWeight),
+                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeAcceleration, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride), ChargeWeight),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunction(animManage.LaserTrackingAttack), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), FollowLaserWeight)
 
                     ),
