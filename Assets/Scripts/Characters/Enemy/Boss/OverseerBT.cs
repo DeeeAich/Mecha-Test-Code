@@ -254,7 +254,7 @@ public class OverseerBT : BehaviourTree
         {
             agent.SetDestination(player.transform.position);
         }
-        if (!trans && health < maxHealth * transitionThreshold)
+        if (!trans && health.health < health.maxHealth * transitionThreshold)
         {
             replacement = new RootNode(this, transitionBrain);
             if (CheckAnimBool())
@@ -369,7 +369,7 @@ public class OverseerBT : BehaviourTree
 
     float FollowLaserWeight()
     {
-        if (health < transitionThreshold * maxHealth)
+        if (trans)
         {
             return 1f;
         }
@@ -507,7 +507,7 @@ public class OverseerBT : BehaviourTree
         }
     }
 
-    internal override void TriggerDeath()
+    internal override void Die()
     {
         animManage.PlayDeathAnimation();
         TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
@@ -534,8 +534,6 @@ public class OverseerBT : BehaviourTree
             if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
                 child.parent = transform.parent.parent;
         }
-        Die();
-        if (destroyOnDeath) Destroy(gameObject, destroyTimer);
     }
 }
 

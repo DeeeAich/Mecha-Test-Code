@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2339507241119626347}
   - component: {fileID: 8442040914560964637}
   - component: {fileID: 7805457920417713782}
+  - component: {fileID: 213611599183135197}
   - component: {fileID: 8278088241060675377}
   - component: {fileID: 7300719402954375497}
   m_Layer: 9
@@ -82,6 +83,48 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &213611599183135197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811666119793368411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73b73c909f5c664a90995493b53f6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  isAlive: 1
+  canTakeDamage: 1
+  canDie: 1
+  entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4179377912053861262}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  meshesRef: {fileID: 4954580959481151922}
 --- !u!114 &8278088241060675377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,36 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78084b5e2acc3b849937b5de2ffc9d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 0
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 0
-  destroyTimer: 3
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4179377912053861262}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 
@@ -391,6 +404,12 @@ MonoBehaviour:
 --- !u!1 &4179377912053861262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5602344921234432224, guid: fe771a6c7f9119c4a9db1b3949c3d781,
+    type: 3}
+  m_PrefabInstance: {fileID: 8628796919293012846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4954580959481151922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3710280227372935900, guid: fe771a6c7f9119c4a9db1b3949c3d781,
     type: 3}
   m_PrefabInstance: {fileID: 8628796919293012846}
   m_PrefabAsset: {fileID: 0}

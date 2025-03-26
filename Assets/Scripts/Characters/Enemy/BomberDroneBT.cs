@@ -51,17 +51,11 @@ public class BomberDroneBT : BehaviourTree
         anim.SetTrigger("Activate");
     }
 
-    internal override void TriggerDeath()
+    internal override void Die()
     {
         Destroy(lean);
-        base.TriggerDeath();
-
     }
 
-    public override void Die()
-    {
-        base.Die();
-    }
 }
 
 namespace AITree

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8787705873125773069}
   - component: {fileID: 540608885084303935}
   - component: {fileID: 3189654505093655842}
+  - component: {fileID: 3878766400525800170}
   m_Layer: 9
   m_Name: Spider
   m_TagString: Enemy
@@ -95,24 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78084b5e2acc3b849937b5de2ffc9d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  maxHealth: 200
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 0
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 0
-  destroyTimer: 3
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 
@@ -165,6 +148,36 @@ MonoBehaviour:
   minDelay: 1
   maxDelay: 1
   anim: {fileID: 4253703802609884915}
+--- !u!114 &3878766400525800170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151759185807588539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73b73c909f5c664a90995493b53f6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 200
+  maxHealth: 200
+  isAlive: 1
+  canTakeDamage: 1
+  canDie: 1
+  entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  destroyOnDeath: 1
+  destroyTimer: 3
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  meshesRef: {fileID: 1775375827244355733}
 --- !u!1 &155357140011744439
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +820,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1216129437923107910}
   m_SourcePrefab: {fileID: 100100000, guid: 794beea2d7252204399aff942cf5aa94, type: 3}
+--- !u!1 &1775375827244355733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 274570988243285334, guid: 794beea2d7252204399aff942cf5aa94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975987543021807043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1929975439001648074 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 118422198926089737, guid: 794beea2d7252204399aff942cf5aa94,

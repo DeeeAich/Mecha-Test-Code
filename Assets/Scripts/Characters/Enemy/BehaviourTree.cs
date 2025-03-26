@@ -18,7 +18,7 @@ namespace AITree
         GAMEOBJECT
     }
 
-    public abstract class BehaviourTree : Health, IShortCircuitable
+    public abstract class BehaviourTree : MonoBehaviour
     {
         public bool debug = false;
         public bool verboseDebug = false;
@@ -31,10 +31,11 @@ namespace AITree
         public GameObject player;
         public RootNode root;
         public bool paused = false;
-        internal bool isShieldable = true;
 
         public RootNode replacement;
         CharacterVFXManager VFXManager;
+
+        internal EnemyHealth health;
 
         public virtual void AddOrOverwrite(string key, object o)
         {
@@ -52,15 +53,14 @@ namespace AITree
             if(player !=null)
             player.GetComponent<Health>().onDeath.RemoveListener(Stop);
         }
-        internal override void Awake()
+        internal virtual void Awake()
         {
-            base.Awake();
             VFXManager = GetComponentInChildren<CharacterVFXManager>();
             player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<Health>().onDeath.AddListener(Stop);
             agent = GetComponent<NavMeshAgent>();
             memory = new Dictionary<string, object>();
-            meshesRef = GetComponentInChildren<MeshFilter>().gameObject;
+            health = GetComponent<EnemyHealth>();
         }
         internal virtual void FixedUpdate()
         {
@@ -84,36 +84,7 @@ namespace AITree
             }
         }
 
-        internal override void TriggerDeath()
-        {
-            base.TriggerDeath();
-            TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
-            if (tde != null)
-            {
-                tde.TriggerExplosion();
-            }
-            Collider[] c = GetComponents<Collider>();
-            if (c.Length > 0)
-            {
-                foreach (Collider x in c)
-                {
-                    x.enabled = false;
-                }
-            }
-            gameObject.tag = "Untagged";
-            EnemyGun[] guns = GetComponentsInChildren<EnemyGun>();
-            foreach (EnemyGun g in guns)
-            {
-                g.BeGone();
-            }
-            foreach (Transform child in transform)
-            {
-                if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
-                    child.parent = transform.parent.parent;
-            }
-            Die();
-            Destroy(gameObject);
-        }
+        
 
         private void LateUpdate()
         {
@@ -179,49 +150,18 @@ namespace AITree
             Resume();
         }
 
-        public virtual void Die()
-        {
-            Stop();
-            isShieldable = false;
-        }
+        
 
-        public virtual void ShortCircuit(float chance, float time)
+        internal virtual void Die()
         {
-            if (chance > UnityEngine.Random.Range(0f, 100f))
-            {
-                if (VFXManager != null)
-                {
-                    VFXManager.ToggleEffectVFX(effect.ShortCircuit, true);
-                }
-                StopForTime(time);
-                //apply VFX for time
-            }
-        }
 
-        internal override DamageEventInfo TakeDamage(float amount, string source, int critCount)
-        {
-            DamageEventInfo info = base.TakeDamage(amount, source, critCount);
-            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(info, transform.position);
-            return info;
         }
-
-        internal override float TakeDamage(float amount, out bool isShield, bool isCrit = false)
-        {
-            float moddedAmount = base.TakeDamage(amount, out bool discardShield, isCrit);
-            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit, discardShield);
-            isShield = discardShield;
-            return moddedAmount;
-        }
-        internal override float TakeDamage(float amount, bool isCrit = false)
-        {
-            float moddedAmount = base.TakeDamage(amount, out bool discardShield, isCrit);
-            EnemyDamageNumberSpawner.instance.SpawnDamageNumber(moddedAmount, transform.position, isCrit, discardShield);
-            return moddedAmount;
-        }
+        
 
 
     }
 
+    #region basic Nodes
     public abstract class Node
     {
         public enum BehaviourTreeState
@@ -314,6 +254,9 @@ namespace AITree
         }
     }
 
+    #endregion
+
+    #region Decorators
     public abstract class Decorator : Node
     {
         protected Decorator(Node child) : base(child)
@@ -467,6 +410,9 @@ namespace AITree
 
     //RepeatUntilFail
 
+    #endregion
+
+    #region Control
     public abstract class Control : Node
     {
         internal int childIndex = 0;
@@ -849,8 +795,9 @@ namespace AITree
         }
     }
 
+    #endregion
 
-
+    #region Conditions and Actions
     public abstract class Condition : Node
     {
 
@@ -931,8 +878,8 @@ namespace AITree
         {
             base.Tick();
 
-            List<BehaviourTree> potentialTargets = new List<BehaviourTree>();
-            potentialTargets.AddRange(GameObject.FindObjectsOfType<BehaviourTree>());
+            List<EnemyHealth> potentialTargets = new List<EnemyHealth>();
+            potentialTargets.AddRange(GameObject.FindObjectsOfType<EnemyHealth>());
             if (potentialTargets.Count == 0)
             {
                 brain.AddOrOverwrite(targetStore, null);
@@ -1997,4 +1944,6 @@ namespace AITree
             }
         }
     }
+
+    #endregion
 }

@@ -15,8 +15,8 @@ public class ShieldDroneBT : BehaviourTree
 
     internal override void Awake()
     {
-        isShieldable = false;
         base.Awake();
+        health.isShieldable = false;
         memory.Add("CoverTarget", transform.position);
         AddOrOverwrite("player", player);
         root = new RootNode(this,
@@ -86,7 +86,7 @@ public class ShieldDroneBT : BehaviourTree
     }
 
 
-    public override void Die()
+    internal override void Die()
     {
         memory.Clear();
         shielder.Break();
