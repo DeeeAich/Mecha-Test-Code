@@ -85,9 +85,17 @@ public class WaveSpawner : MonoBehaviour
 
             for (int i = 0; i < enemyPool.standardEnemies.Length; i++)
             {
-                if (spawnableEnemyTypes.Contains(enemyPool.standardEnemies[i].EnemyType) && enemyPool.standardEnemies[i].difficulty >= GameGeneralManager.instance.difficulty)
+                if (spawnableEnemyTypes.Contains(enemyPool.standardEnemies[i].EnemyType))
                 {
-                    possibleEnemies.Add(enemyPool.standardEnemies[i]);
+                    if (GameGeneralManager.instance != null && enemyPool.standardEnemies[i].difficulty >= GameGeneralManager.instance.difficulty)
+                    {
+                        possibleEnemies.Add(enemyPool.standardEnemies[i]);
+                    }
+                    else
+                    {
+                        possibleEnemies.Add(enemyPool.standardEnemies[i]);
+                    }
+
                 }
             }
 
@@ -219,9 +227,9 @@ public class WaveSpawner : MonoBehaviour
 
             for (int j = 0; j < enemyPool.standardEnemies.Length; j++)
             {
-                if (enemyPool.standardEnemies[i].EnemyType == enemiesToSpawn[enemyToSpawnIndex])
+                if (enemyPool.standardEnemies[j].EnemyType == enemiesToSpawn[enemyToSpawnIndex])
                 {
-                    newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemyPool.standardEnemies[i];
+                    newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemyPool.standardEnemies[j];
                 }
             }
             
