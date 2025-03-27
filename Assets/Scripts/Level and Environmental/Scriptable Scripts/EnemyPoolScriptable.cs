@@ -9,7 +9,7 @@ using UnityEngine;
     public GameObject prefab;
     public GameObject spawnAnimationPrefab;
     public int spawnChance;
-    public int difficulty;
+    public float difficulty;
 }
 
 [Serializable] public enum EnemyType
@@ -18,7 +18,8 @@ using UnityEngine;
     BomberDrone,
     BlueSpiderMech,
     ShieldDrone,
-    Overseer
+    Overseer,
+    OverseerDrone
 }
 
 [CreateAssetMenu(fileName = "Enemy Pool", menuName = "ScriptableObjects/Level Scriptables/Enemy Pool")]

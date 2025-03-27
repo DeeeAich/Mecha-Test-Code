@@ -6,11 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
 
-public enum SpawnType
-{
-    Standard, MiniBoss, Boss
-}
-
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -21,11 +16,11 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
     [Header("This is only used for randomizing")]
-    [SerializeField] private List<EnemyType> spawnableEnemyTypes;
+    public List<EnemyType> spawnableEnemyTypes;
     
     [Header("If unset, these will be randomly generated within fair ranges")]
     [SerializeField] private int[] waves;
-    [SerializeField] private List<EnemyType> enemiesToSpawn;
+    public List<EnemyType> enemiesToSpawn;
 
     [Header("References")]
     [SerializeField] private EnemySpawnPoint[] spawnPoints;

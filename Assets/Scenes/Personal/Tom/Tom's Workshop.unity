@@ -47010,6 +47010,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1789344014}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1789954454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789954456}
+  - component: {fileID: 1789954455}
+  m_Layer: 0
+  m_Name: Editor Wave Spawner Difficulty Setter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1789954455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789954454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf3fc65625290a4090dd29002ed757f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EditorSetWaveSpawnersDifficulties: 0
+  enemyPool: {fileID: 11400000, guid: b3999387f6859e34096a2d01e620a00d, type: 2}
+--- !u!4 &1789954456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789954454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1794779106
 GameObject:
   m_ObjectHideFlags: 0
@@ -54933,6 +54979,8 @@ MonoBehaviour:
   minDelay: 1.5
   maxDelay: 3
   anim: {fileID: 1737988214}
+  ammoPerReload: 0
+  reloadTime: 1
 --- !u!1001 &541124647238421856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56567,6 +56615,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2793457133214408553}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2855066601409668345
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2630213577432634475, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_Name
+      value: Standard Fixed Wave Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094933339892868388, guid: df9ea230fe163a54eaa8e728fbebaa65,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df9ea230fe163a54eaa8e728fbebaa65, type: 3}
 --- !u!1001 &2899135722739374645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57009,6 +57125,8 @@ MonoBehaviour:
   minDelay: 1.5
   maxDelay: 3
   anim: {fileID: 679693489}
+  ammoPerReload: 0
+  reloadTime: 1
 --- !u!1001 &3356601319366737097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60750,24 +60868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78084b5e2acc3b849937b5de2ffc9d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 0
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 1
-  destroyTimer: 3
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 0}
   debug: 0
   verboseDebug: 0
   mostRecentTick: 
@@ -61115,3 +61215,5 @@ SceneRoots:
   - {fileID: 547890488}
   - {fileID: 1698037866}
   - {fileID: 554612262}
+  - {fileID: 2855066601409668345}
+  - {fileID: 1789954456}

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &19575749529987131
+--- !u!1 &2630213577432634475
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7087960124568107892}
-  - component: {fileID: 5983627224697668776}
+  - component: {fileID: 8094933339892868388}
+  - component: {fileID: 8920136664531016023}
   m_Layer: 0
-  m_Name: Standard Random Wave Spawner
+  m_Name: Standard Fixed Wave Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7087960124568107892
+--- !u!4 &8094933339892868388
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19575749529987131}
+  m_GameObject: {fileID: 2630213577432634475}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5983627224697668776
+--- !u!114 &8920136664531016023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19575749529987131}
+  m_GameObject: {fileID: 2630213577432634475}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc9c2ff29cfaaa94f9dc7d4a62e3ec4c, type: 3}
@@ -48,9 +48,9 @@ MonoBehaviour:
   looping: 0
   spawnOnStart: 1
   remainingEnemiesToTriggerNextWave: 2
-  spawnableEnemyTypes: 000000000100000003000000
+  spawnableEnemyTypes: 
   waves: 030000000200000003000000
-  enemiesToSpawn: 
+  enemiesToSpawn: 0000000001000000000000000100000000000000000000000200000001000000
   spawnPoints: []
   enemySpawnPrefab: {fileID: 2025918306934670692, guid: 9021f149eb192824093a81baddb9e885,
     type: 3}
