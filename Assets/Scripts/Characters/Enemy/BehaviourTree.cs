@@ -1131,7 +1131,7 @@ namespace AITree
                     activeTarget = brain.transform.position;
                     break;
             }
-
+            brain.agent.SetDestination(activeTarget);
         }
 
         public override void Restart()
@@ -1161,6 +1161,7 @@ namespace AITree
                         return state;
                     }
                     activeTarget = objectTarget.transform.position;
+                    brain.agent.SetDestination(activeTarget);
                     break;
                 case PositionStoreType.VECTOR3:
                     if (brain.memory.TryGetValue(targetLocation, out object recovered))
@@ -1186,8 +1187,7 @@ namespace AITree
                     return state;
             }
 
-            brain.agent.SetDestination(activeTarget);
-            Vector3 distanceFrom = brain.gameObject.transform.position - activeTarget;
+            Vector3 distanceFrom = brain.gameObject.transform.position - brain.agent.destination;
             distanceFrom.y = 0;
             if (state == BehaviourTreeState.FAILURE)
             {
@@ -1434,7 +1434,7 @@ namespace AITree
             {
                 return state;
             }
-            Vector3 distance = brain.gameObject.transform.position - activeTarget;
+            Vector3 distance = brain.gameObject.transform.position - brain.agent.destination;
             distance.y = 0;
             if ((distance).magnitude > approachRange)
             {
@@ -1841,6 +1841,14 @@ namespace AITree
 
     public class ChargeAttack : Sequence
     {
+        /// <summary>
+        /// please use biggest version
+        /// </summary>
+        /// <param name="chargeSpeed"></param>
+        /// <param name="damageZone"></param>
+        /// <param name="target"></param>
+        /// <param name="facingFunc"></param>
+        /// <param name="resetter"></param>
         public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc, System.Action<bool> resetter) : base()
         {
             children = new List<Node> {
@@ -1917,7 +1925,7 @@ namespace AITree
             new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
+            new AlwaysSucceed(new Approach("chargeTarget", 6f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
@@ -1927,6 +1935,62 @@ namespace AITree
             new CallVoidFunctionWithBool(resetter, true),
                 new InvokeEvent(end)
             };
+        }
+    }
+
+    public class Wander : Action
+    {
+        Vector3 direction = Vector3.zero;
+        float maxStepDistance;
+        float varianceFactor;
+        string locationStore;
+
+        public Wander():base()
+        {
+            locationStore = "uniqueStorageLocationWander";
+            children.Add(new Approach(locationStore, 0.01f, PositionStoreType.VECTOR3));
+        }
+        /// <summary>
+        /// Move a small step in a random direction
+        /// </summary>
+        /// <param name="locationStore">Unique string to carry target position around</param>
+        /// <param name="variance">A measure of how much the last step influences new direction (0 = no change, 1 = use new fully)</param>
+        /// <param name="maxStepDistance"></param>
+        public Wander(string locationStore, float variance, float maxStepDistance) : base()
+        {
+            this.locationStore = locationStore;
+            children.Add(new Approach(locationStore, 0.01f, PositionStoreType.VECTOR3));
+            varianceFactor = variance;
+            this.maxStepDistance = maxStepDistance;
+        }
+        public Wander(string locationStore, float variance, float maxStepDistance, float approachDist) : base()
+        {
+            this.locationStore = locationStore;
+            children.Add(new Approach(locationStore, approachDist, PositionStoreType.VECTOR3));
+            varianceFactor = variance;
+            this.maxStepDistance = maxStepDistance;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+            Vector3 newDirection = Random.insideUnitCircle;
+            newDirection.z = newDirection.y;
+            newDirection.y = 0;
+            direction = Vector3.Lerp(direction, newDirection, varianceFactor);
+            brain.AddOrOverwrite(locationStore, brain.gameObject.transform.position + direction * maxStepDistance);
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            state = children[0].Tick();
+            BehaviourTreeState returnState = state;
+            if(state!=BehaviourTreeState.RUNNING)
+            {
+                Restart();
+            }
+            return returnState;
         }
     }
 
