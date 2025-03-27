@@ -9,9 +9,13 @@ public class EnemyGun : MonoBehaviour
     public float startDelayMin, startDelayMax;
     public float minDelay, maxDelay;
     public Animator anim;
+    public int ammoPerReload = 0;
+    int currentAmmo;
+    public float reloadTime = 1f;
     // Start is called before the first frame update
     void Start()
     {
+        currentAmmo = ammoPerReload;
         StartCoroutine(StartDelay());
     }
 
@@ -43,6 +47,15 @@ public class EnemyGun : MonoBehaviour
             Instantiate(shotPattern, gunPoint.transform.position, gunPoint.transform.rotation, null);
             anim.SetTrigger("shoot");
             timer = 0f;
+            currentAmmo--;
+            if(currentAmmo <= 0 && ammoPerReload!=0)
+            {
+                yield return null;
+                anim.SetTrigger("reload");
+                yield return new WaitForSeconds(reloadTime);
+                currentAmmo = ammoPerReload;
+            }
+
         }
     }
 

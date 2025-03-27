@@ -4,26 +4,49 @@ using UnityEngine;
 
 public class OverseerWeaponsLook : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject lookTarget;
+
     public float speed = 1f;
-    internal bool pause = false;
+    [SerializeField] private bool _pause = false;
+    internal Quaternion _lockedRotation;
+    internal float _savedSpeed;
+
+    public bool pause
+    {
+        get
+        {
+            return _pause;
+        }
+        set
+        {
+            _lockedRotation = transform.rotation;
+            _pause = value;
+            if(_pause)
+            {
+                _savedSpeed = speed;
+                speed = 99f;
+            }
+            else
+            {
+                speed = _savedSpeed;
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _savedSpeed = speed;
+        if(lookTarget == null)
+        lookTarget = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (player == null || pause)
-        {
-            return;
-        }
-        Vector3 lookDir = player.transform.position - transform.position;
+        Vector3 lookDir = lookTarget.transform.position - transform.position;
         lookDir.y = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.up, -lookDir), speed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _pause ? _lockedRotation : Quaternion.LookRotation(Vector3.up, -lookDir), speed * Time.deltaTime);
     }
 
     internal void Pause(bool pause)

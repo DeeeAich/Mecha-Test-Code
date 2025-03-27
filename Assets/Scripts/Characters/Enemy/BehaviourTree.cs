@@ -149,16 +149,10 @@ namespace AITree
             }
             Resume();
         }
-
-
-
         internal virtual void Die()
         {
 
         }
-
-
-
     }
 
     #region basic Nodes
@@ -1906,13 +1900,18 @@ namespace AITree
             new CallVoidFunctionWithBool(resetter, true)
             };
         }
-        public ChargeAttack(float chargeSpeed, float chargeAcceleration, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter, System.Action<bool> overrideToggle) : base()
+        public ChargeAttack(float chargeSpeed, float chargeAcceleration, GameObject damageZone, string target, System.Func<string, bool> facingFunc,
+            System.Action<bool> resetter, System.Action<bool> overrideToggle, System.Action<bool> lookToggle, bool look, UnityEvent prep,
+            UnityEvent start, UnityEvent end) : base()
         {
             children = new List<Node> {
+                new InvokeEvent(prep),
             new CallVoidFunctionWithBool(overrideToggle, true),
             new ModifyAgentStat("speed", 0.1f), //no speed,
             new ModifyAgentStat("angularSpeed", 90f), //rotate base,
             new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+            new CallVoidFunctionWithBool(lookToggle, look),
+                new InvokeEvent(start),
             new ModifyAgentStat("angularSpeed", 0f), //no rotate,
             new ModifyAgentStat("speed", chargeSpeed), //big speed
             new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
@@ -1923,8 +1922,10 @@ namespace AITree
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
             new ModifyAgentStat("acceleration", 8f), //big speed
+            new CallVoidFunctionWithBool(lookToggle, false),
             new CallVoidFunctionWithBool(overrideToggle, false),
-            new CallVoidFunctionWithBool(resetter, true)
+            new CallVoidFunctionWithBool(resetter, true),
+                new InvokeEvent(end)
             };
         }
     }

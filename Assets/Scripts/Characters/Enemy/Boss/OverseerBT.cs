@@ -2,9 +2,14 @@ using AITree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OverseerBT : BehaviourTree
 {
+    public UnityEvent onChargePrepare;
+    public UnityEvent onChargeStart;
+    public UnityEvent onChargeEnd;
+
     [SerializeField] Animator[] walls;
     [Header("Gizmo Settings")]
     [SerializeField] [Range(1, 100)] internal int arcSteps = 8;
@@ -46,7 +51,7 @@ public class OverseerBT : BehaviourTree
     [SerializeField] float chargePatienceWeightBuildup = 0.2f;
     [SerializeField] float chargePatienceWeightDropoff = 0.2f;
     float chargePatienceWeight = 0f;
-    OverseerAnimationManager animManage;
+    [SerializeField] OverseerAnimationManager animManage;
     bool isCharging = false;
     [SerializeField] bool pauseLookOnAttack = false;
 
@@ -162,8 +167,9 @@ public class OverseerBT : BehaviourTree
     internal override void Awake()
     {
         base.Awake();
-
+        if(look == null)
         look = GetComponentInChildren<OverseerWeaponsLook>();
+        if(animManage == null)
         animManage = GetComponentInChildren<OverseerAnimationManager>();
 
         InitialiseBrains();
@@ -184,7 +190,7 @@ public class OverseerBT : BehaviourTree
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 3), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightThree),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 4), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightFour),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithInt(animManage.GroundSlamAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))), SlamWeight),
-                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeAcceleration, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride), ChargeWeight),
+                    new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeAcceleration, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride, look.Pause, pauseLookOnAttack, onChargePrepare, onChargeStart, onChargeEnd), ChargeWeight),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunction(animManage.LaserTrackingAttack), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), FollowLaserWeight)
 
                     ),
@@ -469,7 +475,11 @@ public class OverseerBT : BehaviourTree
             {
                 yield break;
             }
-
+            if(paused)
+            {
+                yield return null;
+                continue;
+            }
             float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
             if (Mathf.Acos(facingScore) < frontRadiusRadians / 2)
             {
@@ -511,30 +521,6 @@ public class OverseerBT : BehaviourTree
     internal override void Die()
     {
         animManage.PlayDeathAnimation();
-        TriggerDebrisExplosion tde = GetComponentInChildren<TriggerDebrisExplosion>();
-        if (tde != null)
-        {
-            tde.TriggerExplosion();
-        }
-        Collider[] c = GetComponents<Collider>();
-        if (c.Length > 0)
-        {
-            foreach (Collider x in c)
-            {
-                x.enabled = false;
-            }
-        }
-        gameObject.tag = "Untagged";
-        EnemyGun[] guns = GetComponentsInChildren<EnemyGun>();
-        foreach (EnemyGun g in guns)
-        {
-            g.BeGone();
-        }
-        foreach (Transform child in transform)
-        {
-            if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
-                child.parent = transform.parent.parent;
-        }
     }
 }
 

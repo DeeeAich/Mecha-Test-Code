@@ -70,7 +70,6 @@ public class EnemyHealth : Health, IShortCircuitable
                 child.parent = transform.parent.parent;
         }
         brain.Die();
-        Destroy(gameObject);
     }
 
     
