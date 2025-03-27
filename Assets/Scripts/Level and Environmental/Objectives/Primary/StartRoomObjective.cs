@@ -8,7 +8,7 @@ public class StartRoomObjective : Objective
     [SerializeField] private float timeToTriggerComplete = 0.25f;
     private void Start()
     {
-        room.startRoom();
+        room.StartRoom();
     }
 
     private void FixedUpdate()

@@ -27,22 +27,29 @@ public class EnemySpawn : MonoBehaviour
         }
         else if (timeToSpawn <= 0)
         {
-            GameObject newEnemy = Instantiate(enemyToSpawn.prefab, transform.position, transform.rotation);
-            newEnemy.transform.SetParent(transform.parent);
-            if (waveSpawner != null)
-            {
-                waveSpawner.spawnedEnemies.Add(newEnemy);
-                if (newEnemy.TryGetComponent(out Health enemyHealth))
-                {
-                    WaveSpawner targetWaveSpawner = waveSpawner;
-                    enemyHealth.onDeath.AddListener(delegate
-                    {
-                        targetWaveSpawner.enemiesKilled++;
-                        Debug.Log("Killed");
-                    });
-                }
-            }
-            spawned = true;
+            SpawnEnemy();
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        GameObject newEnemy = Instantiate(enemyToSpawn.prefab, transform.position, transform.rotation);
+        newEnemy.transform.SetParent(transform.parent);
+        if (waveSpawner != null)
+        {
+            waveSpawner.spawnedEnemies.Add(newEnemy);
+            if (newEnemy.TryGetComponent(out Health enemyHealth))
+            {
+                WaveSpawner targetWaveSpawner = waveSpawner;
+                enemyHealth.onDeath.AddListener(delegate
+                {
+                    targetWaveSpawner.enemiesKilled++;
+                    Debug.Log("Killed");
+                });
+                
+                //implement difficulty
+            }
+        }
+        spawned = true;
     }
 }

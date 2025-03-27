@@ -125,7 +125,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (rooms[i].isActive)
             {
-                rooms[i].completeRoom();
+                rooms[i].CompleteRoom();
             }
         }
     }

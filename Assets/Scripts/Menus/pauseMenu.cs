@@ -52,10 +52,7 @@ public class pauseMenu : MonoBehaviour
         pauseAction.performed += onPauseButtonPressed;
         openInventoryAction.performed += OpenInventory;
         openDevkitCheatsAction.performed += OpenDevkitCheats;
-        
-        anyAction.performed += anyActionPressed;
-        anyAction.canceled += anyActionReleased;
-        
+
         if (inactivityTime != 0)
         {
             useInactivityTimer = true;
@@ -143,9 +140,6 @@ public class pauseMenu : MonoBehaviour
         pauseAction.performed -= onPauseButtonPressed;
         openInventoryAction.performed -= OpenInventory;
         openDevkitCheatsAction.performed -= OpenDevkitCheats;
-        anyAction.performed -= anyActionPressed;
-        anyAction.started -= anyActionPressed;
-        anyAction.canceled -= anyActionPressed;
     }
 
     public void OpenInventory(InputAction.CallbackContext context)
@@ -200,25 +194,4 @@ public class pauseMenu : MonoBehaviour
         
         TogglePause();
     }
-
-    public void anyActionPressed(InputAction.CallbackContext context)
-    {
-        if (useInactivityTimer)
-        {
-            inactivityTimer = inactivityTime;
-            hasInputsPressed = true;
-        }
-    }
-
-    public void anyActionReleased(InputAction.CallbackContext context)
-    {
-        if (useInactivityTimer)
-        {
-            hasInputsPressed = false;
-        }
-        
-    }
-
-
-
 }

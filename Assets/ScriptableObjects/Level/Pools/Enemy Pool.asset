@@ -13,56 +13,44 @@ MonoBehaviour:
   m_Name: Enemy Pool
   m_EditorClassIdentifier: 
   standardEnemies:
-  - Name: Gun Boid
+  - EnemyType: 0
     prefab: {fileID: 2811666119793368411, guid: 855968ce7383f2144b3a39fc654dd10f,
       type: 3}
     spawnAnimationPrefab: {fileID: 7311595574350589422, guid: 223caa65180c5eb41806df398abf6563,
       type: 3}
     spawnChance: 10
-    rarity: 1
-  - Name: Shield Drone
+    difficulty: 0
+  - EnemyType: 3
     prefab: {fileID: 2168237188150525127, guid: 97394da52111d76448d4c96ce174435e,
       type: 3}
     spawnAnimationPrefab: {fileID: 6240455979727431332, guid: 18622a0c66ac11545afc8bf90c2a344b,
       type: 3}
     spawnChance: 8
-    rarity: 1
-  - Name: Bomber
+    difficulty: 0
+  - EnemyType: 1
     prefab: {fileID: 2639150327098342906, guid: caeeb1d327e1826409e543a288939050,
       type: 3}
     spawnAnimationPrefab: {fileID: 1321408075392612775, guid: 07c573759e7e7a64fb2ab42e87d5232d,
       type: 3}
     spawnChance: 10
-    rarity: 1
-  - Name: Spider
+    difficulty: 0
+  - EnemyType: 2
     prefab: {fileID: 151759185807588539, guid: 36eb5a0966608ee458e89346355829ce, type: 3}
     spawnAnimationPrefab: {fileID: 8628115664755298010, guid: 82d05bd0689e4404d8e93b76cee04447,
       type: 3}
     spawnChance: 5
-    rarity: 1
-  miniBosses: []
+    difficulty: 0
   bosses:
-  - Name: Hi :3
+  - EnemyType: 4
     prefab: {fileID: 2698137991132302062, guid: 48fc54a2a341b0a4aa644b84a5ccbc98,
       type: 3}
     spawnAnimationPrefab: {fileID: 1331781626544146514, guid: 9c3c4db03c87e3941a7413a9ce8bf462,
       type: 3}
     spawnChance: 1
-    rarity: 1
+    difficulty: 0
   standardWaveSpawners:
   - {fileID: 19575749529987131, guid: b79b1dc32af68994ba57ff8a57a35d01, type: 3}
-  - {fileID: 6767212152696474178, guid: 734d4feb3d77bcb4fbbbc17514b5ca94, type: 3}
-  - {fileID: 6767212152696474178, guid: 8bb9f1de682c58f4e824dc0dd8722215, type: 3}
-  - {fileID: 6767212152696474178, guid: f1794b6b408e86049b01effe75290faf, type: 3}
-  - {fileID: 6767212152696474178, guid: f669d5be09e6d9b4990f38b21acd1e81, type: 3}
-  - {fileID: 6767212152696474178, guid: 69a18ca9acdbb3c48ac2549c36623ad1, type: 3}
-  - {fileID: 6767212152696474178, guid: 8e064ed6d7815294ea4523f1ab3b557c, type: 3}
-  - {fileID: 6767212152696474178, guid: cf772b9f21c0d404fa9b107dd95fa55d, type: 3}
-  - {fileID: 6767212152696474178, guid: 2fc8def05627b884fabb3e52033cd058, type: 3}
-  rareWaveSpawners:
-  - {fileID: 6662689044550165245, guid: 8874377ff3554ea4899e086fe8148884, type: 3}
-  - {fileID: 6677372590215530054, guid: 6e11b1fc796c18b429d2b33e2fa8124c, type: 3}
-  - {fileID: 7158865111637263928, guid: 8227a13c9e4f94342ab7140d64346563, type: 3}
+  rareWaveSpawners: []
   miniBossWaveSpawners: []
   bossWaveSpawners: []
   exterminateWaveSpawners: []

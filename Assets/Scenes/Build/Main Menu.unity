@@ -442,7 +442,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!1 &428298557
+--- !u!1 &400356369
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -450,22 +450,73 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 428298558}
-  - component: {fileID: 428298559}
+  - component: {fileID: 400356373}
+  - component: {fileID: 400356372}
+  - component: {fileID: 400356371}
+  - component: {fileID: 400356370}
   m_Layer: 0
-  m_Name: Save Data
+  m_Name: General Game Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &428298558
+--- !u!114 &400356370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400356369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c76a3c5a55cba46a5451b0282fbe5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &400356371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400356369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73c3db71fd48d84f9949ac475067379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPersonalData:
+    name: 
+    primaryColor: {r: 0, g: 0, b: 0, a: 0}
+    secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  currentSaveFile:
+    level: 0
+    difficulty: 0
+    randomSeed: 0
+  filePath: 
+--- !u!114 &400356372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400356369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276e7d6a734d77d4f99d7ad58f62b89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 0
+  difficulty: 0
+  randomSeed: 0
+  gameSpeed: 1
+--- !u!4 &400356373
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428298557}
+  m_GameObject: {fileID: 400356369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -474,19 +525,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &428298559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428298557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73c3db71fd48d84f9949ac475067379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  filePath: 
 --- !u!1 &444767215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,6 +3460,6 @@ SceneRoots:
   - {fileID: 2026938037}
   - {fileID: 258248564}
   - {fileID: 2067953133}
-  - {fileID: 428298558}
   - {fileID: 932622270}
   - {fileID: 2027777495}
+  - {fileID: 400356373}

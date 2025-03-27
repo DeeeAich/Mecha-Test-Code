@@ -33,18 +33,19 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            if(instance != this) Destroy(gameObject);
-        }
-        
+        instance = this;
+
         if (randomizeSeedOnAwake)
         {
-            randomSeed = (int)(System.DateTime.Now.Ticks);
+            if (GameGeneralManager.instance != null)
+            {
+                randomSeed = GameGeneralManager.instance.seededRandom.Next();
+            }
+            else
+            {
+                randomSeed = (int)(System.DateTime.Now.Ticks);
+            }
+      
             Debug.Log("Starting game with seed: " + randomSeed);
         }
         
@@ -198,6 +199,5 @@ public class LevelGenerator : MonoBehaviour
         if(currentRoom != null) oldRoom = currentRoom;
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
         onSpawnRoom.Invoke();
-   
     }
 }

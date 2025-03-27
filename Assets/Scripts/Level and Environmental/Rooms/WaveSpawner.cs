@@ -14,34 +14,36 @@ public enum SpawnType
 
 public class WaveSpawner : MonoBehaviour
 {
-    public bool spawning;
-    public bool isComplete;
-    public int currentWave;
-    public int enemiesKilled;
-    public int totalEnemiesToSpawn;
-
-    [Header("Settings")]
+    [Header("Settings")] 
+    public float difficulty = 1;
     public bool looping;
     [SerializeField] private bool spawnOnStart = true;
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
     
-    [SerializeField] private SpawnType[] enemyTypes = new [] {SpawnType.Standard};
+    [Header("This is only used for randomizing")]
+    [SerializeField] private List<EnemyType> spawnableEnemyTypes;
     
     [Header("If unset, these will be randomly generated within fair ranges")]
     [SerializeField] private int[] waves;
-    [SerializeField] private List<EnemySpawnStruct> enemiesToSpawn;
+    [SerializeField] private List<EnemyType> enemiesToSpawn;
 
     [Header("References")]
     [SerializeField] private EnemySpawnPoint[] spawnPoints;
     [SerializeField] private GameObject enemySpawnPrefab;
 
     [Header("Internal References")]
+    public bool spawning;
+    public bool isComplete;
+    public int currentWave;
+    public int enemiesKilled;
+    public int totalEnemiesToSpawn;
+    
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     public List<GameObject> incomingEnemySpawners = new List<GameObject>();
     
     public UnityEvent onComplete;
-
-    private List<EnemySpawnStruct> spawnableEnemies;
+    private EnemyPoolScriptable enemyPool;
+    private List<EnemySpawnStruct> possibleEnemies;
 
     private int enemyToSpawnIndex;
     private Random seededRandom;
@@ -57,10 +59,7 @@ public class WaveSpawner : MonoBehaviour
             Debug.LogWarning("No waves set, not implemented");
         }
 
-        spawnableEnemies = new List<EnemySpawnStruct>();
-        if(enemyTypes.Contains(SpawnType.Standard)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.standardEnemies);
-        if(enemyTypes.Contains(SpawnType.MiniBoss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.miniBosses);
-        if(enemyTypes.Contains(SpawnType.Boss)) spawnableEnemies.AddRange(LevelGenerator.instance.levelInfo.enemyPool.bosses);
+        enemyPool = LevelGenerator.instance.levelInfo.enemyPool;
     }
 
     private void Start() // finds spawn points
@@ -86,15 +85,24 @@ public class WaveSpawner : MonoBehaviour
         
         if (enemiesToSpawn == null || enemiesToSpawn.Count == 0)
         {
-            enemiesToSpawn = new List<EnemySpawnStruct>();
+            enemiesToSpawn = new List<EnemyType>();
+            possibleEnemies = new List<EnemySpawnStruct>();
+
+            for (int i = 0; i < enemyPool.standardEnemies.Length; i++)
+            {
+                if (spawnableEnemyTypes.Contains(enemyPool.standardEnemies[i].EnemyType) && enemyPool.standardEnemies[i].difficulty >= GameGeneralManager.instance.difficulty)
+                {
+                    possibleEnemies.Add(enemyPool.standardEnemies[i]);
+                }
+            }
 
             for (int i = 0; i < waves.Length; i++)
             {
                 int totalSpawnChance = 0;
 
-                for (int j = 0; j < spawnableEnemies.Count; j++)
+                for (int j = 0; j < possibleEnemies.Count; j++)
                 {
-                    totalSpawnChance += spawnableEnemies[j].spawnChance;
+                    totalSpawnChance += possibleEnemies[j].spawnChance;
                 }
 
 
@@ -103,12 +111,12 @@ public class WaveSpawner : MonoBehaviour
                     int rand = seededRandom.Next(0, totalSpawnChance);
                     float currentChance = 0;
                     
-                    for (int k = 0; k < spawnableEnemies.Count; k++)
+                    for (int k = 0; k < possibleEnemies.Count; k++)
                     {
-                        currentChance += spawnableEnemies[k].spawnChance;
+                        currentChance += possibleEnemies[k].spawnChance;
                         if (currentChance > rand)
                         {
-                            enemiesToSpawn.Add(spawnableEnemies[k]);
+                            enemiesToSpawn.Add(possibleEnemies[k].EnemyType);
                             break;
                         }
                     }
@@ -186,7 +194,7 @@ public class WaveSpawner : MonoBehaviour
             
             if (waveSpawnCooldownTimer <= 0)
             {
-                if ((spawnableEnemies == null || spawnedEnemies.Count <= remainingEnemiesToTriggerNextWave) && currentWave < waves.Length)
+                if (spawnedEnemies.Count <= remainingEnemiesToTriggerNextWave && currentWave < waves.Length)
                 {
                     SpawnWave(waves[currentWave]);
                 }
@@ -213,7 +221,22 @@ public class WaveSpawner : MonoBehaviour
             availableSpawns.Remove(spawnPoint);
             
             newSpawn.transform.SetParent(transform);
-            newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemiesToSpawn[enemyToSpawnIndex];
+
+            for (int j = 0; j < enemyPool.standardEnemies.Length; j++)
+            {
+                if (enemyPool.standardEnemies[i].EnemyType == enemiesToSpawn[enemyToSpawnIndex])
+                {
+                    newSpawn.GetComponent<EnemySpawn>().enemyToSpawn = enemyPool.standardEnemies[i];
+                }
+            }
+            
+            if (newSpawn.GetComponent<EnemySpawn>().enemyToSpawn.prefab == null)
+            {
+                Debug.LogError("How even? enemy not in scriptable, fucking off presently");
+                Destroy(newSpawn);
+                return;
+            }
+         
             newSpawn.GetComponent<EnemySpawn>().waveSpawner = this;
             incomingEnemySpawners.Add(newSpawn);
             

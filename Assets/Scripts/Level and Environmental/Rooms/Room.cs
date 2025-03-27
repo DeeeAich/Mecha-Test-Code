@@ -118,7 +118,7 @@ public class Room : MonoBehaviour
         }
     }
     
-    public void startRoom()
+    public void StartRoom()
     {
         Debug.Log("Starting Room: " + name);
         
@@ -152,7 +152,7 @@ public class Room : MonoBehaviour
             if (possiblePrimaryObjectives.Length > 0)
             {
                 primaryObjective = Instantiate(possiblePrimaryObjectives[LevelGenerator.instance.seededRandom.Next(0, possiblePrimaryObjectives.Length)], transform).GetComponent<Objective>();
-                primaryObjective.onComplete.AddListener(completeRoom);
+                primaryObjective.onComplete.AddListener(CompleteRoom);
             }
             else
             {
@@ -163,7 +163,7 @@ public class Room : MonoBehaviour
         else
         {
             primaryObjective.gameObject.SetActive(true);
-            primaryObjective.onComplete.AddListener(completeRoom);
+            primaryObjective.onComplete.AddListener(CompleteRoom);
         }
 
 
@@ -178,16 +178,14 @@ public class Room : MonoBehaviour
         onStartRoom.Invoke();
     }
 
-    public void completeRoom()
+    public void CompleteRoom()
     {
+        // goodbye tom
+        // goodbye jacob
+        
         if (isActive)
         {
-            // goodbye tom
-            // goodbye jacob
-            
-            if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
-            
-            if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
+            //cleaning up internal stuff
             
             for (int i = 0; i < exitDoors.Length; i++)
             {
@@ -208,13 +206,21 @@ public class Room : MonoBehaviour
                     }
                 }
             }
- 
-
+            
             foreach (var pickup in FindObjectsOfType<Pickup>())
             {
                 pickup.animator.SetTrigger("spawnLoot");
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
+            
+            
+            
+            //setting external stuff
+            if (GameGeneralManager.instance != null) GameGeneralManager.instance.difficulty += 1f / LevelGenerator.instance.roomsInThisFloor;
+            
+            if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
+            
+            if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
 
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
             

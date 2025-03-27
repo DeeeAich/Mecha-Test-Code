@@ -65,7 +65,7 @@ public class MetricsTracker : MonoBehaviour
 
     public void RecordEvent(TrackableEvent trackableEvent) // this is for others to call to record damage data
     {
-        if (currentGameRuntimeMetrics.levelRuntimeMetricsList[^1].roomRuntimeMetricsList[^1].timeTaken != 0)
+        if (isTracking && currentGameRuntimeMetrics.levelRuntimeMetricsList[^1].roomRuntimeMetricsList[^1].timeTaken != 0)
         {
             currentGameRuntimeMetrics.levelRuntimeMetricsList[^1].roomRuntimeMetricsList[^1].events.Add(trackableEvent);
         }
@@ -110,6 +110,12 @@ public class MetricsTracker : MonoBehaviour
 
     private void StopGameRuntimeTracking()
     {
+        SaveCurrentData();
+    }
+
+    private void SaveCurrentData()
+    {
+        
     }
 
     public void RoomStarted()
@@ -149,8 +155,15 @@ public class MetricsTracker : MonoBehaviour
                 if (isTracking)
                 {
                     StopGameRuntimeTracking();
+                }
+                break;
+            
+            case 2:
+                if (!isTracking)
+                {
                     StartGameRuntimeTracking();
                 }
+                
                 break;
             
             default:

@@ -5,11 +5,20 @@ using UnityEngine;
 
 [Serializable] public struct EnemySpawnStruct
 {
-    public string Name;
+    public EnemyType EnemyType;
     public GameObject prefab;
     public GameObject spawnAnimationPrefab;
     public int spawnChance;
-    public int rarity;
+    public int difficulty;
+}
+
+[Serializable] public enum EnemyType
+{
+    GunBoid,
+    BomberDrone,
+    BlueSpiderMech,
+    ShieldDrone,
+    Overseer
 }
 
 [CreateAssetMenu(fileName = "Enemy Pool", menuName = "ScriptableObjects/Level Scriptables/Enemy Pool")]
@@ -17,7 +26,6 @@ public class EnemyPoolScriptable : ScriptableObject
 {
     [Header("Enemies")]
     public EnemySpawnStruct[] standardEnemies;
-    public EnemySpawnStruct[] miniBosses;
     public EnemySpawnStruct[] bosses;
 
     [Header("Normal Wave Spawners")]
