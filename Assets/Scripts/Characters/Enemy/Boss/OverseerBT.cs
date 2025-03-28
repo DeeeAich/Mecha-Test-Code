@@ -9,6 +9,7 @@ public class OverseerBT : BehaviourTree
     public UnityEvent onChargePrepare;
     public UnityEvent onChargeStart;
     public UnityEvent onChargeEnd;
+    public UnityEvent onPhaseTransition;
 
     [SerializeField] Animator[] walls;
     [Header("Gizmo Settings")]
@@ -162,6 +163,7 @@ public class OverseerBT : BehaviourTree
     {
         frontRadiusRadians = Mathf.Deg2Rad * frontRadius;
         StartCoroutine(ChargeWeightBuilding());
+        AddOrOverwrite("this", gameObject);
     }
 
     internal override void Awake()
@@ -216,10 +218,13 @@ public class OverseerBT : BehaviourTree
 
         transitionBrain =
             new Sequence(
+                //add new stop moving
+                new Approach("this", 0, PositionStoreType.GAMEOBJECT),
                 new CallVoidFunction(animManage.PhaseTransition), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)),
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointOne", Facing, ResetChargeWeight),
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointTwo", Facing, ResetChargeWeight),
-                new CallVoidFunctionWithBool(SwapBrain, true)
+                new CallVoidFunctionWithBool(SwapBrain, true),
+                new CallVoidFunction(BecomeVincible)
                 );
 
         //head empty open inside
@@ -266,11 +271,11 @@ public class OverseerBT : BehaviourTree
             replacement = new RootNode(this, transitionBrain);
             if (CheckAnimBool())
             {
+                //Invoke public phaseTransition Event
+                onPhaseTransition.Invoke();
                 animManage.PhaseTransition();
-                foreach(Animator anim in walls)
-                {
-                    anim.SetTrigger("Transition");
-                }
+
+                health.canTakeDamage = false;
                 trans = true;
             }
         }
@@ -521,6 +526,11 @@ public class OverseerBT : BehaviourTree
     internal override void Die()
     {
         animManage.PlayDeathAnimation();
+    }
+
+    internal void BecomeVincible()
+    {
+        health.canTakeDamage = true;
     }
 }
 

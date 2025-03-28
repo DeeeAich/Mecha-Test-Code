@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyStats : MonoBehaviour
+public abstract class EnemyStats : MonoBehaviour
 {
     [SerializeField] float _baseMaxHealth;
     [SerializeField] float _difficulty;

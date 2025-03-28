@@ -14,6 +14,7 @@ public class TeslaBotBT : BehaviourTree
         root = new RootNode(this,
                    new Sequence(
                        //new FindTarget("targetType", "target"),
+                       //Make DVDLogo Behaviour
                        new Wander("CalmWanderMemory", calmVariance, calmStepDistance, approachDist)
                 )
             );

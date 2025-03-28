@@ -341,24 +341,24 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             TakeDamage(totalDamage, "Burn");
         }
     }
-    IEnumerator BurnDamage(float damagePerTick, int count)
-    {
-        float timer = 0;
-        float maxTime = 0.25f;
-        int ticks = 0;
-        while (ticks < count)
-        {
-            while (timer < maxTime)
-            {
-                timer += Time.deltaTime;
-                yield return null;
-            }
-            timer -= maxTime;
-            ticks++;
-            TakeDamage(damagePerTick, out bool discard);
-        }
-        yield return null;
-    }
+    //IEnumerator BurnDamage(float damagePerTick, int count)
+    //{ old overlap version
+    //    float timer = 0;
+    //    float maxTime = 0.25f;
+    //    int ticks = 0;
+    //    while (ticks < count)
+    //    {
+    //        while (timer < maxTime)
+    //        {
+    //            timer += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //        timer -= maxTime;
+    //        ticks++;
+    //        TakeDamage(damagePerTick, out bool discard);
+    //    }
+    //    yield return null;
+    //}
     public virtual void Burn(float chance, float damageTick, int tickCount)
     {
         //tick length is locked at 0.25s/t
@@ -378,7 +378,13 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         }
 
         //burns.Add(StartCoroutine(BurnDamage(damageTick * application, tickCount)));
+        if(burnEffects.Count == 0)
         burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
+        else
+        {
+            BurnInfo updatedBurn = new BurnInfo(Mathf.Max(damageTick * application, burnEffects[0].damagePerTick), Mathf.Max(tickCount, burnEffects[0].ticksLeft));
+            burnEffects[0] = updatedBurn;
+        }
         if (!activeBurnEffect)
         {
             StartCoroutine(BurnDamage());

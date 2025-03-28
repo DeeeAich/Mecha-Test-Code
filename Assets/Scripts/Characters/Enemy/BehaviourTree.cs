@@ -1925,7 +1925,7 @@ namespace AITree
             new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
             new ToggleObject(damageZone),
             new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 6f, PositionStoreType.VECTOR3)),
+            new AlwaysSucceed(new Approach("chargeTarget", 0.1f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
             new ModifyAgentStat("speed", 3.5f),
@@ -1993,6 +1993,8 @@ namespace AITree
             return returnState;
         }
     }
+
+
 
     public class SavePositionOfObject : Action
     {
