@@ -11,8 +11,59 @@ public class EnemyGun : MonoBehaviour
     public float damage;
     public Animator anim;
     public int ammoPerReload = 0;
-    int currentAmmo;
+    internal int currentAmmo;
     public float reloadTime = 1f;
+    [SerializeField] EnemyStats stats;
+
+    private void OnEnable()
+    {
+        //Subscribe to Event
+        if (stats == null)
+        {
+            if (TryGetComponent<EnemyStats>(out stats))
+            {
+                damage = stats.damage;
+                stats.onStatsChanged.AddListener(FetchDamage);
+            }
+            else
+            {
+                //stats is not on same level
+            }
+        }
+        else
+        {
+            damage = stats.damage;
+            stats.onStatsChanged.AddListener(FetchDamage);
+        }
+    }
+
+    private void OnDisable()
+    {
+        //Event posted cringe, unsub
+        if (stats == null)
+        {
+            if (TryGetComponent<EnemyStats>(out stats))
+            {
+                damage = stats.damage;
+                stats.onStatsChanged.RemoveListener(FetchDamage);
+            }
+            else
+            {
+                //stats is not on same level
+            }
+        }
+        else
+        {
+            damage = stats.damage;
+            stats.onStatsChanged.RemoveListener(FetchDamage);
+        }
+    }
+
+    void FetchDamage()
+    {
+        damage = stats.damage;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +84,7 @@ public class EnemyGun : MonoBehaviour
         StartCoroutine(FireOnRepeat());
     }
 
-    public IEnumerator FireOnRepeat()
+    public virtual IEnumerator FireOnRepeat()
     {
         float timer = 0f;
         float randTime;
