@@ -151,7 +151,7 @@ namespace AITree
         }
         internal virtual void Die()
         {
-
+            Stop();
         }
     }
 

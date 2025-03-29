@@ -44,6 +44,11 @@ public class OverseerWeaponsLook : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(lookTarget == null)
+        {
+            enabled = false;
+            return;
+        }
         Vector3 lookDir = lookTarget.transform.position - transform.position;
         lookDir.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, _pause ? _lockedRotation : Quaternion.LookRotation(Vector3.up, -lookDir), speed * Time.deltaTime);

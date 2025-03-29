@@ -15,8 +15,9 @@ public class BomberDroneBT : BehaviourTree
     // Start is called before the first frame update
     internal override void Awake()
     {
+        if (OnCharge == null)
+            OnCharge = new UnityEvent();
         explosionDamage = GetComponent<EnemyStats>().damage;
-        OnCharge = new();
         lean = GetComponentInChildren<BomberLean>();
         base.Awake();
         AddOrOverwrite("player", player);
@@ -38,6 +39,8 @@ public class BomberDroneBT : BehaviourTree
 
     private void OnEnable()
     {
+        if (OnCharge == null)
+            OnCharge = new UnityEvent();    
         OnCharge.AddListener(SetAnimation);
     }
 
