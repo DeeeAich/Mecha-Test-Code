@@ -28,13 +28,6 @@ public class SurvivePrimaryObjective : Objective
             timer -= Time.fixedDeltaTime;
             if (timer <= 0)
             {
-                WaveSpawner[] spawners = room.waveSpawners;
-
-                for (int i = 0; i < spawners.Length; i++)
-                {
-                    spawners[i].StopSpawning(false);
-                }
-                
                 TriggerComplete();
             }
             
