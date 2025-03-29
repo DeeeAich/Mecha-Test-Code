@@ -32,15 +32,15 @@ public class Critical : ProjectileMod
         
     }
 
-    //public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
-    //{
-    //
-    //
-    //    if (statusInfo.statusType != WeaStaEftChip.StatusType.Critical)
-    //        return;
-    //
-    //    chance += statusInfo.effectChance;
-    //    damage += statusInfo.effectDamage;
-    //
-    //}
+    public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
+    {
+
+
+        if (statusInfo.statusType != WeaStaEftChip.StatusType.Critical)
+            return;
+
+        chance += statusInfo.effectChance;
+        damage += statusInfo.effectDamage;
+
+    }
 }

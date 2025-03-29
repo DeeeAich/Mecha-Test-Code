@@ -1922,7 +1922,7 @@ namespace AITree
                 new InvokeEvent(start),
             new ModifyAgentStat("angularSpeed", 0f), //no rotate,
             new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
+            new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration   
             new ToggleObject(damageZone),
             new FindChargeTarget(target, "chargeTarget"),
             new AlwaysSucceed(new Approach("chargeTarget", 0.1f, PositionStoreType.VECTOR3)),
@@ -2030,11 +2030,11 @@ namespace AITree
                 Vector3 pathTarget = objectPos;
                 float stepSize = 0.1f;
                 NavMeshPath path = new NavMeshPath();
-                NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, int.MinValue, path);
+                NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, NavMesh.AllAreas, path);
                 while(path.status == NavMeshPathStatus.PathComplete)
                 {
                     pathTarget += direction * stepSize;
-                    NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, int.MinValue, path);
+                    NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, NavMesh.AllAreas, path);
                 }
                 brain.AddOrOverwrite(sto, pathTarget);
                 state = BehaviourTreeState.SUCCESS;
