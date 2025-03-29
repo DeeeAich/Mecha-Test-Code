@@ -90,7 +90,7 @@ public class Objective : MonoBehaviour
         {
             for (int i = 0; i < room.waveSpawners.Length; i++)
             {
-                room.waveSpawners[i].StopSpawning();
+                room.waveSpawners[i].StopSpawning(false);
             }
         }
 

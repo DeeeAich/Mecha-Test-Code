@@ -29,7 +29,7 @@ public class OverseerFightPrimaryObjective : Objective
         {
             if (room.waveSpawners[i] != bossWaveSpawnerInScene)
             {
-                room.waveSpawners[i].StopSpawning();
+                room.waveSpawners[i].StopSpawning(true);
             }
         }
         

@@ -135,9 +135,15 @@ public class WaveSpawner : MonoBehaviour
         currentWave = 0;
     }
 
-    public void StopSpawning()
+    public void StopSpawning(bool killEnemies)
     {
         isComplete = true;
+        spawning = false;
+
+        if (killEnemies)
+        {
+            KillEnemies();
+        }
         
         if (spawnedEnemies != null && spawnedEnemies.Count > 0)
         {
@@ -160,6 +166,20 @@ public class WaveSpawner : MonoBehaviour
         {
             Destroy(incomingEnemySpawners[i]);
         }
+    }
+
+    public void KillEnemies()
+    {
+        if (spawnedEnemies != null && spawnedEnemies.Count > 0)
+        {
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                if (spawnedEnemies[i] == null)
+                {
+                    spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
+                }
+            }
+        }// clears null references from list
     }
 
     private void FixedUpdate()
