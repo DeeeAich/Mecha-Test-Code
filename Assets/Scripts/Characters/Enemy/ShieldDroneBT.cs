@@ -15,6 +15,7 @@ public class ShieldDroneBT : BehaviourTree
 
     internal override void Awake()
     {
+        explosionDamage = GetComponent<EnemyStats>().damage;
         base.Awake();
         health.isShieldable = false;
         memory.Add("CoverTarget", transform.position);

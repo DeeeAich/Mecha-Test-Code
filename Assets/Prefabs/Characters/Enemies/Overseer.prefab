@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 4124273715742297104}
   - component: {fileID: 4791769845658784720}
   - component: {fileID: -8931675275034030346}
+  - component: {fileID: 5509937674916179255}
   m_Layer: 0
   m_Name: Overseer
   m_TagString: Untagged
@@ -161,6 +162,18 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   paused: 0
+  onChargePrepare:
+    m_PersistentCalls:
+      m_Calls: []
+  onChargeStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onChargeEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onPhaseTransition:
+    m_PersistentCalls:
+      m_Calls: []
   walls: []
   arcSteps: 6
   attackColours:
@@ -343,6 +356,29 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   meshesRef: {fileID: 0}
+--- !u!114 &5509937674916179255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650565202339733482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseMaxHealth: 10000
+  _baseSpeed: 3.5
+  _baseAngularSpeed: 30
+  _baseAcceleration: 8
+  _difficulty: 1
+  _baseDamage: 25
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  myHealth: {fileID: -8931675275034030346}
+  myAgent: {fileID: 1259000513520919617}
 --- !u!1001 &5375722804594049362
 PrefabInstance:
   m_ObjectHideFlags: 0

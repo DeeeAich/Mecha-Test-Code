@@ -8,6 +8,7 @@ public class EnemyGun : MonoBehaviour
     public GameObject shotPattern;
     public float startDelayMin, startDelayMax;
     public float minDelay, maxDelay;
+    public float damage;
     public Animator anim;
     public int ammoPerReload = 0;
     int currentAmmo;
@@ -44,11 +45,17 @@ public class EnemyGun : MonoBehaviour
                 yield return null;
                 timer += Time.deltaTime;
             }
-            Instantiate(shotPattern, gunPoint.transform.position, gunPoint.transform.rotation, null);
+            GameObject spawned = Instantiate(shotPattern, gunPoint.transform.position, gunPoint.transform.rotation, transform);
+            MoveProjectile[] bullets = GetComponentsInChildren<MoveProjectile>();
+            foreach(MoveProjectile m in bullets)
+            {
+                m.damage = damage; //I might want to seperate bullet movement and collision, moveProj and bulletHit
+            }
+            spawned.transform.parent = null;
             anim.SetTrigger("shoot");
             timer = 0f;
             currentAmmo--;
-            if(currentAmmo <= 0 && ammoPerReload!=0)
+            if (currentAmmo <= 0 && ammoPerReload != 0)
             {
                 yield return null;
                 anim.SetTrigger("reload");

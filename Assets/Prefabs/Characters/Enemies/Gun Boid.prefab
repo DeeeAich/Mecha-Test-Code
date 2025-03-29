@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 213611599183135197}
   - component: {fileID: 8278088241060675377}
   - component: {fileID: 7300719402954375497}
+  - component: {fileID: 505632371417007408}
   m_Layer: 9
   m_Name: Gun Boid
   m_TagString: Enemy
@@ -144,7 +145,10 @@ MonoBehaviour:
   startDelayMax: 0
   minDelay: 1.25
   maxDelay: 2
+  damage: 25
   anim: {fileID: 5848591045892066733}
+  ammoPerReload: 0
+  reloadTime: 1
 --- !u!114 &7300719402954375497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +173,29 @@ MonoBehaviour:
   strafeMax: 10
   pauseMin: 0
   pauseMax: 0.5
+--- !u!114 &505632371417007408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811666119793368411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseMaxHealth: 100
+  _baseSpeed: 7
+  _baseAngularSpeed: 0
+  _baseAcceleration: 8
+  _difficulty: 1
+  _baseDamage: 25
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  myHealth: {fileID: 213611599183135197}
+  myAgent: {fileID: 7805457920417713782}
 --- !u!1 &3903511325216272645
 GameObject:
   m_ObjectHideFlags: 0

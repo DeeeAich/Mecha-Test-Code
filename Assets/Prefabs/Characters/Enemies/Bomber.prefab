@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3857274298730472560}
   - component: {fileID: 5130297260658799289}
   - component: {fileID: 4410213945877535817}
+  - component: {fileID: 4033069548880598872}
   m_Layer: 9
   m_Name: Bomber
   m_TagString: Enemy
@@ -140,6 +141,29 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   meshesRef: {fileID: 3946711570175696649}
+--- !u!114 &4033069548880598872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639150327098342906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseMaxHealth: 50
+  _baseSpeed: 13
+  _baseAngularSpeed: 120
+  _baseAcceleration: 50
+  _difficulty: 1
+  _baseDamage: 50
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  myHealth: {fileID: 4410213945877535817}
+  myAgent: {fileID: 3857274298730472560}
 --- !u!1001 &1097144415015709746
 PrefabInstance:
   m_ObjectHideFlags: 0

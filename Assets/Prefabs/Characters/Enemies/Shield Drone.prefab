@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8247349491236946628}
   - component: {fileID: 738471980783884206}
   - component: {fileID: 986991060783444348}
+  - component: {fileID: -1502201843710798797}
   m_Layer: 9
   m_Name: Shield Drone
   m_TagString: Enemy
@@ -170,6 +171,29 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   meshesRef: {fileID: 6270579132875442834}
+--- !u!114 &-1502201843710798797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseMaxHealth: 75
+  _baseSpeed: 9
+  _baseAngularSpeed: 120
+  _baseAcceleration: 8
+  _difficulty: 1
+  _baseDamage: 30
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  myHealth: {fileID: 986991060783444348}
+  myAgent: {fileID: 5786988066262490530}
 --- !u!1001 &5863150719433242317
 PrefabInstance:
   m_ObjectHideFlags: 0
