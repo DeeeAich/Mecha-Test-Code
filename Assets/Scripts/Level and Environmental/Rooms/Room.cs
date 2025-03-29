@@ -49,12 +49,12 @@ public class Room : MonoBehaviour
     public UnityEvent onStartRoom;
     public UnityEvent onCompleteRoom;
 
-    private void Awake()
+    private void Awake() // leave objectives and waveSpawners turned off if already in room, this script will turn em on
     {
         captureZones = GetComponentsInChildren<CaptureZone>(true);
         enemySpawnPoints = GetComponentsInChildren<EnemySpawnPoint>(true);
         waveSpawners = GetComponentsInChildren<WaveSpawner>(true);
-        
+        primaryObjective = GetComponentInChildren<Objective>(true);
     }
 
     private void Start()

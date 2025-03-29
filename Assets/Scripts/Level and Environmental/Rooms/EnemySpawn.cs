@@ -35,6 +35,9 @@ public class EnemySpawn : MonoBehaviour
     {
         GameObject newEnemy = Instantiate(enemyToSpawn.prefab, transform.position, transform.rotation);
         newEnemy.transform.SetParent(transform.parent);
+        
+        if(GameGeneralManager.instance != null) newEnemy.GetComponent<EnemyStats>().difficulty = GameGeneralManager.instance.difficulty;
+        
         if (waveSpawner != null)
         {
             waveSpawner.spawnedEnemies.Add(newEnemy);
@@ -46,10 +49,12 @@ public class EnemySpawn : MonoBehaviour
                     targetWaveSpawner.enemiesKilled++;
                     Debug.Log("Killed");
                 });
-                
-                //implement difficulty
+
+           
             }
         }
+        
+        
         spawned = true;
     }
 }

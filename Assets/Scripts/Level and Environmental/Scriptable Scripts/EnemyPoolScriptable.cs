@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable] public struct EnemySpawnStruct
 {
@@ -25,9 +26,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Enemy Pool", menuName = "ScriptableObjects/Level Scriptables/Enemy Pool")]
 public class EnemyPoolScriptable : ScriptableObject
 {
-    [Header("Enemies")]
-    public EnemySpawnStruct[] standardEnemies;
-    public EnemySpawnStruct[] bosses;
+    [FormerlySerializedAs("Enemies")] [Header("Enemies")]
+    public EnemySpawnStruct[] enemies;
 
     [Header("Normal Wave Spawners")]
     public GameObject[] standardWaveSpawners;

@@ -39,12 +39,12 @@ public class EditorWaveSpawnerDifficultySetter : MonoBehaviour
                     int enemiesChecked = 0;
                     float difficulty = 0;
 
-                    for (int j = 0; j < enemyPool.standardEnemies.Length; j++)
+                    for (int j = 0; j < enemyPool.enemies.Length; j++)
                     {
-                        if (spawner.enemiesToSpawn.Contains(enemyPool.standardEnemies[j].EnemyType) && enemyPool.standardEnemies[j].difficulty > spawner.difficulty)
+                        if (spawner.enemiesToSpawn.Contains(enemyPool.enemies[j].EnemyType) && enemyPool.enemies[j].difficulty > spawner.difficulty)
                         {
                             enemiesChecked++;
-                            difficulty = enemyPool.standardEnemies[j].difficulty;
+                            difficulty = enemyPool.enemies[j].difficulty;
                             spawner.difficulty = difficulty;
                         }
                     }
@@ -57,12 +57,12 @@ public class EditorWaveSpawnerDifficultySetter : MonoBehaviour
                     int enemiesChecked = 0;
                     float difficulty = 0;
                     
-                    for (int j = 0; j < enemyPool.standardEnemies.Length; j++)
+                    for (int j = 0; j < enemyPool.enemies.Length; j++)
                     {
-                        if (spawner.spawnableEnemyTypes.Contains(enemyPool.standardEnemies[j].EnemyType) && enemyPool.standardEnemies[j].difficulty > spawner.difficulty)
+                        if (spawner.spawnableEnemyTypes.Contains(enemyPool.enemies[j].EnemyType) && enemyPool.enemies[j].difficulty > spawner.difficulty)
                         {
                             enemiesChecked++;
-                            difficulty = enemyPool.standardEnemies[j].difficulty;
+                            difficulty = enemyPool.enemies[j].difficulty;
                             spawner.difficulty = difficulty;
                         }
                     }
