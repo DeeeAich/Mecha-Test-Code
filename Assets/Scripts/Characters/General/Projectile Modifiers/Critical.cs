@@ -25,11 +25,14 @@ public class Critical : ProjectileMod
 
         lastCrit = (int)crit;
 
-        if(crit > 0)
-            return baseDamage * (damage * crit);
-        else
-            return baseDamage;
-        
+        //if(crit > 0)
+        //    return baseDamage * (damage * crit);
+        //else
+        //    return baseDamage;
+
+
+        // Damage is expected to be 0.5f, increased rarely.
+        return baseDamage + (baseDamage * damage * crit);
     }
 
     public override void AddModifiers(StatusInfo statusInfo, bool percentage = false)
