@@ -32,7 +32,7 @@ public class SurvivePrimaryObjective : Objective
 
                 for (int i = 0; i < spawners.Length; i++)
                 {
-                    spawners[i].StopSpawning(true);
+                    spawners[i].StopSpawning(false);
                 }
                 
                 TriggerComplete();
