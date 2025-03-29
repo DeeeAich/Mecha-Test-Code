@@ -180,6 +180,12 @@ public class OverseerBT : BehaviourTree
         root = new RootNode(this,
             new MultiRoot(motionBrain, weaponsBrain)
             );
+
+        Objective objective = LevelGenerator.instance.currentRoom.GetComponent<Room>().primaryObjective;
+        if(objective is OverseerFightPrimaryObjective)
+        {
+            (objective as OverseerFightPrimaryObjective).Phase2End.AddListener(SwapBrain);
+        }
     }
 
     void InitialiseBrains()
@@ -219,7 +225,7 @@ public class OverseerBT : BehaviourTree
         transitionBrain =
             new Sequence(
                 //add new stop moving
-                new Approach("this", 0, PositionStoreType.GAMEOBJECT),
+                new Approach("this", 0.1f, PositionStoreType.GAMEOBJECT),
                 new CallVoidFunction(animManage.PhaseTransition), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)),
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointOne", Facing, ResetChargeWeight),
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointTwo", Facing, ResetChargeWeight),

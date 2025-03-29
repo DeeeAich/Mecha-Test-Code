@@ -1849,65 +1849,65 @@ namespace AITree
         /// <param name="target"></param>
         /// <param name="facingFunc"></param>
         /// <param name="resetter"></param>
-        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc, System.Action<bool> resetter) : base()
-        {
-            children = new List<Node> {
-            new ModifyAgentStat("speed", 0.1f), //no speed,
-            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
-            new RepeatUntilSuccess(new BooleanFunction(facingFunc)),
-            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
-            new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
-            new ToggleObject(damageZone),
-            new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
-            new ToggleObject(damageZone),
-            new ModifyAgentStat("angularSpeed", 30f), //reset vals
-            new ModifyAgentStat("speed", 3.5f),
-            new ModifyAgentStat("acceleration", 8f), //big speed
-            new CallVoidFunctionWithBool(resetter, true)
-            };
-        }
-        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter) : base()
-        {
-            children = new List<Node> {
-            new ModifyAgentStat("speed", 0.1f), //no speed,
-            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
-            new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
-            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
-            new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ModifyAgentStat("acceleration", 100f), //big speed acceleration
-            new ToggleObject(damageZone),
-            new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
-            new ToggleObject(damageZone),
-            new ModifyAgentStat("angularSpeed", 30f), //reset vals
-            new ModifyAgentStat("speed", 3.5f),
-            new ModifyAgentStat("acceleration", 8f), //big speed
-            new CallVoidFunctionWithBool(resetter, true)
-            };
-        }
-        public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter, System.Action<bool> overrideToggle) : base()
-        {
-            children = new List<Node> {
-            new CallVoidFunctionWithBool(overrideToggle, true),
-            new ModifyAgentStat("speed", 0.1f), //no speed,
-            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
-            new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
-            new ModifyAgentStat("angularSpeed", 0f), //no rotate,
-            new ModifyAgentStat("speed", chargeSpeed), //big speed
-            new ModifyAgentStat("acceleration", 200f), //big speed acceleration
-            new ToggleObject(damageZone),
-            new SavePositionOfObject(target, "chargeTarget"),
-            new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
-            new ToggleObject(damageZone),
-            new ModifyAgentStat("angularSpeed", 30f), //reset vals
-            new ModifyAgentStat("speed", 3.5f),
-            new ModifyAgentStat("acceleration", 8f), //big speed
-            new CallVoidFunctionWithBool(overrideToggle, false),
-            new CallVoidFunctionWithBool(resetter, true)
-            };
-        }
+        //public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<bool> facingFunc, System.Action<bool> resetter) : base()
+        //{
+        //    children = new List<Node> {
+        //    new ModifyAgentStat("speed", 0.1f), //no speed,
+        //    new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+        //    new RepeatUntilSuccess(new BooleanFunction(facingFunc)),
+        //    new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+        //    new ModifyAgentStat("speed", chargeSpeed), //big speed
+        //    new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+        //    new ToggleObject(damageZone),
+        //    new SavePositionOfObject(target, "chargeTarget"),
+        //    new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
+        //    new ToggleObject(damageZone),
+        //    new ModifyAgentStat("angularSpeed", 30f), //reset vals
+        //    new ModifyAgentStat("speed", 3.5f),
+        //    new ModifyAgentStat("acceleration", 8f), //big speed
+        //    new CallVoidFunctionWithBool(resetter, true)
+        //    };
+        //}
+        //public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter) : base()
+        //{
+        //    children = new List<Node> {
+        //    new ModifyAgentStat("speed", 0.1f), //no speed,
+        //    new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+        //    new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+        //    new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+        //    new ModifyAgentStat("speed", chargeSpeed), //big speed
+        //    new ModifyAgentStat("acceleration", 100f), //big speed acceleration
+        //    new ToggleObject(damageZone),
+        //    new SavePositionOfObject(target, "chargeTarget"),
+        //    new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
+        //    new ToggleObject(damageZone),
+        //    new ModifyAgentStat("angularSpeed", 30f), //reset vals
+        //    new ModifyAgentStat("speed", 3.5f),
+        //    new ModifyAgentStat("acceleration", 8f), //big speed
+        //    new CallVoidFunctionWithBool(resetter, true)
+        //    };
+        //}
+        //public ChargeAttack(float chargeSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc, System.Action<bool> resetter, System.Action<bool> overrideToggle) : base()
+        //{
+        //    children = new List<Node> {
+        //    new CallVoidFunctionWithBool(overrideToggle, true),
+        //    new ModifyAgentStat("speed", 0.1f), //no speed,
+        //    new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+        //    new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
+        //    new ModifyAgentStat("angularSpeed", 0f), //no rotate,
+        //    new ModifyAgentStat("speed", chargeSpeed), //big speed
+        //    new ModifyAgentStat("acceleration", 200f), //big speed acceleration
+        //    new ToggleObject(damageZone),
+        //    new SavePositionOfObject(target, "chargeTarget"),
+        //    new AlwaysSucceed(new Approach("chargeTarget", 5f, PositionStoreType.VECTOR3)),
+        //    new ToggleObject(damageZone),
+        //    new ModifyAgentStat("angularSpeed", 30f), //reset vals
+        //    new ModifyAgentStat("speed", 3.5f),
+        //    new ModifyAgentStat("acceleration", 8f), //big speed
+        //    new CallVoidFunctionWithBool(overrideToggle, false),
+        //    new CallVoidFunctionWithBool(resetter, true)
+        //    };
+        //}
         public ChargeAttack(float chargeSpeed, float chargeAcceleration, GameObject damageZone, string target, System.Func<string, bool> facingFunc,
             System.Action<bool> resetter, System.Action<bool> overrideToggle, System.Action<bool> lookToggle, bool look, UnityEvent prep,
             UnityEvent start, UnityEvent end) : base()
@@ -1924,7 +1924,7 @@ namespace AITree
             new ModifyAgentStat("speed", chargeSpeed), //big speed
             new ModifyAgentStat("acceleration", chargeAcceleration), //big speed acceleration
             new ToggleObject(damageZone),
-            new SavePositionOfObject(target, "chargeTarget"),
+            new FindChargeTarget(target, "chargeTarget"),
             new AlwaysSucceed(new Approach("chargeTarget", 0.1f, PositionStoreType.VECTOR3)),
             new ToggleObject(damageZone),
             new ModifyAgentStat("angularSpeed", 30f), //reset vals
@@ -1995,7 +1995,58 @@ namespace AITree
     }
 
 
+    public class FindChargeTarget : Action
+    {
+        string obj, sto;
 
+        public FindChargeTarget(string objectRef, string positionStorage)
+        {
+            this.obj = objectRef;
+            this.sto = positionStorage;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            Vector3 objectPos;
+            if (brain.memory.TryGetValue(obj, out object o))
+            {
+                if (o is Transform)
+                {
+                    objectPos = (o as Transform).position;
+                    //brain.AddOrOverwrite(sto, (o as Transform).position);
+                }
+                else if (o is GameObject)
+                {
+                    objectPos = (o as GameObject).transform.position;
+                    //brain.AddOrOverwrite(sto, (o as GameObject).transform.position);
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+                }
+                Vector3 direction = objectPos - brain.gameObject.transform.position;
+                direction = direction.normalized;
+                Vector3 pathTarget = objectPos;
+                float stepSize = 0.1f;
+                NavMeshPath path = new NavMeshPath();
+                NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, int.MinValue, path);
+                while(path.status == NavMeshPathStatus.PathComplete)
+                {
+                    pathTarget += direction * stepSize;
+                    NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, int.MinValue, path);
+                }
+                brain.AddOrOverwrite(sto, pathTarget);
+                state = BehaviourTreeState.SUCCESS;
+                return state;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+        }
+    }
     public class SavePositionOfObject : Action
     {
         string obj, sto;
