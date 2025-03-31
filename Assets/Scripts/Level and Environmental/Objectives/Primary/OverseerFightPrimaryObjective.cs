@@ -36,6 +36,8 @@ public class OverseerFightPrimaryObjective : Objective
         
         room.waveSpawners = new WaveSpawner[] {bossWaveSpawnerInScene, Instantiate(phase2WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
 
+        bossHealth.canTakeDamage = true;
+
         Phase2End.Invoke(true);
     }
 
