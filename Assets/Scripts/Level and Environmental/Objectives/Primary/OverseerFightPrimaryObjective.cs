@@ -23,27 +23,72 @@ public class OverseerFightPrimaryObjective : Objective
 
     private void StartPhaseTransition()
     {
-        PlayerBody.Instance().StopParts(false,false);
+        ToggleGameFrozenForPhaseTransition(true);
         
-        for (int i = 0; i < room.waveSpawners.Length; i++)
-        {
-            if (room.waveSpawners[i] != bossWaveSpawnerInScene)
-            {
-                room.waveSpawners[i].StopSpawning(true);
-            }
-        }
+        phaseTransitionTimer = phaseTransitionTime;
         
         Phase2Start.Invoke();
     }
 
     private void StopPhaseTransition()
     {
-        PlayerBody.Instance().StopParts(true, true);
-
-        room.waveSpawners = new WaveSpawner[]
-            {bossWaveSpawnerInScene, Instantiate(phase2WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
+        ToggleGameFrozenForPhaseTransition(false);
         
+        room.waveSpawners = new WaveSpawner[] {bossWaveSpawnerInScene, Instantiate(phase2WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
+
         Phase2End.Invoke(true);
+    }
+
+    private void ToggleGameFrozenForPhaseTransition(bool freeze)
+    {
+        PlayerBody.Instance().StopParts(!freeze,!freeze);
+
+        if (freeze)
+        {
+            for (int i = 0; i < room.waveSpawners.Length; i++)
+            {
+                if (room.waveSpawners[i] != bossWaveSpawnerInScene)
+                {
+                    room.waveSpawners[i].StopSpawning(true);
+                }
+            }
+        }
+        
+        foreach (EnemyGun gun in FindObjectsOfType<EnemyGun>(true))
+        {
+            if (freeze)
+            {
+                gun.enabled = false;
+                gun.StopAllCoroutines();
+            }
+            else
+            {
+                gun.enabled = true;
+                gun.StartCoroutine(gun.FireOnRepeat());
+            }
+        }
+        
+        foreach (BasicBullet bullet in FindObjectsOfType<BasicBullet>(true))
+        {
+            if (freeze)
+            {
+                bullet.StopAllCoroutines();
+                if (bullet.gameObject.activeSelf) bullet.StartCoroutine(bullet.AnimationTimer());
+                
+            }
+            else
+            { 
+                if (bullet.gameObject.activeSelf)  bullet.StartCoroutine(bullet.AutoReset());
+            }
+        }
+        
+        foreach (MoveProjectile bullet in FindObjectsOfType<MoveProjectile>(true))
+        {
+            if (freeze)
+            {
+                Destroy(bullet);
+            }
+        }
     }
 
     private void FixedUpdate()

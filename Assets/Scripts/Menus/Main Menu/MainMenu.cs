@@ -19,13 +19,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(StartGameFade());    
+        GameGeneralManager.instance.ChangeScene(1);
     }
 
-    IEnumerator StartGameFade()
-    {
-        FadeCanvas.instance.FadeToBlack();
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(1);
-    }
+
 }

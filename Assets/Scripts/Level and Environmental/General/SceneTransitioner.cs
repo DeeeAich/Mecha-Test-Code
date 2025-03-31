@@ -8,9 +8,6 @@ public class SceneTransitioner : MonoBehaviour
 {
     [SerializeField] private bool setTargetSceneToNextInIndex = true;
     [SerializeField] public int targetScene;
-    
-    [SerializeField] private float sceneTransitionTime;
-    [SerializeField] private float sceneTransitionTimer;
 
     private bool transitioning;
 
@@ -27,20 +24,17 @@ public class SceneTransitioner : MonoBehaviour
         if (!transitioning)
         {
             PlayerBody.Instance().StopParts(true, true);
-            sceneTransitionTimer = sceneTransitionTime;
-            transitioning = true;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (sceneTransitionTimer > 0)
-        {
-            sceneTransitionTimer -= Time.fixedDeltaTime;
-            if (sceneTransitionTimer <= 0)
+            
+            if (GameGeneralManager.instance != null)
+            {
+                GameGeneralManager.instance.ChangeScene(targetScene);
+            }
+            else
             {
                 SceneManager.LoadScene(targetScene);
             }
+            
+            transitioning = true;
         }
     }
 }

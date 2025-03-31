@@ -19,6 +19,9 @@ public class GameGeneralManager : MonoBehaviour
     
     
     public static GameGeneralManager instance;
+
+    private float sceneTransitionTimer = 0;
+    private int sceneTransitionTargetScene;
     
     
     private void Awake()
@@ -36,6 +39,19 @@ public class GameGeneralManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (sceneTransitionTimer > 0)
+        {
+            sceneTransitionTimer -= Time.fixedDeltaTime;
+
+            if (sceneTransitionTimer <= 0)
+            {
+                SceneManager.LoadScene(sceneTransitionTargetScene);
+            }
+        }
+    }
+
     private void OnApplicationQuit()
     {
         if (saveDataOnQuit)
@@ -47,14 +63,24 @@ public class GameGeneralManager : MonoBehaviour
     public void ChangeScene(int targetScene)
     {
         FadeCanvas.instance.FadeToBlack();
+        sceneTransitionTargetScene = targetScene;
+        sceneTransitionTimer = 1;
 
         switch (targetScene)
         {
             case 0:
                 SaveData.instance.hasSaveFile = false;
                 break;
+            
+            case 1:
+                
+                break;
+            
+            case 2:
+                difficulty = 1;
+                break;
         }
 
-        SceneManager.LoadScene(targetScene);
+
     }
 }

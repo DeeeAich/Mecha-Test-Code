@@ -80,7 +80,11 @@ public class SaveData : MonoBehaviour
 
     private void SaveFile(int index)
     {
-        File.WriteAllText(File.ReadAllText(filePath + "/SaveFile" + index), JsonUtility.ToJson(currentSaveFile));
+        if (File.Exists(filePath + "/SaveFile" + index))
+        {
+            File.WriteAllText(File.ReadAllText(filePath + "/SaveFile" + index), JsonUtility.ToJson(currentSaveFile));
+        }
+
     }
     
     public void CreateFile(int index)

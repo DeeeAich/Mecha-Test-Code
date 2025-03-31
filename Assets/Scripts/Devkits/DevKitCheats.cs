@@ -214,7 +214,15 @@ public class DevKitCheats : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+       
+        if (GameGeneralManager.instance != null)
+        {
+            GameGeneralManager.instance.ChangeScene(1);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
     
     public void SetGameSpeedSlider(Slider slider)
