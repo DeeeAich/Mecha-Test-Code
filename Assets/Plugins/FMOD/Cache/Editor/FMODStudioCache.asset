@@ -1,6 +1,414 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8251917837942728550
+--- !u!114 &-9116613997854793093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Tento Emote/Emotional State
+  m_EditorClassIdentifier: 
+  Name: Emotional State
+  StudioPath: 
+  Min: 0
+  Max: 7
+  Default: 0
+  ID:
+    data1: 380760680
+    data2: 296390026
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Hello
+  - Happy
+  - Sad
+  - Angry
+  - Surprise
+  - Laugh
+  - Snore
+  - Bye
+  Exists: 1
+--- !u!114 &-8632554314424250014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Enemies/General/Spawning/Spawning Box Slam
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Enemies/General/Spawning/Spawning Box Slam
+  Guid:
+    Data1: 410045276
+    Data2: 1222652852
+    Data3: -764801099
+    Data4: 56715358
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8617748850052199474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charged Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charged Idle
+  Guid:
+    Data1: 618137843
+    Data2: 1299813904
+    Data3: -1319467385
+    Data4: -1427759170
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8544622760048888416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Loot/Loot Idle Legendary
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Loot/Loot Idle Legendary
+  Guid:
+    Data1: -720103779
+    Data2: 1155295422
+    Data3: 1046734526
+    Data4: 1319542459
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8292853237745481103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Explosion/Size
+  m_EditorClassIdentifier: 
+  Name: Size
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 1
+  ID:
+    data1: 3710014138
+    data2: 2390402781
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Small
+  - Medium
+  - Large
+  Exists: 1
+--- !u!114 &-8275982348500918268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wheat Willy Emote/CanTalk
+  m_EditorClassIdentifier: 
+  Name: CanTalk
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1451641578
+    data2: 3841642865
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-8187065823506786694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CanTalk
+  m_EditorClassIdentifier: 
+  Name: CanTalk
+  StudioPath: parameter:/CanTalk
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1451641578
+    data2: 3841642865
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &-8174023795135979802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 1
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 1
+  Guid:
+    Data1: -2095875801
+    Data2: 1134271896
+    Data3: 1970380967
+    Data4: 950621956
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 296
+--- !u!114 &-8150814535129077782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Ultimates/Overseer/Ult Overseer Fire Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Ultimates/Overseer/Ult Overseer Fire Idle
+  Guid:
+    Data1: 593429530
+    Data2: 1131447040
+    Data3: 1035942070
+    Data4: -1167218054
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7626537326405627966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Reload
+    Mag Swap In
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Reload
+    Mag Swap In
+  Guid:
+    Data1: -708639861
+    Data2: 1074348104
+    Data3: 662424971
+    Data4: -39840667
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7509442041639537953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Charge
+  Guid:
+    Data1: -163183215
+    Data2: 1293575704
+    Data3: -1682655104
+    Data4: 2009294662
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7448136943347230913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Cock
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Cock
+  Guid:
+    Data1: -1722229500
+    Data2: 1213205348
+    Data3: -1454412662
+    Data4: 1820555773
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
+--- !u!114 &-7402463394811166342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Boid/Boid Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Boid/Boid Spawn
+  Guid:
+    Data1: -315629697
+    Data2: 1245924006
+    Data3: 12838074
+    Data4: -1867497101
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7394983450091654536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Fire
+  Guid:
+    Data1: -617989088
+    Data2: 1166573613
+    Data3: 1789640376
+    Data4: 1349473890
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 695
+--- !u!114 &-7379774595577506840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voice Overs/Wheat Willy Dialogue
+  m_EditorClassIdentifier: 
+  Path: event:/Voice Overs/Wheat Willy Dialogue
+  Guid:
+    Data1: 1799541158
+    Data2: 1175268043
+    Data3: -81375595
+    Data4: 183036367
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -6345319747879597414}
+  - {fileID: 5893707205124799070}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7175002748585589861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,15 +418,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Menu.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638669233943219695
+  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Menu.bank
+  Name: Menu
+  StudioPath: bank:/Menu
+  lastModified: 638789718927378579
   FileSizes: []
   Exists: 1
---- !u!114 &-7463317667524424232
+--- !u!114 &-6830426009225030566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,45 +436,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/24 Gauge Shotgun/25 Gauge Shotgun Fire
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Activated Idle
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/24 Gauge Shotgun/25 Gauge Shotgun Fire
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Activated Idle
   Guid:
-    Data1: -1482766278
-    Data2: 1193215313
-    Data3: -417458047
-    Data4: -1262736633
+    Data1: -991882590
+    Data2: 1142911027
+    Data3: 147632257
+    Data4: 2047958810
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
   IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6957329920566772249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Reload
-  m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Reload
-  Guid:
-    Data1: -743961027
-    Data2: 1187739483
-    Data3: -86373485
-    Data4: 1483442551
-  Banks:
-  - {fileID: -8251917837942728550}
-  IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -87,12 +468,12 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638669233942126077
+  lastModified: 638789718927371617
   FileSizes:
   - Name: 
-    Value: 1624
+    Value: 7432
   Exists: 1
---- !u!114 &-6352344195949490857
+--- !u!114 &-6527219034214931264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,15 +482,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/UI.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Ultimates/SAM/Ult SAM Fire
   m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/UI.bank
-  Name: UI
-  StudioPath: bank:/UI
-  lastModified: 638669233943269966
-  FileSizes: []
+  Path: event:/Sound Effects/Player/Ultimates/SAM/Ult SAM Fire
+  Guid:
+    Data1: 1878899915
+    Data2: 1177161026
+    Data3: -1150701657
+    Data4: 1004653712
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6519083824726974160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/UI Move
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/UI Move
+  Guid:
+    Data1: -1465298713
+    Data2: 1109408801
+    Data3: 1749324457
+    Data4: 903087345
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6345319747879597414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wheat Willy Dialogue/CanTalk
+  m_EditorClassIdentifier: 
+  Name: CanTalk
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 1451641578
+    data2: 3841642865
+  Type: 0
+  IsGlobal: 1
+  Labels: []
   Exists: 1
+--- !u!114 &-6030450240788546437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge
+  Guid:
+    Data1: -1863024233
+    Data2: 1092122171
+    Data3: 1962355895
+    Data4: -584982597
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4716
 --- !u!114 &-5842168574242189432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +593,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638669233942115892
+  lastModified: 638789718927365713
   FileSizes: []
   Exists: 1
---- !u!114 &-4406278774140782832
+--- !u!114 &-5785864403285246353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,16 +606,256 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+  m_Name: event:/Sound Effects/Enviroment/Loot/Loot Open Rare
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+  Path: event:/Sound Effects/Enviroment/Loot/Loot Open Rare
   Guid:
-    Data1: 1340591219
-    Data2: 1129046166
-    Data3: 842120890
-    Data4: 733743782
+    Data1: -681161730
+    Data2: 1106011488
+    Data3: 926425008
+    Data4: 1837124428
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5348174489371660032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Death
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Death
+  Guid:
+    Data1: -211918915
+    Data2: 1326143827
+    Data3: 1074913976
+    Data4: 1871492801
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5088679673100194586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/UI Deny
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/UI Deny
+  Guid:
+    Data1: 1998076746
+    Data2: 1077237974
+    Data3: 1441913267
+    Data4: 1173349008
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5056538604503830583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Energy Rifle Reload/Type
+  m_EditorClassIdentifier: 
+  Name: Type
+  StudioPath: 
+  Min: 1
+  Max: 9
+  Default: 1
+  ID:
+    data1: 4161253705
+    data2: 9528000
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4902175392793167595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Loot/Loot Open Legendary
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Loot/Loot Open Legendary
+  Guid:
+    Data1: 446069619
+    Data2: 1325156703
+    Data3: -614893641
+    Data4: -2116485514
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4379739051356692939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Loot/Loot Open Common
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Loot/Loot Open Common
+  Guid:
+    Data1: 769941384
+    Data2: 1098300091
+    Data3: -49536338
+    Data4: -1422338507
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4095597787982543346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/UI Back
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/UI Back
+  Guid:
+    Data1: -1273432547
+    Data2: 1220894223
+    Data3: -220753772
+    Data4: -875914642
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4017288907840682243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Factory Soundscape
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/Factory Soundscape
+  Guid:
+    Data1: -2083586026
+    Data2: 1234618911
+    Data3: -2121751618
+    Data4: 1507562590
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 95000
+--- !u!114 &-3829509521910277182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Misc/Hitmarker Critical
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Misc/Hitmarker Critical
+  Guid:
+    Data1: 318634579
+    Data2: 1155296198
+    Data3: 948287161
+    Data4: 686986294
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3703186122231156398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Explosions/Default Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Explosions/Default Explosion
+  Guid:
+    Data1: -376607884
+    Data2: 1225138744
+    Data3: -949470317
+    Data4: 1524019991
+  Banks:
+  - {fileID: 6047187238806969831}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -155,7 +863,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-3478796240181118828
+--- !u!114 &-3676798395190834612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,16 +873,452 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Energy Rifle/Energy Rifle Fire
+  m_Name: event:/Sound Effects/Enemy/Spider/Spider Step
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Energy Rifle/Energy Rifle Fire
+  Path: event:/Sound Effects/Enemy/Spider/Spider Step
   Guid:
-    Data1: -617989088
-    Data2: 1166573613
-    Data3: 1789640376
-    Data4: 1349473890
+    Data1: 1278211139
+    Data2: 1312688519
+    Data3: 79390349
+    Data4: 1619757530
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 2055612734611933257}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3593950207134782866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Loot/Loot Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Loot/Loot Spawn
+  Guid:
+    Data1: 464436408
+    Data2: 1323329540
+    Data3: -1446486598
+    Data4: -867636937
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &-3463777379628222636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Default Rifle/Default Rifle Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Default Rifle/Default Rifle Fire
+  Guid:
+    Data1: 1505244943
+    Data2: 1118054525
+    Data3: 1655868071
+    Data4: 545219976
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 851
+--- !u!114 &-3416247837895575147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Movement/Player Slide
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Movement/Player Slide
+  Guid:
+    Data1: 344854918
+    Data2: 1233476795
+    Data3: -938381904
+    Data4: -1499773268
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 335
+--- !u!114 &-3224913571653931451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 3
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 3
+  Guid:
+    Data1: -530976643
+    Data2: 1198528578
+    Data3: -1420895345
+    Data4: 17877010
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 296
+--- !u!114 &-3193366369801290365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Idle
+  Guid:
+    Data1: -1839067371
+    Data2: 1288994425
+    Data3: -1809492833
+    Data4: -44493713
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3134820520961714953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/Servo (heavy)
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/Servo (heavy)
+  Guid:
+    Data1: -633163003
+    Data2: 1201556294
+    Data3: -1701355875
+    Data4: 1925802299
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 188936867004670555}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2980686241163401498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/Menu Start Game
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/Menu Start Game
+  Guid:
+    Data1: -633820751
+    Data2: 1305708901
+    Data3: -1839154763
+    Data4: 447469254
+  Banks:
+  - {fileID: -7175002748585589861}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2574
+--- !u!114 &-2883653387442910096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Fire Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Fire Loop
+  Guid:
+    Data1: 2084213076
+    Data2: 1278865272
+    Data3: 1367884961
+    Data4: 675449820
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2703
+--- !u!114 &-2697272793565087433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Charge
+  Guid:
+    Data1: -352584483
+    Data2: 1086084958
+    Data3: -2137597554
+    Data4: -2089992349
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2641725279241122304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Reload
+  Guid:
+    Data1: -1443839752
+    Data2: 1321144291
+    Data3: 1801030038
+    Data4: 1824211230
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2619447666609615937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    3
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    3
+  Guid:
+    Data1: -1421758606
+    Data2: 1154491358
+    Data3: -674650741
+    Data4: 378409461
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2559226234258137975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Door/Door Unlock
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Door/Door Unlock
+  Guid:
+    Data1: -405939063
+    Data2: 1306653294
+    Data3: -923907419
+    Data4: -150467811
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2316802940175336286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Spew
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Spew
+  Guid:
+    Data1: -1164565617
+    Data2: 1095538708
+    Data3: -54316117
+    Data4: -149156372
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2285670675334424774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Detach
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Detach
+  Guid:
+    Data1: -427926941
+    Data2: 1085237187
+    Data3: -887068247
+    Data4: 1460849390
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2277329875821103467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Door/Door Close
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Door/Door Close
+  Guid:
+    Data1: 82931070
+    Data2: 1152831456
+    Data3: -112137593
+    Data4: -648304565
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2113769653514498381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Enemies/General/Spawning/Spawning Beeps
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Enemies/General/Spawning/Spawning Beeps
+  Guid:
+    Data1: -533119461
+    Data2: 1163700195
+    Data3: -580207738
+    Data4: 1048173177
+  Banks:
+  - {fileID: 6047187238806969831}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -182,7 +1326,39 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2400262629072610188
+--- !u!114 &-2005532032234429861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wheat Willy Emote/Emotional State
+  m_EditorClassIdentifier: 
+  Name: Emotional State
+  StudioPath: 
+  Min: 0
+  Max: 7
+  Default: 0
+  ID:
+    data1: 380760680
+    data2: 296390026
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Hello
+  - Happy
+  - Sad
+  - Angry
+  - Surprise
+  - Laugh
+  - Snore
+  - Bye
+  Exists: 1
+--- !u!114 &-1980931120517092788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,24 +1368,294 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Standard Rifle/Standard Rifle Reload
+  m_Name: event:/Sound Effects/General/UI/Pause Close
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Standard Rifle/Standard Rifle Reload
+  Path: event:/Sound Effects/General/UI/Pause Close
+  Guid:
+    Data1: 1385572435
+    Data2: 1262617538
+    Data3: 1889354114
+    Data4: 309712115
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1973354101721053855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Reload
+  Guid:
+    Data1: 1550648575
+    Data2: 1170630278
+    Data3: -291285843
+    Data4: -430333315
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 931
+--- !u!114 &-1832926882623711149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enviroment/Door/Door Open
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enviroment/Door/Door Open
+  Guid:
+    Data1: 60417059
+    Data2: 1278888776
+    Data3: -138113918
+    Data4: -22964872
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1744601712612229851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Death
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Death
+  Guid:
+    Data1: 382784731
+    Data2: 1135490374
+    Data3: -777399629
+    Data4: 2004198361
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1697700330675727989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Start-up
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Start-up
+  Guid:
+    Data1: -77688273
+    Data2: 1186156934
+    Data3: -398404473
+    Data4: 1539885576
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1694478659893457715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/UI Confirm
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/UI Confirm
+  Guid:
+    Data1: 44706977
+    Data2: 1178562705
+    Data3: 372762041
+    Data4: 410891581
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1648084107309179418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/24 Shotgun/24 Shotgun Fire
+  Guid:
+    Data1: 30069671
+    Data2: 1250473303
+    Data3: -710750294
+    Data4: -283921612
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 835
+--- !u!114 &-1113998036711777012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Start
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Start
+  Guid:
+    Data1: 1895619738
+    Data2: 1131037357
+    Data3: -567306866
+    Data4: 1119760119
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1012195007059413316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voice Overs/Wheat Willy Quote
+  m_EditorClassIdentifier: 
+  Path: event:/Voice Overs/Wheat Willy Quote
+  Guid:
+    Data1: -680984065
+    Data2: 1324722595
+    Data3: 1116848060
+    Data4: -388160053
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1000463285182144322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Step
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Step
+  Guid:
+    Data1: -618330458
+    Data2: 1105136417
+    Data3: -640741732
+    Data4: -1874311950
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 403
+--- !u!114 &-893606275719626032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Standard Rifle/Standard Rifle Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Standard Rifle/Standard Rifle Reload
   Guid:
     Data1: -2135806353
     Data2: 1193962173
     Data3: -1456430462
     Data4: -537699382
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2334947251127251379
+--- !u!114 &-774978113576664103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,16 +1665,294 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music Events/Placeholder Combat Music
+  m_Name: event:/Sound Effects/General/Explosion
   m_EditorClassIdentifier: 
-  Path: event:/Music Events/Placeholder Combat Music
+  Path: event:/Sound Effects/General/Explosion
+  Guid:
+    Data1: -1741621163
+    Data2: 1140360685
+    Data3: 1912999298
+    Data4: -1704723860
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -8292853237745481103}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-661150692440616109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Stop
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Stop
+  Guid:
+    Data1: 1253713517
+    Data2: 1282756968
+    Data3: -1542909053
+    Data4: -809812999
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-477361303845054184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/inCombat
+  m_EditorClassIdentifier: 
+  Name: inCombat
+  StudioPath: parameter:/inCombat
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3370622864
+    data2: 1077935145
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - No
+  - Yes
+  Exists: 1
+--- !u!114 &-251444682879485682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Standard Rifle/Standard Rifle Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Standard Rifle/Standard Rifle Fire
+  Guid:
+    Data1: 400050816
+    Data2: 1074234817
+    Data3: 1998492052
+    Data4: 1847917270
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-44021124915834980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Ready
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Ready
+  Guid:
+    Data1: 1959103597
+    Data2: 1200224546
+    Data3: 703547029
+    Data4: -1077298989
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 359
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -6820136024714999097}
+  - {fileID: -5842168574242189432}
+  - {fileID: 6047187238806969831}
+  - {fileID: -7175002748585589861}
+  EditorEvents:
+  - {fileID: 4018685285446529600}
+  - {fileID: -7448136943347230913}
+  - {fileID: -3134820520961714953}
+  - {fileID: 5448324097281579953}
+  - {fileID: 6061042998499936277}
+  - {fileID: -3463777379628222636}
+  - {fileID: 335858774072235115}
+  - {fileID: -3193366369801290365}
+  - {fileID: -4017288907840682243}
+  - {fileID: -8150814535129077782}
+  - {fileID: -2113769653514498381}
+  - {fileID: -7394983450091654536}
+  - {fileID: -1832926882623711149}
+  - {fileID: 1309013515058924047}
+  - {fileID: -8174023795135979802}
+  - {fileID: 126376423343534741}
+  - {fileID: -1697700330675727989}
+  - {fileID: 99110794455984484}
+  - {fileID: 1750160507247985680}
+  - {fileID: 790871144981135764}
+  - {fileID: 6478204276542015069}
+  - {fileID: 3471020686160387765}
+  - {fileID: 2657409715006717004}
+  - {fileID: 8708687676659327650}
+  - {fileID: -3676798395190834612}
+  - {fileID: 9012643713861015670}
+  - {fileID: 9221808404139297505}
+  - {fileID: 3700763258011475184}
+  - {fileID: 5992893949476773076}
+  - {fileID: -3829509521910277182}
+  - {fileID: -2883653387442910096}
+  - {fileID: 2909763667498286617}
+  - {fileID: -774978113576664103}
+  - {fileID: -8632554314424250014}
+  - {fileID: 997270817187451470}
+  - {fileID: 6749537808411464500}
+  - {fileID: -2285670675334424774}
+  - {fileID: 5421569172636291975}
+  - {fileID: 730683741854605671}
+  - {fileID: -661150692440616109}
+  - {fileID: -44021124915834980}
+  - {fileID: 592889444157107679}
+  - {fileID: 8094926583244308403}
+  - {fileID: -893606275719626032}
+  - {fileID: -2619447666609615937}
+  - {fileID: -4902175392793167595}
+  - {fileID: 1561961123048692007}
+  - {fileID: 5788154377980156586}
+  - {fileID: -3703186122231156398}
+  - {fileID: 8103705079471503517}
+  - {fileID: 727862372243302705}
+  - {fileID: -3224913571653931451}
+  - {fileID: -2277329875821103467}
+  - {fileID: -7402463394811166342}
+  - {fileID: -251444682879485682}
+  - {fileID: -3416247837895575147}
+  - {fileID: 5833068518094989128}
+  - {fileID: -4379739051356692939}
+  - {fileID: -2559226234258137975}
+  - {fileID: -7626537326405627966}
+  - {fileID: 6449003579815119823}
+  - {fileID: -2316802940175336286}
+  - {fileID: 7168720597389901251}
+  - {fileID: 4077920186556774405}
+  - {fileID: -7509442041639537953}
+  - {fileID: -6030450240788546437}
+  - {fileID: 3463126803321840128}
+  - {fileID: 7638223205103936807}
+  - {fileID: -1113998036711777012}
+  - {fileID: -8544622760048888416}
+  - {fileID: 4357180232791637124}
+  - {fileID: 4068609115458400678}
+  - {fileID: -6830426009225030566}
+  - {fileID: 3688237231285991511}
+  - {fileID: -1000463285182144322}
+  - {fileID: 2313497182666532098}
+  - {fileID: -7379774595577506840}
+  - {fileID: -1648084107309179418}
+  - {fileID: 5300697179132713395}
+  - {fileID: 2695346955599058197}
+  - {fileID: 4356144780662833384}
+  - {fileID: 5484586289674247952}
+  - {fileID: -3593950207134782866}
+  - {fileID: -5348174489371660032}
+  - {fileID: 7260315984501351443}
+  - {fileID: 1535964194814735732}
+  - {fileID: 6265255628398773793}
+  - {fileID: 743377040992758435}
+  - {fileID: 933769183225744773}
+  - {fileID: -6527219034214931264}
+  - {fileID: 4179652656102828048}
+  - {fileID: 9020581758229504894}
+  - {fileID: 7931649854236281330}
+  - {fileID: 7370234251720312342}
+  - {fileID: -1744601712612229851}
+  - {fileID: -2697272793565087433}
+  - {fileID: 8304877745896207130}
+  - {fileID: 3827909159873921212}
+  - {fileID: 8587350186672799245}
+  - {fileID: 6861104847009138848}
+  - {fileID: 3792418458053863748}
+  - {fileID: 5746352966444537608}
+  - {fileID: 8018771670234592133}
+  - {fileID: -8617748850052199474}
+  - {fileID: 6751380746963146683}
+  - {fileID: -2641725279241122304}
+  - {fileID: -5785864403285246353}
+  - {fileID: -1012195007059413316}
+  - {fileID: -1973354101721053855}
+  - {fileID: -4095597787982543346}
+  - {fileID: -5088679673100194586}
+  - {fileID: -1980931120517092788}
+  - {fileID: 6239764003498677848}
+  - {fileID: -1694478659893457715}
+  - {fileID: -6519083824726974160}
+  - {fileID: -2980686241163401498}
+  EditorParameters:
+  - {fileID: -8187065823506786694}
+  - {fileID: -477361303845054184}
+  MasterBanks:
+  - {fileID: -5842168574242189432}
+  StringsBanks:
+  - {fileID: -6820136024714999097}
+  cacheTime: 638789718927378579
+  cacheVersion: 131620
+--- !u!114 &99110794455984484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Placeholder Combat Music
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Placeholder Combat Music
   Guid:
     Data1: -455799242
     Data2: 1109787170
     Data3: -69138255
     Data4: 732796580
   Banks:
-  - {fileID: 7966729605152868847}
+  - {fileID: 6047187238806969831}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -236,7 +1960,1326 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 491441
---- !u!114 &-1310439989006623088
+--- !u!114 &126376423343534741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+    Shells
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+    Shells
+  Guid:
+    Data1: -1756475602
+    Data2: 1323423568
+    Data3: -862228805
+    Data4: -688246744
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2800
+--- !u!114 &188936867004670555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Servo (heavy)/Type
+  m_EditorClassIdentifier: 
+  Name: Type
+  StudioPath: 
+  Min: 1
+  Max: 9
+  Default: 1
+  ID:
+    data1: 4161253705
+    data2: 9528000
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &335858774072235115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Slam 2
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Slam 2
+  Guid:
+    Data1: -350058736
+    Data2: 1164147527
+    Data3: 720158848
+    Data4: 1842761692
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2387
+--- !u!114 &592889444157107679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voice Overs/Wheat Willy Emote
+  m_EditorClassIdentifier: 
+  Path: event:/Voice Overs/Wheat Willy Emote
+  Guid:
+    Data1: 1863845998
+    Data2: 1195089626
+    Data3: -2048955988
+    Data4: 1791165922
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -8275982348500918268}
+  - {fileID: -2005532032234429861}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 787
+--- !u!114 &727862372243302705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    2
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    2
+  Guid:
+    Data1: -71212680
+    Data2: 1188434709
+    Data3: -396107108
+    Data4: -481591486
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &730683741854605671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/General/Enemy Die
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/General/Enemy Die
+  Guid:
+    Data1: 122931556
+    Data2: 1106365525
+    Data3: -429222502
+    Data4: 54350527
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &743377040992758435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Spider/Spide Death
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Spider/Spide Death
+  Guid:
+    Data1: -1967659837
+    Data2: 1135934372
+    Data3: -1958430789
+    Data4: 345171878
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &790871144981135764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/25 Gauge Shotgun Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/25 Gauge Shotgun Fire
+  Guid:
+    Data1: -1482766278
+    Data2: 1193215313
+    Data3: -417458047
+    Data4: -1262736633
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &933769183225744773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Attack
+  Guid:
+    Data1: 539934916
+    Data2: 1279908594
+    Data3: -1290425175
+    Data4: 1455848288
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1943
+--- !u!114 &997270817187451470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Transition
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Transition
+  Guid:
+    Data1: 2080199005
+    Data2: 1259049389
+    Data3: -4538179
+    Data4: 479586084
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1309013515058924047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/General/Enemy Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/General/Enemy Fire
+  Guid:
+    Data1: -600008155
+    Data2: 1139447798
+    Data3: -1798887295
+    Data4: 779376595
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1535964194814735732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Default Rifle/Default Rifle Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Default Rifle/Default Rifle Reload
+  Guid:
+    Data1: 370865342
+    Data2: 1239703171
+    Data3: 1732515203
+    Data4: 496213758
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1561961123048692007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+    Finish
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/24 Gauge Shotgun/24 Gauge Shotgun Reload
+    Finish
+  Guid:
+    Data1: 1340591219
+    Data2: 1129046166
+    Data3: 842120890
+    Data4: 733743782
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1750160507247985680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/General/Enemy Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/General/Enemy Spawn
+  Guid:
+    Data1: 1046778938
+    Data2: 1276113804
+    Data3: -299253851
+    Data4: -287659331
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &2055612734611933257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Spider Step/typeStep
+  m_EditorClassIdentifier: 
+  Name: typeStep
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1782300554
+    data2: 1646746969
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Short
+  - Long
+  Exists: 1
+--- !u!114 &2173542463063572664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mx Track 1/inCombat
+  m_EditorClassIdentifier: 
+  Name: inCombat
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3370622864
+    data2: 1077935145
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - No
+  - Yes
+  Exists: 1
+--- !u!114 &2313497182666532098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Movement/Player Step
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Movement/Player Step
+  Guid:
+    Data1: -1450471258
+    Data2: 1087209813
+    Data3: -368216921
+    Data4: -89517189
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 5614079502967496665}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2657409715006717004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Boid/Boid Attack
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Boid/Boid Attack
+  Guid:
+    Data1: -815251135
+    Data2: 1237040113
+    Data3: 731014060
+    Data4: 80185633
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2695346955599058197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Fist/Fist Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Fist/Fist Fire
+  Guid:
+    Data1: -1500086356
+    Data2: 1315284645
+    Data3: -1538495846
+    Data4: 99605405
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 439
+--- !u!114 &2909763667498286617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Reload
+  Guid:
+    Data1: 822694741
+    Data2: 1198641612
+    Data3: 613855164
+    Data4: -103683388
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1625
+--- !u!114 &3463126803321840128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/General/Enemy Hurt
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/General/Enemy Hurt
+  Guid:
+    Data1: 629190551
+    Data2: 1235346799
+    Data3: 513849005
+    Data4: -701133098
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &3471020686160387765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Boid/Boid Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Boid/Boid Idle
+  Guid:
+    Data1: 126438974
+    Data2: 1292216779
+    Data3: -405549377
+    Data4: -1367623770
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3688237231285991511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Activate
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Activate
+  Guid:
+    Data1: 551676837
+    Data2: 1108273120
+    Data3: -1158039150
+    Data4: -2146237417
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1450
+--- !u!114 &3700763258011475184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Bomber/Bomber Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Bomber/Bomber Spawn
+  Guid:
+    Data1: 145761874
+    Data2: 1104036115
+    Data3: 1606671767
+    Data4: 1850280540
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3792418458053863748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire
+    Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire
+    Loop
+  Guid:
+    Data1: -1691089429
+    Data2: 1181122083
+    Data3: 1720673448
+    Data4: 67376939
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 6609105433281191714}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2696
+--- !u!114 &3827909159873921212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Boid/Boid Death
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Boid/Boid Death
+  Guid:
+    Data1: -257471773
+    Data2: 1308414699
+    Data3: -318295900
+    Data4: 289594594
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4018685285446529600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Fist/Fist Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Fist/Fist Reload
+  Guid:
+    Data1: 1610103040
+    Data2: 1279028098
+    Data3: 314698635
+    Data4: 449477258
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4068609115458400678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Fire
+  Guid:
+    Data1: 359826336
+    Data2: 1131000928
+    Data3: -1436642417
+    Data4: -1370125385
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 750
+--- !u!114 &4077920186556774405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Attatched Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Attatched Idle
+  Guid:
+    Data1: -223669616
+    Data2: 1119588594
+    Data3: -737627202
+    Data4: 2001891248
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4179652656102828048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 2
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge 2
+  Guid:
+    Data1: -1371995956
+    Data2: 1077543254
+    Data3: -1772524116
+    Data4: -1065286098
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 296
+--- !u!114 &4356144780662833384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Ultimates/SAM/Ult SAM Reset
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Ultimates/SAM/Ult SAM Reset
+  Guid:
+    Data1: 1572603055
+    Data2: 1175654005
+    Data3: -1330084688
+    Data4: 1181507106
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4357180232791637124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Spawn
+  Guid:
+    Data1: -993881442
+    Data2: 1140026041
+    Data3: -291741563
+    Data4: 1255683379
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5300697179132713395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire
+  Guid:
+    Data1: -373762645
+    Data2: 1079616419
+    Data3: -318549333
+    Data4: 997945720
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5421569172636291975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Fire
+  Guid:
+    Data1: 2095855716
+    Data2: 1086807635
+    Data3: 1191652007
+    Data4: -1824857193
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 817
+--- !u!114 &5448324097281579953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/mx Track 1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/mx Track 1
+  Guid:
+    Data1: -808070906
+    Data2: 1236309365
+    Data3: -336339269
+    Data4: -77293693
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2173542463063572664}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 187000
+--- !u!114 &5484586289674247952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Slam 1
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Slam 1
+  Guid:
+    Data1: 460586932
+    Data2: 1300520192
+    Data3: -2098968188
+    Data4: 855809057
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2091
+--- !u!114 &5614079502967496665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Step/typeStep
+  m_EditorClassIdentifier: 
+  Name: typeStep
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1782300554
+    data2: 1646746969
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Short
+  - Long
+  Exists: 1
+--- !u!114 &5746352966444537608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Attach
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Attach
+  Guid:
+    Data1: 410484459
+    Data2: 1324948507
+    Data3: 1571253434
+    Data4: -1450645351
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5788154377980156586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Minigun/Minigun Spin
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Minigun/Minigun Spin
+  Guid:
+    Data1: 1937137012
+    Data2: 1079621428
+    Data3: 745588159
+    Data4: -1911095433
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &5833068518094989128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Ultimates/Overseer/Ult Overseer Fire Start
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Ultimates/Overseer/Ult Overseer Fire Start
+  Guid:
+    Data1: -1084928888
+    Data2: 1242535789
+    Data3: -493282940
+    Data4: 770491439
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5893707205124799070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wheat Willy Dialogue/Willy Lenght
+  m_EditorClassIdentifier: 
+  Name: Willy Lenght
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1122955561
+    data2: 2927225412
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Long
+  - Mid
+  - Short
+  Exists: 1
+--- !u!114 &5992893949476773076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Voice Overs/Tento Emote
+  m_EditorClassIdentifier: 
+  Path: event:/Voice Overs/Tento Emote
+  Guid:
+    Data1: 573794898
+    Data2: 1089291470
+    Data3: 1047290269
+    Data4: 1122949025
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -9116613997854793093}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6047187238806969831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Gameplay.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Gameplay.bank
+  Name: Gameplay
+  StudioPath: bank:/Gameplay
+  lastModified: 638789718927208543
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6061042998499936277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Spider/Spider Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Spider/Spider Spawn
+  Guid:
+    Data1: 384345866
+    Data2: 1213557477
+    Data3: 1378709179
+    Data4: 476049796
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6209034869729830594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Steam/Type
+  m_EditorClassIdentifier: 
+  Name: Type
+  StudioPath: 
+  Min: 1
+  Max: 9
+  Default: 1
+  ID:
+    data1: 4161253705
+    data2: 9528000
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6239764003498677848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/UI/Pause Open
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/UI/Pause Open
+  Guid:
+    Data1: 214490764
+    Data2: 1181700034
+    Data3: -1152340571
+    Data4: -346643714
+  Banks:
+  - {fileID: -5842168574242189432}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6265255628398773793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Shielder/Shielder Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Shielder/Shielder Idle
+  Guid:
+    Data1: 1726192064
+    Data2: 1099432013
+    Data3: 281931937
+    Data4: 716042631
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6449003579815119823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Pulse Rifle/Pulse Rifle Fire
+  Guid:
+    Data1: -1640917618
+    Data2: 1342108516
+    Data3: 1326592901
+    Data4: -1655976344
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 746
+--- !u!114 &6478204276542015069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Misc/Hitmarker
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Misc/Hitmarker
+  Guid:
+    Data1: 1421070394
+    Data2: 1324564505
+    Data3: -2002529866
+    Data4: -1676921867
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10
+--- !u!114 &6609105433281191714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,45 +3303,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -6820136024714999097}
-  - {fileID: 3818131648183977633}
-  - {fileID: 3765217041540281224}
-  - {fileID: -5842168574242189432}
-  - {fileID: 7966729605152868847}
-  - {fileID: -8251917837942728550}
-  - {fileID: -6352344195949490857}
-  EditorEvents:
-  - {fileID: -2334947251127251379}
-  - {fileID: -3478796240181118828}
-  - {fileID: -7463317667524424232}
-  - {fileID: -6957329920566772249}
-  - {fileID: -2400262629072610188}
-  - {fileID: -4406278774140782832}
-  - {fileID: 6122466324123189188}
-  - {fileID: 7793212385133402669}
-  - {fileID: 231845961025063899}
-  - {fileID: 4431678868449552528}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -5842168574242189432}
-  StringsBanks:
-  - {fileID: -6820136024714999097}
-  cacheTime: 638669233943269966
-  cacheVersion: 131620
---- !u!114 &231845961025063899
+--- !u!114 &6749537808411464500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,16 +3313,70 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Stop
+  m_Name: event:/Sound Effects/Player/Status/Player Hurt
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Stop
+  Path: event:/Sound Effects/Player/Status/Player Hurt
   Guid:
-    Data1: 1426314433
-    Data2: 1301891525
-    Data3: 1794235813
-    Data4: -927095111
+    Data1: -2078739358
+    Data2: 1233864278
+    Data3: 1671581056
+    Data4: -1137720201
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &6751380746963146683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Energy Rifle/Energy Rifle Reload OpenClose
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Energy Rifle/Energy Rifle Reload OpenClose
+  Guid:
+    Data1: 1244183539
+    Data2: 1260665721
+    Data3: -1249280342
+    Data4: -902011108
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6861104847009138848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/Door Confirm
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/Door Confirm
+  Guid:
+    Data1: -1050233367
+    Data2: 1221699113
+    Data3: -1395861060
+    Data4: -361418550
+  Banks:
+  - {fileID: 6047187238806969831}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -325,43 +3384,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3765217041540281224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/DX.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/DX.bank
-  Name: DX
-  StudioPath: bank:/DX
-  lastModified: 638669233942072589
-  FileSizes: []
-  Exists: 1
---- !u!114 &3818131648183977633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Ambience.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Ambience.bank
-  Name: Ambience
-  StudioPath: bank:/Ambience
-  lastModified: 638669233942072589
-  FileSizes: []
-  Exists: 1
---- !u!114 &4431678868449552528
+--- !u!114 &7168720597389901251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -371,25 +3394,241 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire Loop
+  m_Name: event:/Sound Effects/Enemy/Spider/Spider Attack
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Not So Mini Gun/Not So Mini Gun Fire Loop
+  Path: event:/Sound Effects/Enemy/Spider/Spider Attack
   Guid:
-    Data1: -1691089429
-    Data2: 1181122083
-    Data3: 1720673448
-    Data4: 67376939
+    Data1: 1379659151
+    Data2: 1228901844
+    Data3: 982382744
+    Data4: -1380576400
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -1310439989006623088}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2696
---- !u!114 &4722014973340781838
+  Length: 0
+--- !u!114 &7260315984501351443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Z.PLACEHOLDER/Player Weapons/Energy Rifle/Energy Rifle Reload Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Z.PLACEHOLDER/Player Weapons/Energy Rifle/Energy Rifle Reload Charge
+  Guid:
+    Data1: 170157245
+    Data2: 1266241253
+    Data3: 2084716477
+    Data4: 191170550
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1125
+--- !u!114 &7370234251720312342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Spider/Spider Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Spider/Spider Idle
+  Guid:
+    Data1: -1170564911
+    Data2: 1321609741
+    Data3: -1753778803
+    Data4: 1432206475
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7638223205103936807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Fire
+  Guid:
+    Data1: 923797914
+    Data2: 1249418327
+    Data3: -28213585
+    Data4: -908196096
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 476
+--- !u!114 &7931649854236281330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Overseer Area Soundscape
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/Overseer Area Soundscape
+  Guid:
+    Data1: 1117581520
+    Data2: 1100453362
+    Data3: -1403856757
+    Data4: 831418584
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 90000
+--- !u!114 &8018771670234592133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/Bullet Drop
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/General/Bullet Drop
+  Guid:
+    Data1: 47426285
+    Data2: 1191375807
+    Data3: 272611258
+    Data4: 672751912
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8094926583244308403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Status/Player Die
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Status/Player Die
+  Guid:
+    Data1: -2048714386
+    Data2: 1263508508
+    Data3: -1815812708
+    Data4: 260238165
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &8103705079471503517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/mx Track 2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/mx Track 2
+  Guid:
+    Data1: -1746638730
+    Data2: 1087796141
+    Data3: -1618001755
+    Data4: 1019284157
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8382964372579908703}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 277343
+--- !u!114 &8304877745896207130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Status/Player Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Status/Player Spawn
+  Guid:
+    Data1: 757804259
+    Data2: 1166224995
+    Data3: -945610846
+    Data4: -1316882595
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 326
+--- !u!114 &8382964372579908703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,24 +3638,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Energy Rifle Charge/Energy Rifle Charge Amount
+  m_Name: parameter:/mx Track 2/inCombat
   m_EditorClassIdentifier: 
-  Name: Energy Rifle Charge Amount
+  Name: inCombat
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 1
   Default: 0
   ID:
-    data1: 816207447
-    data2: 549987821
+    data1: 3370622864
+    data2: 1077935145
   Type: 2
-  IsGlobal: 0
+  IsGlobal: 1
   Labels:
-  - Energy Rifle Charge 01
-  - Energy Rifle Charge 01
-  - Energy Rifle Charge 01
+  - No
+  - Yes
   Exists: 1
---- !u!114 &6122466324123189188
+--- !u!114 &8587350186672799245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -426,24 +3664,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Standard Rifle/Standard Rifle Fire
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    1
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Standard Rifle/Standard Rifle Fire
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Charge Activate
+    1
   Guid:
-    Data1: 400050816
-    Data2: 1074234817
-    Data3: 1998492052
-    Data4: 1847917270
+    Data1: -205450523
+    Data2: 1215984110
+    Data3: -1931319885
+    Data4: -1671927130
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7793212385133402669
+--- !u!114 &8708687676659327650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -453,25 +3693,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX Events/Player Weapons/Energy Rifle/Energy Rifle Charge
+  m_Name: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Reload
   m_EditorClassIdentifier: 
-  Path: event:/SFX Events/Player Weapons/Energy Rifle/Energy Rifle Charge
+  Path: event:/Sound Effects/Player/Weapons/Energy Rifle/Energy Rifle Reload
   Guid:
-    Data1: 1734330541
-    Data2: 1195719501
-    Data3: -993054042
-    Data4: -1862476516
+    Data1: -1153889470
+    Data2: 1132226755
+    Data3: -393976410
+    Data4: 1360879807
   Banks:
-  - {fileID: -8251917837942728550}
+  - {fileID: 6047187238806969831}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 4722014973340781838}
+  - {fileID: -5056538604503830583}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7966729605152868847
+--- !u!114 &9012643713861015670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,12 +3720,76 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/General/Steam
   m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/FMOD Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638669233943173877
-  FileSizes: []
-  Exists: 1
+  Path: event:/Sound Effects/General/Steam
+  Guid:
+    Data1: -1675072947
+    Data2: 1081875920
+    Data3: -936631106
+    Data4: 1469630466
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6209034869729830594}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9020581758229504894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Idle
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Enemy/Overseer/Overseer Lazer Idle
+  Guid:
+    Data1: -2077313332
+    Data2: 1290526032
+    Data3: -308034662
+    Data4: -611508959
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 19750
+--- !u!114 &9221808404139297505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Effects/Player/Weapons/Sniper Rifle/Sniper Reload
+  Guid:
+    Data1: 1051421775
+    Data2: 1341213391
+    Data3: 258388360
+    Data4: 477934900
+  Banks:
+  - {fileID: 6047187238806969831}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
