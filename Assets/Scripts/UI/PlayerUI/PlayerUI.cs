@@ -41,8 +41,6 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField] Animator healthChanges;
 
-    public Transform cursorObject;
-
     private void Awake()
     {
 
@@ -250,23 +248,6 @@ public class PlayerUI : MonoBehaviour
     {
 
         healthChanges.SetTrigger(healing ? "Heal" : "Hit");
-
-    }
-
-    public void SetCursorActive(bool isGamepad)
-    {
-
-        cursorObject.gameObject.SetActive(isGamepad);
-        Cursor.visible = !isGamepad;
-
-    }
-
-    public void SetCursorPosition(Vector3 playerPos, float angle)
-    {
-
-        cursorObject.position = playerPos;
-
-        cursorObject.rotation = Quaternion.Euler(0, 0, angle);
 
     }
 }
