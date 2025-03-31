@@ -24,7 +24,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public UnityEvent leftFire;
     public UnityEvent rightFire;
 
-    public void LookDirection(Vector2 direction, bool isGamepad)
+    public void LookDirection(Vector2 direction, bool isGamepad, Vector3 playerPos)
     {
 
         if (direction.magnitude > 0.2f)
@@ -40,6 +40,9 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
                 turnerObject.rotation = lookDirection;
 
         }
+
+        if (isGamepad)
+            PlayerUI.instance.SetCursorLocation(playerPos, turnerObject.eulerAngles.y);
 
     }
 

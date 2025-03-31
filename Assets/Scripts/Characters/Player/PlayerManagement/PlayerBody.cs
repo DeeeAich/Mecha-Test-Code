@@ -207,6 +207,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         InputDeviceManager.instance.UpdateInputDevice(isGamepad ? InputDevice.PlaystationController : InputDevice.MouseAndKeyboard);
 
+        myUI.SetCursorActive(isGamepad);
+
         //Debug.Log("Control scheme is now " + input.currentControlScheme);
     }
 
