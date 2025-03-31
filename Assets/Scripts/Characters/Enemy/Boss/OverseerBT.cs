@@ -192,6 +192,7 @@ public class OverseerBT : BehaviourTree
     {
         weaponsBrain =
             new Sequence(new BooleanFunction(CheckAnimBool),
+                new YieldTime(3f),
                 new RandomBranching(false,
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 2), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightTwo),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunctionWithInt(animManage.LaserPatternAttack, 1), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), LaserWeightOne),
@@ -201,8 +202,7 @@ public class OverseerBT : BehaviourTree
                     new CalcingRandomChoice(new ChargeAttack(chargeSpeed, chargeAcceleration, chargeDamageZone, "player", Facing, ResetChargeWeight, ToggleLegOverride, look.Pause, pauseLookOnAttack, onChargePrepare, onChargeStart, onChargeEnd), ChargeWeight),
                     new CalcingRandomChoice(new Sequence(new CallVoidFunctionWithBool(look.Pause, pauseLookOnAttack), new CallVoidFunction(animManage.LaserTrackingAttack), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)), new CallVoidFunctionWithBool(look.Pause, false)), FollowLaserWeight)
 
-                    ),
-                new YieldTime(3f)
+                    )
 
             //replace sequence with actual behaviour
 
