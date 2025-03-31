@@ -1196,6 +1196,7 @@ namespace AITree
             if ((distanceFrom).magnitude <= approachDist)
             {
                 state = BehaviourTreeState.SUCCESS;
+                brain.agent.SetDestination(brain.transform.position);
             }
 
 
@@ -1945,7 +1946,7 @@ namespace AITree
         float varianceFactor;
         string locationStore;
 
-        public Wander():base()
+        public Wander() : base()
         {
             locationStore = "uniqueStorageLocationWander";
             children.Add(new Approach(locationStore, 0.01f, PositionStoreType.VECTOR3));
@@ -1986,7 +1987,7 @@ namespace AITree
             base.Tick();
             state = children[0].Tick();
             BehaviourTreeState returnState = state;
-            if(state!=BehaviourTreeState.RUNNING)
+            if (state != BehaviourTreeState.RUNNING)
             {
                 Restart();
             }
@@ -2031,7 +2032,7 @@ namespace AITree
                 float stepSize = 0.1f;
                 NavMeshPath path = new NavMeshPath();
                 NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, NavMesh.AllAreas, path);
-                while(path.status == NavMeshPathStatus.PathComplete)
+                while (path.status == NavMeshPathStatus.PathComplete)
                 {
                     pathTarget += direction * stepSize;
                     NavMesh.CalculatePath(brain.gameObject.transform.position, pathTarget, NavMesh.AllAreas, path);
@@ -2081,6 +2082,252 @@ namespace AITree
                 state = BehaviourTreeState.FAILURE;
                 return state;
             }
+        }
+    }
+
+    public class HasLineOfSight : Condition
+    {
+        readonly string target;
+        readonly PositionStoreType storeType;
+
+        public HasLineOfSight(string target, PositionStoreType storeType)
+        {
+            this.storeType = storeType;
+            this.target = target;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            if(brain.memory.TryGetValue(target, out object recovered))
+            {
+                Vector3 targetPosition = Vector3.zero;
+                switch (storeType)
+                {
+                    case PositionStoreType.NULL:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    case PositionStoreType.VECTOR3:
+                        targetPosition = (Vector3)recovered;
+                        break;
+                    case PositionStoreType.TRANSFORM:
+                        targetPosition = (recovered as Transform).position;
+                        break;
+                    case PositionStoreType.GAMEOBJECT:
+                        targetPosition = (recovered as GameObject).transform.position;
+                        break;
+                }
+                if (Physics.Linecast(brain.transform.position + Vector3.up, targetPosition + Vector3.up, out RaycastHit hit,~LayerMask.GetMask(LayerMask.LayerToName(6))))
+                    state = BehaviourTreeState.FAILURE;
+                else
+                    state = BehaviourTreeState.SUCCESS;
+                if(brain.debug)
+                {
+                    Debug.Log(state);
+                    Debug.Log(hit.collider);
+                }
+                return state;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+        }
+    }
+
+
+    public class FindLineOfSightPosition : Action
+    {
+        readonly string storeLocation;
+        readonly int stepCount;
+        readonly float stepDist;
+        readonly string target;
+        readonly PositionStoreType storeType;
+        public FindLineOfSightPosition(string storeLocation)
+        {
+            this.storeLocation = storeLocation;
+        }
+
+        public FindLineOfSightPosition(string storeLocation, int stepCount, float stepDist) : this(storeLocation)
+        {
+            this.stepCount = stepCount;
+            this.stepDist = stepDist;
+        }
+
+        public FindLineOfSightPosition(string storeLocation, int stepCount, float stepDist, string target, PositionStoreType storeType) : this(storeLocation, stepCount, stepDist)
+        {
+            this.target = target;
+            this.storeType = storeType;
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            if (brain.memory.TryGetValue(target, out object recovered))
+            {
+                Vector3 targetPosition = Vector3.zero;
+                switch (storeType)
+                {
+                    case PositionStoreType.NULL:
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    case PositionStoreType.VECTOR3:
+                        targetPosition = (Vector3)recovered;
+                        break;
+                    case PositionStoreType.TRANSFORM:
+                        targetPosition = (recovered as Transform).position;
+                        break;
+                    case PositionStoreType.GAMEOBJECT:
+                        targetPosition = (recovered as GameObject).transform.position;
+                        break;
+                }
+                Vector3 toTarget = targetPosition - brain.transform.position;
+                Vector3 left = Vector3.Cross(toTarget, Vector3.up);
+                left = left.normalized * stepDist;
+                targetPosition += Vector3.up;
+                Vector3 offsetBrain = brain.transform.position + Vector3.up;
+                state = BehaviourTreeState.FAILURE;
+                for(int i = 1; i <= stepCount; i++)
+                {
+                    Vector3 testPosition = offsetBrain + (left * i);
+                    if (!Physics.Linecast(testPosition, targetPosition, ~LayerMask.GetMask(LayerMask.LayerToName(6))))
+                    {
+                        brain.AddOrOverwrite(storeLocation, testPosition);
+                        state = BehaviourTreeState.SUCCESS;
+                        break;
+                    }
+                    testPosition = offsetBrain - (left * i);
+                    if (!Physics.Linecast(testPosition, targetPosition, ~LayerMask.GetMask(LayerMask.LayerToName(6))))
+                    {
+                        brain.AddOrOverwrite(storeLocation, testPosition);
+                        state = BehaviourTreeState.SUCCESS;
+                        break;
+                    }
+                }
+                return state;
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+                return state;
+            }
+        }
+    }
+
+    public class ApproachUntilLineOfSight : Action
+    {
+        readonly string targetLocation;
+        readonly float approachDist;
+        Vector3 activeTarget;
+        GameObject objectTarget;
+        Transform transformTarget;
+        readonly PositionStoreType store;
+        public ApproachUntilLineOfSight(string targetLocation, float approachDist) : base()
+        {
+            this.targetLocation = targetLocation;
+            this.approachDist = approachDist;
+            store = PositionStoreType.GAMEOBJECT;
+        }
+
+        public ApproachUntilLineOfSight(string targetLocation, float approachDist, PositionStoreType type) : this(targetLocation, approachDist)
+        {
+            store = type;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+            state = BehaviourTreeState.RUNNING;
+            if (!brain.memory.TryGetValue(targetLocation, out object recovered))
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+
+            switch (store)
+            {
+                case PositionStoreType.NULL:
+                    activeTarget = new Vector3(0, 0, 0);
+                    state = BehaviourTreeState.FAILURE;
+                    break;
+                case PositionStoreType.GAMEOBJECT:
+                    objectTarget = (GameObject)recovered;
+                    activeTarget = objectTarget.transform.position;
+                    break;
+                case PositionStoreType.VECTOR3:
+                    activeTarget = (Vector3)recovered;
+                    break;
+                case PositionStoreType.TRANSFORM:
+                    transformTarget = (Transform)recovered;
+                    activeTarget = transformTarget.position;
+                    break;
+                default:
+                    activeTarget = brain.transform.position;
+                    break;
+            }
+            brain.agent.SetDestination(activeTarget);
+        }
+
+        public override void Restart()
+        {
+            base.Restart();
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            switch (store)
+            {
+                case PositionStoreType.NULL:
+                    break;
+                case PositionStoreType.GAMEOBJECT:
+                    if (objectTarget == null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        //Hvae I succeeded, or failed?
+                        /*
+                         If I want to stay near something until they die I have succeded if they die
+                         If my follow up to strafe in range is like, kiss the target, then failure might be more appropriate, because target is gone
+
+                         If I "StrafeInRange until failure" then loss of target being a failure is a good idea
+                         */
+
+                        return state;
+                    }
+                    activeTarget = objectTarget.transform.position;
+                    brain.agent.SetDestination(activeTarget);
+                    break;
+                case PositionStoreType.VECTOR3:
+                    if (brain.memory.TryGetValue(targetLocation, out object recovered))
+                    {
+                        activeTarget = (Vector3)recovered;
+                    }
+                    else
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    }
+                    break;
+                case PositionStoreType.TRANSFORM:
+                    if (transformTarget == null)
+                    {
+                        state = BehaviourTreeState.FAILURE;
+                        return state;
+                    }
+                    activeTarget = transformTarget.position;
+                    break;
+                default:
+                    state = BehaviourTreeState.FAILURE;
+                    return state;
+            }
+            Vector3 testPosition = brain.transform.position + Vector3.up;
+
+            if (!Physics.Linecast(testPosition, activeTarget + Vector3.up, ~LayerMask.GetMask(LayerMask.LayerToName(6))))
+            {
+                state = BehaviourTreeState.SUCCESS;
+                brain.agent.SetDestination(brain.transform.position);
+            }
+            return state;
         }
     }
 

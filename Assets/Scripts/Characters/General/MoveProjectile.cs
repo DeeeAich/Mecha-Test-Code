@@ -16,7 +16,7 @@ public class MoveProjectile : Projectile
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    internal virtual void FixedUpdate()
     {
         transform.position += globalVelocity * Time.fixedDeltaTime;
     }

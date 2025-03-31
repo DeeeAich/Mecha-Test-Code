@@ -4978,6 +4978,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3244064178143083311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5269269884861064963}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5269269884861064963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3244064178143083311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: -0, y: -0.8930004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 206374867420579981}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 45}
 --- !u!1 &4378026353400801982
 GameObject:
   m_ObjectHideFlags: 0
@@ -10299,6 +10330,7 @@ GameObject:
   - component: {fileID: 206374867420579981}
   - component: {fileID: 1666647190895854277}
   - component: {fileID: 7921674671120983261}
+  - component: {fileID: 3939801362213427627}
   m_Layer: 0
   m_Name: Missile Tank Gun
   m_TagString: Untagged
@@ -10320,6 +10352,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1747294724466513033}
+  - {fileID: 5269269884861064963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1666647190895854277
@@ -10363,6 +10396,30 @@ MonoBehaviour:
       Data4: -908196096
     Path: event:/Sound Effects/Enemy/Overseer/Overseer Fire
   parameterName: none
+--- !u!114 &3939801362213427627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911006260247328369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954b3e4c18aaafd47b5793ce1e570295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPoint: {fileID: 3244064178143083311}
+  shotPattern: {fileID: 8143550047868037310, guid: 8b7b5676b10a5fc458651724cdbd3186,
+    type: 3}
+  startDelayMin: 0
+  startDelayMax: 0
+  minDelay: 0
+  maxDelay: 0
+  damage: 40
+  anim: {fileID: 1666647190895854277}
+  ammoPerReload: 1
+  reloadTime: 10
+  stats: {fileID: 0}
 --- !u!1 &5933465651016482981
 GameObject:
   m_ObjectHideFlags: 0

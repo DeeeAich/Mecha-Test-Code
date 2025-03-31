@@ -9898,6 +9898,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440555214934828788}
+  - component: {fileID: 38954603660222124}
+  - component: {fileID: 3246690968612710936}
   m_Layer: 0
   m_Name: Missile Projectile
   m_TagString: Untagged
@@ -9921,3 +9923,46 @@ Transform:
   - {fileID: 3192292756722097009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &38954603660222124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263706797400398085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e7270096b511e41990fa97e1f594a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  damageableHealthEntityTypes:
+  - PlayerBody
+  damageableEntities: 00000000
+  pierceCount: 1
+  localVelocity: {x: 0, y: 0, z: 5}
+  globalVelocity: {x: 0, y: 0, z: 0}
+  speed: 5
+--- !u!136 &3246690968612710936
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263706797400398085}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.21}
