@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4054474314648485717}
   - component: {fileID: 829845859849548049}
   - component: {fileID: 3846449079225347872}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4895,7 +4895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7287878042214626441}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4930,7 +4930,7 @@ GameObject:
   - component: {fileID: 1722557541620551366}
   - component: {fileID: 6311725878949273049}
   - component: {fileID: 6890731220459679237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9816,7 +9816,7 @@ GameObject:
   - component: {fileID: 3192292756722097009}
   - component: {fileID: 4311214628618547406}
   - component: {fileID: 3397701186194385724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9900,7 +9900,8 @@ GameObject:
   - component: {fileID: 1440555214934828788}
   - component: {fileID: 38954603660222124}
   - component: {fileID: 3246690968612710936}
-  m_Layer: 0
+  - component: {fileID: 1093197725244989579}
+  m_Layer: 10
   m_Name: Missile Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9942,7 +9943,6 @@ MonoBehaviour:
   pierceCount: 1
   localVelocity: {x: 0, y: 0, z: 5}
   globalVelocity: {x: 0, y: 0, z: 0}
-  speed: 5
 --- !u!136 &3246690968612710936
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9966,3 +9966,30 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.21}
+--- !u!54 &1093197725244989579
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263706797400398085}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
