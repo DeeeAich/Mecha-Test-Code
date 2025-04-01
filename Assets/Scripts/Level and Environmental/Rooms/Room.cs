@@ -216,9 +216,9 @@ public class Room : MonoBehaviour
             
             
             //setting external stuff
-            if (GameGeneralManager.instance != null) GameGeneralManager.instance.difficulty += 1f / LevelGenerator.instance.roomsInThisFloor;
+            if (GameGeneralManager.instance != null) GameGeneralManager.instance.difficulty += 0.5f / LevelGenerator.instance.roomsInThisFloor;
             
-            if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
+            //if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
             
             if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
 

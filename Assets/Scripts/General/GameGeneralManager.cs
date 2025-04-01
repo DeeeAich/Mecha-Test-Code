@@ -8,7 +8,7 @@ using Random = System.Random;
 public class GameGeneralManager : MonoBehaviour
 {
     [Header("Game Run Bits")] 
-    public bool saveDataOnQuit = true;
+    public bool saveDataOnQuit = false;
     public int currentLevel;
     public float difficulty;
     public int randomSeed;
@@ -82,5 +82,14 @@ public class GameGeneralManager : MonoBehaviour
         }
 
 
+    }
+
+    public void CreateNewSeed()
+    {
+        
+        randomSeed = (int)(System.DateTime.Now.Ticks);
+        seededRandom = new Random(randomSeed);
+        
+        Debug.Log("Creating new seeded random");
     }
 }

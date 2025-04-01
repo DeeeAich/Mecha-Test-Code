@@ -39,14 +39,13 @@ public class LevelGenerator : MonoBehaviour
         {
             GameObject GM = new GameObject("Spawned Game General Manager");
             GM.AddComponent<GameGeneralManager>();
-            GM.GetComponent<GameGeneralManager>().difficulty = 1;
-            GM.GetComponent<GameGeneralManager>().randomSeed = (int)(System.DateTime.Now.Ticks);
-            GM.GetComponent<GameGeneralManager>().seededRandom = new Random(GM.GetComponent<GameGeneralManager>().randomSeed);
+            GameGeneralManager.instance.difficulty = 1;
+            GameGeneralManager.instance.CreateNewSeed();
         }
 
         if (randomizeSeedOnAwake)
         {
-            if (GameGeneralManager.instance != null)
+            if (GameGeneralManager.instance != null && GameGeneralManager.instance.seededRandom != null)
             {
                 randomSeed = GameGeneralManager.instance.seededRandom.Next();
             }

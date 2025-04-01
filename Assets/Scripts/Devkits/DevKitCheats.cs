@@ -17,6 +17,7 @@ public class DevKitCheats : MonoBehaviour
     
     [Header("Loot addition stuff")]
     [SerializeField] private LootPoolScriptable lootPool;
+    [SerializeField] private LootPoolScriptable[] additionalLootPools;
 
     [SerializeField] private TMP_Dropdown leftGunDropdown;
     [SerializeField] private TMP_Dropdown rightGunDropdown;
@@ -72,6 +73,40 @@ public class DevKitCheats : MonoBehaviour
         {
             bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(lootPool.BodyChips[i].name, lootPool.BodyChips[i].mySprite));
         }
+
+        if (additionalLootPools.Length > 0)
+        {
+            for (int i = 0; i < additionalLootPools.Length; i++)
+            {
+                if (additionalLootPools[i].Weapons.Length > 0)
+                {
+                    for (int j = 0; j <  additionalLootPools[i].Weapons.Length; j++)
+                    {
+                        leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( additionalLootPools[i].Weapons[j].itemName, additionalLootPools[i].Weapons[j].mySprite));
+                        rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( additionalLootPools[i].Weapons[j].itemName, additionalLootPools[i].Weapons[j].mySprite));
+                    }
+                }
+
+                if (additionalLootPools[i].BodyChips.Length > 0)
+                {
+                    for (int j = 0; j < additionalLootPools[i].BodyChips.Length; j++)
+                    {
+                        bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].BodyChips[j].name, additionalLootPools[i].BodyChips[j].mySprite));
+                    }
+                }
+
+                if (additionalLootPools[i].WeaponChips.Length > 0)
+                {
+                    for (int j = 0; j <  additionalLootPools[i].WeaponChips.Length; j++)
+                    {
+                        addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].WeaponChips[j].name, additionalLootPools[i].WeaponChips[j].mySprite));
+                        addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].WeaponChips[j].name, additionalLootPools[i].WeaponChips[j].mySprite));
+                    }
+                }
+
+            }
+        }
+
 
         loadout = new int[3];
     }
@@ -159,7 +194,15 @@ public class DevKitCheats : MonoBehaviour
         {
             if (leftGunDropdown.value != 0)
             {
-                PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
+                if (leftGunDropdown.value < lootPool.Weapons.Length)
+                {
+                    PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
+                }
+                else
+                {
+                    PlayerBody.Instance().SetWeapon((WeaponPickup) additionalLootPools[0].Weapons[leftGunDropdown.value - 1 - lootPool.Weapons.Length], true);
+                }
+        
 
                 leftGunDropdown.value = 0;
             }        
@@ -168,7 +211,14 @@ public class DevKitCheats : MonoBehaviour
         {
             if (rightGunDropdown.value != 0)
             {
-                PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
+                if (rightGunDropdown.value < lootPool.Weapons.Length)
+                {
+                    PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
+                }
+                else
+                {
+                    PlayerBody.Instance().SetWeapon((WeaponPickup) additionalLootPools[0].Weapons[rightGunDropdown.value - 1 - lootPool.Weapons.Length], false);
+                }
 
                 rightGunDropdown.value = 0;
             }

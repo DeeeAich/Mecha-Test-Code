@@ -25671,6 +25671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2367473461435744800}
+  - component: {fileID: 110160925111524630}
   m_Layer: 0
   m_Name: Legs
   m_TagString: Untagged
@@ -25697,6 +25698,47 @@ Transform:
   - {fileID: 509007069946148048}
   m_Father: {fileID: 2994073400594985814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110160925111524630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184151949641704719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135bd9c829b27f247991b70ce86d456e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockLegIks: 0
+  legIks:
+  - {fileID: 3222744722817867081}
+  - {fileID: 8976339388524832208}
+  - {fileID: 6614214516562479964}
+  - {fileID: 667778918061456712}
+  legDashVFXAnimators: []
+  legDashSFX: {fileID: 0}
+  footstepSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  maxLegsMovingAtOnce: 1
+  legMoveSpeed: 0.2
+  legMoveSpeedBonusPerSpeedMultiplier: 1.5
+  triggerMovementZoneRadius: 0.75
+  forceMovementZoneRadius: 2
+  distanceAheadOfCenterScalar: 1
+  distanceAheadOfCenterCap: 0.3
+  ikMoveStopDistance: 0.1
+  legIkTargets: []
+  moveTargets: []
+  moveSpeeds: []
+  zoneCenters: []
+  legMoving: 
+  EditorCheckZones: 0
 --- !u!1 &6254606763054632357
 GameObject:
   m_ObjectHideFlags: 0
@@ -31418,6 +31460,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 285648177829547830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &667778918061456712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770888365544878718, guid: b897871d7d34dff4abc46bac8660afaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 285648177829547830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2680674760404527757 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2793772171841824187, guid: b897871d7d34dff4abc46bac8660afaf,
@@ -31525,6 +31573,12 @@ GameObject:
 --- !u!4 &2516750336754160849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 353119955959020518, guid: b897871d7d34dff4abc46bac8660afaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2741499900626366263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3222744722817867081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770888365544878718, guid: b897871d7d34dff4abc46bac8660afaf,
     type: 3}
   m_PrefabInstance: {fileID: 2741499900626366263}
   m_PrefabAsset: {fileID: 0}
@@ -31638,6 +31692,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5870679529100998946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6614214516562479964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770888365544878718, guid: b897871d7d34dff4abc46bac8660afaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5870679529100998946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &8628244951013530777 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2793772171841824187, guid: b897871d7d34dff4abc46bac8660afaf,
@@ -31745,6 +31805,12 @@ GameObject:
 --- !u!4 &8270415712151923784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 353119955959020518, guid: b897871d7d34dff4abc46bac8660afaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 8512053980784105390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8976339388524832208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770888365544878718, guid: b897871d7d34dff4abc46bac8660afaf,
     type: 3}
   m_PrefabInstance: {fileID: 8512053980784105390}
   m_PrefabAsset: {fileID: 0}
