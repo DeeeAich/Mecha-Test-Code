@@ -7,7 +7,8 @@ public class ShortCircuit : ProjectileMod
 
     public override void AttemptApply(GameObject target)
     {
-        base.AttemptApply(target);
+        if (chance < 1)
+            return;
 
         target.GetComponent<IShortCircuitable>().ShortCircuit(chance, duration);
     }

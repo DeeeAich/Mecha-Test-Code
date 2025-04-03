@@ -7,7 +7,8 @@ public class Hack : ProjectileMod
 
     public override void AttemptApply(GameObject target)
     {
-        base.AttemptApply(target);
+        if (chance < 1)
+            return;
 
         target.GetComponent<IHackable>().Hack(damage, chance, duration);
     }
@@ -19,7 +20,7 @@ public class Hack : ProjectileMod
 
 
         chance += statusInfo.effectChance;
-        damage += statusInfo.effectDamage;
+        damage = statusInfo.effectDamage > damage ? statusInfo.effectDamage : damage;
         duration = duration < statusInfo.effectTime || damage == 0 ?
             statusInfo.effectTime : duration;
 

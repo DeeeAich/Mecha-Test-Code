@@ -12,8 +12,6 @@ public class ProjectileMod : MonoBehaviour, IMod
     public virtual void AttemptApply(GameObject target)
     {
 
-        if (chance == 0)
-            return;
 
     }
 

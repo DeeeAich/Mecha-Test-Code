@@ -48,6 +48,10 @@ public class EnemyDamageNumberSpawner : MonoBehaviour
 
     public void SpawnDamageNumber(float damageAmount, Vector3 myLocation, bool isCritical = false, bool hitShield = false)
     {
+
+        if(damageAmount <= 0)
+            return;
+
         int damage = Mathf.FloorToInt(damageAmount);
 
         Vector3 canvasPoint = Camera.main.WorldToScreenPoint(myLocation);
