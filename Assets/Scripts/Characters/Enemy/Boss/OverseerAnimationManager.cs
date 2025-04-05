@@ -33,8 +33,11 @@ public class OverseerAnimationManager : MonoBehaviour
     {
         if (testfire)
         {
-            PhaseTransition();
-            testfire = false;
+            EnterChargeAttack();
+        }
+        else
+        {
+            ExitChargeAttack();
         }
     }
     
@@ -76,6 +79,15 @@ public class OverseerAnimationManager : MonoBehaviour
         {
             groundSlamAnim.SetTrigger("SlamTwo");
         }
+    }
+
+    public void EnterChargeAttack()
+    {
+        groundSlamAnim.SetBool("Charge", true);
+    }
+    public void ExitChargeAttack()
+    { 
+        groundSlamAnim.SetBool("Charge", false);
     }
 
     public void PhaseTransition()
