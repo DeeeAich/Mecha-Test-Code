@@ -33,7 +33,11 @@ public class OverseerAnimationManager : MonoBehaviour
     {
         if (testfire)
         {
-            PhaseTransition();
+            EnterChargeAttack();
+        }
+        else
+        {
+            ExitChargeAttack();
         }
     }
     
