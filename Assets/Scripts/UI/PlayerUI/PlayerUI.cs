@@ -259,6 +259,7 @@ public class PlayerUI : MonoBehaviour
         cursorObject.gameObject.SetActive(isGamepad);
 
         Cursor.visible = !isGamepad;
+        Cursor.lockState = isGamepad ? CursorLockMode.Locked : CursorLockMode.Confined;
 
     }
 
