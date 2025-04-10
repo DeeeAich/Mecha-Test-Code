@@ -35,6 +35,8 @@ public class Room : MonoBehaviour
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
     public GameObject lootSpawnPoint;
+    [SerializeField] private GameObject playerAttentionGrabberPrefab;
+    public GameObject currentAttentionGrabber;
     public int lootCount = 3;
 
     [Header("Internal References")]
@@ -165,8 +167,8 @@ public class Room : MonoBehaviour
             primaryObjective.gameObject.SetActive(true);
             primaryObjective.onComplete.AddListener(CompleteRoom);
         }
-
-
+        
+        if(LevelGenerator.instance.oldRoom != null && LevelGenerator.instance.oldRoom.GetComponent<Room>().currentAttentionGrabber != null) Destroy(LevelGenerator.instance.oldRoom.GetComponent<Room>().currentAttentionGrabber);
 
         CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
         if (camRoom3D != null)
@@ -212,9 +214,15 @@ public class Room : MonoBehaviour
                 pickup.animator.SetTrigger("spawnLoot");
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
-            
-            
-            
+
+         
+            if (lootSpawnPoint != null)
+            {
+                if(currentAttentionGrabber != null) Destroy(currentAttentionGrabber);
+                currentAttentionGrabber = Instantiate(playerAttentionGrabberPrefab, lootSpawnPoint.transform);
+                currentAttentionGrabber.transform.localScale = new Vector3(25, 15, 10);
+            }
+
             //setting external stuff
             if (GameGeneralManager.instance != null) GameGeneralManager.instance.difficulty += 0.5f / LevelGenerator.instance.roomsInThisFloor;
             
@@ -239,6 +247,8 @@ public class Room : MonoBehaviour
             Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,
                 lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * lootSeperationDistance * (i - Mathf.FloorToInt(lootCount/2)), 
                 lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+            
+            if(lootSpawnPoint != null) newLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
             
             newLoot.transform.SetParent(transform);
             newLoot.PlayerPickup = pickupsToSpawn[i];

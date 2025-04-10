@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class Pickup : MonoBehaviour
     public int pickupRarity = 0;
     public pickupType pickupType = pickupType.ChassisChip;
     public PlayerPickup PlayerPickup;
+
+    public UnityEvent onPickedUpEvent;
 
     [Header("Ui Stuff")] 
     public bool mouseControls = true;
@@ -354,6 +357,8 @@ public class Pickup : MonoBehaviour
         if(uiPopup != null) closeUiTimer = 0.5f;
 
         canUse = false;
+        
+        onPickedUpEvent.Invoke();
     }
 
     public void CancelPickup()

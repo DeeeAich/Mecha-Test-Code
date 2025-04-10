@@ -155,13 +155,9 @@ public class DevKitCheats : MonoBehaviour
 
     public void CompleteRoom()
     {
-        Room[] rooms = FindObjectsOfType<Room>();
-        for (int i = 0; i < rooms.Length; i++)
+        if (LevelGenerator.instance != null && LevelGenerator.instance.currentRoom.GetComponent<Room>().isActive)
         {
-            if (rooms[i].isActive)
-            {
-                rooms[i].CompleteRoom();
-            }
+            LevelGenerator.instance.currentRoom.GetComponent<Room>().CompleteRoom();
         }
     }
 
