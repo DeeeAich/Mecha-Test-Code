@@ -24,6 +24,11 @@ public struct SaveFile
 
 public class SaveData : MonoBehaviour
 {
+    [Header("EDITOR TOOLS")] 
+    [SerializeField] private bool EditorClearSaveFiles;
+    [SerializeField] private bool EditorClearPersonalData;
+
+    [Header("Internal")]
     public bool hasSaveFile;
     public PersonalData currentPersonalData;
     public SaveFile currentSaveFile;
@@ -52,6 +57,19 @@ public class SaveData : MonoBehaviour
         LoadPersonalData();
     }
 
+    private void Update()
+    {
+        if (EditorClearSaveFiles)
+        {
+            EditorClearSaveFiles = false;
+        }
+
+        if (EditorClearPersonalData)
+        {
+            EditorClearPersonalData = false;
+        }
+    }
+
     public void LoadPersonalData()
     {
         if (File.Exists(filePath + "/PersonalData"))
@@ -73,8 +91,13 @@ public class SaveData : MonoBehaviour
     {
         if (File.Exists(filePath + "/SaveFile" + index))
         {
+            Debug.Log("Loading Save File " + index);
             currentSaveFile = JsonUtility.FromJson<SaveFile>(filePath + "/SaveFile" + index);
             hasSaveFile = true;
+        }
+        else
+        {
+            Debug.LogError("Failed To Load Save File " + index + ", No File Found");
         }
     }
 
@@ -89,12 +112,28 @@ public class SaveData : MonoBehaviour
     
     public void CreateFile(int index)
     {
+        Debug.Log("Creating Save File " + index);
+        
         currentSaveFileIndex = index;
         
         currentSaveFile = new SaveFile();
         currentSaveFile.randomSeed = (int)(System.DateTime.Now.Ticks);
         currentSaveFile.level = 0;
         currentSaveFile.difficulty = 0;
+        
+        SaveFile(index);
+    }
+
+    public void LoadOrCreateFile(int index)
+    {
+        if (File.Exists(filePath + "/SaveFile" + index))
+        {
+            LoadFile(index);
+        }
+        else
+        {
+            CreateFile(index);
+        }
     }
 
     public void SaveCurrentFile()

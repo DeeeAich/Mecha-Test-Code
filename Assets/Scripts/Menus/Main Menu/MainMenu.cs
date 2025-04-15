@@ -22,5 +22,8 @@ public class MainMenu : MonoBehaviour
         GameGeneralManager.instance.ChangeScene(1);
     }
 
-
+    public void LoadSave(int index)
+    {
+        SaveData.instance.LoadOrCreateFile(index);
+    }
 }
