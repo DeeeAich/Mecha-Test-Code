@@ -194,13 +194,29 @@ public class pauseMenu : MonoBehaviour
             devkitCheatsMenu.SetActive(false);
             mainPauseMenu.SetActive(false);
             inventoryMenu.SetActive(false);
+            TogglePause();
         }
         else
         {
-            mainPauseMenu.SetActive(true);
-            mainPauseMenuInitialButton.Select();
+            bool closedAPickup = false;
+            
+            foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
+            {
+                if (pickup.open)
+                {
+                    pickup.ClosePickupMenu();
+                    closedAPickup = true;
+                }
+            }
+
+            if (!closedAPickup)
+            {
+                mainPauseMenu.SetActive(true);
+                mainPauseMenuInitialButton.Select();
+                TogglePause();
+            }
         }
         
-        TogglePause();
+   
     }
 }

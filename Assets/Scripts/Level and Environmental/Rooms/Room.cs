@@ -211,7 +211,10 @@ public class Room : MonoBehaviour
             
             foreach (var pickup in FindObjectsOfType<Pickup>())
             {
-                pickup.animator.SetTrigger("spawnLoot");
+                for (int i = 0; i < pickup.animators.Length; i++)
+                {
+                    pickup.animators[i].SetTrigger("spawnLoot");
+                }
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
             }
 
@@ -241,17 +244,10 @@ public class Room : MonoBehaviour
         Debug.Log("Spawning Loot");
         
         PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
-        
-        for (int i = 0; i < pickupsToSpawn.Length; i++)
-        {
-            Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab,
-                lootSpawnPoint.transform.position + lootSpawnPoint.transform.right * lootSeperationDistance * (i - Mathf.FloorToInt(lootCount/2)), 
-                lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
-            
-            if(lootSpawnPoint != null) newLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
-            
-            newLoot.transform.SetParent(transform);
-            newLoot.PlayerPickup = pickupsToSpawn[i];
-        }
+
+        Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+        newLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
+        newLoot.transform.SetParent(transform);
+        newLoot.PlayerPickups = pickupsToSpawn;
     }
 }
