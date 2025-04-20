@@ -144,6 +144,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
     internal virtual float TakeDamage(float amount, out bool isShield, bool isCrit = false)
     {
         isShield = false;
+
+        amount = Mathf.RoundToInt(amount);
+
         if (!canTakeDamage || !isAlive)
         {
             return 0f;

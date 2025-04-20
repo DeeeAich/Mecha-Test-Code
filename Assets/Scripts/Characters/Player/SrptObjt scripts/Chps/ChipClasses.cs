@@ -130,3 +130,15 @@ public class WeaponStats
     }
 
 }
+
+[Serializable]
+public class ChipTrigger
+{
+
+    public enum Trigger
+    {
+        Damaged, OnKill,
+        OnShot,OnRoomClear
+    }
+
+}
