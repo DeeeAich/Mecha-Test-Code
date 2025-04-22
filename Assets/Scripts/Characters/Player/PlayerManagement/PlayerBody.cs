@@ -86,8 +86,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
         if (lastHealth != myHealth.health || lastMax != myHealth.maxHealth)
         {
-            lastHealth = myHealth.health + myHealth.maxHealth - lastMax;
-            lastMax = myHealth.maxHealth;
+            lastHealth = Mathf.RoundToInt(myHealth.health + myHealth.maxHealth - lastMax);
+            lastMax = Mathf.RoundToInt(myHealth.maxHealth);
             myUI.HealthChanged(lastHealth, lastMax);
         }
 

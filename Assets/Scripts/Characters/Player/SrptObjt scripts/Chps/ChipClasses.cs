@@ -132,7 +132,7 @@ public class WeaponStats
 }
 
 [Serializable]
-public class ChipTrigger
+public class ChipEnums
 {
 
     public enum Trigger

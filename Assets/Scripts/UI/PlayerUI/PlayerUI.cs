@@ -118,6 +118,7 @@ public class PlayerUI : MonoBehaviour
     public void HealthChanged(float nextHealth, float newMaxHealth = 0)
     {
 
+
         healthChanging = true;
         newHealth = nextHealth;
 
