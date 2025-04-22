@@ -21,6 +21,14 @@ public class OverseerFightPrimaryObjective : Objective
     private Health bossHealth;
     private bool hasRegisteredEvents = false;
 
+    private void Start()
+    {
+        if (room.spawnedLoot != null)
+        {
+            room.spawnedLoot.gameObject.SetActive(false);
+        }
+    }
+
     private void StartPhaseTransition()
     {
         ToggleGameFrozenForPhaseTransition(true);
@@ -38,6 +46,10 @@ public class OverseerFightPrimaryObjective : Objective
 
         bossHealth.canTakeDamage = true;
 
+        if (room.spawnedLoot != null)
+        {
+            room.spawnedLoot.gameObject.SetActive(true);
+        }
         Phase2End.Invoke(true);
     }
 

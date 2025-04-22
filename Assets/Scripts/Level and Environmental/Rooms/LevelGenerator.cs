@@ -97,7 +97,7 @@ public class LevelGenerator : MonoBehaviour
         Debug.Log("There are " + possibleRooms.Count + " rooms available");
 
         
-        if (possibleRooms.Contains(mostrecentyUsedRoomPrefab))
+        if (possibleRooms.Count > 0 && possibleRooms.Contains(mostrecentyUsedRoomPrefab))
         {
             print("Removing " + mostrecentyUsedRoomPrefab.name);
             possibleRooms.Remove(mostrecentyUsedRoomPrefab);

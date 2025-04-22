@@ -35,6 +35,7 @@ public class Room : MonoBehaviour
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
     public GameObject lootSpawnPoint;
+    public Pickup spawnedLoot;
     [SerializeField] private GameObject playerAttentionGrabberPrefab;
     public GameObject currentAttentionGrabber;
     public int lootCount = 3;
@@ -245,9 +246,9 @@ public class Room : MonoBehaviour
         
         PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
 
-        Pickup newLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
-        newLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
-        newLoot.transform.SetParent(transform);
-        newLoot.PlayerPickups = pickupsToSpawn;
+        spawnedLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+        spawnedLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
+        spawnedLoot.transform.SetParent(transform);
+        spawnedLoot.PlayerPickups = pickupsToSpawn;
     }
 }

@@ -33,6 +33,7 @@ public class pauseMenu : MonoBehaviour
     [SerializeField] private Button inventoryMenuInitialButton;
 
     [SerializeField] private InventoryManager InventoryManager;
+    [SerializeField] private GameObject inventoryPlayerCamera;
 
     private InputAction pauseAction;
     private InputAction openInventoryAction;
@@ -114,6 +115,7 @@ public class pauseMenu : MonoBehaviour
             devkitCheatsMenu.SetActive(false);
             mainPauseMenu.SetActive(false);
             inventoryMenu.SetActive(true);
+            inventoryPlayerCamera.SetActive(true);
             InventoryManager.UpdateInventory();
         }
     }
@@ -121,7 +123,15 @@ public class pauseMenu : MonoBehaviour
     public void TriggerBackToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        
+        if (GameGeneralManager.instance != null)
+        {
+            GameGeneralManager.instance.ChangeScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void Reset()
@@ -158,9 +168,12 @@ public class pauseMenu : MonoBehaviour
             devkitCheatsMenu.SetActive(false);
             mainPauseMenu.SetActive(false);
             inventoryMenu.SetActive(false);
+            inventoryPlayerCamera.SetActive(false);
+            
         }
         else
         {
+            inventoryPlayerCamera.SetActive(true);
             inventoryMenu.SetActive(true);
             InventoryManager.UpdateInventory();
             inventoryMenuInitialButton.Select();
@@ -176,6 +189,7 @@ public class pauseMenu : MonoBehaviour
             devkitCheatsMenu.SetActive(false);
             mainPauseMenu.SetActive(false);
             inventoryMenu.SetActive(false);
+            inventoryPlayerCamera.SetActive(false);
         }
         else
         {
@@ -194,6 +208,7 @@ public class pauseMenu : MonoBehaviour
             devkitCheatsMenu.SetActive(false);
             mainPauseMenu.SetActive(false);
             inventoryMenu.SetActive(false);
+            inventoryPlayerCamera.SetActive(false);
             TogglePause();
         }
         else
@@ -212,6 +227,7 @@ public class pauseMenu : MonoBehaviour
             if (!closedAPickup)
             {
                 mainPauseMenu.SetActive(true);
+                inventoryPlayerCamera.SetActive(true);
                 mainPauseMenuInitialButton.Select();
                 TogglePause();
             }
