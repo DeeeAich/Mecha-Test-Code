@@ -20,21 +20,11 @@ public class StatusInfo
 public class BodyStats
 {
     public float health, armour;
-    public bool percentage;
 
     public void AddStats(BodyStats stats)
     {
-        if (percentage)
-        {
-
-            stats.health *= 1 + health / 100;
-            stats.armour *= armour / 100 + 1;
-        }
-        else
-        {
-            stats.health += health;
-            stats.armour += armour;
-        }
+        stats.health *= health + 1;
+        stats.armour *= armour + 1;
     }
 
     public void SetStats(BodyStats stats)
@@ -51,25 +41,22 @@ public class LegStatChange
 {
 
     public float speed, acceleration, turnSpeed;
-    public bool percentage;
 
     public void AddStats(LegStatChange stats)
     {
 
-        if (percentage)
-        {
-            stats.speed *= 1 + speed / 100;
-            stats.acceleration *= 1 + acceleration / 100;
-            stats.turnSpeed *= 1 + turnSpeed / 100;
+        stats.speed *= speed + 1;
+        stats.acceleration *= acceleration + 1;
+        stats.turnSpeed *= turnSpeed + 1;
 
-        }
-        else
-        {
-            stats.speed += speed;
-            stats.acceleration += acceleration;
-            stats.turnSpeed += turnSpeed;
-        }
+    }
 
+    public void RemoveStats(LegStatChange stats)
+    {
+
+        stats.speed /= speed + 1;
+        stats.acceleration /= acceleration + 1;
+        stats.turnSpeed /= turnSpeed + 1;
 
     }
 
@@ -80,12 +67,32 @@ public class DashStatChange
 {
     [Tooltip("Add additional charges or remove")]
     public int dashCharges;
-    [Tooltip("Add for slower, minus for faster")]
+    [Tooltip("Add for slower, minus for faster %")]
     public float dashTime;
-    [Tooltip("Add distance or remove distance")]
+    [Tooltip("Add distance or remove distance %")]
     public float dashDistance;
-    [Tooltip("Add to increase time, minus to decrease")]
+    [Tooltip("Add to increase time, minus to decrease %")]
     public float dashRecharge;
+
+    public void AddStats(DashStatChange stats)
+    {
+
+        stats.dashCharges += dashCharges;
+        stats.dashTime *= dashTime;
+        stats.dashDistance *=dashDistance + 1;
+        stats.dashRecharge *= dashRecharge;
+
+    }
+
+    public void RemoveStats(DashStatChange stats)
+    {
+
+        stats.dashCharges -= dashCharges;
+        stats.dashTime /= dashTime;
+        stats.dashDistance /= dashDistance + 1;
+        stats.dashRecharge /= dashRecharge;
+
+    }
 
 }
 
@@ -105,17 +112,13 @@ public class WeaponStats
     public void AddStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed -= attackSpeed;
-        if (statsToUpdate.attackSpeed < statsToUpdate.minAttackSpeed)
-            statsToUpdate.attackSpeed = statsToUpdate.minAttackSpeed;
-        statsToUpdate.damage += damage;
-        statsToUpdate.ammoCount += ammoCount;
+        statsToUpdate.attackSpeed *= attackSpeed;
+        statsToUpdate.damage *= damage + 1;
+        statsToUpdate.ammoCount = ammoCount + 1;
         statsToUpdate.shotCost += shotCost;
-        statsToUpdate.reloadSpeed -= reloadSpeed;
-        if (statsToUpdate.reloadSpeed < statsToUpdate.minReloadSpeed)
-            statsToUpdate.reloadSpeed = statsToUpdate.minReloadSpeed;
-        if (piercing < 0)
-            piercing = 0;
+        statsToUpdate.reloadSpeed *= reloadSpeed;
+        if (piercing <= -1)
+            piercing = -1;
         else
             statsToUpdate.piercing += piercing;
 
@@ -124,8 +127,8 @@ public class WeaponStats
     public void RemoveStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed -= attackSpeed;
-        statsToUpdate.damage -= damage;
+        statsToUpdate.attackSpeed /= attackSpeed;
+        statsToUpdate.damage /= damage + 1;
 
     }
 
@@ -138,7 +141,8 @@ public class ChipEnums
     public enum Trigger
     {
         Damaged, OnKill,
-        OnShot,OnRoomClear
+        OnShot,OnRoomClear,
+        None
     }
 
 }

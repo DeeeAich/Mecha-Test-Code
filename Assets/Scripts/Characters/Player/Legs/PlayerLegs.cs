@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLegs : MonoBehaviour
+public class PlayerLegs : MonoBehaviour, ILegModifiable
 {
     public PlayerBody myBody;
     public PlayerBody.LegInfo curLegs;
@@ -11,15 +11,18 @@ public class PlayerLegs : MonoBehaviour
     public bool dashing = false;
     public Vector3 dashDirection;
     public Rigidbody ridBy;
+    public List<MovementChip> legChips;
+    internal LegStatChange legMods;
+    internal DashStatChange dashMods;
 
     public virtual void Movement(Vector2 stickAmount)
     {
 
         if (stickAmount.magnitude != 0 && !dashing)
         {
-            curSpeed += stickAmount * myBody.legStats.speed;
+            curSpeed += stickAmount * myBody.legStats.speed * legMods.speed;
 
-            if (curSpeed.magnitude > (stickAmount * myBody.legStats.speed).magnitude)
+            if (curSpeed.magnitude > (stickAmount * myBody.legStats.speed * legMods.speed).magnitude)
                 curSpeed = stickAmount * myBody.legStats.speed;
         }
         else if (!dashing)
@@ -74,4 +77,47 @@ public class PlayerLegs : MonoBehaviour
         }
 
     }
+
+    public void ApplyChip(MovementChip newChip)
+    {
+
+        legChips.Add(newChip);
+
+        switch(newChip.moveType)
+        {
+            case (MovementChip.MovementType.LegStat):
+                LegStatChip legStatChip = (LegStatChip)newChip;
+                ApplyLegStats(legStatChip.statChange);
+                break;
+            case (MovementChip.MovementType.DashStat):
+                DashStatChip dashStatChip = (DashStatChip)newChip;
+                ApplyDashStats(dashStatChip.statChange);
+                break;
+        }
+
+    }
+
+    public void ApplyLegStats(LegStatChange chipChange)
+    {
+        chipChange.AddStats(legMods);
+    }
+
+    public void RemoveLegStats(LegStatChange chipChange)
+    {
+        chipChange.RemoveStats(legMods);
+    }
+
+    public void ApplyDashStats(DashStatChange chipChange)
+    {
+        chipChange.AddStats(dashMods);
+
+
+
+    }
+
+    public void RemoveDashStats(DashStatChange chipChange)
+    {
+        chipChange.RemoveStats(dashMods);
+    }
+
 }

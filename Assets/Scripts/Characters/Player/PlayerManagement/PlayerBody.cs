@@ -322,24 +322,26 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         {
 
             case (BodyChip.BodyType.Stat):
-                ApplyStatusChange();
-                break;
-            case (BodyChip.BodyType):
-
+                BStatChip bStatChip = (BStatChip)chip;
+                ApplyStats(bStatChip.bodyStats);
                 break;
         }
 
     }
 
-    private void ApplyStatusChange()
+    public void ApplyStats(BodyStats newStats)
     {
 
-        foreach(BStatChip bStat in myMods)
-        {
+        newStats.AddStats(myStats);
 
+        myHealth.maxHealth *= myStats.health;
 
+    }
 
-        }
+    public void RemoveStats(BodyStats newStats)
+    {
+
+        
 
     }
 

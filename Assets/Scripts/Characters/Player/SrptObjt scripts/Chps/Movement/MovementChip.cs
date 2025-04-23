@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementChip : MonoBehaviour
+public class MovementChip : Chip
 {
 
-    [Header("Stat Changes")]
-    float maxSpeed, accelleration,
-        dashCount, dashCoolDown;
+    public enum MovementType
+    {
+        LegStat, DashStat,
+        Trigger
+    }
 
-    bool percentage = false;
+    public MovementType moveType;
 
 }
