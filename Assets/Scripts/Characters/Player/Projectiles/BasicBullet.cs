@@ -10,6 +10,7 @@ public class BasicBullet : Projectile
 
     [SerializeField] internal float speed;
     [SerializeField] internal float resetTime = 2f;
+    [SerializeField] internal float animationTime = 1.2f;
     internal bool animating = false;
     public ProjectileGun myGun;
     public EventReference hitMarkerSound;
@@ -33,7 +34,7 @@ public class BasicBullet : Projectile
         if (animating)
             return;
 
-        if (other.TryGetComponent(out Health health))
+        if (other.TryGetComponent<Health>(out Health health))
         {
             if (hasHitMarkerSound)
             {
@@ -83,7 +84,7 @@ public class BasicBullet : Projectile
         }
     }
 
-    public IEnumerator AnimationTimer()
+    public virtual IEnumerator AnimationTimer()
     {
 
         Animator bulletAnimator = GetComponentInChildren<Animator>();
@@ -93,7 +94,7 @@ public class BasicBullet : Projectile
 
             transform.GetComponentInChildren<Animator>().SetTrigger("impact");
 
-            yield return new WaitForSeconds(1.2f);
+            yield return new WaitForSeconds(animationTime);
 
             transform.GetComponentInChildren<Animator>().SetTrigger("return");
         }

@@ -14,7 +14,8 @@ public class DashTriggerChip : MovementTriggerChip
     public override void Trigger(PlayerLegs playerLegs)
     {
         
-        
+        if (chance == 0 || chance < Random.Range(0.0f, 100.0f))
+            StartCoroutine(TriggerTimed(playerLegs));
 
     }
 
@@ -25,7 +26,7 @@ public class DashTriggerChip : MovementTriggerChip
 
         yield return new WaitForSeconds(timer);
 
-
+        legs.RemoveDashStats(statChange);
 
         yield return null;
     }
