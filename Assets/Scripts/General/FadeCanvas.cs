@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class FadeCanvas : MonoBehaviour
 {
     public static FadeCanvas instance;
-    public List<Animator> loadGridAnims;
+    public List<LoadGridToggle> loadGridAnims;
 
     private void Awake()
     {
@@ -21,17 +21,18 @@ public class FadeCanvas : MonoBehaviour
         }
 
 
-        foreach (var anim in loadGridAnims)
+        for (var i = 0; i < loadGridAnims.Count; i++)
         {
-            anim.SetBool("exit", false);
+            loadGridAnims[i].exit = false;
         }
     }
 
     public void FadeToBlack()
     {
-        foreach (var anim in loadGridAnims)
+
+        for (var i = 0; i < loadGridAnims.Count; i++)
         {
-            anim.SetBool("exit", true);
+            loadGridAnims[i].exit = true;
         }
 
 
