@@ -31,12 +31,6 @@ public class TutorialManager : MonoBehaviour
         onStageCompletes[tutorialStage].Invoke();
     }
 
-    private void CompleteDashChallenge(InputAction.CallbackContext context)
-    {
-        CompleteTutorialStage();
-        dash.performed -= CompleteDashChallenge;
-    }
-
     public void StartTutorialStage(int stage)
     {
         tutorialStage = stage;
@@ -44,30 +38,52 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialStage)
         {
             case 0:
+                /*
                 PlayerBody.Instance().weaponHolder.rightFire.AddListener(delegate
                 {
                     CompleteTutorialStage();
                     PlayerBody.Instance().weaponHolder.rightFire.RemoveAllListeners();
                 });
+                */
+                
+                
+                
                 break;
             
             case 1:
+                /*
                 dash = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Dash"];
                 dash.performed += CompleteDashChallenge;
+                */
+                
+                
+                
                 break;
             
             case 2:
-                
+                /*
                 PlayerBody.Instance().weaponHolder.leftFire.AddListener(delegate
                 {
                     CompleteTutorialStage();
                     PlayerBody.Instance().weaponHolder.leftFire.RemoveAllListeners();
                 });
+                */
+                
+                
                 
                 break;
             
         }
         
         onStageStarts[stage].Invoke();
+        
     }
+    
+    /*
+private void CompleteDashChallenge(InputAction.CallbackContext context)
+{
+CompleteTutorialStage();
+dash.performed -= CompleteDashChallenge;
+}
+*/
 }
