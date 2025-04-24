@@ -190,7 +190,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (leftGunDropdown.value != 0)
             {
-                if (leftGunDropdown.value < lootPool.Weapons.Length)
+                if (leftGunDropdown.value < lootPool.Weapons.Length + 1)
                 {
                     PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
                 }
@@ -207,7 +207,7 @@ public class DevKitCheats : MonoBehaviour
         {
             if (rightGunDropdown.value != 0)
             {
-                if (rightGunDropdown.value < lootPool.Weapons.Length)
+                if (rightGunDropdown.value < lootPool.Weapons.Length + 1)
                 {
                     PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
                 }

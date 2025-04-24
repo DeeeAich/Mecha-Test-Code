@@ -24,6 +24,10 @@ public enum pickupType
 
 public class Pickup : MonoBehaviour
 {
+    [Header("Editor Only")]
+    [SerializeField] private bool EDITORTriggerSpawn = false;
+    
+    [Header("Pickup Info")]
     public pickupType pickupType = pickupType.ChassisChip;
     public PlayerPickup[] PlayerPickups;
 
@@ -191,6 +195,13 @@ public class Pickup : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (EDITORTriggerSpawn)
+        {
+            EDITORTriggerSpawn = false;
+            
+            SpawnLootBox();
+        }
+        
         if (closeUiTimer > 0)
         {
             closeUiTimer -= Time.fixedDeltaTime;
@@ -421,5 +432,14 @@ public class Pickup : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpawnLootBox()
+    {
+        for (int i = 0; i < animators.Length; i++)
+        {
+            animators[i].SetTrigger("spawnLoot");
+        }
+        GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
     }
 }

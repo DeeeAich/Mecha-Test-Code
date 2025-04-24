@@ -212,11 +212,16 @@ public class Room : MonoBehaviour
             
             foreach (var pickup in FindObjectsOfType<Pickup>())
             {
+                pickup.SpawnLootBox();
+                
+                
+                /*
                 for (int i = 0; i < pickup.animators.Length; i++)
                 {
                     pickup.animators[i].SetTrigger("spawnLoot");
                 }
                 pickup.GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
+                */
             }
 
          

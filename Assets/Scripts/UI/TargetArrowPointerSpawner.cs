@@ -16,6 +16,7 @@ public class TargetArrowPointerSpawner : MonoBehaviour
     {
         if (PlayerUI.instance != null)
         {
+            showArrow = true;
             targetArrow = Instantiate(targetArrowPrefab, PlayerUI.instance.transform);
             targetArrow.GetComponent<TargetArrowPointer>().target = target;
         }
