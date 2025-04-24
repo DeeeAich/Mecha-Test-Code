@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ public class Grenade : BasicBullet
         if (hasHitMarkerSound)
                 AudioManager.instance.PlayOneShotSFX(hitMarkerSound, transform.position);
 
+        StartCoroutine(AnimationTimer());
 
 
     }
@@ -46,14 +48,17 @@ public class Grenade : BasicBullet
     public override IEnumerator AnimationTimer()
     {
         animating = true;
+        timer = 0;
+
+        RaycastHit[] enemiesHit = Physics.SphereCastAll(transform.position + Vector3.down, explRadius, Vector3.up, 2, enemies);
 
         GetComponentInChildren<Animator>().SetTrigger("impact");
 
-        yield return new WaitForSeconds(animationTime / 2);
+        yield return new WaitForSeconds(0.1f);
 
         float modifiedDamage = critRoller.AdditiveDamage(damage);
 
-        RaycastHit[] enemiesHit = Physics.SphereCastAll(transform.position, explRadius, new Vector3(), 0, enemies);
+        print("Touched " + enemiesHit.Length);
 
         foreach(RaycastHit enemy in enemiesHit)
             if(enemy.transform.gameObject.TryGetComponent<Health>(out Health enemyHealth))
@@ -61,7 +66,7 @@ public class Grenade : BasicBullet
                 enemyHealth.TakeDamage(modifiedDamage);
             }
 
-        yield return new WaitForSeconds(animationTime / 2);
+        yield return new WaitForSeconds(animationTime);
 
         transform.parent = myGun.projectileHolder;
         transform.localPosition = new Vector3();
@@ -69,6 +74,8 @@ public class Grenade : BasicBullet
         animating = false;
 
         GetComponentInChildren<Animator>().SetTrigger("return");
+
+        gameObject.SetActive(false);
 
         yield return null;
 
