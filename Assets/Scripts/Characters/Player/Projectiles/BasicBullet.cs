@@ -8,15 +8,17 @@ using Unity.VisualScripting;
 public class BasicBullet : Projectile
 {
 
-    [SerializeField] float speed;
-    [SerializeField] float resetTime = 2f;
-    bool animating = false;
+    [SerializeField] internal float speed;
+    [SerializeField] internal float resetTime = 2f;
+    internal bool animating = false;
     public ProjectileGun myGun;
     public EventReference hitMarkerSound;
     public bool hasHitMarkerSound =false;
+    public bool paused = false;
 
-    private Critical critRoller;
-    private int pierceCounter = 0;
+    internal Critical critRoller;
+    internal int pierceCounter = 0;
+    internal float timer;
 
     public virtual void Start()
     {
@@ -63,22 +65,22 @@ public class BasicBullet : Projectile
 
     public virtual void FixedUpdate()
     {
-        if (gameObject.activeInHierarchy && !animating)
+        if (gameObject.activeInHierarchy && !animating && !paused)
+        {
             transform.position += transform.forward * speed * Time.deltaTime;
-    }
 
-    public IEnumerator AutoReset()
-    {
+            timer += Time.deltaTime;
+            if(timer >= resetTime)
+            {
 
-        yield return new WaitForSeconds(resetTime);
+                gameObject.SetActive(false);
+                transform.parent = myGun.projectileHolder;
+                transform.localPosition = new Vector3();
+                pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
+                animating = false;
 
-        gameObject.SetActive(false);
-        transform.parent = myGun.projectileHolder;
-        transform.localPosition = new Vector3();
-        pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
-        animating = false;
-
-        yield return null;
+            }
+        }
     }
 
     public IEnumerator AnimationTimer()

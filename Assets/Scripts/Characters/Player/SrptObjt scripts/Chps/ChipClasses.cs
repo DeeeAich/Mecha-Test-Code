@@ -65,22 +65,22 @@ public class LegStatChange
 [Serializable]
 public class DashStatChange
 {
-    [Tooltip("Add additional charges or remove")]
-    public int dashCharges;
-    [Tooltip("Add for slower, minus for faster %")]
-    public float dashTime;
-    [Tooltip("Add distance or remove distance %")]
-    public float dashDistance;
-    [Tooltip("Add to increase time, minus to decrease %")]
-    public float dashRecharge;
+    [Tooltip("Add additional charges or remove count")]
+    public int dashCharges = 0;
+    [Tooltip("Add for slower, minus for faster .")]
+    public float dashTime = 1;
+    [Tooltip("Add distance or remove distance .")]
+    public float dashDistance = 1;
+    [Tooltip("Add to increase time, minus to decrease .")]
+    public float dashRecharge = 1;
 
     public void AddStats(DashStatChange stats)
     {
 
         stats.dashCharges += dashCharges;
-        stats.dashTime *= dashTime;
-        stats.dashDistance *=dashDistance + 1;
-        stats.dashRecharge *= dashRecharge;
+        stats.dashTime *= 1 - dashTime;
+        stats.dashDistance *= dashDistance + 1;
+        stats.dashRecharge *= 1 - dashRecharge;
 
     }
 
@@ -101,22 +101,20 @@ public class WeaponStats
 {
 
     public float attackSpeed = 1;
-    public float minAttackSpeed = 0.2f;
     public float damage = 1;
     public float ammoCount = 1;
     public int shotCost = 0;
     public float reloadSpeed = 1;
-    public float minReloadSpeed = 0.4f;
-    public int piercing;
+    public int piercing = 0;
 
     public void AddStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed *= attackSpeed;
+        statsToUpdate.attackSpeed *= 1 - attackSpeed;
         statsToUpdate.damage *= damage + 1;
         statsToUpdate.ammoCount = ammoCount + 1;
         statsToUpdate.shotCost += shotCost;
-        statsToUpdate.reloadSpeed *= reloadSpeed;
+        statsToUpdate.reloadSpeed *= 1 - reloadSpeed;
         if (piercing <= -1)
             piercing = -1;
         else
@@ -127,8 +125,9 @@ public class WeaponStats
     public void RemoveStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed /= attackSpeed;
+        statsToUpdate.attackSpeed /= 1 - attackSpeed;
         statsToUpdate.damage /= damage + 1;
+        statsToUpdate.reloadSpeed /= 1 - reloadSpeed;
 
     }
 

@@ -92,7 +92,7 @@ public class OverseerFightPrimaryObjective : Objective
             }
             else
             { 
-                if (bullet.gameObject.activeSelf)  bullet.StartCoroutine(bullet.AutoReset());
+                //if (bullet.gameObject.activeSelf)  bullet.StartCoroutine(bullet.AutoReset());
             }
         }
         

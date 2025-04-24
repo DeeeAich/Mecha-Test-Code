@@ -77,7 +77,6 @@ public class ProjectileGun : Weapon
             newBullet.SetActive(true);
             newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
-            StartCoroutine(newBullet.GetComponent<BasicBullet>().AutoReset());
 
             curDivation += divPerShot;
             if (curDivation > maxDiviation)

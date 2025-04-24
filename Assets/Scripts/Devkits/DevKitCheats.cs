@@ -319,12 +319,12 @@ public class DevKitCheats : MonoBehaviour
             if (freeze)
             {
                 bullet.enabled = false;
-                bullet.StopAllCoroutines();
+                bullet.GetComponent<BasicBullet>().paused = true;
             }
             else
             {
                 bullet.enabled = true;
-                if(bullet.gameObject.activeSelf) bullet.StartCoroutine(bullet.AutoReset());
+                if(bullet.gameObject.activeSelf) bullet.GetComponent<BasicBullet>().paused = false;
             }
         }
         

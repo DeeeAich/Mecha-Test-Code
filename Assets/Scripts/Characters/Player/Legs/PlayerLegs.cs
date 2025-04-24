@@ -12,8 +12,8 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
     public Vector3 dashDirection;
     public Rigidbody ridBy;
     public List<MovementChip> legChips;
-    internal LegStatChange legMods;
-    internal DashStatChange dashMods;
+    [SerializeField] internal LegStatChange legMods;
+    [SerializeField] internal DashStatChange dashMods;
 
     public virtual void Movement(Vector2 stickAmount)
     {

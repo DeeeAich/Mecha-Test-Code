@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : BasicBullet
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public override void Start()
     {
-        
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FixedUpdate()
     {
-        
+        if (gameObject.activeInHierarchy && !animating && !paused)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+            timer += Time.deltaTime;
+            if (timer >= resetTime)
+            {
+                animating = true;
+                transform.parent = myGun.projectileHolder;
+                transform.localPosition = new Vector3();
+                pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
+                animating = false;
+
+            }
+        }
     }
 }

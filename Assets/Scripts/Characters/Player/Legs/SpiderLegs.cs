@@ -6,6 +6,11 @@ using UnityEngine.UIElements.Experimental;
 public class SpiderLegs : PlayerLegs
 {
 
+    public override void Movement(Vector2 stickAmount)
+    {
+        base.Movement(stickAmount);
+    }
+
     public override IEnumerator Dash(Vector2 stickAmount)
     {
 
