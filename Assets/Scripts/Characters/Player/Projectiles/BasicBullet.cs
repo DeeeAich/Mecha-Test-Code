@@ -91,21 +91,29 @@ public class BasicBullet : Projectile
     {
 
         Animator bulletAnimator = GetComponentInChildren<Animator>();
+        animating = true;
         if (bulletAnimator != null)
         {
-            animating = true;
-
             transform.GetComponentInChildren<Animator>().SetTrigger("impact");
 
             yield return new WaitForSeconds(animationTime);
 
             transform.GetComponentInChildren<Animator>().SetTrigger("return");
         }
-            gameObject.SetActive(false);
-            transform.parent = myGun.projectileHolder;
-            transform.localPosition = new Vector3();
-            pierceCount = myGun.pierceCount + myGun.modifiers.piercing;
-            animating = false;
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(0.5f);
+
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+
+        transform.parent = myGun.projectileHolder;
+        transform.localPosition = new Vector3();
+        pierceCount = myGun.pierceCount + myGun.modifiers.piercing;
+        gameObject.SetActive(false);
+        animating = false;
         yield return null;
     }
 }
