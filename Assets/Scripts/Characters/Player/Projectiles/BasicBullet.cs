@@ -52,12 +52,15 @@ public class BasicBullet : Projectile
 
             if (pierceCounter == -1)
             {
+                pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
                 StopAllCoroutines();
                 StartCoroutine(AnimationTimer());
             }
         }
         else
         {
+            pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
+
             StopAllCoroutines();
             StartCoroutine(AnimationTimer());
 
