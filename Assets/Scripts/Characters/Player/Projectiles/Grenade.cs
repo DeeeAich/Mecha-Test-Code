@@ -64,6 +64,9 @@ public class Grenade : BasicBullet
             if(enemy.transform.gameObject.TryGetComponent<Health>(out Health enemyHealth))
             {
                 enemyHealth.TakeDamage(modifiedDamage);
+
+                foreach (ProjectileMod modi in myGun.GetComponents<ProjectileMod>())
+                    modi.AttemptApply(enemy.transform.gameObject);
             }
 
         yield return new WaitForSeconds(animationTime);
