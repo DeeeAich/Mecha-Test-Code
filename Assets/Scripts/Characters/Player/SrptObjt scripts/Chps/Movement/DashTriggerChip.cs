@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "newDashTrigger", menuName = "Player/Chip/Dash/Trigger")]
 public class DashTriggerChip : MovementTriggerChip
 {
 

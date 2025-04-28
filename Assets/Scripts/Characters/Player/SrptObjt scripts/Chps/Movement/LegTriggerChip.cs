@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "newLegTrigger", menuName = "Player/Chip/Leg/Trigger")]
 public class LegTriggerChip : MovementTriggerChip
 {
 

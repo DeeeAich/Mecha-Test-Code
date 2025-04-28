@@ -101,37 +101,39 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             myUI.WeaponAmmoRight(100, 0);
     }
 
-    private void TriggerEndOfRoom()
+    public void TriggerChips(ChipEnums.Trigger trigger)
     {
-        foreach(BodyChip chip in myMods)
-            if(chip.bodyType == BodyChip.BodyType.EndRoom)
-                chip.TriggerAbility();
+
+        foreach(BodyTriggerChip triggerChip in myMods)
+            if(triggerChip.chipTrigger == trigger)
+                triggerChip.TriggerAbility();
+
+        myMovement.ChipTrigger(trigger);
+
+        weaponHolder.TriggerChips(trigger);
+
     }
+
+    private void TriggerEndOfRoom() =>
+        TriggerChips(ChipEnums.Trigger.OnRoomClear);
 
     public void TriggerOnKill()
     {
-
-        foreach (BodyChip chip in myMods)
-            if (chip.bodyType == BodyChip.BodyType.OnKill)
-                chip.TriggerAbility();
+        TriggerChips(ChipEnums.Trigger.OnKill);
     }
 
     public void TriggerOnDamage()
     {
-        foreach (BodyChip chip in myMods)
-            if (chip.bodyType == BodyChip.BodyType.OnDamage)
-                chip.TriggerAbility();
-
         PlayerUI.instance.OnHealthChange(false);
+
+        TriggerChips(ChipEnums.Trigger.Damaged);
     }
 
     public void TriggerOnHeal(int amount)
     {
         vfxManager.SpawnHealParticles(-amount);
-        foreach (BodyChip chip in myMods)
-            if (chip.bodyType == BodyChip.BodyType.OnHeal)
-                chip.TriggerAbility();
-        PlayerUI.instance.OnHealthChange(true);
+
+        TriggerChips(ChipEnums.Trigger.OnHeal);
 
     }
 
@@ -190,7 +192,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private void SetHooks()
     {
 
-        if(LevelGenerator.instance != null) LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
+        if(LevelGenerator.instance != null)
+            LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
 
     }
 

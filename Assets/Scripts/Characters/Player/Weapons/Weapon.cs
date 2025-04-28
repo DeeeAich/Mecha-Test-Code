@@ -26,7 +26,6 @@ public class Weapon : MonoBehaviour, IModable
     public PlayerWeaponControl myController;
 
     public WeaponStats modifiers;
-    public WeaponStats tempMods;
 
     public virtual void Start()
     {
@@ -81,15 +80,16 @@ public class Weapon : MonoBehaviour, IModable
     public virtual void TempStatsAdd(WeaponStats addStats)
     {
 
-        addStats.AddStats(tempMods);
+        addStats.AddStats(modifiers);
 
     }
 
     public virtual void TempStatsRemove(WeaponStats removeStats)
     {
 
-    }
+        removeStats.RemoveStats(modifiers);
 
+    }
 
     public virtual void AddMod(StatusInfo modInfo)
     {

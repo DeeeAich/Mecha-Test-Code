@@ -121,15 +121,13 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
         chipChange.RemoveStats(dashMods);
     }
 
-    public void ChipTrigger()
+    public void ChipTrigger(ChipEnums.Trigger trigger)
     {
 
-        foreach (MovementChip chip in legChips)
-            if(chip.moveType == MovementChip.MovementType.Trigger)
+        foreach (MovementTriggerChip chip in legChips)
+            if(chip.chipTrigger == trigger)
             {
-                MovementTriggerChip triggerChip = (MovementTriggerChip)chip;
-
-                triggerChip.Trigger(this);
+                chip.Trigger(this);
             }
 
     }

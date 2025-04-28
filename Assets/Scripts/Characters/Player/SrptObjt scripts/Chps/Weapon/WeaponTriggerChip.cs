@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementTriggerChip : MovementChip
+
+public class WeaponTriggerChip : WeaponChip
 {
-    
+
     public ChipEnums.Trigger chipTrigger;
 
-    public virtual void Trigger(PlayerLegs playerLegs)
+    public virtual void TriggerActivate(Weapon weapon)
     {
-
-
 
     }
 

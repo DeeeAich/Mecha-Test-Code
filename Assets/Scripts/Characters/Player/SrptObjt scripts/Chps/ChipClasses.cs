@@ -141,7 +141,7 @@ public class ChipEnums
     {
         Damaged, OnKill,
         OnShot,OnRoomClear,
-        None
+        OnHeal, None
     }
 
 }
