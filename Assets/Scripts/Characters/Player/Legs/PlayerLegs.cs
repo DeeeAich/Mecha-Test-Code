@@ -124,10 +124,16 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
     public void ChipTrigger(ChipEnums.Trigger trigger)
     {
 
-        foreach (MovementTriggerChip chip in legChips)
-            if(chip.chipTrigger == trigger)
+        foreach (MovementChip chip in legChips)
+            if (chip.moveType == MovementChip.MovementType.Trigger)
             {
-                chip.Trigger(this);
+
+                MovementTriggerChip triggerChip = (MovementTriggerChip)chip;
+
+                if (triggerChip.chipTrigger == trigger)
+                {
+                    triggerChip.Trigger(this);
+                }
             }
 
     }

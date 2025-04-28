@@ -8,7 +8,7 @@ public class WeaponChip : Chip
     public enum WeaponSubType
     {
         Generic, Projectile,
-        StatusEffect
+        StatusEffect, Trigger
     }
 
     public WeaponSubType supType;

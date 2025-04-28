@@ -104,9 +104,14 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void TriggerChips(ChipEnums.Trigger trigger)
     {
 
-        foreach(BodyTriggerChip triggerChip in myMods)
-            if(triggerChip.chipTrigger == trigger)
+        foreach (BodyChip chip in myMods)
+            if(chip.bodyType == BodyChip.BodyType.Trigger)
+            {
+                BodyTriggerChip triggerChip = (BodyTriggerChip)chip;
+
+            if (triggerChip.chipTrigger == trigger)
                 triggerChip.TriggerAbility();
+            }
 
         myMovement.ChipTrigger(trigger);
 

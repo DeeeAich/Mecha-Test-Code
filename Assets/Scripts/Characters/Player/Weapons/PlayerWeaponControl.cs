@@ -177,13 +177,21 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public void TriggerChips(ChipEnums.Trigger trigger)
     {
 
-        foreach (WeaponTriggerChip chip in leftMods)
-            if (chip.chipTrigger == trigger)
-                chip.TriggerActivate(leftWeapon);
+        foreach (WeaponChip checkChip in leftMods)
+            if (checkChip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip chip = (WeaponTriggerChip)checkChip;
+                if (chip.chipTrigger == trigger)
+                    chip.TriggerActivate(leftWeapon);
+            }
 
-        foreach (WeaponTriggerChip chip in rightMods)
-            if (chip.chipTrigger == trigger)
-                chip.TriggerActivate(rightWeapon);
+        foreach (WeaponTriggerChip checkChip in rightMods)
+            if (checkChip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip chip = (WeaponTriggerChip)checkChip;
+                if (chip.chipTrigger == trigger)
+                    chip.TriggerActivate(rightWeapon);
+            }
 
     }
 
