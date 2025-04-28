@@ -165,6 +165,18 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    public void DashChanged(int newDashMax)
+    {
+
+        int diff = newDashMax - dashTotal;
+
+        dashTotal = newDashMax;
+        dashCount += diff;
+
+        dashCountTxt.text = dashCount.ToString();
+
+    }
+
     public void Dashed()
     {
 

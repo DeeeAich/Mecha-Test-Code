@@ -111,13 +111,27 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
     {
         chipChange.AddStats(dashMods);
 
-
+        if (dashMods.dashCharges > 0)
+            PlayerUI.instance.DashChanged(dashMods.dashCharges + curLegs.dashCharges);
 
     }
 
     public void RemoveDashStats(DashStatChange chipChange)
     {
         chipChange.RemoveStats(dashMods);
+    }
+
+    public void ChipTrigger()
+    {
+
+        foreach (MovementChip chip in legChips)
+            if(chip.moveType == MovementChip.MovementType.Trigger)
+            {
+                MovementTriggerChip triggerChip = (MovementTriggerChip)chip;
+
+                triggerChip.Trigger(this);
+            }
+
     }
 
 }
