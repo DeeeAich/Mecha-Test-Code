@@ -37,14 +37,9 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Speeds")]
     [SerializeField]private float textDelay;
-    [SerializeField]private float slowTextDelay = 0.2f;
-    [SerializeField]private float mediumTextDelay = 0.125f;
-    [SerializeField]private float fastTextDelay = 0.05f;
 
     [SerializeField]private float automaticSkipDelay;
-    [SerializeField]private float slowAutomaticSkipDelay = 2.5f;
-    [SerializeField]private float mediumAutomaticSkipDelay = 1.75f;
-    [SerializeField]private float fastAutomaticSkipDelay = 0.5f;
+
 
     /////////////////////////////////////////////////// OPEN
     void OpenDialogueBoxAndStart()
@@ -86,41 +81,21 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.SetActive(true);
         profileImage.texture = dialogueObject.character;
-        switch (dialogueObject.textSpeed)
-        {
-            case TextSpeed.Slow:
-                textDelay = slowTextDelay;
-                break;
-            case TextSpeed.Medium:
-                textDelay = mediumTextDelay;
-                break;
-            case TextSpeed.Fast:
-                textDelay = fastTextDelay;
-                break;
-        }
-        switch (dialogueObject.automaticSkipDelay)
-        {
-            case AutomaticSkipDelay.Slow:
-                automaticSkipDelay = slowAutomaticSkipDelay;
-                break;
-            case AutomaticSkipDelay.Medium:
-                automaticSkipDelay = mediumAutomaticSkipDelay;
-                break;
-            case AutomaticSkipDelay.Fast:
-                automaticSkipDelay = fastAutomaticSkipDelay;
-                break;
-        }
+        textDelay = dialogueObject.textSpeed;
+        automaticSkipDelay = dialogueObject.automaticSkipDelay;
+      
         if (dialogueObject.isBold) dialogueText.fontStyle = FontStyles.Bold;
         if (dialogueObject.isItalic) dialogueText.fontStyle = FontStyles.Italic;
 
         finalText = dialogueObject.dialogueText + " ";
 
-
+        /*
         if (hasNpc && dialogueObject.triggerActionAnimation) 
         {
             npcAnimator.SetInteger("ActionID", dialogueObject.actionAnimationID);
             npcAnimator.SetTrigger("Action");
         }
+        */
 
         EntryAudio();
 
@@ -136,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     {
         for (int i = 0; i < text.Length; i++)
         {
-            AudioManager.instance.PlayOneShotSFX(Interaction[currentInteractionNum].dialogueObject[currentLine].characterDialogue, transform.position);
+           // AudioManager.instance.PlayOneShotSFX(Interaction[currentInteractionNum].dialogueObject[currentLine].characterDialogue, transform.position);
 
             currentText = text.Substring(0, i);
             dialogueText.text = currentText;
@@ -195,9 +170,10 @@ public class DialogueManager : MonoBehaviour
     /////////////////////////////////////////////////// Audio
 
     private EventInstance eventInstance;
-
+    
     void EntryAudio()
     {
+        /*
         if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerEntryAudio)
         {
             eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].entryAudioEvent);
@@ -208,9 +184,11 @@ public class DialogueManager : MonoBehaviour
             eventInstance.start();
             eventInstance.release();
         }
+        */
     }
     void ExitAudio()
     {
+        /*
         if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerExitAudio)
         {
             eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].exitAudioEvent);
@@ -221,10 +199,12 @@ public class DialogueManager : MonoBehaviour
             eventInstance.start();
             eventInstance.release();
         }
+        */
     }
 
     void CloseAudio()
     {
+        /*
         if (Interaction[currentInteractionNum].dialogueObject[currentLine].triggerCloseAudio)
         {
             eventInstance = RuntimeManager.CreateInstance(Interaction[currentInteractionNum].dialogueObject[currentLine].closeAudioEvent);
@@ -235,7 +215,10 @@ public class DialogueManager : MonoBehaviour
             eventInstance.start();
             eventInstance.release();
         }
+        */
     }
+    
+
 
     /////////////////////////////////////////////////// Interaction
 

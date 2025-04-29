@@ -45,6 +45,10 @@ public class AudioManager : MonoBehaviour
     public EventReference Level2BaseAmbience;
     public EventReference overseerAmbience;
 
+
+    [Header("Dialogue")]
+    public DialogueOneShot dialogueOneLiner;
+
     [Header("Scenes")]
     public string level2SceneName;
     public string tutorialSceneName;

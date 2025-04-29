@@ -388,6 +388,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5674836074770565120, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 155
+      objectReference: {fileID: 0}
     - target: {fileID: 7225607791113409757, guid: 341edb866a18a0043b984eb257283a49,
         type: 3}
       propertyPath: m_Name
@@ -403,6 +408,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341edb866a18a0043b984eb257283a49, type: 3}
+--- !u!114 &2720476123180288110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 307418217571412044, guid: 341edb866a18a0043b984eb257283a49,
+    type: 3}
+  m_PrefabInstance: {fileID: 2415400150513229858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975f02758a44d2442be146cad9083e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4583138965072771133 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2170644003738736671, guid: 341edb866a18a0043b984eb257283a49,
@@ -472,10 +489,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3624609260618622333}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TriggerPlayerDeathOneLiner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TriggerOneLinerOnEnter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768998558301955401, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5041930653980852429, guid: 9e71a777bf80b491fba3b95931b04c7f,
+        type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 3624609260618622333}
   m_SourcePrefab: {fileID: 100100000, guid: 9e71a777bf80b491fba3b95931b04c7f, type: 3}
 --- !u!4 &545417112074955053 stripped
 Transform:
@@ -483,6 +539,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5586525487396558897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &612448190538356988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5041930653980852429, guid: 9e71a777bf80b491fba3b95931b04c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5586525487396558897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3624609260618622333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612448190538356988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2743948547613970742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7751581162837559559, guid: 9e71a777bf80b491fba3b95931b04c7f,
@@ -576,6 +650,11 @@ PrefabInstance:
       propertyPath: combatMusic.Path
       value: event:/Music/Combat Track
       objectReference: {fileID: 0}
+    - target: {fileID: 1332045100252218995, guid: 11524fb632cc01945b3b92ec9ed78dd5,
+        type: 3}
+      propertyPath: dialogueOneLiner
+      value: 
+      objectReference: {fileID: 2720476123180288110}
     - target: {fileID: 1332045100252218995, guid: 11524fb632cc01945b3b92ec9ed78dd5,
         type: 3}
       propertyPath: nonCombatMusic.Path

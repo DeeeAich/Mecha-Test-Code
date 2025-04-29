@@ -12,31 +12,34 @@ public class DialogueObject : ScriptableObject
 {
     [Header("Profile Image")]
     public Texture character;
+    public string characterName;
 
     [Header("Text")]
     [TextArea]
     public string dialogueText;
-    public TextSpeed textSpeed;
-    public AutomaticSkipDelay automaticSkipDelay;
+    public float textSpeed = 0.1f;
+    public float automaticSkipDelay;
     public bool isBold = false;
     public bool isItalic = false;
 
+    /*
     [Header("Animation")]
     public bool triggerActionAnimation;
     public int actionAnimationID;
 
-
+    
     [Header("Talking Audio")]
-    public bool talkingAudio = true;
+    public bool talkingAudio = false;
     public EventReference characterDialogue;
-
+    */
 
     [Header("Entry Audio")]
-    public bool triggerEntryAudio;
+    //public bool triggerEntryAudio;
     public EventReference entryAudioEvent;
-    public CharacterEmotion entryCharacterEmotion;
+    public float entryAudioEventLength = 1f;
+    //public CharacterEmotion entryCharacterEmotion;
 
-
+    /*
     [Header("Exit Audio")]
     public bool triggerExitAudio;
     public EventReference exitAudioEvent;
@@ -46,21 +49,10 @@ public class DialogueObject : ScriptableObject
     public bool triggerCloseAudio;
     public EventReference closeAudioEvent;
     public CharacterEmotion closeCharacterEmotion;
-
+    */
 }
 
-public enum TextSpeed
-{
-    Medium,
-    Slow,
-    Fast
-}
-public enum AutomaticSkipDelay
-{
-    Medium,
-    Slow,
-    Fast
-}
+
 
 public enum CharacterEmotion
 {
