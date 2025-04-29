@@ -40,17 +40,17 @@ public class DialogueOneShot : MonoBehaviour
     public void TriggerLevelStartOneLiner()
     {
         int num = Random.Range(0, levelStartLines.dialogueObject.Count);
-        TriggerOneLiner(levelStartLines.dialogueObject[num]);
+        TriggerOneShot(levelStartLines.dialogueObject[num]);
     }
     public void TriggerPlayerDeathOneLiner()
     {
         int num = Random.Range(0, playerDeathLines.dialogueObject.Count);
-        TriggerOneLiner(playerDeathLines.dialogueObject[num]);
+        TriggerOneShot(playerDeathLines.dialogueObject[num]);
     }
     public void TriggerBossDeathOneLiner()
     {
         int num = Random.Range(0, bossKillLines.dialogueObject.Count);
-        TriggerOneLiner(bossKillLines.dialogueObject[num]);
+        TriggerOneShot(bossKillLines.dialogueObject[num]);
     }
 
 
@@ -58,9 +58,9 @@ public class DialogueOneShot : MonoBehaviour
 
 
 
-    public void TriggerOneLiner(DialogueObject dialogueObject)
+    public void TriggerOneShot(DialogueObject dialogueObject)
     {
-        if (isTalking) { return; }
+        if (isTalking) { Interupt(dialogueObject); }
 
         isTalking = true;
         npcInteractionAnimator.SetBool("Open", true);
@@ -72,6 +72,15 @@ public class DialogueOneShot : MonoBehaviour
 
         StartCoroutine(OpenUI());
     }
+
+    void Interupt(DialogueObject dialogueObject)
+    {
+        npcInteractionAnimator.SetTrigger("Interrupt");
+        npcInteractionAnimator.SetBool("Open", false);
+        StopAllCoroutines();
+        currentDialogueInstance.stop(STOP_MODE.IMMEDIATE);
+    }
+
     IEnumerator OpenUI()
     {
         yield return new WaitForSeconds(0.5f);

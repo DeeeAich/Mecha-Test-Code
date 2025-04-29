@@ -7,7 +7,7 @@ public class TriggerDialogueOneShot : MonoBehaviour
     public DialogueObject specificDialogueOneShot;
     public void TriggerSpecificDialogueOneShot()
     {
-        AudioManager.instance.dialogueOneLiner.TriggerOneLiner(specificDialogueOneShot);
+        AudioManager.instance.dialogueOneLiner.TriggerOneShot(specificDialogueOneShot);
     }
 
     public void TriggerLevelStartOneLiner()
