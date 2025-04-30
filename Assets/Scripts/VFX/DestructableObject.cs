@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DestructableObject : MonoBehaviour
 {
-    public bool hasHealth;
-    public float health;
     private bool destroyed;
     public Transform pushPos;
     public TriggerDebrisExplosion debrisExplosion;
@@ -16,7 +14,7 @@ public class DestructableObject : MonoBehaviour
         {
             debrisExplosion = GetComponent<TriggerDebrisExplosion>();
         }
-        if(pushPos != null) pushPos.localPosition = new Vector3(pushPos.localPosition.x, pushPos.localPosition.y + Random.Range(-1f, 1f), pushPos.localPosition.z);
+        if(pushPos != null) pushPos.localPosition = new Vector3(pushPos.localPosition.x + Random.Range(-1f, 1f), pushPos.localPosition.y + Random.Range(-1f, 1f), pushPos.localPosition.z + Random.Range(-1f, 1f));
     }
 
     private void OnTriggerEnter(Collider other)
