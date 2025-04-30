@@ -108,7 +108,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
                 i--;
             }
         }
-        float calculating = amount;
+        float calculating = Mathf.RoundToInt(amount);
         foreach (DamageMod mod in damageMods)
         {
             if (mod is ShieldModifier)
@@ -209,7 +209,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             }
         }
         float damageTaken = 0f;
-        float remainingDamage = amount;
+        float remainingDamage = Mathf.RoundToInt(amount);
         foreach (DamageMod mod in damageMods)
         {
             //Debug.Log("Current Damage: " + remainingDamage);

@@ -2331,5 +2331,75 @@ namespace AITree
         }
     }
 
+    public class GetDVDBouncePoint : Action
+    {
+        string velocityData;
+        string futureVelocity;
+        Vector3 velocity;
+        float sideStepDist = 0.5f;
+
+        public GetDVDBouncePoint(string velocityData, string futureVelocity)
+        {
+            this.velocityData = velocityData;
+            this.futureVelocity = futureVelocity;
+        }
+
+        public override void Begin()
+        {
+            base.Begin();
+            state = BehaviourTreeState.RUNNING;
+            if(brain.memory.TryGetValue(velocityData, out object extracted))
+            {
+                if(extracted is Vector3)
+                {
+                    velocity = (Vector3)extracted;
+                }
+                else
+                {
+                    state = BehaviourTreeState.FAILURE;
+                    return;
+                }
+                Vector3 pos = brain.gameObject.transform.position;
+                pos.y += 0.25f; //high enough not to collide with the ground, low enough to see walls before holes in the floor
+                Physics.Raycast(pos, velocity, out RaycastHit hitInfo, 100f, ~LayerMask.GetMask(LayerMask.LayerToName(0)));
+                Vector3 sideStep = Vector3.Cross(velocity, Vector3.up);
+                sideStep = sideStep.normalized * sideStepDist;
+                NavMeshPath probePath = new NavMeshPath();
+                NavMeshPath leftSideStep = new NavMeshPath();//might be right actually
+                NavMeshPath rightSideStep = new NavMeshPath();//might be left actually
+                brain.agent.CalculatePath(hitInfo.point, probePath);
+                brain.agent.CalculatePath(hitInfo.point + sideStep, leftSideStep);
+                brain.agent.CalculatePath(hitInfo.point - sideStep, rightSideStep);
+                Vector3 probeRes, leftRes, rightRes;
+                probeRes = probePath.corners[probePath.corners.Length - 1];
+                leftRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
+                rightRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
+                probeRes.y = 0;
+                leftRes.y = 0;
+                rightRes.y = 0;
+                Vector3 lp = probeRes - leftRes;
+                Vector3 rp = rightRes - probeRes;
+                if((lp - rp).magnitude < 0.01f)
+                {
+                    //lr, pr, and rr are co-linear
+                    //thus, the line lr-rr should intersect at the point on the edge we seek
+                }
+                else
+                {
+                    //check for corner, then use the smaller of lp/rp if not corner
+                }
+            }
+            else
+            {
+                state = BehaviourTreeState.FAILURE;
+            }
+        }
+
+        public override BehaviourTreeState Tick()
+        {
+            base.Tick();
+            return state;
+        }
+    }
     #endregion
 }
