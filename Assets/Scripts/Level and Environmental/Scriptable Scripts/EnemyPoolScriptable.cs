@@ -19,6 +19,7 @@ using UnityEngine.Serialization;
     BomberDrone,
     BlueSpiderMech,
     ShieldDrone,
+    MissileTank,
     Overseer,
     OverseerDrone
 }

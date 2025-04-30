@@ -69,7 +69,7 @@ public class GameGeneralManager : MonoBehaviour
         switch (targetScene)
         {
             case 0:
-                SaveData.instance.hasSaveFile = false;
+                if(SaveData.instance != null) SaveData.instance.hasSaveFile = false;
                 break;
             
             case 1:
