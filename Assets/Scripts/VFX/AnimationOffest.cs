@@ -18,4 +18,9 @@ public class AnimationOffest : MonoBehaviour
         }
 
     }
+
+    public void TriggerDestroyAnimation()
+    {
+        anim.SetTrigger("Destroy");
+    }
 }
