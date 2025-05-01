@@ -17,13 +17,6 @@ public class BodyChip : Chip
 
     public BodyType bodyType;
 
-    public virtual void DoAction(PlayerBody myBody)
-    {
-
-
-
-    }
-
     public virtual void ChangeStats(BodyChip addChip)
     {
 

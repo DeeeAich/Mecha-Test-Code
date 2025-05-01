@@ -63,7 +63,7 @@ public class Grenade : BasicBullet
         foreach(RaycastHit enemy in enemiesHit)
             if(enemy.transform.gameObject.TryGetComponent<Health>(out Health enemyHealth))
             {
-                enemyHealth.TakeDamage(modifiedDamage);
+                enemyHealth.TakeDamage(modifiedDamage, myGun.name, critRoller.lastCrit);
 
                 foreach (ProjectileMod modi in myGun.GetComponents<ProjectileMod>())
                     modi.AttemptApply(enemy.transform.gameObject);

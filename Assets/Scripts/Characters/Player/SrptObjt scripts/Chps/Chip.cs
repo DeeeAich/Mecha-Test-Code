@@ -19,9 +19,4 @@ public class Chip : PlayerPickup
     public ChipTypes chipType = ChipTypes.Body;
 
 
-    public virtual void TriggerAbility()
-    {
-
-    }
-
 }

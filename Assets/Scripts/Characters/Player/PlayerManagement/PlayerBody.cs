@@ -1,7 +1,9 @@
 using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerBody : MonoBehaviour, IBodyModifiable
@@ -25,6 +27,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private InputAction move, look, dash,
         ultUse, leftFire, rightFire,
         leftRe, rightRe, interact;
+
+    public TriggerEvents triggers;
 
     private bool isGamepad = true;
 
@@ -101,44 +105,26 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             myUI.WeaponAmmoRight(100, 0);
     }
 
-    public void TriggerChips(ChipEnums.Trigger trigger)
+    public void TriggerOnKill(string killSource)
     {
-
-        foreach (BodyChip chip in myMods)
-            if(chip.bodyType == BodyChip.BodyType.Trigger)
-            {
-                BodyTriggerChip triggerChip = (BodyTriggerChip)chip;
-
-            if (triggerChip.chipTrigger == trigger)
-                triggerChip.TriggerAbility();
-            }
-
-        myMovement.ChipTrigger(trigger);
-
-        weaponHolder.TriggerChips(trigger);
-
-    }
-
-    private void TriggerEndOfRoom() =>
-        TriggerChips(ChipEnums.Trigger.OnRoomClear);
-
-    public void TriggerOnKill()
-    {
-        TriggerChips(ChipEnums.Trigger.OnKill);
+        if (killSource == weaponHolder.leftWeapon.name)
+            triggers.killedLeft.Invoke();
+        else
+            triggers.killedRight.Invoke();
     }
 
     public void TriggerOnDamage()
     {
         PlayerUI.instance.OnHealthChange(false);
 
-        TriggerChips(ChipEnums.Trigger.Damaged);
+        triggers.damaged.Invoke();
     }
 
     public void TriggerOnHeal(int amount)
     {
         vfxManager.SpawnHealParticles(-amount);
 
-        TriggerChips(ChipEnums.Trigger.OnHeal);
+        triggers.healed.Invoke();
 
     }
 
@@ -197,8 +183,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private void SetHooks()
     {
 
-        if(LevelGenerator.instance != null)
-            LevelGenerator.instance.onSpawnRoom.AddListener(TriggerEndOfRoom);
+        if (LevelGenerator.instance != null)
+            LevelGenerator.instance.onSpawnRoom.AddListener(delegate { triggers.roomClear.Invoke(); });
 
     }
 
@@ -250,9 +236,25 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         myUI.WeaponChange(setWeapon.mySprite, left);
 
         if (left && weaponHolder.leftWeapon != null)
+        {
+            foreach(WeaponChip chip in weaponHolder.leftMods)
+                if(chip.supType == WeaponChip.WeaponSubType.Trigger)
+                {
+                    WeaponTriggerChip tChip = (WeaponTriggerChip)chip;
+                    tChip.ChipTriggerUnsetter(weaponHolder.leftWeapon);
+                }
             Destroy(weaponHolder.leftWeapon.gameObject);
-        else if (! left && weaponHolder.rightWeapon != null)
+        }
+        else if (!left && weaponHolder.rightWeapon != null)
+        {
+            foreach (WeaponChip chip in weaponHolder.rightMods)
+                if (chip.supType == WeaponChip.WeaponSubType.Trigger)
+                {
+                    WeaponTriggerChip tChip = (WeaponTriggerChip)chip;
+                    tChip.ChipTriggerUnsetter(weaponHolder.rightWeapon);
+                }
             Destroy(weaponHolder.rightWeapon.gameObject);
+        }
 
         GameObject genWeapon = GameObject.Instantiate(setWeapon.weaponPrefab, weaponPoints[left ? 0 : 1]);
 
@@ -307,16 +309,24 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         UnsetControls();
 
-        LevelGenerator.instance.onSpawnRoom.RemoveListener(TriggerEndOfRoom);
+        LevelGenerator.instance.onSpawnRoom.RemoveListener(delegate { triggers.roomClear.Invoke(); });
+
+        triggers.ClearEvents();
 
     }
 
     [Tooltip("For setting the parts to on or off")]
     public void StopParts(bool weapons, bool legs)
     {
-
+        if(!weapons)
+        {
+            weaponHolder.leftWeapon.FireRelease();
+            weaponHolder.rightWeapon.FireRelease();
+        }
         canShoot = weapons;
         canMove = legs;
+
+
     }
 
     public BodyStats myStats;
@@ -325,6 +335,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         myMods.Add(chip);
+        PlayerManager.instance.bodyMods.Add(chip);
 
         switch (chip.bodyType)
         {
@@ -332,6 +343,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             case (BodyChip.BodyType.Stat):
                 BStatChip bStatChip = (BStatChip)chip;
                 ApplyStats(bStatChip.bodyStats);
+                break;
+            case (BodyChip.BodyType.Trigger):
+                AddTrigger((BodyTriggerChip)chip);
                 break;
         }
 
@@ -353,6 +367,12 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     }
 
+    public void AddTrigger(BodyTriggerChip chip)
+    {
+        chip.ChipTriggerSetter();
+
+    }
+
     public void Preform(IEnumerator corout)
         => StartCoroutine(corout);
 
@@ -360,6 +380,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         UnsetControls();
+        triggers.ClearEvents();
 
     }
+
 }

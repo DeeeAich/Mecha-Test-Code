@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using JetBrains.Annotations;
+using UnityEngine.Events;
 
 [Serializable]
 public class StatusInfo
@@ -141,7 +142,36 @@ public class ChipEnums
     {
         Damaged, OnKill,
         OnShot,OnRoomClear,
-        OnHeal, None
+        OnHeal, moveStart,
+        moveEnd, reload,
+        None
+    }
+
+}
+
+[Serializable]
+public class TriggerEvents
+{
+
+    public UnityEvent healed, damaged,
+        dashed, moveStart, moveEnd,
+        killedLeft, killedRight,
+        fireLeft, fireRight,
+        reloadLeft, reloadRight,
+        roomClear;
+
+    public void ClearEvents()
+    {
+        healed.RemoveAllListeners();
+        damaged.RemoveAllListeners();
+        dashed.RemoveAllListeners();
+        moveStart.RemoveAllListeners();
+        moveEnd.RemoveAllListeners();
+        killedLeft.RemoveAllListeners();
+        killedRight.RemoveAllListeners();
+        reloadLeft.RemoveAllListeners();
+        reloadRight.RemoveAllListeners();
+        roomClear.RemoveAllListeners();
     }
 
 }

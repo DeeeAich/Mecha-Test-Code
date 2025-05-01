@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     public List<BodyChip> bodyMods;
+    public List<MovementChip> movementChips;
 
     public WeaponPickup leftWeapon;
     public List<WeaponChip> leftWeaponChips;
@@ -15,7 +16,6 @@ public class PlayerManager : MonoBehaviour
     public List<WeaponChip> rightWeaponChips;
 
     private PlayerBody playerBody;
-
 
     private void Start()
     {

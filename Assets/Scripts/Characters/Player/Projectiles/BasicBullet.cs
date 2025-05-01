@@ -43,7 +43,7 @@ public class BasicBullet : Projectile
 
             float modifiedDamage = critRoller.AdditiveDamage(damage);
 
-            health.TakeDamage(modifiedDamage,out bool discard, modifiedDamage != damage);
+            health.TakeDamage(modifiedDamage, myGun.name, critRoller.lastCrit);
 
             foreach (ProjectileMod modi in myGun.GetComponents<ProjectileMod>())
                 modi.AttemptApply(other.gameObject);

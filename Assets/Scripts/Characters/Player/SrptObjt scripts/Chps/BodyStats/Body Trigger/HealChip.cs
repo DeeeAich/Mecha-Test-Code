@@ -10,12 +10,12 @@ public class HealChip : BodyTriggerChip
     public float chance = 0;
     public int healPercent = 15;
 
-    public override void TriggerAbility()
+    public override void TriggerAbility(PlayerBody myBody)
     {
 
         if (chance == 0 || chance > UnityEngine.Random.Range(0, 100))
         {
-            Health health = PlayerBody.Instance().GetComponent<Health>();
+            Health health = myBody.GetComponent<Health>();
             health.TakeDamage(-(health.maxHealth * healPercent) / 100);
         }
     }

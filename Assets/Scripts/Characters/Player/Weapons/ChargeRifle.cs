@@ -32,7 +32,7 @@ public class ChargeRifle : Weapon
     private bool isFiring;
 
     private BeamParticles myParticles;
-
+    internal Critical myCrit;
     public override void Start()
     {
 
@@ -46,6 +46,8 @@ public class ChargeRifle : Weapon
         lineGen.SetPosition(0, firePoint.position);
 
         myParticles = GetComponentInChildren<BeamParticles>();
+
+        myCrit = GetComponent<Critical>();
 
     }
 
@@ -136,7 +138,7 @@ public class ChargeRifle : Weapon
         RaycastHit[] hits = Physics.SphereCastAll(firePoint.position, lineWidth * 3.5f,
                             firePoint.forward, beamRange, layerMask: hitOptions, QueryTriggerInteraction.Ignore);
 
-        float damageModed = GetComponent<Critical>().AdditiveDamage(damage[charges - 1] * modifiers.damage);
+        float damageModed = myCrit.AdditiveDamage(damage[charges - 1] * modifiers.damage);
 
         if (hits.Length > 0)
             foreach (RaycastHit hit in hits)
@@ -146,7 +148,7 @@ public class ChargeRifle : Weapon
                 {
 
 
-                    health.TakeDamage(damageModed, damageModed != damage[charges - 1] * modifiers.damage);
+                    health.TakeDamage(damageModed, name, myCrit.lastCrit);
                     foreach (ProjectileMod mod in myMods)
                         mod.AttemptApply(hit.collider.gameObject);
 

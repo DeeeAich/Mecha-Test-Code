@@ -67,7 +67,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             StartCoroutine(leftWeapon.Reload());
     }
 
-    public void FireRight(InputAction.CallbackContext context)
+    public void PressRight(InputAction.CallbackContext context)
     {
         if (myBody.canShoot && rightWeapon != null)
         {
@@ -128,6 +128,9 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             case (WeaponChip.WeaponSubType.StatusEffect):
                 ApplyMods((WeaStaEftChip)newChip, left ? leftWeapon : rightWeapon);
                 break;
+            case (WeaponChip.WeaponSubType.Trigger):
+                ApplyTriggers((WeaponTriggerChip)newChip, left);
+                break;
         }
 
     }
@@ -142,6 +145,13 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
             modableObject.AddMod(info);
 
         }
+
+    }
+
+    public void ApplyTriggers(WeaponTriggerChip chip, bool left)
+    {
+
+        chip.ChipTriggerSetter(left ? leftWeapon : rightWeapon);
 
     }
 
@@ -174,25 +184,5 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     }
 
-    public void TriggerChips(ChipEnums.Trigger trigger)
-    {
-
-        foreach (WeaponChip checkChip in leftMods)
-            if (checkChip.supType == WeaponChip.WeaponSubType.Trigger)
-            {
-                WeaponTriggerChip chip = (WeaponTriggerChip)checkChip;
-                if (chip.chipTrigger == trigger)
-                    chip.TriggerActivate(leftWeapon);
-            }
-
-        foreach (WeaponTriggerChip checkChip in rightMods)
-            if (checkChip.supType == WeaponChip.WeaponSubType.Trigger)
-            {
-                WeaponTriggerChip chip = (WeaponTriggerChip)checkChip;
-                if (chip.chipTrigger == trigger)
-                    chip.TriggerActivate(rightWeapon);
-            }
-
-    }
 
 }
