@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
+[CreateAssetMenu(fileName = "newRoomEndHeal", menuName = "Player/Chip/Body/Stat")]
 public class BStatChip : BodyChip
 {
 

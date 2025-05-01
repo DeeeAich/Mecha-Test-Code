@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-[CreateAssetMenu(fileName = "newRoomEndHeal", menuName = "Player/Chip/BodyTrigger/HealChip")]
+[CreateAssetMenu(fileName = "newRoomEndHeal", menuName = "Player/Chip/Body/Trigger/HealChip")]
 public class HealChip : BodyTriggerChip
 {
     public float chance = 0;

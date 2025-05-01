@@ -151,7 +151,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         rightFire = playerInputs.actions["Right Fire"];
         rightRe = playerInputs.actions["Right Reload"];
 
-        rightFire.performed += weaponHolder.FireRight;
+        rightFire.performed += weaponHolder.PressRight;
         rightFire.canceled += weaponHolder.LiftRight;
         rightRe.performed += weaponHolder.ReloadRight;
 
@@ -172,7 +172,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         leftFire.performed -= weaponHolder.PressLeft;
         leftFire.canceled -= weaponHolder.LiftLeft;
         leftRe.performed -= weaponHolder.ReloadLeft;
-        rightFire.performed -= weaponHolder.FireRight;
+        rightFire.performed -= weaponHolder.PressRight;
         rightFire.canceled -= weaponHolder.LiftRight;
         rightRe.performed -= weaponHolder.ReloadRight;
         interact.performed -= Interact;
