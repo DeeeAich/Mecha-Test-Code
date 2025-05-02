@@ -84,6 +84,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
                 Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
                 isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
 
+        if (canShoot && canMove)
+            triggers.constant.Invoke();
+
     }
 
     private void Update()

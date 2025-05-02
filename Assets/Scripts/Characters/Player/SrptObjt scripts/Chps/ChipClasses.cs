@@ -144,7 +144,7 @@ public class ChipEnums
         OnShot,OnRoomClear,
         OnHeal, moveStart,
         moveEnd, reload,
-        None
+        constant, none
     }
 
 }
@@ -158,7 +158,7 @@ public class TriggerEvents
         killedLeft, killedRight,
         fireLeft, fireRight,
         reloadLeft, reloadRight,
-        roomClear;
+        roomClear, constant;
 
     public void ClearEvents()
     {
@@ -172,6 +172,7 @@ public class TriggerEvents
         reloadLeft.RemoveAllListeners();
         reloadRight.RemoveAllListeners();
         roomClear.RemoveAllListeners();
+        constant.RemoveAllListeners();
     }
 
 }
