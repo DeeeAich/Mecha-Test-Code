@@ -107,6 +107,7 @@ public class WeaponStats
     public int shotCost = 0;
     public float reloadSpeed = 1;
     public int piercing = 0;
+    public float diviation = 1;
 
     public void AddStats(WeaponStats statsToUpdate)
     {
@@ -120,6 +121,8 @@ public class WeaponStats
             piercing = -1;
         else
             statsToUpdate.piercing += piercing;
+        statsToUpdate.diviation *= 1 - diviation;
+
 
     }
 

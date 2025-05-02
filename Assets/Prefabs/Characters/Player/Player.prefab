@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5072524261996192025}
   - component: {fileID: 8033736023942219050}
   - component: {fileID: 2772350036050259412}
-  - component: {fileID: 5131012082131279984}
   - component: {fileID: 7768998558301955401}
   - component: {fileID: 972275038148020981}
   - component: {fileID: 7604659684895359705}
@@ -70,20 +69,49 @@ MonoBehaviour:
   weaponPoints:
   - {fileID: 7730225897642374141}
   - {fileID: 4054117787783875094}
+  triggers:
+    healed:
+      m_PersistentCalls:
+        m_Calls: []
+    damaged:
+      m_PersistentCalls:
+        m_Calls: []
+    dashed:
+      m_PersistentCalls:
+        m_Calls: []
+    moveStart:
+      m_PersistentCalls:
+        m_Calls: []
+    moveEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    killedLeft:
+      m_PersistentCalls:
+        m_Calls: []
+    killedRight:
+      m_PersistentCalls:
+        m_Calls: []
+    fireLeft:
+      m_PersistentCalls:
+        m_Calls: []
+    fireRight:
+      m_PersistentCalls:
+        m_Calls: []
+    reloadLeft:
+      m_PersistentCalls:
+        m_Calls: []
+    reloadRight:
+      m_PersistentCalls:
+        m_Calls: []
+    roomClear:
+      m_PersistentCalls:
+        m_Calls: []
+    constant:
+      m_PersistentCalls:
+        m_Calls: []
   myUI: {fileID: 0}
   canMove: 1
   canShoot: 1
-  triggerEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
-  - m_PersistentCalls:
-      m_Calls: []
   myStats:
     health: 0
     armour: 0
@@ -139,22 +167,6 @@ MonoBehaviour:
   rightFire:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5131012082131279984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5041930653980852429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39381b31f46db1d418479753c71cdb06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentUltimate: {fileID: 11400000, guid: 177588e168de700498e305f21521a64a, type: 2}
-  ultimateCaster: {fileID: 0}
-  firePoint: {fileID: 0}
-  recharging: 0
 --- !u!114 &7768998558301955401
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         vfxManager = GetComponentInChildren<CharacterVFXManager>();
         myMovement = GetComponent<PlayerLegs>();
         weaponHolder = GetComponent<PlayerWeaponControl>();
-        ultController = GetComponent<PlayerUltyControl>();
+        //ultController = GetComponent<PlayerUltyControl>();
         myUI = FindObjectOfType<PlayerUI>();
         myHealth = GetComponent<Health>();
         lastHealth = myHealth.health;
@@ -161,9 +161,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         interact = playerInputs.actions["Interact"];
         interact.performed += Interact;
 
-        ultUse = playerInputs.actions["Ultimate"];
-        ultUse.performed += ultController.UseUltimate;
-        ultUse.canceled += ultController.EndUltimate;
+        //ultUse = playerInputs.actions["Ultimate"];
+        //ultUse.performed += ultController.UseUltimate;
+        //ultUse.canceled += ultController.EndUltimate;
 
         playerInputs.onControlsChanged += SetControlScheme;
     }
@@ -216,7 +216,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         myUI.LockAndLoad(myHealth.maxHealth, myHealth.health,
             weaponHolder.leftWeapon != null ? weaponHolder.leftWeapon.curAmmo : 0,
             weaponHolder.rightWeapon != null ? weaponHolder.rightWeapon.curAmmo : 0,
-            legStats.dashRecharge, legStats.dashCharges, ultController.currentUltimate.rechargeTime,
+            legStats.dashRecharge, legStats.dashCharges,
             weaponHolder.leftWInfo != null ? weaponHolder.leftWInfo.mySprite : null,
             weaponHolder.rightWInfo != null ? weaponHolder.rightWInfo.mySprite : null);
     }

@@ -197,7 +197,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     public void LockAndLoad(float mHealth, float curHealth, int leftAm, int rightAm, float dashCha,
-        int dashMax, float ultCha, Sprite left = null, Sprite right = null)
+        int dashMax, Sprite left = null, Sprite right = null)
     {
 
         healthTexts[0].text = curHealth.ToString();
