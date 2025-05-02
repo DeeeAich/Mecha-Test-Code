@@ -238,7 +238,7 @@ public class PlayerUI : MonoBehaviour
 
         dashChargeTime = dashCha;
 
-        ultChargeTime = ultCha;
+        //ultChargeTime = ultCha;
 
     }
 
