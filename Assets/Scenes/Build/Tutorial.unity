@@ -5505,7 +5505,7 @@ PrefabInstance:
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
@@ -5514,12 +5514,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1355615895}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 33631537}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
@@ -5529,12 +5544,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: TriggerSpecificDialogueOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
         type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: TriggerDialogueOneShot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
       propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469356092408872453, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
+      propertyPath: onOpen.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7831173709914166556, guid: 83787e3bbc619854b93d0a64688d4e23,
@@ -5605,7 +5635,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 3
       addedObject: {fileID: 636073472}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9165011240801193686, guid: 83787e3bbc619854b93d0a64688d4e23,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 33631537}
   m_SourcePrefab: {fileID: 100100000, guid: 83787e3bbc619854b93d0a64688d4e23, type: 3}
 --- !u!4 &33631534 stripped
 Transform:
@@ -5619,12 +5653,32 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 33631533}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 33631536}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce567c72024612a45966e64c877d18ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &33631536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9165011240801193686, guid: 83787e3bbc619854b93d0a64688d4e23,
+    type: 3}
+  m_PrefabInstance: {fileID: 33631533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &33631537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33631536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: 8235888f1e176ca45a74d64b0df64c2a,
+    type: 2}
 --- !u!1001 &35289499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20798,18 +20852,18 @@ PrefabInstance:
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1495874028}
+      objectReference: {fileID: 183791078}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -20818,12 +20872,12 @@ PrefabInstance:
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartTutorialStage
+      value: TriggerSpecificDialogueOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TutorialManager, Assembly-CSharp
+      value: TriggerDialogueOneShot, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
@@ -20908,7 +20962,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 183791078}
   m_SourcePrefab: {fileID: 100100000, guid: 46dd83296dad478498e0e65e108ef6db, type: 3}
 --- !u!4 &183791076 stripped
 Transform:
@@ -20916,6 +20974,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 183791075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &183791077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
+    type: 3}
+  m_PrefabInstance: {fileID: 183791075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &183791078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183791077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: b7f69d98a34e3eb44a9ac1ebb14d99cd,
+    type: 2}
 --- !u!1001 &184910727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42626,7 +42704,7 @@ PrefabInstance:
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
@@ -42635,12 +42713,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1495874028}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 504848372}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
@@ -42650,8 +42743,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TriggerSpecificDialogueOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TutorialManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TriggerDialogueOneShot, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
@@ -42661,6 +42764,11 @@ PrefabInstance:
     - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
         type: 3}
       propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364574623169947828, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      propertyPath: entryTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
@@ -42736,7 +42844,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 504848372}
   m_SourcePrefab: {fileID: 100100000, guid: 46dd83296dad478498e0e65e108ef6db, type: 3}
 --- !u!4 &504848370 stripped
 Transform:
@@ -42744,6 +42856,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 504848369}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &504848371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2492677707395646549, guid: 46dd83296dad478498e0e65e108ef6db,
+    type: 3}
+  m_PrefabInstance: {fileID: 504848369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &504848372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504848371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: b553f36e5c826b5478edda4f98d8dcee,
+    type: 2}
 --- !u!1 &514794255
 GameObject:
   m_ObjectHideFlags: 0
@@ -48660,6 +48792,8 @@ GameObject:
   - component: {fileID: 670067591}
   - component: {fileID: 670067590}
   - component: {fileID: 670067592}
+  - component: {fileID: 670067594}
+  - component: {fileID: 670067593}
   m_Layer: 0
   m_Name: Shooting Range (1)
   m_TagString: Untagged
@@ -48698,6 +48832,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 670067594}
+        m_TargetAssemblyTypeName: TriggerDialogueOneShot, Assembly-CSharp
+        m_MethodName: TriggerSpecificDialogueOneShot
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -48766,8 +48912,48 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 670067593}
+        m_TargetAssemblyTypeName: TriggerDialogueOneShot, Assembly-CSharp
+        m_MethodName: TriggerSpecificDialogueOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   timeToWait: 0.5
   timer: 0
+--- !u!114 &670067593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670067589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: 13a07f564861453409de28be34ecf591,
+    type: 2}
+--- !u!114 &670067594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670067589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: 44df6e97b7604eb4286acf4beac8dd8d,
+    type: 2}
 --- !u!1 &683203901
 GameObject:
   m_ObjectHideFlags: 0
@@ -75982,6 +76168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223952164}
   - component: {fileID: 1223952163}
+  - component: {fileID: 1223952165}
   m_Layer: 0
   m_Name: Tutorial Post Processing Animator
   m_TagString: Untagged
@@ -76027,6 +76214,20 @@ Transform:
   - {fileID: 955541728}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1223952165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223952162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 11400000, guid: 8b9462d91a8a0f545a2ae606658cbfdd,
+    type: 2}
 --- !u!1001 &1225089760
 PrefabInstance:
   m_ObjectHideFlags: 0
