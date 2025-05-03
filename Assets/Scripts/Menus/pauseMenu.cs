@@ -145,11 +145,11 @@ public class pauseMenu : MonoBehaviour
         
         if (GameGeneralManager.instance != null)
         {
-            GameGeneralManager.instance.ChangeScene(1);
+            GameGeneralManager.instance.ChangeScene(4);
         }
         else
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(4);
         }
   
     }
