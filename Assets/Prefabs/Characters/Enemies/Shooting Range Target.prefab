@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7905658260056324810}
   - component: {fileID: 3258116230972078365}
   - component: {fileID: 455323368108799736}
+  - component: {fileID: 792472769763641757}
   m_Layer: 0
   m_Name: Shooting Range Target
   m_TagString: Untagged
@@ -199,7 +200,19 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 792472769763641757}
+        m_TargetAssemblyTypeName: OneShotAudioEventSender, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   meshesRef: {fileID: 0}
 --- !u!114 &3258116230972078365
 MonoBehaviour:
@@ -235,6 +248,26 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2403435677658566425, guid: 8fe49697cd48c58479038ba60120f0d6, type: 3}
+--- !u!114 &792472769763641757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718984868519451649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: 1385572435
+      Data2: 1262617538
+      Data3: 1889354114
+      Data4: 309712115
+    Path: event:/Sound Effects/General/UI/Pause Close
+  parameterName: none
 --- !u!1001 &5836107324000072047
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -78,6 +78,7 @@ public class DialogueOneShot : MonoBehaviour
         currentDialogueObject = dialogueObject;
 
         characterNameText.text = currentDialogueObject.characterName;
+        dialogueText.text = "";
         finalText = currentDialogueObject.dialogueText + " ";
         characterProfile.texture = currentDialogueObject.character;
 
