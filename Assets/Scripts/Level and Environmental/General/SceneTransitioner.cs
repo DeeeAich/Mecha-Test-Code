@@ -8,6 +8,7 @@ public class SceneTransitioner : MonoBehaviour
 {
     [SerializeField] private bool setTargetSceneToNextInIndex = true;
     [SerializeField] public int targetScene;
+    [SerializeField] private bool isCutscene = false;
 
     private bool transitioning;
 
@@ -23,11 +24,17 @@ public class SceneTransitioner : MonoBehaviour
     {
         if (!transitioning)
         {
-            PlayerBody.Instance().StopParts(true, true);
-            
-            if (GameGeneralManager.instance != null)
+            if (!isCutscene)
             {
-                GameGeneralManager.instance.ChangeScene(targetScene);
+                PlayerBody.Instance().StopParts(true, true);
+                if (GameGeneralManager.instance != null)
+                {
+                    GameGeneralManager.instance.ChangeScene(targetScene);
+                }
+                else
+                {
+                    SceneManager.LoadScene(targetScene);
+                }
             }
             else
             {

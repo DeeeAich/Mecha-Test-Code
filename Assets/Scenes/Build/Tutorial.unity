@@ -26003,7 +26003,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267309375}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00000090897083}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -26012,7 +26012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59.46, y: 18.91}
+  m_AnchoredPosition: {x: -50.46, y: 17.91}
   m_SizeDelta: {x: 30, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267309377
@@ -75434,13 +75434,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264365082695533978, guid: 79022ccc560eaae408bd88ec8a57ec33,
         type: 3}
+      propertyPath: isCutscene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264365082695533978, guid: 79022ccc560eaae408bd88ec8a57ec33,
+        type: 3}
       propertyPath: targetScene
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3264365082695533978, guid: 79022ccc560eaae408bd88ec8a57ec33,
         type: 3}
       propertyPath: setTargetSceneToNextInIndex
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4807381922565416074, guid: 79022ccc560eaae408bd88ec8a57ec33,
         type: 3}
@@ -75544,6 +75549,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1142316062}
+    - targetCorrespondingSourceObject: {fileID: 8164928367783024820, guid: 79022ccc560eaae408bd88ec8a57ec33,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1142316064}
   m_SourcePrefab: {fileID: 100100000, guid: 79022ccc560eaae408bd88ec8a57ec33, type: 3}
 --- !u!4 &1142316058 stripped
 Transform:
@@ -75592,6 +75601,47 @@ MonoBehaviour:
   Event:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1142316064}
+        m_TargetAssemblyTypeName: PublicEventOnATimer, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1223952163}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Exit
+          m_BoolArgument: 0
+        m_CallState: 2
+  timeToWait: 10
+  timer: 0
+--- !u!114 &1142316064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960539007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67831835ff672174495f95e20dc30fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1142316061}
         m_TargetAssemblyTypeName: SceneTransitioner, Assembly-CSharp
         m_MethodName: StartSceneTransition
@@ -75604,7 +75654,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  timeToWait: 10
+  timeToWait: 2
   timer: 0
 --- !u!1 &1142993407
 GameObject:
@@ -76183,6 +76233,7 @@ GameObject:
   - component: {fileID: 1223952164}
   - component: {fileID: 1223952163}
   - component: {fileID: 1223952165}
+  - component: {fileID: 1223952166}
   m_Layer: 0
   m_Name: Tutorial Post Processing Animator
   m_TagString: Untagged
@@ -76242,6 +76293,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specificDialogueOneShot: {fileID: 11400000, guid: 8b9462d91a8a0f545a2ae606658cbfdd,
     type: 2}
+--- !u!114 &1223952166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223952162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -633820751
+      Data2: 1305708901
+      Data3: -1839154763
+      Data4: 447469254
+    Path: event:/Sound Effects/General/UI/Menu Start Game
+  parameterName: none
 --- !u!1001 &1225089760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77421,7 +77492,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323059860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000020265575}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -77430,7 +77501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.06, y: 18.91}
+  m_AnchoredPosition: {x: -51.060005, y: 20.910002}
   m_SizeDelta: {x: 30, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1323059862
@@ -126604,7 +126675,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089803886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000003874302}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -126613,7 +126684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.06, y: 18.91}
+  m_AnchoredPosition: {x: -51.06, y: 20.91}
   m_SizeDelta: {x: 30, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2089803888
