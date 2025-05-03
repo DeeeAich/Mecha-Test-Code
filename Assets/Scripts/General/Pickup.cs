@@ -40,37 +40,25 @@ public class Pickup : MonoBehaviour
 
     [Header("Loot Options Menu")]
     [SerializeField] private GameObject lootOptionsMenu;
-
     [SerializeField] private Image[] lootOptionsImages;
     [SerializeField] private TMP_Text[] lootOptionsNames;
     [SerializeField] private TMP_Text[] lootOptionsDescriptions;
     
-    [Header("Apllication Choice Menu")]
-    [SerializeField] private GameObject choiceMenu;
-    [FormerlySerializedAs("uiPopupAnimator")] public Animator choiceMenuAnimator;
-    
-    [SerializeField] private Image[] newLootImages;
-    [SerializeField] private TMP_Text[] newLootNames;
-    [SerializeField] private TMP_Text[] newLootDescriptions;
-    
+    [Header("Current Gear Display")]
+    [SerializeField] private GameObject weaponsChipsDisplay;
+    [SerializeField] private GameObject mechChipsDisplay;
+
+    [SerializeField] private GameObject weaponsChoiceButtons;
+    [SerializeField] private GameObject mechChoiceButton;
+
     [SerializeField] private Image currentLeftWeaponImage;
     [SerializeField] private Image currentRightWeaponImage;
     [SerializeField] private Image[] currentLeftWeaponChipImages;
     [SerializeField] private Image[] currentRightWeaponChipImages;
-    
-    [SerializeField] private Button leftSelectButton;
-    [SerializeField] private Button rightSelectButton;
-    [SerializeField] private Button initiallySelectedButton;
-    
-    [SerializeField] private GameObject singleItemPopup;
-    [SerializeField] private GameObject twoOptionItemPopup;
-    [SerializeField] private GameObject weaponPopup;
-    [SerializeField] private GameObject weaponChipPopup;
-    [SerializeField] private GameObject ordinancePopup;
-    [SerializeField] private GameObject mechChipPopup;
-    
+    [SerializeField] private Image[] currentMechChipImages;
+
     [Header("Other References")]
-    public Animator[] animators;
+    public Animator[] boxAnimators;
     [SerializeField] private GameObject[] imageDisplayPoints;
     [SerializeField] private GameObject[] hologramSpawnPoints;
     
@@ -93,7 +81,7 @@ public class Pickup : MonoBehaviour
         for (int i = 0; i < PlayerPickups.Length; i++)
         {
             itemDisplayImagesOverBoxes[i].sprite = PlayerPickups[i].mySprite;
-            animators[i].SetInteger("lootRarity", PlayerPickups[i].rarity);
+            boxAnimators[i].SetInteger("lootRarity", PlayerPickups[i].rarity);
 
             lootOptionsImages[i].sprite = PlayerPickups[i].mySprite;
             lootOptionsNames[i].text = PlayerPickups[i].itemName;
@@ -102,7 +90,7 @@ public class Pickup : MonoBehaviour
             switch (pickupType)
             {
                 case pickupType.Weapon:
-                    animators[i].SetBool("isWeapon", true);
+                    boxAnimators[i].SetBool("isWeapon", true);
                     imageDisplayPoints[i].SetActive(false);
                     if(PlayerPickups[i].hologramReference != null) Instantiate(PlayerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
                     break;
@@ -114,23 +102,7 @@ public class Pickup : MonoBehaviour
     {
         pickupIndex = index;
 
-        for (int i = 0; i < newLootDescriptions.Length; i++)
-        {
-            newLootDescriptions[i].text = PlayerPickups[pickupIndex].description;
-        }
         
-        for (int i = 0; i < newLootNames.Length; i++)
-        {
-            newLootNames[i].text = PlayerPickups[pickupIndex].itemName;
-        }
-        
-        for (int i = 0; i < newLootImages.Length; i++)
-        {
-            newLootImages[i].sprite = PlayerPickups[pickupIndex].mySprite;
-        }
-        
-        lootOptionsMenu.SetActive(false);
-        choiceMenu.SetActive(true);
     }
 
     private void Update()
@@ -139,8 +111,10 @@ public class Pickup : MonoBehaviour
         {
             GameObject curSelected = EventSystem.current.currentSelectedGameObject;
 
+            /*
             if (mouseControls)
             {
+                
                 if (CheckMouseInBounds(leftSelectButton.GetComponent<RectTransform>()))
                 {
                     leftSelectButton.Select();
@@ -189,7 +163,7 @@ public class Pickup : MonoBehaviour
                     
                     initiallySelectedButton.Select();
                 }
-            }
+            }*/
         }
     }
 
@@ -227,54 +201,28 @@ public class Pickup : MonoBehaviour
 
     public void OpenPickupMenu()
     {
-        singleItemPopup.SetActive(false);
-        twoOptionItemPopup.SetActive(false);
-
         if (!open)
         {
             switch (pickupType)
             {
                 case pickupType.Weapon:
-                    PlayerBody.Instance().StopParts(false,false);
-
                     DisplayWeaponChips();
-
-                    uiPopup.SetActive(true);
-                    twoOptionItemPopup.SetActive(true);
-                    weaponPopup.SetActive(true);
-                    
                     break;
             
                 case pickupType.Chassis:
-                    PlayerBody.Instance().StopParts(false,false);
-                
-                    uiPopup.SetActive(true);
-                    singleItemPopup.SetActive(true);
-                
-        
+                    DisplayMechChips();
                     break;
             
                 case pickupType.Ordinance :
-                    PlayerBody.Instance().StopParts(false,false);
-                
-                    uiPopup.SetActive(true);
-                    singleItemPopup.SetActive(true);
-                    ordinancePopup.SetActive(true);
-                    
                     break;
             
                 case pickupType.WeaponChip:
-                    PlayerBody.Instance().StopParts(false,false);
-                
+     
                     DisplayWeaponChips();
-                
-                    uiPopup.SetActive(true);
-                    twoOptionItemPopup.SetActive(true);
-                    weaponChipPopup.SetActive(true);
-                    
                     break;
             
                 case pickupType.ChassisChip:
+                    DisplayMechChips();
                     break;
             
                 case pickupType.OrdinanceChip:
@@ -284,15 +232,12 @@ public class Pickup : MonoBehaviour
                     break;
             }
             
-            GetComponentInChildren<Interactable>(true).canInteract = false;
+            PlayerBody.Instance().StopParts(false,false);
+            uiPopup.SetActive(true);
             
-            leftSelectButton.interactable = false;
-            rightSelectButton.interactable = false;
-            initiallySelectedButton.interactable = false;
+            GetComponentInChildren<Interactable>(true).canInteract = false;
             buttonInteractBlockTimer = 0.25f;
             open = true;
-            
-            InputAction pauseAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Pause"];
         }
     }
     
@@ -302,8 +247,9 @@ public class Pickup : MonoBehaviour
         PlayerBody.Instance().StopParts(true,true);
         GetComponentInChildren<Interactable>(true).canInteract = true;
         if(uiPopup != null) uiPopup.SetActive(false);
-
-        choiceMenu.SetActive(false);
+        
+        mechChoiceButton.SetActive(false);
+        weaponsChoiceButtons.SetActive(false);
         lootOptionsMenu.SetActive(true);
     }
     
@@ -373,12 +319,12 @@ public class Pickup : MonoBehaviour
                 break;
         }
         
-        animators[pickupIndex].SetTrigger("openLoot");
+        boxAnimators[pickupIndex].SetTrigger("openLoot");
         GetComponentInChildren<Interactable>(true).canInteract = false;
 
-        for (int i = 0; i < animators.Length; i++)
+        for (int i = 0; i < boxAnimators.Length; i++)
         {
-            animators[i].SetTrigger("lootLocked");
+            boxAnimators[i].SetTrigger("lootLocked");
         }
         
         
@@ -432,13 +378,32 @@ public class Pickup : MonoBehaviour
                 }
             }
         }
+        
+        weaponsChipsDisplay.SetActive(true);
+        weaponsChoiceButtons.SetActive(true);
+    }
+
+    private void DisplayMechChips()
+    {
+        for (int i = 0; i < currentMechChipImages.Length; i++)
+        {
+            if (PlayerBody.Instance().chipsInserted.Count < i)
+            {
+                currentMechChipImages[i].sprite = PlayerBody.Instance().chipsInserted[i].mySprite;
+                currentMechChipImages[i].enabled = true;
+            }
+            currentMechChipImages[i].enabled = false;
+        }
+        
+        mechChipsDisplay.SetActive(true);
+        mechChoiceButton.SetActive(false);
     }
 
     public void SpawnLootBox()
     {
-        for (int i = 0; i < animators.Length; i++)
+        for (int i = 0; i < boxAnimators.Length; i++)
         {
-            animators[i].SetTrigger("spawnLoot");
+            boxAnimators[i].SetTrigger("spawnLoot");
         }
         GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
     }
