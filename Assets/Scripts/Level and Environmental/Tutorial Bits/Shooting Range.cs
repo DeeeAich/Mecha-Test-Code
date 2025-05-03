@@ -6,12 +6,14 @@ using UnityEngine.Events;
 public class ShootingRange : MonoBehaviour
 {
     public UnityEvent onComplete;
+    public UnityEvent onFirstTargetDeath;
     
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject[] spawnPoints;
 
     [Header("Internal")]
     [SerializeField] private List<Health> spawnedTargets;
+    [SerializeField] private bool firstTargetDead;
 
     public void SpawnTargets()
     {
@@ -30,6 +32,11 @@ public class ShootingRange : MonoBehaviour
         {
             if (spawnedTargets[i] == null || spawnedTargets[i].health <= 0)
             {
+                if (firstTargetDead == false)
+                {
+                    firstTargetDead = true;
+                    onFirstTargetDeath.Invoke();
+                }
                 spawnedTargets.RemoveAt(i);
                 break;
             }
