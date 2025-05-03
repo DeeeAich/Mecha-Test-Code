@@ -1574,9 +1574,9 @@ namespace AITree
     public class EnsureInRange : Fallback
     {
 
-        public EnsureInRange(string targetLocation, float range, float approachDist)
+        public EnsureInRange(string targetLocation, float maxRange, float approachDist)
         {
-            children = new List<Node> { new InRange(targetLocation, range), new Approach(targetLocation, approachDist) };
+            children = new List<Node> { new InRange(targetLocation, maxRange), new Approach(targetLocation, approachDist) };
         }
     }
 
@@ -2331,75 +2331,175 @@ namespace AITree
         }
     }
 
-    public class GetDVDBouncePoint : Action
-    {
-        string velocityData;
-        string futureVelocity;
-        Vector3 velocity;
-        float sideStepDist = 0.5f;
+    //public class GetDVDBouncePoint : Action
+    //{
+    //    string velocityData;
+    //    string destinationStorage;
+    //    Vector3 velocity;
+    //    float sideStepDist = 0.5f;
 
-        public GetDVDBouncePoint(string velocityData, string futureVelocity)
-        {
-            this.velocityData = velocityData;
-            this.futureVelocity = futureVelocity;
-        }
+    //    public GetDVDBouncePoint(string velocityData, string destinationStorage)
+    //    {
+    //        this.velocityData = velocityData;
+    //        this.destinationStorage = destinationStorage;
+    //    }
 
-        public override void Begin()
-        {
-            base.Begin();
-            state = BehaviourTreeState.RUNNING;
-            if(brain.memory.TryGetValue(velocityData, out object extracted))
-            {
-                if(extracted is Vector3)
-                {
-                    velocity = (Vector3)extracted;
-                }
-                else
-                {
-                    state = BehaviourTreeState.FAILURE;
-                    return;
-                }
-                Vector3 pos = brain.gameObject.transform.position;
-                pos.y += 0.25f; //high enough not to collide with the ground, low enough to see walls before holes in the floor
-                Physics.Raycast(pos, velocity, out RaycastHit hitInfo, 100f, ~LayerMask.GetMask(LayerMask.LayerToName(0)));
-                Vector3 sideStep = Vector3.Cross(velocity, Vector3.up);
-                sideStep = sideStep.normalized * sideStepDist;
-                NavMeshPath probePath = new NavMeshPath();
-                NavMeshPath leftSideStep = new NavMeshPath();//might be right actually
-                NavMeshPath rightSideStep = new NavMeshPath();//might be left actually
-                brain.agent.CalculatePath(hitInfo.point, probePath);
-                brain.agent.CalculatePath(hitInfo.point + sideStep, leftSideStep);
-                brain.agent.CalculatePath(hitInfo.point - sideStep, rightSideStep);
-                Vector3 probeRes, leftRes, rightRes;
-                probeRes = probePath.corners[probePath.corners.Length - 1];
-                leftRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
-                rightRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
-                probeRes.y = 0;
-                leftRes.y = 0;
-                rightRes.y = 0;
-                Vector3 lp = probeRes - leftRes;
-                Vector3 rp = rightRes - probeRes;
-                if((lp - rp).magnitude < 0.01f)
-                {
-                    //lr, pr, and rr are co-linear
-                    //thus, the line lr-rr should intersect at the point on the edge we seek
-                }
-                else
-                {
-                    //check for corner, then use the smaller of lp/rp if not corner
-                }
-            }
-            else
-            {
-                state = BehaviourTreeState.FAILURE;
-            }
-        }
+    //    public override void Begin()
+    //    {
+    //        base.Begin();
+    //        state = BehaviourTreeState.RUNNING;
+    //        if(brain.memory.TryGetValue(velocityData, out object extracted))
+    //        {
+    //            if(extracted is Vector3)
+    //            {
+    //                velocity = (Vector3)extracted;
+    //            }
+    //            else
+    //            {
+    //                state = BehaviourTreeState.FAILURE;
+    //                return;
+    //            }
+    //            Vector3 pos = brain.gameObject.transform.position;
+    //            pos.y += 0.25f; //high enough not to collide with the ground, low enough to see walls before holes in the floor
+    //            Physics.Raycast(pos, velocity, out RaycastHit hitInfo, 100f, ~LayerMask.GetMask(LayerMask.LayerToName(0)));
+    //            Vector3 sideStep = Vector3.Cross(velocity, Vector3.up);
+    //            sideStep = sideStep.normalized * sideStepDist;
+    //            sideStep.y = 0.5f;
+    //            NavMeshPath probePath = new NavMeshPath();
+    //            NavMeshPath leftSideStep = new NavMeshPath();//might be right actually
+    //            NavMeshPath rightSideStep = new NavMeshPath();//might be left actually
+    //            Vector3 hitPoint = hitInfo.point;
+    //            hitPoint.y = 0;
+    //            //Debug.Log(brain.agent.CalculatePath(hitPoint, probePath));
+    //            //Debug.Log(NavMesh.CalculatePath(brain.gameObject.transform.position, hitPoint, 7, probePath));
+    //            Debug.Log(NavMesh.FindClosestEdge(hitPoint, out NavMeshHit navMeshHit, -1));
+    //            Debug.Log(brain.agent.CalculatePath(hitPoint + sideStep, leftSideStep));
+    //            Debug.Log(brain.agent.CalculatePath(hitPoint - sideStep, rightSideStep));
+                
+    //            Vector3 probeRes, leftRes, rightRes;
+    //            probeRes = probePath.corners[probePath.corners.Length - 1];
+    //            leftRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
+    //            rightRes = rightSideStep.corners[rightSideStep.corners.Length - 1];
+    //            probeRes.y = 0;
+    //            leftRes.y = 0;
+    //            rightRes.y = 0;
+    //            Vector3 lp = probeRes - leftRes;
+    //            Vector3 rp = rightRes - probeRes;
+    //            if((lp - rp).sqrMagnitude < 0.01f)
+    //            {
+    //                Debug.Log("CASE CO-LINEAR");
+    //                float y1 = rightRes.z;
+    //                float y2 = leftRes.z;
+    //                float x1 = rightRes.x;
+    //                float x2 = leftRes.x;
 
-        public override BehaviourTreeState Tick()
-        {
-            base.Tick();
-            return state;
-        }
-    }
+    //                float c = ((y1 / x1 - y2 / x2) / (1f / x1 - 1f / x2));
+
+    //                float m = (y1 - c) / x1;
+
+    //                float m2 = velocity.z / velocity.x;
+
+    //                float xt = c / (m2 - m);
+
+    //                float yt = xt * m2;
+
+    //                Vector3 destination = new Vector3(xt, 0, yt);
+
+    //                Vector3 normal = hitInfo.normal.normalized;
+
+    //                Vector3 newVel = velocity - 2*(Vector3.Dot(velocity, normal)) * normal;
+    //                Debug.Log(c);
+    //                brain.AddOrOverwrite(destinationStorage, destination);
+    //                brain.AddOrOverwrite(velocityData, newVel);
+    //                state = BehaviourTreeState.SUCCESS;
+    //                //lr, pr, and rr are co-linear
+    //                //thus, the line lr-rr should intersect at the point on the edge we seek
+    //            }
+    //            else
+    //            {
+    //                if(lp.magnitude < 0.01f && rp.magnitude < 0.01f)
+    //                {
+    //                    //corner
+    //                    Debug.Log("CASE CO-ORNER");
+    //                    brain.AddOrOverwrite(destinationStorage, probeRes);
+    //                    brain.AddOrOverwrite(velocityData, -velocity);
+    //                    state = BehaviourTreeState.SUCCESS;
+    //                }
+    //                else
+    //                {
+    //                    if(lp.magnitude < rp.magnitude)
+    //                    {
+
+    //                        Debug.Log("CASE USE LEFT");
+    //                        float y1 = probeRes.z;
+    //                        float y2 = leftRes.z;
+    //                        float x1 = probeRes.x;
+    //                        float x2 = leftRes.x;
+
+    //                        float c = ((y1 / x1 - y2 / x2) / (1 / x1 - 1 / x2));
+
+    //                        float m = (y1 - c) / x1;
+
+    //                        float m2 = velocity.z / velocity.x;
+
+    //                        float xt = c / (m2 - m);
+
+    //                        float yt = xt * m2;
+
+    //                        Vector3 destination = new Vector3(xt, 0, yt);
+
+    //                        Vector3 normal = hitInfo.normal.normalized;
+
+    //                        Vector3 newVel = velocity - 2 * (Vector3.Dot(velocity, normal)) * normal;
+
+    //                        brain.AddOrOverwrite(destinationStorage, destination);
+    //                        brain.AddOrOverwrite(velocityData, newVel);
+    //                        state = BehaviourTreeState.SUCCESS;
+    //                    }
+    //                    else
+    //                    {
+
+    //                        Debug.Log("CASE USE RIGHT");
+    //                        float y1 = rightRes.z;
+    //                        float y2 = probeRes.z;
+    //                        float x1 = rightRes.x;
+    //                        float x2 = probeRes.x;
+
+    //                        float c = ((y1 / x1 - y2 / x2) / (1 / x1 - 1 / x2));
+
+    //                        float m = (y1 - c) / x1;
+
+    //                        float m2 = velocity.z / velocity.x;
+
+    //                        float xt = c / (m2 - m);
+
+    //                        float yt = xt * m2;
+
+    //                        Vector3 destination = new Vector3(xt, 0, yt);
+
+    //                        Vector3 normal = hitInfo.normal.normalized;
+
+    //                        Vector3 newVel = velocity - 2 * (Vector3.Dot(velocity, normal)) * normal;
+
+    //                        brain.AddOrOverwrite(destinationStorage, destination);
+    //                        brain.AddOrOverwrite(velocityData, newVel);
+    //                        state = BehaviourTreeState.SUCCESS;
+    //                    }
+    //                }
+    //                //check for corner, then use the smaller of lp/rp if not corner
+    //            }
+    //        }
+    //        else
+    //        {
+    //            state = BehaviourTreeState.FAILURE;
+    //        }
+    //    }
+
+    //    public override BehaviourTreeState Tick()
+    //    {
+    //        base.Tick();
+    //        return state;
+    //    }
+    //}
     #endregion
 }
