@@ -112,11 +112,11 @@ public class WeaponStats
     public void AddStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed *= 1 - attackSpeed;
+        statsToUpdate.attackSpeed *= 1 + attackSpeed;
         statsToUpdate.damage *= damage + 1;
         statsToUpdate.ammoCount = ammoCount + 1;
         statsToUpdate.shotCost += shotCost;
-        statsToUpdate.reloadSpeed *= 1 - reloadSpeed;
+        statsToUpdate.reloadSpeed *= 1 + reloadSpeed;
         if (piercing <= -1)
             piercing = -1;
         else
@@ -129,9 +129,10 @@ public class WeaponStats
     public void RemoveStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed /= 1 - attackSpeed;
+        statsToUpdate.attackSpeed /= 1 + attackSpeed;
         statsToUpdate.damage /= damage + 1;
-        statsToUpdate.reloadSpeed /= 1 - reloadSpeed;
+        statsToUpdate.reloadSpeed /= 1 + reloadSpeed;
+        statsToUpdate.diviation /= 1 - diviation;
 
     }
 

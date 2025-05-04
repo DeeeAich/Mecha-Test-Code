@@ -85,7 +85,8 @@ public class ProjectileGun : Weapon
 
             if (hasBurst)
             {
-                yield return new WaitForSeconds(timeBetweenBurst);
+                float burstsPerSecond = (1 / timeBetweenBurst) * modifiers.attackSpeed;
+                yield return new WaitForSeconds(1 / burstsPerSecond);
             }
 
         }
@@ -97,7 +98,9 @@ public class ProjectileGun : Weapon
         else
             PlayerBody.Instance().triggers.fireRight?.Invoke();
 
-        yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
+        float shotsPerSecond = (1 / fireRate) * modifiers.attackSpeed;
+
+        yield return new WaitForSeconds(1 / shotsPerSecond);
 
         waitOnShot = false;
 
@@ -121,7 +124,7 @@ public class ProjectileGun : Weapon
         base.SetAnimation();
 
         if (hasBurst)
-            myAnim.SetFloat("FireRate", 1 / timeBetweenBurst);
+            myAnim.SetFloat("FireRate", 1 / ((1 / timeBetweenBurst) * modifiers.attackSpeed));
 
     }
 }

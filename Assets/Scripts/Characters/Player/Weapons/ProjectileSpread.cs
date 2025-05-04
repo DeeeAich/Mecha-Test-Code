@@ -66,7 +66,8 @@ public class ProjectileSpread : ProjectileGun
         else
             PlayerBody.Instance().triggers.fireRight?.Invoke();
 
-        yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
+        float shotsPerSecond = (1 / fireRate) * modifiers.attackSpeed;
+        yield return new WaitForSeconds(1 / shotsPerSecond);
 
         waitOnShot = false;
 

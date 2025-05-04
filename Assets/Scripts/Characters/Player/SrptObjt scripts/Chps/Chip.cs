@@ -29,7 +29,6 @@ public class Chip : PlayerPickup
                 Debug.Log(del.Target == checkAction.Target);
                 if(del.Target == checkAction.Target)
                     return true;
-
             }
 
         return false;
