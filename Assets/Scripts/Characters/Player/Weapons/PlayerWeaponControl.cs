@@ -50,7 +50,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void PressLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && leftWeapon != null)
+        if (myBody.canShoot && leftWeapon != null && leftWeapon.gameObject.activeInHierarchy)
         {
             leftFire.Invoke();
             leftWeapon.FirePress();
@@ -59,19 +59,19 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void LiftLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && leftWeapon != null)
+        if (myBody.canShoot && leftWeapon != null && leftWeapon.gameObject.activeInHierarchy)
             leftWeapon.FireRelease();
     }
 
     public void ReloadLeft(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && leftWeapon != null)
+        if (myBody.canShoot && leftWeapon != null && leftWeapon.gameObject.activeInHierarchy)
             StartCoroutine(leftWeapon.Reload());
     }
 
     public void PressRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && rightWeapon != null)
+        if (myBody.canShoot && rightWeapon != null && rightWeapon.gameObject.activeInHierarchy)
         {
             rightFire.Invoke();
             rightWeapon.FirePress();
@@ -80,13 +80,13 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void LiftRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && rightWeapon != null)
+        if (myBody.canShoot && rightWeapon != null && rightWeapon.gameObject.activeInHierarchy)
             rightWeapon.FireRelease();
     }
 
     public void ReloadRight(InputAction.CallbackContext context)
     {
-        if (myBody.canShoot && rightWeapon != null)
+        if (myBody.canShoot && rightWeapon != null && rightWeapon.gameObject.activeInHierarchy)
             StartCoroutine(rightWeapon.Reload());
     }
 

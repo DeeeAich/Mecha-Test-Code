@@ -46,8 +46,12 @@ public class Door : MonoBehaviour
                 nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.weaponLootImage;
                 break;
             
-            case LootType.combatChip:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.combatChipLootImage;
+            case LootType.weaponChip:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.weaponChipLootImage;
+                break;
+            
+            case LootType.mechChip:
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.chassisChipLootImage;
                 break;
             
             case LootType.ordinance:

@@ -9,8 +9,9 @@ using UnityEngine.UI;
 
 public class pauseMenu : MonoBehaviour
 {
-
     
+
+
     [Tooltip("Set to zero to ignore")]
     [SerializeField] private float inactivityTime;
     public float inactivityTimer = 0;
@@ -23,6 +24,7 @@ public class pauseMenu : MonoBehaviour
     public bool canUseDevkit = true;
     
     public float gameSpeed = 1f;
+    public int sceneToResetTo = 5;
     
     [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private GameObject mainPauseMenu;
@@ -145,11 +147,11 @@ public class pauseMenu : MonoBehaviour
         
         if (GameGeneralManager.instance != null)
         {
-            GameGeneralManager.instance.ChangeScene(4);
+            GameGeneralManager.instance.ChangeScene(sceneToResetTo);
         }
         else
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(sceneToResetTo);
         }
   
     }

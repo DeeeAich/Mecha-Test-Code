@@ -425,7 +425,7 @@ public class Pickup : MonoBehaviour
     {
         for (int i = 0; i < currentMechChipImages.Length; i++)
         {
-            if (PlayerBody.Instance().chipsInserted.Count < i)
+            if (PlayerBody.Instance().chipsInserted.Count > 0 && PlayerBody.Instance().chipsInserted.Count < i)
             {
                 currentMechChipImages[i].sprite = PlayerBody.Instance().chipsInserted[i].mySprite;
                 currentMechChipImages[i].enabled = true;
@@ -435,7 +435,7 @@ public class Pickup : MonoBehaviour
         }
 
         mechChipsDisplay.SetActive(true);
-        mechChoiceButton.SetActive(false);
+        mechChoiceButton.SetActive(true);
     }
 
     public void SpawnLootBox()
