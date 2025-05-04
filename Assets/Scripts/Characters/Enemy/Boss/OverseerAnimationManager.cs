@@ -25,7 +25,8 @@ public class OverseerAnimationManager : MonoBehaviour
     public FollowGameObjectDelayed laser1TargetTracker;
     public FollowGameObjectDelayed laser2TargetTracker;
 
-
+    public LoopingAudioEventSender laserAudio1;
+    public LoopingAudioEventSender laserAudio2;
     
     public bool testfire;
 
@@ -105,6 +106,8 @@ public class OverseerAnimationManager : MonoBehaviour
         animationIsPlaying = true;
         groundSlamAnim.SetTrigger("Death");
         bodybackAnim.SetTrigger("Death");
+        laserAudio1.LoopingAudio(1);
+        laserAudio2.LoopingAudio(1);
     }
     IEnumerator Action(float actionTime)
     {
