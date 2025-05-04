@@ -11,7 +11,8 @@ using Random = UnityEngine.Random;
 public enum LootType
 {
     weapon,
-    combatChip,
+    weaponChip,
+    mechChip,
     ordinance,
     chassis
 }

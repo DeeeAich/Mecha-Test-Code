@@ -123,8 +123,8 @@ public class LevelGenerator : MonoBehaviour
         List<LootType> possibleLoots = new List<LootType>();
         
         possibleLoots.Add(LootType.weapon);
-        possibleLoots.Add(LootType.combatChip);
-        possibleLoots.Add(LootType.combatChip);
+        possibleLoots.Add(LootType.weaponChip);
+        possibleLoots.Add(LootType.mechChip);
 
         //possibleLoots.Add(LootType.ordinance);
         //possibleLoots.Add(LootType.chassis);
@@ -135,6 +135,14 @@ public class LevelGenerator : MonoBehaviour
             int rand = seededRandom.Next(0, possibleLoots.Count);
             selection[i] = possibleLoots[rand];
             if(totalPossibleLoots > selection.Length) possibleLoots.RemoveAt(rand);
+        }
+
+        if (roomIndex == 1)
+        {
+            for (int i = 0; i < selection.Length; i++)
+            {
+                selection[i] = LootType.weapon;
+            }
         }
         
         return selection;
@@ -151,8 +159,12 @@ public class LevelGenerator : MonoBehaviour
                 possibleSelection.AddRange(levelInfo.lootPool.Weapons);
                 break;
             
-            case LootType.combatChip:
+            case LootType.weaponChip:
                 possibleSelection.AddRange(levelInfo.lootPool.WeaponChips);
+                break;
+            
+            case LootType.mechChip:
+                possibleSelection.AddRange(levelInfo.lootPool.BodyChips);
                 break;
             
             case LootType.ordinance:

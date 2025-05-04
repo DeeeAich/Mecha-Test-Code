@@ -25,7 +25,8 @@ public class LootPoolScriptable : ScriptableObject
     
     [Header("Images for display on things like doors and crates")]
     public Sprite weaponLootImage;
-    public Sprite combatChipLootImage;
+    public Sprite weaponChipLootImage;
+    public Sprite chassisChipLootImage;
     public Sprite ordinanceLootImage;
     public Sprite chassisLootImage;
 }

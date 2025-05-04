@@ -69,5 +69,15 @@ public class DebrisManager : MonoBehaviour
                 debrisGettingDestroyed[i].transform.position -= Vector3.up * Time.fixedDeltaTime * debrisSinkDistance/debrisDestroyTime;
             }
         }
+
+        for (int i = 0; i < debris.Length; i++)
+        {
+            if(debris[i] == null) continue;
+            
+            if (debris[i].TryGetComponent(out Rigidbody rb))
+            {
+                if(rb.IsSleeping()) Destroy(rb);
+            }
+        }
     }
 }
