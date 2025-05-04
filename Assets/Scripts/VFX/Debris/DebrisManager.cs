@@ -76,8 +76,18 @@ public class DebrisManager : MonoBehaviour
             
             if (debris[i].TryGetComponent(out Rigidbody rb))
             {
-                if(rb.IsSleeping()) Destroy(rb);
+                if (rb.IsSleeping())
+                {
+                    Destroy(rb);
+                    
+                    if (debris[i].TryGetComponent(out Collider col))
+                    {
+                        Destroy(col);
+                    }
+                }
             }
+
+
         }
     }
 }

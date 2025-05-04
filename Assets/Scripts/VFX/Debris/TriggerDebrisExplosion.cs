@@ -80,15 +80,22 @@ public class TriggerDebrisExplosion : MonoBehaviour
             objectsToPush[i].SetActive(true);
             objectsToPush[i].layer = LayerMask.NameToLayer("Debris");
             objectsToPush[i].transform.parent = transform.parent;
-            objectsToPush[i].GetComponent<Rigidbody>().isKinematic = false;
+            
+            if (objectsToPush[i].TryGetComponent(out Rigidbody rb))
+            {
+                rb.isKinematic = false;
+                
+                if (explosionVFX != null)
+                {
+                    rb.AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius);
+                } 
+                else
+                {
+                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                }
+            }
             
             if(DebrisManager.instance != null) DebrisManager.instance.AddDebris(objectsToPush[i]);
-            
-            if (explosionVFX != null) { objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionVFX.transform.position, explosionRadius); } 
-            else
-            {
-                objectsToPush[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
-            }
         }
         StartCoroutine(WaitToScale());
     }
