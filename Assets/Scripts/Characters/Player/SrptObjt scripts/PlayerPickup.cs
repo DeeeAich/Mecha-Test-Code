@@ -27,5 +27,15 @@ public class PlayerPickup : ScriptableObject
 
         PlayerBody.Instance().Preform(corout);
     }
+    protected void StopCoroutine(IEnumerator corout)
+    {
+        if (!Application.isPlaying)
+        {
+            Debug.LogError("Can not run coroutine outside of play mode.");
+            return;
+        }
+
+        PlayerBody.Instance().End(corout);
+    }
 
 }

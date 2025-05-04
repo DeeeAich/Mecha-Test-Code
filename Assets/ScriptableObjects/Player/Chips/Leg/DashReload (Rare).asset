@@ -9,21 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722b2807ca063f046822bce37741af64, type: 3}
-  m_Name: Dash Up (Rare)
+  m_Script: {fileID: 11500000, guid: e0cb478e5677aa64dbe8c1e754cf98f0, type: 3}
+  m_Name: DashReload (Rare)
   m_EditorClassIdentifier: 
-  itemName: Bot Reflexes
+  itemName: Rare Dash Reload
   PickupType: 6
   rarity: 1
   spawnRate: 5
-  description: Increases number of dashes by 1
-  mySprite: {fileID: 21300000, guid: de154c34b262c2c40b23026a222d884d, type: 3}
+  description: Gain 3 ammo in each gun when you dash.
+  mySprite: {fileID: 21300000, guid: 710ad6f52dc7d8f4a942b959c3f560f0, type: 3}
   objectReference: {fileID: 0}
   hologramReference: {fileID: 0}
   chipType: 2
-  moveType: 1
-  statChange:
-    dashCharges: 1
-    dashTime: 0
-    dashDistance: 0
-    dashRecharge: 0
+  moveType: 2
+  chipTrigger: 9
+  ammoUpCount: 3

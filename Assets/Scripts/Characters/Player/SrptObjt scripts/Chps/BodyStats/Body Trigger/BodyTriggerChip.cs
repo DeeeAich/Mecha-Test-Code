@@ -11,8 +11,8 @@ public class BodyTriggerChip : BodyChip
     public ChipEnums.Trigger chipTrigger;
     internal UnityAction startAction, resetAction, constantAction;
 
-    internal bool addedAction;
-    internal int addedActionCount;
+    internal bool addedAction = false;
+    internal int addedActionCount = 0;
 
     public virtual void ChipTriggerSetter()
     {
@@ -59,6 +59,16 @@ public class BodyTriggerChip : BodyChip
 
     public virtual void TriggerAbility(PlayerBody myBody)
     {
+
+    }
+
+    public virtual void ChipTriggerUnsetter()
+    {
+
+        addedAction = false;
+        startAction = null;
+        resetAction = null;
+        constantAction = null;
 
     }
 

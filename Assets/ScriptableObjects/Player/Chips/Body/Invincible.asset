@@ -9,20 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348fcf26e71fc9d488091937306d9011, type: 3}
-  m_Name: Overclocked (Common)
+  m_Script: {fileID: 11500000, guid: 80483a30576737e428f22d248ab6e67a, type: 3}
+  m_Name: Invincible
   m_EditorClassIdentifier: 
-  itemName: Overclocked
+  itemName: Invincibility
   PickupType: 6
   rarity: 0
   spawnRate: 10
-  description: Increases movement speed by 15%
-  mySprite: {fileID: 21300000, guid: 296cbefc8d91098469653a24422e3455, type: 3}
+  description: When you take damage gain 0.5 seconds of invunerability.
+  mySprite: {fileID: 21300000, guid: 7451f2e7f36127d4a8ecf86bee1cbbea, type: 3}
   objectReference: {fileID: 0}
   hologramReference: {fileID: 0}
-  chipType: 2
-  moveType: 0
-  statChange:
-    speed: 0.15
-    acceleration: 0.15
-    turnSpeed: 0
+  chipType: 0
+  bodyType: 0
+  chipTrigger: 0
+  invincibleTime: 0.5

@@ -9,21 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722b2807ca063f046822bce37741af64, type: 3}
-  m_Name: Dash Up (Rare)
+  m_Script: {fileID: 11500000, guid: 6c8fb02a4545a004580a02fa12b7ac40, type: 3}
+  m_Name: DamageRush (Rare)
   m_EditorClassIdentifier: 
-  itemName: Bot Reflexes
+  itemName: Damage Rush
   PickupType: 6
   rarity: 1
   spawnRate: 5
-  description: Increases number of dashes by 1
-  mySprite: {fileID: 21300000, guid: de154c34b262c2c40b23026a222d884d, type: 3}
+  description: Increase speed by 30% for 2 seconds after taking damage
+  mySprite: {fileID: 21300000, guid: 0a33041dff1fe5440b2ac5b164316769, type: 3}
   objectReference: {fileID: 0}
   hologramReference: {fileID: 0}
   chipType: 2
-  moveType: 1
+  moveType: 2
+  chipTrigger: 0
   statChange:
-    dashCharges: 1
-    dashTime: 0
-    dashDistance: 0
-    dashRecharge: 0
+    speed: 0.3
+    acceleration: 0.3
+    turnSpeed: 0
+  chance: 0
+  timer: 2

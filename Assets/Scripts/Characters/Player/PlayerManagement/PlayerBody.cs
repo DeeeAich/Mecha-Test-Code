@@ -72,6 +72,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         SetControls();
         SetHooks();
         LoadStats();
+        LoadStartingChips();
+
     }
 
     private void FixedUpdate()
@@ -84,9 +86,10 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
                 Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
                 isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
 
-        if (canShoot && canMove)
+        if (canShoot)
+        {
             triggers.constant?.Invoke();
-
+        }
     }
 
     private void Update()
@@ -385,11 +388,32 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void Preform(IEnumerator corout)
         => StartCoroutine(corout);
 
+    public void End(IEnumerator corout)
+        => StopCoroutine(corout);
+
     private void OnDestroy()
     {
 
         UnsetControls();
         triggers.ClearEvents();
+
+    }
+
+    private void LoadStartingChips()
+    {
+
+        foreach (BodyChip bodyChip in myMods)
+        {
+            BodyTriggerChip bodyTriggerChip = (BodyTriggerChip)bodyChip;
+            bodyTriggerChip.ChipTriggerUnsetter();
+        }
+
+        List<BodyChip> setChips = myMods;
+
+        myMods = new();
+
+        foreach (BodyChip chip in setChips)
+            ApplyChip(chip);
 
     }
 

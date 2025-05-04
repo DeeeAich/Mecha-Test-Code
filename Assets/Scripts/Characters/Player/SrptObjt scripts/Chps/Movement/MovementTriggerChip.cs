@@ -56,6 +56,9 @@ public class MovementTriggerChip : MovementChip
                     PlayerBody.Instance().triggers.reloadLeft += startAction;
                     PlayerBody.Instance().triggers.reloadRight += startAction;
                 break;
+            case (ChipEnums.Trigger.dashed):
+                    PlayerBody.Instance().triggers.dashed += startAction;
+                break;
         }
 
         addedAction = true;

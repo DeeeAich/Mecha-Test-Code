@@ -148,7 +148,8 @@ public class ChipEnums
         OnShot,OnRoomClear,
         OnHeal, moveStart,
         moveEnd, reload,
-        constant, none
+        constant, dashed,
+        none
     }
 
 }
