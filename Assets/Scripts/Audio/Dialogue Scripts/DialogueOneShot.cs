@@ -23,7 +23,10 @@ public class DialogueOneShot : MonoBehaviour
     public string finalText = "";
 
 
-    
+    public DialogueInteraction levelStartLines;
+    public DialogueInteraction playerDeathLines;
+    public DialogueInteraction bossKillLines;
+    public DialogueInteraction roomClearLines;
 
     private void FixedUpdate()
     {
@@ -33,9 +36,7 @@ public class DialogueOneShot : MonoBehaviour
         }
     }
 
-    public DialogueInteraction levelStartLines;
-    public DialogueInteraction playerDeathLines;
-    public DialogueInteraction bossKillLines;
+
 
     public void TriggerLevelStartOneLiner()
     {
@@ -52,6 +53,16 @@ public class DialogueOneShot : MonoBehaviour
         int num = Random.Range(0, bossKillLines.dialogueObject.Count);
         TriggerOneShot(bossKillLines.dialogueObject[num]);
     }
+    public void TriggerRoomClearOneLiner()
+    {
+        int ran = Random.Range(0, 10);
+
+        if (ran > 8)
+        {
+            int num = Random.Range(0, roomClearLines.dialogueObject.Count);
+            TriggerOneShot(roomClearLines.dialogueObject[num]);
+        }
+    }
 
 
 
@@ -67,6 +78,7 @@ public class DialogueOneShot : MonoBehaviour
         currentDialogueObject = dialogueObject;
 
         characterNameText.text = currentDialogueObject.characterName;
+        dialogueText.text = "";
         finalText = currentDialogueObject.dialogueText + " ";
         characterProfile.texture = currentDialogueObject.character;
 

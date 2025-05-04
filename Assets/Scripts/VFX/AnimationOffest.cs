@@ -23,4 +23,8 @@ public class AnimationOffest : MonoBehaviour
     {
         anim.SetTrigger("Destroy");
     }
+    public void TriggerPauseAnimation()
+    {
+        anim.speed = 0f;
+    }
 }

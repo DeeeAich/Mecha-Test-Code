@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3704894535056492635}
   - component: {fileID: -5339429284980591230}
+  - component: {fileID: 6126344284176898317}
   m_Layer: 0
   m_Name: Start Room Objective
   m_TagString: Untagged
@@ -44,3 +45,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475cbf2a24e605a4491836c0e5756b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isComplete: 0
+  waveSpawnerTypesToAttemptToSpawn: 00000000
+  room: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6126344284176898317}
+        m_TargetAssemblyTypeName: TriggerDialogueOneShot, Assembly-CSharp
+        m_MethodName: TriggerRoomClearOneLiner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  progressBar: {fileID: 0}
+  timeToTriggerComplete: 0.25
+--- !u!114 &6126344284176898317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823316449091080674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 0}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7293723447530582643}
   - component: {fileID: 2441760451003082883}
+  - component: {fileID: -1814090986067671335}
   m_Layer: 0
   m_Name: Capture Zone Objective
   m_TagString: Untagged
@@ -50,8 +51,33 @@ MonoBehaviour:
   room: {fileID: 0}
   onComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -1814090986067671335}
+        m_TargetAssemblyTypeName: TriggerDialogueOneShot, Assembly-CSharp
+        m_MethodName: TriggerRoomClearOneLiner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   progressBar: {fileID: 7521165585678585219}
+--- !u!114 &-1814090986067671335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607246403355914503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e26f798a1baa1f43b829a3da9b4b7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificDialogueOneShot: {fileID: 0}
 --- !u!1001 &4414738026327399933
 PrefabInstance:
   m_ObjectHideFlags: 0

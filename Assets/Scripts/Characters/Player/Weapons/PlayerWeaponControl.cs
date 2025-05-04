@@ -143,7 +143,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     {
 
         IModable modableObject = target.GetComponent<IModable>();
-        foreach(StatusInfo info in applyChip.AddStatuses)
+        foreach (StatusInfo info in applyChip.AddStatuses)
         {
 
             modableObject.AddMod(info);
@@ -187,6 +187,4 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
         turnSpeed = turnSpeedSet;
 
     }
-
-
 }

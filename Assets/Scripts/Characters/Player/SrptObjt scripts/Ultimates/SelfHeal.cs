@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SelfHeal : Ultimate
 {
-
     public override void ActivateUltimate()
     {
 
