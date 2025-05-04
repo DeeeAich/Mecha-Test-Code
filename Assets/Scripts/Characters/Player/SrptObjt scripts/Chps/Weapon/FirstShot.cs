@@ -25,7 +25,7 @@ public class FirstShot : WeaponTriggerChip
                 resetActionLeft += () => TriggerDeactivate(weapon);
             }
 
-            PlayerBody.Instance().triggers.reloadLeft += startActionLeft;
+            PlayerBody.Instance().triggers.replenishLeft += startActionLeft;
             actionAddedLeft = true;
         }
         else
@@ -39,7 +39,7 @@ public class FirstShot : WeaponTriggerChip
                 resetActionRight += () => TriggerDeactivate(weapon);
             }
 
-            PlayerBody.Instance().triggers.reloadRight += startActionRight;
+            PlayerBody.Instance().triggers.replenishRight += startActionRight;
             actionAddedRight = true;
 
         }
@@ -74,7 +74,7 @@ public class FirstShot : WeaponTriggerChip
         {
             for (int i = 0; i < addedCountLeft; i++)
             {
-                PlayerBody.Instance().triggers.reloadLeft -= startActionLeft;
+                PlayerBody.Instance().triggers.replenishLeft -= startActionLeft;
                 if (charged)
                     PlayerBody.Instance().triggers.fireLeft -= resetActionLeft;
             }
@@ -87,7 +87,7 @@ public class FirstShot : WeaponTriggerChip
         {
             for (int i = 0; i < addedCountRight; i++)
             {
-                PlayerBody.Instance().triggers.reloadRight -= startActionRight;
+                PlayerBody.Instance().triggers.replenishRight -= startActionRight;
                 if (charged)
                     PlayerBody.Instance().triggers.fireRight -= resetActionRight;
             }

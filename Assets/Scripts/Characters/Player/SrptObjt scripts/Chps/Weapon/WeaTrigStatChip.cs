@@ -14,7 +14,7 @@ public class WeaTrigStatChip : WeaponTriggerChip
     public override void TriggerActivate(Weapon weapon)
     {
         Debug.Log("Triggering ability");
-        weapon.TempStatsAdd(chipStats, changeTime);
+        weapon.TempTimedStatsAdd(chipStats, changeTime);
         
     }
 

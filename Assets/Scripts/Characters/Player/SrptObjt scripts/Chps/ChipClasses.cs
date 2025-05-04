@@ -112,11 +112,11 @@ public class WeaponStats
     public void AddStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed *= 1 + attackSpeed;
+        statsToUpdate.attackSpeed *= attackSpeed + 1;
         statsToUpdate.damage *= damage + 1;
         statsToUpdate.ammoCount = ammoCount + 1;
         statsToUpdate.shotCost += shotCost;
-        statsToUpdate.reloadSpeed *= 1 + reloadSpeed;
+        statsToUpdate.reloadSpeed *= reloadSpeed + 1;
         if (piercing <= -1)
             piercing = -1;
         else
@@ -129,9 +129,9 @@ public class WeaponStats
     public void RemoveStats(WeaponStats statsToUpdate)
     {
 
-        statsToUpdate.attackSpeed /= 1 + attackSpeed;
+        statsToUpdate.attackSpeed /= attackSpeed + 1;
         statsToUpdate.damage /= damage + 1;
-        statsToUpdate.reloadSpeed /= 1 + reloadSpeed;
+        statsToUpdate.reloadSpeed /= reloadSpeed + 1;
         statsToUpdate.diviation /= 1 - diviation;
 
     }
@@ -162,6 +162,7 @@ public class TriggerEvents
         killedLeft, killedRight,
         fireLeft, fireRight,
         reloadLeft, reloadRight,
+        replenishLeft, replenishRight,
         roomClear, constant;
 
     public void ClearEvents()
@@ -175,6 +176,8 @@ public class TriggerEvents
         killedRight = null;
         reloadLeft = null;
         reloadRight = null;
+        replenishLeft = null;
+        replenishRight = null;
         roomClear = null;
         constant = null;
     }

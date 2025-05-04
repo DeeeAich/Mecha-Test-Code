@@ -78,6 +78,32 @@ public class Weapon : MonoBehaviour, IModable
 
     }
 
+    public virtual void ExternalReload(float amount, bool percentage = false)
+    {
+
+        if (percentage)
+            amount *= maxAmmo / 100;
+
+        int addedCount = Mathf.RoundToInt(amount);
+
+        if (addedCount <= 0)
+            addedCount = 1;
+
+        if (curAmmo + addedCount > maxAmmo)
+            addedCount = maxAmmo - curAmmo;
+
+        if (curAmmo > 0)
+        {
+            if (weapon == myController.leftWeapon)
+                PlayerBody.Instance().triggers.reloadLeft.Invoke();
+            else
+                PlayerBody.Instance().triggers.reloadRight.Invoke();
+        }
+
+        curAmmo += addedCount;
+
+    }
+
     public virtual void AddStats(WeaStatChip addStats)
     {
         addStats.myStatChange.AddStats(modifiers);
@@ -95,7 +121,7 @@ public class Weapon : MonoBehaviour, IModable
         weaponStats.RemoveStats(modifiers);
     }
 
-    public void TempStatsAdd(WeaponStats addStats, float timer)
+    public void TempTimedStatsAdd(WeaponStats addStats, float timer)
     {
 
         addStats.AddStats(modifiers);

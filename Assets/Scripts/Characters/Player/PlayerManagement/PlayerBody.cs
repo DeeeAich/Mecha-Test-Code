@@ -343,7 +343,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         myMods.Add(chip);
-        PlayerManager.instance.bodyMods.Add(chip);
+        if(PlayerManager.instance != null)
+            PlayerManager.instance.bodyMods.Add(chip);
 
         switch (chip.bodyType)
         {
