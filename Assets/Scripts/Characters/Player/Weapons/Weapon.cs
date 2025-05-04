@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IModable
@@ -56,6 +57,11 @@ public class Weapon : MonoBehaviour, IModable
 
         reloading = true;
 
+        if (myController.leftWeapon == this)
+            PlayerBody.Instance().triggers.reloadLeft?.Invoke();
+        else
+            PlayerBody.Instance().triggers.reloadRight?.Invoke();
+
         myAnim.SetTrigger("Reload");
         
         yield return new WaitForSeconds(reloadTime * modifiers.reloadSpeed);
@@ -77,17 +83,32 @@ public class Weapon : MonoBehaviour, IModable
 
     }
 
-    public virtual void TempStatsAdd(WeaponStats addStats)
+    public void TempStatsAdd(WeaponStats addStats)
+    {
+        addStats.AddStats(modifiers);
+    }
+
+    public void TempStatRemove(WeaponStats weaponStats)
+    {
+        weaponStats.RemoveStats(modifiers);
+    }
+
+    public void TempStatsAdd(WeaponStats addStats, float timer)
     {
 
         addStats.AddStats(modifiers);
+        StartCoroutine(TempStatsTimedRemove(addStats, timer));
 
     }
 
-    public virtual void TempStatsRemove(WeaponStats removeStats)
+    public IEnumerator TempStatsTimedRemove(WeaponStats removeStats, float timer)
     {
 
+        yield return new WaitForSeconds(timer);
+
         removeStats.RemoveStats(modifiers);
+
+        yield return null;
 
     }
 

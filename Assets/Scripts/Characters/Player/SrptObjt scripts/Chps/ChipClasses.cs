@@ -156,7 +156,7 @@ public class ChipEnums
 public class TriggerEvents
 {
 
-    public UnityEvent healed, damaged,
+    public UnityAction healed, damaged,
         dashed, moveStart, moveEnd,
         killedLeft, killedRight,
         fireLeft, fireRight,
@@ -165,17 +165,17 @@ public class TriggerEvents
 
     public void ClearEvents()
     {
-        healed.RemoveAllListeners();
-        damaged.RemoveAllListeners();
-        dashed.RemoveAllListeners();
-        moveStart.RemoveAllListeners();
-        moveEnd.RemoveAllListeners();
-        killedLeft.RemoveAllListeners();
-        killedRight.RemoveAllListeners();
-        reloadLeft.RemoveAllListeners();
-        reloadRight.RemoveAllListeners();
-        roomClear.RemoveAllListeners();
-        constant.RemoveAllListeners();
+        healed = null;
+        damaged = null;
+        dashed = null;
+        moveStart = null;
+        moveEnd = null;
+        killedLeft = null;
+        killedRight = null;
+        reloadLeft = null;
+        reloadRight = null;
+        roomClear = null;
+        constant = null;
     }
 
 }

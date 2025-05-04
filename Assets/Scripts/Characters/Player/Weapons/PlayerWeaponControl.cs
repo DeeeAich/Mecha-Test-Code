@@ -24,6 +24,8 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public UnityEvent leftFire;
     public UnityEvent rightFire;
 
+    public static PlayerWeaponControl instance;
+
     public void LookDirection(Vector2 direction, bool isGamepad, Vector3 playerPos)
     {
 
@@ -91,6 +93,8 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
     public virtual void Start()
     {
         myBody = GetComponent<PlayerBody>();
+
+        instance = this;
 
         if(rightWeapon != null)
             rightWeapon.myController = this;

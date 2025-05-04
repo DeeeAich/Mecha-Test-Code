@@ -85,7 +85,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
                 isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
 
         if (canShoot && canMove)
-            triggers.constant.Invoke();
+            triggers.constant?.Invoke();
 
     }
 
@@ -111,24 +111,29 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void TriggerOnKill(string killSource)
     {
         if (killSource == weaponHolder.leftWeapon.name)
-            triggers.killedLeft.Invoke();
+            triggers.killedLeft?.Invoke();
         else
-            triggers.killedRight.Invoke();
+            triggers.killedRight?.Invoke();
     }
 
     public void TriggerOnDamage()
     {
         PlayerUI.instance.OnHealthChange(false);
 
-        triggers.damaged.Invoke();
+        triggers.damaged?.Invoke();
     }
 
     public void TriggerOnHeal(int amount)
     {
         vfxManager.SpawnHealParticles(-amount);
 
-        triggers.healed.Invoke();
+        triggers.healed?.Invoke();
 
+    }
+
+    public void TriggerOnRoomEnd()
+    {
+        triggers.roomClear?.Invoke();
     }
 
     private void Dash(InputAction.CallbackContext context)
@@ -187,7 +192,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         if (LevelGenerator.instance != null)
-            LevelGenerator.instance.onSpawnRoom.AddListener(delegate { triggers.roomClear.Invoke(); });
+            LevelGenerator.instance.onSpawnRoom.AddListener(TriggerOnRoomEnd);
 
     }
 
@@ -312,7 +317,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         UnsetControls();
 
-        LevelGenerator.instance.onSpawnRoom.RemoveListener(delegate { triggers.roomClear.Invoke(); });
+        LevelGenerator.instance.onSpawnRoom.RemoveListener(delegate { triggers.roomClear?.Invoke(); });
 
         triggers.ClearEvents();
 

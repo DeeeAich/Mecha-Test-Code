@@ -18,8 +18,6 @@ public class ProjectileSpread : ProjectileGun
             genBullet.GetComponent<BasicBullet>().myGun = this;
             genBullet.SetActive(false);
         }
-
-        myController.ReApplyChips(this == myController.leftWeapon);
     }
 
     public override IEnumerator RepeatFire()
@@ -61,11 +59,17 @@ public class ProjectileSpread : ProjectileGun
         }
         myAnim.SetTrigger("Fire");
 
+        curAmmo -= shotCost;
+
+        if (myController.leftWeapon == this)
+            PlayerBody.Instance().triggers.fireLeft?.Invoke();
+        else
+            PlayerBody.Instance().triggers.fireRight?.Invoke();
+
         yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
 
         waitOnShot = false;
 
-        curAmmo -= shotCost;
 
         if (curAmmo <= 0)
         {

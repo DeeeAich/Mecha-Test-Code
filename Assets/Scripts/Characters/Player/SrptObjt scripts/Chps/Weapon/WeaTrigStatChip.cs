@@ -2,31 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "TriggerStatChip", menuName = "Player/Chip/Weapon/Trigger/Stat")]
 public class WeaTrigStatChip : WeaponTriggerChip
 {
 
     public WeaponStats chipStats;
 
     public float changeTime;
+    private bool active = false;
 
     public override void TriggerActivate(Weapon weapon)
     {
-
-        StartCoroutine(StatChangeTimer(weapon));
-
-    }
-
-    public IEnumerator StatChangeTimer(Weapon weapon)
-    {
-
-        weapon.TempStatsAdd(chipStats);
-
-        yield return new WaitForSeconds(changeTime);
-
-        weapon.TempStatsRemove(chipStats);
-
-        yield return null;
-
+        Debug.Log("Triggering ability");
+        weapon.TempStatsAdd(chipStats, changeTime);
+        
     }
 
 }

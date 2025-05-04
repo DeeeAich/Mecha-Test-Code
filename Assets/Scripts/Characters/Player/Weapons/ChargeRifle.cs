@@ -171,6 +171,11 @@ public class ChargeRifle : Weapon
 
             }
 
+        if (myController.leftWeapon == this)
+            PlayerBody.Instance().triggers.fireLeft?.Invoke();
+        else
+            PlayerBody.Instance().triggers.fireRight?.Invoke();
+
         StartCoroutine(FlashBeam());
 
     }

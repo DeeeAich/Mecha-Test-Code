@@ -73,7 +73,8 @@ public class ProjectileGun : Weapon
             newBullet.transform.parent = null;
             newBullet.transform.position = firePoint.position;
             newBullet.transform.rotation = firePoint.rotation;
-            newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation - ((1 - modifiers.diviation) * (80 - maxDiviation)), curDivation + ((1 - modifiers.diviation) * (80 - maxDiviation))) , 0);
+            newBullet.transform.rotation *= Quaternion.Euler(0, UnityEngine.Random.Range(-curDivation - ((1 - modifiers.diviation) * (80 - maxDiviation)),
+                                                                                curDivation + ((1 - modifiers.diviation) * (80 - maxDiviation))) , 0);
             newBullet.SetActive(true);
             newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
@@ -89,11 +90,16 @@ public class ProjectileGun : Weapon
 
         }
 
+        curAmmo -= shotCost;
+
+        if (myController.leftWeapon == this)
+            PlayerBody.Instance().triggers.fireLeft?.Invoke();
+        else
+            PlayerBody.Instance().triggers.fireRight?.Invoke();
+
         yield return new WaitForSeconds(fireRate * modifiers.attackSpeed);
 
         waitOnShot = false;
-
-        curAmmo -= shotCost;
 
         if (curAmmo <= 0)
         {

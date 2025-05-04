@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 
-[CreateAssetMenu(fileName = "NewStatusEffectChip", menuName = "Player/Chip/StatusEffectChip")]
+[CreateAssetMenu(fileName = "NewStatusEffectChip", menuName = "Player/Chip/Weapon/StatusEffectChip")]
 public class WeaStaEftChip : WeaponChip
 {
     public enum StatusType
