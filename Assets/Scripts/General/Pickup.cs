@@ -135,6 +135,18 @@ public class Pickup : MonoBehaviour
         }
     }
 
+    public void UnRigChoiceMenu()
+    {
+        choiceButtons.SetActive(false);
+
+        for (int i = 0; i < lootOptionsButtonsWithAssociatedAnimators.Length; i++)
+        {
+            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsSelected", false);
+            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", false);
+            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsReturn", false);
+        }
+    }
+
     private void Update()
     {
         if (uiPopup.activeSelf)
