@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        GameGeneralManager.instance.ChangeScene(1);
+        GameGeneralManager.instance.ChangeScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void LoadSave(int index)

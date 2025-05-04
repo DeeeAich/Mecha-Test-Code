@@ -16,8 +16,7 @@ public class GameGeneralManager : MonoBehaviour
 
     [Header("Misc")]
     public float gameSpeed = 1;
-    
-    
+
     public static GameGeneralManager instance;
 
     private float sceneTransitionTimer = 0;
