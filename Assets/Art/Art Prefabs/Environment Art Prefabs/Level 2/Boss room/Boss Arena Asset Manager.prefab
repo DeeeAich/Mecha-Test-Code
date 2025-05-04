@@ -7578,6 +7578,7 @@ GameObject:
   - component: {fileID: 1174723113019609029}
   - component: {fileID: 3105679913615023147}
   - component: {fileID: 4468659484147640765}
+  - component: {fileID: 1535789261481018516}
   m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
@@ -11368,15 +11369,16 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 2
-    inside: 1
+    inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives: []
+    primitives:
+    - {fileID: 1535789261481018516}
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -12397,6 +12399,20 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1535789261481018516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3310224822329241498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: []
+  parameterName: none
 --- !u!1 &3387470649703743456
 GameObject:
   m_ObjectHideFlags: 0
@@ -17773,6 +17789,7 @@ GameObject:
   - component: {fileID: 3312736687254509615}
   - component: {fileID: 8022033652071956678}
   - component: {fileID: 8918329863534431861}
+  - component: {fileID: 5041573852904841086}
   m_Layer: 0
   m_Name: Boss Arena Asset Manager
   m_TagString: Untagged
@@ -17840,6 +17857,32 @@ MonoBehaviour:
   cameraPivot: {fileID: 376259476392304195}
   roomUpperLevelToggle: {fileID: 2795003720814700033}
   test: 0
+--- !u!114 &5041573852904841086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079740359617659279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a1d35eeb2ec4fb05f6940e3002e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+  - Guid:
+      Data1: -350058736
+      Data2: 1164147527
+      Data3: 720158848
+      Data4: 1842761692
+    Path: event:/Sound Effects/Enemy/Overseer/Overseer Slam 2
+  - Guid:
+      Data1: -1741621163
+      Data2: 1140360685
+      Data3: 1912999298
+      Data4: -1704723860
+    Path: event:/Sound Effects/General/Explosion
+  parameterName: none
 --- !u!1 &4178902742938814808
 GameObject:
   m_ObjectHideFlags: 0
@@ -18666,7 +18709,7 @@ Transform:
   m_GameObject: {fileID: 5174849768391787260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071069, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: -72.341, z: 0.10429004}
+  m_LocalPosition: {x: 0, y: 12.600025, z: 0.10429004}
   m_LocalScale: {x: 0.85536504, y: 0.855365, z: 0.85536504}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19350,7 +19393,7 @@ Transform:
   m_GameObject: {fileID: 5987865140616049929}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.86602575, z: -0, w: 0.49999955}
-  m_LocalPosition: {x: 0, y: -72.341, z: 0.10429004}
+  m_LocalPosition: {x: 0, y: 12.6, z: 0.10429004}
   m_LocalScale: {x: 0.8553648, y: 0.855365, z: 0.8553648}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26517,7 +26560,7 @@ Transform:
   m_GameObject: {fileID: 9210064942209635040}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.50000083, z: -0, w: 0.866025}
-  m_LocalPosition: {x: 0, y: -72.341, z: 0.10429004}
+  m_LocalPosition: {x: 0, y: 12.600025, z: 0.10429004}
   m_LocalScale: {x: 0.85536504, y: 0.855365, z: 0.85536504}
   m_ConstrainProportionsScale: 0
   m_Children:
