@@ -10,6 +10,10 @@ public class TeslaDamageZone : DamageZone
     {
         teslaVFX = transform.parent.GetComponentInChildren<TeslaVFX>();
     }
+    void Start()
+    {
+        dots = new Dictionary<Health, Coroutine>();
+    }
 
     internal override IEnumerator DamageOverTime(Health target)
     {
