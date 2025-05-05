@@ -14,7 +14,6 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private CharacterVFXManager vfxManager;
     public Legs legStats;
     public PlayerUltyControl ultController;
-    public List<Chip> chipsInserted;
     private PlayerInput playerInputs;
     public Camera myCamera;
     public Transform playerCentre;
