@@ -541,6 +541,7 @@ public class OverseerBT : BehaviourTree
     internal void BecomeVincible()
     {
         health.canTakeDamage = true;
+        health.canDie = true;
     }
 
     internal void ChargeSpewUp()

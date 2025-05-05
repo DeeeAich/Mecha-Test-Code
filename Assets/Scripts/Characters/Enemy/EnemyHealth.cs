@@ -5,6 +5,7 @@ using AITree;
 
 public class EnemyHealth : Health, IShortCircuitable
 {
+    [SerializeField] internal bool unchildStuff = true;
     internal bool isShieldable = true;
     internal BehaviourTree brain;
     //Lazy Initialization (don't get component if never needed)
@@ -66,7 +67,7 @@ public class EnemyHealth : Health, IShortCircuitable
         }
         foreach (Transform child in transform)
         {
-            if (transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
+            if (unchildStuff && transform.parent != null && transform.parent.parent != null && !child.gameObject.TryGetComponent<HealthBar>(out HealthBar bar))
                 child.parent = transform.parent.parent;
         }
         brain.Die();
