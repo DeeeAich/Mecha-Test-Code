@@ -182,10 +182,34 @@ MonoBehaviour:
       m_Calls: []
   onChargeStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4490819715129559487}
+        m_TargetAssemblyTypeName: OverseerAnimationManager, Assembly-CSharp
+        m_MethodName: EnterChargeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onChargeEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4490819715129559487}
+        m_TargetAssemblyTypeName: OverseerAnimationManager, Assembly-CSharp
+        m_MethodName: ExitChargeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onPhaseTransition:
     m_PersistentCalls:
       m_Calls: []
@@ -250,7 +274,7 @@ NavMeshAgent:
   m_AngularSpeed: 30
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: -0.3
@@ -545,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
+  delay: 0.3
   step: 0.01
   usePlayer: 1
   pauseAnimation: 0
@@ -573,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4647f13644d39c648ba84974638bf361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
+  delay: 0.3
   step: 0.01
   usePlayer: 1
   pauseAnimation: 0
