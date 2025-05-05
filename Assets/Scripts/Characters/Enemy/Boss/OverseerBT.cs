@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class OverseerBT : BehaviourTree
 {
+    float facingTimer = 0f;
+    [SerializeField] float facingTimeOut = 5f;
+
     public UnityEvent onChargePrepare;
     public UnityEvent onChargeStart;
     public UnityEvent onChargeEnd;
@@ -455,6 +458,10 @@ public class OverseerBT : BehaviourTree
 
     bool Facing(string target)
     {
+        if(facingTimer > facingTimeOut)
+        {
+            facingTimer += Time.deltaTime;
+        }
         Vector3 targetVector = Vector3.zero;
         if (memory.TryGetValue(target, out object o))
         {
@@ -478,7 +485,12 @@ public class OverseerBT : BehaviourTree
         else
             return false;
         float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
-        return Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f;
+        bool result = Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f;
+        if(result)
+        {
+            facingTimer = 0f;
+        }
+        return result;
     }
 
 
