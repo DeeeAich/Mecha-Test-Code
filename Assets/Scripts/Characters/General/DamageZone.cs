@@ -10,7 +10,7 @@ public class DamageZone : MonoBehaviour
     public float dotDamage;
     public float dotTime = 1f;
 
-    private Dictionary<Health, Coroutine> dots;
+    internal Dictionary<Health, Coroutine> dots;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class DamageZone : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    internal virtual void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Health hp))
         {
@@ -48,7 +48,7 @@ public class DamageZone : MonoBehaviour
         }
     }
 
-    IEnumerator DamageOverTime(Health target)
+    internal virtual IEnumerator DamageOverTime(Health target)
     {
         float timer = 0f;
         while(true)
