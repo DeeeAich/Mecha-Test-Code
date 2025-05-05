@@ -313,7 +313,7 @@ public class OverseerBT : BehaviourTree
         //Debug.Log("charge Score: " + facingScore * chargePatienceWeight + " from p=" + chargePatienceWeight + " and f=" + facingScore);
         
         
-        return facingScore * chargePatienceWeight * ChargeAttackWeight;
+        return facingScore * chargePatienceWeight * ChargeAttackWeight + 0.01f;
     }
 
     float SlamWeight()
