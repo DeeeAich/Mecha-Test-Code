@@ -6,7 +6,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
 
-
+public struct EnemyWave
+{
+    public EnemyType[] enemies;
+}
 public class WaveSpawner : MonoBehaviour
 {
     [Header("Settings")]
@@ -231,11 +234,10 @@ public class WaveSpawner : MonoBehaviour
 
     private void SpawnWave(int waveSize)
     {
-
         if (waveSize > spawnPoints.Length) waveSize = spawnPoints.Length;
-        //if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex)   waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
+        if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex)   waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
 
-            List<EnemySpawnPoint> availableSpawns = spawnPoints.ToList();
+        List<EnemySpawnPoint> availableSpawns = spawnPoints.ToList();
 
         for (int i = 0; i < waveSize; i++)
         {
@@ -264,12 +266,12 @@ public class WaveSpawner : MonoBehaviour
             incomingEnemySpawners.Add(newSpawn);
             
             enemyToSpawnIndex++;
-            if (looping && enemyToSpawnIndex == enemiesToSpawn.Count)
+            if (enemyToSpawnIndex == enemiesToSpawn.Count)
             {
                 enemyToSpawnIndex = 0;
             }
         }
-        
+
         waveSpawnCooldownTimer = waveSpawnCooldown;
         currentWave++;
     }
