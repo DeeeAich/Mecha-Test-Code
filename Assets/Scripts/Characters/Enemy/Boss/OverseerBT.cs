@@ -226,11 +226,10 @@ public class OverseerBT : BehaviourTree
             new Sequence(
                 //add new stop moving
                 new Approach("this", 0.1f, PositionStoreType.GAMEOBJECT),
-                new CallVoidFunction(animManage.PhaseTransition), new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool)),
+                new CallVoidFunction(animManage.PhaseTransition),
+                new RepeatUntilSuccess(new BooleanFunction(CheckAnimBool))
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointOne", Facing, ResetChargeWeight),
                 //new ChargeAttack(chargeSpeed, chargeDamageZone, "wallPointTwo", Facing, ResetChargeWeight),
-                new CallVoidFunctionWithBool(SwapBrain, true),
-                new CallVoidFunction(BecomeVincible)
                 );
 
         //head empty open inside
@@ -252,6 +251,7 @@ public class OverseerBT : BehaviourTree
             {
                 n.shotPattern = phaseTwoBullets;
             }
+            BecomeVincible();
         }
     }
 
@@ -474,7 +474,7 @@ public class OverseerBT : BehaviourTree
         else
             return false;
         float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
-        return Mathf.Acos(facingScore) < frontRadiusRadians / 2;
+        return Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f;
     }
 
 
