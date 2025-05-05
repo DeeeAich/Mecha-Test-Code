@@ -6,8 +6,8 @@ public class MoveProjectile : Projectile
 {
     public Vector3 localVelocity;
     [SerializeField] private Vector3 globalVelocity;
+    [SerializeField] private float despawnTimer = 20f;
     private bool piercing;
-
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,16 @@ public class MoveProjectile : Projectile
     internal virtual void FixedUpdate()
     {
         transform.position += globalVelocity * Time.fixedDeltaTime;
+        if (despawnTimer > 0)
+        {
+            despawnTimer -= Time.fixedDeltaTime;
+            if (despawnTimer <= 0)
+            {
+                Destroy(gameObject, 1f);
+                globalVelocity = Vector3.zero;
+                transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+            }
+        }
     }
 
     public override void OnTriggerEnter(Collider other)
