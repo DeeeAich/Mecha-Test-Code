@@ -93,6 +93,9 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
                 DashStatChip dashStatChip = (DashStatChip)newChip;
                 ApplyDashStats(dashStatChip.statChange);
                 break;
+            case (MovementChip.MovementType.Trigger):
+                ApplyTriggerChip((MovementTriggerChip)newChip);
+                break;
         }
 
     }
@@ -121,20 +124,10 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
         chipChange.RemoveStats(dashMods);
     }
 
-    public void ChipTrigger(ChipEnums.Trigger trigger)
+    public void ApplyTriggerChip(MovementTriggerChip triggerChip)
     {
 
-        foreach (MovementChip chip in legChips)
-            if (chip.moveType == MovementChip.MovementType.Trigger)
-            {
-
-                MovementTriggerChip triggerChip = (MovementTriggerChip)chip;
-
-                if (triggerChip.chipTrigger == trigger)
-                {
-                    triggerChip.Trigger(this);
-                }
-            }
+        triggerChip.ChipTriggerSetter(this);
 
     }
 

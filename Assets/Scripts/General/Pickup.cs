@@ -361,7 +361,7 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.MovementChip:
-
+                PlayerBody.Instance().GetComponent<ILegModifiable>().ApplyChip((MovementChip)PlayerPickups[pickupIndex]);
                 break;
 
             case pickupType.LegsChip:
@@ -435,12 +435,23 @@ public class Pickup : MonoBehaviour
 
     private void DisplayMechChips()
     {
+
+        PlayerBody body = PlayerBody.Instance();
+        PlayerLegs legs = body.myMovement;
+
         for (int i = 0; i < currentMechChipImages.Length; i++)
         {
-            if (PlayerBody.Instance().chipsInserted.Count > 0 && PlayerBody.Instance().chipsInserted.Count < i)
+            if (body.myMods.Count > 0 && body.myMods.Count < i)
             {
-                currentMechChipImages[i].sprite = PlayerBody.Instance().chipsInserted[i].mySprite;
+                currentMechChipImages[i].sprite = PlayerBody.Instance().myMods[i].mySprite;
                 currentMechChipImages[i].enabled = true;
+            }
+            else if (legs.legChips.Count > 0 && legs.legChips.Count < i - body.myMods.Count)
+            {
+
+                currentMechChipImages[i].sprite = legs.legChips[i - body.myMods.Count].mySprite;
+                currentMechChipImages[i].enabled = true;
+
             }
 
             currentMechChipImages[i].enabled = false;
