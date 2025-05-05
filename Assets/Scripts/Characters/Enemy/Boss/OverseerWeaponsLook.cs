@@ -58,4 +58,9 @@ public class OverseerWeaponsLook : MonoBehaviour
     {
         this.pause = pause;
     }
+
+    public void SetRotationSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }

@@ -121,4 +121,9 @@ public class EnemyGun : MonoBehaviour
     {
         StopAllCoroutines();
     }
+
+    public void ResumeFiring()
+    {
+        StartCoroutine(StartDelay());
+    }
 }

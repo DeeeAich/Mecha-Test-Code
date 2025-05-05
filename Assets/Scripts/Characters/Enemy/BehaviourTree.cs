@@ -1909,7 +1909,7 @@ namespace AITree
         //    new CallVoidFunctionWithBool(resetter, true)
         //    };
         //}
-        public ChargeAttack(float chargeSpeed, float chargeAcceleration, GameObject damageZone, string target, System.Func<string, bool> facingFunc,
+        public ChargeAttack(float chargeSpeed, float chargeAcceleration, float aimingRotationSpeed, GameObject damageZone, string target, System.Func<string, bool> facingFunc,
             System.Action<bool> resetter, System.Action<bool> overrideToggle, System.Action<bool> lookToggle, bool look, UnityEvent prep,
             UnityEvent start, UnityEvent end) : base()
         {
@@ -1917,7 +1917,7 @@ namespace AITree
                 new InvokeEvent(prep),
             new CallVoidFunctionWithBool(overrideToggle, true),
             new ModifyAgentStat("speed", 0.1f), //no speed,
-            new ModifyAgentStat("angularSpeed", 90f), //rotate base,
+            new ModifyAgentStat("angularSpeed", aimingRotationSpeed), //rotate base,
             new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),
             new CallVoidFunctionWithBool(lookToggle, look),
                 new InvokeEvent(start),
