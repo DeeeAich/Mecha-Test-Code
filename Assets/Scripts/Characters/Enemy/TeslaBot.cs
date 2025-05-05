@@ -58,5 +58,6 @@ public class TeslaBot : BehaviourTree
 
         direction = direction - 2 * (Vector3.Dot(direction, normal)) * normal;
         direction.y = 0;
+        direction.Normalize();
     }
 }

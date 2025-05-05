@@ -88,7 +88,7 @@ public class InventoryManager : MonoBehaviour
         chassisImage.sprite = playerBody.legStats.mySprite;
         chassisImage.color = rarityColors[playerBody.legStats.rarity];
 
-        if (playerBody.ultController.currentUltimate != null)
+        if (playerBody.ultController != null && playerBody.ultController.currentUltimate != null)
         {
             ordinanceTitle.text = playerBody.ultController.currentUltimate.itemName;
             ordinanceDescription.text = playerBody.ultController.currentUltimate.description;

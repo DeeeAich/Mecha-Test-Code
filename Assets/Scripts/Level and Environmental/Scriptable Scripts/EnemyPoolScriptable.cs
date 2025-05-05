@@ -21,7 +21,8 @@ using UnityEngine.Serialization;
     ShieldDrone,
     MissileTank,
     Overseer,
-    OverseerDrone
+    OverseerDrone,
+    TeslaBot
 }
 
 [CreateAssetMenu(fileName = "Enemy Pool", menuName = "ScriptableObjects/Level Scriptables/Enemy Pool")]
