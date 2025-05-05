@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,21 @@ public enum musicTrack
     Level2Combat,
     Tutorial
 }
+
 public enum ambienceTrack
 {
     None,
     Level2Ambience,
     OverseerAmbience
+}
+
+[Serializable]
+public struct SceneStartingAudio
+{
+    public string Scene;
+    public musicState stateToPlay;
+    public musicTrack trackToPlay;
+    public ambienceTrack ambienceTrackToPlay;
 }
 
 public class AudioManager : MonoBehaviour
@@ -35,8 +46,12 @@ public class AudioManager : MonoBehaviour
     public musicTrack currentMusicTrack;
     public musicState currentMusicState;
     private EventInstance currentMusic;
+    
     public EventReference Level2BaseMusic;
     public EventReference tutorialMusic;
+    
+    
+    public SceneStartingAudio[] startingAudios;
 
 
     [Header("Ambience")]
@@ -49,11 +64,12 @@ public class AudioManager : MonoBehaviour
     [Header("Dialogue")]
     public DialogueOneShot dialogueOneLiner;
 
+    /*
     [Header("Scenes")]
     public string level2SceneName;
     public string tutorialSceneName;
     public string mainMenuSceneName;
-
+    */
     private void Awake()
     {
         if (instance == null)
@@ -70,7 +86,23 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
+        bool hasSpecifiedStartingAudio = false;
+        for (int i = 0; i < startingAudios.Length; i++)
+        {
+            if (startingAudios[i].Scene == SceneManager.GetActiveScene().name)
+            {
+                PlayStartingAudio(startingAudios[i]);
+                hasSpecifiedStartingAudio = true;
+                break;
+            }
+        }
+
+        if (!hasSpecifiedStartingAudio)
+        {
+            PlayStartingAudio(startingAudios[0]);
+        }
         
+        /*
         if (SceneManager.GetActiveScene().name.ToString() == level2SceneName)
         {
             ChangeMusicTrack(musicTrack.Level2Combat);
@@ -88,6 +120,14 @@ public class AudioManager : MonoBehaviour
             ChangeMusicState(musicState.combat);
             ChangeAmbienceTrack(ambienceTrack.None);
         }
+        */
+    }
+
+    private void PlayStartingAudio(SceneStartingAudio audio)
+    {
+        ChangeMusicState(audio.stateToPlay);
+        ChangeMusicTrack(audio.trackToPlay);
+        ChangeAmbienceTrack(audio.ambienceTrackToPlay);
     }
 
     public void PlayOneShotSFX(EventReference sound, Vector3 worldPos)
@@ -109,8 +149,6 @@ public class AudioManager : MonoBehaviour
 
                 currentMusic = RuntimeManager.CreateInstance(Level2BaseMusic);
                 currentMusic.start();
-                
-
                 break;
 
             case musicTrack.Tutorial:
