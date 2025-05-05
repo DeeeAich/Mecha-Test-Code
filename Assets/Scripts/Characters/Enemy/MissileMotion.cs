@@ -5,7 +5,7 @@ using UnityEngine;
 class MissileMotion : MoveProjectile
 {
     float speed;
-    float timeto180 = 5f;
+    [SerializeField] float timeto180 = 5f;
     GameObject target;
     private void Awake()
     {
