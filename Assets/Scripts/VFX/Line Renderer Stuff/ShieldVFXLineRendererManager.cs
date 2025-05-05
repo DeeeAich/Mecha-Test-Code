@@ -20,6 +20,13 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
         {
             for (int i = 0; i < shieldVFXLineRenderers.Count; i++)
             {
+                if (shieldVFXLineRenderers[i] == null)
+                {
+                    shieldVFXLineRenderers.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+                
                 if (!shieldVFXLineRenderers[i].isActiveAndEnabled) { shieldVFXLineRenderers[i].gameObject.SetActive(true); }
                 shieldVFXLineRenderers[i].lineEnd.position = shieldedTarget.transform.position;
                 shieldVFXLineRenderers[i].ManualUpdate();
@@ -31,6 +38,12 @@ public class ShieldVFXLineRendererManager : MonoBehaviour
         {
             for (int i = 0; i < shieldVFXLineRenderers.Count; i++)
             {
+                if (shieldVFXLineRenderers[i] == null)
+                {
+                    shieldVFXLineRenderers.RemoveAt(i);
+                    continue;
+                }
+                
                 if(shieldVFXLineRenderers[i]!=null)
                 shieldVFXLineRenderers[i].gameObject.SetActive(false);              
             }

@@ -10,6 +10,6 @@ public class TeslaVFX : MonoBehaviour
     {
         GameObject zap = Instantiate(zapFFXPrefab, transform);
         zap.transform.localPosition = Vector3.zero;
-        zap.GetComponent<ShieldVFXLineRendererManager>().shieldedTarget = gameObject;
+        zap.GetComponent<ShieldVFXLineRendererManager>().shieldedTarget = target;
     }
 }
