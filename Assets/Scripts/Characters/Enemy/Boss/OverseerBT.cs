@@ -38,7 +38,7 @@ public class OverseerBT : BehaviourTree
     [SerializeField] GameObject chargeDamageZone;
     [SerializeField] float targetOffsetAngle = 30f;
     [SerializeField] float offsetDistance = 10f;
-
+    OverseerMoltenSpewing spew;
     [Header("Weight Calc Vars")]
     [SerializeField] float inwardMaxRange = 35f;
     [SerializeField] float inwardMinRange = 30f;
@@ -55,8 +55,10 @@ public class OverseerBT : BehaviourTree
     [SerializeField] OverseerAnimationManager animManage;
     bool isCharging = false;
     [SerializeField] bool pauseLookOnAttack = false;
+    float defaultSpewRate;
 
     [SerializeField] OverseerWeaponsLook look;
+    [SerializeField] float phaseTwoChargeSpewRate = 0.75f;
     bool trans = false;
     private void OnDrawGizmosSelected()
     {
@@ -168,12 +170,15 @@ public class OverseerBT : BehaviourTree
 
     internal override void Awake()
     {
-        base.Awake();
-        if(look == null)
+        base.Awake(); 
+        spew = GetComponentInChildren<OverseerMoltenSpewing>();
+        defaultSpewRate = spew.spawnRate;
+        if (look == null)
         look = GetComponentInChildren<OverseerWeaponsLook>();
         if(animManage == null)
         animManage = GetComponentInChildren<OverseerAnimationManager>();
-
+        onChargeStart.AddListener(ChargeSpewUp);
+        onChargeEnd.AddListener(ChargeSpewDown);
         InitialiseBrains();
 
         AddOrOverwrite("player", player);
@@ -242,7 +247,6 @@ public class OverseerBT : BehaviourTree
             replacement = new RootNode(this,
                 new MultiRoot(motionBrain, weaponsBrain)
                 );
-            OverseerMoltenSpewing spew = GetComponentInChildren<OverseerMoltenSpewing>();
             if(spew !=null)
             {
                 spew.isSpawning = true;
@@ -537,5 +541,15 @@ public class OverseerBT : BehaviourTree
     internal void BecomeVincible()
     {
         health.canTakeDamage = true;
+    }
+
+    internal void ChargeSpewUp()
+    {
+        spew.spawnRate = phaseTwoChargeSpewRate;
+    }
+
+    internal void ChargeSpewDown()
+    {
+        spew.spawnRate = defaultSpewRate;
     }
 }
