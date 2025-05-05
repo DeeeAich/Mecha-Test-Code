@@ -10,21 +10,17 @@ public class TeslaDamageZone : DamageZone
     {
         teslaVFX = transform.parent.GetComponentInChildren<TeslaVFX>();
     }
-    void Start()
-    {
-        dots = new Dictionary<Health, Coroutine>();
-    }
 
-    internal override IEnumerator DamageOverTime(Health target)
+    internal override IEnumerator DamageOverTime(Health target, ZoneDamageOverTimeInfo info)
     {
         float timer = 0f;
         while (true)
         {
             yield return null;
-            timer += Time.deltaTime;
-            if (timer >= dotTime)
+            if (info.inside)
+                timer += Time.deltaTime;
+            if (timer >= dotTime && target != null)
             {
-                teslaVFX.ZapObject(target.gameObject);//Make Toms lightning script go off
                 target.TakeDamage(dotDamage);
                 timer -= dotTime;
             }
@@ -35,12 +31,20 @@ public class TeslaDamageZone : DamageZone
     {
         if (other.TryGetComponent(out Health hp))
         {
-            hp.TakeDamage(entryDamage);
             if (continuous && !dots.ContainsKey(hp))
             {
-                teslaVFX.ZapObject(hp.gameObject);//Make Toms lightning script go off
-                Coroutine c = StartCoroutine(DamageOverTime(hp));
-                dots.Add(hp, c);
+                hp.TakeDamage(entryDamage);
+                ZoneDamageOverTimeInfo newInfo = new ZoneDamageOverTimeInfo();
+                newInfo.inside = true;
+                newInfo.coroutine = StartCoroutine(DamageOverTime(hp, newInfo));
+            }
+            else if (continuous)
+            {
+                dots[hp].inside = true;
+            }
+            else
+            {
+                hp.TakeDamage(entryDamage);
             }
         }
     }

@@ -10,52 +10,61 @@ public class DamageZone : MonoBehaviour
     public float dotDamage;
     public float dotTime = 1f;
 
-    internal Dictionary<Health, Coroutine> dots;
-    // Start is called before the first frame update
-    void Start()
+    public class ZoneDamageOverTimeInfo
     {
-        dots = new Dictionary<Health, Coroutine>();
+        public bool inside;
+        public Coroutine coroutine;
     }
 
-    // Update is called once per frame
-    void Update()
+    internal Dictionary<Health, ZoneDamageOverTimeInfo> dots;
+    // Start is called before the first frame update
+    internal void Start()
     {
-        
+        dots = new Dictionary<Health, ZoneDamageOverTimeInfo>();
     }
 
     internal virtual void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Health hp))
+        if (other.TryGetComponent(out Health hp))
         {
-            hp.TakeDamage(entryDamage);
             if (continuous && !dots.ContainsKey(hp))
             {
-                Coroutine c = StartCoroutine(DamageOverTime(hp));
-                dots.Add(hp, c);
+                hp.TakeDamage(entryDamage);
+                ZoneDamageOverTimeInfo newInfo = new ZoneDamageOverTimeInfo();
+                newInfo.inside = true;
+                newInfo.coroutine = StartCoroutine(DamageOverTime(hp, newInfo));
+            }
+            else if (continuous)
+            {
+                dots[hp].inside = true;
+            }
+            else
+            {
+                hp.TakeDamage(entryDamage);
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    internal void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Health hp))
         {
             if (continuous && dots.ContainsKey(hp))
             {
-                StopCoroutine(dots[hp]);
-                dots.Remove(hp);
+                dots[hp].inside = false;
             }
         }
     }
 
-    internal virtual IEnumerator DamageOverTime(Health target)
+    internal virtual IEnumerator DamageOverTime(Health target, ZoneDamageOverTimeInfo info)
     {
         float timer = 0f;
-        while(true)
+        while (true)
         {
             yield return null;
-            timer += Time.deltaTime;
-            if(timer >= dotTime)
+            if (info.inside)
+                timer += Time.deltaTime;
+            if (timer >= dotTime && target != null)
             {
                 target.TakeDamage(dotDamage);
                 timer -= dotTime;
