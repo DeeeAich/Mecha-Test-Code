@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class TeslaDamageZone : DamageZone
 {
+    [SerializeField] private TeslaVFX teslaVFX;
+
+    private void Awake()
+    {
+        teslaVFX = transform.parent.GetComponentInChildren<TeslaVFX>();
+    }
+
     internal override IEnumerator DamageOverTime(Health target)
     {
         float timer = 0f;
@@ -13,7 +20,7 @@ public class TeslaDamageZone : DamageZone
             timer += Time.deltaTime;
             if (timer >= dotTime)
             {
-                //Make Toms lightning script go off
+                teslaVFX.ZapObject(target.gameObject);//Make Toms lightning script go off
                 target.TakeDamage(dotDamage);
                 timer -= dotTime;
             }
@@ -27,7 +34,7 @@ public class TeslaDamageZone : DamageZone
             hp.TakeDamage(entryDamage);
             if (continuous && !dots.ContainsKey(hp))
             {
-                //Make Toms lightning script go off
+                teslaVFX.ZapObject(hp.gameObject);//Make Toms lightning script go off
                 Coroutine c = StartCoroutine(DamageOverTime(hp));
                 dots.Add(hp, c);
             }
