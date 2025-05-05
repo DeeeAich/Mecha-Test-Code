@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class OverseerAnimationManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class OverseerAnimationManager : MonoBehaviour
     public bool animationIsPlaying;
 
 
-    public Animator groundSlamAnim;
+    [FormerlySerializedAs("groundSlamAnim")] public Animator bodyAnim;
 
     public Animator bodybackAnim;
 
@@ -27,13 +28,6 @@ public class OverseerAnimationManager : MonoBehaviour
 
     public LoopingAudioEventSender laserAudio1;
     public LoopingAudioEventSender laserAudio2;
-    
-    public bool testfire;
-
-    private void Update()
-    {
-        
-    }
     
 
     /*
@@ -67,21 +61,26 @@ public class OverseerAnimationManager : MonoBehaviour
         StartCoroutine(Action(3.5f));
         if (phase == 1)
         {
-            groundSlamAnim.SetTrigger("SlamOne");
+            bodyAnim.SetTrigger("SlamOne");
         }
         else
         {
-            groundSlamAnim.SetTrigger("SlamTwo");
+            bodyAnim.SetTrigger("SlamTwo");
         }
     }
 
+    public void PrepareChargeAttach()
+    {
+        bodyAnim.SetBool("Prepare Charge", true);
+    }
     public void EnterChargeAttack()
     {
-        groundSlamAnim.SetBool("Charge", true);
+        bodyAnim.SetBool("Charge", true);
+        bodyAnim.SetBool("Prepare Charge", false);
     }
     public void ExitChargeAttack()
     { 
-        groundSlamAnim.SetBool("Charge", false);
+        bodyAnim.SetBool("Charge", false);
     }
 
     public void PhaseTransition()
@@ -89,7 +88,7 @@ public class OverseerAnimationManager : MonoBehaviour
         basePhase2Anim.SetTrigger("PhaseTwo");
         bodyPhase2Anim.SetTrigger("PhaseTwo");
         bodybackAnim.SetTrigger("PhaseTwo");
-        groundSlamAnim.SetTrigger("PhaseTwo");
+        bodyAnim.SetTrigger("PhaseTwo");
         StartCoroutine(Action(2.5f));
     }
 
@@ -97,7 +96,7 @@ public class OverseerAnimationManager : MonoBehaviour
     {
         Debug.Log("BOSS SHOULD EXPLODE");
         animationIsPlaying = true;
-        groundSlamAnim.SetTrigger("Death");
+        bodyAnim.SetTrigger("Death");
         bodybackAnim.SetTrigger("Death");
         laserAudio1.LoopingAudio(1);
         laserAudio2.LoopingAudio(1);

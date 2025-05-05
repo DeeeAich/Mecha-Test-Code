@@ -39,6 +39,16 @@ public class OverseerBT : BehaviourTree
     [SerializeField] float targetOffsetAngle = 30f;
     [SerializeField] float offsetDistance = 10f;
     OverseerMoltenSpewing spew;
+
+    [Header("Attack Weights")] 
+    [SerializeField] private float ChargeAttackWeight = 1;
+    [SerializeField] private float SlamAttackWeight = 1;
+    [SerializeField] private float inwardStraightLaserAttackWeight = 1;
+    [SerializeField] private float outwardStraightLaserAttackWeight = 1;
+    [SerializeField] private float zigzagLaserAttackWeight = 1;
+    [SerializeField] private float circleLaserAttackWeight = 1;
+    [SerializeField] private float followLazerAttachWeight = 1;
+    
     [Header("Weight Calc Vars")]
     [SerializeField] float inwardMaxRange = 35f;
     [SerializeField] float inwardMinRange = 30f;
@@ -297,9 +307,28 @@ public class OverseerBT : BehaviourTree
         if (Mathf.Acos(facingScore) > frontRadiusRadians / 2)
             facingScore = 0f;
         //Debug.Log("charge Score: " + facingScore * chargePatienceWeight + " from p=" + chargePatienceWeight + " and f=" + facingScore);
-        return facingScore * chargePatienceWeight;
+        
+        
+        return facingScore * chargePatienceWeight * ChargeAttackWeight;
     }
 
+    float SlamWeight()
+    {
+        float calc;
+        float distanceScore = 0f;
+        float distToTarget = (player.transform.position - transform.position).magnitude;
+        if (distToTarget > slamMinRange && distToTarget <= slamMaxRange)
+        {
+            distToTarget -= slamMinRange;
+            float rangeDif = slamMaxRange - slamMinRange;
+            distanceScore = distToTarget / rangeDif;
+        }
+        //float facingScore = Vector3.Dot(-weaponsPivotOffset.transform.up, (player.transform.position - transform.position).normalized);
+        calc = distanceScore;
+        
+        
+        return calc * SlamAttackWeight;
+    }
     float LaserWeightOne()
     {
         float calc;
@@ -316,8 +345,10 @@ public class OverseerBT : BehaviourTree
             facingScore = 0;
         calc = distanceScore * facingScore;
         //Debug.Log("inward Score: " + calc + " from d=" + distanceScore + " and f=" + facingScore);
-        return calc;
-    }
+        
+        
+        return calc * inwardStraightLaserAttackWeight;
+    } // inward lazer
     float LaserWeightTwo()
     {
         float calc;
@@ -335,25 +366,29 @@ public class OverseerBT : BehaviourTree
         if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
-        return calc;
-    }
+        
+        
+        return calc * outwardStraightLaserAttackWeight;
+    } // outward lazer
     float LaserWeightThree()
     {
         float calc;
         float distanceScore = 0f;
         float distToTarget = (player.transform.position - transform.position).magnitude;
-        if (distToTarget > inwardMinRange && distToTarget <= inwardMaxRange)
+        if (distToTarget > zigzagMinRange && distToTarget <= zigzagMaxRange)
         {
-            distToTarget -= inwardMinRange;
-            float rangeDif = inwardMaxRange - inwardMinRange;
+            distToTarget -= zigzagMinRange;
+            float rangeDif = zigzagMaxRange - zigzagMinRange;
             distanceScore = 1 - (distToTarget / rangeDif);
         }
         float facingScore = Vector3.Dot(weaponsPivotOffset.transform.forward, (player.transform.position - transform.position).normalized);
         if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
-        return calc;
-    }
+        
+        
+        return calc * zigzagLaserAttackWeight;
+    } // zigzag attack
     float LaserWeightFour()
     {
         float calc;
@@ -371,32 +406,21 @@ public class OverseerBT : BehaviourTree
         if (Mathf.Acos(facingScore) > frontRadiusRadians)
             facingScore = 0;
         calc = distanceScore * facingScore;
-        return calc;
-    }
-    float SlamWeight()
-    {
-        float calc;
-        float distanceScore = 0f;
-        float distToTarget = (player.transform.position - transform.position).magnitude;
-        if (distToTarget > slamMinRange && distToTarget <= slamMaxRange)
-        {
-            distToTarget -= slamMinRange;
-            float rangeDif = slamMaxRange - slamMinRange;
-            distanceScore = distToTarget / rangeDif;
-        }
-        //float facingScore = Vector3.Dot(-weaponsPivotOffset.transform.up, (player.transform.position - transform.position).normalized);
-        calc = distanceScore;
-        return calc;
-    }
-
+        
+        
+        return calc * circleLaserAttackWeight;
+    } // circle lazer
     float FollowLaserWeight()
     {
         if (trans)
         {
-            return 1f;
+            return 1f * followLazerAttachWeight;
         }
         return 0f;
     }
+
+
+
 
     bool CheckAnimBool()
     {
