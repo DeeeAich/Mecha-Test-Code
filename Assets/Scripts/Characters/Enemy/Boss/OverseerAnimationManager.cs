@@ -32,14 +32,7 @@ public class OverseerAnimationManager : MonoBehaviour
 
     private void Update()
     {
-        if (testfire)
-        {
-            EnterChargeAttack();
-        }
-        else
-        {
-            ExitChargeAttack();
-        }
+        
     }
     
 
