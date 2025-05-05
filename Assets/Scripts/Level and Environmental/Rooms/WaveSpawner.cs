@@ -233,9 +233,9 @@ public class WaveSpawner : MonoBehaviour
     {
 
         if (waveSize > spawnPoints.Length) waveSize = spawnPoints.Length;
-        if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex) waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
+        //if (waveSize > enemiesToSpawn.Count - enemyToSpawnIndex)   waveSize = enemiesToSpawn.Count - enemyToSpawnIndex;
 
-        List<EnemySpawnPoint> availableSpawns = spawnPoints.ToList();
+            List<EnemySpawnPoint> availableSpawns = spawnPoints.ToList();
 
         for (int i = 0; i < waveSize; i++)
         {
