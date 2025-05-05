@@ -79,6 +79,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4998756055709684745}
+  - component: {fileID: 2340861221936824183}
   m_Layer: 0
   m_Name: Offset
   m_TagString: Untagged
@@ -102,6 +103,20 @@ Transform:
   - {fileID: 7679363271813014452}
   m_Father: {fileID: 6199570638191850685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2340861221936824183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474239719825910063}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9999febffc2c5499d69fc3631b0821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 3
+  unParentOnEnable: 0
 --- !u!1 &6650565202339733482
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +233,7 @@ MonoBehaviour:
   animManage: {fileID: 4490819715129559487}
   pauseLookOnAttack: 1
   look: {fileID: 4304123311262241812}
+  phaseTwoChargeSpewRate: 0.75
 --- !u!195 &1259000513520919617
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -354,8 +370,21 @@ MonoBehaviour:
       m_Calls: []
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2340861221936824183}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   meshesRef: {fileID: 0}
+  unchildStuff: 1
 --- !u!114 &5509937674916179255
 MonoBehaviour:
   m_ObjectHideFlags: 0
