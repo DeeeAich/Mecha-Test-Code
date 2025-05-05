@@ -100,7 +100,7 @@ public class OverseerFightPrimaryObjective : Objective
         {
             if (freeze)
             {
-                Destroy(bullet);
+                Destroy(bullet.gameObject);
             }
         }
     }
