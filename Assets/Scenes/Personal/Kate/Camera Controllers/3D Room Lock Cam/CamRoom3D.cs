@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class CamRoom3D : MonoBehaviour
 {
+    [SerializeField] bool useCustomLens = false;
+    [SerializeField] float customLens = 20f;
+
+
     //The location and size of the camera boundaries //deserialized because not needed to be filled in
     private float xMin;
     private float yMin;
@@ -140,6 +144,8 @@ public class CamRoom3D : MonoBehaviour
             //dist(tan(VFOV/2))
             lensSize = Mathf.Abs(dist * Mathf.Tan(VFOV / 2 * Mathf.Deg2Rad));
         }
+        if (useCustomLens)
+            lensSize = customLens;
 
         float aspectLPlusRatio = Camera.main.aspect;
         //xMin is left edge of box + half the x dimension of the camera (which is aspectRatio * the vertical size)
@@ -201,6 +207,8 @@ public class CamRoom3D : MonoBehaviour
 
 
         tracker.transform.position = projectionRect.transform.position + projectionRect.transform.right*xMag + projectionRect.transform.up*yMag;
+
+
     }
 
     private float Map(float a, float b, float c, float d, float e)
