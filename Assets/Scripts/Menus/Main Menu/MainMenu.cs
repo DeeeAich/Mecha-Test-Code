@@ -43,4 +43,9 @@ public class MainMenu : MonoBehaviour
     {
         skipTutorial = toggle.isOn;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
