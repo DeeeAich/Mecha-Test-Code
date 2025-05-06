@@ -82,6 +82,7 @@ public class BasicBullet : Projectile
                 transform.localPosition = new Vector3();
                 pierceCounter = myGun.pierceCount + myGun.modifiers.piercing;
                 animating = false;
+                timer = 0;
 
             }
         }
@@ -99,6 +100,8 @@ public class BasicBullet : Projectile
             yield return new WaitForSeconds(animationTime);
 
             transform.GetComponentInChildren<Animator>().SetTrigger("return");
+
+            timer = 0;
         }
         else
         {
@@ -107,6 +110,8 @@ public class BasicBullet : Projectile
             yield return new WaitForSeconds(0.5f);
 
             transform.GetChild(0).gameObject.SetActive(true);
+            timer = 0;
+
         }
 
         transform.parent = myGun.projectileHolder;
