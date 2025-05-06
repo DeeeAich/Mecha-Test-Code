@@ -263,8 +263,15 @@ public class DevKitCheats : MonoBehaviour
             {
                 if (bodyChipsDropdown.value - 1 - itemsToSkip < lootPools[i].BodyChips.Length)
                 {
-                    PlayerBody.Instance().ApplyChip((BodyChip)lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip]);
+                    if(lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip].PickupType == pickupType.ChassisChip)
+                        PlayerBody.Instance().ApplyChip(
+                            (BodyChip)lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip]);
+                    else
+                        PlayerBody.Instance().GetComponent<ILegModifiable>().ApplyChip(
+                            (MovementChip)lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip]);
                     Debug.Log("Added body chip: " + lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip].itemName);
+
+                    break;
                 }
                 else
                 {
