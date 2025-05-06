@@ -43,23 +43,23 @@ public class Door : MonoBehaviour
         switch (type)
         {
             case LootType.weapon:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.weaponLootImage;
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.weaponLootImage;
                 break;
             
             case LootType.weaponChip:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.weaponChipLootImage;
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.weaponChipLootImage;
                 break;
             
             case LootType.mechChip:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.chassisChipLootImage;
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.chassisChipLootImage;
                 break;
             
             case LootType.ordinance:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.ordinanceLootImage;
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.ordinanceLootImage;
                 break;
             
             case LootType.chassis:
-                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.lootPool.chassisLootImage;
+                nextRoomLootDisplayImage.sprite = LevelGenerator.instance.levelInfo.chassisLootImage;
                 break;
         }
     }

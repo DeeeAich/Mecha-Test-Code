@@ -195,6 +195,8 @@ public class pauseMenu : MonoBehaviour
         }
         else
         {
+            FindObjectOfType<DevKitCheats>().UpdateDropdowns();
+            Debug.Log("Opening and Updating devkits");
             devkitCheatsMenu.SetActive(true);
         }
         

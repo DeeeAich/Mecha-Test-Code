@@ -9,5 +9,13 @@ public class LevelScriptable : ScriptableObject
 
     public RoomPoolScriptable roomPool;
     public EnemyPoolScriptable enemyPool;
-    public LootPoolScriptable lootPool;
+    public LootPoolScriptable[] lootPools;
+    
+    [Header("Images for display on things like doors and crates")]
+    public GameObject pickupPrefab; 
+    public Sprite weaponLootImage;
+    public Sprite weaponChipLootImage;
+    public Sprite chassisChipLootImage;
+    public Sprite ordinanceLootImage;
+    public Sprite chassisLootImage;
 }

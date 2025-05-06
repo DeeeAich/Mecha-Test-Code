@@ -16,8 +16,7 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private Animator screenBorderAnimator;
     
     [Header("Loot addition stuff")]
-    [SerializeField] private LootPoolScriptable lootPool;
-    [SerializeField] private LootPoolScriptable[] additionalLootPools;
+    [SerializeField] private LootPoolScriptable[] lootPools;
 
     [SerializeField] private TMP_Dropdown leftGunDropdown;
     [SerializeField] private TMP_Dropdown rightGunDropdown;
@@ -27,13 +26,25 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private TMP_Dropdown addChipDropdownRight;
 
     [SerializeField] private TMP_Dropdown bodyChipsDropdown;
-
-    private int[] loadout;
+    
     private bool timeIsGoing = true;
 
     private void Start()
     {
+        leftGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(true); });
+        rightGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(false); });
+        
+        addChipDropdownLeft.onValueChanged.AddListener(delegate{ AddChip(true);});
+        addChipDropdownRight.onValueChanged.AddListener(delegate{ AddChip(false);});
+        bodyChipsDropdown.onValueChanged.AddListener(delegate{AddBodyChip();});
+        
+        UpdateDropdowns();
+    }
 
+    public void UpdateDropdowns()
+    {
+        lootPools = LevelGenerator.instance.levelInfo.lootPools;
+        
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         rightGunDropdown.options = new List<TMP_Dropdown.OptionData>();
         chassisDropdown.options = new List<TMP_Dropdown.OptionData>();
@@ -41,13 +52,6 @@ public class DevKitCheats : MonoBehaviour
         addChipDropdownRight.options = new List<TMP_Dropdown.OptionData>();
         bodyChipsDropdown.options = new List<TMP_Dropdown.OptionData>();
         
-        leftGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(true); });
-        rightGunDropdown.onValueChanged.AddListener(delegate{ AddWeapon(false); });
-        
-        addChipDropdownLeft.onValueChanged.AddListener(delegate{ AddChip(true);});
-        addChipDropdownRight.onValueChanged.AddListener(delegate{ AddChip(false);});
-        bodyChipsDropdown.onValueChanged.AddListener(delegate{AddBodyChip();});
-
         leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( "Change Left Weapon"));
         rightGunDropdown.options.Add(new TMP_Dropdown.OptionData("Change Right Weapon"));
         chassisDropdown.options.Add(new TMP_Dropdown.OptionData("Change Chassis"));
@@ -55,60 +59,46 @@ public class DevKitCheats : MonoBehaviour
         addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData("Add Chip to Right Slot"));
         bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData("Add Chip To Body"));
 
-        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
-        
-        for (int i = 0; i <  lootPool.Weapons.Length; i++)
+        if (lootPools.Length > 0)
         {
-            leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName, lootPool.Weapons[i].mySprite));
-            rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( lootPool.Weapons[i].itemName, lootPool.Weapons[i].mySprite));
-        }
-
-        for (int i = 0; i <  lootPool.WeaponChips.Length; i++)
-        {
-            addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name, lootPool.WeaponChips[i].mySprite));
-            addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(lootPool.WeaponChips[i].name, lootPool.WeaponChips[i].mySprite));
-        }
-
-        for (int i = 0; i < lootPool.BodyChips.Length; i++)
-        {
-            bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(lootPool.BodyChips[i].name, lootPool.BodyChips[i].mySprite));
-        }
-
-        if (additionalLootPools.Length > 0)
-        {
-            for (int i = 0; i < additionalLootPools.Length; i++)
+            for (int i = 0; i < lootPools.Length; i++)
             {
-                if (additionalLootPools[i].Weapons.Length > 0)
+                if (lootPools[i].Weapons.Length > 0)
                 {
-                    for (int j = 0; j <  additionalLootPools[i].Weapons.Length; j++)
+                    for (int j = 0; j < lootPools[i].Weapons.Length; j++)
                     {
-                        leftGunDropdown.options.Add(new TMP_Dropdown.OptionData( additionalLootPools[i].Weapons[j].itemName, additionalLootPools[i].Weapons[j].mySprite));
-                        rightGunDropdown.options.Add(new TMP_Dropdown.OptionData( additionalLootPools[i].Weapons[j].itemName, additionalLootPools[i].Weapons[j].mySprite));
+                        leftGunDropdown.options.Add(new TMP_Dropdown.OptionData(
+                            lootPools[i].Weapons[j].itemName, lootPools[i].Weapons[j].mySprite));
+                        rightGunDropdown.options.Add(new TMP_Dropdown.OptionData(
+                            lootPools[i].Weapons[j].itemName, lootPools[i].Weapons[j].mySprite));
                     }
                 }
 
-                if (additionalLootPools[i].BodyChips.Length > 0)
+                if (lootPools[i].BodyChips.Length > 0)
                 {
-                    for (int j = 0; j < additionalLootPools[i].BodyChips.Length; j++)
+                    for (int j = 0; j < lootPools[i].BodyChips.Length; j++)
                     {
-                        bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].BodyChips[j].name, additionalLootPools[i].BodyChips[j].mySprite));
+                        bodyChipsDropdown.options.Add(new TMP_Dropdown.OptionData(
+                            lootPools[i].BodyChips[j].name, lootPools[i].BodyChips[j].mySprite));
                     }
                 }
 
-                if (additionalLootPools[i].WeaponChips.Length > 0)
+                if (lootPools[i].WeaponChips.Length > 0)
                 {
-                    for (int j = 0; j <  additionalLootPools[i].WeaponChips.Length; j++)
+                    for (int j = 0; j < lootPools[i].WeaponChips.Length; j++)
                     {
-                        addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].WeaponChips[j].name, additionalLootPools[i].WeaponChips[j].mySprite));
-                        addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(additionalLootPools[i].WeaponChips[j].name, additionalLootPools[i].WeaponChips[j].mySprite));
+                        addChipDropdownLeft.options.Add(new TMP_Dropdown.OptionData(
+                            lootPools[i].WeaponChips[j].name,
+                            lootPools[i].WeaponChips[j].mySprite));
+                        addChipDropdownRight.options.Add(new TMP_Dropdown.OptionData(
+                            lootPools[i].WeaponChips[j].name,
+                            lootPools[i].WeaponChips[j].mySprite));
                     }
                 }
 
             }
         }
-
-
-        loadout = new int[3];
+        
     }
 
     private void Update()
@@ -161,44 +151,28 @@ public class DevKitCheats : MonoBehaviour
         }
     }
 
-    public void SetLoadout()
-    {
-        int[] newLoadout = new int[3];
-
-        newLoadout[0] = chassisDropdown.value;
-        newLoadout[1] = leftGunDropdown.value;
-        newLoadout[2] = rightGunDropdown.value;
-        
-        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
-
-        if (newLoadout != loadout)
-        {
-            PlayerBody body = FindObjectOfType<PlayerBody>();
-            
-            if(newLoadout[1] != loadout[1]) body.SetWeapon((WeaponPickup)lootPool.Weapons[newLoadout[1]], true);
-            if(newLoadout[2] != loadout[2]) body.SetWeapon((WeaponPickup)lootPool.Weapons[newLoadout[2]], false);
-            
-            loadout = newLoadout;
-        }
-    }
-
     public void AddWeapon(bool applyToLeft)
     {
-        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
         
         if (applyToLeft)
         {
             if (leftGunDropdown.value != 0)
             {
-                if (leftGunDropdown.value < lootPool.Weapons.Length + 1)
+                int itemsToSkip = 0;
+                
+                for (int i = 0; i < lootPools.Length; i++)
                 {
-                    PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[leftGunDropdown.value - 1], true);
+                    if (leftGunDropdown.value - 1 - itemsToSkip < lootPools[i].Weapons.Length)
+                    {
+                        PlayerBody.Instance().SetWeapon((WeaponPickup) lootPools[i].Weapons[leftGunDropdown.value - 1 - itemsToSkip], true);
+                        Debug.Log("Added weapon" +  lootPools[i].Weapons[leftGunDropdown.value - 1 - itemsToSkip]);
+                    }
+                    else
+                    {
+                        itemsToSkip += lootPools[i].Weapons.Length;
+                    }
                 }
-                else
-                {
-                    PlayerBody.Instance().SetWeapon((WeaponPickup) additionalLootPools[0].Weapons[leftGunDropdown.value - 1 - lootPool.Weapons.Length], true);
-                }
-        
 
                 leftGunDropdown.value = 0;
             }        
@@ -207,13 +181,19 @@ public class DevKitCheats : MonoBehaviour
         {
             if (rightGunDropdown.value != 0)
             {
-                if (rightGunDropdown.value < lootPool.Weapons.Length + 1)
+                int itemsToSkip = 0;
+                
+                for (int i = 0; i < lootPools.Length; i++)
                 {
-                    PlayerBody.Instance().SetWeapon((WeaponPickup) lootPool.Weapons[rightGunDropdown.value - 1], false);
-                }
-                else
-                {
-                    PlayerBody.Instance().SetWeapon((WeaponPickup) additionalLootPools[0].Weapons[rightGunDropdown.value - 1 - lootPool.Weapons.Length], false);
+                    if (rightGunDropdown.value - 1 - itemsToSkip < lootPools[i].Weapons.Length)
+                    {
+                        PlayerBody.Instance().SetWeapon((WeaponPickup) lootPools[i].Weapons[rightGunDropdown.value - 1 - itemsToSkip], false);
+                        Debug.Log("Added weapon" +  lootPools[i].Weapons[rightGunDropdown.value - 1 - itemsToSkip].itemName);
+                    }
+                    else
+                    {
+                        itemsToSkip += lootPools[i].Weapons.Length;
+                    }
                 }
 
                 rightGunDropdown.value = 0;
@@ -223,22 +203,49 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddChip(bool applyToLeft)
     {
-        if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
+        if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
         
         if (applyToLeft)
         {
             if (addChipDropdownLeft.value != 0)
             {
-                PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownLeft.value -1], true);
+                int itemsToSkip = 0;
+                
+                for (int i = 0; i < lootPools.Length; i++)
+                {
+                    if (addChipDropdownLeft.value - 1 - itemsToSkip < lootPools[i].WeaponChips.Length)
+                    {
+                        PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPools[i].WeaponChips[addChipDropdownLeft.value -1 - itemsToSkip], true);
+                        Debug.Log("Added weapon chip: " + lootPools[i].WeaponChips[addChipDropdownLeft.value -1 - itemsToSkip].itemName);
+                    }
+                    else
+                    {
+                        itemsToSkip += lootPools[i].WeaponChips.Length;
+                    }
+                }
+
                 addChipDropdownLeft.value = 0;
             }
-
         }
         else
         {
             if (addChipDropdownRight.value != 0)
             {
-                PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPool.WeaponChips[addChipDropdownRight.value - 1], false);
+                int itemsToSkip = 0;
+                
+                for (int i = 0; i < lootPools.Length; i++)
+                {
+                    if (addChipDropdownRight.value - 1 - itemsToSkip < lootPools[i].WeaponChips.Length)
+                    {
+                        PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPools[i].WeaponChips[addChipDropdownRight.value -1 - itemsToSkip], false);
+                        Debug.Log("Added weapon chip: " + lootPools[i].WeaponChips[addChipDropdownRight.value -1 - itemsToSkip].itemName);
+                    }
+                    else
+                    {
+                        itemsToSkip += lootPools[i].WeaponChips.Length;
+                    }
+                }
+
                 addChipDropdownRight.value = 0;
             }
         }
@@ -248,13 +255,25 @@ public class DevKitCheats : MonoBehaviour
     {
         if (bodyChipsDropdown.value != 0)
         {
-            if(LevelGenerator.instance != null) lootPool = LevelGenerator.instance.levelInfo.lootPool;
-        
-            PlayerBody.Instance().ApplyChip((BodyChip)lootPool.BodyChips[bodyChipsDropdown.value - 1]);
+            if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
+            
+            int itemsToSkip = 0;
+                
+            for (int i = 0; i < lootPools.Length; i++)
+            {
+                if (bodyChipsDropdown.value - 1 - itemsToSkip < lootPools[i].BodyChips.Length)
+                {
+                    PlayerBody.Instance().ApplyChip((BodyChip)lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip]);
+                    Debug.Log("Added body chip: " + lootPools[i].BodyChips[bodyChipsDropdown.value - 1 - itemsToSkip].itemName);
+                }
+                else
+                {
+                    itemsToSkip += lootPools[i].BodyChips.Length;
+                }
+            }
 
-            addChipDropdownLeft.value = 0;
+            bodyChipsDropdown.value = 0;
         }
-
     }
 
     public void BackToMainMenu()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class CamRoom3D : MonoBehaviour
 {
     [SerializeField] bool useCustomLens = false;
-    [SerializeField] float customLens = 20f;
+    public float customLens = 20f;
 
 
     //The location and size of the camera boundaries //deserialized because not needed to be filled in

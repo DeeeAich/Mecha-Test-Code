@@ -130,6 +130,7 @@ public class Room : MonoBehaviour
         // hello tom
         // hi jacob :3
         AudioManager.instance.ChangeMusicState(musicState.combat);
+        FindObjectOfType<CameraSizeModifier>().ChangeCameraSize(GetComponentInChildren<CamRoom3D>().customLens);
 
         if (entryDoor != null)
         {
@@ -239,6 +240,7 @@ public class Room : MonoBehaviour
             //if(MetricsTracker.instance != null) MetricsTracker.instance.RoomCompleted(this);
             
             if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
+            FindObjectOfType<CameraSizeModifier>().ResetCameraSize();
 
             FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
             
@@ -252,7 +254,7 @@ public class Room : MonoBehaviour
         
         PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
 
-        spawnedLoot = Instantiate(LevelGenerator.instance.levelInfo.lootPool.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+        spawnedLoot = Instantiate(LevelGenerator.instance.levelInfo.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
         spawnedLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
         spawnedLoot.transform.SetParent(transform);
         spawnedLoot.PlayerPickups = pickupsToSpawn;

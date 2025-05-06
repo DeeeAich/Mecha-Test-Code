@@ -152,29 +152,33 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerPickup[] selection = new PlayerPickup[count];
         List<PlayerPickup> possibleSelection = new List<PlayerPickup>();
-        
-        switch (type)
+
+        for (int i = 0; i < levelInfo.lootPools.Length; i++)
         {
-            case LootType.weapon:
-                possibleSelection.AddRange(levelInfo.lootPool.Weapons);
-                break;
+            switch (type)
+            {
+                case LootType.weapon:
+                    possibleSelection.AddRange(levelInfo.lootPools[i].Weapons);
+                    break;
             
-            case LootType.weaponChip:
-                possibleSelection.AddRange(levelInfo.lootPool.WeaponChips);
-                break;
+                case LootType.weaponChip:
+                    possibleSelection.AddRange(levelInfo.lootPools[i].WeaponChips);
+                    break;
             
-            case LootType.mechChip:
-                possibleSelection.AddRange(levelInfo.lootPool.BodyChips);
-                break;
+                case LootType.mechChip:
+                    possibleSelection.AddRange(levelInfo.lootPools[i].BodyChips);
+                    break;
             
-            case LootType.ordinance:
-                possibleSelection.AddRange(levelInfo.lootPool.Ordinance);
-                break;
+                case LootType.ordinance:
+                    possibleSelection.AddRange(levelInfo.lootPools[i].Ordinance);
+                    break;
             
-            case LootType.chassis:
-                possibleSelection.AddRange(levelInfo.lootPool.Chassis); 
-                break;
+                case LootType.chassis:
+                    possibleSelection.AddRange(levelInfo.lootPools[i].Chassis); 
+                    break;
+            }
         }
+
 
     
         int totalSpawnChance = 0;

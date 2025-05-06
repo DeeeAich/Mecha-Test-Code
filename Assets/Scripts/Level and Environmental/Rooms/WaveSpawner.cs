@@ -173,6 +173,14 @@ public class WaveSpawner : MonoBehaviour
 
     public void KillEnemies()
     {
+        if (incomingEnemySpawners.Count > 0)
+        {
+            for (int i = 0; i < incomingEnemySpawners.Count; i++)
+            {
+                Destroy(incomingEnemySpawners[i]);
+            }
+        }
+        
         if (spawnedEnemies.Count > 0)
         {
             for (int i = 0; i < spawnedEnemies.Count; i++)
