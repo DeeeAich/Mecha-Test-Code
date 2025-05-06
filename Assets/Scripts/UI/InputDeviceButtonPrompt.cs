@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,20 +12,16 @@ public class InputDeviceButtonPrompt : MonoBehaviour
     public ButtonAction buttonAction;
     public Image buttomImage;
 
+    private void OnEnable()
+    {
+        UpdateButton();
+    }
+
     private void Start()
     {
         UpdateButton();
     }
 
-    private void LateUpdate()
-    {
-        UpdateButton();
-    }
-
-    private void Awake()
-    {
-        UpdateButton();
-    }
     public void UpdateButton()
     {
         if (buttomImage == null)
