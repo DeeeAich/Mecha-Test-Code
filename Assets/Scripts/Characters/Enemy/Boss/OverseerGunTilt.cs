@@ -8,6 +8,7 @@ public class OverseerGunTilt : MonoBehaviour
     GameObject player;
     Vector3 height;
     Vector3 distance;
+    [SerializeField] Vector3 playerTargetingOffset;
     float distanceMag;
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,8 @@ public class OverseerGunTilt : MonoBehaviour
             return;
 
         height = Vector3.zero;
-        height.y = transform.position.y - player.transform.position.y;
-        distance = player.transform.position - transform.position;
+        height.y = transform.position.y - player.transform.position.y + playerTargetingOffset.y;
+        distance = (player.transform.position + playerTargetingOffset) - transform.position;
         distance.y = 0;
         distanceMag = distance.magnitude;
         Vector3 myActualForeward = -turretFacing.transform.up;
