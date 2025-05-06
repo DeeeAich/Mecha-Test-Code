@@ -14,6 +14,7 @@ public class OverseerGunTilt : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerTargetingOffset *= -1;
     }
 
     // Update is called once per frame
