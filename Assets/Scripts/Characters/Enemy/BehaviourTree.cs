@@ -1916,7 +1916,7 @@ namespace AITree
             children = new List<Node> {
                 new InvokeEvent(prep),
             new CallVoidFunctionWithBool(overrideToggle, true),
-            new ModifyAgentStat("speed", 0.1f), //no speed,
+            new ModifyAgentStat("speed", 0f), //no speed,
             new ModifyAgentStat("angularSpeed", aimingRotationSpeed), //rotate base,
             new ModifyAgentStat("acceleration", 9999f),
             new RepeatUntilSuccess(new BooleanFunction(facingFunc, target)),

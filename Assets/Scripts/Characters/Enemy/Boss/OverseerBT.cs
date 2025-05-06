@@ -481,11 +481,28 @@ public class OverseerBT : BehaviourTree
         return angle <= targetOffsetAngle;
     }
 
-    
+    Quaternion startForceRotation;
+    bool rotationOverrideToggle = true;
+    Quaternion StartForceRotation
+    {
+        get
+        {
+            return startForceRotation;
+        }
+        set
+        {
+            if(rotationOverrideToggle)
+            {
+                startForceRotation = value;
+                rotationOverrideToggle = false;
+            }
+        }
+    }
 
 
     bool Facing(string target)
     {
+        StartForceRotation = transform.rotation;
         facingTimer += Time.deltaTime;
         Vector3 targetVector = Vector3.zero;
         if (memory.TryGetValue(target, out object o))
@@ -509,11 +526,14 @@ public class OverseerBT : BehaviourTree
         }
         else
             return false;
+        Quaternion targetRot = Quaternion.LookRotation(player.transform.position - gameObject.transform.position, Vector3.up);
+        transform.rotation = Quaternion.Lerp(StartForceRotation, targetRot, facingTimer / 2f);
         float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
         bool result = facingTimer > facingTimeIn && (facingTimer > facingTimeOut || Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f);
         if(result)
         {
             facingTimer = 0f;
+            rotationOverrideToggle = true;
         }
         return result;
     }
