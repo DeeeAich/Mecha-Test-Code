@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class OverseerBT : BehaviourTree
 {
     float facingTimer = 0f;
+    [SerializeField] float facingTimeIn = 2f;
     [SerializeField] float facingTimeOut = 5f;
 
     public UnityEvent onChargePrepare;
@@ -350,7 +351,6 @@ public class OverseerBT : BehaviourTree
         calc = distanceScore * facingScore;
         //Debug.Log("inward Score: " + calc + " from d=" + distanceScore + " and f=" + facingScore);
         
-        
         return calc * inwardStraightLaserAttackWeight;
     } // inward lazer
     float LaserWeightTwo()
@@ -483,10 +483,7 @@ public class OverseerBT : BehaviourTree
 
     bool Facing(string target)
     {
-        if(facingTimer > facingTimeOut)
-        {
-            facingTimer += Time.deltaTime;
-        }
+        facingTimer += Time.deltaTime;
         Vector3 targetVector = Vector3.zero;
         if (memory.TryGetValue(target, out object o))
         {
@@ -510,7 +507,7 @@ public class OverseerBT : BehaviourTree
         else
             return false;
         float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
-        bool result = Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f;
+        bool result = facingTimer > facingTimeIn && (facingTimer > facingTimeOut || Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f);
         if(result)
         {
             facingTimer = 0f;
