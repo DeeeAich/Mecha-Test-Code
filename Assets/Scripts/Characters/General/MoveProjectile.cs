@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveProjectile : Projectile
 {
     public Vector3 localVelocity;
-    [SerializeField] private Vector3 globalVelocity;
+    [SerializeField] public Vector3 globalVelocity;
     [SerializeField] private float despawnTimer = 20f;
     private bool piercing;
 
