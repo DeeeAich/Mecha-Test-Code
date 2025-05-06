@@ -528,8 +528,8 @@ public class OverseerBT : BehaviourTree
             return false;
         Quaternion targetRot = Quaternion.LookRotation(player.transform.position - gameObject.transform.position, Vector3.up);
         transform.rotation = Quaternion.Lerp(StartForceRotation, targetRot, facingTimer / 2f);
-        float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
-        bool result = facingTimer > facingTimeIn && (facingTimer > facingTimeOut || Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f);
+        //float facingScore = Vector3.Dot(gameObject.transform.forward, (targetVector - transform.position).normalized);
+        bool result = facingTimer > facingTimeIn; //&& (facingTimer > facingTimeOut || Mathf.Acos(facingScore) < Mathf.Deg2Rad*5f);
         if(result)
         {
             facingTimer = 0f;
