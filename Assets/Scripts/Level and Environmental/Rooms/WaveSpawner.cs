@@ -173,15 +173,19 @@ public class WaveSpawner : MonoBehaviour
 
     public void KillEnemies()
     {
-        if (spawnedEnemies != null && spawnedEnemies.Count > 0)
+        if (spawnedEnemies.Count > 0)
         {
             for (int i = 0; i < spawnedEnemies.Count; i++)
             {
-                if (spawnedEnemies[i] == null)
+                if (spawnedEnemies[i] != null)
                 {
                     spawnedEnemies[i].GetComponent<Health>().TriggerDeath();
                 }
             }
+        }
+        else
+        {
+            Debug.Log("No Enemies To kill Off");
         }// clears null references from list
     }
 

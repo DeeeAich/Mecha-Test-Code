@@ -39,34 +39,40 @@ public class Pickup : MonoBehaviour
     [SerializeField] private RectTransform[] buttonsWithAssociatedAnimators;
     [SerializeField] private Animator[] associatedAnimators;
 
-    [Header("Loot Options Menu")] [SerializeField]
-    private GameObject lootOptionsMenu;
+    [Header("Loot Options Menu")] 
+    [SerializeField] private GameObject lootOptionsMenu;
 
+    [SerializeField] private GameObject[] lootOptionsWeaponsImages;
+    [SerializeField] private GameObject[] lootOptionsChipsImages;
+    
     [SerializeField] private Image[] lootOptionsImages;
     [SerializeField] private TMP_Text[] lootOptionsNames;
     [SerializeField] private TMP_Text[] lootOptionsDescriptions;
-
-    [FormerlySerializedAs("lootOptionsButtons")] [SerializeField]
-    private Button[] lootOptionsButtonsWithAssociatedAnimators;
-
+    
+    [SerializeField] private Button[] lootOptionsButtonsWithAssociatedAnimators;
     [SerializeField] private Animator[] lootOptionsAssociatedAnimators;
 
-    [Header("Current Gear Display")] [SerializeField]
-    private GameObject weaponsChipsDisplay;
-
+    [Header("Current Gear Display")]
+    [SerializeField] private GameObject weaponsChipsDisplay;
     [SerializeField] private GameObject mechChipsDisplay;
 
     [SerializeField] private GameObject choiceButtons;
     [SerializeField] private GameObject weaponsChoiceButtons;
     [SerializeField] private GameObject mechChoiceButton;
-
-    [SerializeField] private Image currentLeftWeaponImage;
-    [SerializeField] private Image currentRightWeaponImage;
+    
+    [SerializeField] private Image[] currentMechChipImages;
+    
+    [Header("Current Weapons")]
+    [SerializeField] private Image[] currentLeftWeaponImages;
+    [SerializeField] private Image[] currentRightWeaponImages;
+    [SerializeField] private TMP_Text currentLeftWeaponName;
+    [SerializeField] private TMP_Text currentRightWeaponName;
     [SerializeField] private Image[] currentLeftWeaponChipImages;
     [SerializeField] private Image[] currentRightWeaponChipImages;
-    [SerializeField] private Image[] currentMechChipImages;
 
-    [Header("Other References")] public Animator[] boxAnimators;
+
+    [Header("Other References")] 
+    public Animator[] boxAnimators;
     [SerializeField] private GameObject[] imageDisplayPoints;
     [SerializeField] private GameObject[] hologramSpawnPoints;
 
@@ -91,7 +97,10 @@ public class Pickup : MonoBehaviour
             itemDisplayImagesOverBoxes[i].sprite = PlayerPickups[i].mySprite;
             boxAnimators[i].SetInteger("lootRarity", PlayerPickups[i].rarity);
 
+
             lootOptionsImages[i].sprite = PlayerPickups[i].mySprite;
+            lootOptionsWeaponsImages[i].GetComponent<Image>().sprite = PlayerPickups[i].mySprite;
+            
             lootOptionsNames[i].text = PlayerPickups[i].itemName;
             lootOptionsDescriptions[i].text = PlayerPickups[i].description;
 
@@ -100,8 +109,10 @@ public class Pickup : MonoBehaviour
                 case pickupType.Weapon:
                     boxAnimators[i].SetBool("isWeapon", true);
                     imageDisplayPoints[i].SetActive(false);
-                    if (PlayerPickups[i].hologramReference != null)
-                        Instantiate(PlayerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
+                    if (PlayerPickups[i].hologramReference != null) Instantiate(PlayerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
+                    
+                    lootOptionsWeaponsImages[i].SetActive(true);
+                    lootOptionsChipsImages[i].SetActive(false);
                     break;
             }
         }
@@ -251,6 +262,7 @@ public class Pickup : MonoBehaviour
                     break;
 
                 case pickupType.MovementChip:
+                    DisplayMechChips();
                     break;
             }
 
@@ -365,7 +377,6 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.LegsChip:
-
                 break;
         }
 
@@ -389,8 +400,10 @@ public class Pickup : MonoBehaviour
     {
         if (PlayerBody.Instance().weaponHolder.leftWeapon != null)
         {
-            currentLeftWeaponImage.sprite = PlayerBody.Instance().weaponHolder.leftWInfo.mySprite;
-            currentLeftWeaponImage.enabled = true;
+            for (int i = 0; i < currentLeftWeaponImages.Length; i++)
+            {
+                currentLeftWeaponImages[i].sprite = PlayerBody.Instance().weaponHolder.leftWInfo.mySprite;
+            }
 
             List<WeaponChip> leftChips = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().leftMods;
 
@@ -406,12 +419,16 @@ public class Pickup : MonoBehaviour
                     currentLeftWeaponChipImages[i].enabled = false;
                 }
             }
+
+            currentLeftWeaponName.text = PlayerBody.Instance().weaponHolder.leftWInfo.itemName;
         }
 
         if (PlayerBody.Instance().weaponHolder.rightWeapon != null)
         {
-            currentRightWeaponImage.sprite = PlayerBody.Instance().weaponHolder.rightWInfo.mySprite;
-            currentRightWeaponImage.enabled = true;
+            for (int i = 0; i < currentRightWeaponImages.Length; i++)
+            {
+                currentRightWeaponImages[i].sprite = PlayerBody.Instance().weaponHolder.rightWInfo.mySprite;
+            }
 
             List<WeaponChip> rightChips = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().rightMods;
 
@@ -427,6 +444,8 @@ public class Pickup : MonoBehaviour
                     currentRightWeaponChipImages[i].enabled = false;
                 }
             }
+            
+            currentRightWeaponName.text = PlayerBody.Instance().weaponHolder.rightWInfo.itemName;
         }
 
         weaponsChipsDisplay.SetActive(true);
@@ -441,20 +460,18 @@ public class Pickup : MonoBehaviour
 
         for (int i = 0; i < currentMechChipImages.Length; i++)
         {
-            if (body.myMods.Count > 0 && body.myMods.Count < i)
+            currentMechChipImages[i].enabled = false;
+            
+            if (body.myMods.Count > 0 && i < body.myMods.Count)
             {
                 currentMechChipImages[i].sprite = PlayerBody.Instance().myMods[i].mySprite;
                 currentMechChipImages[i].enabled = true;
             }
-            else if (legs.legChips.Count > 0 && legs.legChips.Count < i - body.myMods.Count)
+            else if (legs.legChips.Count > 0 && i - body.myMods.Count < legs.legChips.Count)
             {
-
                 currentMechChipImages[i].sprite = legs.legChips[i - body.myMods.Count].mySprite;
                 currentMechChipImages[i].enabled = true;
-
             }
-
-            currentMechChipImages[i].enabled = false;
         }
 
         mechChipsDisplay.SetActive(true);

@@ -205,8 +205,8 @@ public class Room : MonoBehaviour
                 {
                     if (waveSpawners[i] != null)
                     {
-                        waveSpawners[i].isComplete = true;
-                        Destroy(waveSpawners[i].gameObject);
+                        waveSpawners[i].StopSpawning(true);
+                        //Destroy(waveSpawners[i].gameObject);
                     }
                 }
             }

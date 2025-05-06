@@ -56,17 +56,21 @@ public class DebrisManager : MonoBehaviour
     {
         for (int i = 0; i < debrisGettingDestroyed.Count; i++)
         {
-            debrisGettingDestroyedTimers[i] -= Time.fixedDeltaTime;
+            if (debrisGettingDestroyed[i] != null)
+            {
+                debrisGettingDestroyedTimers[i] -= Time.fixedDeltaTime;
 
-            if (debrisGettingDestroyedTimers[i] <= 0)
-            {
-                Destroy(debrisGettingDestroyed[i]);
-                debrisGettingDestroyed.RemoveAt(i);
-                debrisGettingDestroyedTimers.RemoveAt(i);
-            }
-            else
-            {
-                debrisGettingDestroyed[i].transform.position -= Vector3.up * Time.fixedDeltaTime * debrisSinkDistance/debrisDestroyTime;
+                if (debrisGettingDestroyedTimers[i] <= 0)
+                {
+                    Destroy(debrisGettingDestroyed[i]);
+                    debrisGettingDestroyed.RemoveAt(i);
+                    debrisGettingDestroyedTimers.RemoveAt(i);
+           
+                }
+                else
+                {
+                    debrisGettingDestroyed[i].transform.position -= Vector3.up * Time.fixedDeltaTime * debrisSinkDistance/debrisDestroyTime;
+                }
             }
         }
 
