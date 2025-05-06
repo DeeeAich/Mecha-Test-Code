@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 class MissileMotion : MoveProjectile
 {
     float speed;
     [SerializeField] float timeto180 = 5f;
     GameObject target;
+    public GameObject missileModel;
+
+    public bool isDestroyed;
+    public float deleteTimer;
+
+    public UnityEvent onHit;
+
+
+
     private void Awake()
     {
         speed = localVelocity.magnitude;
@@ -26,6 +36,26 @@ class MissileMotion : MoveProjectile
         float totalAngle = Quaternion.Angle(targetRot, transform.rotation);
         float t = rotPerUpdate / totalAngle;
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
+
+        globalVelocity = new Vector3(globalVelocity.x, 0, globalVelocity.z);
+        
+
+        if (isDestroyed)
+        {
+            deleteTimer += Time.fixedDeltaTime;
+        }
+        if (deleteTimer >= 2)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void DestroyMissile()
+    {
+        missileModel.SetActive(false);
+        isDestroyed = true;
+        deleteTimer = 0;
+        onHit.Invoke();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -34,13 +64,16 @@ class MissileMotion : MoveProjectile
         {
             if (damageableEntities.Contains(health.entityType))
             {
+
                 health.TakeDamage(damage);
 
                 pierceCount--;
 
                 if (pierceCount == 0)
                 {
-                    Destroy(gameObject);
+                    DestroyMissile();
+
+
                     //transform.GetComponentInChildren<Animator>().SetTrigger("impact");
                 }/*
                 else
@@ -60,7 +93,7 @@ class MissileMotion : MoveProjectile
         }
         else
         {
-            Destroy(gameObject);
+            DestroyMissile();
             //transform.GetComponentInChildren<Animator>().SetTrigger("impact");
 
         }

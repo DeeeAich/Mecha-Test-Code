@@ -6,6 +6,7 @@ public class ProjectileHitVFX : MonoBehaviour
 {
     public ParticleSystem hitVFX;
     public int hitVFXEmission;
+    public bool isEnemy;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,9 +14,25 @@ public class ProjectileHitVFX : MonoBehaviour
         {
             hitVFX.Emit(hitVFXEmission);
         }
-        if (other.CompareTag("Enemy"))
+
+        if (!isEnemy)
         {
-            hitVFX.Emit(hitVFXEmission);
+            if (other.CompareTag("Enemy"))
+            {
+                hitVFX.Emit(hitVFXEmission);
+            }
         }
+        else
+        {
+            if (other.CompareTag("Player"))
+            {
+                hitVFX.Emit(hitVFXEmission);
+            }
+        }
+    }
+
+    public void ManualHitVFXTtrigger()
+    {
+        hitVFX.Emit(hitVFXEmission);
     }
 }
