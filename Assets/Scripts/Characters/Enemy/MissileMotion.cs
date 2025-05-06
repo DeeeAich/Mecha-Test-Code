@@ -44,7 +44,7 @@ class MissileMotion : MoveProjectile
         {
             deleteTimer += Time.fixedDeltaTime;
         }
-        if (deleteTimer >= 2)
+        if (deleteTimer >= 1)
         {
             Destroy(gameObject);
         }
@@ -53,6 +53,8 @@ class MissileMotion : MoveProjectile
     public void DestroyMissile()
     {
         missileModel.SetActive(false);
+        GetComponent<CapsuleCollider>().enabled = false;
+        globalVelocity = Vector3.zero;
         isDestroyed = true;
         deleteTimer = 0;
         onHit.Invoke();
