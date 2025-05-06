@@ -37,12 +37,11 @@ public class DevKitCheats : MonoBehaviour
         addChipDropdownLeft.onValueChanged.AddListener(delegate{ AddChip(true);});
         addChipDropdownRight.onValueChanged.AddListener(delegate{ AddChip(false);});
         bodyChipsDropdown.onValueChanged.AddListener(delegate{AddBodyChip();});
-        
-        UpdateDropdowns();
     }
 
     public void UpdateDropdowns()
-    {
+    { 
+        if(LevelGenerator.instance == null) return;
         lootPools = LevelGenerator.instance.levelInfo.lootPools;
         
         leftGunDropdown.options = new List<TMP_Dropdown.OptionData>();
