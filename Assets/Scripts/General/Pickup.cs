@@ -388,6 +388,7 @@ public class Pickup : MonoBehaviour
             boxAnimators[i].SetTrigger("lootLocked");
         }
 
+        
 
         if (uiPopup != null) closeUiTimer = 0.5f;
 
