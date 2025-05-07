@@ -24,6 +24,7 @@ public class pauseMenu : MonoBehaviour
     public bool canUseDevkit = true;
     
     public float gameSpeed = 1f;
+    public int mainMenuScene = 1;
     public int sceneToResetTo = 5;
     
     [SerializeField] private GameObject pauseCanvas;
@@ -128,11 +129,11 @@ public class pauseMenu : MonoBehaviour
         
         if (GameGeneralManager.instance != null)
         {
-            GameGeneralManager.instance.ChangeScene(0);
+            GameGeneralManager.instance.ChangeScene(mainMenuScene);
         }
         else
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(mainMenuScene);
         }
     }
 

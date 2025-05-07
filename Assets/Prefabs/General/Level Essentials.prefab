@@ -468,6 +468,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8213209388818074168}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeGameMasterVoluem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 7792514027805555457}
+    - target: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.UI.Slider, UnityEngine.UI
+      objectReference: {fileID: 0}
     - target: {fileID: 5674836074770565120, guid: 341edb866a18a0043b984eb257283a49,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -506,6 +546,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2415400150513229858}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7792514027805555457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5593940896515955491, guid: 341edb866a18a0043b984eb257283a49,
+    type: 3}
+  m_PrefabInstance: {fileID: 2415400150513229858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5586525487396558897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -680,6 +732,11 @@ PrefabInstance:
       objectReference: {fileID: 2720476123180288110}
     - target: {fileID: 1332045100252218995, guid: 11524fb632cc01945b3b92ec9ed78dd5,
         type: 3}
+      propertyPath: MasterVolumeSlider
+      value: 
+      objectReference: {fileID: 7792514027805555457}
+    - target: {fileID: 1332045100252218995, guid: 11524fb632cc01945b3b92ec9ed78dd5,
+        type: 3}
       propertyPath: nonCombatMusic.Path
       value: event:/Music/Combat Track
       objectReference: {fileID: 0}
@@ -799,3 +856,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7171825839581088843}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8213209388818074168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1332045100252218995, guid: 11524fb632cc01945b3b92ec9ed78dd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7171825839581088843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f317696a9eff760488f5a0659b2fe07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

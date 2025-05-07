@@ -6,6 +6,7 @@ using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using Slider = UnityEngine.UI.Slider;
 
 
 public enum musicState
@@ -39,8 +40,17 @@ public struct SceneStartingAudio
 
 public class AudioManager : MonoBehaviour
 {
+    public UnityEngine.UI.Slider MasterVolumeSlider;
+    
     public static AudioManager instance;
 
+    private FMOD.Studio.VCA MusicVca;
+    private FMOD.Studio.VCA SfxVca;
+    private FMOD.Studio.VCA MasterVca;
+
+    public float MusicVolume = 1;
+    public float SFXVolume = 1;
+    public float MasterVolume = 1f;
 
     [Header("Music")]
     public musicTrack currentMusicTrack;
@@ -80,6 +90,16 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        MusicVca = FMODUnity.RuntimeManager.GetVCA("vca:/MUSIC VCA");
+        SfxVca = FMODUnity.RuntimeManager.GetVCA("vca:/SFX VCA");
+        MasterVca = FMODUnity.RuntimeManager.GetVCA("vca:/MASTER VCA");
+
+        MusicVca.getVolume(out MusicVolume);
+        MasterVca.getVolume(out MasterVolume);
+        SfxVca.getVolume(out SFXVolume);
+
+        if(MasterVolumeSlider != null) MasterVolumeSlider.value = MasterVolume;
     }
 
 
@@ -135,7 +155,6 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
-
     public void ChangeMusicTrack(musicTrack newTrack)
     {
 
@@ -175,8 +194,7 @@ public class AudioManager : MonoBehaviour
         }
         currentMusicState = newState;
     }
-
-
+    
     public void ChangeAmbienceTrack(ambienceTrack newTrack)
     {
         currentAmbience.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -196,5 +214,11 @@ public class AudioManager : MonoBehaviour
         }
         currentAmbienceTrack = newTrack;
         Debug.Log(newTrack.ToString());
+    }
+
+    public void ChangeGameMasterVoluem(Slider volumeSlider)
+    {
+        MasterVolume = volumeSlider.value;
+        MasterVca.setVolume(MasterVolume);
     }
 }

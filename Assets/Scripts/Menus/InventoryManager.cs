@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private bool editorUpdateInventory;
 
-    [SerializeField] private Color[] rarityColors;
+    public Color[] rarityColors;
 
     public List<Image> bodyChipsImages;
     public Button[] bodyChipsButtons;
