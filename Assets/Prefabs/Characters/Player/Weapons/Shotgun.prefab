@@ -28,8 +28,41 @@ Transform:
   m_LocalPosition: {x: -0.27, y: -0.08, z: 1.612}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2199806430961404111}
+  - {fileID: 7248201931224585705}
   m_Father: {fileID: 1956097079281339446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3031222890467528901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7248201931224585705}
+  m_Layer: 0
+  m_Name: Gizmo Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7248201931224585705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031222890467528901}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.10615564, z: -0, w: 0.99434954}
+  m_LocalPosition: {x: 0.20000003, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4067996033564578625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3096072767103390523
 GameObject:
@@ -106,7 +139,7 @@ MonoBehaviour:
     shotCost: 0
     reloadSpeed: 1
     piercing: 0
-    diviation: 1
+    diviation: 0.95
   projectileHolder: {fileID: 8624168632669874808}
   projectile: {fileID: 4874561802893684910, guid: 55a22631f8e311745881f5d2b3613b3a,
     type: 3}
@@ -117,7 +150,7 @@ MonoBehaviour:
   timeBetweenBurst: 0
   burstCount: 1
   fireCount: 8
-  spreadRange: 0.3
+  spreadRange: 0.2
   evenSpread: 1
 --- !u!114 &2893156105795303936
 MonoBehaviour:
@@ -180,6 +213,37 @@ MonoBehaviour:
   duration: 0
   chance: 0
   damage: 0
+--- !u!1 &4127585567238404654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2199806430961404111}
+  m_Layer: 0
+  m_Name: Gizmo Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2199806430961404111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127585567238404654}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.21111163, z: -0, w: 0.977462}
+  m_LocalPosition: {x: 0.20000003, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4067996033564578625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8142957531874074339
 GameObject:
   m_ObjectHideFlags: 0

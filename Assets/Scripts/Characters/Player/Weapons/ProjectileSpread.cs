@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ProjectileSpread : ProjectileGun
 {
@@ -8,6 +10,8 @@ public class ProjectileSpread : ProjectileGun
     public int fireCount;
     public float spreadRange = 0.3f;
     public bool evenSpread;
+
+    private Transform gizmoFirepoint;
 
     public override void LoadBullets()
     {
@@ -87,4 +91,34 @@ public class ProjectileSpread : ProjectileGun
 
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if (gizmoFirepoint == null)
+        {
+            gizmoFirepoint = new GameObject().transform;
+            gizmoFirepoint.gameObject.name = "Gizmo Firepoint";
+            gizmoFirepoint.parent = firePoint.transform;
+            gizmoFirepoint.position = firePoint.position;
+        }
+        
+        Gizmos.color = Color.yellow;
+        
+        float spreadDif = 2f / ((float) fireCount - 1f);
+
+        for (int i = 0; i < fireCount; i++)
+        {
+            float bulDiv = 0;
+            if (evenSpread)
+                bulDiv = -1f + ((float)i * spreadDif);
+            else
+                bulDiv = Random.Range(-1.0f, 1.0f);
+
+            gizmoFirepoint.transform.position = firePoint.position;
+            gizmoFirepoint.transform.rotation = firePoint.rotation;
+            gizmoFirepoint.transform.position += firePoint.right * bulDiv * spreadRange;
+            gizmoFirepoint.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv * ((1 - modifiers.diviation) * (40 - maxDiviation)), 0);
+            
+            Gizmos.DrawLine(gizmoFirepoint.position, gizmoFirepoint.position + gizmoFirepoint.forward);
+        }
+    }
 }
