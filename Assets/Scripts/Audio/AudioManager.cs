@@ -7,6 +7,7 @@ using FMOD.Studio;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using Slider = UnityEngine.UI.Slider;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 
 public enum musicState
@@ -185,6 +186,10 @@ public class AudioManager : MonoBehaviour
                 currentMusic = RuntimeManager.CreateInstance(tutorialMusic);
                 currentMusic.start();
                 break;
+            
+            default:
+                currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
+                break;
         }
 
         currentMusicTrack = newTrack;
@@ -222,6 +227,9 @@ public class AudioManager : MonoBehaviour
                 currentAmbience.start();
                 break;
 
+            default:
+                currentAmbience.stop(STOP_MODE.ALLOWFADEOUT);
+                break;
         }
         currentAmbienceTrack = newTrack;
         Debug.Log(newTrack.ToString());
