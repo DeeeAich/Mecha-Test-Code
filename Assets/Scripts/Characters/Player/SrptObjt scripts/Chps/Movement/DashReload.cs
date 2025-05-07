@@ -16,5 +16,14 @@ public class DashReload : MovementTriggerChip
 
     }
 
+    public override void ChipTriggerSetter(PlayerLegs playerLegs)
+    {
+        base.ChipTriggerSetter(playerLegs);
+    }
+
+    public override void ChipTriggerUnsetter()
+    {
+        base.ChipTriggerUnsetter();
+    }
 
 }

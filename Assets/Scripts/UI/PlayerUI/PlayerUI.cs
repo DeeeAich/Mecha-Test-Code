@@ -168,17 +168,20 @@ public class PlayerUI : MonoBehaviour
     public void DashChanged(int newDashMax)
     {
 
-        int diff = newDashMax - dashTotal;
+        if (newDashMax > dashTotal)
+        {
 
-        dashTotal = newDashMax;
-        dashCount += diff;
+            dashTotal++;
+            dashCount++;
 
-        dashCountTxt.text = dashCount.ToString();
-
+            dashCountTxt.text = dashCount.ToString();
+        }
     }
 
-    public void Dashed()
+    public void Dashed(float timer)
     {
+
+        dashChargeTime = timer;
 
         dashCount--;
 

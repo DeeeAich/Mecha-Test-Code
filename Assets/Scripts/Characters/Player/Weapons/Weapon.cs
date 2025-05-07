@@ -102,9 +102,9 @@ public class Weapon : MonoBehaviour, IModable
         if (curAmmo > 0)
         {
             if (weapon == myController.leftWeapon)
-                PlayerBody.Instance().triggers.replenishLeft.Invoke();
+                PlayerBody.Instance().triggers.replenishLeft?.Invoke();
             else
-                PlayerBody.Instance().triggers.replenishRight.Invoke();
+                PlayerBody.Instance().triggers.replenishRight?.Invoke();
         }
 
         curAmmo += addedCount;
@@ -121,17 +121,20 @@ public class Weapon : MonoBehaviour, IModable
     public void TempStatsAdd(WeaponStats addStats)
     {
         addStats.AddStats(modifiers);
+        SetAnimation();
     }
 
     public void TempStatRemove(WeaponStats weaponStats)
     {
         weaponStats.RemoveStats(modifiers);
+        SetAnimation();
     }
 
     public void TempTimedStatsAdd(WeaponStats addStats, float timer)
     {
 
         addStats.AddStats(modifiers);
+        SetAnimation();
         StartCoroutine(TempStatsTimedRemove(addStats, timer));
 
     }
@@ -142,6 +145,7 @@ public class Weapon : MonoBehaviour, IModable
         yield return new WaitForSeconds(timer);
 
         removeStats.RemoveStats(modifiers);
+        SetAnimation();
 
         yield return null;
 

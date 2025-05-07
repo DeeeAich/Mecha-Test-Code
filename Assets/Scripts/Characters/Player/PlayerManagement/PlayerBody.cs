@@ -114,7 +114,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
         if (killSource == weaponHolder.leftWeapon.name)
             triggers.killedLeft?.Invoke();
-        else
+        else if (killSource == weaponHolder.rightWeapon.name)
             triggers.killedRight?.Invoke();
     }
 
@@ -140,7 +140,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void Dash(InputAction.CallbackContext context)
     {
-        StartCoroutine(myMovement.Dash(move.ReadValue<Vector2>()));
+        myMovement.StartDash(move.ReadValue<Vector2>());
     }
 
     private void SetControls()

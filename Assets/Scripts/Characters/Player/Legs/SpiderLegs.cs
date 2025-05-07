@@ -11,55 +11,50 @@ public class SpiderLegs : PlayerLegs
         base.Movement(stickAmount);
     }
 
-    public override IEnumerator Dash(Vector2 stickAmount)
+    public override void Dash()
     {
-
-        if (dashing || curLegs.dashCharges == 0)
-            yield break;
-
-        dashDirection = new Vector2();
-
-        if (stickAmount.magnitude != 0)
-        {
-            dashDirection = (stickAmount * 10).normalized;
-        }
-        else if (curSpeed.magnitude != 0)
-        {
-            dashDirection = curSpeed.normalized;
-        }
-        else
-        {
-            yield break;
-        }
-
-
-        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
-        myBody.myUI.Dashed();
-
-        curLegs.dashCharges--;
-        dashing = true;
-
-        curSpeed = dashDirection * (myBody.legStats.dashDistance * dashMods.dashDistance / myBody.legStats.dashTime * dashMods.dashTime);
 
         MultipleLegIkMover mover = GetComponentInChildren<MultipleLegIkMover>();
 
-        mover.enabled = false;
+        bool removeFirst = false;
 
-        GetComponent<Health>().canTakeDamage = !myBody.legStats.invincibleDuringDash;
-        yield return new WaitForSeconds(myBody.legStats.dashTime * dashMods.dashTime);
-        GetComponent<Health>().canTakeDamage = true;
-        dashing = false;
+        for (int i = 0; i < dashTimers.Count; i++)
+        {
 
-        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(false);
+            dashTimers[i].timer += Time.deltaTime;
+            if (dashTimers[i].timer < 1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime))
+            {
+                myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
 
-        mover.enabled = true;
+                curSpeed = dashDirection * ((myBody.legStats.dashDistance * dashMods.dashDistance) / (1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime)));
 
-        yield return new WaitForSeconds(myBody.legStats.dashRecharge * dashMods.dashRecharge);
+                mover.enabled = false;
+                GetComponent<Health>().canTakeDamage = !myBody.legStats.invincibleDuringDash;
 
-        curLegs.dashCharges++;
+            }
+            else if (!dashTimers[i].completed)
+            {
+                dashTimers[i].completed = true;
+                dashing = false;
+                mover.enabled = true;
+                GetComponent<Health>().canTakeDamage = true;
+                myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(false);
 
-        yield return null;
+            }
 
+
+            if (dashTimers[i].timer >= myBody.legStats.dashRecharge * dashMods.dashRecharge + 1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime))
+            {
+                curLegs.dashCharges++;
+
+                removeFirst = true;
+
+            }
+
+        }
+
+        if (removeFirst)
+            dashTimers.RemoveAt(0);
     }
 
 }

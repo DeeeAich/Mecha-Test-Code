@@ -13,11 +13,23 @@ public class HealChip : BodyTriggerChip
     public override void TriggerAbility(PlayerBody myBody)
     {
 
-        if (chance == 0 || chance > UnityEngine.Random.Range(0, 100))
+        float testRandom = UnityEngine.Random.Range(0, 100);
+
+        if (chance == 0 || chance >= testRandom)
         {
             Health health = myBody.GetComponent<Health>();
             health.TakeDamage(-(health.maxHealth * healPercent) / 100);
         }
+    }
+
+    public override void ChipTriggerSetter()
+    {
+        base.ChipTriggerSetter();
+    }
+
+    public override void ChipTriggerUnsetter()
+    {
+        base.ChipTriggerUnsetter();
     }
 
 }

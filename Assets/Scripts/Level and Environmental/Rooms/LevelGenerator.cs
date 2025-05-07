@@ -65,6 +65,8 @@ public class LevelGenerator : MonoBehaviour
         SpawnRoom(levelInfo.roomPool.entryRooms[0], StartPosition);
         currentRoom.GetComponent<Room>().roomLootType = GenerateNextLootType(1)[0];
         if(PlayerManager.instance != null) PlayerManager.instance.SetStats();
+
+        ResetChips();
     }
 
     public GameObject[] NextRoomSelection(int count)
@@ -224,4 +226,51 @@ public class LevelGenerator : MonoBehaviour
         currentRoom = Instantiate(room, targetPosition.transform.position, targetPosition.transform.rotation);
         onSpawnRoom.Invoke();
     }
+
+    public void ResetChips()
+    {
+        
+        foreach (LootPoolScriptable lootPool in levelInfo.lootPools)
+        {
+
+            foreach(PlayerPickup chip in lootPool.BodyChips)
+            {
+                if(chip.PickupType == pickupType.ChassisChip)
+                {
+                    BodyChip bodyChip = (BodyChip)chip;
+                    if (bodyChip.bodyType == BodyChip.BodyType.Trigger && !PlayerBody.Instance().myMods.Contains(bodyChip))
+                    {
+                        BodyTriggerChip bodyTriggerChip = (BodyTriggerChip)chip;
+                        bodyTriggerChip.ChipTriggerUnsetter();
+                    }
+
+                }
+                else
+                {
+                    MovementChip movementChip = (MovementChip)chip;
+                    if (movementChip.moveType == MovementChip.MovementType.Trigger && !PlayerBody.Instance().myMovement.legChips.Contains(movementChip))
+                    {
+                        MovementTriggerChip movementTriggerChip = (MovementTriggerChip)chip;
+                        movementTriggerChip.ChipTriggerUnsetter();
+                    }
+                }
+            }
+
+            foreach(PlayerPickup chip in lootPool.WeaponChips)
+            {
+                WeaponChip weaponChip = (WeaponChip)chip;
+                if(weaponChip.supType == WeaponChip.WeaponSubType.Trigger &&
+                    !PlayerWeaponControl.instance.leftMods.Contains(weaponChip) && !PlayerWeaponControl.instance.leftMods.Contains(weaponChip))
+                {
+                    WeaponTriggerChip weaponTriggerChip = (WeaponTriggerChip)weaponChip;
+                    weaponTriggerChip.ChipTriggerUnsetter(PlayerWeaponControl.instance.leftWeapon);
+                    weaponTriggerChip.ChipTriggerUnsetter(PlayerWeaponControl.instance.rightWeapon);
+                }
+            }
+
+
+        }
+
+    }
+
 }

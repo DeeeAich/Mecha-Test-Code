@@ -79,7 +79,7 @@ public class DashStatChange
     {
 
         stats.dashCharges += dashCharges;
-        stats.dashTime *= 1 - dashTime;
+        stats.dashTime *= 1 + dashTime;
         stats.dashDistance *= dashDistance + 1;
         stats.dashRecharge *= 1 - dashRecharge;
 
@@ -183,4 +183,11 @@ public class TriggerEvents
         constant = null;
     }
 
+}
+
+[Serializable]
+public class DashTimers
+{
+    public float timer;
+    public bool completed;
 }

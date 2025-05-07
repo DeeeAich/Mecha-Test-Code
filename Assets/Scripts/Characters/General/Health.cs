@@ -132,15 +132,17 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             health = maxHealth;
         }
 
-        if (health <= 0 && canDie)
+        if (health <= 0 && canDie && !killed)
         {
+            killed = true;
+            print("Killed by " + source);
             if (gameObject.tag != "Player")
                 PlayerBody.Instance().TriggerOnKill(source);
             TriggerDeath();
         }
         return damageInfo;
     }
-
+    bool killed = false;
     internal virtual float TakeDamage(float amount, out bool isShield, bool isCrit = false)
     {
         isShield = false;

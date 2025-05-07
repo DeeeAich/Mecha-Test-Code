@@ -17,11 +17,17 @@ public class BodyTriggerChip : BodyChip
     public virtual void ChipTriggerSetter()
     {
 
+        Debug.Log("Setting triggers");
+
         PlayerBody playerBody = PlayerBody.Instance();
 
         if (!addedAction)
-            startAction += ()=> TriggerAbility(playerBody);
+        {
+            startAction += () => TriggerAbility(playerBody);
+            addedAction = true;
+            Debug.Log("Adding action for " + name);
 
+        }
         switch (chipTrigger)
         {
             case (ChipEnums.Trigger.Damaged):
@@ -53,7 +59,6 @@ public class BodyTriggerChip : BodyChip
                 break;
         }
 
-        addedAction = true;
 
     }
 

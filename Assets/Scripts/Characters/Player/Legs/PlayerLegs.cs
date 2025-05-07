@@ -23,7 +23,7 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
             curSpeed += stickAmount * myBody.legStats.speed * legMods.speed;
 
             if (curSpeed.magnitude > (stickAmount * myBody.legStats.speed * legMods.speed).magnitude)
-                curSpeed = stickAmount * myBody.legStats.speed;
+                curSpeed = stickAmount * myBody.legStats.speed * legMods.speed;
         }
         else if (!dashing)
         {
@@ -33,30 +33,47 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
         ridBy.velocity = new Vector3(curSpeed.x, 0, curSpeed.y);
     }
 
-    public virtual IEnumerator Dash(Vector2 stickAmount)
+
+    public List<DashTimers> dashTimers = new();
+
+    public void StartDash(Vector2 stickAmount)
     {
-        if (dashing || myBody.legStats.dashCharges == 0)
-            yield break;
 
         dashDirection = new Vector2();
 
-        if(stickAmount.magnitude != 0)
+        if (!dashing && curLegs.dashCharges + dashMods.dashCharges > 0 && stickAmount.magnitude != 0)
         {
             dashDirection = (stickAmount * 10).normalized;
-        }
-        else if(curSpeed.magnitude != 0)
-        {
-            dashDirection = curSpeed.normalized;
+            curLegs.dashCharges--;
+            DashTimers newDash = new();
+            dashTimers.Add(newDash);
+            myBody.myUI.Dashed(1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime)
+                        + (1 / (( 1 / myBody.legStats.dashRecharge) * dashMods.dashRecharge)));
+            dashing = true;
+            PlayerBody.Instance().triggers.dashed?.Invoke();
         }
         else
         {
-            yield break;
+            dashing = false;
+            return;
         }
 
-        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
-        myBody.myUI.Dashed();
+    }
 
-        yield return null;
+    internal virtual void FixedUpdate()
+    {
+
+        Dash();
+
+    }
+
+
+    public virtual void Dash()
+    {
+
+        myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
+        myBody.myUI.Dashed(1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime));
+
 
     }
 

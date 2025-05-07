@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bee9d308685dfa549aab215da51c10ad, type: 3}
-  m_Name: FireRateOnDamage (Common)
+  m_Name: Reactive Fire (Legendary)
   m_EditorClassIdentifier: 
-  itemName: Reactive Fire
+  itemName: Legendary Reactive Fire
   PickupType: 3
-  rarity: 0
-  spawnRate: 10
-  description: Increases attack speed by 20% for 1 seconds when damaged
+  rarity: 2
+  spawnRate: 1
+  description: Increases attack speed by 60% for 3 seconds when damaged
   mySprite: {fileID: 21300000, guid: 0443049e24646bc4d8a69772a37e0d64, type: 3}
   objectReference: {fileID: 0}
   hologramReference: {fileID: 0}
@@ -25,11 +25,11 @@ MonoBehaviour:
   chipTrigger: 0
   timed: 1
   chipStats:
-    attackSpeed: 0.2
+    attackSpeed: 0.6
     damage: 0
     ammoCount: 0
     shotCost: 0
     reloadSpeed: 0
     piercing: 0
     diviation: 0
-  changeTime: 1
+  changeTime: 3

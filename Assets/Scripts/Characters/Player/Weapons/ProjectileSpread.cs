@@ -51,7 +51,7 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.position = firePoint.position;
             newBullet.transform.rotation = firePoint.rotation;
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
-            newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv + ((1 - modifiers.diviation) * (80 - maxDiviation)), 0);
+            newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv * ((1 - modifiers.diviation) * (40 - maxDiviation)), 0);
             newBullet.SetActive(true);
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
             newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
