@@ -50,11 +50,12 @@ public class Grenade : BasicBullet
         animating = true;
         timer = 0;
 
-        RaycastHit[] enemiesHit = Physics.SphereCastAll(transform.position + Vector3.down, explRadius, Vector3.up, 2, enemies);
 
         GetComponentInChildren<Animator>().SetTrigger("impact");
 
         yield return new WaitForSeconds(0.1f);
+
+        RaycastHit[] enemiesHit = Physics.SphereCastAll(transform.position + Vector3.down, explRadius, Vector3.up, 2, enemies);
 
         float modifiedDamage = critRoller.AdditiveDamage(damage);
 
