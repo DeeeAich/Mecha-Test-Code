@@ -116,9 +116,9 @@ public class Pickup : MonoBehaviour
 
 
             lootOptionsImages[i].sprite = playerPickups[i].mySprite;
-            lootOptionsImages[i].color = FindObjectOfType<InventoryManager>(true).rarityColors[playerPickups[i].rarity];
+            lootOptionsImages[i].color = ColourManager.instance.standardColours.LootRarityColours[playerPickups[i].rarity];
             lootOptionsWeaponsImages[i].GetComponent<Image>().sprite = playerPickups[i].mySprite;
-            lootOptionsWeaponsImages[i].GetComponent<Image>().color = FindObjectOfType<InventoryManager>(true).rarityColors[playerPickups[i].rarity];
+            //lootOptionsWeaponsImages[i].GetComponent<Image>().color = FindObjectOfType<InventoryManager>(true).rarityColors[playerPickups[i].rarity];
             
             lootOptionsNames[i].text = playerPickups[i].itemName;
             lootOptionsDescriptions[i].text = playerPickups[i].description;

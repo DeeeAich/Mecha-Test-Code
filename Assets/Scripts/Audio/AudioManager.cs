@@ -7,6 +7,7 @@ using FMOD.Studio;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using Slider = UnityEngine.UI.Slider;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 
 public enum musicState
@@ -48,6 +49,9 @@ public class AudioManager : MonoBehaviour
     private FMOD.Studio.VCA SfxVca;
     private FMOD.Studio.VCA MasterVca;
 
+    public bool setVolumeOnStart;
+    public float StartingMasterVolume = 0.25f;
+    
     public float MusicVolume = 1;
     public float SFXVolume = 1;
     public float MasterVolume = 1f;
@@ -98,8 +102,16 @@ public class AudioManager : MonoBehaviour
         MusicVca.getVolume(out MusicVolume);
         MasterVca.getVolume(out MasterVolume);
         SfxVca.getVolume(out SFXVolume);
+        
+        if (setVolumeOnStart)
+        {
+            MasterVolume = StartingMasterVolume;
+            MasterVca.setVolume(MasterVolume);
+        }
 
         if(MasterVolumeSlider != null) MasterVolumeSlider.value = MasterVolume;
+
+ 
     }
 
 
@@ -174,6 +186,10 @@ public class AudioManager : MonoBehaviour
                 currentMusic = RuntimeManager.CreateInstance(tutorialMusic);
                 currentMusic.start();
                 break;
+            
+            default:
+                currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
+                break;
         }
 
         currentMusicTrack = newTrack;
@@ -211,6 +227,9 @@ public class AudioManager : MonoBehaviour
                 currentAmbience.start();
                 break;
 
+            default:
+                currentAmbience.stop(STOP_MODE.ALLOWFADEOUT);
+                break;
         }
         currentAmbienceTrack = newTrack;
         Debug.Log(newTrack.ToString());

@@ -26,6 +26,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text leftWeaponTitle;
     [SerializeField] private TMP_Text rightWeaponTitle;
     
+    [SerializeField] private TMP_Text leftWeaponDescription;
+    [SerializeField] private TMP_Text rightWeaponDescription;
+    
     [SerializeField] private Image leftWeaponImage;
     [SerializeField] private Image rightWeaponImage;
 
@@ -46,6 +49,8 @@ public class InventoryManager : MonoBehaviour
     
     private void Awake()
     {
+        rarityColors = ColourManager.instance.standardColours.LootRarityColours;
+        
         FindObjectOfType<pauseMenu>().onPause.AddListener(delegate { UpdateInventory(); });
 
         for (int i = 0; i < weaponLeftChipsButtons.Length; i++)
@@ -80,6 +85,8 @@ public class InventoryManager : MonoBehaviour
     {
         print("Updating Inventory");
         inspectionCard.SetActive(false);
+
+
 
         PlayerBody playerBody = PlayerBody.Instance();
 
@@ -118,6 +125,8 @@ public class InventoryManager : MonoBehaviour
         {
             leftWeaponTitle.text = weapons.leftWInfo.itemName;
             leftWeaponTitle.gameObject.SetActive(true);
+            leftWeaponDescription.text = weapons.leftWInfo.description;
+            leftWeaponDescription.gameObject.SetActive(true);
             leftWeaponImage.sprite = weapons.leftWInfo.mySprite;
             leftWeaponAmmo.text = weapons.leftWeapon.curAmmo.ToString();
             leftWeaponImage.gameObject.SetActive(true);
@@ -140,6 +149,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             leftWeaponTitle.gameObject.SetActive(false);
+            leftWeaponDescription.gameObject.SetActive(false);
             leftWeaponImage.gameObject.SetActive(false);
         }
 
@@ -147,6 +157,8 @@ public class InventoryManager : MonoBehaviour
         {
             rightWeaponTitle.text = weapons.rightWInfo.itemName;
             rightWeaponTitle.gameObject.SetActive(true);
+            rightWeaponDescription.text = weapons.rightWInfo.description;
+            rightWeaponDescription.gameObject.SetActive(true);
             rightWeaponImage.sprite = weapons.rightWInfo.mySprite;
             rightWeaponAmmo.text = weapons.rightWeapon.curAmmo.ToString();
             rightWeaponTitle.gameObject.SetActive(true);
@@ -168,6 +180,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
+            rightWeaponDescription.gameObject.SetActive(false);
             rightWeaponTitle.gameObject.SetActive(false);
             rightWeaponTitle.gameObject.SetActive(false);
         }
