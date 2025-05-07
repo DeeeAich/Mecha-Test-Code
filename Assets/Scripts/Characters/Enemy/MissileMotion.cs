@@ -36,8 +36,7 @@ class MissileMotion : MoveProjectile
         float totalAngle = Quaternion.Angle(targetRot, transform.rotation);
         float t = rotPerUpdate / totalAngle;
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
-
-        globalVelocity = new Vector3(globalVelocity.x, 0, globalVelocity.z);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
         
 
         if (isDestroyed)
