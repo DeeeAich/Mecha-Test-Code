@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
     [Header("Music")]
     public musicTrack currentMusicTrack;
     public musicState currentMusicState;
-    private EventInstance currentMusic;
+    private static EventInstance currentMusic;
     
     public EventReference Level2BaseMusic;
     public EventReference tutorialMusic;
@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Ambience")]
     public ambienceTrack currentAmbienceTrack;
-    public EventInstance currentAmbience;
+    public static EventInstance currentAmbience;
     public EventReference Level2BaseAmbience;
     public EventReference overseerAmbience;
 
