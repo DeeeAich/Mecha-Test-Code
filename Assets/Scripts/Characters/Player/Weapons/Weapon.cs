@@ -58,9 +58,16 @@ public class Weapon : MonoBehaviour, IModable
         reloading = true;
 
         if (myController.leftWeapon == this)
+        {
             PlayerBody.Instance().triggers.reloadLeft?.Invoke();
+            PlayerBody.Instance().triggers.replenishLeft?.Invoke();
+        }
         else
+        {
             PlayerBody.Instance().triggers.reloadRight?.Invoke();
+            PlayerBody.Instance().triggers.replenishRight?.Invoke();
+
+        }
 
         myAnim.SetTrigger("Reload");
 
@@ -95,9 +102,9 @@ public class Weapon : MonoBehaviour, IModable
         if (curAmmo > 0)
         {
             if (weapon == myController.leftWeapon)
-                PlayerBody.Instance().triggers.reloadLeft.Invoke();
+                PlayerBody.Instance().triggers.replenishLeft.Invoke();
             else
-                PlayerBody.Instance().triggers.reloadRight.Invoke();
+                PlayerBody.Instance().triggers.replenishRight.Invoke();
         }
 
         curAmmo += addedCount;
