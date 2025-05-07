@@ -48,6 +48,9 @@ public class AudioManager : MonoBehaviour
     private FMOD.Studio.VCA SfxVca;
     private FMOD.Studio.VCA MasterVca;
 
+    public bool setVolumeOnStart;
+    public float StartingMasterVolume = 0.25f;
+    
     public float MusicVolume = 1;
     public float SFXVolume = 1;
     public float MasterVolume = 1f;
@@ -98,8 +101,16 @@ public class AudioManager : MonoBehaviour
         MusicVca.getVolume(out MusicVolume);
         MasterVca.getVolume(out MasterVolume);
         SfxVca.getVolume(out SFXVolume);
+        
+        if (setVolumeOnStart)
+        {
+            MasterVolume = StartingMasterVolume;
+            MasterVca.setVolume(MasterVolume);
+        }
 
         if(MasterVolumeSlider != null) MasterVolumeSlider.value = MasterVolume;
+
+ 
     }
 
 
