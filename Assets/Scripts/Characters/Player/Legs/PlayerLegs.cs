@@ -130,9 +130,7 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
     public void ApplyDashStats(DashStatChange chipChange)
     {
         chipChange.AddStats(dashMods);
-
-        if (dashMods.dashCharges > 0)
-            PlayerUI.instance.DashChanged(dashMods.dashCharges + curLegs.dashCharges);
+        PlayerUI.instance.DashChanged(dashMods.dashCharges + curLegs.dashCharges);
 
     }
 

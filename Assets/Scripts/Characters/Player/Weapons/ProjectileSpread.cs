@@ -55,7 +55,7 @@ public class ProjectileSpread : ProjectileGun
             newBullet.transform.position = firePoint.position;
             newBullet.transform.rotation = firePoint.rotation;
             newBullet.transform.position += firePoint.right * bulDiv * spreadRange;
-            newBullet.transform.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv * ((1 - modifiers.diviation) * (40 - maxDiviation)), 0);
+            newBullet.transform.rotation *= Quaternion.Euler(0, bulDiv * (maxDiviation + ((1 - modifiers.diviation) * (40 - maxDiviation))), 0);
             newBullet.SetActive(true);
             newBullet.GetComponent<BasicBullet>().damage = damage[0] * modifiers.damage;
             newBullet.GetComponent<BasicBullet>().pierceCount = pierceCount + modifiers.piercing;
@@ -116,7 +116,7 @@ public class ProjectileSpread : ProjectileGun
             gizmoFirepoint.transform.position = firePoint.position;
             gizmoFirepoint.transform.rotation = firePoint.rotation;
             gizmoFirepoint.transform.position += firePoint.right * bulDiv * spreadRange;
-            gizmoFirepoint.rotation *= Quaternion.Euler(0, maxDiviation * bulDiv * ((1 - modifiers.diviation) * (40 - maxDiviation)), 0);
+            gizmoFirepoint.rotation *= Quaternion.Euler(0, bulDiv * (maxDiviation + ((1 - modifiers.diviation) * (40 - maxDiviation))), 0);
             
             Gizmos.DrawLine(gizmoFirepoint.position, gizmoFirepoint.position + gizmoFirepoint.forward);
         }

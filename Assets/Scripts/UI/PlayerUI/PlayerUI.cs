@@ -185,6 +185,9 @@ public class PlayerUI : MonoBehaviour
 
         dashCount--;
 
+        if (dashCount < 0)
+            dashCount = 0;
+
         dashCountTxt.text = dashCount.ToString();
 
         dashCharging = true;
