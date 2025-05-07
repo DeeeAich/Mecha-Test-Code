@@ -66,7 +66,7 @@ public class LevelGenerator : MonoBehaviour
         currentRoom.GetComponent<Room>().roomLootType = GenerateNextLootType(1)[0];
         if(PlayerManager.instance != null) PlayerManager.instance.SetStats();
 
-        ResetChips();
+        //ResetChips();
     }
 
     public GameObject[] NextRoomSelection(int count)

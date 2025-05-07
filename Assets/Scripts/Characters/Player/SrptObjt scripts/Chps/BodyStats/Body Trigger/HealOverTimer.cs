@@ -56,7 +56,7 @@ public class HealOverTimer : BodyTriggerChip
             pauseTimer += Time.deltaTime;
             if(pauseTimer > pauseTimeForDamage)
             {
-                Debug.Log("Unpaused");
+                //Debug.Log("Unpaused");
                 betweemTicks = false;
                 pauseForDamge = false;
             }

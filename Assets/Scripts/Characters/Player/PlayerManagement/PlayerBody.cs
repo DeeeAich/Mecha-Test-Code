@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerBody : MonoBehaviour, IBodyModifiable
 {
@@ -61,6 +62,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         instance = this;
         myHealth.onDeath.AddListener(OnDeath);
         SetControlScheme(playerInputs);
+        SceneManager.activeSceneChanged += UnsetChips;
     }
 
     private void Start()
@@ -112,9 +114,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     public void TriggerOnKill(string killSource)
     {
-        if (killSource == weaponHolder.leftWeapon.name)
+        if (killSource == "left")
             triggers.killedLeft?.Invoke();
-        else if (killSource == weaponHolder.rightWeapon.name)
+        else if (killSource == "right")
             triggers.killedRight?.Invoke();
     }
 
@@ -321,6 +323,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
         LevelGenerator.instance.onSpawnRoom.RemoveListener(delegate { triggers.roomClear?.Invoke(); });
 
+        UnsetChips();
+
         triggers.ClearEvents();
 
     }
@@ -418,4 +422,103 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     }
 
+    public void UnsetChips()
+    {
+
+        print("Unsetting Chips");
+
+        foreach (BodyChip chip in myMods)
+        {
+
+            if(chip.bodyType == BodyChip.BodyType.Trigger)
+            {
+                BodyTriggerChip bodyTriggerChip = (BodyTriggerChip)chip;
+                bodyTriggerChip.ChipTriggerUnsetter();
+            }
+
+        }
+
+        foreach (WeaponChip chip in weaponHolder.leftMods)
+        {
+            if(chip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip weaponTriggerChip = (WeaponTriggerChip)chip;
+                weaponTriggerChip.ChipTriggerUnsetter(weaponHolder.leftWeapon);
+            }
+        }
+        foreach (WeaponChip chip in weaponHolder.rightMods)
+        {
+            if (chip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip weaponTriggerChip = (WeaponTriggerChip)chip;
+                weaponTriggerChip.ChipTriggerUnsetter(weaponHolder.rightWeapon);
+            }
+        }
+
+        foreach (MovementChip chip in myMovement.legChips)
+        {
+
+            if (chip.moveType == MovementChip.MovementType.Trigger)
+            {
+                MovementTriggerChip movementTriggerChip = (MovementTriggerChip)chip;
+                movementTriggerChip.ChipTriggerUnsetter();
+            }
+
+        }
+        triggers.ClearEvents();
+        SceneManager.activeSceneChanged -= UnsetChips;
+    }
+    private void UnsetChips(Scene sceneUnloaded, Scene sceneLoaded)
+    {
+
+        print("Unsetting Chips");
+
+        foreach (BodyChip chip in myMods)
+        {
+
+            if (chip.bodyType == BodyChip.BodyType.Trigger)
+            {
+                BodyTriggerChip bodyTriggerChip = (BodyTriggerChip)chip;
+                bodyTriggerChip.ChipTriggerUnsetter();
+            }
+
+        }
+
+        foreach (WeaponChip chip in weaponHolder.leftMods)
+        {
+            if (chip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip weaponTriggerChip = (WeaponTriggerChip)chip;
+                weaponTriggerChip.ChipTriggerUnsetter(weaponHolder.leftWeapon);
+            }
+        }
+        foreach (WeaponChip chip in weaponHolder.rightMods)
+        {
+            if (chip.supType == WeaponChip.WeaponSubType.Trigger)
+            {
+                WeaponTriggerChip weaponTriggerChip = (WeaponTriggerChip)chip;
+                weaponTriggerChip.ChipTriggerUnsetter(weaponHolder.rightWeapon);
+            }
+        }
+
+        foreach (MovementChip chip in myMovement.legChips)
+        {
+
+            if (chip.moveType == MovementChip.MovementType.Trigger)
+            {
+                MovementTriggerChip movementTriggerChip = (MovementTriggerChip)chip;
+                movementTriggerChip.ChipTriggerUnsetter();
+            }
+
+        }
+        triggers.ClearEvents();
+        SceneManager.activeSceneChanged -= UnsetChips;
+    }
+
+    private void OnApplicationQuit()
+    {
+
+        UnsetControls();
+
+    }
 }
