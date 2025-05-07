@@ -103,14 +103,21 @@ public class InventoryManager : MonoBehaviour
             ordinanceImage.color = rarityColors[playerBody.ultController.currentUltimate.rarity];
         }
 
-        List<BodyChip> bodyChips = PlayerBody.Instance().myMods;
-
+        List<BodyChip> bodyChips = playerBody.myMods;
+        List<MovementChip> legChips = playerBody.myMovement.legChips;
+        
         for (int i = 0; i < bodyChipsImages.Count; i++)
         {
             if (i < bodyChips.Count)
             {
                 bodyChipsImages[i].sprite = bodyChips[i].mySprite;
                 bodyChipsImages[i].color = rarityColors[bodyChips[i].rarity];
+                bodyChipsImages[i].enabled = true;
+            }
+            else if (i < bodyChips.Count + legChips.Count)
+            {
+                bodyChipsImages[i - bodyChips.Count].sprite = legChips[i - bodyChips.Count].mySprite;
+                bodyChipsImages[i].color = rarityColors[legChips[i - bodyChips.Count].rarity];
                 bodyChipsImages[i].enabled = true;
             }
             else
