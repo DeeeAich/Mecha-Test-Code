@@ -116,8 +116,12 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             mod.Modification(calculating, out calculating);
             damageInfo.encounteredMods.Add(mod.ToString());
         }
-        foreach(ShieldModifier sM in damageMods)
+        foreach(DamageMod sM in damageMods)
         {
+            if(!(sM is ShieldModifier))
+            {
+                continue;
+            }
             damageInfo.shieldDamage += sM.Modification(calculating, out calculating);
             damageInfo.encounteredMods.Add(sM.ToString());
         }
@@ -298,6 +302,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         {
             manager.ToggleEffectVFX(effect.Hack, false);
         }
+        hackCoroutine = null;
     }
 
 
