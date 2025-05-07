@@ -30,7 +30,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     public TriggerEvents triggers;
 
-    private bool isGamepad = true;
+    public bool isGamepad = true;
 
     public PlayerUI myUI;
     private Health myHealth;
@@ -203,7 +203,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     private void Interact(InputAction.CallbackContext context)
     {
         if(curInteract!=null)
-        curInteract.TriggerInteraction();
+            curInteract.TriggerInteraction();
 
     }
 
@@ -214,6 +214,11 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         InputDeviceManager.instance.UpdateInputDevice(isGamepad ? InputDevice.PlaystationController : InputDevice.MouseAndKeyboard);
 
         myUI.SetCursorActive(isGamepad);
+
+        foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
+        {
+            pickup.mouseControls = !isGamepad;
+        }
 
         //Debug.Log("Control scheme is now " + input.currentControlScheme);
     }
