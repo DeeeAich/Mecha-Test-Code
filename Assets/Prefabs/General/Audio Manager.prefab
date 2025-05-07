@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f317696a9eff760488f5a0659b2fe07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolumeSlider: {fileID: 0}
+  MusicVolume: 1
+  SFXVolume: 1
+  MasterVolume: 1
   currentMusicTrack: 0
   currentMusicState: 0
   Level2BaseMusic:
@@ -77,6 +81,14 @@ MonoBehaviour:
     stateToPlay: 0
     trackToPlay: 1
     ambienceTrackToPlay: 1
+  - Scene: Intro Cutscene
+    stateToPlay: 0
+    trackToPlay: 0
+    ambienceTrackToPlay: 0
+  - Scene: Outro Cutscene
+    stateToPlay: 0
+    trackToPlay: 0
+    ambienceTrackToPlay: 0
   currentAmbienceTrack: 0
   Level2BaseAmbience:
     Guid:
