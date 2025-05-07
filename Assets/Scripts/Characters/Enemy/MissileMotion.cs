@@ -15,11 +15,12 @@ class MissileMotion : MoveProjectile
 
     public UnityEvent onHit;
 
-
+    private float startingYValue;
 
     private void Awake()
     {
         speed = localVelocity.magnitude;
+        startingYValue = transform.position.y;
     }
 
     internal override void FixedUpdate()
@@ -36,8 +37,8 @@ class MissileMotion : MoveProjectile
         float totalAngle = Quaternion.Angle(targetRot, transform.rotation);
         float t = rotPerUpdate / totalAngle;
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
-        transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
-        
+
+        transform.position = new Vector3(transform.position.x, startingYValue, transform.position.z);
 
         if (isDestroyed)
         {
