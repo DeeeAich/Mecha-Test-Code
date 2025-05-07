@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class OverseerNailGun : EnemyGun
 {
@@ -24,7 +26,10 @@ public class OverseerNailGun : EnemyGun
         2. This outsources the loop to elsewhere but provides the means to fire
     */
 
-
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 
     public override IEnumerator FireOnRepeat()
     {

@@ -278,24 +278,24 @@ MonoBehaviour:
   chargeDamageZone: {fileID: 2198544353261910240}
   targetOffsetAngle: 10
   offsetDistance: 20
-  ChargeAttackWeight: 1
+  ChargeAttackWeight: 0.5
   SlamAttackWeight: 1
   inwardStraightLaserAttackWeight: 1
   outwardStraightLaserAttackWeight: 1
   zigzagLaserAttackWeight: 1
   circleLaserAttackWeight: 1
   followLazerAttachWeight: 1
-  inwardMaxRange: 44.9
-  inwardMinRange: 35
-  wideMaxRange: 45
+  inwardMaxRange: 55
+  inwardMinRange: 27.9
+  wideMaxRange: 32.8
   wideMinRange: 15
   zigzagMaxRange: 30
   zigzagMinRange: 20
-  circleMaxRange: 24.9
-  circleMinRange: 17
+  circleMaxRange: 65.9
+  circleMinRange: 21.1
   slamMaxRange: 15
   slamMinRange: 0
-  chargeMaxRange: 40
+  chargeMaxRange: 56
   chargeMinRange: 25
   frontRadius: 69
   chargePatienceWeightBuildup: 0.2
@@ -566,11 +566,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6394850259094641932, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: maxDelay
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394850259094641932, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: minDelay
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 6519917493531491619, guid: 8e669a9946637c54da70f145562ccad7,
         type: 3}
       propertyPath: stats
       value: 
       objectReference: {fileID: 5509937674916179255}
+    - target: {fileID: 6519917493531491619, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: maxDelay
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519917493531491619, guid: 8e669a9946637c54da70f145562ccad7,
+        type: 3}
+      propertyPath: minDelay
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8415257191825918189, guid: 8e669a9946637c54da70f145562ccad7,
         type: 3}
       propertyPath: laser1TargetTracker
