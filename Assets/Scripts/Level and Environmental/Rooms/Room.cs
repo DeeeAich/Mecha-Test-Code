@@ -257,6 +257,6 @@ public class Room : MonoBehaviour
         spawnedLoot = Instantiate(LevelGenerator.instance.levelInfo.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
         spawnedLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
         spawnedLoot.transform.SetParent(transform);
-        spawnedLoot.PlayerPickups = pickupsToSpawn;
+        spawnedLoot.playerPickups = pickupsToSpawn;
     }
 }

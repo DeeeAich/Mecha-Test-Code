@@ -144,6 +144,7 @@ public class pauseMenu : MonoBehaviour
         openInventoryAction.performed -= OpenInventory;
         
         TogglePause();
+        sceneToResetTo = SceneManager.GetActiveScene().buildIndex;
         
         if (GameGeneralManager.instance != null)
         {

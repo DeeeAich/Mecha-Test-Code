@@ -218,6 +218,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
         {
             pickup.mouseControls = !isGamepad;
+            pickup.TrySelectInitialButton();
         }
 
         //Debug.Log("Control scheme is now " + input.currentControlScheme);

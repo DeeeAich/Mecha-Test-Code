@@ -19,8 +19,7 @@ public enum pickupType
     WeaponChip,
     ChassisChip,
     OrdinanceChip,
-    MovementChip,
-    LegsChip
+    MovementChip
 }
 
 public class Pickup : MonoBehaviour
@@ -29,13 +28,19 @@ public class Pickup : MonoBehaviour
     private bool EDITORTriggerSpawn = false;
 
     [Header("Pickup Info")] public pickupType pickupType = pickupType.ChassisChip;
-    public PlayerPickup[] PlayerPickups;
+    [FormerlySerializedAs("PlayerPickups")] public PlayerPickup[] playerPickups;
 
     public UnityEvent onPickedUpEvent;
+    public UnityEvent onMenuOpened;
+    public UnityEvent onChoiceMenuOpened;
 
-    [Header("Ui Stuff")] public bool mouseControls = true;
-    public SpriteRenderer[] itemDisplayImagesOverBoxes;
+    [Header("Ui Stuff")] 
+    public bool mouseControls = true;
     public GameObject uiPopup;
+
+    [SerializeField] private Button initiallySelectedButton;
+    [SerializeField] private Button choiceMenuNavigationButton;
+    [SerializeField] private Button exitButton;
     [SerializeField] private RectTransform[] buttonsWithAssociatedAnimators;
     [SerializeField] private Animator[] associatedAnimators;
 
@@ -75,6 +80,7 @@ public class Pickup : MonoBehaviour
     public Animator[] boxAnimators;
     [SerializeField] private GameObject[] imageDisplayPoints;
     [SerializeField] private GameObject[] hologramSpawnPoints;
+    public SpriteRenderer[] itemDisplayImagesOverBoxes;
 
     [HideInInspector] public bool open;
     private float buttonInteractBlockTimer;
@@ -82,34 +88,45 @@ public class Pickup : MonoBehaviour
     private bool canUse = true;
     private int pickupIndex = 0;
 
+    private InputAction backAction;
 
     private void Start()
     {
         RigLootBox();
+        
+        backAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Back"];
+        backAction.performed += BackButtonPressed;
+
+        mouseControls = !PlayerBody.Instance().isGamepad;
+    }
+
+    private void OnDisable()
+    {
+        backAction.performed -= BackButtonPressed;
     }
 
     private void RigLootBox()
     {
-        pickupType = PlayerPickups[0].PickupType;
+        pickupType = playerPickups[0].PickupType;
 
-        for (int i = 0; i < PlayerPickups.Length; i++)
+        for (int i = 0; i < playerPickups.Length; i++)
         {
-            itemDisplayImagesOverBoxes[i].sprite = PlayerPickups[i].mySprite;
-            boxAnimators[i].SetInteger("lootRarity", PlayerPickups[i].rarity);
+            itemDisplayImagesOverBoxes[i].sprite = playerPickups[i].mySprite;
+            boxAnimators[i].SetInteger("lootRarity", playerPickups[i].rarity);
 
 
-            lootOptionsImages[i].sprite = PlayerPickups[i].mySprite;
-            lootOptionsWeaponsImages[i].GetComponent<Image>().sprite = PlayerPickups[i].mySprite;
+            lootOptionsImages[i].sprite = playerPickups[i].mySprite;
+            lootOptionsWeaponsImages[i].GetComponent<Image>().sprite = playerPickups[i].mySprite;
             
-            lootOptionsNames[i].text = PlayerPickups[i].itemName;
-            lootOptionsDescriptions[i].text = PlayerPickups[i].description;
+            lootOptionsNames[i].text = playerPickups[i].itemName;
+            lootOptionsDescriptions[i].text = playerPickups[i].description;
 
             switch (pickupType)
             {
                 case pickupType.Weapon:
                     boxAnimators[i].SetBool("isWeapon", true);
                     imageDisplayPoints[i].SetActive(false);
-                    if (PlayerPickups[i].hologramReference != null) Instantiate(PlayerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
+                    if (playerPickups[i].hologramReference != null) Instantiate(playerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
                     
                     lootOptionsWeaponsImages[i].SetActive(true);
                     lootOptionsChipsImages[i].SetActive(false);
@@ -143,7 +160,22 @@ public class Pickup : MonoBehaviour
             {
                 lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", true);
             }
+
+            Navigation nav = new Navigation();
+
+            nav.mode = Navigation.Mode.Explicit;
+            
+            nav.selectOnUp = exitButton;
+            nav.selectOnDown = choiceMenuNavigationButton;
+            nav.selectOnLeft = lootOptionsButtonsWithAssociatedAnimators[i].navigation.selectOnLeft;
+            nav.selectOnRight = lootOptionsButtonsWithAssociatedAnimators[i].navigation.selectOnRight;
+            
+            lootOptionsButtonsWithAssociatedAnimators[i].navigation = nav;
         }
+        
+        
+        
+        onChoiceMenuOpened.Invoke();
     }
 
     public void UnRigChoiceMenu()
@@ -155,6 +187,17 @@ public class Pickup : MonoBehaviour
             lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsSelected", false);
             lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", false);
             lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsReturn", false);
+            
+            Navigation nav = new Navigation();
+            
+            nav.mode = Navigation.Mode.Explicit;
+            
+            nav.selectOnUp = exitButton;
+            nav.selectOnDown = exitButton;
+            nav.selectOnLeft = lootOptionsButtonsWithAssociatedAnimators[i].navigation.selectOnLeft;
+            nav.selectOnRight = lootOptionsButtonsWithAssociatedAnimators[i].navigation.selectOnRight;
+            
+            lootOptionsButtonsWithAssociatedAnimators[i].navigation = nav;
         }
     }
 
@@ -194,7 +237,12 @@ public class Pickup : MonoBehaviour
 
                 if (buttonInteractBlockTimer <= 0)
                 {
-                    lootOptionsButtonsWithAssociatedAnimators[1].Select();
+                    foreach (Button button in GetComponentsInChildren<Button>())
+                    {
+                        button.interactable = true;
+                    }
+                    
+                    initiallySelectedButton.Select();
                 }
             }
         }
@@ -236,6 +284,8 @@ public class Pickup : MonoBehaviour
     {
         if (!open)
         {
+            UnRigChoiceMenu();
+            
             switch (pickupType)
             {
                 case pickupType.Weapon:
@@ -270,7 +320,16 @@ public class Pickup : MonoBehaviour
             uiPopup.SetActive(true);
 
             GetComponentInChildren<Interactable>(true).canInteract = false;
+
+            initiallySelectedButton.Select();
             buttonInteractBlockTimer = 0.5f;
+            
+            foreach (Button button in GetComponentsInChildren<Button>())
+            {
+                button.interactable = false;
+            }
+            
+            onMenuOpened.Invoke();
             open = true;
         }
     }
@@ -307,16 +366,18 @@ public class Pickup : MonoBehaviour
         open = false;
         PlayerBody.Instance().StopParts(true, true);
         GetComponentInChildren<Interactable>(true).canInteract = true;
+        
+        UnRigChoiceMenu();
+        
         if (uiPopup != null) uiPopup.SetActive(false);
-
-
-        choiceButtons.SetActive(false);
+        
         lootOptionsMenu.SetActive(true);
     }
 
     public void PickupItem(bool optionalDataApplyToLeft)
     {
         if (!canUse) return;
+        pickupType = playerPickups[pickupIndex].PickupType;
 
         PlayerBody.Instance().StopParts(true, true);
         Debug.Log("Picking up " + name);
@@ -336,10 +397,10 @@ public class Pickup : MonoBehaviour
                     newPickup = PlayerBody.Instance().weaponHolder.rightWInfo;
                 }
 
-                PlayerBody.Instance().SetWeapon((WeaponPickup) PlayerPickups[pickupIndex], optionalDataApplyToLeft);
+                PlayerBody.Instance().SetWeapon((WeaponPickup) playerPickups[pickupIndex], optionalDataApplyToLeft);
 
-                PlayerPickups[pickupIndex] = newPickup;
-                if (PlayerPickups[pickupIndex] != null)
+                playerPickups[pickupIndex] = newPickup;
+                if (playerPickups[pickupIndex] != null)
                 {
                     RigLootBox();
                     // keep box open, swap loot from hand to box
@@ -361,11 +422,11 @@ public class Pickup : MonoBehaviour
 
             case pickupType.WeaponChip:
                 PlayerBody.Instance().GetComponent<IWeaponModifiable>()
-                    .ApplyChip((WeaponChip) PlayerPickups[pickupIndex], optionalDataApplyToLeft);
+                    .ApplyChip((WeaponChip) playerPickups[pickupIndex], optionalDataApplyToLeft);
                 break;
 
             case pickupType.ChassisChip:
-                PlayerBody.Instance().ApplyChip((BodyChip) PlayerPickups[pickupIndex]);
+                PlayerBody.Instance().ApplyChip((BodyChip) playerPickups[pickupIndex]);
                 break;
 
             case pickupType.OrdinanceChip:
@@ -373,10 +434,7 @@ public class Pickup : MonoBehaviour
                 break;
 
             case pickupType.MovementChip:
-                PlayerBody.Instance().GetComponent<ILegModifiable>().ApplyChip((MovementChip)PlayerPickups[pickupIndex]);
-                break;
-
-            case pickupType.LegsChip:
+                PlayerBody.Instance().GetComponent<ILegModifiable>().ApplyChip((MovementChip)playerPickups[pickupIndex]);
                 break;
         }
 
@@ -451,6 +509,7 @@ public class Pickup : MonoBehaviour
 
         weaponsChipsDisplay.SetActive(true);
         weaponsChoiceButtons.SetActive(true);
+        choiceMenuNavigationButton = weaponsChoiceButtons.GetComponentInChildren<Button>();
     }
 
     private void DisplayMechChips()
@@ -477,6 +536,7 @@ public class Pickup : MonoBehaviour
 
         mechChipsDisplay.SetActive(true);
         mechChoiceButton.SetActive(true);
+        choiceMenuNavigationButton = mechChoiceButton.GetComponent<Button>();
     }
 
     public void SpawnLootBox()
@@ -487,5 +547,21 @@ public class Pickup : MonoBehaviour
         }
 
         GetComponentInChildren<Interactable>(true).gameObject.SetActive(true);
+    }
+
+    private void BackButtonPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed && uiPopup.activeSelf)
+        {
+            ClosePickupMenu();
+        }
+    }
+
+    public void TrySelectInitialButton()
+    {
+        if (uiPopup.activeSelf)
+        {
+            
+        }
     }
 }
