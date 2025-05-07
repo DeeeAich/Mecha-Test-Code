@@ -52,6 +52,7 @@ public class BomberDroneBT : BehaviourTree
     public void SetAnimation()
     {
         Animator anim = GetComponentInChildren<Animator>();
+        if(anim !=null)
         anim.SetTrigger("Activate");
     }
 
