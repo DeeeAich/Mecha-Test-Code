@@ -88,10 +88,12 @@ public class Weapon : MonoBehaviour, IModable
     public virtual void ExternalReload(float amount, bool percentage = false)
     {
 
-        if (percentage)
-            amount *= maxAmmo / 100;
+        int addedCount = (int)amount;
 
-        int addedCount = Mathf.RoundToInt(amount);
+        if (percentage)
+            addedCount = Mathf.RoundToInt(amount * maxAmmo / 100);
+
+        print(addedCount);
 
         if (addedCount <= 0)
             addedCount = 1;
@@ -159,8 +161,8 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void SetAnimation()
     {
-        float shotsPerSecond = (1 / fireRate) * modifiers.attackSpeed;
-        float reloadsPerSecond = (1 / reloadTime) * modifiers.reloadSpeed;
+        float shotsPerSecond = ((1 / fireRate) * modifiers.attackSpeed);
+        float reloadsPerSecond = ((1 / reloadTime) * modifiers.reloadSpeed);
         myAnim.SetFloat("FireRate", shotsPerSecond);
         myAnim.SetFloat("ReloadSpeed", reloadsPerSecond);
     }
