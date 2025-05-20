@@ -216,7 +216,6 @@ public class LevelGenerator : MonoBehaviour
         return selection;
     }
     
-    
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
         roomIndex++;

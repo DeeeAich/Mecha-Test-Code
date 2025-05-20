@@ -126,8 +126,15 @@ public class DevKitCheats : MonoBehaviour
         {
             if (healths[i] != playerHealth)
             {
-                healths[i].health = 0;
-                healths[i].TriggerDeath();
+                if (healths[i].TryGetComponent(out OverseerBT bt))
+                {
+                    healths[i].health = 10;
+                }
+                else
+                {
+                    healths[i].health = 0;
+                    healths[i].TriggerDeath();
+                }
             }
         }
     }

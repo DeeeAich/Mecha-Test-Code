@@ -130,7 +130,18 @@ public class Room : MonoBehaviour
         // hello tom
         // hi jacob :3
         AudioManager.instance.ChangeMusicState(musicState.combat);
-        FindObjectOfType<CameraSizeModifier>().ChangeCameraSize(GetComponentInChildren<CamRoom3D>().customLens);
+        
+        
+        CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
+        if (camRoom3D != null)
+        {
+            FindObjectOfType<CameraSizeModifier>().ChangeCameraSize(camRoom3D.customLens);
+            FindObjectOfType<CinemachineVirtualCamera>().Follow = camRoom3D.tracker.transform;
+        }
+        else
+        {
+            Debug.LogError("No CamRoom3d");
+        }
 
         if (entryDoor != null)
         {
@@ -173,11 +184,7 @@ public class Room : MonoBehaviour
         
         if(LevelGenerator.instance.oldRoom != null && LevelGenerator.instance.oldRoom.GetComponent<Room>().currentAttentionGrabber != null) Destroy(LevelGenerator.instance.oldRoom.GetComponent<Room>().currentAttentionGrabber);
 
-        CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
-        if (camRoom3D != null)
-        {
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = camRoom3D.tracker.transform;
-        }
+
 
         isActive = true;
         onStartRoom.Invoke();

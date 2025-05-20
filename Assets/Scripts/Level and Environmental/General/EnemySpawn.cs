@@ -47,7 +47,7 @@ public class EnemySpawn : MonoBehaviour
                 enemyHealth.onDeath.AddListener(delegate
                 {
                     targetWaveSpawner.enemiesKilled++;
-                    Debug.Log("Killed");
+                    //Debug.Log("Killed");
                 });
 
            
