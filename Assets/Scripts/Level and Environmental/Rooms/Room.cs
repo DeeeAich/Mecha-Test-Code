@@ -35,8 +35,8 @@ public class Room : MonoBehaviour
     public EnemySpawnPoint[] enemySpawnPoints;
     public WaveSpawner[] waveSpawners;
     public CaptureZone[] captureZones;
-    public GameObject[] lootSpawnPoints;
-    public List<Pickup> spawnedLoot;
+    public GameObject lootSpawnPoint;
+    public Pickup spawnedLoot;
     [SerializeField] private GameObject playerAttentionGrabberPrefab;
     public GameObject currentAttentionGrabber;
     public int lootCount = 3;
@@ -116,7 +116,7 @@ public class Room : MonoBehaviour
             }
         }
         
-        if (lootSpawnPoints != null && lootSpawnPoints.Length > 0)
+        if (lootSpawnPoint != null)
         {
             SpawnLoot();
         }
@@ -132,11 +132,11 @@ public class Room : MonoBehaviour
         AudioManager.instance.ChangeMusicState(musicState.combat);
         
         
-        CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>(true);
+        CamRoom3D camRoom3D = GetComponentInChildren<CamRoom3D>();
         if (camRoom3D != null)
         {
             FindObjectOfType<CameraSizeModifier>().ChangeCameraSize(camRoom3D.customLens);
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = camRoom3D.tracker.transform;
+            CameraSizeModifier.absoluteCinemachine.Follow = camRoom3D.tracker.transform;
         }
         else
         {
@@ -234,10 +234,10 @@ public class Room : MonoBehaviour
             }
 
          
-            if (lootSpawnPoints != null && lootSpawnPoints.Length > 0)
+            if (lootSpawnPoint != null)
             {
                 if(currentAttentionGrabber != null) Destroy(currentAttentionGrabber);
-                currentAttentionGrabber = Instantiate(playerAttentionGrabberPrefab, lootSpawnPoints[0].transform);
+                currentAttentionGrabber = Instantiate(playerAttentionGrabberPrefab, lootSpawnPoint.transform);
                 currentAttentionGrabber.transform.localScale = new Vector3(25, 15, 10);
             }
 
@@ -249,32 +249,22 @@ public class Room : MonoBehaviour
             if(triggersMusic) AudioManager.instance.ChangeMusicState(musicState.idle);
             FindObjectOfType<CameraSizeModifier>().ResetCameraSize();
 
-            Camera.main.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
-
-            isActive = false;
+            CameraSizeModifier.absoluteCinemachine.Follow = PlayerBody.Instance().transform;
+            
             onCompleteRoom.Invoke();
-        }
-        else
-        {
-            Debug.LogError("Failed To Complete Room (Room is not active)");
         }
     }
 
     private void SpawnLoot()
     {
-        //Debug.Log("Spawning Loot");
+        Debug.Log("Spawning Loot");
+        
+        PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
 
-        for (int i = 0; i < lootSpawnPoints.Length; i++)
-        {
-            PlayerPickup[] pickupsToSpawn = LevelGenerator.instance.GenerateLootPickups(lootCount, roomLootType);
-
-            spawnedLoot.Add(Instantiate(LevelGenerator.instance.levelInfo.pickupPrefab, lootSpawnPoints[i].transform.position, lootSpawnPoints[i].transform.rotation).GetComponent<Pickup>());
-            spawnedLoot[^1].onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
-            spawnedLoot[^1].transform.SetParent(transform);
-            spawnedLoot[^1].playerPickups = pickupsToSpawn;
-            spawnedLoot[^1].RigLootBox();
-        }
-
+        spawnedLoot = Instantiate(LevelGenerator.instance.levelInfo.pickupPrefab, lootSpawnPoint.transform.position, lootSpawnPoint.transform.rotation).GetComponent<Pickup>();
+        spawnedLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
+        spawnedLoot.transform.SetParent(transform);
+        spawnedLoot.playerPickups = pickupsToSpawn;
+        spawnedLoot.RigLootBox();
     }
 }
