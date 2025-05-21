@@ -73,8 +73,8 @@ public class TeslaBot : BehaviourTree
         direction = normal; //direction - 2 * (Vector3.Dot(direction, normal)) * normal;
         direction.y = 0;
         direction.Normalize();
-
-        Debug.Log("did the thing");
+        if(debug)
+        Debug.Log("TeslaBot pass-through protection triggered");
     }
 
     private void OnCollisionExit(Collision collision)
