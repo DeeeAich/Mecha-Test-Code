@@ -125,16 +125,13 @@ public class Pickup : MonoBehaviour
             {
                 case pickupType.Weapon:
                     boxAnimators[i].SetBool("isWeapon", true);
-                    imageDisplayPoints[i].SetActive(false);
+                    //imageDisplayPoints[i].SetActive(false);
                     if (playerPickups[i].hologramReference != null) Instantiate(playerPickups[i].hologramReference, hologramSpawnPoints[i].transform);
                     
                     lootOptionsWeaponsImages[i].SetActive(true);
                     lootOptionsChipsImages[i].SetActive(false);
                     break;
                 
-                default:
-                    imageDisplayPoints[i].SetActive(true);
-                    break;
             }
         }
 
