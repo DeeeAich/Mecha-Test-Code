@@ -1118,7 +1118,13 @@ namespace AITree
                     break;
                 case PositionStoreType.GAMEOBJECT:
                     objectTarget = (GameObject)recovered;
-                    activeTarget = objectTarget.transform.position;
+                    if (objectTarget != null)
+                        activeTarget = objectTarget.transform.position;
+                    else
+                    {
+                        activeTarget = new Vector3(0, 0, 0);
+                        state = BehaviourTreeState.FAILURE;
+                    }
                     break;
                 case PositionStoreType.VECTOR3:
                     activeTarget = (Vector3)recovered;
@@ -2100,7 +2106,7 @@ namespace AITree
         public override BehaviourTreeState Tick()
         {
             base.Tick();
-            if(brain.memory.TryGetValue(target, out object recovered))
+            if (brain.memory.TryGetValue(target, out object recovered))
             {
                 Vector3 targetPosition = Vector3.zero;
                 switch (storeType)
@@ -2118,11 +2124,11 @@ namespace AITree
                         targetPosition = (recovered as GameObject).transform.position;
                         break;
                 }
-                if (Physics.Linecast(brain.transform.position + Vector3.up, targetPosition + Vector3.up, out RaycastHit hit,~LayerMask.GetMask(LayerMask.LayerToName(6))))
+                if (Physics.Linecast(brain.transform.position + Vector3.up, targetPosition + Vector3.up, out RaycastHit hit, ~LayerMask.GetMask(LayerMask.LayerToName(6))))
                     state = BehaviourTreeState.FAILURE;
                 else
                     state = BehaviourTreeState.SUCCESS;
-                if(brain.debug)
+                if (brain.debug)
                 {
                     Debug.Log(state);
                     Debug.Log(hit.collider);
@@ -2189,7 +2195,7 @@ namespace AITree
                 targetPosition += Vector3.up;
                 Vector3 offsetBrain = brain.transform.position + Vector3.up;
                 state = BehaviourTreeState.FAILURE;
-                for(int i = 1; i <= stepCount; i++)
+                for (int i = 1; i <= stepCount; i++)
                 {
                     Vector3 testPosition = offsetBrain + (left * i);
                     if (!Physics.Linecast(testPosition, targetPosition, ~LayerMask.GetMask(LayerMask.LayerToName(6))))
@@ -2376,7 +2382,7 @@ namespace AITree
     //            Debug.Log(NavMesh.FindClosestEdge(hitPoint, out NavMeshHit navMeshHit, -1));
     //            Debug.Log(brain.agent.CalculatePath(hitPoint + sideStep, leftSideStep));
     //            Debug.Log(brain.agent.CalculatePath(hitPoint - sideStep, rightSideStep));
-                
+
     //            Vector3 probeRes, leftRes, rightRes;
     //            probeRes = probePath.corners[probePath.corners.Length - 1];
     //            leftRes = leftSideStep.corners[leftSideStep.corners.Length - 1];
