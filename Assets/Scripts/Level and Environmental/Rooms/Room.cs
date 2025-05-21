@@ -136,7 +136,7 @@ public class Room : MonoBehaviour
         if (camRoom3D != null)
         {
             FindObjectOfType<CameraSizeModifier>().ChangeCameraSize(camRoom3D.customLens);
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = camRoom3D.tracker.transform;
+            CameraSizeModifier.absoluteCinemachine.Follow = camRoom3D.tracker.transform;
         }
         else
         {
@@ -250,7 +250,7 @@ public class Room : MonoBehaviour
             FindObjectOfType<CameraSizeModifier>().ResetCameraSize();
 
             Camera.main.transform.parent.GetComponentInChildren<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
-            FindObjectOfType<CinemachineVirtualCamera>().Follow = PlayerBody.Instance().transform;
+            CameraSizeModifier.absoluteCinemachine.Follow = PlayerBody.Instance().transform;
 
             isActive = false;
             onCompleteRoom.Invoke();
