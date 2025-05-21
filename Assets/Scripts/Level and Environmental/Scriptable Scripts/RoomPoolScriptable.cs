@@ -8,8 +8,8 @@ public class RoomPoolScriptable : ScriptableObject
 {
     public GameObject[] entryRooms;
     public GameObject[] standardRooms;
-    public GameObject[] rareRooms;
     public GameObject[] miniBossRooms;
+    public GameObject[] preBossRooms;
     public GameObject[] bossRooms;
-    public GameObject[] finalRooms;
+    public GameObject[] postBossRooms;
 }

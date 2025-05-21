@@ -48,7 +48,7 @@ public class OverseerFightPrimaryObjective : Objective
 
         if (room.spawnedLoot != null)
         {
-            room.spawnedLoot.gameObject.SetActive(true);
+            //room.spawnedLoot.gameObject.SetActive(true);
         }
         Phase2End.Invoke(true);
     }
