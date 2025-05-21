@@ -265,5 +265,6 @@ public class Room : MonoBehaviour
         spawnedLoot.onPickedUpEvent.AddListener(delegate { Destroy(this.currentAttentionGrabber); });
         spawnedLoot.transform.SetParent(transform);
         spawnedLoot.playerPickups = pickupsToSpawn;
+        spawnedLoot.RigLootBox();
     }
 }

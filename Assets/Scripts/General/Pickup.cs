@@ -27,7 +27,7 @@ public class Pickup : MonoBehaviour
     [Header("Editor Only")] [SerializeField]
     private bool EDITORTriggerSpawn = false;
 
-    [Header("Pickup Info")] public pickupType pickupType = pickupType.ChassisChip;
+    [Header("Pickup Info")]
     [FormerlySerializedAs("PlayerPickups")] public PlayerPickup[] playerPickups;
 
     public UnityEvent onPickedUpEvent;
@@ -91,9 +91,7 @@ public class Pickup : MonoBehaviour
     private InputAction backAction;
 
     private void Start()
-    {
-        RigLootBox();
-        
+    { 
         backAction = PlayerBody.Instance().GetComponent<PlayerInput>().actions["Back"];
         backAction.performed += BackButtonPressed;
 
@@ -105,14 +103,14 @@ public class Pickup : MonoBehaviour
         backAction.performed -= BackButtonPressed;
     }
 
-    private void RigLootBox()
+    public void RigLootBox()
     {
-        pickupType = playerPickups[0].PickupType;
-
+        Debug.Log("Rigging Loot Box With " + playerPickups.Length + " Loot Choices");
+        
         for (int i = 0; i < playerPickups.Length; i++)
         {
             itemDisplayImagesOverBoxes[i].sprite = playerPickups[i].mySprite;
-            boxAnimators[i].SetInteger("lootRarity", playerPickups[i].rarity);
+            if(boxAnimators[i].gameObject.activeInHierarchy) boxAnimators[i].SetInteger("lootRarity", playerPickups[i].rarity);
 
 
             lootOptionsImages[i].sprite = playerPickups[i].mySprite;
@@ -123,7 +121,7 @@ public class Pickup : MonoBehaviour
             lootOptionsNames[i].text = playerPickups[i].itemName;
             lootOptionsDescriptions[i].text = playerPickups[i].description;
 
-            switch (pickupType)
+            switch (playerPickups[i].PickupType)
             {
                 case pickupType.Weapon:
                     boxAnimators[i].SetBool("isWeapon", true);
@@ -132,6 +130,10 @@ public class Pickup : MonoBehaviour
                     
                     lootOptionsWeaponsImages[i].SetActive(true);
                     lootOptionsChipsImages[i].SetActive(false);
+                    break;
+                
+                default:
+                    imageDisplayPoints[i].SetActive(true);
                     break;
             }
         }
@@ -186,9 +188,9 @@ public class Pickup : MonoBehaviour
 
         for (int i = 0; i < lootOptionsButtonsWithAssociatedAnimators.Length; i++)
         {
-            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsSelected", false);
-            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", false);
-            lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsReturn", false);
+            if(lootOptionsAssociatedAnimators[i].gameObject.activeInHierarchy) lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsSelected", false);
+            if(lootOptionsAssociatedAnimators[i].gameObject.activeInHierarchy)lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", false);
+            if(lootOptionsAssociatedAnimators[i].gameObject.activeInHierarchy)lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsReturn", false);
             
             Navigation nav = new Navigation();
             
@@ -288,6 +290,8 @@ public class Pickup : MonoBehaviour
         {
             UnRigChoiceMenu();
             
+            pickupType pickupType = playerPickups[0].PickupType;
+            
             switch (pickupType)
             {
                 case pickupType.Weapon:
@@ -379,7 +383,8 @@ public class Pickup : MonoBehaviour
     public void PickupItem(bool optionalDataApplyToLeft)
     {
         if (!canUse) return;
-        pickupType = playerPickups[pickupIndex].PickupType;
+        
+        pickupType pickupType = playerPickups[pickupIndex].PickupType;
 
         PlayerBody.Instance().StopParts(true, true);
         Debug.Log("Picking up " + name);
