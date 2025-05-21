@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraSizeModifier : MonoBehaviour
 {
-    [SerializeField] internal static CinemachineVirtualCamera absoluteCinemachine;
+    [SerializeField] CinemachineVirtualCamera abosluteCinemachine;
     [SerializeField] float testVal;
     [SerializeField] bool test;
     [SerializeField] bool resetTest;
@@ -16,8 +16,7 @@ public class CameraSizeModifier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        absoluteCinemachine = GetComponent<CinemachineVirtualCamera>();
-        rememberedLensSize = absoluteCinemachine.m_Lens.OrthographicSize;
+        rememberedLensSize = abosluteCinemachine.m_Lens.OrthographicSize;
         currentSize = rememberedLensSize;
         targetSize = rememberedLensSize;
     }
@@ -49,7 +48,7 @@ public class CameraSizeModifier : MonoBehaviour
         }
 
 
-        absoluteCinemachine.m_Lens.OrthographicSize = currentSize;
+        abosluteCinemachine.m_Lens.OrthographicSize = currentSize;
     }
 
     public void ChangeCameraSize(float newSize)
