@@ -207,7 +207,7 @@ public class pauseMenu : MonoBehaviour
 
     public void onPauseButtonPressed(InputAction.CallbackContext context)
     {
-        print("Pause button");
+        //print("Pause button");
 
         if (paused)
         {

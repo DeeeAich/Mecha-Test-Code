@@ -10,9 +10,12 @@ public class TeslaBot : BehaviourTree
     public float speed;
     internal float speedBackup;
     internal float yPos;
+    internal Vector3 lastKnownLocation;
+    internal List<Collider> colliders;
 
     override internal void Awake()
     {
+        colliders = new List<Collider>();
         base.Awake();
         direction = Random.onUnitSphere;
         direction.y = 0;
@@ -53,11 +56,29 @@ public class TeslaBot : BehaviourTree
 
     private void OnCollisionEnter(Collision collision)
     {
-
         Vector3 normal = collision.GetContact(0).normal.normalized; //normal.normalized;
-
+        colliders.Add(collision.collider);
         direction = direction - 2 * (Vector3.Dot(direction, normal)) * normal;
         direction.y = 0;
         direction.Normalize();
+        lastKnownLocation = transform.position;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        transform.position = lastKnownLocation; 
+        
+        Vector3 normal = collision.GetContact(0).normal.normalized; //normal.normalized;
+        normal += Random.insideUnitSphere * 0.5f;
+        direction = normal; //direction - 2 * (Vector3.Dot(direction, normal)) * normal;
+        direction.y = 0;
+        direction.Normalize();
+        if(debug)
+        Debug.Log("TeslaBot pass-through protection triggered");
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        colliders.Remove(collision.collider);
     }
 }

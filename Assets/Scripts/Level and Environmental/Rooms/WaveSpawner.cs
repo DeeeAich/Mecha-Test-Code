@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
@@ -15,6 +16,7 @@ public class WaveSpawner : MonoBehaviour
     [Header("Settings")]
     public bool looping;
     [SerializeField] private int remainingEnemiesToTriggerNextWave = 2;
+    [SerializeField] private float waveSpawnCooldown = 3;
     
     [Header("If unset, these will be randomly generated within fair ranges")]
     [SerializeField] private int[] waves;
@@ -27,7 +29,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private EnemySpawnPoint[] spawnPoints;
     [SerializeField] private GameObject enemySpawnPrefab;
 
-    [Header("Internal References")]
+    
+    [Header("- - - - - - - - - Internal References Do Not Touch - - - - - - - - -")]
     [SerializeField] private bool spawnOnStart = true;
     public float difficulty = 1;
     public bool spawning;
@@ -42,11 +45,11 @@ public class WaveSpawner : MonoBehaviour
     public UnityEvent onComplete;
     private EnemyPoolScriptable enemyPool;
     private List<EnemySpawnStruct> possibleEnemies;
-
+    
     private int enemyToSpawnIndex;
     private Random seededRandom;
-    private float waveSpawnCooldown = 3;
-    private float waveSpawnCooldownTimer;
+
+    [SerializeField] private float waveSpawnCooldownTimer;
     
     private void Awake() // creates enemy spawn pool
     {
@@ -193,7 +196,7 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Enemies To kill Off");
+            //Debug.Log("No Enemies To kill Off");
         }// clears null references from list
     }
 

@@ -25,7 +25,7 @@ public class OverseerFightPrimaryObjective : Objective
     {
         if (room.spawnedLoot != null)
         {
-            room.spawnedLoot.gameObject.SetActive(false);
+            //room.spawnedLoot.gameObject.SetActive(false);
         }
     }
 
@@ -48,7 +48,7 @@ public class OverseerFightPrimaryObjective : Objective
 
         if (room.spawnedLoot != null)
         {
-            room.spawnedLoot.gameObject.SetActive(true);
+            //room.spawnedLoot.gameObject.SetActive(true);
         }
         Phase2End.Invoke(true);
     }
@@ -107,45 +107,61 @@ public class OverseerFightPrimaryObjective : Objective
 
     private void FixedUpdate()
     {
-        if (bossHealth == null)
+        if (!isComplete)
         {
-            if (!bossWaveSpawnerInScene.isComplete && bossWaveSpawnerInScene.spawnedEnemies.Count > 0)
-            {
-                if (bossWaveSpawnerInScene.spawnedEnemies[0].TryGetComponent(out bossHealth))
-                {
-                    bossHealth = FindObjectOfType<OverseerBT>().GetComponent<Health>();
-                    bossHealth.GetComponent<OverseerBT>().onPhaseTransition.AddListener(StartPhaseTransition);
-                }
-            }
-        }
-        else
-        {
-            progressBar.fillAmount = bossHealth.health / bossHealth.maxHealth;
-            
-            if (bossHealth != null && bossHealth.health <= 0)
+
+            if (bossWaveSpawnerInScene.isComplete)
             {
                 TriggerComplete();
             }
-        }
-        
-        if (phaseTransitionTimer > 0)
-        {
-            phaseTransitionTimer -= Time.fixedDeltaTime;
-
-            if (phaseTransitionTimer <= 0)
+            else
             {
-                StopPhaseTransition();
-                postPhaseTransitionWaveSpawnerStartTimer = 1;
+                if (bossHealth == null)
+                {
+                    if (!bossWaveSpawnerInScene.isComplete && bossWaveSpawnerInScene.spawnedEnemies.Count > 0)
+                    {
+                        if (bossWaveSpawnerInScene.spawnedEnemies[0].TryGetComponent(out bossHealth))
+                        {
+                            bossHealth = FindObjectOfType<OverseerBT>().GetComponent<Health>();
+                            bossHealth.GetComponent<OverseerBT>().onPhaseTransition.AddListener(StartPhaseTransition);
+                        }
+                    }
+                }
+                else
+                {
+     
+                    progressBar.fillAmount = bossHealth.health / bossHealth.maxHealth;
+            
+                    /*
+                    if (bossHealth != null && bossHealth.health <= 0)
+                    {
+                        TriggerComplete();
+                    }
+                    */
+                }
             }
-        }
-
-        if (postPhaseTransitionWaveSpawnerStartTimer > 0)
-        {
-            postPhaseTransitionWaveSpawnerStartTimer -= Time.fixedDeltaTime;
-
-            if (postPhaseTransitionWaveSpawnerStartTimer <= 0)
+            
+     
+        
+            if (phaseTransitionTimer > 0)
             {
-                room.waveSpawners[1].StartSpawning();
+                phaseTransitionTimer -= Time.fixedDeltaTime;
+
+                if (phaseTransitionTimer <= 0)
+                {
+                    StopPhaseTransition();
+                    postPhaseTransitionWaveSpawnerStartTimer = 1;
+                }
+            }
+
+            if (postPhaseTransitionWaveSpawnerStartTimer > 0)
+            {
+                postPhaseTransitionWaveSpawnerStartTimer -= Time.fixedDeltaTime;
+
+                if (postPhaseTransitionWaveSpawnerStartTimer <= 0)
+                {
+                    room.waveSpawners[1].StartSpawning();
+                }
             }
         }
     }

@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   looping: 0
-  remainingEnemiesToTriggerNextWave: 2
+  remainingEnemiesToTriggerNextWave: 3
+  waveSpawnCooldown: 5
   waves: 030000000200000003000000
   enemiesToSpawn: 0000000001000000000000000100000003000000000000000200000001000000
   spawnableEnemyTypes: 
@@ -64,3 +65,4 @@ MonoBehaviour:
   onComplete:
     m_PersistentCalls:
       m_Calls: []
+  waveSpawnCooldownTimer: 0

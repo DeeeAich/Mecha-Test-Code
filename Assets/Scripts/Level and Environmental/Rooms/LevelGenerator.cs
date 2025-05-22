@@ -71,49 +71,58 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject[] NextRoomSelection(int count)
     {
-        GameObject[] selection = new GameObject[count];
+ 
         List<GameObject> possibleRooms = new List<GameObject>();
-
-        if (roomIndex  < levelInfo.roomPool.entryRooms.Length)
+        string roomTypesToSpawnName = "Standard";
+        
+        if      (levelInfo.roomPool.entryRooms.Length > 0    &&  roomIndex < levelInfo.roomPool.entryRooms.Length)
         {
-            print("Using entry rooms");
             possibleRooms.Add(levelInfo.roomPool.entryRooms[roomIndex]);
+            roomTypesToSpawnName = "Entry Rooms";
         }
-        else if (roomIndex == roomsInThisFloor)
+        else if (levelInfo.roomPool.preBossRooms.Length > 0  &&  roomIndex == roomsInThisFloor - 1)
+        {
+            possibleRooms = levelInfo.roomPool.preBossRooms.ToList();
+            roomTypesToSpawnName = "Pre-boss Rooms";
+        }
+        else if (levelInfo.roomPool.bossRooms.Length > 0     &&  roomIndex == roomsInThisFloor )
         {
             possibleRooms = levelInfo.roomPool.bossRooms.ToList();
+            roomTypesToSpawnName = "Boss Rooms";
         }
-        else if (roomIndex == roomsInThisFloor + 1)
+        else if (levelInfo.roomPool.postBossRooms.Length > 0 &&  roomIndex == roomsInThisFloor + 1)
         {
-            possibleRooms = levelInfo.roomPool.finalRooms.ToList();
+            possibleRooms = levelInfo.roomPool.postBossRooms.ToList();
+            roomTypesToSpawnName = "Post Boss Rooms";
         }
-        else if (minibossRoomIndexes.Contains(roomIndex))
+        else if (levelInfo.roomPool.miniBossRooms.Length > 0 &&  minibossRoomIndexes.Contains(roomIndex))
         {
             possibleRooms = levelInfo.roomPool.miniBossRooms.ToList();
         }
-        else
+        else if (levelInfo.roomPool.standardRooms.Length > 0)
         {
             possibleRooms = levelInfo.roomPool.standardRooms.ToList();
         }
+        else
+        {
+            Debug.LogError("No Rooms In Room Pool");
+        }
         
-        Debug.Log("There are " + possibleRooms.Count + " rooms available");
-
-        
-        if (possibleRooms.Count > 0 && possibleRooms.Contains(mostrecentyUsedRoomPrefab))
+        Debug.Log("Choosing next room from " + possibleRooms.Count + " " + roomTypesToSpawnName);
+        if (possibleRooms.Count > 1 && possibleRooms.Contains(mostrecentyUsedRoomPrefab))
         {
             print("Removing " + mostrecentyUsedRoomPrefab.name);
             possibleRooms.Remove(mostrecentyUsedRoomPrefab);
         }
+
+        GameObject[] selection = new GameObject[count];
+        bool canRemoveDuplicates = possibleRooms.Count > selection.Length;
         
-        
-        if(possibleRooms.Count == 0) Debug.LogError("FUCK AHH THERE ARE NO FUCKING ROOMS TO GENERATE");
-        
-        int totalPossibleRooms = possibleRooms.Count;
         for (int i = 0; i < selection.Length; i++)
         {
             int rand = seededRandom.Next(0, possibleRooms.Count);
             selection[i] = possibleRooms[rand];
-            if(totalPossibleRooms > selection.Length) possibleRooms.RemoveAt(rand);
+            if(canRemoveDuplicates) possibleRooms.RemoveAt(rand);
         }
 
         return selection;
@@ -123,30 +132,32 @@ public class LevelGenerator : MonoBehaviour
     {
         LootType[] selection = new LootType[count];
         List<LootType> possibleLoots = new List<LootType>();
+
+        if (roomIndex == 1)
+        {
+            possibleLoots.Add(LootType.weapon);
+        }
+        else if (roomIndex == roomsInThisFloor - 1)
+        {
+            possibleLoots.Add(LootType.weaponChip);
+            possibleLoots.Add(LootType.mechChip);
+        }
+        else
+        {
+            possibleLoots.Add(LootType.weapon);
+            possibleLoots.Add(LootType.weaponChip);
+            possibleLoots.Add(LootType.mechChip);
+        }
         
-        possibleLoots.Add(LootType.weapon);
-        possibleLoots.Add(LootType.weaponChip);
-        possibleLoots.Add(LootType.mechChip);
-
-        //possibleLoots.Add(LootType.ordinance);
-        //possibleLoots.Add(LootType.chassis);
-
-        int totalPossibleLoots = possibleLoots.Count;
+        bool canRemoveDuplicates = possibleLoots.Count > selection.Length;
         for (int i = 0; i < selection.Length; i++)
         {
             int rand = seededRandom.Next(0, possibleLoots.Count);
             selection[i] = possibleLoots[rand];
-            if(totalPossibleLoots > selection.Length) possibleLoots.RemoveAt(rand);
+            if(canRemoveDuplicates) possibleLoots.RemoveAt(rand);
         }
 
-        if (roomIndex == 1)
-        {
-            for (int i = 0; i < selection.Length; i++)
-            {
-                selection[i] = LootType.weapon;
-            }
-        }
-        
+
         return selection;
     }
 
@@ -215,7 +226,6 @@ public class LevelGenerator : MonoBehaviour
 
         return selection;
     }
-    
     
     public void SpawnRoom(GameObject room, GameObject targetPosition)
     {
