@@ -161,8 +161,8 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void SetAnimation()
     {
-        float shotsPerSecond = ((1 / fireRate) * modifiers.attackSpeed);
-        float reloadsPerSecond = ((1 / reloadTime) * modifiers.reloadSpeed);
+        float shotsPerSecond = (1 / fireRate) * modifiers.attackSpeed;
+        float reloadsPerSecond = (1 / reloadTime) * modifiers.reloadSpeed;
         myAnim.SetFloat("FireRate", shotsPerSecond);
         myAnim.SetFloat("ReloadSpeed", reloadsPerSecond);
     }

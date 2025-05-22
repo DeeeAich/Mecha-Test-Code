@@ -336,16 +336,61 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     }
 
     [Tooltip("For setting the parts to on or off")]
+
+    private struct PartStopper
+    {
+        public bool weapons,
+            legs;
+    }
+    private List<PartStopper> stoppedParts;
     public void StopParts(bool weapons, bool legs)
     {
-        if(!weapons)
-        {
-            weaponHolder.leftWeapon.FireRelease();
-            weaponHolder.rightWeapon.FireRelease();
-        }
-        canShoot = weapons;
-        canMove = legs;
 
+        if(!weapons || !legs)
+        {
+
+            PartStopper newStopper = new();
+            newStopper.weapons = weapons;
+            newStopper.legs = legs;
+
+            if (!weapons)
+            {
+                weaponHolder.leftWeapon.FireRelease();
+                weaponHolder.rightWeapon.FireRelease();
+            }
+
+            canShoot = weapons ? canShoot : weapons;
+            canMove = legs ? canMove : legs;
+
+        }
+        else
+        {
+            for (int i = 0; i < stoppedParts.Count; i++)
+            {
+                if (stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == legs ||
+                        stoppedParts[i].weapons == weapons && stoppedParts[i].legs == !legs ||
+                            stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == !legs)
+                {
+                    stoppedParts.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if(stoppedParts.Count == 0)
+            {
+                canMove = true;
+                canShoot = true;
+            }
+            else
+            {
+                foreach (PartStopper partStopper in stoppedParts)
+                {
+                    canMove = partStopper.legs ? canMove : false;
+                    canShoot = partStopper.weapons ? canShoot : false;
+                }
+            }
+
+        }
 
     }
 

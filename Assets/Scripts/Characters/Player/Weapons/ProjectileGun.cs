@@ -124,7 +124,7 @@ public class ProjectileGun : Weapon
         base.SetAnimation();
 
         if (hasBurst)
-            myAnim.SetFloat("FireRate", 1 / ((1 / timeBetweenBurst) * modifiers.attackSpeed));
+            myAnim.SetFloat("FireRate", (1 / timeBetweenBurst) * modifiers.attackSpeed);
 
     }
 }
