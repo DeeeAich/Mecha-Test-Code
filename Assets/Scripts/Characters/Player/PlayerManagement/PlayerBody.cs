@@ -342,7 +342,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         public bool weapons,
             legs;
     }
-    private List<PartStopper> stoppedParts;
+    private List<PartStopper> stoppedParts = new();
     public void StopParts(bool weapons, bool legs)
     {
 
@@ -352,6 +352,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             PartStopper newStopper = new();
             newStopper.weapons = weapons;
             newStopper.legs = legs;
+            stoppedParts.Add(newStopper);
 
             if (!weapons)
             {
@@ -365,16 +366,24 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         }
         else
         {
+            int removeIndex = 50;
             for (int i = 0; i < stoppedParts.Count; i++)
             {
                 if (stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == legs ||
                         stoppedParts[i].weapons == weapons && stoppedParts[i].legs == !legs ||
                             stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == !legs)
                 {
-                    stoppedParts.RemoveAt(i);
+                    removeIndex = i;
                     break;
                 }
+
             }
+
+            if(removeIndex != 50)
+                stoppedParts.RemoveAt(removeIndex);
+
+            print(stoppedParts.Count);
+            print(stoppedParts.Count > 0 ? stoppedParts[0].weapons : "");
 
             if(stoppedParts.Count == 0)
             {
