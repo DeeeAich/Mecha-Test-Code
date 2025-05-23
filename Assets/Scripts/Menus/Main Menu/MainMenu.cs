@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,19 +7,28 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    float timer = 0f;
+
     [SerializeField] private int sceneForTutorial = 2;
     [SerializeField] private int sceneForSkipTutorial = 5;
     private bool skipTutorial;
-    private void Update()
+
+    private bool timerRunningToSelectFirstButton = true;
+    [SerializeField] private Button firstButton;
+    float timer = 2f;
+
+    private void FixedUpdate()
     {
-        timer += Time.deltaTime;
-        if(timer > 5f)
+        if (timerRunningToSelectFirstButton)
         {
-            UnityEngine.UI.Button selected = GetComponentInChildren<UnityEngine.UI.Button>();
-            selected.Select();
-            timer = 0f;
+            timer -= Time.fixedDeltaTime;
+
+            if (timer <= 0)
+            {
+                firstButton.Select();
+                timerRunningToSelectFirstButton = false;
+            }
         }
+
     }
 
     public void StartGame()
