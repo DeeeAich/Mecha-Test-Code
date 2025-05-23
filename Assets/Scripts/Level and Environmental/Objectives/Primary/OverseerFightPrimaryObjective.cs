@@ -131,6 +131,7 @@ public class OverseerFightPrimaryObjective : Objective
                         {
                             bossHealth = FindObjectOfType<OverseerBT>().GetComponent<Health>();
                             bossHealth.GetComponent<OverseerBT>().onPhaseTransition.AddListener(StartPhaseTransition);
+                            bossHealth.onDeath.AddListener(StartPhaseTransition);
                         }
                     }
                 }
