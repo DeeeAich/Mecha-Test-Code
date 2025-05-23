@@ -21,16 +21,21 @@ public class OverseerFightPrimaryObjective : Objective
     private Health bossHealth;
     private bool hasRegisteredEvents = false;
 
+    public int currentPhase;
+
     private void Start()
     {
         if (room.spawnedLoot != null)
         {
+            currentPhase = 0;
             //room.spawnedLoot.gameObject.SetActive(false);
         }
     }
 
     private void StartPhaseTransition()
     {
+        if(currentPhase != 0) return;
+        
         ToggleGameFrozenForPhaseTransition(true);
         
         phaseTransitionTimer = phaseTransitionTime;
@@ -44,13 +49,15 @@ public class OverseerFightPrimaryObjective : Objective
         
         room.waveSpawners = new WaveSpawner[] {bossWaveSpawnerInScene, Instantiate(phase2WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
 
-        bossHealth.canTakeDamage = true;
+        if(bossHealth != null) bossHealth.canTakeDamage = true;
 
         if (room.spawnedLoot != null)
         {
             //room.spawnedLoot.gameObject.SetActive(true);
         }
+        
         Phase2End.Invoke(true);
+        currentPhase = 1;
     }
 
     private void ToggleGameFrozenForPhaseTransition(bool freeze)
@@ -124,6 +131,7 @@ public class OverseerFightPrimaryObjective : Objective
                         {
                             bossHealth = FindObjectOfType<OverseerBT>().GetComponent<Health>();
                             bossHealth.GetComponent<OverseerBT>().onPhaseTransition.AddListener(StartPhaseTransition);
+                            bossHealth.onDeath.AddListener(StartPhaseTransition);
                         }
                     }
                 }

@@ -109,10 +109,15 @@ public class DevKitCheats : MonoBehaviour
                 ToggleEnemyTime();
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
             {
                 Time.timeScale = 1;
                 SceneManager.LoadScene(0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                CompleteRoom();
             }
         }
     }

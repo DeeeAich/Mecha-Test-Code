@@ -40,7 +40,7 @@ public class CamRoom3D : MonoBehaviour
         //projectionRect.transform.RotateAround(projectionRect.transform.position, projectionRect.transform.right, projectionAngle - projectionRect.transform.rotation.eulerAngles.x);
 
         player = PlayerBody.Instance().gameObject;
-        cam = FindObjectOfType<CinemachineVirtualCamera>();
+        cam = CameraSizeModifier.absoluteCinemachine;
 
         //Get the scale right
             //Get the corners
