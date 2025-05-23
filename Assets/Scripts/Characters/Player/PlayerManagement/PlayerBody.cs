@@ -460,6 +460,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         UnsetControls();
+        UnsetChips();
         triggers.ClearEvents();
 
     }
