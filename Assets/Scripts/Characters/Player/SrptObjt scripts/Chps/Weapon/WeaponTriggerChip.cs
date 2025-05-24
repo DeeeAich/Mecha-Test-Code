@@ -83,8 +83,15 @@ public class WeaponTriggerChip : WeaponChip
                     PlayerBody.Instance().triggers.reloadLeft += PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
                     PlayerBody.Instance().triggers.reloadRight += PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
                 break;
+            case (ChipEnums.Trigger.replenish):
+                PlayerBody.Instance().triggers.replenishLeft += PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
+                PlayerBody.Instance().triggers.replenishRight += PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
+                break;
             case (ChipEnums.Trigger.constant):
                     PlayerBody.Instance().triggers.constant += PlayerWeaponControl.instance.leftWeapon == weapon ? constantActionLeft : constantActionRight;
+                break;
+            case (ChipEnums.Trigger.dashed):
+                PlayerBody.Instance().triggers.dashed += PlayerWeaponControl.instance.leftWeapon == weapon ? constantActionLeft : constantActionRight;
                 break;
         }
 
@@ -129,6 +136,13 @@ public class WeaponTriggerChip : WeaponChip
                             PlayerBody.Instance().triggers.reloadLeft -= PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
 
                             PlayerBody.Instance().triggers.reloadRight -= PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
+                        break;
+                    case (ChipEnums.Trigger.replenish):
+                        PlayerBody.Instance().triggers.replenishLeft -= PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
+                        PlayerBody.Instance().triggers.replenishRight -= PlayerWeaponControl.instance.leftWeapon == weapon ? startActionLeft : startActionRight;
+                        break;
+                    case (ChipEnums.Trigger.dashed):
+                        PlayerBody.Instance().triggers.dashed -= PlayerWeaponControl.instance.leftWeapon == weapon ? constantActionLeft : constantActionRight;
                         break;
                 }
         if (weapon == PlayerWeaponControl.instance.leftWeapon)

@@ -101,8 +101,9 @@ public class Weapon : MonoBehaviour, IModable
         if (curAmmo + addedCount > maxAmmo)
             addedCount = maxAmmo - curAmmo;
 
-        if (curAmmo > 0)
+        if (addedCount > 0)
         {
+            print("Replenished");
             if (weapon == myController.leftWeapon)
                 PlayerBody.Instance().triggers.replenishLeft?.Invoke();
             else

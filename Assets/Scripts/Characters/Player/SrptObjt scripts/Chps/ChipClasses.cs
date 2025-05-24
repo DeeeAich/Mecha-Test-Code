@@ -149,7 +149,7 @@ public class ChipEnums
         OnHeal, moveStart,
         moveEnd, reload,
         constant, dashed,
-        none
+        replenish, none
     }
 
 }

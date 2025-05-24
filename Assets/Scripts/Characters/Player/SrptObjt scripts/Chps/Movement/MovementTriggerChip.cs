@@ -56,6 +56,10 @@ public class MovementTriggerChip : MovementChip
                     PlayerBody.Instance().triggers.reloadLeft += startAction;
                     PlayerBody.Instance().triggers.reloadRight += startAction;
                 break;
+            case (ChipEnums.Trigger.replenish):
+                PlayerBody.Instance().triggers.replenishLeft += startAction;
+                PlayerBody.Instance().triggers.replenishRight += startAction;
+                break;
             case (ChipEnums.Trigger.dashed):
                     PlayerBody.Instance().triggers.dashed += startAction;
                 break;
@@ -99,6 +103,13 @@ public class MovementTriggerChip : MovementChip
                 case (ChipEnums.Trigger.reload):
                         PlayerBody.Instance().triggers.reloadLeft -= startAction;
                         PlayerBody.Instance().triggers.reloadRight -= startAction;
+                    break;
+                case (ChipEnums.Trigger.replenish):
+                    PlayerBody.Instance().triggers.replenishLeft -= startAction;
+                    PlayerBody.Instance().triggers.replenishRight -= startAction;
+                    break;
+                case (ChipEnums.Trigger.dashed):
+                    PlayerBody.Instance().triggers.dashed -= startAction;
                     break;
             }
 
