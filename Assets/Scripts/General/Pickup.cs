@@ -82,6 +82,8 @@ public class Pickup : MonoBehaviour
     [SerializeField] private GameObject[] hologramSpawnPoints;
     public SpriteRenderer[] itemDisplayImagesOverBoxes;
 
+    [SerializeField] private bool RigOnStart = false;
+
     [HideInInspector] public bool open;
     private float buttonInteractBlockTimer;
     private float closeUiTimer;
@@ -96,6 +98,8 @@ public class Pickup : MonoBehaviour
         backAction.performed += BackButtonPressed;
 
         mouseControls = !PlayerBody.Instance().isGamepad;
+        
+        if(RigOnStart) RigLootBox();
     }
 
     private void OnDisable()
@@ -146,6 +150,8 @@ public class Pickup : MonoBehaviour
         pickupIndex = index;
 
         choiceButtons.SetActive(true);
+        
+        Navigation nav = new Navigation();
 
         for (int i = 0; i < lootOptionsButtonsWithAssociatedAnimators.Length; i++)
         {
@@ -162,8 +168,7 @@ public class Pickup : MonoBehaviour
                 lootOptionsAssociatedAnimators[i].GetComponent<Animator>().SetBool("IsGreyedOut", true);
             }
 
-            Navigation nav = new Navigation();
-
+            nav = new Navigation();
             nav.mode = Navigation.Mode.Explicit;
             
             nav.selectOnUp = exitButton;
@@ -174,8 +179,15 @@ public class Pickup : MonoBehaviour
             lootOptionsButtonsWithAssociatedAnimators[i].navigation = nav;
         }
         
+        nav = new Navigation();
+        nav.mode = Navigation.Mode.Explicit;
+        nav.selectOnUp = choiceMenuNavigationButton;
+        nav.selectOnDown = choiceMenuNavigationButton;
+
+        exitButton.navigation = nav;
         
-        
+        choiceMenuNavigationButton.Select();
+
         onChoiceMenuOpened.Invoke();
     }
 
@@ -323,6 +335,13 @@ public class Pickup : MonoBehaviour
             uiPopup.SetActive(true);
 
             GetComponentInChildren<Interactable>(true).canInteract = false;
+            
+            Navigation nav = new Navigation();
+            nav.mode = Navigation.Mode.Explicit;
+            nav.selectOnUp = lootOptionsButtonsWithAssociatedAnimators[0];
+            nav.selectOnDown = lootOptionsButtonsWithAssociatedAnimators[0];
+
+            exitButton.navigation = nav;
 
             initiallySelectedButton.Select();
             buttonInteractBlockTimer = 0.5f;

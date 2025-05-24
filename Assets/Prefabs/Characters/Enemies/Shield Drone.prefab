@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5309172495042634644}
+  - component: {fileID: 986991060783444348}
+  - component: {fileID: -1502201843710798797}
   - component: {fileID: 7889106024169608077}
   - component: {fileID: 5786988066262490530}
   - component: {fileID: 8247349491236946628}
   - component: {fileID: 738471980783884206}
-  - component: {fileID: 986991060783444348}
-  - component: {fileID: -1502201843710798797}
   m_Layer: 9
   m_Name: Shield Drone
   m_TagString: Enemy
@@ -39,6 +39,60 @@ Transform:
   - {fileID: 2333583541317137942}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986991060783444348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73b73c909f5c664a90995493b53f6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 30
+  maxHealth: 30
+  isAlive: 1
+  canTakeDamage: 1
+  canDie: 1
+  entityType: 1
+  entityBounds: {x: 1, y: 1, z: 1}
+  editorTakeDamage: 0
+  editorDamageAmount: 100
+  destroyOnDeath: 1
+  destroyTimer: 0.1
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  meshesRef: {fileID: 6270579132875442834}
+  unchildStuff: 1
+--- !u!114 &-1502201843710798797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168237188150525127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseMaxHealth: 30
+  _baseSpeed: 9
+  _baseAngularSpeed: 120
+  _baseAcceleration: 8
+  _difficulty: 1
+  _baseDamage: 30
+  onStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  myHealth: {fileID: 986991060783444348}
+  myAgent: {fileID: 5786988066262490530}
 --- !u!136 &7889106024169608077
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -100,7 +154,7 @@ MonoBehaviour:
   targetHealth: {fileID: 0}
   rangeMax: 15
   rangeInit: 7.5
-  shieldHealth: 100
+  shieldHealth: 25
   breakTime: 0.5
   breakEvent:
     m_PersistentCalls:
@@ -141,59 +195,6 @@ MonoBehaviour:
   maxHideAngle: 60
   unshieldStunTimeMin: 1
   unshieldStunTimeMax: 2
---- !u!114 &986991060783444348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2168237188150525127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73b73c909f5c664a90995493b53f6a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 75
-  maxHealth: 75
-  isAlive: 1
-  canTakeDamage: 1
-  canDie: 1
-  entityType: 1
-  entityBounds: {x: 1, y: 1, z: 1}
-  editorTakeDamage: 0
-  editorDamageAmount: 100
-  destroyOnDeath: 1
-  destroyTimer: 0.1
-  onTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  meshesRef: {fileID: 6270579132875442834}
---- !u!114 &-1502201843710798797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2168237188150525127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2558aeaff3be06f418879b815139a3cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseMaxHealth: 75
-  _baseSpeed: 9
-  _baseAngularSpeed: 120
-  _baseAcceleration: 8
-  _difficulty: 1
-  _baseDamage: 30
-  onStatsChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  myHealth: {fileID: 986991060783444348}
-  myAgent: {fileID: 5786988066262490530}
 --- !u!1001 &5863150719433242317
 PrefabInstance:
   m_ObjectHideFlags: 0
