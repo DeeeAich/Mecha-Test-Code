@@ -176,6 +176,12 @@ public class OverseerBT : BehaviourTree
         }
     }
 
+    public override void StopForTime(float time)
+    {
+        return;
+        base.StopForTime(time);
+    }
+
     private void Start()
     {
         frontRadiusRadians = Mathf.Deg2Rad * frontRadius;
