@@ -9,6 +9,8 @@ public class FirstShot : WeaponTriggerChip
 {
     public WeaponStats setStats;
     private bool charged;
+    private int leftSet = 0;
+    private int rightSet = 0;
 
     public override void ChipTriggerSetter(Weapon weapon)
     {
@@ -48,13 +50,29 @@ public class FirstShot : WeaponTriggerChip
 
     public override void TriggerActivate(Weapon weapon)
     {
-        weapon.TempStatsAdd(setStats);
-        charged = true;
+        if(weapon == PlayerWeaponControl.instance.leftWeapon)
+        {
+            if (leftSet >= addedCountLeft)
+                return;
 
-        if (weapon == PlayerWeaponControl.instance.leftWeapon)
+            leftSet++;
+
             PlayerBody.Instance().triggers.fireLeft += resetActionLeft;
+
+        }
         else
+        {
+            if (rightSet >= addedCountRight)
+                return;
+
+            rightSet++;
+
             PlayerBody.Instance().triggers.fireRight += resetActionRight;
+
+        }
+
+        weapon.TempStatsAdd(setStats);
+
     }
 
     public override void TriggerDeactivate(Weapon weapon)
@@ -62,9 +80,15 @@ public class FirstShot : WeaponTriggerChip
         weapon.TempStatRemove(setStats);
         charged = false;
         if (weapon == PlayerWeaponControl.instance.leftWeapon)
+        {
+            leftSet--;
             PlayerBody.Instance().triggers.fireLeft -= resetActionLeft;
+        }
         else
+        {
+            rightSet--;
             PlayerBody.Instance().triggers.fireRight -= resetActionRight;
+        }
     }
 
     public override void ChipTriggerUnsetter(Weapon weapon)
@@ -82,6 +106,7 @@ public class FirstShot : WeaponTriggerChip
             startActionLeft = null;
             actionAddedLeft = false;
             addedCountLeft = 0;
+            leftSet = 0;
         }
         else
         {
@@ -95,6 +120,7 @@ public class FirstShot : WeaponTriggerChip
             resetActionRight = null;
             actionAddedRight = false;
             addedCountRight = 0;
+            rightSet = 0;
 
         }
 
