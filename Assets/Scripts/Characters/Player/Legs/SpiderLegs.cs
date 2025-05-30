@@ -22,11 +22,11 @@ public class SpiderLegs : PlayerLegs
         {
 
             dashTimers[i].timer += Time.deltaTime;
-            if (dashTimers[i].timer < 1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime))
+            if (dashTimers[i].timer < 1 / ((1 / curLegs.dashTime) * dashMods.dashTime))
             {
                 myLegs.GetComponent<MultipleLegIkMover>().ToggleDashParticles(true);
 
-                curSpeed = dashDirection * ((myBody.legStats.dashDistance * dashMods.dashDistance) / (1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime)));
+                curSpeed = dashDirection * ((curLegs.dashDistance * dashMods.dashDistance) / (1 / ((1 / curLegs.dashTime) * dashMods.dashTime)));
 
                 mover.enabled = false;
                 GetComponent<Health>().canTakeDamage = !myBody.legStats.invincibleDuringDash;
@@ -43,7 +43,7 @@ public class SpiderLegs : PlayerLegs
             }
 
 
-            if (dashTimers[i].timer >= myBody.legStats.dashRecharge * dashMods.dashRecharge + 1 / ((1 / myBody.legStats.dashTime) * dashMods.dashTime))
+            if (dashTimers[i].timer >= curLegs.dashRecharge * dashMods.dashRecharge + 1 / ((1 / curLegs.dashTime) * dashMods.dashTime))
             {
                 curLegs.dashCharges++;
 
