@@ -16,6 +16,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button firstButton;
     float timer = 2f;
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     private void FixedUpdate()
     {
         if (timerRunningToSelectFirstButton)
