@@ -23,6 +23,17 @@ class MissileMotion : MoveProjectile
         startingYValue = transform.position.y;
     }
 
+    private void OnEnable()
+    {
+        //Level Generator -> Current Room -> OnCompleteRoom
+        LevelGenerator.instance.currentRoom.GetComponent<Room>().onCompleteRoom.AddListener(DestroyMissile);
+    }
+
+    private void OnDisable()
+    {
+        LevelGenerator.instance.currentRoom.GetComponent<Room>().onCompleteRoom.RemoveListener(DestroyMissile);
+    }
+
     internal override void FixedUpdate()
     {
         if(target == null)
