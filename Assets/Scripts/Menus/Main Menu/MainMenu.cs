@@ -29,7 +29,11 @@ public class MainMenu : MonoBehaviour
 
             if (timer <= 0)
             {
-                firstButton.Select();
+                if (firstButton.gameObject.activeInHierarchy)
+                {
+                    firstButton.Select();
+                }
+   
                 timerRunningToSelectFirstButton = false;
             }
         }
