@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,10 +16,15 @@ public class MainMenu : MonoBehaviour
     private bool timerRunningToSelectFirstButton = true;
     [SerializeField] private Button firstButton;
     float timer = 2f;
-
+    
+    private PlayerInput playerInput;
+    private bool usingGamepad;
     private void Start()
     {
         Cursor.visible = true;
+        playerInput = FindObjectOfType<PlayerInput>();
+        playerInput.onControlsChanged += OnControlsChanged;
+        playerInput.actions["Any Action"].performed += TriggerControlsCheck;
     }
 
     private void FixedUpdate()
@@ -66,5 +72,34 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void TriggerControlsCheck(InputAction.CallbackContext context)
+    {
+        if(!usingGamepad) OnControlsChanged(playerInput);
+    }
+
+    private void OnControlsChanged(PlayerInput input)
+    {
+        usingGamepad = input.currentControlScheme.Equals("Controller");
+        Cursor.visible = !usingGamepad;
+
+        if (usingGamepad)
+        {
+            foreach (Button button in FindObjectsOfType<Button>())
+            {
+                if (button.gameObject.activeInHierarchy)
+                {
+                    button.Select();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        playerInput.onControlsChanged -= OnControlsChanged;
+        playerInput.actions["Any Action"].performed -= TriggerControlsCheck;
     }
 }
