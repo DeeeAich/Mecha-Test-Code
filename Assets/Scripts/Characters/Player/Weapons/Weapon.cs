@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IModable
@@ -87,6 +88,9 @@ public class Weapon : MonoBehaviour, IModable
 
     public virtual void ExternalReload(float amount, bool percentage = false)
     {
+
+        if (reloading)
+            return;
 
         int addedCount = (int)amount;
 

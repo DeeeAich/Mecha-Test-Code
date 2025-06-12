@@ -349,6 +349,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         if(!weapons || !legs)
         {
 
+            print("Adding pause");
+
             PartStopper newStopper = new();
             newStopper.weapons = weapons;
             newStopper.legs = legs;
@@ -400,6 +402,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             }
 
         }
+
+        print(stoppedParts.Count);
 
     }
 

@@ -81,6 +81,9 @@ public class pauseMenu : MonoBehaviour
 
     public void TogglePause()
     {
+
+        print("Attempting to toggle pause");
+
         if (canPause)
         {
             if (paused)
