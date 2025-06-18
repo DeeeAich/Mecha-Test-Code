@@ -38,7 +38,7 @@ public class CamRoom3D : MonoBehaviour
         //I need to construct the plane here
         projectionRect.transform.rotation = Quaternion.LookRotation(camForward, camUp);
         //projectionRect.transform.RotateAround(projectionRect.transform.position, projectionRect.transform.right, projectionAngle - projectionRect.transform.rotation.eulerAngles.x);
-
+        if(PlayerBody.Instance()!=null)
         player = PlayerBody.Instance().gameObject;
         cam = CameraSizeModifier.absoluteCinemachine;
 

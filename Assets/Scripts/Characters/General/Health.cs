@@ -139,8 +139,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         if (health <= 0 && canDie && !killed)
         {
             killed = true;
-            print("Killed by " + source);
-            if (gameObject.tag != "Player")
+            print(ToString() + " Killed by " + source);
+            if (gameObject.tag == "Enemy")
                 PlayerBody.Instance().TriggerOnKill(source);
             TriggerDeath();
         }
@@ -193,7 +193,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
         if (health <= 0 && canDie)
         {
-            if (gameObject.tag != "Player")
+
+            if (gameObject.tag == "Enemy")
                 PlayerBody.Instance().TriggerOnKill("");
             TriggerDeath();
         }
@@ -238,7 +239,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
         if (health <= 0 && canDie)
         {
-            if (gameObject.tag != "Player")
+            if (gameObject.tag == "Enemy")
                 PlayerBody.Instance().TriggerOnKill("");
             TriggerDeath();
         }
