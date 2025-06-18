@@ -21,20 +21,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Level 3 Tile
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ccc1c26229cf0c844978167996efa9cb,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _EMISSION
-  - _METALLICSPECGLOSSMAP
-  - _NORMALMAP
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -44,8 +41,12 @@ Material:
         m_Texture: {fileID: 2800000, guid: e2b2e34e8362f1c40ba625cc053dad8d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Base_Texture:
+        m_Texture: {fileID: 2800000, guid: e2b2e34e8362f1c40ba625cc053dad8d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: b0e58f69a094f7846baec935f6ad79a6, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -65,7 +66,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: d2f41e7dfcb08034bae948c84d7df7c0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 434bbc6d11279884ab43a1ab8ef168cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission_Texture:
+        m_Texture: {fileID: 2800000, guid: 434bbc6d11279884ab43a1ab8ef168cd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FaceShadowMap:
@@ -93,7 +98,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: df4ff3143c116c24f8a9486b8816b939, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Metallic_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map_Texture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -106,6 +119,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _RampTex:
         m_Texture: {fileID: 2800000, guid: d5674c2ac82db1a4ab4cbb251d627e21, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Roughness_Texture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -146,6 +163,7 @@ Material:
     - _DiffuseStep: 0
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
+    - _Dither_Size: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnabledHairSpec: 0
@@ -175,7 +193,9 @@ Material:
     - _HatchingEnabled: 0
     - _HatchingRotation: 0
     - _HatchingSmoothness: 0.1
+    - _Max_Brightness: 1
     - _Metallic: 0
+    - _Min_Brightness: 0.3
     - _NoiseScale: 1
     - _NoiseStrength: 0.1
     - _OcclusionStrength: 1
@@ -183,12 +203,15 @@ Material:
     - _OutlineMode: 0
     - _OutlineWidth: 12
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 0
     - _RimLightAlign: 0
     - _RimLightSmoothness: 0
     - _RimPower: 0.55
+    - _Roughness: 0
+    - _Shades: 0.49
     - _SizeFalloff: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
@@ -207,13 +230,18 @@ Material:
     - _Surface: 0
     - _ToonBlending: 0
     - _ToonEnabled: 1
+    - _Transparency: 1
     - _UseRampColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Base_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 14.259475, g: 0.14931391, b: 0, a: 1}
+    - _EmissionColor: {r: 7.906699, g: 0.09302, b: 0, a: 1}
+    - _Emission_Color: {r: 5.656854, g: 0, b: 0, a: 0}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
