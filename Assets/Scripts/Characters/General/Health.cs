@@ -116,9 +116,9 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             mod.Modification(calculating, out calculating);
             damageInfo.encounteredMods.Add(mod.ToString());
         }
-        foreach(DamageMod sM in damageMods)
+        foreach (DamageMod sM in damageMods)
         {
-            if(!(sM is ShieldModifier))
+            if (!(sM is ShieldModifier))
             {
                 continue;
             }
@@ -126,7 +126,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             damageInfo.encounteredMods.Add(sM.ToString());
         }
         health -= calculating;
-        damageInfo.healthDamage = calculating; 
+        damageInfo.healthDamage = calculating;
         onTakeDamage.Invoke();
 
 
@@ -139,9 +139,11 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         if (health <= 0 && canDie && !killed)
         {
             killed = true;
-            print("Killed by " + source);
-            if (gameObject.tag != "Player")
+            if (gameObject.tag == "Enemy")
+            {
+                print(ToString() + " Killed by " + source);
                 PlayerBody.Instance().TriggerOnKill(source);
+            }
             TriggerDeath();
         }
         return damageInfo;
@@ -193,7 +195,8 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
         if (health <= 0 && canDie)
         {
-            if (gameObject.tag != "Player")
+
+            if (gameObject.tag == "Enemy")
                 PlayerBody.Instance().TriggerOnKill("");
             TriggerDeath();
         }
@@ -238,7 +241,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
 
         if (health <= 0 && canDie)
         {
-            if (gameObject.tag != "Player")
+            if (gameObject.tag == "Enemy")
                 PlayerBody.Instance().TriggerOnKill("");
             TriggerDeath();
         }
@@ -328,7 +331,7 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         yield return null;
         float timer = 0f;
         float maxTime = 0.25f;
-        while(burnEffects.Count > 0)
+        while (burnEffects.Count > 0)
         {
             while (timer < maxTime)
             {
@@ -337,16 +340,16 @@ public class Health : MonoBehaviour, IHackable, IBurnable
             }
             timer -= maxTime;
             float totalDamage = 0f;
-            for(int i = 0; i < burnEffects.Count; i++)
+            for (int i = 0; i < burnEffects.Count; i++)
             {
                 totalDamage += burnEffects[i].damagePerTick;
-                if(burnEffects[i].ticksLeft <=1)
+                if (burnEffects[i].ticksLeft <= 1)
                 {
                     burnEffects.RemoveAt(i);
                     i--;
                 }
                 else
-                burnEffects[i] = new BurnInfo(burnEffects[i].damagePerTick, burnEffects[i].ticksLeft - 1);
+                    burnEffects[i] = new BurnInfo(burnEffects[i].damagePerTick, burnEffects[i].ticksLeft - 1);
             }
             TakeDamage(totalDamage, "Burn");
         }
@@ -382,14 +385,14 @@ public class Health : MonoBehaviour, IHackable, IBurnable
         if (burnEffects == null)
             burnEffects = new List<BurnInfo>();
 
-        if(application <=0)
+        if (application <= 0)
         {
             return;
         }
 
         //burns.Add(StartCoroutine(BurnDamage(damageTick * application, tickCount)));
-        if(burnEffects.Count == 0)
-        burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
+        if (burnEffects.Count == 0)
+            burnEffects.Add(new BurnInfo(damageTick * application, tickCount));
         else
         {
             BurnInfo updatedBurn = new BurnInfo(Mathf.Max(damageTick * application, burnEffects[0].damagePerTick), Mathf.Max(tickCount, burnEffects[0].ticksLeft));
