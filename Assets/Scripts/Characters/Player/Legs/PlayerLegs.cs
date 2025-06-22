@@ -41,7 +41,7 @@ public class PlayerLegs : MonoBehaviour, ILegModifiable
 
         dashDirection = new Vector2();
 
-        if (!dashing && curLegs.dashCharges + dashMods.dashCharges > 0 && stickAmount.magnitude != 0)
+        if (!dashing && curLegs.dashCharges + dashMods.dashCharges > 0 && stickAmount.magnitude != 0 && myBody.PauseChecker(PlayerSystems.Dashing))
         {
             dashDirection = (stickAmount * 10).normalized;
             curLegs.dashCharges--;
