@@ -62,7 +62,7 @@ public class OverseerFightPrimaryObjective : Objective
 
     private void ToggleGameFrozenForPhaseTransition(bool freeze)
     {
-        PlayerBody.Instance().StopParts(!freeze,!freeze);
+        PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, freeze);
 
         if (freeze)
         {

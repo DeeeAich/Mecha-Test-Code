@@ -86,7 +86,7 @@ public class pauseMenu : MonoBehaviour
         {
             if (paused)
             {
-                PlayerBody.Instance().StopParts(true, true);
+                PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, false);
 
                 onUnpause.Invoke();
                 paused = false;
@@ -94,7 +94,7 @@ public class pauseMenu : MonoBehaviour
             }
             else
             {
-                PlayerBody.Instance().StopParts(false, false);
+                PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, true);
                 
                 onPause.Invoke();
                 paused = true;

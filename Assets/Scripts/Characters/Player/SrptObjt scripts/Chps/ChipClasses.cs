@@ -191,3 +191,22 @@ public class DashTimers
     public float timer;
     public bool completed;
 }
+
+[Serializable]
+public enum PlayerSystems
+{
+    AllParts, BotTop,
+    BotBottom, Turning,
+    Weapons, LeftWeapon,
+    RightWeapon, Dashing
+}
+
+[Serializable]
+public class PartPauseTracker
+{
+
+    public PlayerSystems playerSystem;
+
+    public int pauseCount;
+
+}

@@ -39,9 +39,6 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private Interactable curInteract;
 
-    public bool canMove = true;
-    public bool canShoot = true;
-
     private static PlayerBody instance;
     public static PlayerBody Instance()
     {
@@ -79,18 +76,14 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void FixedUpdate()
     {
-        myMovement.Movement( canMove ? move.ReadValue<Vector2>() : new Vector2());
+        myMovement.Movement(PauseChecker(PlayerSystems.BotBottom) ? move.ReadValue<Vector2>() : new Vector2()); ;
         
-        if (canShoot)
+        if (PauseChecker(PlayerSystems.BotTop))
             weaponHolder.LookDirection(isGamepad ?
                 look.ReadValue<Vector2>():
                 Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
                 isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
 
-        if (canShoot)
-        {
-            triggers.constant?.Invoke();
-        }
     }
 
     private void Update()
@@ -313,7 +306,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     {
 
         myCamera.transform.parent = null;
-        StopParts(false, false);
+        PauseSystem(PlayerSystems.AllParts, true);
 
         myUI.StartCoroutine(myUI.StartDeath());
 
@@ -335,74 +328,52 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     }
 
-    [Tooltip("For setting the parts to on or off")]
 
-    private struct PartStopper
-    {
-        public bool weapons,
-            legs;
-    }
-    private List<PartStopper> stoppedParts = new();
-    public void StopParts(bool weapons, bool legs)
-    {
+    private List<PartPauseTracker> partTracker = new List<PartPauseTracker>();
 
-        if(!weapons || !legs)
+    public void PauseSystem(PlayerSystems system, bool pause)
+    {
+        bool partFound = false;
+        foreach(PartPauseTracker part in partTracker)
         {
 
-            print("Adding pause");
-
-            PartStopper newStopper = new();
-            newStopper.weapons = weapons;
-            newStopper.legs = legs;
-            stoppedParts.Add(newStopper);
-
-            if (!weapons)
+            if(part.playerSystem == system)
             {
-                weaponHolder.leftWeapon.FireRelease();
-                weaponHolder.rightWeapon.FireRelease();
-            }
+                part.pauseCount += pause ? 1 : -1;
+                if(part.pauseCount < 0)
+                    part.pauseCount = 0;
 
-            canShoot = weapons ? canShoot : weapons;
-            canMove = legs ? canMove : legs;
-
-        }
-        else
-        {
-            int removeIndex = 50;
-            for (int i = 0; i < stoppedParts.Count; i++)
-            {
-                if (stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == legs ||
-                        stoppedParts[i].weapons == weapons && stoppedParts[i].legs == !legs ||
-                            stoppedParts[i].weapons == !weapons && stoppedParts[i].legs == !legs)
-                {
-                    removeIndex = i;
-                    break;
-                }
-
-            }
-
-            if(removeIndex != 50)
-                stoppedParts.RemoveAt(removeIndex);
-
-            if(stoppedParts.Count == 0)
-            {
-                canMove = true;
-                canShoot = true;
-            }
-            else
-            {
-                foreach (PartStopper partStopper in stoppedParts)
-                {
-                    canMove = partStopper.legs ? canMove : false;
-                    canShoot = partStopper.weapons ? canShoot : false;
-                }
+                partFound = true;
+                break;
             }
 
         }
 
-        print(stoppedParts.Count);
+        if (!partFound && pause)
+        {
+            PartPauseTracker part = new PartPauseTracker();
+            part.playerSystem = system;
+            part.pauseCount = 1;
+            partTracker.Add(part);
+        }
 
     }
+
+    public bool PauseChecker(PlayerSystems system)
+    {
+
+        foreach(PartPauseTracker part in partTracker)
+        {
+            if(part.playerSystem == system && part.pauseCount > 0 || part.playerSystem == PlayerSystems.AllParts && part.pauseCount > 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
 
     public BodyStats myStats;
 

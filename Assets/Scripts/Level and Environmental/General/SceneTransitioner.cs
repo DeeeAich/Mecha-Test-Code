@@ -26,7 +26,7 @@ public class SceneTransitioner : MonoBehaviour
         {
             if (!isCutscene)
             {
-                PlayerBody.Instance().StopParts(true, true);
+                PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, false);
                 if (GameGeneralManager.instance != null)
                 {
                     GameGeneralManager.instance.ChangeScene(targetScene);

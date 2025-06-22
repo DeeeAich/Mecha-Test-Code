@@ -331,7 +331,7 @@ public class Pickup : MonoBehaviour
                     break;
             }
 
-            PlayerBody.Instance().StopParts(false, false);
+            PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, true);
             uiPopup.SetActive(true);
 
             GetComponentInChildren<Interactable>(true).canInteract = false;
@@ -386,7 +386,7 @@ public class Pickup : MonoBehaviour
         */
 
         open = false;
-        PlayerBody.Instance().StopParts(true, true);
+        PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, true);
         GetComponentInChildren<Interactable>(true).canInteract = true;
         
         UnRigChoiceMenu();
@@ -402,7 +402,7 @@ public class Pickup : MonoBehaviour
         
         pickupType pickupType = playerPickups[pickupIndex].PickupType;
 
-        PlayerBody.Instance().StopParts(true, true);
+        PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, false);
         Debug.Log("Picking up " + name);
 
         switch (pickupType)
