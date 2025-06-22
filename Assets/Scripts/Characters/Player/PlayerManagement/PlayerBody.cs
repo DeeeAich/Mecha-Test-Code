@@ -334,6 +334,11 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     public void PauseSystem(PlayerSystems system, bool pause)
     {
         bool partFound = false;
+        if(pause)
+        {
+            weaponHolder.leftWeapon.FireRelease();
+            weaponHolder.rightWeapon.FireRelease();
+        }
         foreach(PartPauseTracker part in partTracker)
         {
 
