@@ -433,8 +433,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         newStats.AddStats(myStats);
 
         float healthDif = myHealth.maxHealth - myHealth.health;
-        myHealth.maxHealth *= newStats.health + 1;
-        myHealth.maxHealth = Mathf.RoundToInt(myHealth.maxHealth);
+        myHealth.maxHealth = legStats.baseHealth + myStats.health;
         myHealth.health = myHealth.maxHealth - healthDif;
 
     }

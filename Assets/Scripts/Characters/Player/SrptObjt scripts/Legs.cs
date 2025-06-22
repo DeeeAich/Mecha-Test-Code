@@ -6,6 +6,7 @@ using UnityEngine;
 public class Legs : PlayerPickup
 {
     [Header("Basic Info")]
+    public float baseHealth;
     public float speed;
     public float accelleration;
     public float turnSpeed;

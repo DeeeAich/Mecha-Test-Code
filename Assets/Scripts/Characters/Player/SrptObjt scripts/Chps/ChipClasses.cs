@@ -24,8 +24,8 @@ public class BodyStats
 
     public void AddStats(BodyStats stats)
     {
-        stats.health *= health + 1;
-        stats.armour *= armour + 1;
+        stats.health += health;
+        stats.armour += armour;
     }
 
     public void SetStats(BodyStats stats)
