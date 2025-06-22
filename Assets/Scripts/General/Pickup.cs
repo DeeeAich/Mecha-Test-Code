@@ -87,7 +87,7 @@ public class Pickup : MonoBehaviour
     [HideInInspector] public bool open;
     private float buttonInteractBlockTimer;
     private float closeUiTimer;
-    private bool canUse = true;
+    public bool canUse = true;
     private int pickupIndex = 0;
 
     private InputAction backAction;
@@ -474,6 +474,7 @@ public class Pickup : MonoBehaviour
         if (uiPopup != null) closeUiTimer = 0.5f;
 
         canUse = false;
+        open = false;
 
         onPickedUpEvent.Invoke();
     }

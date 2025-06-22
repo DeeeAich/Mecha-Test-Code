@@ -384,9 +384,6 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             if(removeIndex != 50)
                 stoppedParts.RemoveAt(removeIndex);
 
-            print(stoppedParts.Count);
-            print(stoppedParts.Count > 0 ? stoppedParts[0].weapons : "");
-
             if(stoppedParts.Count == 0)
             {
                 canMove = true;
@@ -436,7 +433,8 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         newStats.AddStats(myStats);
 
         float healthDif = myHealth.maxHealth - myHealth.health;
-        myHealth.maxHealth *= myStats.health;
+        myHealth.maxHealth *= newStats.health + 1;
+        myHealth.maxHealth = Mathf.RoundToInt(myHealth.maxHealth);
         myHealth.health = myHealth.maxHealth - healthDif;
 
     }
