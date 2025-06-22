@@ -364,6 +364,13 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     }
 
+    public void ClearPauses()
+    {
+
+        partTracker.Clear();
+
+    }
+
     public bool PauseChecker(PlayerSystems system)
     {
 
