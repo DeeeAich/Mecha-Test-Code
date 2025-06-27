@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private bool editorUpdateInventory;
 
-    public Color[] rarityColors;
+    private Color[] rarityColors;
 
     public List<Image> bodyChipsImages;
     public Button[] bodyChipsButtons;
@@ -46,7 +47,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text inspectionCardTitle;
     [SerializeField] private TMP_Text inspectionCardDescription;
     [SerializeField] private Image inspectionCardImage;
-    
+    [SerializeField] private Button inspectionCardTargetButton;
+
     private void Awake()
     {
         rarityColors = ColourManager.instance.standardColours.LootRarityColours;
@@ -78,6 +80,11 @@ public class InventoryManager : MonoBehaviour
         {
             editorUpdateInventory = false;
             UpdateInventory();
+        }
+
+        if (inspectionCard.activeSelf && EventSystem.current.currentSelectedGameObject != inspectionCardTargetButton.gameObject)
+        {
+            CloseInspectionCard();
         }
     }
 
@@ -207,6 +214,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 
                 inspectionCard.transform.position = WeaponsLeftChipsImages[index].transform.position;
+                inspectionCardTargetButton = weaponLeftChipsButtons[index];
                 chip = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().leftMods[index];
                 break;
             
@@ -217,6 +225,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 
                 inspectionCard.transform.position = WeaponsRightChipsImages[index].transform.position;
+                inspectionCardTargetButton = weaponRightChipsButtons[index];
                 chip = PlayerBody.Instance().GetComponent<PlayerWeaponControl>().rightMods[index];
                 break;
             
@@ -227,6 +236,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 
                 inspectionCard.transform.position = bodyChipsImages[index].transform.position;
+                inspectionCardTargetButton = bodyChipsButtons[index];
                 chip = PlayerBody.Instance().myMods[index];
                 break;
         }
@@ -244,6 +254,25 @@ public class InventoryManager : MonoBehaviour
 
     public void CloseInspectionCard()
     {
-        
+        inspectionCard.SetActive(false);
+        inspectionCardTargetButton = null;
+    }
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < weaponLeftChipsButtons.Length; i++)
+        {
+            weaponLeftChipsButtons[i].onClick.RemoveAllListeners();
+        }
+
+        for (int i = 0; i < weaponRightChipsButtons.Length; i++)
+        {
+            weaponRightChipsButtons[i].onClick.RemoveAllListeners();
+        }
+
+        for (int i = 0; i < bodyChipsButtons.Length; i++)
+        {
+            bodyChipsButtons[i].onClick.RemoveAllListeners();
+        }
     }
 }

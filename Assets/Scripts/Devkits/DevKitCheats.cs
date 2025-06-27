@@ -28,6 +28,7 @@ public class DevKitCheats : MonoBehaviour
     [SerializeField] private TMP_Dropdown bodyChipsDropdown;
     
     private bool timeIsGoing = true;
+    private bool hasAppliedChangeThisFrame;
 
     private void Start()
     {
@@ -97,7 +98,14 @@ public class DevKitCheats : MonoBehaviour
 
             }
         }
-        
+
+        hasAppliedChangeThisFrame = true;
+        leftGunDropdown.value = 0;
+        rightGunDropdown.value = 0;
+        chassisDropdown.value = 0;
+        addChipDropdownLeft.value = 0;
+        addChipDropdownRight.value = 0;
+        bodyChipsDropdown.value = 0;
     }
 
     private void Update()
@@ -120,6 +128,11 @@ public class DevKitCheats : MonoBehaviour
                 CompleteRoom();
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        hasAppliedChangeThisFrame = false;
     }
 
     public void KillAllEnemies()
@@ -164,6 +177,9 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddWeapon(bool applyToLeft)
     {
+        if(hasAppliedChangeThisFrame) return;
+        hasAppliedChangeThisFrame = true;
+        
         if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
         
         if (applyToLeft)
@@ -178,6 +194,7 @@ public class DevKitCheats : MonoBehaviour
                     {
                         PlayerBody.Instance().SetWeapon((WeaponPickup) lootPools[i].Weapons[leftGunDropdown.value - 1 - itemsToSkip], true);
                         Debug.Log("Added weapon" +  lootPools[i].Weapons[leftGunDropdown.value - 1 - itemsToSkip]);
+                        break;
                     }
                     else
                     {
@@ -200,6 +217,7 @@ public class DevKitCheats : MonoBehaviour
                     {
                         PlayerBody.Instance().SetWeapon((WeaponPickup) lootPools[i].Weapons[rightGunDropdown.value - 1 - itemsToSkip], false);
                         Debug.Log("Added weapon" +  lootPools[i].Weapons[rightGunDropdown.value - 1 - itemsToSkip].itemName);
+                        break;
                     }
                     else
                     {
@@ -214,6 +232,9 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddChip(bool applyToLeft)
     {
+        if(hasAppliedChangeThisFrame) return;
+        hasAppliedChangeThisFrame = true;
+        
         if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
         
         if (applyToLeft)
@@ -228,6 +249,7 @@ public class DevKitCheats : MonoBehaviour
                     {
                         PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPools[i].WeaponChips[addChipDropdownLeft.value -1 - itemsToSkip], true);
                         Debug.Log("Added weapon chip: " + lootPools[i].WeaponChips[addChipDropdownLeft.value -1 - itemsToSkip].itemName);
+                        break;
                     }
                     else
                     {
@@ -250,6 +272,7 @@ public class DevKitCheats : MonoBehaviour
                     {
                         PlayerBody.Instance().GetComponent<IWeaponModifiable>().ApplyChip((WeaponChip) lootPools[i].WeaponChips[addChipDropdownRight.value -1 - itemsToSkip], false);
                         Debug.Log("Added weapon chip: " + lootPools[i].WeaponChips[addChipDropdownRight.value -1 - itemsToSkip].itemName);
+                        break;
                     }
                     else
                     {
@@ -264,6 +287,9 @@ public class DevKitCheats : MonoBehaviour
 
     public void AddBodyChip()
     {
+        if(hasAppliedChangeThisFrame) return;
+        hasAppliedChangeThisFrame = true;
+        
         if (bodyChipsDropdown.value != 0)
         {
             if(LevelGenerator.instance != null) lootPools = LevelGenerator.instance.levelInfo.lootPools;
@@ -310,6 +336,8 @@ public class DevKitCheats : MonoBehaviour
     
     public void SetGameSpeedSlider(Slider slider)
     {
+        if (slider.value >= 0.9 && slider.value <= 1.1) slider.value = 1;
+        
         FindObjectOfType<pauseMenu>().gameSpeed = slider.value;
     }
 
