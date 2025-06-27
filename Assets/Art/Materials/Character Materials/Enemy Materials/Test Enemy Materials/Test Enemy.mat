@@ -21,24 +21,31 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Test Enemy
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ccc1c26229cf0c844978167996efa9cb,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _EMISSION
+  - _BURN
+  - _HACK
+  - _SHIELD
+  - _SHOCK
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: _Metallic _MetallicGlossMap
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 664392f9555a2ca438d431ed5df5f225, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Base_Texture:
         m_Texture: {fileID: 2800000, guid: 664392f9555a2ca438d431ed5df5f225, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -63,6 +70,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 2800000, guid: 6b18503dda4f2be4e9a2bb06e0e50558, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission_Texture:
         m_Texture: {fileID: 2800000, guid: 6b18503dda4f2be4e9a2bb06e0e50558, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -94,6 +105,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: a7349083a8e7acb4da5368f2ee86425e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metallic_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -104,6 +123,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _RampTex:
         m_Texture: {fileID: 2800000, guid: dde28dc20e6d0e44ea2e260b0a28e5a0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Roughness_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3cbc41fc54ce4e218bc5c69d2c0a2f71_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 311cd9115ea9a00439b7500fccbee6ce, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_626aae58183446c4b5db3fdae6a0daf0_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c5b4c780400e86245b5df7093190bee2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d8eb3b8c98dc4f75a58c2085d1651a65_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c5b4c780400e86245b5df7093190bee2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_dc10660a618e4dcc8621da622780868f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c5b4c780400e86245b5df7093190bee2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -130,6 +169,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BURN: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BrushLowerCut: 0
@@ -144,6 +184,7 @@ Material:
     - _DiffuseStep: 0
     - _DitherTexelSize: 1
     - _DitherThreshold: 1
+    - _Dither_Size: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnabledHairSpec: 0
@@ -156,6 +197,7 @@ Material:
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
+    - _HACK: 1
     - _HairSpecExponent: 128
     - _HairSpecNoiseStrength: 1
     - _HairSpecularSize: 0.8
@@ -184,12 +226,16 @@ Material:
     - _OutlineWidth: 8
     - _OverrideShadowColor: 0
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 0
     - _RimLightAlign: 0
     - _RimLightSmoothness: 0.695
     - _RimPower: 0.303
+    - _Roughness: 0
+    - _SHIELD: 1
+    - _SHOCK: 1
     - _Shininess: 0
     - _SizeFalloff: 0
     - _Smoothness: 0
@@ -211,22 +257,28 @@ Material:
     - _Surface: 0
     - _ToonBlending: 1
     - _ToonEnabled: 1
+    - _Transparency: 1
     - _UseRampColor: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Effect_Scale: {r: 2, g: 2, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 1.3108872, b: 1.4980392, a: 1}
+    - _Emission_Color: {r: 0, g: 1.3108872, b: 1.4980392, a: 1}
     - _FaceFrontDirection: {r: 0, g: 0, b: 1, a: 0}
     - _FaceRightDirection: {r: 1, g: 0, b: 0, a: 0}
     - _HairSpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _HalfToneColor: {r: 0, g: 0, b: 0, a: 1}
     - _HatchingColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -80, g: 200, b: 0, a: 0}
     - _RimColor: {r: 0, g: 1, b: 0.8081796, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpherizeNormalOrigin: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
