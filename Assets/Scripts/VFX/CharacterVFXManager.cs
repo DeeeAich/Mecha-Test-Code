@@ -29,6 +29,7 @@ public class CharacterVFXManager : MonoBehaviour
     public ParticleSystem healParticleSystem;
 
 
+    public Animator hitAnimator;
 
     [Header("Player ONLY")]
     public bool isPlayer = false;
@@ -193,5 +194,11 @@ public class CharacterVFXManager : MonoBehaviour
             
             if(materialRemoved) meshRenderers[i].materials = materials.ToArray();
         }
+    }
+
+
+    public void PlayHitAnimation()
+    {
+        hitAnimator.SetTrigger("Hit");
     }
 }

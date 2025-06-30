@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 96156678568660996}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 12, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14760,7 +14760,7 @@ Transform:
   m_GameObject: {fileID: 3000318166383826532}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0.000000057601163, z: 0.000000057601163, w: 0.7071068}
-  m_LocalPosition: {x: -0.023639195, y: 1.6457745, z: -0.0074136257}
+  m_LocalPosition: {x: -0.023639195, y: 1.645774, z: -0.0074136257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19699,6 +19699,7 @@ GameObject:
   - component: {fileID: 7383046324028839737}
   - component: {fileID: 9123482636930068952}
   - component: {fileID: 8131353096561412210}
+  - component: {fileID: 6728495943381317468}
   m_Layer: 0
   m_Name: Tesla Bot Assets
   m_TagString: Untagged
@@ -19797,6 +19798,7 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 2784723935235090716}
   healParticleSystem: {fileID: 0}
+  hitAnimator: {fileID: 6728495943381317468}
   isPlayer: 0
   playerParent: {fileID: 0}
 --- !u!114 &8131353096561412210
@@ -19827,12 +19829,33 @@ MonoBehaviour:
     Path: event:/Sound Effects/Enemy/General/Enemy Die
   idleSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 126438974
+      Data2: 1292216779
+      Data3: -405549377
+      Data4: -1367623770
+    Path: event:/Sound Effects/Enemy/Boid/Boid Idle
   hasIdleSound: 0
+--- !u!95 &6728495943381317468
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4574267681189245156}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98da9e7e02a3cda41913ac7763e187a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4826165261253817268
 GameObject:
   m_ObjectHideFlags: 0

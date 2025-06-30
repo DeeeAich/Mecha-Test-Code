@@ -63,7 +63,19 @@ MonoBehaviour:
   destroyTimer: 0.1
   onTakeDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7897384473601543709}
+        m_TargetAssemblyTypeName: CharacterVFXManager, Assembly-CSharp
+        m_MethodName: PlayHitAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -682,3 +694,15 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 8704097870826017423}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7897384473601543709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1536307686967418002, guid: 50c62ee347922b64b951fc54c3644be2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8704097870826017423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946711570175696649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be195d8ef645d545b4b252895ae2c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

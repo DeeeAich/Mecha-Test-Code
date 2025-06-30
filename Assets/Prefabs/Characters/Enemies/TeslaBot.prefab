@@ -280,7 +280,19 @@ MonoBehaviour:
   destroyTimer: 3
   onTakeDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7997052295457513452}
+        m_TargetAssemblyTypeName: CharacterVFXManager, Assembly-CSharp
+        m_MethodName: PlayHitAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -357,11 +369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8845324609349330709}
     m_Modifications:
-    - target: {fileID: 729105203297356478, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2994073400594985814, guid: 190424dc7f1f0f543baf9e905f210842,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -417,31 +424,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tesla Bot Assets
       objectReference: {fileID: 0}
-    - target: {fileID: 8131353096561412210, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: idleSound.Path
-      value: event:/Sound Effects/Enemy/Boid/Boid Idle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8131353096561412210, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: idleSound.Guid.Data1
-      value: 126438974
-      objectReference: {fileID: 0}
-    - target: {fileID: 8131353096561412210, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: idleSound.Guid.Data2
-      value: 1292216779
-      objectReference: {fileID: 0}
-    - target: {fileID: 8131353096561412210, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: idleSound.Guid.Data3
-      value: -405549377
-      objectReference: {fileID: 0}
-    - target: {fileID: 8131353096561412210, guid: 190424dc7f1f0f543baf9e905f210842,
-        type: 3}
-      propertyPath: idleSound.Guid.Data4
-      value: -1367623770
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -477,6 +459,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1181671190790319668}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7997052295457513452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9123482636930068952, guid: 190424dc7f1f0f543baf9e905f210842,
+    type: 3}
+  m_PrefabInstance: {fileID: 1181671190790319668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394926419964010192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be195d8ef645d545b4b252895ae2c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8645349523640498621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7465930491304187785, guid: 190424dc7f1f0f543baf9e905f210842,

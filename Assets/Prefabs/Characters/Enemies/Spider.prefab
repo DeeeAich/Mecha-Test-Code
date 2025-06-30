@@ -182,7 +182,19 @@ MonoBehaviour:
   destroyTimer: 0.1
   onTakeDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3785487958265915197}
+        m_TargetAssemblyTypeName: CharacterVFXManager, Assembly-CSharp
+        m_MethodName: PlayHitAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -789,26 +801,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764120203561146673, guid: 794beea2d7252204399aff942cf5aa94,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764120203561146673, guid: 794beea2d7252204399aff942cf5aa94,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764120203561146673, guid: 794beea2d7252204399aff942cf5aa94,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764120203561146673, guid: 794beea2d7252204399aff942cf5aa94,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764120203561146673, guid: 794beea2d7252204399aff942cf5aa94,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
@@ -871,6 +863,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1975987543021807043}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3785487958265915197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3451128468440089342, guid: 794beea2d7252204399aff942cf5aa94,
+    type: 3}
+  m_PrefabInstance: {fileID: 1975987543021807043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775375827244355733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be195d8ef645d545b4b252895ae2c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4253703802609884915 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2334042326607018800, guid: 794beea2d7252204399aff942cf5aa94,
