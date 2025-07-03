@@ -386,7 +386,7 @@ public class Pickup : MonoBehaviour
         */
 
         open = false;
-        PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, true);
+        PlayerBody.Instance().PauseSystem(PlayerSystems.AllParts, false);
         GetComponentInChildren<Interactable>(true).canInteract = true;
         
         UnRigChoiceMenu();
