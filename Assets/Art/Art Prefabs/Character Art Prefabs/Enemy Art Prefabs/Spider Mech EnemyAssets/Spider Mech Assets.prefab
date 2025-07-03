@@ -160,6 +160,9 @@ MonoBehaviour:
   shortCircuitObjects:
   - {fileID: 7194635703055084388}
   healParticleSystem: {fileID: 2566496872056168645}
+  hitAnimator: {fileID: 2247817970153999978}
+  isPlayer: 0
+  playerParent: {fileID: 0}
 --- !u!114 &6893698300692450955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30489,6 +30492,7 @@ GameObject:
   - component: {fileID: 7764120203561146673}
   - component: {fileID: 8534421430089462630}
   - component: {fileID: 5894850834986125059}
+  - component: {fileID: 2247817970153999978}
   m_Layer: 0
   m_Name: Spider Torso
   m_TagString: Untagged
@@ -30504,8 +30508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2193768042377021803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: -0.000000089406946, z: -0.000000089406946,
-    w: 0.70710677}
+  m_LocalRotation: {x: -0.50000024, y: 0.4999998, z: 0.4999998, w: 0.50000024}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30514,7 +30517,7 @@ Transform:
   - {fileID: 7334938160182360410}
   - {fileID: 5834259079422799665}
   m_Father: {fileID: 7682291335271320884}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &8534421430089462630
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -30565,6 +30568,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &2247817970153999978
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193768042377021803}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc78d3a2b8137c5408f223aba0c469b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2286885912322449226
 GameObject:
   m_ObjectHideFlags: 0
@@ -81548,14 +81572,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9011513331518918418}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0.000000030908623, z: 0.000000030908623, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0.000000031387465, z: 0.000000031387465, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0.4561922}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7764120203561146673}
   m_Father: {fileID: 6075565475206907120}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &9049908772034419688
 GameObject:
   m_ObjectHideFlags: 0

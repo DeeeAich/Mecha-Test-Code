@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1134503272140366015}
   - component: {fileID: 2230708036977505414}
   - component: {fileID: 8567859344543597782}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mag Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 45
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -661,8 +661,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: -1.5707963
+      minMaxState: 3
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -714,8 +714,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 3.1415925
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -767,9 +767,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: -0.7853981
+      minScalar: -0.7853981
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -820,7 +820,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 300
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 1
@@ -4013,14 +4013,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 10000
+    maxKillSpeed: 10
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
-    maxCollisionShapes: 256
+      m_Bits: 1
+    maxCollisionShapes: 300
     quality: 0
-    voxelSize: 0.5
+    voxelSize: 1
     collisionMessages: 0
     collidesWithDynamic: 1
     interiorCollisions: 0
@@ -5034,7 +5034,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 2
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0

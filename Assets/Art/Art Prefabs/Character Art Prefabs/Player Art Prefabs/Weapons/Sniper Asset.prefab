@@ -10714,7 +10714,7 @@ GameObject:
   - component: {fileID: 6113166560777639095}
   - component: {fileID: 4669999321910684331}
   - component: {fileID: 2150992013812675575}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Mag Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10818,8 +10818,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 4
+      minMaxState: 0
+      scalar: 45
       minScalar: 3
       maxCurve:
         serializedVersion: 2
@@ -11148,8 +11148,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: -1.5707963
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11201,8 +11201,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11254,8 +11254,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -11307,7 +11307,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 300
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 1
@@ -14500,14 +14500,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 10000
+    maxKillSpeed: 10
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
       m_Bits: 1
-    maxCollisionShapes: 5
-    quality: 2
-    voxelSize: 0.5
+    maxCollisionShapes: 300
+    quality: 0
+    voxelSize: 1
     collisionMessages: 0
     collidesWithDynamic: 1
     interiorCollisions: 0
@@ -15521,7 +15521,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 2
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -20743,7 +20743,7 @@ GameObject:
   - component: {fileID: 8129330080585521001}
   - component: {fileID: 7699905418759553677}
   - component: {fileID: 4618801168475691397}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bullet Casing Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20764,7 +20764,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7347409766112212601}
-  m_LocalEulerAnglesHint: {x: -25.62, y: -33.839, z: 16.167}
+  m_LocalEulerAnglesHint: {x: -25.62, y: -64.37, z: 16.167}
 --- !u!198 &7699905418759553677
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -20847,8 +20847,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 4
+      minMaxState: 0
+      scalar: 45
       minScalar: 3
       maxCurve:
         serializedVersion: 2
@@ -21177,7 +21177,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -21230,8 +21230,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 58.643063
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -21283,9 +21283,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1.5707963
-      minScalar: 0
+      minScalar: 1.5707963
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -21336,7 +21336,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 10
+    maxNumParticles: 300
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 1
     rotation3D: 1
@@ -21879,7 +21879,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 1
@@ -24372,7 +24372,7 @@ ParticleSystem:
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -24529,14 +24529,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 10000
-    radiusScale: 1
+    maxKillSpeed: 10
+    radiusScale: 2
     collidesWith:
       serializedVersion: 2
       m_Bits: 1
-    maxCollisionShapes: 5
-    quality: 2
-    voxelSize: 0.5
+    maxCollisionShapes: 300
+    quality: 0
+    voxelSize: 1
     collisionMessages: 0
     collidesWithDynamic: 1
     interiorCollisions: 0
@@ -25550,7 +25550,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 2
+  m_RenderAlignment: 1
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0

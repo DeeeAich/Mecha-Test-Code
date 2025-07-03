@@ -7,11 +7,16 @@ using UnityEngine.Serialization;
 
 public class OverseerFightPrimaryObjective : Objective
 {
+    
     public UnityEvent Phase2Start;
     public UnityEvent<bool> Phase2End;
     
-    [FormerlySerializedAs("bossWaveSpawner")] [SerializeField] private WaveSpawner bossWaveSpawnerInScene;
+    [SerializeField] private WaveSpawner bossWaveSpawnerInScene;
+    [SerializeField] private GameObject phase1WaveSpawnerPrefab;
     [SerializeField] private GameObject phase2WaveSpawnerPrefab;
+
+    [SerializeField] private EnemySpawnPoint[] phase1SpawnPoints;
+    [SerializeField] private EnemySpawnPoint[] phase2SpawnPoints;
 
     [SerializeField] private float phaseTransitionTime = 10;
     private float phaseTransitionTimer;
@@ -30,6 +35,10 @@ public class OverseerFightPrimaryObjective : Objective
             currentPhase = 0;
             //room.spawnedLoot.gameObject.SetActive(false);
         }
+
+        room.enemySpawnPoints = phase1SpawnPoints;
+        room.waveSpawners = new WaveSpawner[] {bossWaveSpawnerInScene, Instantiate(phase1WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
+        room.waveSpawners[1].StartSpawning();
     }
 
     private void StartPhaseTransition()
@@ -38,6 +47,8 @@ public class OverseerFightPrimaryObjective : Objective
         
         ToggleGameFrozenForPhaseTransition(true);
         
+        room.waveSpawners[1].StopSpawning(true);
+
         phaseTransitionTimer = phaseTransitionTime;
         
         Phase2Start.Invoke();
@@ -47,7 +58,10 @@ public class OverseerFightPrimaryObjective : Objective
     {
         ToggleGameFrozenForPhaseTransition(false);
         
+        Destroy(room.waveSpawners[1].gameObject);
+        room.enemySpawnPoints = phase2SpawnPoints;
         room.waveSpawners = new WaveSpawner[] {bossWaveSpawnerInScene, Instantiate(phase2WaveSpawnerPrefab, room.transform).GetComponent<WaveSpawner>()};
+        room.waveSpawners[1].StartSpawning();
 
         if(bossHealth != null) bossHealth.canTakeDamage = true;
 
