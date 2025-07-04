@@ -53,12 +53,26 @@ class MissileMotion : MoveProjectile
 
         if (isDestroyed)
         {
-            deleteTimer += Time.fixedDeltaTime;
+            deleteTimer -= Time.fixedDeltaTime;
+            if (deleteTimer <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        if (deleteTimer >= 1)
+        else
         {
-            Destroy(gameObject);
+            if (despawnTimer > 0)
+            {
+                despawnTimer -= Time.fixedDeltaTime;
+                if (despawnTimer <= 0)
+                {
+                    Destroy(gameObject, 1f);
+                    globalVelocity = Vector3.zero;
+                    transform.GetComponentInChildren<Animator>().SetTrigger("impact");
+                }
+            }
         }
+  
     }
 
     public void DestroyMissile()

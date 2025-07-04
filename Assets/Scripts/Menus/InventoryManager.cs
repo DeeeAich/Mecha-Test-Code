@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
@@ -12,8 +13,8 @@ public class InventoryManager : MonoBehaviour
 
     private Color[] rarityColors;
 
-    public List<Image> bodyChipsImages;
-    public Button[] bodyChipsButtons;
+    [SerializeField] private List<Image> bodyChipsImages;
+    [SerializeField] private Button[] bodyChipsButtons;
 
     [SerializeField] private TMP_Text chassisTitle;
     [SerializeField] private TMP_Text chassisDescription;
@@ -48,6 +49,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text inspectionCardDescription;
     [SerializeField] private Image inspectionCardImage;
     [SerializeField] private Button inspectionCardTargetButton;
+
+    [Header("Public Lists")] 
+    public List<BodyChip> bodyChips;
+    public List<MovementChip> legChips;
+    public List<WeaponChip> leftMods;
+    public List<WeaponChip> rightMods;
 
     private void Awake()
     {
@@ -92,10 +99,15 @@ public class InventoryManager : MonoBehaviour
     {
         print("Updating Inventory");
         inspectionCard.SetActive(false);
-
-
-
+        
+        // Remove this part for updating list externally
         PlayerBody playerBody = PlayerBody.Instance();
+        PlayerWeaponControl weapons = PlayerBody.Instance().weaponHolder;
+        leftMods = weapons.leftMods;
+        rightMods = weapons.rightMods;
+        
+        bodyChips = playerBody.myMods;
+        legChips = playerBody.myMovement.legChips;
 
         chassisTitle.text = playerBody.legStats.itemName;
         chassisDescription.text = playerBody.legStats.description;
@@ -110,9 +122,6 @@ public class InventoryManager : MonoBehaviour
             ordinanceImage.color = rarityColors[playerBody.ultController.currentUltimate.rarity];
         }
 
-        List<BodyChip> bodyChips = playerBody.myMods;
-        List<MovementChip> legChips = playerBody.myMovement.legChips;
-        
         for (int i = 0; i < bodyChipsImages.Count; i++)
         {
             if (i < bodyChips.Count)
@@ -123,7 +132,7 @@ public class InventoryManager : MonoBehaviour
             }
             else if (i < bodyChips.Count + legChips.Count)
             {
-                bodyChipsImages[i - bodyChips.Count].sprite = legChips[i - bodyChips.Count].mySprite;
+                bodyChipsImages[i].sprite = legChips[i - bodyChips.Count].mySprite;
                 bodyChipsImages[i].color = rarityColors[legChips[i - bodyChips.Count].rarity];
                 bodyChipsImages[i].enabled = true;
             }
@@ -132,8 +141,6 @@ public class InventoryManager : MonoBehaviour
                 bodyChipsImages[i].enabled = false;
             }
         }
-
-        PlayerWeaponControl weapons = PlayerBody.Instance().weaponHolder;
 
         if (weapons.leftWeapon != null)
         {
@@ -145,7 +152,6 @@ public class InventoryManager : MonoBehaviour
             leftWeaponAmmo.text = weapons.leftWeapon.curAmmo.ToString();
             leftWeaponImage.gameObject.SetActive(true);
             
-            List<WeaponChip> leftMods = weapons.leftMods;
             for (int i = 0; i < WeaponsLeftChipsImages.Count; i++)
             {
                 if (i < leftMods.Count)
@@ -177,7 +183,6 @@ public class InventoryManager : MonoBehaviour
             rightWeaponAmmo.text = weapons.rightWeapon.curAmmo.ToString();
             rightWeaponTitle.gameObject.SetActive(true);
             
-            List<WeaponChip> rightMods = weapons.rightMods;
             for (int i = 0; i < WeaponsRightChipsImages.Count; i++)
             {
                 if (i < rightMods.Count)
@@ -230,14 +235,21 @@ public class InventoryManager : MonoBehaviour
                 break;
             
             case 2: // body chips
-                if (index >= PlayerBody.Instance().myMods.Count)
+                if (index < bodyChips.Count)
+                {
+                    chip = PlayerBody.Instance().myMods[index];
+                }
+                else if (index < bodyChips.Count + legChips.Count)
+                {
+                    chip = PlayerBody.Instance().myMovement.legChips[index - bodyChips.Count];
+                }
+                else
                 {
                     return;
                 }
                 
                 inspectionCard.transform.position = bodyChipsImages[index].transform.position;
                 inspectionCardTargetButton = bodyChipsButtons[index];
-                chip = PlayerBody.Instance().myMods[index];
                 break;
         }
 
