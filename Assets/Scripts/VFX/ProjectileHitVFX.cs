@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ProjectileHitVFX : MonoBehaviour
 {
-    public ParticleSystem hitVFX;
+    public ParticleSystem defaultHitVFX;
+    public ParticleSystem laserHitVFX;
     public int hitVFXEmission;
     public bool isEnemy;
 
@@ -12,27 +13,39 @@ public class ProjectileHitVFX : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Default") && other.CompareTag("Untagged"))
         {
-            hitVFX.Emit(hitVFXEmission);
+            PlayHitVFX();
         }
 
         if (!isEnemy)
         {
             if (other.CompareTag("Enemy"))
             {
-                hitVFX.Emit(hitVFXEmission);
+                PlayHitVFX();
             }
         }
         else
         {
             if (other.CompareTag("Player"))
             {
-                hitVFX.Emit(hitVFXEmission);
+                PlayHitVFX();
             }
         }
     }
 
     public void ManualHitVFXTtrigger()
     {
-        hitVFX.Emit(hitVFXEmission);
+        PlayHitVFX();
+    }
+
+    public void PlayHitVFX()
+    {
+        if (defaultHitVFX.gameObject.activeInHierarchy)
+        {
+            defaultHitVFX.Emit(hitVFXEmission);
+        }
+        else if (laserHitVFX.gameObject.activeInHierarchy)
+        {
+            laserHitVFX.Emit(hitVFXEmission);
+        }
     }
 }
