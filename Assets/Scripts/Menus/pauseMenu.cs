@@ -91,6 +91,7 @@ public class pauseMenu : MonoBehaviour
                 onUnpause.Invoke();
                 paused = false;
                 Time.timeScale = gameSpeed;
+                Cursor.visible = false;
             }
             else
             {
@@ -99,6 +100,9 @@ public class pauseMenu : MonoBehaviour
                 onPause.Invoke();
                 paused = true;
                 Time.timeScale = 0;
+
+                if (!PlayerBody.Instance().isGamepad)
+                    Cursor.visible = true;
             }
         }
         else

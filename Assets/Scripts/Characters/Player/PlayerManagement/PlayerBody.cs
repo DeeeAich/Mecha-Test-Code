@@ -72,22 +72,26 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
         LoadStats();
         LoadStartingChips();
 
+        Cursor.visible = false;
+
     }
 
     private void FixedUpdate()
     {
+        
         myMovement.Movement(PauseChecker(PlayerSystems.BotBottom) ? move.ReadValue<Vector2>() : new Vector2()); ;
         
-        if (PauseChecker(PlayerSystems.BotTop))
-            weaponHolder.LookDirection(isGamepad ?
-                look.ReadValue<Vector2>():
-                Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
-                isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
-
     }
 
     private void Update()
     {
+        
+        if (PauseChecker(PlayerSystems.BotTop))
+            weaponHolder.LookDirection(isGamepad ?
+                look.ReadValue<Vector2>() :
+                Input.mousePosition - myCamera.WorldToScreenPoint(playerCentre.position),
+                isGamepad, myCamera.WorldToScreenPoint(playerCentre.position));
+
         if (lastHealth != myHealth.health || lastMax != myHealth.maxHealth)
         {
             lastHealth = Mathf.RoundToInt(myHealth.health + myHealth.maxHealth - lastMax);

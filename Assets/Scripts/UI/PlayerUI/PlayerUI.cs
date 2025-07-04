@@ -42,6 +42,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Animator healthChanges;
 
     public Transform cursorObject;
+    public float cursorGap;
 
     private void Awake()
     {
@@ -275,10 +276,19 @@ public class PlayerUI : MonoBehaviour
     public void SetCursorActive(bool isGamepad)
     {
 
-        cursorObject.gameObject.SetActive(isGamepad);
+        cursorObject.GetChild(0).localPosition = isGamepad ? new Vector3(0,cursorGap * (Screen.height / 1080),0) : new Vector3(0, 0, 0);
 
-        Cursor.visible = !isGamepad;
+        Cursor.visible = false;
         Cursor.lockState = isGamepad ? CursorLockMode.Locked : CursorLockMode.Confined;
+
+        
+
+    }
+
+    public void SetMouseLocation(Vector3 mouseLocation)
+    {
+
+        cursorObject.position = mouseLocation;
 
     }
 

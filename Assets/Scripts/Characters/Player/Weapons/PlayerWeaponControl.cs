@@ -45,6 +45,8 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
         if (isGamepad)
             PlayerUI.instance.SetCursorLocation(playerPos, turnerObject.eulerAngles.y);
+        else
+            PlayerUI.instance.SetMouseLocation(Input.mousePosition);
 
     }
 
