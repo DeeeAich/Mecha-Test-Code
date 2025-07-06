@@ -25,6 +25,9 @@ public class MainMenu : MonoBehaviour
         playerInput = FindObjectOfType<PlayerInput>();
         playerInput.onControlsChanged += OnControlsChanged;
         playerInput.actions["Any Action"].performed += TriggerControlsCheck;
+        
+        usingGamepad = playerInput.currentControlScheme.Equals("Controller");
+        Cursor.visible = !usingGamepad;
     }
 
     private void FixedUpdate()
@@ -35,7 +38,7 @@ public class MainMenu : MonoBehaviour
 
             if (timer <= 0)
             {
-                if (firstButton.gameObject.activeInHierarchy)
+                if (firstButton.gameObject.activeInHierarchy && usingGamepad)
                 {
                     firstButton.Select();
                 }

@@ -9,9 +9,6 @@ using UnityEngine;
 public struct PersonalData
 {
     public string name;
-    
-    public Color primaryColor;
-    public Color secondaryColor;
 }
 
 [Serializable]
@@ -149,7 +146,7 @@ public class SaveData : MonoBehaviour
 
     public void ComposeFile() // this fills out a save struct, to then be written to JSON by the SaveFile()
     {
-        currentSaveFile.randomSeed = GameGeneralManager.instance.seededRandom.Next();
+        currentSaveFile.randomSeed = GameGeneralManager.instance.randomSeed;
         currentSaveFile.level = GameGeneralManager.instance.currentLevel;
         currentSaveFile.difficulty = GameGeneralManager.instance.difficulty;
     }
