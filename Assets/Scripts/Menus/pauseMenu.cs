@@ -101,8 +101,7 @@ public class pauseMenu : MonoBehaviour
                 paused = true;
                 Time.timeScale = 0;
 
-                if (!PlayerBody.Instance().isGamepad)
-                    Cursor.visible = true;
+                if (!PlayerBody.Instance().isGamepad) Cursor.visible = true;
             }
         }
         else
@@ -172,78 +171,108 @@ public class pauseMenu : MonoBehaviour
 
     public void OpenInventory(InputAction.CallbackContext context)
     {
-        if (paused)
+        if (canPause)
         {
-            devkitCheatsMenu.SetActive(false);
-            mainPauseMenu.SetActive(false);
-            inventoryMenu.SetActive(false);
-            inventoryPlayerCamera.SetActive(false);
+            if (paused)
+            {
+                devkitCheatsMenu.SetActive(false);
+                mainPauseMenu.SetActive(false);
+                inventoryMenu.SetActive(false);
+                inventoryPlayerCamera.SetActive(false);
             
-        }
-        else
-        {
-            inventoryPlayerCamera.SetActive(true);
-            inventoryMenu.SetActive(true);
-            InventoryManager.UpdateInventory();
-            inventoryMenuInitialButton.Select();
+            }
+            else
+            {
+                CloseWorldMenus();
+                
+                inventoryPlayerCamera.SetActive(true);
+                inventoryMenu.SetActive(true);
+                InventoryManager.UpdateInventory();
+                inventoryMenuInitialButton.Select();
+            }
+
+            TogglePause();
         }
 
-        TogglePause();
     }
 
     public void OpenDevkitCheats(InputAction.CallbackContext context)
     {
-        if (paused)
+        if (canPause)
         {
-            devkitCheatsMenu.SetActive(false);
-            mainPauseMenu.SetActive(false);
-            inventoryMenu.SetActive(false);
-            inventoryPlayerCamera.SetActive(false);
-        }
-        else
-        {
-            FindObjectOfType<DevKitCheats>().UpdateDropdowns();
-            Debug.Log("Opening and Updating devkits");
-            devkitCheatsMenu.SetActive(true);
-        }
+            if (paused)
+            {
+                devkitCheatsMenu.SetActive(false);
+                mainPauseMenu.SetActive(false);
+                inventoryMenu.SetActive(false);
+                inventoryPlayerCamera.SetActive(false);
+            }
+            else
+            {
+                CloseWorldMenus();
+                
+                FindObjectOfType<DevKitCheats>().UpdateDropdowns();
+                Debug.Log("Opening and Updating devkits");
+                devkitCheatsMenu.SetActive(true);
+            }
         
-        TogglePause();
+            TogglePause();
+        }
+   
     }
 
     public void onPauseButtonPressed(InputAction.CallbackContext context)
     {
         //print("Pause button");
 
-        if (paused)
+        if (canPause)
         {
-            devkitCheatsMenu.SetActive(false);
-            mainPauseMenu.SetActive(false);
-            inventoryMenu.SetActive(false);
-            inventoryPlayerCamera.SetActive(false);
-            TogglePause();
-        }
-        else
-        {
-            bool closedAPickup = false;
-            
-            foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
+            if (paused)
             {
-                if (pickup.open)
-                {
-                    pickup.ClosePickupMenu();
-                    closedAPickup = true;
-                }
-            }
-
-            if (!closedAPickup)
-            {
-                mainPauseMenu.SetActive(true);
-                inventoryPlayerCamera.SetActive(true);
-                mainPauseMenuInitialButton.Select();
+                devkitCheatsMenu.SetActive(false);
+                mainPauseMenu.SetActive(false);
+                inventoryMenu.SetActive(false);
+                inventoryPlayerCamera.SetActive(false);
                 TogglePause();
             }
+            else
+            {
+                
+                if (!TryCloseWorldMenus())
+                {
+                    mainPauseMenu.SetActive(true);
+                    inventoryPlayerCamera.SetActive(true);
+                    mainPauseMenuInitialButton.Select();
+                    TogglePause();
+                }
+            }
         }
+
         
    
+    }
+
+    public bool TryCloseWorldMenus()
+    {
+        foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
+        {
+            if (pickup.open)
+            {
+                pickup.ClosePickupMenu();
+                return true;
+            }
+        }
+
+        return false;
+    }
+    private void CloseWorldMenus()
+    {
+        foreach (Pickup pickup in FindObjectsOfType<Pickup>(true))
+        {
+            if (pickup.open)
+            {
+                pickup.ClosePickupMenu();
+            }
+        }
     }
 }

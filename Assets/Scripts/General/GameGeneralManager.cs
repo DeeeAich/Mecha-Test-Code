@@ -61,9 +61,17 @@ public class GameGeneralManager : MonoBehaviour
 
     public void ChangeScene(int targetScene)
     {
-        FadeCanvas.instance.FadeToBlack();
+        if (FadeCanvas.instance != null)
+        {
+            FadeCanvas.instance.FadeToBlack();
+            sceneTransitionTimer = 1;
+        }
+        else
+        {
+            sceneTransitionTimer = 0.01f;
+        }
         sceneTransitionTargetScene = targetScene;
-        sceneTransitionTimer = 1;
+     
 
         switch (targetScene)
         {

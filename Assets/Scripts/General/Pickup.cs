@@ -353,6 +353,8 @@ public class Pickup : MonoBehaviour
             
             onMenuOpened.Invoke();
             open = true;
+
+            if (!PlayerBody.Instance().isGamepad) Cursor.visible = true;
         }
     }
 
@@ -394,6 +396,8 @@ public class Pickup : MonoBehaviour
         if (uiPopup != null) uiPopup.SetActive(false);
         
         lootOptionsMenu.SetActive(true);
+
+        Cursor.visible = false;
     }
 
     public void PickupItem(bool optionalDataApplyToLeft)
@@ -477,6 +481,8 @@ public class Pickup : MonoBehaviour
         open = false;
 
         onPickedUpEvent.Invoke();
+
+        Cursor.visible = false;
     }
 
     private void DisplayWeaponChips()
