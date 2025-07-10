@@ -76,7 +76,7 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void PressRight(InputAction.CallbackContext context)
     {
-        if (leftWeapon != null && leftWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
+        if (rightWeapon != null && rightWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
             && myBody.PauseChecker(PlayerSystems.Weapons) && myBody.PauseChecker(PlayerSystems.RightWeapon))
         {
             rightFire.Invoke();
@@ -86,14 +86,14 @@ public class PlayerWeaponControl : MonoBehaviour, IWeaponModifiable
 
     public void LiftRight(InputAction.CallbackContext context)
     {
-        if (leftWeapon != null && leftWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
+        if (rightWeapon != null && rightWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
             && myBody.PauseChecker(PlayerSystems.Weapons) && myBody.PauseChecker(PlayerSystems.RightWeapon))
             rightWeapon.FireRelease();
     }
 
     public void ReloadRight(InputAction.CallbackContext context)
     {
-        if (leftWeapon != null && leftWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
+        if (rightWeapon != null && rightWeapon.gameObject.activeInHierarchy && myBody.PauseChecker(PlayerSystems.BotTop)
             && myBody.PauseChecker(PlayerSystems.Weapons) && myBody.PauseChecker(PlayerSystems.RightWeapon))
             StartCoroutine(rightWeapon.Reload());
     }

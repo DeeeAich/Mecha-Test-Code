@@ -333,7 +333,7 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
     }
 
 
-    private List<PartPauseTracker> partTracker = new List<PartPauseTracker>();
+    [SerializeField] List<PartPauseTracker> partTracker = new List<PartPauseTracker>();
 
     public void PauseSystem(PlayerSystems system, bool pause)
     {
