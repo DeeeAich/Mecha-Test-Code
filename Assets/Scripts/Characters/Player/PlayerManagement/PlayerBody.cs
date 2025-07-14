@@ -78,14 +78,9 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
 
     private void FixedUpdate()
     {
-        
-        myMovement.Movement(PauseChecker(PlayerSystems.BotBottom) ? move.ReadValue<Vector2>() : new Vector2()); ;
-        
-    }
 
-    private void Update()
-    {
-        
+        myMovement.Movement(PauseChecker(PlayerSystems.BotBottom) ? move.ReadValue<Vector2>() : new Vector2());
+
         if (PauseChecker(PlayerSystems.BotTop))
             weaponHolder.LookDirection(isGamepad ?
                 look.ReadValue<Vector2>() :
@@ -99,6 +94,11 @@ public class PlayerBody : MonoBehaviour, IBodyModifiable
             myUI.HealthChanged(lastHealth, lastMax);
         }
 
+    }
+
+    private void Update()
+    {
+        
         if (weaponHolder.leftWeapon != null)
             myUI.WeaponAmmoLeft(weaponHolder.leftWeapon.maxAmmo * weaponHolder.leftWeapon.modifiers.ammoCount, weaponHolder.leftWeapon.curAmmo);
         else
