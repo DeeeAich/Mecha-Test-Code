@@ -39,11 +39,11 @@ public class ProjectileHitVFX : MonoBehaviour
 
     public void PlayHitVFX()
     {
-        if (defaultHitVFX.gameObject.activeInHierarchy)
+        if (defaultHitVFX != null && defaultHitVFX.gameObject.activeInHierarchy)
         {
             defaultHitVFX.Emit(hitVFXEmission);
         }
-        else if (laserHitVFX.gameObject.activeInHierarchy)
+        else if (laserHitVFX != null && laserHitVFX.gameObject.activeInHierarchy)
         {
             laserHitVFX.Emit(hitVFXEmission);
         }
